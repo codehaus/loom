@@ -39,9 +39,8 @@
     <!-- Metagenerate descriptor files                                    -->
     <!--==================================================================-->
     <goal name="sar:metagenerate"
-        prereqs="sar:init"
+        prereqs="sar:init,metaclass:generate"
         description="Generate Loom Descriptor Files">
-        <attainGoal name="metaclass:generate"/>
     </goal>
 
     <!--==================================================================-->
