@@ -40,7 +40,7 @@
         <dependency>
             <groupId>spice</groupId>
             <artifactId>spice-netserve</artifactId>
-            <version>1.1-b2</version>
+            <version>1.1-b3</version>
             <properties>
                 <sar.bundle>true</sar.bundle>
             </properties>
