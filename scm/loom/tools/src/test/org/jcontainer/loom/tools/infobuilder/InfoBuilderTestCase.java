@@ -25,7 +25,6 @@ import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ContextDescriptor;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.tools.info.EntryDescriptor;
-import org.jcontainer.loom.tools.info.LoggerDescriptor;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
 import org.jcontainer.loom.tools.qdox.DefaultInfoBuilder;
@@ -36,7 +35,7 @@ import org.realityforge.metaclass.model.Attribute;
  * Abstract class which TestCases can extend.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-10-05 01:06:31 $
+ * @version $Revision: 1.7 $ $Date: 2003-10-05 01:13:14 $
  */
 public class InfoBuilderTestCase
     extends TestCase
@@ -107,7 +106,6 @@ public class InfoBuilderTestCase
 
         return new ComponentInfo( component,
                                   ServiceDescriptor.EMPTY_SET,
-                                  LoggerDescriptor.EMPTY_SET,
                                   ContextDescriptor.EMPTY_CONTEXT,
                                   DependencyDescriptor.EMPTY_SET,
                                   null,
@@ -211,10 +209,6 @@ public class InfoBuilderTestCase
         final ComponentDescriptor component =
             new ComponentDescriptor( "org.realityforge.Component1", Attribute.EMPTY_SET );
 
-        final LoggerDescriptor logger1 = new LoggerDescriptor( "", Attribute.EMPTY_SET );
-        final LoggerDescriptor logger2 = new LoggerDescriptor( "audit", Attribute.EMPTY_SET );
-        final LoggerDescriptor[] loggers = new LoggerDescriptor[]{logger1, logger2};
-
         final EntryDescriptor entry1 = new EntryDescriptor( "mbean",
                                                             "javax.jmx.MBeanServer",
                                                             false,
@@ -247,7 +241,7 @@ public class InfoBuilderTestCase
                                   "http://relaxng.org/ns/structure/1.0",
                                   Attribute.EMPTY_SET );
 
-        return new ComponentInfo( component, services, loggers,
+        return new ComponentInfo( component, services,
                                   context, deps, schema, null );
     }
 

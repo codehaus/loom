@@ -16,27 +16,26 @@ import org.apache.avalon.framework.configuration.DefaultConfiguration;
 import org.apache.avalon.framework.logger.ConsoleLogger;
 import org.jcontainer.loom.components.deployer.PhoenixProfileBuilder;
 import org.jcontainer.loom.interfaces.ContainerConstants;
+import org.jcontainer.loom.tools.LoomToolConstants;
 import org.jcontainer.loom.tools.configuration.ConfigurationBuilder;
 import org.jcontainer.loom.tools.info.ComponentDescriptor;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
-import org.jcontainer.loom.tools.info.LoggerDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
 import org.jcontainer.loom.tools.infobuilder.LegacyUtil;
 import org.jcontainer.loom.tools.metadata.ComponentMetaData;
 import org.jcontainer.loom.tools.metadata.DependencyMetaData;
 import org.jcontainer.loom.tools.metadata.PartitionMetaData;
-import org.jcontainer.loom.tools.profile.PartitionProfile;
 import org.jcontainer.loom.tools.profile.ComponentProfile;
-import org.jcontainer.loom.tools.LoomToolConstants;
-import org.xml.sax.InputSource;
+import org.jcontainer.loom.tools.profile.PartitionProfile;
 import org.realityforge.metaclass.model.Attribute;
+import org.xml.sax.InputSource;
 
 /**
  *  An basic test case for the Application.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-10-05 01:06:31 $
+ * @version $Revision: 1.3 $ $Date: 2003-10-05 01:13:13 $
  */
 public class ApplicationTestCase
     extends TestCase
@@ -54,7 +53,6 @@ public class ApplicationTestCase
     private static final ComponentInfo C1 =
         new ComponentInfo( new ComponentDescriptor( C1_NAME, Attribute.EMPTY_SET ),
                            ServiceDescriptor.EMPTY_SET,
-                           LoggerDescriptor.EMPTY_SET,
                            LegacyUtil.CONTEXT_DESCRIPTOR,
                            new DependencyDescriptor[]{new DependencyDescriptor( S1_NAME,
                                                                                 S1_NAME,
@@ -66,7 +64,6 @@ public class ApplicationTestCase
     private static final ComponentInfo C2 =
         new ComponentInfo( new ComponentDescriptor( C2_NAME, Attribute.EMPTY_SET ),
                            new ServiceDescriptor[]{new ServiceDescriptor( S1_NAME, Attribute.EMPTY_SET )},
-                           LoggerDescriptor.EMPTY_SET,
                            LegacyUtil.CONTEXT_DESCRIPTOR,
                            DependencyDescriptor.EMPTY_SET,
                            null,
@@ -75,7 +72,6 @@ public class ApplicationTestCase
     private static final ComponentInfo C3 =
         new ComponentInfo( new ComponentDescriptor( C3_NAME, Attribute.EMPTY_SET ),
                            ServiceDescriptor.EMPTY_SET,
-                           LoggerDescriptor.EMPTY_SET,
                            LegacyUtil.CONTEXT_DESCRIPTOR,
                            new DependencyDescriptor[]{new DependencyDescriptor( S1_ARRAY_NAME,
                                                                                 S1_ARRAY_NAME,
@@ -87,7 +83,6 @@ public class ApplicationTestCase
     private static final ComponentInfo C4 =
         new ComponentInfo( new ComponentDescriptor( C4_NAME, Attribute.EMPTY_SET ),
                            ServiceDescriptor.EMPTY_SET,
-                           LoggerDescriptor.EMPTY_SET,
                            LegacyUtil.CONTEXT_DESCRIPTOR,
                            new DependencyDescriptor[]{new DependencyDescriptor( S1_MAP_NAME,
                                                                                 S1_MAP_NAME,

@@ -13,7 +13,6 @@ import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ContextDescriptor;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.tools.info.EntryDescriptor;
-import org.jcontainer.loom.tools.info.LoggerDescriptor;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
 import org.realityforge.metaclass.model.Attribute;
@@ -22,7 +21,7 @@ import org.realityforge.metaclass.model.Attribute;
  * A set of utilities for asserting  facts about info objects.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-10-05 01:06:31 $
+ * @version $Revision: 1.4 $ $Date: 2003-10-05 01:13:14 $
  */
 public class InfoAssert
 {
@@ -54,10 +53,6 @@ public class InfoAssert
                                             final ComponentInfo expected,
                                             final ComponentInfo actual )
     {
-        final LoggerDescriptor[] expectedLoggers = expected.getLoggers();
-        final LoggerDescriptor[] actualLoggers = actual.getLoggers();
-        assertEqualLoggers( message, expectedLoggers, actualLoggers );
-
         final SchemaDescriptor expectedSchema = expected.getConfigurationSchema();
         final SchemaDescriptor actualSchema = actual.getConfigurationSchema();
         assertEqualSchema( message + "/Configuration", expectedSchema, actualSchema );
@@ -151,20 +146,6 @@ public class InfoAssert
         assertEqualAttributes( message + ".attributes",
                                expected.getAttributes(),
                                actual.getAttributes() );
-    }
-
-    public static void assertEqualLoggers( final String message,
-                                           final LoggerDescriptor[] expected,
-                                           final LoggerDescriptor[] actual )
-    {
-        Assert.assertEquals( message + ": Loggers.length", expected.length, actual.length );
-        for( int i = 0; i < expected.length; i++ )
-        {
-            Assert.assertEquals( message + ": Loggers[ " + i + "].name",
-                                 expected[ i ].getName(), actual[ i ].getName() );
-            assertEqualAttributes( message + ": Loggers[ " + i + "].attributes",
-                                   expected[ i ].getAttributes(), actual[ i ].getAttributes() );
-        }
     }
 
     public static void assertEqualContext( final String message,

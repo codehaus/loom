@@ -94,7 +94,6 @@ import org.jcontainer.loom.tools.info.ComponentDescriptor;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ContextDescriptor;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
-import org.jcontainer.loom.tools.info.LoggerDescriptor;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
 import org.jcontainer.loom.tools.infobuilder.LegacyUtil;
@@ -106,7 +105,7 @@ import org.realityforge.metaclass.model.Attribute;
  *
  * @author Paul Hammant
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.7 $ $Date: 2003-10-05 01:06:31 $
+ * @version $Revision: 1.8 $ $Date: 2003-10-05 01:13:14 $
  */
 public class LegacyInfoBuilder
     extends AbstractInfoBuilder
@@ -122,11 +121,10 @@ public class LegacyInfoBuilder
         final ComponentDescriptor component = buildComponent( javaClass );
         final ServiceDescriptor[] services = buildServices( javaClass );
         final ContextDescriptor context = LegacyUtil.CONTEXT_DESCRIPTOR;
-        final LoggerDescriptor[] loggers = LoggerDescriptor.EMPTY_SET;
         final SchemaDescriptor schema = buildConfigurationSchema( javaClass );
         final DependencyDescriptor[] dependencies = buildDependencies( javaClass );
 
-        return new ComponentInfo( component, services, loggers, context,
+        return new ComponentInfo( component, services, context,
                                   dependencies, schema, null );
     }
 

@@ -15,7 +15,6 @@ import org.jcontainer.loom.tools.info.ContextDescriptor;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.tools.info.EntryDescriptor;
 import org.jcontainer.loom.tools.info.FeatureDescriptor;
-import org.jcontainer.loom.tools.info.LoggerDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
 import org.realityforge.metaclass.model.Attribute;
 
@@ -24,7 +23,7 @@ import org.realityforge.metaclass.model.Attribute;
  * to enablesupport of Legacy BlockInfo files.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-10-05 01:06:31 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-05 01:13:14 $
  */
 public class LegacyUtil
 {
@@ -125,7 +124,6 @@ public class LegacyUtil
             new ComponentDescriptor( implementationKey, Attribute.EMPTY_SET );
         return new ComponentInfo( descriptor,
                                   ServiceDescriptor.EMPTY_SET,
-                                  LoggerDescriptor.EMPTY_SET,
                                   ContextDescriptor.EMPTY_CONTEXT,
                                   DependencyDescriptor.EMPTY_SET,
                                   null,

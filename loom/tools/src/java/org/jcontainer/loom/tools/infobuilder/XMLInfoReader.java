@@ -19,7 +19,6 @@ import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ContextDescriptor;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.tools.info.EntryDescriptor;
-import org.jcontainer.loom.tools.info.LoggerDescriptor;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
 import org.realityforge.salt.i18n.ResourceManager;
@@ -33,7 +32,7 @@ import org.xml.sax.InputSource;
  * is specified in the <a href="package-summary.html#external">package summary</a>.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.7 $ $Date: 2003-10-05 01:06:31 $
+ * @version $Revision: 1.8 $ $Date: 2003-10-05 01:13:14 $
  */
 public final class XMLInfoReader
     extends AbstractLogEnabled
@@ -96,9 +95,6 @@ public final class XMLInfoReader
         final ComponentDescriptor descriptor = buildComponentDescriptor( configuration );
         final String implementationKey = descriptor.getImplementationKey();
 
-        configuration = info.getChild( "loggers" );
-        final LoggerDescriptor[] loggers = buildLoggers( configuration );
-
         configuration = info.getChild( "context" );
         final ContextDescriptor context = buildContext( configuration );
 
@@ -122,13 +118,12 @@ public final class XMLInfoReader
                             implementationKey,
                             new Integer( services.length ),
                             new Integer( dependencies.length ),
-                            new Integer( context.getEntrys().length ),
-                            new Integer( loggers.length ) );
+                            new Integer( context.getEntrys().length ) );
             getLogger().debug( message );
         }
 
         return new ComponentInfo( descriptor, services,
-                                  loggers, context, dependencies,
+                                  context, dependencies,
                                   configurationSchema, parametersSchema );
     }
 
@@ -151,45 +146,6 @@ public final class XMLInfoReader
         final String type = configuration.getAttribute( "type", "" );
         final Attribute[] attributes = buildAttributes( configuration );
         return new SchemaDescriptor( location, type, attributes );
-    }
-
-    /**
-     * A utility method to build an array of {@link org.jcontainer.loom.tools.info.LoggerDescriptor} objects
-     * from specified configuraiton.
-     *
-     * @param configuration the loggers configuration
-     * @return the created LoggerDescriptor
-     * @throws org.apache.avalon.framework.configuration.ConfigurationException if an error occurs
-     */
-    private LoggerDescriptor[] buildLoggers( final Configuration configuration )
-        throws ConfigurationException
-    {
-        final Configuration[] elements = configuration.getChildren( "logger" );
-        final ArrayList loggers = new ArrayList();
-
-        for( int i = 0; i < elements.length; i++ )
-        {
-            final LoggerDescriptor logger = buildLogger( elements[ i ] );
-            loggers.add( logger );
-        }
-
-        return (LoggerDescriptor[])loggers.toArray( new LoggerDescriptor[ loggers.size() ] );
-    }
-
-    /**
-     * A utility method to build a {@link org.jcontainer.loom.tools.info.LoggerDescriptor}
-     * object from specified configuraiton.
-     *
-     * @param logger the Logger configuration
-     * @return the created LoggerDescriptor
-     * @throws org.apache.avalon.framework.configuration.ConfigurationException if an error occurs
-     */
-    private LoggerDescriptor buildLogger( Configuration logger )
-        throws ConfigurationException
-    {
-        final String name = logger.getAttribute( "name", "" );
-        final Attribute[] attributes = buildAttributes( logger );
-        return new LoggerDescriptor( name, attributes );
     }
 
     /**
