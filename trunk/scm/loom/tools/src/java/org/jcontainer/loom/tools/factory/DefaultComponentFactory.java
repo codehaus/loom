@@ -18,11 +18,11 @@ import org.jcontainer.dna.AbstractLogEnabled;
 import org.jcontainer.dna.Logger;
 
 /**
- * The default implementation of {@link org.jcontainer.loom.tools.factory.ComponentFactory}
- * that simply creates components from a {@link java.lang.ClassLoader}.
+ * The default implementation of {@link ComponentFactory}
+ * that simply creates components from a {@link ClassLoader}.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-10-06 13:42:07 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-16 00:20:17 $
  */
 public class DefaultComponentFactory
     extends AbstractLogEnabled
@@ -68,7 +68,7 @@ public class DefaultComponentFactory
      * Create a component by creating info for class
      * with specified name and loaded from factorys ClassLoader.
      *
-     * @see org.jcontainer.loom.tools.factory.ComponentFactory#createBundle
+     * @see ComponentFactory#createBundle
      */
     public ComponentBundle createBundle( final String implementationKey )
         throws Exception
@@ -87,7 +87,7 @@ public class DefaultComponentFactory
      * Create a component by creating instance of class
      * with specified name and loaded from factorys ClassLoader.
      *
-     * @see org.jcontainer.loom.tools.factory.ComponentFactory#createComponent
+     * @see ComponentFactory#createComponent
      */
     public Object createComponent( final String implementationKey )
         throws Exception
@@ -102,23 +102,21 @@ public class DefaultComponentFactory
      *
      * @param implementationKey the implementationKey
      * @return the new ComponentBundle
-     * @throws java.lang.Exception if unable to create bundle
+     * @throws Exception if unable to create bundle
      */
     protected ComponentBundle newBundle( final String implementationKey )
         throws Exception
     {
-        final ComponentBundle bundle;
         final ComponentInfo info = createComponentInfo( implementationKey );
-        bundle = new DefaultComponentBundle( info, getClassLoader() );
-        return bundle;
+        return new DefaultComponentBundle( info, getClassLoader() );
     }
 
     /**
      * Create a {@link org.jcontainer.loom.tools.info.ComponentInfo} for component with specified implementationKey.
      *
      * @param implementationKey the implementationKey
-     * @return the created {@link org.jcontainer.loom.tools.info.ComponentInfo}
-     * @throws java.lang.Exception if unabel to create componentInfo
+     * @return the created {@link ComponentInfo}
+     * @throws Exception if unabel to create componentInfo
      */
     protected ComponentInfo createComponentInfo( final String implementationKey )
         throws Exception
