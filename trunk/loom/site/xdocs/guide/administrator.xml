@@ -53,29 +53,16 @@ loom.sh [start|stop|run|restart|check]
               </p>
               <p>
                 The main benifit of using the Java Service Wrapper is that it can
-                install Loom as a Linux/Unix deamon or an NT service.  It can also detect if the JVM
+                install Loom as a Linux/Unix deamon or a Windows NT service.  
+                It can also detect if the JVM
                 freezes up or crashes and restart the application immediately.
               </p>
               <p>
-                To build Loom with the Java Service Wrapper, download and
-                extract the latest version.  Copy to <code>loom/distribution/deploy/ext</code> 
-                the wrapper binaries and libraries:
-              </p>
-
-<source>
-# If you're using Linux/Solaris:
-bin/wrapper
-lib/libwrapper.so
-lib/wrapper.jar
-
-# If you're using Windows:
-bin/Wrapper.exe
-lib/Wrapper.dll
-lib/wrapper.jar
-</source>
-
-              <p>
-                Then just build as usual.
+                Loom distribution comes with both Linux and Windows Wrappers. 
+                To build Loom with a Wrapper for another Unix platform, simply change the 
+                <code>wrapper.nix</code> property in <code>loom/distribution/project.properties</code> 
+                to the appropriate platform and rebuild.  
+                Loom will cache each new distribution downloaded in the Maven local repository.
               </p>
               <p>
                 For usage instructions
