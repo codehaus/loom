@@ -12,6 +12,11 @@
                 as described in the manifest of a JAR file. The toolkit can also
                 parse and represent Specification sections described in manifests.
             </p>
+            <p>
+                All Spice jars are held in the 
+                <a href="http://spice.sf.net/maven">http://spice.sf.net/maven</a> 
+                repository for Maven usage.                
+            </p>
         </section>
         <section name="Extensions">
             <p>
