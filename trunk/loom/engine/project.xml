@@ -84,7 +84,7 @@
         <dependency>
             <groupId>spice</groupId>
             <artifactId>spice-alchemist</artifactId>
-            <version>20040617.222741</version>
+            <version>1.2-rc1</version>
         </dependency>
         <dependency>
             <groupId>spice</groupId>
