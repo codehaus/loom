@@ -4,7 +4,7 @@
     <name>Extension</name>
     <id>spice-extension</id>
     <gumpRepositoryId>components</gumpRepositoryId>
-    <currentVersion>1.0dev</currentVersion>
+    <currentVersion>1.0</currentVersion>
     <inceptionYear>2000</inceptionYear>
 
     <shortDescription>Parse and represent "Extension" and Specification information</shortDescription>
@@ -14,6 +14,14 @@
         to parse Manifests to extract information relating to Specifications
         and "Optional Packages" aka Extensions.
     </description>
+
+    <versions>
+        <version>
+            <id>1.0</id>
+            <name>1.0</name>
+            <tag>EXTENSION_1_0-tag</tag>
+        </version>
+    </versions>
 
     <developers>
         <developer>
