@@ -17,6 +17,11 @@
         </dependency>
         <dependency>
             <groupId>spice</groupId>
+            <artifactId>spice-metaclass</artifactId>
+            <version>20031016.074122</version>
+        </dependency>
+        <dependency>
+            <groupId>spice</groupId>
             <artifactId>spice-metaclass-jmx</artifactId>
             <version>20031017.081651</version>
         </dependency>
