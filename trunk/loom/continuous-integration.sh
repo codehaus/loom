@@ -33,22 +33,11 @@ maven build &> target/cleanbuild.log
 
 # See if the "compiling" file is there. If it is, compilation
 # failed.
-if grep "BUILD FAILED" target/cleanbuild.log ; then
+if grep "BUILD SUCCESSFUL" target/clenbuild.log ; then
+  echo "Build passed, emailing list"
+  tail target/cleanbuild.log | mutt -s "[PASS] Clean build passed" $mailto
+else
   # Mail Maven's output to the dev list.
   echo "Build failed, emailing list"
-  cat target/cleanbuild.log | mutt -s "[BUILD] Clean build failed" $mailto
-else
-  # See if the "testfailure" file is there. If it is, tests failed.
-  if [ -e "target/testfailure" ] ; then
-    # Mail Maven's output to the dev list.
-    cat target/cleanbuild.log | mutt -s "[BUILD] Test failure - see http://loom.jcontainer.org/junit-report.html" $mailto
-  # else
-    # Deploy site only if compile and tests pass. Logs currently not used.
-    # Must be run separately to get the files uploaded in the proper dir
-    # on the server.
-    # maven jar:deploy &> target/jardeploy.log
-    # maven dist:deploy &> target/distdeploy.log
-  fi
-  # We'll deploy the site even if the tests fail. Log currently not used.
-  # maven site:deploy &> target/sitedeploy.log
+  cat target/cleanbuild.log | mutt -s "[FAIL] Clean build failed" $mailto
 fi
