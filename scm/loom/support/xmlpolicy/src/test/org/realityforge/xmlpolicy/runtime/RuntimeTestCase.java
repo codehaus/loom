@@ -108,6 +108,24 @@ public class RuntimeTestCase
         fail( "Expected to find AllPermission in set" );
     }
 
+
+    public void testPolicyAccessPermissionNotCovered()
+        throws Exception
+    {
+        final URL url = new URL( "http://spice.sourceforge.net/-" );
+        final CodeSource codeSource = new CodeSource( url, new Certificate[ 0 ] );
+        final AllPermission allPermission = new AllPermission();
+        final HashMap grants = new HashMap();
+        grants.put( codeSource, new Permission[]{allPermission} );
+
+        final Policy policy = new DefaultPolicy( grants );
+        policy.refresh();
+        final PermissionCollection resultPermissions = policy.getPermissions( new CodeSource( null, new Certificate[ 0 ] ) );
+        final Enumeration enumeration = resultPermissions.elements();
+        assertEquals( "Permissions for codeSource" + codeSource,
+                      false, enumeration.hasMoreElements() );
+    }
+
     public void testPolicyAccessPermissionForNonSpecifiedCodeBase()
         throws Exception
     {
