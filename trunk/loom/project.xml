@@ -19,7 +19,7 @@
     <distributionSite>codehaus.org</distributionSite>
     
     <repository>
-        <connection>scm:cvs:pserver:anoncvs@codehaus.org:/cvsroot/jcontainer:jcontainer</connection>    
-        <url>http://jcontainer.cvs.codehaus.org/</url>
+        <connection>scm:cvs:pserver:anonymous@codehaus.org:/cvsroot/jcontainer:jcontainer/loom</connection>    
+        <url>http://cvs.codehaus.org/viewcvs.cgi/jcontainer/loom/?root=jcontainer</url>
     </repository>
 </project>
