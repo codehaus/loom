@@ -155,6 +155,15 @@
             <excludes>
                 <exclude>**/Abstract*.java</exclude>
             </excludes>
+            <resources>
+                <resource>
+                    <directory>src/test</directory>
+                    <includes>
+                        <include>**/*.xml</include>
+                        <include>**/*.xinfo</include>
+                    </includes>
+                </resource>
+            </resources>
         </unitTest>
 
         <resources>
