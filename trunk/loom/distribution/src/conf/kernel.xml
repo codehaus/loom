@@ -109,9 +109,7 @@
 
         <component role="org.codehaus.loom.interfaces.ConfigurationValidator"
             class="org.codehaus.loom.components.validator.DefaultConfigurationValidator"
-            logger="validator">
-            <schema-type name="relax-ng" uri="http://relaxng.org/ns/structure/1.0"/>
-        </component>
+            logger="validator"/>
 
         <component role="org.codehaus.loom.interfaces.ClassLoaderManager"
             class="org.codehaus.loom.components.classloader.DefaultClassLoaderManager"
@@ -135,8 +133,9 @@
 
         <!--
             Use LoomInstrumentManager when you want to enable instrumentation of
-            Loom and hosted applications. Note that you must include AltRMI libraries in
-            /container/lib to be able to start the AltRMI listener.
+            Loom and hosted applications. Note that you must include the correct AltRMI
+            libraries for the version of monitor you use in /container/lib, to be able to start
+            the AltRMI listener.
 
             You may also want to add:
             <!ENTITY % instrumentables.xml SYSTEM "instrumentables.xml">
@@ -144,9 +143,9 @@
             configuration in a separate document.
 
             The HTTP connector configured below is not part of InstrumentManager 1.0.
-            To be able to use it you must update all instrument manager libraries to
-            version 1.2.
-        
+            To be able to use it you must update all instrument manager libraries to at
+            least version 1.2.
+
         <component role="org.apache.excalibur.instrument.InstrumentManager"
             class="org.codehaus.loom.components.instrument.LoomInstrumentManager"
             logger="instrument">
@@ -161,16 +160,14 @@
         -->
 
         <!--
-        Can disable the Hot-Deploy monitor by commenting out the next component.
+        Disable the Hot-Deployment monitor by commenting out the following component.
         -->
         <component
             class="org.codehaus.loom.components.monitor.DefaultDeploymentMonitor"
             logger="monitor">
-            <!-- the amount of time in milliseconds between checks
-            of deployment dir -->
+            <!--Amount of time in milliseconds between checks of the deployment dir -->
             <monitor-frequency>1000</monitor-frequency>
             <base-application-directory>${loom.home}/apps</base-application-directory>
         </component>
     </embeddor>
-
 </loom>
