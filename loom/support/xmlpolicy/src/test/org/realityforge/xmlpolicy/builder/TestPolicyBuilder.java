@@ -14,7 +14,7 @@ import java.util.HashMap;
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-05 09:41:31 $
+ * @version $Revision: 1.2 $ $Date: 2003-06-05 09:45:37 $
  */
 class TestPolicyBuilder
     extends PolicyBuilder
@@ -23,10 +23,17 @@ class TestPolicyBuilder
                                        URL url )
         throws Exception
     {
-        final HashMap certs = new HashMap();
-        certs.put( "jenny", new MockCertificate() );
-        certs.put( "mischelle", new MockCertificate() );
-        certs.put( "george", new MockCertificate() );
-        return new MockKeyStore( certs );
+        if( url.equals( new URL( "http://spice.sourceforge.net" ) ) )
+        {
+            final HashMap certs = new HashMap();
+            certs.put( "jenny", new MockCertificate() );
+            certs.put( "mischelle", new MockCertificate() );
+            certs.put( "george", new MockCertificate() );
+            return new MockKeyStore( certs );
+        }
+        else
+        {
+            throw new Exception( "Unable to create keystore " + url );
+        }
     }
 }
