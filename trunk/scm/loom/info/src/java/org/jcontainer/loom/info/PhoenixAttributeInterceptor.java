@@ -23,7 +23,7 @@ import org.realityforge.metaclass.tools.qdox.DefaultQDoxAttributeInterceptor;
  * into modern DNA and MX attributes.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-10-15 03:54:12 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-15 05:19:00 $
  */
 public class PhoenixAttributeInterceptor
     extends DefaultQDoxAttributeInterceptor
@@ -118,9 +118,19 @@ public class PhoenixAttributeInterceptor
             final Properties parameters = new Properties();
             if( null != type )
             {
-                //Check for "relax-ng" ==> "http://relaxng.org/ns/structure/1.0"
-                parameters.setProperty( "type", type );
+                if( "relax-ng".equals( type ) )
+                {
+                    parameters.setProperty( "type",
+                                            "http://relaxng.org/ns/structure/1.0" );
+                }
+                else
+                {
+                    parameters.setProperty( "type", type );
+                }
             }
+            final String classname = method.getParentClass().getName();
+            final String location = getSchemaLocationFor( classname );
+            parameters.setProperty( "location", location );
             return new Attribute( "dna.configuration", parameters );
         }
         else if( name.equals( "phoenix:dependency" ) )
@@ -233,5 +243,24 @@ public class PhoenixAttributeInterceptor
             }
         }
         return (Attribute[])result.toArray( new Attribute[ result.size() ] );
+    }
+
+    /**
+     * Get the location of the schema. By default it is "Foo-schema.xml"
+     * for the com.biz.Foo component.
+     *
+     * @param classname the classname of component
+     * @return the location of the schema
+     */
+    static String getSchemaLocationFor( final String classname )
+    {
+        final int index = classname.lastIndexOf( "." );
+        String location = classname;
+        if( -1 != index )
+        {
+            location = classname.substring( index + 1 );
+        }
+        location += "-schema.xml";
+        return location;
     }
 }
