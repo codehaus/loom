@@ -9,17 +9,18 @@ package org.jcontainer.loom.components.application;
 
 import java.io.File;
 import java.io.InputStream;
+
 import org.apache.avalon.framework.logger.Logger;
 import org.apache.excalibur.instrument.InstrumentManager;
+import org.jcomponent.alchemist.LoggerAlchemist;
 import org.jcontainer.loom.components.instrument.NoopInstrumentManager;
-import org.jcontainer.loom.components.util.DNAAvalonLogger;
-import org.jcontainer.loom.interfaces.ApplicationContext;
 import org.jcontainer.loom.components.util.profile.PartitionProfile;
+import org.jcontainer.loom.interfaces.ApplicationContext;
 
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-10-16 14:45:47 $
+ * @version $Revision: 1.7 $ $Date: 2003-10-25 16:23:21 $
  */
 class MockApplicationContext
     implements ApplicationContext
@@ -79,7 +80,7 @@ class MockApplicationContext
 
     public Logger getLogger( String name )
     {
-        return new DNAAvalonLogger( m_logger );
+        return LoggerAlchemist.toAvalonLogger( m_logger );
     }
 
     public InstrumentManager getInstrumentManager()
