@@ -28,7 +28,8 @@
         <echo message="Build components"/>
         <maven:reactor
             basedir="${basedir}"
-            includes="engine/project.xml,launcher/project.xml,info/project.xml"
+            includes="*/project.xml"
+            excludes="demos/*/project.xml,distribution/project.xml,integration-test/project.xml,plugins/project.xml,site/project.xml"
             goals="clean:clean,build"
             banner="Building"
             ignoreFailures="false"/>
@@ -76,7 +77,7 @@
         <maven:reactor
             basedir="${basedir}"
             includes="*/project.xml"
-            excludes="distribution/project.xml,site/project.xml,demos/*/project.xml,integration-test/project.xml"
+            excludes="demos/*/project.xml,distribution/project.xml,integration-test/project.xml,plugins/project.xml,site/project.xml"
             goals="clean:clean"
             banner="Cleaning"
             ignoreFailures="false"/>
@@ -124,7 +125,7 @@
         <maven:reactor
             basedir="${basedir}"
             includes="*/project.xml"
-            excludes="distribution/project.xml,site/project.xml,demos/*/project.xml,integration-test/project.xml"
+            excludes="demos/*/project.xml,distribution/project.xml,integration-test/project.xml,plugins/project.xml,site/project.xml"
             goals="clean:clean,deploy"
             banner="Deploying"
             ignoreFailures="false"/>
