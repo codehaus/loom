@@ -219,7 +219,7 @@ public class DefaultEmbeddor
      * happens for the {@link org.jcontainer.loom.interfaces.Application}s.
      * Now, the Kernel is taken through its lifecycle. When it is
      * finished, as well as all the applications running in it, it
-     * is shut down, after which the PhoenixEmbeddor is as well.
+     * is shut down, after which the Embeddor is as well.
      */
     public void execute()
         throws Exception

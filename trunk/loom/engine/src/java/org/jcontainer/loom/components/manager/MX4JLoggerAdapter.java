@@ -13,7 +13,7 @@ package org.jcontainer.loom.components.manager;
 import mx4j.log.Logger;
 
 /**
- * A class to pipe MX4J's own logger to the one Phoenix wants to use.
+ * A class to pipe MX4J's own logger to the one the container wants to use.
  */
 public class MX4JLoggerAdapter extends Logger
 {

@@ -20,11 +20,11 @@ import org.jcontainer.loom.components.util.ResourceUtil;
 import org.realityforge.xmlpolicy.builder.PolicyResolver;
 
 /**
- * A basic resolver that resolves Phoenix specific features.
+ * A basic resolver that resolves container specific features.
  * (like remapping URLs).
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-29 04:38:21 $
+ * @version $Revision: 1.2 $ $Date: 2003-08-07 16:28:51 $
  */
 class SarPolicyResolver
     extends AbstractLogEnabled

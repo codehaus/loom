@@ -23,11 +23,11 @@ import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
 
 /**
- * a LoaderResolver that knows about Phoenixs environment,
+ * a LoaderResolver that knows about container environment,
  * and the way it is split across multiple directories.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-07-13 00:15:36 $
+ * @version $Revision: 1.3 $ $Date: 2003-08-07 16:28:51 $
  */
 class SarLoaderResolver
     extends DefaultLoaderResolver

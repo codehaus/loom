@@ -41,7 +41,7 @@ import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
 
 /**
- * The ServerKernel is the core of the Phoenix system.
+ * The ServerKernel is the core of the container system.
  * The kernel is responsible for orchestrating low level services
  * such as loading, configuring and destroying blocks. It also
  * gives access to basic facilities such as scheduling sub-systems,
