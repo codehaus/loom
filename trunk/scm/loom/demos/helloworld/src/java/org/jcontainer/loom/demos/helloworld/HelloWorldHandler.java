@@ -93,7 +93,7 @@ import java.net.Socket;
 import java.net.SocketException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.phoenix.BlockContext;
-import org.jcomponent.netserve.connection.RequestHandler;
+import org.codehaus.spice.netserve.connection.RequestHandler;
 
 /**
  * This handles an individual incoming request.  It outputs a greeting as html.

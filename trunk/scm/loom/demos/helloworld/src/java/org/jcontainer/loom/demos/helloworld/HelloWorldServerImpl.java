@@ -102,9 +102,9 @@ import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 import org.apache.avalon.phoenix.BlockContext;
-import org.jcomponent.netserve.connection.RequestHandler;
-import org.jcomponent.netserve.connection.SocketAcceptorManager;
-import org.jcomponent.netserve.sockets.ServerSocketFactory;
+import org.codehaus.spice.netserve.connection.RequestHandler;
+import org.codehaus.spice.netserve.connection.SocketAcceptorManager;
+import org.codehaus.spice.netserve.sockets.ServerSocketFactory;
 
 /**
  * @author Paul Hammant <Paul_Hammant@yahoo.com>

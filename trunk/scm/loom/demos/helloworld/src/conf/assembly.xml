@@ -4,18 +4,18 @@
 
 <assembly>
 
-    <block class="org.jcomponent.threadpool.impl.AvalonCommonsThreadPool"
+    <block class="org.codehaus.spice.threadpool.impl.AvalonCommonsThreadPool"
         name="thread-pool"/>
 
     <!-- The Connection Manager block -->
-    <block class="org.jcomponent.netserve.connection.impl.AvalonConnectionManager"
+    <block class="org.codehaus.spice.netserve.connection.impl.AvalonConnectionManager"
         name="connections">
         <provide name="thread-pool"
-            role="org.jcomponent.threadpool.ThreadPool"/>
+            role="org.codehaus.spice.threadpool.ThreadPool"/>
     </block>
 
     <!-- The Socket Manager block -->
-    <block class="org.jcomponent.netserve.sockets.impl.DefaultServerSocketFactory" name="sockets"/>
+    <block class="org.codehaus.spice.netserve.sockets.impl.DefaultServerSocketFactory" name="sockets"/>
 
     <!-- The RMIfication block -->
     <block class="org.apache.avalon.cornerstone.blocks.rmification.DefaultRMIfication"
@@ -27,9 +27,9 @@
     <block class="org.jcontainer.loom.demos.helloworld.HelloWorldServerImpl"
         name="helloworldserver">
         <provide name="sockets"
-            role="org.jcomponent.netserve.sockets.ServerSocketFactory"/>
+            role="org.codehaus.spice.netserve.sockets.ServerSocketFactory"/>
         <provide name="connections"
-            role="org.jcomponent.netserve.connection.ConnectionManager"/>
+            role="org.codehaus.spice.netserve.connection.ConnectionManager"/>
     </block>
 
 </assembly>

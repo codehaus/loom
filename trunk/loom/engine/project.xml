@@ -72,9 +72,9 @@
             <version>0.1</version>
         </dependency>
         <dependency>
-            <groupId>jcomponent</groupId>
-            <artifactId>jcomponent-alchemist</artifactId>
-            <version>20031025.132828</version>
+            <groupId>spice</groupId>
+            <artifactId>spice-alchemist</artifactId>
+            <version>20031120.105516</version>
         </dependency>
         <dependency>
             <groupId>spice</groupId>
@@ -148,7 +148,7 @@
         <dependency> <!-- for unit testing -->
             <groupId>excalibur</groupId>
             <artifactId>excalibur-logger</artifactId>
-            <version>20030713</version>
+            <version>20031215.105842</version>
         </dependency>
         <dependency><!-- for unit testing -->
             <groupId>excalibur</groupId>
