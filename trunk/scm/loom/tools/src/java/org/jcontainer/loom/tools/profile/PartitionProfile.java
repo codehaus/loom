@@ -16,7 +16,7 @@ import org.jcontainer.loom.tools.metadata.PartitionMetaData;
  * objects.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-06-29 01:07:36 $
+ * @version $Revision: 1.5 $ $Date: 2003-07-07 10:23:40 $
  */
 public class PartitionProfile
 {
@@ -26,7 +26,7 @@ public class PartitionProfile
     public static final PartitionProfile[] EMPTY_SET = new PartitionProfile[ 0 ];
 
     /**
-     * The {@link org.jcontainer.loom.tools.metadata.PartitionMetaData} for this partition.
+     * The {@link PartitionMetaData} for this partition.
      */
     private final PartitionMetaData m_metaData;
 
