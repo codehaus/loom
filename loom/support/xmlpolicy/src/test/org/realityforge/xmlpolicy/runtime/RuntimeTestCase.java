@@ -108,7 +108,6 @@ public class RuntimeTestCase
         fail( "Expected to find AllPermission in set" );
     }
 
-
     public void testPolicyAccessPermissionNotCovered()
         throws Exception
     {
