@@ -1,6 +1,7 @@
 #!/bin/bash
 
-mailto=jcontainer-interest@lists.codehaus.org
+#mailto=jcontainer-interest@lists.codehaus.org
+mailto=osi@pobox.com
 builddir=.
 
 #JAVA_HOME=/usr/local/j2sdk1.4.1
@@ -24,8 +25,8 @@ rm -Rf target
 mkdir target
 
 # Compile and test
-maven clean-all &> target/cleanbuild.log
-maven build &> target/cleanbuild.log
+maven clean-all | tee -a target/cleanbuild.log
+maven build | tee -a target/cleanbuild.log
 
 # See if the "compiling" file is there. If it is, compilation
 # failed.
