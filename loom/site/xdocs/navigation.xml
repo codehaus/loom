@@ -2,7 +2,7 @@
 <project name="loom">
 
     <title>loom</title>
-    
+
     <body>
         <search/>
         <menu name="Overview">
@@ -15,7 +15,7 @@
         </menu>
         <menu name="Guide">
             <item href="/guide/architecture.html" name="Architectural Overview"/>
-            <item href="/guide/roles.html" name="Development Roles"/>                        
+            <item href="/guide/roles.html" name="Development Roles"/>
             <item href="/guide/administrator.html" name="for Administrators"/>
             <item href="/guide/deployers.html" name="for Deployers"/>
             <item href="/guide/assemblers/index.html" name="for Assemblers" collapse="true">
@@ -46,7 +46,6 @@
         </menu>
         <menu name="For Developers">
             <item href="/developers/a-future.html" name="A Future"/>
-            <item href="/developers/project-structure.html" name="Project Structure"/>
             <item href="/developers/alternate-kernel.html" name="Alternate Kernels"/>
         </menu>
     </body>
