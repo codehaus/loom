@@ -15,6 +15,7 @@ import java.security.Permission;
 import java.security.PermissionCollection;
 import java.security.Permissions;
 import java.security.Policy;
+import java.security.cert.Certificate;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import org.realityforge.salt.io.FileUtil;
@@ -129,7 +130,8 @@ public abstract class AbstractPolicy
             error( "Error building codeBase", mue );
         }
 
-        return new CodeSource( finalLocation, codeSource.getCertificates() );
+        final Certificate[] certificates = codeSource.getCertificates();
+        return new CodeSource( finalLocation, certificates );
     }
 
     /**
