@@ -61,8 +61,8 @@
             <version>4.1.5</version>
         </dependency>
         <dependency>
-            <groupId>phoenix</groupId>
-            <artifactId>phoenix-client</artifactId>
+            <groupId>avalon-phoenix</groupId>
+            <artifactId>avalon-phoenix-client</artifactId>
             <version>4.0.4</version>
         </dependency>
         <dependency>
