@@ -169,8 +169,16 @@
     <build>
         <!-- Only used if aggregating components by source -->
         <sourceDirectory>target/aggregated-src/java</sourceDirectory>
-        <unitTestSourceDirectory>target/aggregated-src/test</unitTestSourceDirectory>
+        <resources>
+            <resource>
+                <directory>target/aggregated-src/java</directory>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </resource>
+        </resources>
 
+        <unitTestSourceDirectory>target/aggregated-src/test</unitTestSourceDirectory>
         <unitTest>
             <resource>
                 <directory>target/aggregated-src/test</directory>
