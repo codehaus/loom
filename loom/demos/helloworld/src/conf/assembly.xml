@@ -1,49 +1,35 @@
 <?xml version="1.0"?>
-<!DOCTYPE assembly PUBLIC "-//LOOM/Assembly DTD Version 1.0//EN" 
+<!DOCTYPE assembly PUBLIC "-//LOOM/Assembly DTD Version 1.0//EN"
                   "http://loom.jcontainer.org/dtds/assembly_1_0.dtd">
 
 <assembly>
- 
-  <!-- The ThreadManager block -->
-  <block class="org.apache.avalon.cornerstone.blocks.threads.DefaultThreadManager" 
-         name="thread-manager" />
- 
-  <!-- The Connection Manager block -->
-  <block class="org.apache.avalon.cornerstone.blocks.connection.DefaultConnectionManager" 
-         name="connections">
-    <provide name="thread-manager" 
-             role="org.apache.avalon.cornerstone.services.threads.ThreadManager" />
-  </block>
 
-  <!-- The Socket Manager block -->
-  <block class="org.apache.avalon.cornerstone.blocks.sockets.DefaultSocketManager" name="sockets" />
+    <block class="org.jcomponent.threadpool.impl.AvalonCommonsThreadPool"
+        name="thread-pool"/>
 
-  <!-- The TimeScheduler block -->
-  <block class="org.apache.avalon.cornerstone.blocks.scheduler.DefaultTimeScheduler" name="scheduler">
-    <provide name="thread-manager" 
-             role="org.apache.avalon.cornerstone.services.threads.ThreadManager" />
-  </block>
+    <!-- The Connection Manager block -->
+    <block class="org.jcomponent.netserve.connection.impl.AvalonConnectionManager"
+        name="connections">
+        <provide name="thread-pool"
+            role="org.jcomponent.threadpool.ThreadPool"/>
+    </block>
 
-  <!-- The RMIfication block -->
-  <block class="org.apache.avalon.cornerstone.blocks.rmification.DefaultRMIfication"
-         name="rmification"/>
+    <!-- The Socket Manager block -->
+    <block class="org.jcomponent.netserve.sockets.impl.DefaultServerSocketFactory" name="sockets"/>
 
-  <!--                                        -->
-  <!-- Below this section are the demo blocks -->
-  <!--                                        -->
-  <block class="org.jcontainer.loom.demos.helloworld.HelloWorldServerImpl" 
-         name="helloworldserver" >
-    <provide name="sockets" 
-      	 	 role="org.apache.avalon.cornerstone.services.sockets.SocketManager"/>
-    <provide name="connections" 
-             role="org.apache.avalon.cornerstone.services.connection.ConnectionManager" />
-  </block>
+    <!-- The RMIfication block -->
+    <block class="org.apache.avalon.cornerstone.blocks.rmification.DefaultRMIfication"
+        name="rmification"/>
 
-  <block class="org.jcontainer.loom.demos.helloworld.RMIHelloWorldServerImpl" 
-         name="rmihelloworldserver">
-    <provide name="rmification" 
-    	 role="org.apache.avalon.cornerstone.services.rmification.RMIfication"/>
-  </block>
-
+    <!--                                        -->
+    <!-- Below this section are the demo blocks -->
+    <!--                                        -->
+    <block class="org.jcontainer.loom.demos.helloworld.HelloWorldServerImpl"
+        name="helloworldserver">
+        <provide name="sockets"
+            role="org.jcomponent.netserve.sockets.ServerSocketFactory"/>
+        <provide name="connections"
+            role="org.jcomponent.netserve.connection.ConnectionManager"/>
+    </block>
 
 </assembly>

@@ -94,8 +94,7 @@ import java.net.SocketException;
 
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.phoenix.BlockContext;
-
-import org.apache.avalon.cornerstone.services.connection.ConnectionHandler;
+import org.jcomponent.netserve.connection.ConnectionHandler;
 
 /**
  * This handles an individual incoming request.  It outputs a greeting as html.
