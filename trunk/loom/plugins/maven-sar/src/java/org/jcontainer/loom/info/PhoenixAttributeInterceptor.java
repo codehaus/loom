@@ -22,7 +22,7 @@ import org.realityforge.metaclass.tools.qdox.QDoxAttributeInterceptor;
  * into modern DNA and MX attributes.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.8 $ $Date: 2003-10-17 08:06:35 $
+ * @version $Revision: 1.1 $ $Date: 2003-11-01 13:15:31 $
  */
 public class PhoenixAttributeInterceptor
     extends DefaultQDoxAttributeInterceptor

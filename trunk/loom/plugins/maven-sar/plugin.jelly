@@ -31,6 +31,18 @@
 
         <j:set var="metagenerate" value='${context.getVariable("maven.sar.metagenerate")}'/>
         <ant:echo message="Set metagenerate property to ${metagenerate}"/>
+        <j:if test="${metagenerate == 'true'}">
+            <ant:echo message="Defining metagenerate task"/>
+            <ant:taskdef name="metagenerate"
+                classname="org.jcontainer.loom.info.GenerateLoomDescriptorsTask">
+                <ant:classpath>
+	                <ant:pathelement path="${plugin.dir}"/>
+	                <ant:pathelement path="${plugin.getDependencyPath('dna:dna-tools')}"/>
+	                <ant:pathelement path="${plugin.getDependencyPath('qdox')}"/>
+	                <ant:pathelement path="${plugin.getDependencyPath('spice:spice-metaclass')}"/>
+                </ant:classpath>
+            </ant:taskdef>
+		</j:if>
 
     </goal>
 
@@ -40,14 +52,6 @@
     <goal name="sar:metagenerate" prereqs="sar:init"
         description="Metagenerate xinfo files">
         <j:if test="${metagenerate == 'true'}">
-            <ant:echo message="Defining metagenerate task"/>
-            <ant:taskdef name="metagenerate"
-                classname="org.jcontainer.loom.info.GenerateLoomDescriptorsTask">
-                <ant:classpath>
-                    <ant:path refid="maven.dependency.classpath"/>
-                    <ant:pathelement path="${maven.build.dest}"/>
-                </ant:classpath>
-            </ant:taskdef>
             <ant:echo message="Generating Component Descriptors"/>
             <!-- Ensure maven.build.dest exists -->
             <ant:mkdir dir="${maven.build.dest}"/>
