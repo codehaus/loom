@@ -18,7 +18,7 @@ import org.jcontainer.loom.tools.metadata.ComponentMetaData;
  * construct a specific instance of the component.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-06-29 01:07:36 $
+ * @version $Revision: 1.4 $ $Date: 2003-07-05 05:25:03 $
  */
 public class ComponentProfile
 {
@@ -42,6 +42,14 @@ public class ComponentProfile
     public ComponentProfile( final ComponentInfo info,
                              final ComponentMetaData metaData )
     {
+        if( null == info )
+        {
+            throw new NullPointerException( "info" );
+        }
+        if( null == metaData )
+        {
+            throw new NullPointerException( "metaData" );
+        }
         m_info = info;
         m_metaData = metaData;
     }
