@@ -6,7 +6,7 @@
  * with this distribution in the LICENSE.txt file.
  *
  * This product includes software developed by the
-�*�Apache Software Foundation (http://www.apache.org/).
+ * Apache Software Foundation (http://www.apache.org/).
  */
 package org.jcontainer.loom.components.logger;
 
@@ -15,8 +15,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationUtil;
 import org.apache.avalon.framework.container.ContainerUtil;
@@ -27,11 +29,6 @@ import org.apache.avalon.framework.context.DefaultContext;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.logger.Logger;
 import org.apache.avalon.phoenix.BlockContext;
-import org.apache.oro.text.perl.Perl5Util;
-import org.jcontainer.loom.components.util.ResourceUtil;
-import org.jcontainer.loom.interfaces.LogManager;
-import org.realityforge.configkit.PropertyExpander;
-import org.realityforge.configkit.ResolverFactory;
 import org.jcomponent.loggerstore.DOMLog4JLoggerStoreFactory;
 import org.jcomponent.loggerstore.InitialLoggerStoreFactory;
 import org.jcomponent.loggerstore.Jdk14LoggerStoreFactory;
@@ -40,8 +37,12 @@ import org.jcomponent.loggerstore.LoggerStore;
 import org.jcomponent.loggerstore.LoggerStoreFactory;
 import org.jcomponent.loggerstore.PropertyLog4JLoggerStoreFactory;
 import org.jcomponent.loggerstore.SimpleLogKitLoggerStoreFactory;
-import org.realityforge.salt.i18n.Resources;
+import org.jcontainer.loom.components.util.ResourceUtil;
+import org.jcontainer.loom.interfaces.LogManager;
+import org.realityforge.configkit.PropertyExpander;
+import org.realityforge.configkit.ResolverFactory;
 import org.realityforge.salt.i18n.ResourceManager;
+import org.realityforge.salt.i18n.Resources;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -79,17 +80,16 @@ public class DefaultLogManager
         final HashMap data = new HashMap();
         data.putAll( appContext );
         data.put( "loom.home", m_loomHome );
-        replaceBackslash( data );
+        normaliseFilePaths( data );
         return data;
     }
 
     /**
-     * Replaces backslack character '\' with '/' in <class>File</class> instance values
+     * Normalises file paths by replacing File.separatorChar with '/'
      * 
      * @param data the Map containing the context data
      */
-    private void replaceBackslash( final Map data ){
-        final Perl5Util perl5 = new Perl5Util();
+    private void normaliseFilePaths( final Map data ){
         for ( Iterator i = data.keySet().iterator(); i.hasNext(); )
         {
             final Object key = i.next();
@@ -98,13 +98,11 @@ public class DefaultLogManager
             {
                 File file = (File)value;
                 final String path = file.getPath();
-                final String newPath = perl5.substitute( "s/\\\\/\\//g", path );
-                // Note: in the String representation of a regex 
-                // you have to escape the backslash, and escape the backslash 
-                // that is escaping the backslash - so much for simplicity!
-                // Using JDK1.4 the statement becomes
-                // final String newPath = path.replaceAll("\\\\","/");
-                data.put( key, new File( newPath ) );
+                if ( File.separatorChar != '/' ) 
+                {
+                    final String newPath = path.replace( File.separatorChar, '/' );
+                    data.put( key, new File( newPath ) );
+                }
             }
         }
     }
