@@ -1,13 +1,12 @@
 <?xml version="1.0"?>
-<project
+<project default="buildDist"
     xmlns:doc="doc"
     xmlns:j="jelly:core"
     xmlns:maven="jelly:maven"
     xmlns:define="jelly:define"
     xmlns:util="jelly:util"
     xmlns:ant="jelly:ant"
-    xmlns:archive="loom:archive"
-    default="jar:install">
+    xmlns:archive="loom:archive">
 
     <define:taglib uri="loom:archive">
         <define:tag name="copy-deps">
@@ -49,6 +48,7 @@
 
         <ant:mkdir dir="${distDir}/conf"/>
         <ant:copy file="src/conf/kernel.xml" todir="${distDir}/conf"/>
+        <ant:copy file="src/conf/wrapper.conf" todir="${distDir}/conf"/>
         <ant:copy todir="${distDir}/conf">
             <ant:fileset dir="deploy/conf">
                 <ant:include name="*.xml"/>
@@ -66,6 +66,8 @@
         <ant:copy todir="${distDir}/ext">
             <ant:fileset dir="deploy/ext">
                 <ant:include name="*.jar"/>
+                <ant:include name="*.so"/>
+                <ant:include name="*.dll"/>
             </ant:fileset>
         </ant:copy>
 
@@ -86,6 +88,16 @@
 
         <ant:copy file="${pom.getDependencyPath('loom:loom-launcher')}"
             tofile="${distDir}/bin/loom-launcher.jar"/>
+
+        <ant:copy todir="${distDir}/bin">
+            <ant:fileset dir="deploy/ext">
+                <ant:include name="*rapper*"/>
+                <ant:exclude name="*.jar"/>
+                <ant:exclude name="*.so"/>
+                <ant:exclude name="*.dll"/>
+            </ant:fileset>
+        </ant:copy>
+
 
     </goal>
 
