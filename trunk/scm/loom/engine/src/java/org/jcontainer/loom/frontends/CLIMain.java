@@ -126,7 +126,6 @@ public final class CLIMain
 
     static final String HOME_DIR = File.class.getName() + "/home";
     static final String PERSISTENT = Boolean.class.getName() + "/persistent";
-    static final String DISABLE_HOOK = "disable-hook";
     static final String CONFIGFILE = "loom.configfile";
 
     private static final String DEFAULT_LOG_FILE =
@@ -144,8 +143,6 @@ public final class CLIMain
 
     ///The code to return to system using exit code
     private int m_exitCode;
-
-    private ShutdownHook m_hook;
 
     private boolean m_shuttingDown;
     private Logger m_logger;
@@ -225,14 +222,6 @@ public final class CLIMain
             return;
         }
 
-        final boolean disableHook =
-            properties.getProperty( DISABLE_HOOK, "false" ).equals( "true" );
-        if( false == disableHook )
-        {
-            m_hook = new ShutdownHook( this );
-            Runtime.getRuntime().addShutdownHook( m_hook );
-        }
-
         // If an Observer is present in the data object, then add it as an observer for
         //  m_observable
         Observer observer = (Observer)data.get( Observer.class.getName() );
@@ -265,10 +254,6 @@ public final class CLIMain
         }
         finally
         {
-            if( null != m_hook )
-            {
-                Runtime.getRuntime().removeShutdownHook( m_hook );
-            }
             shutdown();
         }
     }
@@ -350,33 +335,6 @@ public final class CLIMain
 
     /**
      * Shut the embeddor down.
-     * This method is designed to only be called from within the ShutdownHook.
-     * To shutdown Pheonix, call shutdown() below.
-     */
-    protected void forceShutdown()
-    {
-        if( null == m_hook || null == m_embeddor )
-        {
-            //We were shutdown gracefully but the shutdown hook
-            //thread was not removed. This can occur when an earlier
-            //shutdown hook caused a shutdown() request to be processed
-            return;
-        }
-
-        final String message = REZ.getString( "main.abnormal-exit.notice" );
-        if( null != m_logger )
-        {
-            m_logger.info( message );
-        }
-        System.out.print( message );
-        System.out.print( " " );
-        System.out.flush();
-
-        shutdown();
-    }
-
-    /**
-     * Shut the embeddor down.
      *
      * Note must be public so that the Frontend can
      * shut it down via reflection.
@@ -389,11 +347,6 @@ public final class CLIMain
         if( !m_shuttingDown )
         {
             m_shuttingDown = true;
-
-            //Null hook so it is not tried to be removed
-            //when we are shutting down. (Attempting to remove
-            //hook during shutdown raises an exception).
-            m_hook = null;
 
             if( null != m_embeddor )
             {
@@ -445,24 +398,5 @@ public final class CLIMain
         System.out.println( REZ.getString( "main.exception.footer" ) );
 
         m_exitCode = 1;
-    }
-}
-
-final class ShutdownHook
-    extends Thread
-{
-    private final CLIMain m_main;
-
-    protected ShutdownHook( final CLIMain main )
-    {
-        m_main = main;
-    }
-
-    /**
-     * Run the shutdown hook.
-     */
-    public void run()
-    {
-        m_main.forceShutdown();
     }
 }
