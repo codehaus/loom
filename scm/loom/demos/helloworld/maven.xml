@@ -1,7 +1,6 @@
-<project default="build"
-  xmlns:sar="sar">
+<project default="main">
 
-  <goal name="build">
+  <goal name="main">
     <attainGoal name="jar:jar"/>
     <attainGoal name="sar:sar"/>
   </goal>
