@@ -1,0 +1,49 @@
+/*
+ * Copyright (C) The JContainer Group. All rights reserved.
+ *
+ * This software is published under the terms of the JContainer
+ * Software License version 1.1, a copy of which has been included
+ * with this distribution in the LICENSE.txt file.
+ */
+package org.jcontainer.loom.tools.verifier;
+
+import org.apache.avalon.framework.logger.ConsoleLogger;
+import org.apache.avalon.phoenix.containerkit.profile.PartitionProfile;
+import org.apache.avalon.phoenix.test.AbstractContainerTestCase;
+import org.jcontainer.loom.tools.verifier.SarVerifier;
+
+/**
+ *  An basic test case for the LogManager.
+ *
+ * @author <a href="mailto:peter at apache.org">Peter Donald</a>
+ * @version $Revision: 1.1 $ $Date: 2003-06-26 08:31:27 $
+ */
+public class VerifierTestCase
+    extends AbstractContainerTestCase
+{
+    public VerifierTestCase( final String name )
+    {
+        super( name );
+    }
+
+    public void testBasic()
+        throws Exception
+    {
+        verify( "assembly1.xml" );
+    }
+
+    public void testComplex()
+        throws Exception
+    {
+        verify( "assembly2.xml" );
+    }
+
+    protected void verify( final String config ) throws Exception
+    {
+        final PartitionProfile sarMetaData = assembleSar( config );
+        final ClassLoader classLoader = getClass().getClassLoader();
+        final SarVerifier verifier = new SarVerifier();
+        verifier.enableLogging( new ConsoleLogger() );
+        verifier.verifySar( sarMetaData, classLoader );
+    }
+}

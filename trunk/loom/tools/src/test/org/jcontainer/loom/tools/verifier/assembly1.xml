@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE assembly PUBLIC "-//PHOENIX/Assembly DTD Version 1.0//EN"
+                  "http://jakarta.apache.org/avalon/dtds/phoenix/assembly_1.1.dtd">
+
+<assembly>
+
+    <block class="org.apache.avalon.phoenix.test.data.Component1"
+        name="c1">
+        <provide name="c2"
+            role="org.apache.avalon.phoenix.test.data.Service2"/>
+    </block>
+
+    <block class="org.apache.avalon.phoenix.test.data.Component2"
+        name="c2">
+        <proxy disable="true"/>
+    </block>
+
+</assembly>
