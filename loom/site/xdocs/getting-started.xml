@@ -21,6 +21,27 @@
             </p>
 
         </section>
+        <section name="Building the demos from source">
+            <p>
+			To build the demo
+                <source>
+cd loom
+maven build:demos
+                </source>
+            </p>
+            <p>
+		    The resulting artifacts are SAR files, one for each demo, in the distribution/deploy/demos
+		    directory.  A SAR file is an archive
+		    for Loom applications which conveniently holds all the libraries and deployment
+		    information the the given application.  If you are familiar with J2EE EAR and WAR
+		    files you'll find it very similar.
+            </p>
+            <p>
+			All is needed is for the SAR files to dropped in the <code>apps/</code> directory 
+			of the Loom distribution and to start/restart Loom by executing 
+			the preferred script in the <code>bin/</code> directory.
+            </p>
+        </section>
 
         <section name="The HelloWorld demo">
 
@@ -28,28 +49,11 @@
 		    Loom would not be a serious application if it did not have an HellWorld demo!
 		    It will allow you to verify that you've successfully built Loom.
             </p>
+ 
             <p>
-		    Firstly you will need to build the helloworld.sar file.  A SAR file is an archive
-		    for Loom applications which conveniently holds all the libraries and deployment
-		    information the the given application.  If you are familiar with J2EE EAR and WAR
-		    files you'll find it very similar.
-            </p>
-            <p>
-			To build the helloworld demo
-                <source>
-cd loom/demos/helloworld
-maven
-                </source>
-			The resulting artifact will be found in the target/demo-helloworld.sar.
-			Copy it into apps/ directory of the Loom distribution.
-            </p>
-
-            <p>
-		    Then fire up Loom by simply executing the run script in the distribution bin/ directory:
-                <source>
-cd [distribution-dir]/bin
-run[.bat|sh]
-                </source>
+		    Fire up Loom by executing the <code>run</code> script in the  <code>bin/</code> directory
+		    (this will execute in the foreground so you can see the messages
+		    written to System.out).
             </p>
 
             <p>
@@ -57,9 +61,9 @@ run[.bat|sh]
 		    where localhost is the network name alias of your machine ("localhost").
 		    It should be recognised on all platforms. In the unlikely case it doesn't replace
 		    localhost with 127.0.0.1
-                <br/>
+            </p>
+            <p>
 		    If all goes well, you will see something like the following:
-
                 <source>
 Hello World!
 Requests so far = 1
@@ -87,52 +91,6 @@ maven xdoc
             </p>
         </section>
 
-        <section name="The Avalon Lifecycle demo">
-            <p>The lifecycle demo shows only the calling of the Avalon lifecycle methods
-		under Loom control.  If you are not familiar with the Avalon lifecycle, please
-		refer to the
-                <a href="http://avalon.apache.org/framework/reference-the-lifecycle.html">
-		Avalon lifecycle</a> documentation.
-            </p>
-            <p>Do not forget that the lifecycle methods are optional.  You can implement
-		all of them, as this demo does, some or none of them.</p>
-            <p>
-			To build the demo
-                <source>
-cd loom/demos/avalonlifecycle
-maven
-                </source>
-			The resulting artifact will be found in the target/demo-avalonlifecycle.sar.
-			Copy it into apps/ directory of the Loom distribution.
-            </p>
-
-            <p>This is the output that appears in the Console that Loom was started from:</p>
-            <source>
-Lifecycle1Impl.constructor() called. (You should never do too much in here)
-Lifecycle1Impl.enableLogging() called.
-Lifecycle1Impl.contextualize() called (things like base directory passed in here).
-Lifecycle1Impl.service() called (lookup on other services possible now).
-Lifecycle1Impl.configure() called (configuration from config.xml passed here).
-Lifecycle1Impl.initialize() called.
-Lifecycle1Impl.start() called.
-Lifecycle2Impl.constructor() called. (You should never do too much in here)
-Lifecycle2Impl.enableLogging() called.
-Lifecycle2Impl.contextualize() called (things like base directory passed in here).
-Lifecycle2Impl.service() called (lookup on other services possible now).
-Lifecycle2Impl.service(), Lifecycle1 service looked up
-Lifecycle2Impl.configure() called (configuration from config.xml passed here).
-Lifecycle2Impl.initialize() called.
-Lifecycle1Impl.myServiceMethod() called.
-Lifecycle2Impl.initialize(), Lifecycle1.myServiceMethod() method called result = 123
-Lifecycle2Impl.start() called.
-(Ctrl-C pressed in console) JVM exiting abnormally. Shutting down Loom.
-Lifecycle2Impl.stop() called.
-Lifecycle2Impl.dispose() Called
-Lifecycle1Impl.stop() called.
-Lifecycle1Impl.dispose() Called
-            </source>
-        </section>
-
         <section name="The distributed demo">
             <p>
 	    This demo application could be considered a starter project for someone wanting to make a
@@ -141,32 +99,26 @@ Lifecycle1Impl.dispose() Called
             </p>
             <p>
 	    This demo application also demonstrates that it is possible to make a server application that is dual mode.
-	    Dual mode to us is the ability for the server application to run inside Loom and to
+	    Dual mode here is the ability for the server application to run inside Loom and to
 	    stand-alone from the command line.  The only difference is that the app
 	    needs to be zipped into two forms - the sar file for Loom and a jar file for standalone.
             </p>
             <p>
-	    To build the demo
-            </p>
-            <source>
-cd loom/demos/distributed
-maven
-            </source>
-            <p>
-		The build setup also demostrates a typical build structure for multi-component project.
-		The top-level
-                <code>loom/demos/distributed/maven.xml</code> drives the build of the
-		of the components via a reactor, which takes into consideration any dependencies among the
-		components.
-            </p>
-
-            <p>
-		The build artifacts are:
+		The build artifacts produced by this demo are 
                 <ol>
-                    <li>server/target/demo-distributed-server.sar - the server app in Loom form</li>
-                    <li>server/target/demo-distributed-server-x.y.jar - the server app in standalone form</li>
-                    <li>client/target/demo-distributed-client-x.y.jar - the client app</li>
+                    <li>demos/distributed/server/target/demo-distributed-server.sar - the server app in Loom form</li>
+                    <li>demos/distributed/server/target/demo-distributed-server-x.y.jar - the server app in standalone form</li>
+                    <li>demos/distributed/client/target/demo-distributed-client-x.y.jar - the client app</li>
                 </ol>
+            </p>
+            <p>
+	    To run the Server app inside Loom drop the
+                <code>demo-distributed-server.sar</code> in the
+	    Loom distribution
+                <code>apps</code> directory (as done above), and restart Loom:
+                <source>
+Server started on port 1234
+                </source>
             </p>
 
             <p>
@@ -176,20 +128,13 @@ java -jar demo-distributed-server-x.y.jar
 Loom Demo listening on port 7654
 Ctrl-C to exit
                 </source>
+			</p>
 
-
-	    To run the Server app inside Loom drop the
-                <code>demo-distributed-server.sar</code> in the
-	    Loom distribution
-                <code>apps</code> directory (as done above), and restart Loom:
-                <source>
-Server started on port 1234
-                </source>
-
+			<p>
 	    Finally use the client application to poke the server :
                 <source>
-java -jar loom-demo-client.jar localhost 7654 HelloLonerWorld!!!
-java -jar loom-demo-client.jar localhost 1234 HelloLoomWorld!!!
+java -jar demo-distributed-client-x.y.jar localhost 7654 HelloLonerWorld
+java -jar demo-distributed-client-x.y.jar localhost 1234 HelloLoomWorld
                 </source>
 		You should see the messages appear in the console windows in which the two servers are running.
             </p>
