@@ -190,6 +190,14 @@
                 <category>shared</category>
             </properties>
         </dependency>
+        <dependency> <!-- for spice-metaclass -->
+            <groupId>asm</groupId>
+            <artifactId>asm</artifactId>
+            <version>1.4</version>
+            <properties>
+                <category>shared</category>
+            </properties>
+        </dependency>
         <dependency>
             <groupId>spice</groupId>
             <artifactId>spice-metaclass-jmx</artifactId>
