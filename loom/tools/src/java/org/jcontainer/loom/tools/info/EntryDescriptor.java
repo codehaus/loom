@@ -8,6 +8,7 @@
 package org.jcontainer.loom.tools.info;
 
 import java.io.Serializable;
+import org.realityforge.metaclass.model.Attribute;
 
 /**
  * A descriptor that describes a value that must be placed
@@ -28,7 +29,7 @@ import java.io.Serializable;
  * of how to declare the container specific Attributes.</p>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-29 01:07:35 $
+ * @version $Revision: 1.3 $ $Date: 2003-10-05 01:06:31 $
  */
 public final class EntryDescriptor
     extends FeatureDescriptor

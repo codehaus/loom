@@ -9,6 +9,7 @@ package org.jcontainer.loom.tools.info;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import org.realityforge.metaclass.model.Attribute;
 
 /**
  * This is the Abstract class for all feature descriptors.
@@ -18,7 +19,7 @@ import java.util.Arrays;
  * be defined by future specification documents.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-29 01:07:35 $
+ * @version $Revision: 1.3 $ $Date: 2003-10-05 01:06:31 $
  */
 public abstract class FeatureDescriptor
     implements Serializable

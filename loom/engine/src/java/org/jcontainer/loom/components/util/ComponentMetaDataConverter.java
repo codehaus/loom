@@ -15,18 +15,18 @@ import org.apache.avalon.phoenix.metadata.DependencyMetaData;
 import org.apache.avalon.phoenix.metadata.SarMetaData;
 import org.apache.avalon.phoenix.metainfo.BlockInfo;
 import org.jcontainer.loom.interfaces.ContainerConstants;
-import org.jcontainer.loom.tools.info.Attribute;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.metadata.ComponentMetaData;
 import org.jcontainer.loom.tools.LoomToolConstants;
 import org.jcontainer.loom.tools.profile.ComponentProfile;
 import org.jcontainer.loom.tools.profile.PartitionProfile;
+import org.realityforge.metaclass.model.Attribute;
 
 /**
  * Convert a {@link ComponentMetaData} into a {@link BlockMetaData}.
  *
  * @author <a href="mailto:peter@apache.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-07-19 02:12:06 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-05 01:06:31 $
  */
 public class ComponentMetaDataConverter
 {

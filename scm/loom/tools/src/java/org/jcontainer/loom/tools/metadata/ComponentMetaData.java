@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.parameters.Parameters;
-import org.jcontainer.loom.tools.info.Attribute;
 import org.jcontainer.loom.tools.info.FeatureDescriptor;
+import org.realityforge.metaclass.model.Attribute;
 
 /**
  * Each component declared in the application is represented by
@@ -23,7 +23,7 @@ import org.jcontainer.loom.tools.info.FeatureDescriptor;
  * new components as needed.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-07-05 05:29:02 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-05 01:06:31 $
  */
 public class ComponentMetaData
     extends FeatureDescriptor
