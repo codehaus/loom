@@ -10,22 +10,16 @@ package org.jcontainer.loom.tools.factory;
 import java.util.Map;
 import java.util.WeakHashMap;
 import org.jcontainer.loom.tools.info.ComponentInfo;
-import org.jcontainer.loom.tools.factory.ComponentBundle;
-import org.jcontainer.loom.tools.factory.ComponentFactory;
-import org.jcontainer.loom.tools.factory.DefaultComponentBundle;
 import org.jcontainer.loom.tools.infobuilder.BlockInfoReader;
-import org.jcontainer.dna.AbstractLogEnabled;
-import org.jcontainer.dna.Logger;
 
 /**
  * The default implementation of {@link ComponentFactory}
  * that simply creates components from a {@link ClassLoader}.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-10-16 00:40:51 $
+ * @version $Revision: 1.7 $ $Date: 2003-10-16 04:32:45 $
  */
 public class DefaultComponentFactory
-    extends AbstractLogEnabled
     implements ComponentFactory
 {
     /**
@@ -56,12 +50,6 @@ public class DefaultComponentFactory
             throw new NullPointerException( "classLoader" );
         }
         m_classLoader = classLoader;
-    }
-
-    public void enableLogging( final Logger logger )
-    {
-        super.enableLogging( logger );
-        setupLogger( m_infoBuilder, "info" );
     }
 
     /**
@@ -112,7 +100,7 @@ public class DefaultComponentFactory
     }
 
     /**
-     * Create a {@link org.jcontainer.loom.tools.info.ComponentInfo} for component with specified implementationKey.
+     * Create a {@link ComponentInfo} for component with specified implementationKey.
      *
      * @param implementationKey the implementationKey
      * @return the created {@link ComponentInfo}
@@ -126,9 +114,9 @@ public class DefaultComponentFactory
     }
 
     /**
-     * Retrieve ClassLoader associated with ComponentFactory.
+     * Return the ClassLoader associated with the ComponentFactory.
      *
-     * @return
+     * @return the ClassLoader associated with the ComponentFactory.
      */
     protected ClassLoader getClassLoader()
     {
