@@ -2,7 +2,6 @@
 <document>
     <properties>
         <title>Specification of environment.xml</title>
-        <author email="peter at apache.org">Peter Donald</author>
     </properties>
     <body>
         <section name="Introduction">
@@ -11,9 +10,11 @@
                 <code>environment.xml</code> file is to configure
         environmental or Server Application wide settings. Currently this means
         being able to set the security policy and configure logging settings.
-        A sample
-                <code>environment.xml</code> follows.
-            </p>
+        A sample <code>environment.xml</code> follows. Note that the example
+        does not include defining custom classloaders which is possible by
+        adding a &lt;classloaders&gt; element in environment.xml file. This
+        feature is more fully described in <a href="classman.html">ClassMan
+        Overview</a>.</p>
         </section>
         <section name="Sample environment.xml file">
             <source>
