@@ -5,14 +5,14 @@
 
     <preGoal name="java:compile">
         <ant:mkdir dir="target/src/java/org/jcontainer/loom/interfaces"/>
-        <ant:tstamp property="build.date"/>
+        <ant:tstamp/>
         <j:file name="target/src/java/org/jcontainer/loom/interfaces/Version.java">
             package org.jcontainer.loom.interfaces;
             interface Version
             {
             String SOFTWARE = "${pom.name}";
             String VERSION = "${pom.currentVersion}";
-            String DATE = "${build.date}";
+            String DATE = "${TODAY}";
             }
         </j:file>
     </preGoal>
