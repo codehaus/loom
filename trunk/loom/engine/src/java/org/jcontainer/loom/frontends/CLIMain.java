@@ -145,7 +145,7 @@ public final class CLIMain
         }
         else
         {
-            final Thread thread = new Thread( this, "Phoenix-Monitor" );
+            final Thread thread = new Thread( this, "Loom-Monitor" );
             thread.setDaemon( false );
             thread.start();
         }
@@ -204,7 +204,7 @@ public final class CLIMain
 
     /**
      * Uses {@link org.apache.log.Hierarchy} to create a new
-     * logger using "Phoenix" as its category, DEBUG as its
+     * logger using "Loom" as its category, DEBUG as its
      * priority and the log-destination from Parameters as its
      * destination.
      * TODO: allow configurable priorities and multiple
@@ -225,7 +225,7 @@ public final class CLIMain
         //Create an anonymous hierarchy so no other
         //components can get access to logging hierarchy
         final Hierarchy hierarchy = new Hierarchy();
-        final org.apache.log.Logger logger = hierarchy.getLoggerFor( "Phoenix" );
+        final org.apache.log.Logger logger = hierarchy.getLoggerFor( "Loom" );
         logger.setLogTargets( new LogTarget[]{logTarget} );
         logger.setPriority( Priority.getPriorityForName( logPriority ) );
         logger.info( "Logger started" );
@@ -295,7 +295,7 @@ public final class CLIMain
                 }
             }
 
-            // Notify any observers that Phoenix is shutting down
+            // Notify any observers of shutdown
             setChanged();
             notifyObservers( "shutdown" );
         }
