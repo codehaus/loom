@@ -16,11 +16,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.jar.Manifest;
 import org.apache.avalon.excalibur.extension.Extension;
-import org.apache.avalon.excalibur.i18n.ResourceManager;
-import org.apache.avalon.excalibur.i18n.Resources;
 import org.apache.avalon.excalibur.packagemanager.OptionalPackage;
 import org.apache.avalon.excalibur.packagemanager.PackageManager;
 import org.realityforge.classman.runtime.JoinClassLoader;
+import org.realityforge.salt.i18n.Resources;
+import org.realityforge.salt.i18n.ResourceManager;
 
 /**
  * This is a class that performs resolver that;
@@ -38,7 +38,7 @@ import org.realityforge.classman.runtime.JoinClassLoader;
  * </ul>
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-04-04 13:52:12 $
+ * @version $Revision: 1.2 $ $Date: 2003-06-04 23:38:36 $
  */
 public class SimpleLoaderResolver
     implements LoaderResolver
