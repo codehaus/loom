@@ -1,0 +1,17 @@
+<catalog version="1.0">
+    <entity
+        publicId="-//PHOENIX/Block Info DTD Version 1.0//EN"
+        resource="org/apache/avalon/phoenix/tools/blockinfo.dtd"/>
+    <entity
+        publicId="-//AVALON/Component Info DTD Version 1.0//EN"
+        resource="org/apache/avalon/phoenix/tools/componentinfo.dtd"/>
+    <entity
+        publicId="-//PHOENIX/Assembly DTD Version 1.0//EN"
+        resource="org/apache/avalon/phoenix/tools/assembly.dtd"/>
+    <entity
+        publicId="-//PHOENIX/Mx Info DTD Version 1.0//EN"
+        resource="org/apache/avalon/phoenix/tools/mxinfo.dtd"/>
+    <entity
+        publicId="-//PHOENIX/Assembly DTD Version 1.1//EN"
+        resource="org/apache/avalon/phoenix/tools/assembly.dtd"/>
+</catalog>
