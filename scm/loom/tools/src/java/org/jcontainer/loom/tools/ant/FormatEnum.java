@@ -14,7 +14,7 @@ import org.apache.tools.ant.types.EnumeratedAttribute;
  * outputting as xml or as a serialized format.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-29 01:07:35 $
+ * @version $Revision: 1.3 $ $Date: 2003-10-06 10:12:54 $
  */
 public class FormatEnum
     extends EnumeratedAttribute
@@ -26,10 +26,6 @@ public class FormatEnum
         {
             return MetaGenerateTask.LEGACY_TYPE;
         }
-        else if( value.equals( "ser" ) )
-        {
-            return MetaGenerateTask.SER_TYPE;
-        }
         else
         {
             return MetaGenerateTask.XML_TYPE;
@@ -38,6 +34,6 @@ public class FormatEnum
 
     public String[] getValues()
     {
-        return new String[]{"xml", "ser", "legacy"};
+        return new String[]{"xml", "legacy"};
     }
 }
