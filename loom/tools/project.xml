@@ -67,15 +67,9 @@
 
     <build>
         <sourceDirectory>src/java</sourceDirectory>
-        <unitTestSourceDirectory>${basedir}/src/test</unitTestSourceDirectory>
+        <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
 
         <unitTest>
-            <resource>
-                <directory>${basedir}/src/test</directory>
-                <includes>
-                    <include>**/*</include>
-                </includes>
-            </resource>
             <includes>
                 <include>**/*TestCase.java</include>
             </includes>
