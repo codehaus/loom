@@ -55,9 +55,8 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>avalon</groupId>
-            <artifactId>avalon-logkit</artifactId>
-            <version>20030527</version>
+            <id>logkit</id>
+            <version>1.2.2</version>
             <properties>
                 <category>shared</category>
             </properties>
@@ -237,5 +236,4 @@
             </properties>
         </dependency>
     </dependencies>
-
 </project>

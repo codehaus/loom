@@ -13,9 +13,8 @@
             <version>1.5</version>
         </dependency>
         <dependency>
-            <groupId>avalon</groupId>
-            <artifactId>avalon-logkit</artifactId>
-            <version>20030527</version>
+            <id>logkit</id>
+            <version>1.2.2</version>
         </dependency>
         <dependency>
             <groupId>avalon</groupId>
@@ -140,11 +139,6 @@
             <groupId>excalibur</groupId>
             <artifactId>excalibur-logger</artifactId>
             <version>20030713</version>
-        </dependency>
-        <dependency><!-- for unit testing -->
-            <groupId>avalon</groupId>
-            <artifactId>avalon-logkit</artifactId>
-            <version>20030527</version>
         </dependency>
         <dependency><!-- for unit testing -->
             <groupId>excalibur</groupId>
