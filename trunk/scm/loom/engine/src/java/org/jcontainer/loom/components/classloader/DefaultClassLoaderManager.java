@@ -213,6 +213,7 @@ public class DefaultClassLoaderManager
         final Map defined = new HashMap();
         defined.put( "*system*", ClassLoader.getSystemClassLoader() );
         defined.put( "*common*", m_commonClassLoader );
+        defined.put( "*shared*", m_commonClassLoader );
         m_predefinedLoaders = Collections.unmodifiableMap( defined );
     }
 
