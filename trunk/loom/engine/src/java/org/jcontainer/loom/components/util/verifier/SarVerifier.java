@@ -90,7 +90,6 @@ import org.jcontainer.loom.components.util.metadata.ComponentMetaData;
 import org.jcontainer.loom.components.util.profile.ComponentProfile;
 import org.jcontainer.loom.components.util.profile.PartitionProfile;
 import org.jcontainer.loom.interfaces.ContainerConstants;
-import org.jcontainer.loom.tools.verifier.ComponentVerifier;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
@@ -120,7 +119,7 @@ import org.realityforge.salt.i18n.Resources;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-10-16 14:45:47 $
+ * @version $Revision: 1.2 $ $Date: 2003-10-26 03:39:39 $
  */
 public class SarVerifier
     extends AssemblyVerifier

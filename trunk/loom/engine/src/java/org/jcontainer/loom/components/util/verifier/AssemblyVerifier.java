@@ -39,11 +39,11 @@ import org.realityforge.salt.i18n.Resources;
  *   <li>Verify that the Class objects for component implement the
  *       service interfaces.</li>
  *   <li>Verify that the Class is a valid Avalon Component as per the
- *       rules in {@link org.jcontainer.loom.tools.verifier.ComponentVerifier} object.</li>
+ *       rules in {@link org.jcontainer.loom.components.util.verifier.ComponentVerifier} object.</li>
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-10-16 14:45:47 $
+ * @version $Revision: 1.2 $ $Date: 2003-10-26 03:39:39 $
  */
 public class AssemblyVerifier
     extends AbstractLogEnabled
