@@ -41,7 +41,7 @@
         <maven:reactor
             basedir="${basedir}"
             includes="*/project.xml"
-            excludes="distribution/*"
+            excludes="distribution/*,demos/project.xml,demos/*/project.xml,integration-test/project.xml"
             goals="clean,deploy"
             banner="Deploying"
             ignoreFailures="false"/>
