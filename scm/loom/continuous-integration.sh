@@ -24,6 +24,9 @@ cd $builddir
 rm -Rf target
 mkdir target
 
+# Delete compiled local copies to start fresh each time
+rm -Rf ~/.amven/repository/loom/jars
+
 # Compile and test
 maven clean-all &> target/cleanbuild.log
 maven build &> ../target/cleanbuild.log
