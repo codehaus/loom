@@ -31,7 +31,7 @@ import org.xml.sax.InputSource;
  * href="package-summary.html#external">package summary</a>.
  *
  * @author Peter Donald
- * @version $Revision: 1.2 $ $Date: 2004-05-01 12:48:34 $
+ * @version $Revision: 1.3 $ $Date: 2004-07-02 23:59:14 $
  */
 public final class LegacyBlockInfoReader
     extends AbstractLogEnabled
@@ -141,24 +141,27 @@ public final class LegacyBlockInfoReader
 
     /**
      * A utility method to build a descriptor for SchemaDescriptor,
+     * <br/>
+     * Schema type declarations of type 'relax-ng' will be substituted with
+     * the full name space 'http://relaxng.org/ns/structure/1.0'. The 'relax-ng'
+     * schema-type is deprecated and shouldn't be used anymore.
      *
      * @return the a descriptor for the SchemaDescriptor,
      */
     private SchemaDescriptor buildConfigurationSchema( final String classname,
-                                                       final Configuration configuration )
+      final Configuration configuration )
     {
-        final String schemaType = configuration.getChild( "schema-type" ).getValue(
-            "" );
+        String schemaType = configuration.getChild( "schema-type" ).getValue( "" );
         if( "".equals( schemaType ) )
         {
             return null;
         }
-        else
+        if( "relax-ng".equals( schemaType ) )
         {
-            final String location = LegacyUtil.getSchemaLocationFor( classname );
-            return new SchemaDescriptor( location, schemaType );
+             schemaType = "http://relaxng.org/ns/structure/1.0";
         }
-
+        final String location = LegacyUtil.getSchemaLocationFor( classname );
+        return new SchemaDescriptor( location, schemaType );
     }
 
     /**
