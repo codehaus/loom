@@ -17,12 +17,12 @@ import org.jcontainer.loom.tools.infobuilder.BlockInfoReader;
 import org.jcontainer.loom.tools.verifier.InfoVerifier;
 
 /**
- * Simple task to load a {@link org.jcontainer.loom.tools.info.ComponentInfo} descriptor,
+ * Simple task to load a {@link ComponentInfo} descriptor,
  * a component class and verify that the implementation class
- * is compatible with the {@link org.jcontainer.loom.tools.info.ComponentInfo}.
+ * is compatible with the {@link ComponentInfo}.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.9 $ $Date: 2003-10-16 00:40:51 $
+ * @version $Revision: 1.10 $ $Date: 2003-10-16 04:32:55 $
  */
 public class ComponentVerifierTask
     extends Task
@@ -61,8 +61,6 @@ public class ComponentVerifierTask
         final AntClassLoader classLoader = new AntClassLoader( getProject(), m_classpath );
 
         final BlockInfoReader builder = new BlockInfoReader();
-        builder.enableLogging( new ConsoleLogger( ConsoleLogger.LEVEL_INFO ) );
-
         final InfoVerifier verifier = new InfoVerifier();
         verifier.enableLogging( new ConsoleLogger( ConsoleLogger.LEVEL_INFO ) );
 
