@@ -133,9 +133,9 @@
 
         <!--
             Use LoomInstrumentManager when you want to enable instrumentation of
-            Loom and hosted applications. Note that you must include the correct AltRMI
-            libraries for the version of monitor you use in /container/lib, to be able to start
-            the AltRMI listener.
+            Loom and hosted applications. To ba able to start the AltRMI listener you
+            must include correct AltRMI libraries in /container/lib for the version of
+            monitor you use.
 
             You may also want to add:
             <!ENTITY % instrumentables.xml SYSTEM "instrumentables.xml">
