@@ -13,9 +13,7 @@ package org.jcontainer.loom.tools.info;
  * of Component. It contains information such as;
  * <ul>
  *   <li>type: the type of the Context if it
- *       differs from base Context class (Such as
- *       <a href="http://jakarta.apache.org/avalon/phoenix">
- *       Phoenixes</a> BlockContext).</li>
+ *       differs from base Context class (Such as BlockContext).</li>
  *   <li>entrys: a list of entrys contained in context</li>
  * </ul>
  *
@@ -24,7 +22,7 @@ package org.jcontainer.loom.tools.info;
  * about Context requirements.</p>
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-26 08:52:31 $
+ * @version $Revision: 1.3 $ $Date: 2003-06-26 08:53:43 $
  */
 public class ContextDescriptor
     extends FeatureDescriptor
