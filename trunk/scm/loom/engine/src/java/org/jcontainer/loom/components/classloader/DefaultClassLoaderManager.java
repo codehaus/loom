@@ -92,19 +92,7 @@ import java.security.Policy;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import org.jcontainer.loom.classman.builder.LoaderBuilder;
-import org.jcontainer.loom.classman.builder.LoaderResolver;
-import org.jcontainer.loom.classman.metadata.ClassLoaderMetaData;
-import org.jcontainer.loom.classman.metadata.ClassLoaderSetMetaData;
-import org.jcontainer.loom.classman.metadata.FileSetMetaData;
-import org.jcontainer.loom.classman.metadata.JoinMetaData;
-import org.jcontainer.loom.classman.reader.ClassLoaderSetReader;
-import org.jcontainer.loom.classman.verifier.ClassLoaderVerifier;
 import org.codehaus.spice.configkit.PropertyExpander;
-import org.jcontainer.loom.extension.Extension;
-import org.jcontainer.loom.xmlpolicy.builder.PolicyBuilder;
-import org.jcontainer.loom.xmlpolicy.metadata.PolicyMetaData;
-import org.jcontainer.loom.xmlpolicy.reader.PolicyReader;
 import org.jcontainer.dna.AbstractLogEnabled;
 import org.jcontainer.dna.Active;
 import org.jcontainer.dna.Composable;
@@ -113,10 +101,22 @@ import org.jcontainer.dna.ConfigurationException;
 import org.jcontainer.dna.MissingResourceException;
 import org.jcontainer.dna.ResourceLocator;
 import org.jcontainer.dna.impl.ConfigurationUtil;
+import org.jcontainer.loom.classman.builder.LoaderBuilder;
+import org.jcontainer.loom.classman.builder.LoaderResolver;
+import org.jcontainer.loom.classman.metadata.ClassLoaderMetaData;
+import org.jcontainer.loom.classman.metadata.ClassLoaderSetMetaData;
+import org.jcontainer.loom.classman.metadata.FileSetMetaData;
+import org.jcontainer.loom.classman.metadata.JoinMetaData;
+import org.jcontainer.loom.classman.reader.ClassLoaderSetReader;
+import org.jcontainer.loom.classman.verifier.ClassLoaderVerifier;
 import org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager;
 import org.jcontainer.loom.components.extensions.pkgmgr.PackageManager;
+import org.jcontainer.loom.extension.Extension;
 import org.jcontainer.loom.interfaces.ClassLoaderManager;
 import org.jcontainer.loom.interfaces.ClassLoaderSet;
+import org.jcontainer.loom.xmlpolicy.builder.PolicyBuilder;
+import org.jcontainer.loom.xmlpolicy.metadata.PolicyMetaData;
+import org.jcontainer.loom.xmlpolicy.reader.PolicyReader;
 import org.w3c.dom.Element;
 
 /**
@@ -149,13 +149,19 @@ public class DefaultClassLoaderManager
      */
     private PackageManager m_packageManager;
 
-    /** Parent ClassLoader for all applications aka as the "common" classloader. */
+    /**
+     * Parent ClassLoader for all applications aka as the "common" classloader.
+     */
     private ClassLoader m_commonClassLoader;
 
-    /** The utility class used to verify {@link ClassLoaderMetaData} objects. */
+    /**
+     * The utility class used to verify {@link ClassLoaderMetaData} objects.
+     */
     private final ClassLoaderVerifier m_verifier = new ClassLoaderVerifier();
 
-    /** Utility class to build map of {@link ClassLoader} objects. */
+    /**
+     * Utility class to build map of {@link ClassLoader} objects.
+     */
     private final LoaderBuilder m_builder = new LoaderBuilder();
 
     /**
@@ -170,10 +176,15 @@ public class DefaultClassLoaderManager
      */
     private Map m_predefinedLoaders;
 
-    /** The contextdata used in interpolation of the policy configuration file. */
+    /**
+     * The contextdata used in interpolation of the policy configuration file.
+     */
     private final Map m_data = new HashMap();
 
-    /** The property expander that will expand properties in the policy configuraiton file. */
+    /**
+     * The property expander that will expand properties in the policy
+     * configuraiton file.
+     */
     private final PropertyExpander m_expander = new PropertyExpander();
 
     /**
@@ -183,11 +194,11 @@ public class DefaultClassLoaderManager
     public void compose( final ResourceLocator locator )
         throws MissingResourceException
     {
-        final ExtensionManager extensionManager =
-            (ExtensionManager)locator.lookup( ExtensionManager.class.getName() );
+        final ExtensionManager extensionManager = (ExtensionManager) locator.lookup(
+            ExtensionManager.class.getName() );
         m_packageManager = new PackageManager( extensionManager );
-        m_commonClassLoader = (ClassLoader)locator.
-            lookup( ClassLoader.class.getName() + "/common" );
+        m_commonClassLoader = (ClassLoader) locator.lookup(
+            ClassLoader.class.getName() + "/common" );
     }
 
     /**
@@ -195,18 +206,17 @@ public class DefaultClassLoaderManager
      *
      * @throws Exception if unable to setup map
      */
-    public void initialize()
-        throws Exception
+    public void initialize() throws Exception
     {
         m_data.putAll( System.getProperties() );
 
         final Map defined = new HashMap();
-        defined.put( "*system*", m_commonClassLoader );
+        defined.put( "*system*", ClassLoader.getSystemClassLoader() );
+        defined.put( "*common*", m_commonClassLoader );
         m_predefinedLoaders = Collections.unmodifiableMap( defined );
     }
 
-    public void dispose()
-        throws Exception
+    public void dispose() throws Exception
     {
     }
 
@@ -214,8 +224,8 @@ public class DefaultClassLoaderManager
      * Create a {@link ClassLoader} for a specific application. See Class
      * Javadoc for description of technique for creating {@link ClassLoader}.
      *
-     * @param environment the configuration "environment.xml" for the
-     * application
+     * @param environment   the configuration "environment.xml" for the
+     *                      application
      * @param homeDirectory the base directory of application
      * @param workDirectory the work directory of application
      * @return the ClassLoader created
@@ -225,32 +235,27 @@ public class DefaultClassLoaderManager
         final Configuration environment,
         final Map data,
         final File homeDirectory,
-        final File workDirectory )
-        throws Exception
+        final File workDirectory ) throws Exception
     {
         //Configure policy
         final Configuration policyConfig = environment.getChild( "policy" );
-        final Policy policy =
-            configurePolicy( policyConfig,
-                             data,
-                             homeDirectory,
-                             workDirectory );
+        final Policy policy = configurePolicy( policyConfig,
+                                               data,
+                                               homeDirectory,
+                                               workDirectory );
 
-        final ClassLoaderSetMetaData metaData =
-            getLoaderMetaData( environment );
+        final ClassLoaderSetMetaData metaData = getLoaderMetaData( environment );
 
         m_verifier.verifyClassLoaderSet( metaData );
 
-        final LoaderResolver resolver =
-            new SarLoaderResolver( m_packageManager, policy,
-                                   homeDirectory, workDirectory );
+        final LoaderResolver resolver = new SarLoaderResolver(
+            m_packageManager, policy, homeDirectory, workDirectory );
         setupLogger( resolver );
-        final Map map =
-            m_builder.buildClassLoaders( metaData,
-                                         resolver,
-                                         m_predefinedLoaders );
-        final ClassLoader defaultClassLoader =
-            (ClassLoader)map.get( metaData.getDefault() );
+        final Map map = m_builder.buildClassLoaders( metaData,
+                                                     resolver,
+                                                     m_predefinedLoaders );
+        final ClassLoader defaultClassLoader = (ClassLoader) map.get(
+            metaData.getDefault() );
         return new ClassLoaderSet( defaultClassLoader, map );
     }
 
@@ -263,8 +268,7 @@ public class DefaultClassLoaderManager
      * @return the {@link ClassLoaderMetaData} object
      */
     private ClassLoaderSetMetaData getLoaderMetaData(
-        final Configuration environment )
-        throws Exception
+        final Configuration environment ) throws Exception
     {
         final boolean loaderDefined = isClassLoaderDefined( environment );
         if( !loaderDefined )
@@ -291,30 +295,27 @@ public class DefaultClassLoaderManager
     {
         final String[] includes = new String[]{"SAR-INF/lib/*.jar"};
         final String[] excludes = new String[ 0 ];
-        final FileSetMetaData fileSet =
-            new FileSetMetaData( ".",
-                                 includes,
-                                 excludes );
+        final FileSetMetaData fileSet = new FileSetMetaData( ".",
+                                                             includes,
+                                                             excludes );
         final String name = "default";
         final String parent = "*system*";
         final String[] entrys = new String[]{"SAR-INF/classes/"};
         final Extension[] extensions = new Extension[ 0 ];
         final FileSetMetaData[] filesets = new FileSetMetaData[]{fileSet};
-        final ClassLoaderMetaData loader =
-            new ClassLoaderMetaData( name,
-                                     parent,
-                                     entrys,
-                                     extensions,
-                                     filesets );
+        final ClassLoaderMetaData loader = new ClassLoaderMetaData( name,
+                                                                    parent,
+                                                                    entrys,
+                                                                    extensions,
+                                                                    filesets );
         final String[] predefined = new String[]{parent};
         final ClassLoaderMetaData[] classLoaders = new ClassLoaderMetaData[]{
             loader};
         final JoinMetaData[] joins = new JoinMetaData[ 0 ];
-        return
-            new ClassLoaderSetMetaData( name,
-                                        predefined,
-                                        classLoaders,
-                                        joins );
+        return new ClassLoaderSetMetaData( name,
+                                           predefined,
+                                           classLoaders,
+                                           joins );
     }
 
     /**
@@ -334,7 +335,7 @@ public class DefaultClassLoaderManager
      * Setup policy based on configuration data.
      *
      * @param configuration the configuration data
-     * @param data the context data used to expand policy file
+     * @param data          the context data used to expand policy file
      * @param baseDirectory the applications base directory
      * @throws ConfigurationException if an error occurs
      */
@@ -344,8 +345,8 @@ public class DefaultClassLoaderManager
                                     final File workDirectory )
         throws Exception
     {
-        final SarPolicyResolver resolver =
-            new SarPolicyResolver( baseDirectory, workDirectory );
+        final SarPolicyResolver resolver = new SarPolicyResolver(
+            baseDirectory, workDirectory );
         setupLogger( resolver );
         final PolicyBuilder builder = new PolicyBuilder();
         final PolicyReader reader = new PolicyReader();
