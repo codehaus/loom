@@ -7,8 +7,6 @@
  */
 package org.jcontainer.loom.tools.verifier;
 
-import org.jcontainer.dna.LogEnabled;
-import org.jcontainer.dna.Logger;
 import org.realityforge.metaclass.Attributes;
 import org.realityforge.metaclass.model.Attribute;
 
@@ -32,20 +30,14 @@ import org.realityforge.metaclass.model.Attribute;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.14 $ $Date: 2003-10-16 05:21:50 $
+ * @version $Revision: 1.15 $ $Date: 2003-10-16 05:50:26 $
  */
 public class InfoVerifier
-    implements LogEnabled
 {
     /**
      * The verifier for components in assembly.
      */
     private final ComponentVerifier m_verifier = new ComponentVerifier();
-
-    public void enableLogging( final Logger logger )
-    {
-        m_verifier.enableLogging( logger );
-    }
 
     /**
      * Verfiy that specified components designate classes that implement the
