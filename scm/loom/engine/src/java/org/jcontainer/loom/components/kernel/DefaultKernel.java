@@ -107,7 +107,7 @@ import org.jcontainer.loom.components.application.DefaultApplication;
 import org.jcontainer.loom.interfaces.Application;
 import org.jcontainer.loom.interfaces.ApplicationContext;
 import org.jcontainer.loom.interfaces.ApplicationMBean;
-import org.jcontainer.loom.interfaces.ConfigurationRepository;
+import org.jcontainer.loom.interfaces.ConfigurationInterceptor;
 import org.jcontainer.loom.interfaces.ConfigurationValidator;
 import org.jcontainer.loom.interfaces.Kernel;
 import org.jcontainer.loom.interfaces.KernelMBean;
@@ -152,7 +152,7 @@ public class DefaultKernel
     private SystemManager m_applicationManager;
 
     ///Configuration Repository
-    private ConfigurationRepository m_repository;
+    private ConfigurationInterceptor m_repository;
 
     //Configuration Validator
     private ConfigurationValidator m_validator;
@@ -175,8 +175,8 @@ public class DefaultKernel
         throws ServiceException
     {
         m_systemManager = (SystemManager)serviceManager.lookup( SystemManager.class.getName() );
-        m_repository = (ConfigurationRepository)serviceManager.
-            lookup( ConfigurationRepository.class.getName() );
+        m_repository = (ConfigurationInterceptor)serviceManager.
+            lookup( ConfigurationInterceptor.class.getName() );
         m_validator = (ConfigurationValidator)serviceManager.lookup( ConfigurationValidator.class.getName() );
         m_instrumentManager = (InstrumentManager)serviceManager.lookup( InstrumentManager.class.getName() );
     }
@@ -455,7 +455,7 @@ public class DefaultKernel
     {
         final DefaultServiceManager serviceManager = new DefaultServiceManager();
         serviceManager.put( SystemManager.class.getName(), m_systemManager );
-        serviceManager.put( ConfigurationRepository.class.getName(), m_repository );
+        serviceManager.put( ConfigurationInterceptor.class.getName(), m_repository );
         serviceManager.put( ConfigurationValidator.class.getName(), m_validator );
         serviceManager.put( InstrumentManager.class.getName(), m_instrumentManager );
         serviceManager.put( Kernel.class.getName(), this );

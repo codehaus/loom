@@ -102,7 +102,8 @@ import org.apache.avalon.framework.context.Contextualizable;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.jcontainer.loom.components.configuration.merger.ConfigurationMerger;
 import org.jcontainer.loom.components.util.PropertyUtil;
-import org.jcontainer.loom.interfaces.ConfigurationRepository;
+import org.jcontainer.loom.components.util.ExtensionFileFilter;
+import org.jcontainer.loom.interfaces.ConfigurationInterceptor;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.io.FileUtil;
@@ -110,7 +111,7 @@ import org.xml.sax.SAXException;
 
 /**
  * <p>
- * A ConfigurationRepository that will store partial configurations on disk.
+ * A ConfigurationInterceptor that will store partial configurations on disk.
  * </p><p>
  * When a Configuration is retrieved from the repository, the configuration from disk is
  * <i>merged</i> with the configuration from the SAR. This merge is accompilished via
@@ -119,12 +120,12 @@ import org.xml.sax.SAXException;
  * @author Peter Royal
  * @see ConfigurationMerger
  */
-public class FileSystemPersistentConfigurationRepository
+public class FileSystemPersistentConfigurationInterceptor
     extends AbstractLogEnabled
-    implements ConfigurationRepository, Contextualizable, Configurable, Initializable
+    implements ConfigurationInterceptor, Contextualizable, Configurable, Initializable
 {
     private static final Resources REZ =
-        ResourceManager.getPackageResources( FileSystemPersistentConfigurationRepository.class );
+        ResourceManager.getPackageResources( FileSystemPersistentConfigurationInterceptor.class );
 
     private final Map m_persistedConfigurations = new HashMap();
 
@@ -252,7 +253,7 @@ public class FileSystemPersistentConfigurationRepository
     {
         final DefaultConfigurationBuilder builder = new DefaultConfigurationBuilder();
         final String app = appPath.getName();
-        final File[] blocks = appPath.listFiles( new ConfigurationFileFilter() );
+        final File[] blocks = appPath.listFiles( new ExtensionFileFilter( ".xml" ) );
 
         for( int i = 0; i < blocks.length; i++ )
         {
