@@ -19,14 +19,21 @@ import java.security.cert.CertificateException;
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-06-05 09:51:41 $
+ * @version $Revision: 1.4 $ $Date: 2003-06-05 10:16:46 $
  */
 class MockCertificate
     extends Certificate
 {
-    public MockCertificate()
+    public static final MockCertificate JENNY_CERTIFICATE = new MockCertificate("jenny");
+    public static final MockCertificate MISCHELLE_CERTIFICATE = new MockCertificate("mischelle");
+    public static final MockCertificate GEORGE_CERTIFICATE = new MockCertificate("george");
+
+    private final String m_name;
+
+    public MockCertificate(final String name )
     {
-        super( "" );
+        super( "name" );
+        m_name = name;
     }
 
     public byte[] getEncoded()
@@ -51,7 +58,7 @@ class MockCertificate
 
     public String toString()
     {
-        return null;
+        return m_name;
     }
 
     public PublicKey getPublicKey()
