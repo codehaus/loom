@@ -47,7 +47,7 @@ import org.realityforge.salt.i18n.ResourceManager;
  * {@link org.jcontainer.loom.tools.verifier.AssemblyVerifier}</p>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-07-03 06:35:49 $
+ * @version $Revision: 1.3 $ $Date: 2003-07-07 13:13:00 $
  */
 public abstract class AbstractResourceProvider
     extends AbstractLogEnabled
@@ -129,8 +129,8 @@ public abstract class AbstractResourceProvider
         if( null == parameters )
         {
             final String message =
-                REZ.getString( "resource.missing-parameters.error",
-                               component.getName() );
+                REZ.format( "resource.missing-parameters.error",
+                            component.getName() );
             throw new Exception( message );
         }
         parameters.makeReadOnly();
@@ -152,8 +152,8 @@ public abstract class AbstractResourceProvider
         if( null == configuration )
         {
             final String message =
-                REZ.getString( "resource.missing-configuration.error",
-                               component.getName() );
+                REZ.format( "resource.missing-configuration.error",
+                            component.getName() );
             throw new Exception( message );
         }
         return configuration;
