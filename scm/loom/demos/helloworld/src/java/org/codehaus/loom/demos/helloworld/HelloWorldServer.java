@@ -87,7 +87,7 @@
 package org.codehaus.loom.demos.helloworld;
 
 /**
- * @author Paul Hammant <Paul_Hammant@yahoo.com>
+ * @author Paul Hammant <Paul_Hammant at yahoo.com>
  * @version 1.0
  */
 public interface HelloWorldServer
