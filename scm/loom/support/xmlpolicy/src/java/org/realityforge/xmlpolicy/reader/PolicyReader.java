@@ -20,7 +20,7 @@ import org.w3c.dom.NodeList;
  * specified XML document.
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-04-16 11:45:59 $
+ * @version $Revision: 1.2 $ $Date: 2003-06-04 23:10:00 $
  */
 public class PolicyReader
 {
@@ -170,7 +170,7 @@ public class PolicyReader
     private KeyStoreMetaData buildKeyStore( final Element element )
         throws Exception
     {
-        final String name = getAttribute( element, "name" );
+        final String name = element.getAttribute( "name" );
         final String location = getAttribute( element, "location" );
         final String type = getAttribute( element, "type" );
         return new KeyStoreMetaData( name, location, type );
