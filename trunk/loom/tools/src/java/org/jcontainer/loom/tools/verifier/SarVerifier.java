@@ -11,8 +11,8 @@
 package org.jcontainer.loom.tools.verifier;
 
 import org.apache.avalon.framework.logger.Logger;
-import org.apache.avalon.phoenix.interfaces.ContainerConstants;
 import org.jcontainer.loom.tools.metadata.ComponentMetaData;
+import org.jcontainer.loom.tools.LoomToolConstants;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
@@ -42,7 +42,7 @@ import org.realityforge.salt.i18n.Resources;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-06-29 01:07:36 $
+ * @version $Revision: 1.7 $ $Date: 2003-07-03 06:45:02 $
  */
 public class SarVerifier
     extends AssemblyVerifier
@@ -77,9 +77,9 @@ public class SarVerifier
         throws VerifyException
     {
         final org.jcontainer.loom.tools.profile.ComponentProfile[] blocks =
-            profile.getPartition( ContainerConstants.BLOCK_PARTITION ).getComponents();
+            profile.getPartition( LoomToolConstants.BLOCK_PARTITION ).getComponents();
         final org.jcontainer.loom.tools.profile.ComponentProfile[] listeners =
-            profile.getPartition( ContainerConstants.LISTENER_PARTITION ).getComponents();
+            profile.getPartition( LoomToolConstants.LISTENER_PARTITION ).getComponents();
 
         String message;
 
