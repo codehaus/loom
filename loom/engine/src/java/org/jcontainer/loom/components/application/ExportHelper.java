@@ -51,19 +51,19 @@
 package org.jcontainer.loom.components.application;
 
 import java.util.ArrayList;
-import org.apache.avalon.excalibur.i18n.ResourceManager;
-import org.apache.avalon.excalibur.i18n.Resources;
 import org.apache.avalon.framework.CascadingException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.jcontainer.loom.interfaces.ApplicationContext;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
 import org.jcontainer.loom.tools.infobuilder.LegacyUtil;
+import org.realityforge.salt.i18n.Resources;
+import org.realityforge.salt.i18n.ResourceManager;
 
 /**
  * Utility class to help with exporting Blocks to management subsystem.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-29 04:38:21 $
+ * @version $Revision: 1.2 $ $Date: 2003-07-13 00:15:34 $
  */
 class ExportHelper
     extends AbstractLogEnabled
@@ -97,7 +97,7 @@ class ExportHelper
             {
                 final String reason = e.toString();
                 final String message =
-                    REZ.getString( "bad-mx-service.error", name, service.getType(), reason );
+                    REZ.format( "bad-mx-service.error", name, service.getType(), reason );
                 getLogger().error( message );
                 throw new CascadingException( message, e );
             }
@@ -110,7 +110,7 @@ class ExportHelper
         catch( final Exception e )
         {
             final String message =
-                REZ.getString( "export.error", name, e );
+                REZ.format( "export.error", name, e );
             getLogger().error( message );
             throw new CascadingException( message, e );
         }
@@ -154,7 +154,7 @@ class ExportHelper
         catch( final Exception e )
         {
             final String message =
-                REZ.getString( "unexport.error", name, e );
+                REZ.format( "unexport.error", name, e );
             getLogger().error( message );
         }
     }

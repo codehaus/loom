@@ -14,8 +14,6 @@ import java.io.File;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
-import org.apache.avalon.excalibur.i18n.ResourceManager;
-import org.apache.avalon.excalibur.i18n.Resources;
 import org.apache.avalon.framework.CascadingRuntimeException;
 import org.apache.avalon.framework.ExceptionUtil;
 import org.apache.avalon.framework.configuration.Configuration;
@@ -31,6 +29,8 @@ import org.apache.log.LogTarget;
 import org.apache.log.Priority;
 import org.apache.log.output.io.FileTarget;
 import org.jcontainer.loom.interfaces.Embeddor;
+import org.realityforge.salt.i18n.Resources;
+import org.realityforge.salt.i18n.ResourceManager;
 
 /**
  * WARNING: DO NOT USE THIS SERVLET FOR PRODUCTION SERVICE. THIS IS EXPERIMENTAL.

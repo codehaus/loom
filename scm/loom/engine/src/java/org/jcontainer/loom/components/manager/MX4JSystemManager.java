@@ -23,14 +23,14 @@ import javax.management.ReflectionException;
 import mx4j.adaptor.rmi.jrmp.JRMPAdaptorMBean;
 import mx4j.log.Log;
 import mx4j.util.StandardMBeanProxy;
-import org.apache.avalon.excalibur.i18n.ResourceManager;
-import org.apache.avalon.excalibur.i18n.Resources;
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.context.Context;
 import org.apache.avalon.framework.context.ContextException;
 import org.apache.avalon.framework.context.Contextualizable;
+import org.realityforge.salt.i18n.ResourceManager;
+import org.realityforge.salt.i18n.Resources;
 
 /**
  * This component is responsible for managing phoenix instance.
@@ -257,7 +257,7 @@ public class MX4JSystemManager
         catch( final Exception e )
         {
             final String message =
-                REZ.getString( "jmxmanager.error.jmxmbean.dispose", name );
+                REZ.format( "jmxmanager.error.jmxmbean.dispose", name );
             getLogger().error( message, e );
         }
     }

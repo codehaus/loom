@@ -15,9 +15,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
-import org.apache.avalon.excalibur.i18n.ResourceManager;
-import org.apache.avalon.excalibur.i18n.Resources;
-import org.apache.avalon.excalibur.io.ExtensionFileFilter;
 import org.apache.avalon.framework.CascadingException;
 import org.apache.avalon.framework.activity.Disposable;
 import org.apache.avalon.framework.activity.Initializable;
@@ -41,6 +38,8 @@ import org.jcontainer.loom.interfaces.Embeddor;
 import org.jcontainer.loom.interfaces.EmbeddorMBean;
 import org.jcontainer.loom.interfaces.Kernel;
 import org.jcontainer.loom.interfaces.SystemManager;
+import org.realityforge.salt.i18n.Resources;
+import org.realityforge.salt.i18n.ResourceManager;
 
 /**
  * This is the object that is interacted with to create, manage and
@@ -217,7 +216,7 @@ public class DefaultEmbeddor
      * This is the main method of the embeddor. It sets up the core
      * components, and then deploys the <code>Facilities</code>. These
      * are registered with the Kernel and the Manager. The same
-     * happens for the {@link org.apache.avalon.phoenix.interfaces.Application}s.
+     * happens for the {@link org.jcontainer.loom.interfaces.Application}s.
      * Now, the Kernel is taken through its lifecycle. When it is
      * finished, as well as all the applications running in it, it
      * is shut down, after which the PhoenixEmbeddor is as well.
@@ -577,29 +576,29 @@ public class DefaultEmbeddor
             if( !service.isInstance( object ) )
             {
                 final String message =
-                    REZ.getString( "bad-type.error",
-                                   classname,
-                                   service.getName() );
+                    REZ.format( "bad-type.error",
+                                classname,
+                                service.getName() );
                 throw new Exception( message );
             }
             return object;
         }
         catch( final IllegalAccessException iae )
         {
-            final String message = REZ.getString( "bad-ctor.error", service.getName(), classname );
+            final String message = REZ.format( "bad-ctor.error", service.getName(), classname );
             throw new CascadingException( message, iae );
         }
         catch( final InstantiationException ie )
         {
             final String message =
-                REZ.getString( "no-instantiate.error",
-                               service.getName(),
-                               classname );
+                REZ.format( "no-instantiate.error",
+                            service.getName(),
+                            classname );
             throw new CascadingException( message, ie );
         }
         catch( final ClassNotFoundException cnfe )
         {
-            final String message = REZ.getString( "no-class.error", service.getName(), classname );
+            final String message = REZ.format( "no-class.error", service.getName(), classname );
             throw new CascadingException( message, cnfe );
         }
     }

@@ -12,13 +12,13 @@ package org.jcontainer.loom.frontends;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
-import org.apache.avalon.excalibur.i18n.ResourceManager;
-import org.apache.avalon.excalibur.i18n.Resources;
 import org.apache.avalon.framework.component.ComponentException;
 import org.apache.avalon.framework.component.ComponentManager;
 import org.apache.avalon.framework.component.Composable;
 import org.jcontainer.loom.components.embeddor.SingleAppEmbeddor;
 import org.jcontainer.loom.interfaces.Embeddor;
+import org.realityforge.salt.i18n.ResourceManager;
+import org.realityforge.salt.i18n.Resources;
 
 /**
  * WARNING: DO NOT USE THIS SERVLET FOR PRODUCTION SERVICE. THIS IS EXPERIMENTAL.

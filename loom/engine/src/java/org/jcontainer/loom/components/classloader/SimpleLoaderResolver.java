@@ -19,12 +19,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.jar.Manifest;
 import org.apache.avalon.excalibur.extension.Extension;
-import org.apache.avalon.excalibur.i18n.ResourceManager;
-import org.apache.avalon.excalibur.i18n.Resources;
 import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
 import org.jcontainer.loom.components.extensions.pkgmgr.PackageManager;
 import org.realityforge.classman.builder.LoaderResolver;
 import org.realityforge.classman.runtime.JoinClassLoader;
+import org.realityforge.salt.i18n.ResourceManager;
+import org.realityforge.salt.i18n.Resources;
 
 /**
  * This is a class that performs resolver that;
@@ -42,7 +42,7 @@ import org.realityforge.classman.runtime.JoinClassLoader;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-29 04:38:21 $
+ * @version $Revision: 1.2 $ $Date: 2003-07-13 00:15:36 $
  * @deprecated Convert to ClassMan SimpleLoaderResolver when it updates
  *             dependecy to latest Excalibur-Extension
  */
@@ -277,12 +277,12 @@ class SimpleLoaderResolver
         if( isDebugEnabled() )
         {
             final String message1 =
-                REZ.getString( "available-extensions",
-                               Arrays.asList( available ) );
+                REZ.format( "available-extensions",
+                            Arrays.asList( available ) );
             debug( message1 );
             final String message2 =
-                REZ.getString( "required-extensions",
-                               Arrays.asList( required ) );
+                REZ.format( "required-extensions",
+                            Arrays.asList( required ) );
             debug( message2 );
         }
 
@@ -327,14 +327,14 @@ class SimpleLoaderResolver
             }
 
             final String message =
-                REZ.getString( "unsatisfied.extensions", new Integer( size ) );
+                REZ.format( "unsatisfied.extensions", new Integer( size ) );
             throw new Exception( message );
         }
 
         if( isDebugEnabled() )
         {
             final String message =
-                REZ.getString( "optional-packages-added", dependencies );
+                REZ.format( "optional-packages-added", dependencies );
             debug( message );
         }
 
@@ -406,7 +406,7 @@ class SimpleLoaderResolver
                 catch( final IOException ioe )
                 {
                     final String message =
-                        REZ.getString( "bad-classpath-entry", element );
+                        REZ.format( "bad-classpath-entry", element );
                     throw new Exception( message );
                 }
             }

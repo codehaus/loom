@@ -12,13 +12,13 @@ package org.jcontainer.loom.components.manager;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.avalon.excalibur.i18n.ResourceManager;
-import org.apache.avalon.excalibur.i18n.Resources;
 import org.apache.avalon.framework.activity.Disposable;
 import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.jcontainer.loom.interfaces.ManagerException;
 import org.jcontainer.loom.interfaces.SystemManager;
+import org.realityforge.salt.i18n.Resources;
+import org.realityforge.salt.i18n.ResourceManager;
 
 /**
  * This is abstract implementation of SystemManager.
@@ -58,7 +58,7 @@ public abstract class AbstractSystemManager
         if( null == interfaces )
         {
             final String message =
-                REZ.getString( "manager.error.interfaces.null", name );
+                REZ.format( "manager.error.interfaces.null", name );
             throw new IllegalArgumentException( message );
         }
         verifyInterfaces( object, interfaces );
@@ -86,7 +86,7 @@ public abstract class AbstractSystemManager
         if( null == entry )
         {
             final String message =
-                REZ.getString( "manager.error.unregister.noentry", name );
+                REZ.format( "manager.error.unregister.noentry", name );
             throw new ManagerException( message );
         }
 
@@ -169,14 +169,14 @@ public abstract class AbstractSystemManager
             if( !clazz.isInterface() )
             {
                 final String message =
-                    REZ.getString( "manager.error.verify.notinterface", clazz.getName() );
+                    REZ.format( "manager.error.verify.notinterface", clazz.getName() );
                 throw new ManagerException( message );
             }
 
             if( !clazz.isInstance( object ) )
             {
                 final String message =
-                    REZ.getString( "manager.error.verify.notinstance", clazz.getName() );
+                    REZ.format( "manager.error.verify.notinstance", clazz.getName() );
                 throw new ManagerException( message );
             }
 
@@ -210,7 +210,7 @@ public abstract class AbstractSystemManager
 
         if( null != m_entries.get( name ) )
         {
-            final String message = REZ.getString( "manager.error.register.exists", name );
+            final String message = REZ.format( "manager.error.register.exists", name );
             throw new ManagerException( message );
         }
     }

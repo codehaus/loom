@@ -11,10 +11,10 @@
 package org.jcontainer.loom.components.manager;
 
 import java.util.HashMap;
-import org.apache.avalon.excalibur.i18n.ResourceManager;
-import org.apache.avalon.excalibur.i18n.Resources;
 import org.jcontainer.loom.interfaces.ManagerException;
 import org.jcontainer.loom.interfaces.SystemManager;
+import org.realityforge.salt.i18n.Resources;
+import org.realityforge.salt.i18n.ResourceManager;
 
 /**
  * Implements a management context local to a particular process with which

@@ -16,8 +16,6 @@ import java.util.Map;
 import java.util.Properties;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import org.apache.avalon.excalibur.i18n.ResourceManager;
-import org.apache.avalon.excalibur.i18n.Resources;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationUtil;
 import org.apache.avalon.framework.container.ContainerUtil;
@@ -39,6 +37,8 @@ import org.realityforge.loggerstore.LogKitLoggerStoreFactory;
 import org.realityforge.loggerstore.LoggerStore;
 import org.realityforge.loggerstore.LoggerStoreFactory;
 import org.realityforge.loggerstore.PropertyLog4JLoggerStoreFactory;
+import org.realityforge.salt.i18n.Resources;
+import org.realityforge.salt.i18n.ResourceManager;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -144,9 +144,9 @@ public class DefaultLogManager
             if( getLogger().isDebugEnabled() )
             {
                 final String message =
-                    REZ.getString( "logger-create",
-                                   context.get( BlockContext.APP_NAME ),
-                                   version );
+                    REZ.format( "logger-create",
+                                context.get( BlockContext.APP_NAME ),
+                                version );
                 getLogger().debug( message );
             }
 

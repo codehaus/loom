@@ -14,8 +14,6 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import org.apache.avalon.excalibur.i18n.ResourceManager;
-import org.apache.avalon.excalibur.i18n.Resources;
 import org.apache.avalon.framework.activity.Disposable;
 import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.activity.Startable;
@@ -23,8 +21,8 @@ import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.logger.Logger;
 import org.apache.avalon.phoenix.ApplicationListener;
 import org.apache.avalon.phoenix.BlockListener;
-import org.jcontainer.loom.components.util.ComponentMetaDataConverter;
 import org.apache.avalon.phoenix.metadata.SarMetaData;
+import org.jcontainer.loom.components.util.ComponentMetaDataConverter;
 import org.jcontainer.loom.interfaces.Application;
 import org.jcontainer.loom.interfaces.ApplicationContext;
 import org.jcontainer.loom.interfaces.ApplicationException;
@@ -32,6 +30,8 @@ import org.jcontainer.loom.interfaces.ApplicationMBean;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.tools.lifecycle.LifecycleException;
 import org.jcontainer.loom.tools.lifecycle.LifecycleHelper;
+import org.realityforge.salt.i18n.ResourceManager;
+import org.realityforge.salt.i18n.Resources;
 
 /**
  * This is the basic container of blocks. A server application
@@ -333,7 +333,7 @@ public final class DefaultApplication
             {
                 final String name = listeners[ i ].getMetaData().getName();
                 final String message =
-                    REZ.getString( "bad-listener", "startup", name, e.getMessage() );
+                    REZ.format( "bad-listener", "startup", name, e.getMessage() );
                 getLogger().error( message, e );
                 throw e;
             }
@@ -396,7 +396,7 @@ public final class DefaultApplication
             final Integer count = new Integer( blocks.length );
             final List pathList = Arrays.asList( order );
             final String message =
-                REZ.getString( "blocks-processing", count, name, pathList );
+                REZ.format( "blocks-processing", count, name, pathList );
             getLogger().info( message );
         }
 
@@ -425,7 +425,7 @@ public final class DefaultApplication
             //Log message saying we are processing block
             if( getLogger().isDebugEnabled() )
             {
-                final String message = REZ.getString( "process-block", block, name );
+                final String message = REZ.format( "process-block", block, name );
                 getLogger().debug( message );
             }
 
@@ -444,7 +444,7 @@ public final class DefaultApplication
             catch( final Exception e )
             {
                 final String message =
-                    REZ.getString( "app.error.run-phase", name, block, e.getMessage() );
+                    REZ.format( "app.error.run-phase", name, block, e.getMessage() );
                 getLogger().error( message, e );
                 m_listenerSupport.applicationFailure( e );
                 throw e;
@@ -453,7 +453,7 @@ public final class DefaultApplication
             //Log message saying we have processed block
             if( getLogger().isDebugEnabled() )
             {
-                final String message = REZ.getString( "processed-block", block, name );
+                final String message = REZ.format( "processed-block", block, name );
                 getLogger().debug( message );
             }
         }
@@ -561,9 +561,9 @@ public final class DefaultApplication
             m_listenerSupport.addBlockListener( (BlockListener)listener );
 
             final String message =
-                REZ.getString( "helper.isa-blocklistener.error",
-                               name,
-                               profile.getMetaData().getImplementationKey() );
+                REZ.format( "helper.isa-blocklistener.error",
+                            name,
+                            profile.getMetaData().getImplementationKey() );
             getLogger().error( message );
             System.err.println( message );
         }

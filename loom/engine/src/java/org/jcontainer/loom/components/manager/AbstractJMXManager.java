@@ -18,16 +18,16 @@ import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
 import javax.management.modelmbean.ModelMBean;
 import javax.management.modelmbean.ModelMBeanInfo;
-import org.apache.avalon.excalibur.i18n.ResourceManager;
-import org.apache.avalon.excalibur.i18n.Resources;
 import org.jcontainer.loom.interfaces.ManagerException;
+import org.realityforge.salt.i18n.Resources;
+import org.realityforge.salt.i18n.ResourceManager;
 
 /**
  * An abstract class via which JMX Managers can extend.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author <a href="mailto:Huw@mmlive.com">Huw Roberts</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-29 04:38:22 $
+ * @version $Revision: 1.2 $ $Date: 2003-07-13 00:15:36 $
  */
 public abstract class AbstractJMXManager
     extends AbstractSystemManager
@@ -81,7 +81,7 @@ public abstract class AbstractJMXManager
         }
         catch( final Exception e )
         {
-            final String message = REZ.getString( "jmxmanager.error.export.fail", name );
+            final String message = REZ.format( "jmxmanager.error.export.fail", name );
             getLogger().error( message, e );
             throw new ManagerException( message, e );
         }
@@ -115,7 +115,7 @@ public abstract class AbstractJMXManager
         catch( final Exception e )
         {
             final String message =
-                REZ.getString( "jmxmanager.error.unexport.fail", name );
+                REZ.format( "jmxmanager.error.unexport.fail", name );
             getLogger().error( message, e );
             throw new ManagerException( message, e );
         }
@@ -282,8 +282,8 @@ public abstract class AbstractJMXManager
         catch( Exception e )
         {
             final String message =
-                REZ.getString( "jmxmanager.error.mbean.load.class",
-                               className );
+                REZ.format( "jmxmanager.error.mbean.load.class",
+                            className );
             getLogger().error( message, e );
             throw new ManagerException( message, e );
         }
@@ -298,8 +298,8 @@ public abstract class AbstractJMXManager
         catch( final Exception e )
         {
             final String message =
-                REZ.getString( "jmxmanager.error.mbean.instantiate",
-                               className );
+                REZ.format( "jmxmanager.error.mbean.instantiate",
+                            className );
             getLogger().error( message, e );
             throw new ManagerException( message, e );
         }
@@ -315,8 +315,8 @@ public abstract class AbstractJMXManager
         catch( Exception e )
         {
             final String message =
-                REZ.getString( "jmxmanager.error.mbean.set.resource",
-                               className );
+                REZ.format( "jmxmanager.error.mbean.set.resource",
+                            className );
             getLogger().error( message, e );
             throw new ManagerException( message, e );
         }
