@@ -2,6 +2,7 @@
 
 <project>
     <id>test-maven-sar-plugin</id>
+    <currentVersion>test</currentVersion>
 	<name>Test project for Maven Sar Plugin</name>
 	<dependencies>
         <dependency>
