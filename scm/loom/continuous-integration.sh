@@ -24,7 +24,8 @@ rm -Rf target
 mkdir target
 
 # Compile and test
-maven test:test &> target/cleanbuild.log
+maven clean-all &> target/cleanbuild.log
+maven build &> target/cleanbuild.log
 
 # See if the "compiling" file is there. If it is, compilation
 # failed.
