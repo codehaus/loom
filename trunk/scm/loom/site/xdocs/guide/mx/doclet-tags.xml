@@ -23,7 +23,7 @@
         </li>
       </ul>
       <p>
-        Any class or interface can be used to produce MXINFO files.  How they get used is up to 
+        Any class or interface can be used to produce MXINFO files.  How they get used is up to
         container and its Management subsystem.
       </p>
     </section>
@@ -42,7 +42,7 @@
           <tr>
             <td>Purpose</td>
             <td>
-              Marks the class or interface as eligible for management.  
+              Marks the class or interface as eligible for management.
             </td>
           </tr>
           <tr>
@@ -56,7 +56,7 @@
           <tr>
             <td>Notes</td>
             <td>
-         
+
             </td>
           </tr>
         </table>
@@ -86,8 +86,8 @@
             <td>Purpose</td>
             <td>
               Marks the method as being a getter or setter and as eligible for
-              management.  If the class defines a getter and setter, then just 
-              getter should be marked up.  
+              management.  If the class defines a getter and setter, then just
+              getter should be marked up.
             </td>
           </tr>
           <tr>
@@ -128,7 +128,7 @@ String[] getApplicationNames();
           <tr>
             <td>Purpose</td>
             <td>
-              Marks the method as elible to be a management operation.  
+              Marks the method as elible to be a management operation.
             </td>
           </tr>
           <tr>
@@ -184,7 +184,7 @@ void removeApplication( String name )
           <tr>
             <td>Notes</td>
             <td>
-              Optional.  If ommitted the javadoc definition is used.            
+              Optional.  If ommitted the javadoc definition is used.
             </td>
           </tr>
         </table>
@@ -241,7 +241,7 @@ String getVersion();
           Example:
         </p>
         <source>
-                
+
 /**
  * Ftp server starting point. Avalon framework will load this
  * from the jar file. This is also the starting point of remote
@@ -256,10 +256,10 @@ String getVersion();
  * @author  Paul Hammant &lt;Paul_Hammant@yahoo.com>
  * @version 1.0
  */
- 
+
         </source>
       </subsection>
-    </section> 
+    </section>
     <section name="Build Instructions">
       <p>
         To have mxinfo files generated as part as your ant build
@@ -273,7 +273,7 @@ String getVersion();
   &lt;mkdir dir="${build.qdox}"/>
 
   &lt;taskdef name="generatemeta"
-      classname="org.apache.avalon.phoenix.tools.metagenerate.MetaGenerateTask">
+      classname="org.jcontainer.loom.info.GenerateLoomDescriptorsTask">
     &lt;classpath refid="project.class.path" />
   &lt;/taskdef>
 

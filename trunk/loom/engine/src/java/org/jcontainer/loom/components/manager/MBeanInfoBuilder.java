@@ -117,7 +117,7 @@ import org.realityforge.salt.i18n.ResourceManager;
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author <a href="mailto:huw@mmlive.com">Huw Roberts</a>
- * @version $Revision: 1.5 $ $Date: 2003-10-05 10:07:04 $
+ * @version $Revision: 1.6 $ $Date: 2003-10-15 02:04:51 $
  */
 public final class MBeanInfoBuilder
     extends AbstractLogEnabled
@@ -610,7 +610,7 @@ public final class MBeanInfoBuilder
             final InputSource source = new InputSource( stream );
 
             // build with validation against DTD
-            return ConfigurationBuilder.build( source, ConfigurationBuilder.MXINFO_SCHEMA, getLogger() );
+            return ConfigurationBuilder.build( source, null, getLogger() );
         }
         catch( Exception e )
         {

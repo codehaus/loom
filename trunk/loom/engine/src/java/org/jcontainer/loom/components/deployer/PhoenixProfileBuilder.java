@@ -28,7 +28,7 @@ import org.jcontainer.loom.tools.profile.ProfileBuilder;
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.9 $ $Date: 2003-10-14 08:42:15 $
+ * @version $Revision: 1.10 $ $Date: 2003-10-15 02:04:50 $
  */
 public class PhoenixProfileBuilder
     extends AbstractLogEnabled
@@ -42,7 +42,7 @@ public class PhoenixProfileBuilder
         setupLogger( m_assembler );
     }
 
-    public PartitionProfile buildProfile( Map parameters )
+    public PartitionProfile buildProfile( final Map parameters )
         throws Exception
     {
         final PartitionMetaData metaData = m_assembler.buildAssembly( parameters );

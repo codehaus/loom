@@ -29,7 +29,7 @@ import org.xml.sax.InputSource;
  * <a href="package-summary.html#external">package summary</a>.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-10-14 08:42:16 $
+ * @version $Revision: 1.7 $ $Date: 2003-10-15 02:04:51 $
  */
 public final class BlockInfoReader
     extends AbstractLogEnabled
@@ -76,7 +76,8 @@ public final class BlockInfoReader
         throws Exception
     {
         final InputSource input = new InputSource( inputStream );
-        final Configuration configuration = ConfigurationBuilder.build( input, ConfigurationBuilder.BLOCKINFO_SCHEMA, getLogger() );
+        final Configuration configuration =
+            ConfigurationBuilder.build( input, null, getLogger() );
         return build( implementationKey, configuration );
     }
 

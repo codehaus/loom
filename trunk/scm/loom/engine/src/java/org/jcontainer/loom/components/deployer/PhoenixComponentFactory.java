@@ -94,10 +94,10 @@ import org.jcontainer.dna.Logger;
 
 /**
  * A Phoenix-specific {@link org.jcontainer.loom.tools.factory.ComponentFactory}
- * that makes sure {@link org.jcontainer.loom.tools.info.ComponentInfo} is loaded via BlockInfo loader.
+ * that makes sure {@link ComponentInfo} is loaded via BlockInfo loader.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-10-06 12:56:10 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-15 02:04:50 $
  */
 public class PhoenixComponentFactory
     extends DefaultComponentFactory
@@ -129,6 +129,4 @@ public class PhoenixComponentFactory
 
         return m_infoReader.createComponentInfo( implementationKey, inputStream );
     }
-
 }
-

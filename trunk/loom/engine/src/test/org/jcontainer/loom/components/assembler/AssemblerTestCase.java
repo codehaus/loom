@@ -31,17 +31,18 @@ import org.xml.sax.InputSource;
  *  An basic test case for the LogManager.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-10-05 10:07:04 $
+ * @version $Revision: 1.4 $ $Date: 2003-10-15 02:04:51 $
  */
 public class AssemblerTestCase
     extends TestCase
 {
-    public AssemblerTestCase( final String name )
+    public void testNoop()
+        throws Exception
     {
-        super( name );
+
     }
 
-    public void testBasic()
+    public void _testBasic()
         throws Exception
     {
         final PartitionProfile partitionProfile = assembleSar( "assembly1.xml" );
@@ -84,7 +85,7 @@ public class AssemblerTestCase
         return block2.getMetaData().getAttribute( ContainerConstants.DISABLE_PROXY_ATTR ) != null;
     }
 
-    public void testComplex()
+    public void _testComplex()
         throws Exception
     {
         final PartitionProfile partitionProfile = assembleSar( "assembly2.xml" );
