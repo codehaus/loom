@@ -116,7 +116,7 @@ import org.codehaus.dna.ResourceLocator;
  *
  * @author Peter Donald
  * @author Johan Sjoberg
- * @version $Revision: 1.5 $ $Date: 2004-08-17 23:14:32 $
+ * @version $Revision: 1.6 $ $Date: 2004-10-11 20:12:27 $
  */
 public class DefaultDeploymentMonitor
     extends AbstractLogEnabled
@@ -148,7 +148,7 @@ public class DefaultDeploymentMonitor
      *
      * @param configuration The configuration object
      */
-    public void configure( Configuration configuration )
+    public void configure( final Configuration configuration )
         throws ConfigurationException
     {
         m_frequency = 1000L
@@ -195,6 +195,11 @@ public class DefaultDeploymentMonitor
         throws Exception
     {
         m_scanner.stop();
+    }
+
+    public void unableToListContents()
+    {
+        getLogger().error( REZ.format( "monitor.no-list-contents.error", m_appsDir.toString() ) );
     }
 
     /**
@@ -321,7 +326,7 @@ public class DefaultDeploymentMonitor
     /**
      * Retrieve the set of files that are candidate deployments.
      *
-     * @newValue The file set to check.
+     * @param newValue The file set to check.
      */
     private Set getDeployments( final Set newValue )
     {
@@ -348,7 +353,7 @@ public class DefaultDeploymentMonitor
      * Check if a file represents a loom deployment.
      *
      * @param file The file to check
-     * @returns true If file represents a loom deployment, else false
+     * @return true If file represents a loom deployment, else false
      */
     private boolean isDeployment( final File file )
     {

@@ -7,30 +7,39 @@
  */
 package org.codehaus.loom.components.util.monitor;
 
-import java.util.Set;
 import java.util.Collections;
+import java.util.Set;
 
 /**
  * DirectoryChangeListener used for storing a single change.
  *
  * @author Johan Sjoberg
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class MockDirectoryChangeListener
     implements DirectoryChangeListener
 {
-    /** The recorded change type */
+    /**
+     * The recorded change type
+     */
     protected int m_changeType = 0;
 
-    /** The recorded set of files */
+    /**
+     * The recorded set of files
+     */
     protected Set m_fileSet = Collections.EMPTY_SET;
 
     /**
      * Record a change.
      */
-    public void directoryChange( int type, Set fileSet )
+    public void directoryChange( final int type, final Set fileSet )
     {
         m_changeType = type;
         m_fileSet = fileSet;
+    }
+
+    public void unableToListContents()
+    {
+        throw new RuntimeException( "Expected to be able to view directory contents" );
     }
 }

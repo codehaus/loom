@@ -8,7 +8,6 @@
 package org.codehaus.loom.components.util.monitor;
 
 import java.io.File;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -16,46 +15,65 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Utility class that scans for changes in a directory. If changes are
- * detected it will notify its <code>DirectoryChangeListener</code>.
+ * Utility class that scans for changes in a directory. If changes are detected it will notify its
+ * <code>DirectoryChangeListener</code>.
  *
  * @author Johan Sjoberg
  * @author Peter Donald
- * @version $Revision: 1.3 $ $Date: 2004-07-15 08:50:54 $
+ * @version $Revision: 1.4 $ $Date: 2004-10-11 20:12:28 $
  */
 public class DirectoryScanner implements Runnable
 {
-    /** The monitor thread */
+    /**
+     * The monitor thread
+     */
     private final Thread m_monitorThread = new Thread( this );
 
-    /** Flag indicating if we are running or not */
+    /**
+     * Flag indicating if we are running or not
+     */
     private volatile boolean m_keepRunning = false;
 
-    /** Poll frequency */
+    /**
+     * Poll frequency
+     */
     private long m_frequency = 1000L * 5L;
 
-    /** Priority of the monitor thread */
+    /**
+     * Priority of the monitor thread
+     */
     private int m_priority = Thread.NORM_PRIORITY;
 
-    /** Class listening for changes in the directory */
+    /**
+     * Class listening for changes in the directory
+     */
     private DirectoryChangeListener m_directoryChangeListener;
 
-    /** Last modification time */
+    /**
+     * Last modification time
+     */
     private long m_lastModified;
 
-    /** The directory to monitor */
+    /**
+     * The directory to monitor
+     */
     private File m_directory;
 
-    /** Files in the monitored directory */
+    /**
+     * Files in the monitored directory
+     */
     private Set m_files;
 
-    /** File modification times */
+    /**
+     * File modification times
+     */
     private Map m_times;
 
     /**
      * Set the directory to be scanned.
      *
      * @param path The directory's path
+     *
      * @throws IllegalArgumentException if the directory doesn't exist.
      */
     public void setDirectory( final String path )
@@ -64,7 +82,7 @@ public class DirectoryScanner implements Runnable
         if( !m_directory.isDirectory() )
         {
             final String message =
-              "Argument [" + path + "] doesn't seem to be a directory.";
+                "Argument [" + path + "] doesn't seem to be a directory.";
             throw new IllegalArgumentException( message );
         }
         m_files = new HashSet();
@@ -80,12 +98,11 @@ public class DirectoryScanner implements Runnable
     }
 
     /**
-     * Set the <code>DirectoryChangeListener</code> to notify about
-     * changes in the directory.
+     * Set the <code>DirectoryChangeListener</code> to notify about changes in the directory.
      *
      * @param directoryChangeListener The listener
      */
-    public void setDirectoryChangeListener( DirectoryChangeListener directoryChangeListener )
+    public void setDirectoryChangeListener( final DirectoryChangeListener directoryChangeListener )
     {
         m_directoryChangeListener = directoryChangeListener;
     }
@@ -95,7 +112,7 @@ public class DirectoryScanner implements Runnable
      *
      * @param frequency The scan frequency in milliseconds
      */
-    public void setFrequency( long frequency )
+    public void setFrequency( final long frequency )
     {
         m_frequency = frequency;
     }
@@ -152,15 +169,21 @@ public class DirectoryScanner implements Runnable
             return;
         }
 
-        final HashSet existingFiles = new HashSet();
-        final HashSet modifiedFiles = new HashSet();
-        final HashSet addedFiles = new HashSet();
-
         final File[] files = m_directory.listFiles();
-        int fileCount = 0;
-        if( null != files )
+
+        //This will be true if there is an IOException, or if the directory dissapears. Both reasons to not
+        //remove appslications :) -- PR
+        if( null == files )
         {
-            fileCount = files.length;
+            m_directoryChangeListener.unableToListContents();
+        }
+        else
+        {
+            final HashSet existingFiles = new HashSet();
+            final HashSet modifiedFiles = new HashSet();
+            final HashSet addedFiles = new HashSet();
+            final int fileCount = files.length;
+
             for( int i = 0; i < files.length; i++ )
             {
                 final File file = files[i];
@@ -180,56 +203,53 @@ public class DirectoryScanner implements Runnable
                 }
                 m_times.put( file, new Long( newModTime ) );
             }
-        }
 
-        final int lastCount = m_files.size();
-        final int addedCount = addedFiles.size();
-        final int modifiedCount = modifiedFiles.size();
+            final int lastCount = m_files.size();
+            final int addedCount = addedFiles.size();
+            final int modifiedCount = modifiedFiles.size();
 
-        // If no new files have been added and
-        // none deleted then nothing to do
-        if( fileCount == lastCount && 0 == addedCount && 0 == modifiedCount )
-        {
-            return;
-        }
-
-        final HashSet deletedFiles = new HashSet();
-
-        // If only new files were added and none were changed then
-        // we don't have to scan for deleted files
-        if( fileCount != lastCount + addedCount )
-        {
-            final Iterator iterator = m_files.iterator();
-            while( iterator.hasNext() )
+            // If no new files have been added and
+            // none deleted then nothing to do
+            if( fileCount == lastCount && 0 == addedCount && 0 == modifiedCount )
             {
-                final File file = (File)iterator.next();
-                if( !existingFiles.contains( file ) )
+                return;
+            }
+
+            final HashSet deletedFiles = new HashSet();
+
+            // If only new files were added and none were changed then
+            // we don't have to scan for deleted files
+            if( fileCount != lastCount + addedCount )
+            {
+                final Iterator iterator = m_files.iterator();
+                while( iterator.hasNext() )
                 {
-                    deletedFiles.add( file );
-                    m_times.remove( file );
+                    final File file = (File)iterator.next();
+                    if( !existingFiles.contains( file ) )
+                    {
+                        deletedFiles.add( file );
+                        m_times.remove( file );
+                    }
                 }
             }
-        }
 
-        final int deletedCount = deletedFiles.size();
+            final int deletedCount = deletedFiles.size();
 
-        if( 0 != addedCount )
-        {
-            m_directoryChangeListener.directoryChange(
-              DirectoryChangeListener.ADDITION, addedFiles );
-        }
-        if( 0 != deletedCount )
-        {
-            m_directoryChangeListener.directoryChange(
-              DirectoryChangeListener.REMOVAL, deletedFiles );
-        }
-        if( 0 != modifiedCount )
-        {
-            m_directoryChangeListener.directoryChange(
-              DirectoryChangeListener.MODIFICATION, modifiedFiles );
-        }
+            if( 0 != addedCount )
+            {
+                m_directoryChangeListener.directoryChange( DirectoryChangeListener.ADDITION, addedFiles );
+            }
+            if( 0 != deletedCount )
+            {
+                m_directoryChangeListener.directoryChange( DirectoryChangeListener.REMOVAL, deletedFiles );
+            }
+            if( 0 != modifiedCount )
+            {
+                m_directoryChangeListener.directoryChange( DirectoryChangeListener.MODIFICATION, modifiedFiles );
+            }
 
-        existingFiles.addAll( addedFiles );
-        m_files = existingFiles;
+            existingFiles.addAll( addedFiles );
+            m_files = existingFiles;
+        }
     }
 }
