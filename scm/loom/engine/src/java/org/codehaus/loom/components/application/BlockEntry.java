@@ -195,7 +195,7 @@ class BlockEntry
         }
 
         //Note that the proxy is still built using the
-        //Block interface so that ComponentManaers can
+        //Block interface so that ComponentManagers can
         //still be used to provide blocks with services.
         //Block extends Component and thus the proxy
         //extends Component. The magic is that the Block
