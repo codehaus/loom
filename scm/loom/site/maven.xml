@@ -115,4 +115,16 @@
         </j:file>
     </preGoal>
 
+    <postGoal name="test:compile">
+        <attainGoal name="generateMetaData"/>
+    </postGoal>
+
+    <goal name="generateMetaData" prereqs="dna:metagenerate">
+        <ant:metaclass_generate destDir="${basedir}/target/test-classes">
+            <ant:interceptorSet refid="maven.metaclass.interceptors"/>
+            <ant:fileset dir="${maven.aggregated.src}/test">
+                <include name="**/data/*"/>
+            </ant:fileset>
+        </ant:metaclass_generate>
+    </goal>
 </project>
