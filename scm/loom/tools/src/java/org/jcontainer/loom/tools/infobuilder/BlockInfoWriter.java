@@ -13,7 +13,6 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
-import org.jcontainer.loom.tools.info.FeatureDescriptor;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
 
@@ -22,7 +21,7 @@ import org.jcontainer.loom.tools.info.ServiceDescriptor;
  * documents in legacy BlockInfo format.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-10-06 12:56:10 $
+ * @version $Revision: 1.2 $ $Date: 2003-10-06 13:07:38 $
  */
 public class BlockInfoWriter
 {
@@ -118,7 +117,7 @@ public class BlockInfoWriter
             final ServiceDescriptor service = services[ i ];
             if( !LegacyUtil.isMxService( service ) )
             {
-                writeService( writer, service.getType(), service );
+                writeService( writer, service.getType() );
             }
         }
         writer.write( "</services>" );
@@ -146,7 +145,7 @@ public class BlockInfoWriter
             final ServiceDescriptor service = services[ i ];
             if( LegacyUtil.isMxService( service ) )
             {
-                writeService( writer, service.getType(), service );
+                writeService( writer, service.getType() );
             }
         }
         writer.write( "</management-access-points>" );
@@ -186,7 +185,7 @@ public class BlockInfoWriter
                 writer.write( key );
                 writer.write( "</role>" );
             }
-            writeService( writer, type, dependency );
+            writeService( writer, type );
             writer.write( "</dependency>" );
         }
         writer.write( "</dependencies>" );
@@ -197,24 +196,14 @@ public class BlockInfoWriter
      *
      * @param writer the writer
      * @param type the type of the service
-     * @param feature the feature describing service
      * @throws java.io.IOException if unable to write xml
      */
     private void writeService( final Writer writer,
-                               final String type,
-                               final FeatureDescriptor feature )
+                               final String type )
         throws IOException
     {
         writer.write( "<service name=\"" );
         writer.write( type );
-
-        final String version = LegacyUtil.getVersionString( feature );
-        if( null != version )
-        {
-            writer.write( "\" version=\"" );
-            writer.write( version );
-        }
-
         writer.write( "\"/>" );
     }
 
