@@ -20,6 +20,10 @@
             <version>4.0</version>
         </dependency>
         <dependency>
+            <id>phoenix-client</id>
+            <version>1.0dev</version>
+        </dependency>
+        <dependency>
             <id>spice-salt</id>
             <version>0.8dev</version>
         </dependency>
@@ -63,6 +67,32 @@
 
     <build>
         <sourceDirectory>src/java</sourceDirectory>
+        <unitTestSourceDirectory>${basedir}/src/test</unitTestSourceDirectory>
+
+        <unitTest>
+            <resource>
+                <directory>${basedir}/src/test</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </resource>
+            <includes>
+                <include>**/*TestCase.java</include>
+            </includes>
+            <excludes>
+                <exclude>**/Abstract*.java</exclude>
+            </excludes>
+        </unitTest>
+
+        <resources>
+            <resource>
+                <directory>${basedir}/src/java</directory>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </resource>
+        </resources>
+
     </build>
 
 </project>
