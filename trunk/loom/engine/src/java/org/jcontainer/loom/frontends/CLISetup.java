@@ -88,7 +88,6 @@ package org.jcontainer.loom.frontends;
 
 import java.util.List;
 import java.util.Properties;
-import org.jcontainer.loom.components.ParameterConstants;
 import org.realityforge.cli.CLArgsParser;
 import org.realityforge.cli.CLOption;
 import org.realityforge.cli.CLOptionDescriptor;
@@ -114,7 +113,6 @@ class CLISetup
     private static final int PERSISTENT_OPT = 'p';
     private static final int CONFIGFILE_OPT = 'f';
     private static final int DISABLE_HOOK_OPT = 2;
-    private static final int APPLICATION_OPT = 3;
 
     ///Parameters created by parsing CLI options
     private final Properties m_parameters = new Properties();
@@ -142,7 +140,7 @@ class CLISetup
      */
     private CLOptionDescriptor[] createCLOptions()
     {
-        final CLOptionDescriptor options[] = new CLOptionDescriptor[ 8 ];
+        final CLOptionDescriptor options[] = new CLOptionDescriptor[ 7 ];
         options[ 0 ] =
             new CLOptionDescriptor( "help",
                                     CLOptionDescriptor.ARGUMENT_DISALLOWED,
@@ -169,16 +167,11 @@ class CLISetup
                                     DISABLE_HOOK_OPT,
                                     REZ.getString( "cli.opt.disable-hook.desc" ) );
         options[ 5 ] =
-            new CLOptionDescriptor( "application",
-                                    CLOptionDescriptor.ARGUMENT_REQUIRED,
-                                    APPLICATION_OPT,
-                                    REZ.getString( "cli.opt.application.desc" ) );
-        options[ 6 ] =
             new CLOptionDescriptor( "persistent",
                                     CLOptionDescriptor.ARGUMENT_DISALLOWED,
                                     PERSISTENT_OPT,
                                     REZ.getString( "cli.opt.persistent.desc" ) );
-        options[ 7 ] =
+        options[ 6 ] =
             new CLOptionDescriptor( "configfile",
                                     CLOptionDescriptor.ARGUMENT_REQUIRED,
                                     CONFIGFILE_OPT,
@@ -233,25 +226,20 @@ class CLISetup
                     break;
 
                 case APPS_PATH_OPT:
-                    m_parameters.setProperty( ParameterConstants.APPS_DIR,
-                                              option.getArgument() );
-                    break;
-
-                case APPLICATION_OPT:
-                    m_parameters.setProperty( ParameterConstants.APPLICATION_LOCATION,
+                    m_parameters.setProperty( CLIMain.APPS_DIR,
                                               option.getArgument() );
                     break;
 
                 case PERSISTENT_OPT:
-                    m_parameters.setProperty( ParameterConstants.PERSISTENT, "true" );
+                    m_parameters.setProperty( CLIMain.PERSISTENT, "true" );
                     break;
 
                 case DISABLE_HOOK_OPT:
-                    m_parameters.setProperty( "disable-hook", "true" );
+                    m_parameters.setProperty( CLIMain.DISABLE_HOOK, "true" );
                     break;
 
                 case CONFIGFILE_OPT:
-                    m_parameters.setProperty( "loom.configfile", option.getArgument() );
+                    m_parameters.setProperty( CLIMain.CONFIGFILE, option.getArgument() );
                     break;
             }
         }

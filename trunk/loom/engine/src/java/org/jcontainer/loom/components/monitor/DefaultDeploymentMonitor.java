@@ -101,11 +101,7 @@ import org.jcontainer.dna.Configurable;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.ConfigurationException;
 import org.jcontainer.dna.MissingResourceException;
-import org.jcontainer.dna.ParameterException;
-import org.jcontainer.dna.Parameterizable;
-import org.jcontainer.dna.Parameters;
 import org.jcontainer.dna.ResourceLocator;
-import org.jcontainer.loom.components.ParameterConstants;
 import org.jcontainer.loom.interfaces.Deployer;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
@@ -117,29 +113,19 @@ import org.realityforge.salt.io.FileUtil;
  * application as necessary.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.11 $ $Date: 2003-10-05 13:45:40 $
+ * @version $Revision: 1.12 $ $Date: 2003-10-29 21:55:27 $
  */
 public class DefaultDeploymentMonitor
     extends AbstractLogEnabled
-    implements Parameterizable, Configurable, Composable, Active, PropertyChangeListener
+    implements Configurable, Composable, Active, PropertyChangeListener
 {
     private final static Resources REZ =
         ResourceManager.getPackageResources( DefaultDeploymentMonitor.class );
 
-    private String m_appsDir;
+    private File m_appsDir;
     private ActiveMonitor m_monitor;
     private Deployer m_deployer;
     private long m_frequency;
-
-    /**
-     * requires parameter "loom.apps.dir" to be set to directory
-     * that the component is to scanner.
-     */
-    public void parameterize( final Parameters parameters )
-        throws ParameterException
-    {
-        m_appsDir = parameters.getParameter( ParameterConstants.APPS_DIR );
-    }
 
     public void configure( Configuration configuration )
         throws ConfigurationException
@@ -149,11 +135,13 @@ public class DefaultDeploymentMonitor
 
     /**
      * @dna.dependency type="Deployer"
+     * @dna.dependency type="File" qualifier="apps"
      */
     public void compose( final ResourceLocator locator )
         throws MissingResourceException
     {
         m_deployer = (Deployer)locator.lookup( Deployer.class.getName() );
+        m_appsDir = (File)locator.lookup( File.class.getName() + "/apps" );
     }
 
     /**
@@ -163,7 +151,7 @@ public class DefaultDeploymentMonitor
         throws Exception
     {
         final DirectoryResource resource =
-            new DirectoryResource( m_appsDir );
+            new DirectoryResource( m_appsDir.getPath() );
         resource.addPropertyChangeListener( this );
         m_monitor = new ActiveMonitor();
         m_monitor.setFrequency( m_frequency );
