@@ -3,7 +3,6 @@
   <extend>${basedir}/../project.xml</extend>
   <id>maven-sar-plugin</id>
   <name>Maven Sar Plugin</name>
-  <currentVersion>1.1-dev</currentVersion>
   <description>Maven Sar Plugin</description>
   <shortDescription>Maven Sar Plugin</shortDescription>
 
@@ -21,7 +20,7 @@
           <tag>MAVEN_SAR_PLUGIN_1_0-tag</tag>
       </version>
   </versions>
-  
+
   <developers>
     <developer>
       <name>Mauro Talevi</name>

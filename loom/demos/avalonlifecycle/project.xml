@@ -23,7 +23,8 @@
         <dependency>
             <groupId>loom</groupId>
             <artifactId>maven-sar-plugin</artifactId>
-            <version>20031028.090136</version>
+            <version>${pom.currentVersion}</version>
+            <type>plugin</type>
         </dependency>
         <dependency>
             <groupId>avalon</groupId>
@@ -36,7 +37,7 @@
             <version>20030801</version>
         </dependency>
         <dependency>
-        	<groupId>avalon</groupId>
+            <groupId>avalon</groupId>
             <artifactId>avalon-phoenix-client</artifactId>
             <version>20030819</version>
         </dependency>
@@ -46,7 +47,7 @@
             <version>20031005.002435</version>
         </dependency>
         <dependency> <!-- for metagenerating xinfo -->
-        	<id>qdox</id>
+            <id>qdox</id>
             <version>1.1</version>
         </dependency>
     </dependencies>

@@ -25,15 +25,6 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>loom</groupId>
-            <artifactId>loom-tools</artifactId>
-            <version>${pom.currentVersion}</version>
-		    <url>http://dist.codehaus.org/loom/jars</url>
-            <properties>
-                <category>tools</category>
-            </properties>
-        </dependency>
-        <dependency>
             <groupId>avalon</groupId>
             <artifactId>avalon-framework</artifactId>
             <version>20030713</version>
