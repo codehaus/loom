@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE assembly PUBLIC "-//LOOM/Assembly DTD Version 1.1//EN"
+                  "http://jcontainer.codehaus.org/loom/assembly_1.0.dtd">
+
+<assembly>
+
+    <block class="org.jcontainer.loom.components.assembler.data.Component1"
+        name="c1">
+        <provide name="c2"
+            role="org.jcontainer.loom.components.assembler.data.Service2"/>
+    </block>
+
+    <block class="org.jcontainer.loom.components.assembler.data.Component2"
+        name="c2">
+        <proxy disable="true"/>
+    </block>
+
+</assembly>
