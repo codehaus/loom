@@ -24,8 +24,8 @@ import java.util.Vector;
  * distinct, non-overlapping sets of resources or else ClassCastExceptions
  * may result along with other undersired behaviour. </p>
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-04-04 13:52:12 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.2 $ $Date: 2003-06-27 03:45:08 $
  */
 public class JoinClassLoader
     extends SecureClassLoader
@@ -85,7 +85,7 @@ public class JoinClassLoader
                 //Not in that classloader
             }
         }
-        
+
         return super.findClass( name );
     }
 

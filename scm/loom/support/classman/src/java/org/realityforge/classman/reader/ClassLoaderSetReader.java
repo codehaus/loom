@@ -20,8 +20,8 @@ import org.w3c.dom.NodeList;
  * This class builds a {@link ClassLoaderSetMetaData} object from
  * specified configuration.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-04-04 13:52:12 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.2 $ $Date: 2003-06-27 03:45:08 $
  */
 public class ClassLoaderSetReader
 {

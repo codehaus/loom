@@ -24,7 +24,7 @@ import org.realityforge.salt.io.FileUtil;
  * Abstract Policy class that makes it easy to add permission
  * sets to policy.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  */
 public abstract class AbstractPolicy
     extends Policy

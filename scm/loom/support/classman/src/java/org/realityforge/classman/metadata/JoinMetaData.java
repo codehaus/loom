@@ -13,8 +13,8 @@ package org.realityforge.classman.metadata;
  * the ClassLoaders contain disjoint sets of classes (with the
  * exception of classes loaded from the system classpath).
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-04-04 13:52:12 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.2 $ $Date: 2003-06-27 03:45:07 $
  */
 public class JoinMetaData
 {

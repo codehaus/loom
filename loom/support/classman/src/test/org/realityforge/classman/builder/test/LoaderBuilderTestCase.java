@@ -24,8 +24,8 @@ import org.realityforge.classman.test.DummyExtensionManager;
 /**
  * Unit test for join classloader.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-04-04 13:52:13 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.2 $ $Date: 2003-06-27 03:45:09 $
  */
 public class LoaderBuilderTestCase
     extends AbstractLoaderTestCase

@@ -19,8 +19,8 @@ import org.w3c.dom.Document;
 /**
  * An abstract base class for all the tests that performed on loaders.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-04-04 13:52:14 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.2 $ $Date: 2003-06-27 03:45:15 $
  */
 public class AbstractLoaderTestCase
     extends TestCase

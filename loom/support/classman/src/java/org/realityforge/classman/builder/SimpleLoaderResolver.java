@@ -37,8 +37,8 @@ import org.realityforge.salt.i18n.ResourceManager;
  *       {@link UnsupportedOperationException} if attempt to be constructed.</li>
  * </ul>
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-06-27 03:43:56 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.6 $ $Date: 2003-06-27 03:45:05 $
  */
 public class SimpleLoaderResolver
     implements LoaderResolver

@@ -11,8 +11,8 @@ package org.realityforge.classman.metadata;
  * This class defines a set of ClassLoaders and
  * the default ClassLoader to use.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-04-04 13:52:12 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.2 $ $Date: 2003-06-27 03:45:07 $
  */
 public class ClassLoaderSetMetaData
 {

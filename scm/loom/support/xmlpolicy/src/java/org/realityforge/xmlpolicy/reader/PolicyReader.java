@@ -19,8 +19,8 @@ import org.w3c.dom.NodeList;
  * This class builds a {@link PolicyMetaData} object from
  * specified XML document.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-04 23:10:00 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.3 $ $Date: 2003-06-27 03:45:58 $
  */
 public class PolicyReader
 {

@@ -3,7 +3,7 @@
    This is the DTD defining the Policy 1.0
    descriptor (XML) file format/syntax.
 
-   Author: Peter Donald <peter at apache.org>
+   Author: Peter Donald <peter at realityforge.org>
 
    This descriptor is used to define information in a java.policy
    except in a XML file format.

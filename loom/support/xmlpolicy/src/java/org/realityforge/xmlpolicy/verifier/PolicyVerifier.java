@@ -27,8 +27,8 @@ import org.realityforge.salt.i18n.ResourceManager;
  *   <li>If target is null then actions is null.</li>
  * </ul>
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-06-13 01:06:09 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.5 $ $Date: 2003-06-27 03:45:58 $
  */
 public class PolicyVerifier
 {

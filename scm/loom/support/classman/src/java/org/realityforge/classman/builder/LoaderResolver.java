@@ -15,8 +15,8 @@ import org.apache.avalon.excalibur.extension.Extension;
  * a specific policy with respect to how ClassLoader
  * hierarchy is constructed.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-04-04 13:52:12 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.2 $ $Date: 2003-06-27 03:45:05 $
  */
 public interface LoaderResolver
 {

@@ -9,8 +9,8 @@ package org.realityforge.classman.test.data.cl1;
 
 /**
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-04-04 13:52:15 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.2 $ $Date: 2003-06-27 03:45:21 $
  */
 public class Data2
 {
