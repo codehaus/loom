@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * PhoenixLoader is the class that bootstraps and sets up engine ClassLoader.
+ * LoomLoader is the class that bootstraps and sets up engine ClassLoader.
  * It also sets up a default policy that gives full permissions to engine code.
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
@@ -27,12 +27,12 @@ import java.util.Map;
 public final class Main
 {
     private static final String MAIN_CLASS =
-        "org.apache.avalon.phoenix.frontends.CLIMain";
+        "org.jcontainer.loom.frontends.CLIMain";
 
     private static Object c_frontend;
 
     /**
-     * Main entry point for Phoenix.
+     * Main entry point for Loom.
      *
      * @param args the command line arguments
      * @throws java.lang.Exception if an error occurs
@@ -46,7 +46,7 @@ public final class Main
     }
 
     /**
-     * Method to call to startup Phoenix from an
+     * Method to call to startup Loom from an
      * external (calling) application. Protected to allow
      * access from DaemonLauncher.
      *
@@ -72,7 +72,7 @@ public final class Main
 
             data.put( "common.classloader", ClassLoader.getSystemClassLoader() );
             data.put( "container.classloader", classLoader );
-            data.put( "phoenix.home", new File( LauncherUtils.findPhoenixHome() ) );
+            data.put( "loom.home", new File( LauncherUtils.findLoomHome() ) );
 
             //Setup context classloader
             Thread.currentThread().setContextClassLoader( classLoader );
@@ -98,7 +98,7 @@ public final class Main
     }
 
     /**
-     * Method to call to shutdown Phoenix from an
+     * Method to call to shutdown Loom from an
      * external (calling) application. Protected to allow
      * access from DaemonLauncher.
      */

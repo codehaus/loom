@@ -23,7 +23,7 @@ import java.util.StringTokenizer;
  */
 public class LauncherUtils
 {
-    private static final String LOADER_JAR = "phoenix-loader.jar";
+    private static final String LOADER_JAR = "loom-launcher.jar";
 
     /**
      * Create a ClassPath for the engine.
@@ -59,9 +59,9 @@ public class LauncherUtils
     private static File findEngineLibDir()
         throws Exception
     {
-        final String phoenixHome = findPhoenixHome();
+        final String loomHome = findLoomHome();
         final String engineLibDir =
-            phoenixHome + File.separator + "bin" + File.separator + "lib";
+            loomHome + File.separator + "bin" + File.separator + "lib";
         final File dir = new File( engineLibDir ).getCanonicalFile();
         if( !dir.exists() )
         {
@@ -72,25 +72,25 @@ public class LauncherUtils
 
     /**
      * Utility method to find the home directory
-     * of Phoenix and make sure system property is
+     * of Loom and make sure system property is
      * set to it.
      *
-     * @return the location of phoenix directory
+     * @return the location of loom directory
      * @throws java.lang.Exception if unable to locate directory
      */
-    static String findPhoenixHome()
+    static String findLoomHome()
         throws Exception
     {
-        String phoenixHome = System.getProperty( "phoenix.home", null );
-        if( null == phoenixHome )
+        String loomHome = System.getProperty( "loom.home", null );
+        if( null == loomHome )
         {
             final File loaderDir = findLoaderDir();
-            phoenixHome = loaderDir.getAbsoluteFile().getParentFile() + File.separator;
+            loomHome = loaderDir.getAbsoluteFile().getParentFile() + File.separator;
         }
 
-        phoenixHome = ( new File( phoenixHome ) ).getCanonicalFile().toString();
-        System.setProperty( "phoenix.home", phoenixHome );
-        return phoenixHome;
+        loomHome = ( new File( loomHome ) ).getCanonicalFile().toString();
+        System.setProperty( "loom.home", loomHome );
+        return loomHome;
     }
 
     /**
@@ -117,6 +117,6 @@ public class LauncherUtils
 
         throw new Exception( "Unable to locate " + LOADER_JAR +
                              " in classpath. User must specify " +
-                             "phoenix.home system property." );
+                             "loom.home system property." );
     }
 }
