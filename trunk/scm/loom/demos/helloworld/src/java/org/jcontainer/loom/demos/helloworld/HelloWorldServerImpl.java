@@ -91,11 +91,6 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.UnknownHostException;
 
-import org.apache.avalon.cornerstone.services.connection.ConnectionHandler;
-import org.apache.avalon.cornerstone.services.connection.ConnectionHandlerFactory;
-import org.apache.avalon.cornerstone.services.connection.ConnectionManager;
-import org.apache.avalon.cornerstone.services.sockets.ServerSocketFactory;
-import org.apache.avalon.cornerstone.services.sockets.SocketManager;
 import org.apache.avalon.framework.activity.Disposable;
 import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.configuration.Configurable;
@@ -108,6 +103,10 @@ import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 import org.apache.avalon.phoenix.BlockContext;
+import org.jcomponent.netserve.connection.ConnectionManager;
+import org.jcomponent.netserve.connection.ConnectionHandlerManager;
+import org.jcomponent.netserve.connection.ConnectionHandler;
+import org.jcomponent.netserve.sockets.ServerSocketFactory;
 
 /**
  * @phoenix:block
@@ -122,9 +121,9 @@ public final class HelloWorldServerImpl
     extends AbstractLogEnabled
     implements HelloWorldServer, HelloWorldServerMBean, Contextualizable,
     Serviceable, Configurable, Initializable, Disposable,
-    ConnectionHandlerFactory
+    ConnectionHandlerManager
 {
-    private SocketManager m_socketManager;
+    private ServerSocketFactory m_socketManager;
     private ConnectionManager m_connectionManager;
     private BlockContext m_context;
     private String m_greeting = "Hello World";
@@ -167,8 +166,8 @@ public final class HelloWorldServerImpl
 
     /**
      *
-     * @phoenix:dependency name="org.apache.avalon.cornerstone.services.sockets.SocketManager"
-     * @phoenix:dependency name="org.apache.avalon.cornerstone.services.connection.ConnectionManager"
+     * @phoenix:dependency name="org.jcomponent.netserve.sockets.ServerSocketFactory"
+     * @phoenix:dependency name="org.jcomponent.netserve.connection.ConnectionManager"
      *
      */
     public void service( final ServiceManager serviceManager )
@@ -176,16 +175,14 @@ public final class HelloWorldServerImpl
     {
         getLogger().info( "HelloWorldServer.compose()" );
 
-        m_socketManager = (SocketManager)serviceManager.lookup( SocketManager.ROLE );
+        m_socketManager = (ServerSocketFactory)serviceManager.lookup( ServerSocketFactory.class.getName() );
         m_connectionManager = (ConnectionManager)serviceManager.lookup( ConnectionManager.ROLE );
     }
 
     public void initialize()
         throws Exception
     {
-        final ServerSocketFactory factory =
-            m_socketManager.getServerSocketFactory( "plain" );
-        m_serverSocket = factory.createServerSocket( m_port, 5, m_bindTo );
+        m_serverSocket = m_socketManager.createServerSocket( m_port, 5, m_bindTo );
 
         m_connectionManager.connect( m_connectionName, m_serverSocket, this );
 
@@ -197,7 +194,7 @@ public final class HelloWorldServerImpl
     {
         try
         {
-            m_connectionManager.disconnect( m_connectionName );
+            m_connectionManager.disconnect( m_connectionName, true );
         }
         catch( final Exception e )
         {
@@ -214,13 +211,7 @@ public final class HelloWorldServerImpl
         }
     }
 
-    /**
-     * Construct an appropriate ConnectionHandler.
-     *
-     * @return the new ConnectionHandler
-     * @exception Exception if an error occurs
-     */
-    public ConnectionHandler createConnectionHandler()
+    public ConnectionHandler aquireHandler()
         throws Exception
     {
         final HelloWorldHandler handler =
@@ -232,7 +223,7 @@ public final class HelloWorldServerImpl
     /**
      * Release a previously created ConnectionHandler e.g. for spooling.
      */
-    public void releaseConnectionHandler( ConnectionHandler connectionHandler )
+    public void releaseHandler( ConnectionHandler handler )
     {
     }
 }

@@ -1,51 +1,22 @@
 <?xml version="1.0"?>
 <config>
 
-  <thread-manager>
-      <thread-group>
-        <name>default</name>
-
-        <!-- normal priority == 5, max-priority = 10 -->
+    <thread-pool>
+        <name>MyThreadPool</name>
         <priority>5</priority>
-
-        <!-- are threads deamon threads ? -->
         <is-daemon>false</is-daemon>
+        <resource-limiting>false</resource-limiting>
+        <max-threads>10</max-threads>
+        <max-idle>5</max-idle>
+    </thread-pool>
 
-        <max-threads>40</max-threads>
-        <!-- these are ignored at the moment but will be fixed in later revisions -->
-        <min-threads>20</min-threads>
-        <min-spare-threads>20</min-spare-threads>
-      </thread-group>
-  </thread-manager>
-
-  <sockets>
-      <server-sockets>
-        <factory name="plain"
-                 class="org.apache.avalon.cornerstone.blocks.sockets.DefaultServerSocketFactory" />
-      </server-sockets>
-
-      <client-sockets>
-        <factory name="plain"
-                 class="org.apache.avalon.cornerstone.blocks.sockets.DefaultSocketFactory" />
-      </client-sockets>
-  </sockets>
-
-  <helloworldserver>
-      <port>8999</port>
-      <bind>127.0.0.1</bind>
-      <helloworldhandler>
-        <connectiontimeout>360000</connectiontimeout>
-      </helloworldhandler>
-      <test></test>
-  </helloworldserver>
-  
-
-  <rmification>
-    <port>1099</port>
-  </rmification>
-
-  <rmihelloworldserver>
-    <pub-name>rmi-helloworldserver</pub-name>
-  </rmihelloworldserver>
+    <helloworldserver>
+        <port>8999</port>
+        <bind>127.0.0.1</bind>
+        <helloworldhandler>
+            <connectiontimeout>360000</connectiontimeout>
+        </helloworldhandler>
+        <test></test>
+    </helloworldserver>
 
 </config>

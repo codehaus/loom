@@ -22,21 +22,46 @@
         </dependency>
         <dependency>
             <groupId>avalon</groupId>
-            <artifactId>avalon-cornerstone</artifactId>
-            <version>20030801</version>
-        </dependency>
-        <dependency>
-        	<groupId>avalon</groupId>
             <artifactId>avalon-phoenix-client</artifactId>
             <version>20030819</version>
         </dependency>
         <dependency>
-        	<groupId>loom</groupId>
+            <groupId>loom</groupId>
             <artifactId>loom-tools</artifactId>
             <version>1.0dev</version>
         </dependency>
+        <dependency>
+            <groupId>jcomponent</groupId>
+            <artifactId>jcomponent-netserve</artifactId>
+            <version>20030831.040601</version>
+            <properties>
+                <sar.bundle.jar>true</sar.bundle.jar>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>jcomponent</groupId>
+            <artifactId>jcomponent-threadpool</artifactId>
+            <version>20030831.040503</version>
+            <properties>
+                <sar.bundle.jar>true</sar.bundle.jar>
+            </properties>
+        </dependency>
+        <dependency> <!-- for jcomponent-threadpool -->
+            <id>commons-pool</id>
+            <version>20030623.172700</version>
+            <properties>
+                <sar.bundle.jar>true</sar.bundle.jar>
+            </properties>
+        </dependency>
+        <dependency><!-- for commons-pool -->
+            <id>commons-collections</id>
+            <version>2.0</version>
+            <properties>
+                <sar.bundle.jar>true</sar.bundle.jar>
+            </properties>
+        </dependency>
         <dependency>        <!-- for metagenerating xinfo -->
-        	<id>qdox</id>
+            <id>qdox</id>
             <version>1.1</version>
         </dependency>
     </dependencies>
