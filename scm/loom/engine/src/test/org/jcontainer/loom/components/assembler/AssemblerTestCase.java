@@ -26,6 +26,7 @@ import org.jcontainer.loom.components.util.metadata.DependencyDirective;
 import org.jcontainer.loom.components.util.profile.ComponentProfile;
 import org.jcontainer.loom.components.util.profile.PartitionProfile;
 import org.jcontainer.loom.interfaces.ContainerConstants;
+import org.jcontainer.loom.interfaces.LoomException;
 import org.xml.sax.InputSource;
 
 /**
@@ -33,17 +34,10 @@ import org.xml.sax.InputSource;
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author <a href="mailto:peter.royal@pobox.com">Peter Royal</a>
- * @version $Revision: 1.13 $ $Date: 2003-11-05 07:27:08 $
+ * @version $Revision: 1.14 $ $Date: 2003-11-10 02:15:13 $
  */
-public class AssemblerTestCase
-    extends TestCase
+public class AssemblerTestCase extends TestCase
 {
-    public void testNoop()
-        throws Exception
-    {
-
-    }
-
     public void testBasic()
         throws Exception
     {
@@ -168,6 +162,31 @@ public class AssemblerTestCase
         assertEquals( "Block4 isDisableProxy", false, isProxyDisabled( block4 ) );
     }
 
+    public void testBuildDependencies() throws Exception
+    {
+        final DefaultConfiguration[] provides = new DefaultConfiguration[2];
+        final String name0 = "Cheese";
+        final String role0 = "market.Cheddar";
+        final String name1 = "Bleu";
+        final String role1 = "market.blue";
+
+        provides[0] = new DefaultConfiguration("provide","","");
+        provides[0].setAttribute("name", name0);
+        provides[0].setAttribute("role", role0);
+        provides[1] = new DefaultConfiguration("provide","","");
+        provides[1].setAttribute("name", name1);
+        provides[1].setAttribute("role",role1);
+
+        final Assembler assembler = new Assembler();
+        final DependencyDirective[] directives = assembler.buildDependencies(provides );
+
+        assertEquals(provides.length, directives.length);
+        assertEquals( name0,directives[0].getProviderName());
+        assertEquals( name1,directives[1].getProviderName());
+        assertEquals( role0,directives[0].getKey());
+        assertEquals( role1,directives[1].getKey());
+    }
+
     public void testBuildDependency()
         throws Exception
     {
@@ -253,5 +272,38 @@ public class AssemblerTestCase
         parameters.put( ContainerConstants.CONFIG_DESCRIPTOR, new DefaultConfiguration( "config", "", "" ) );
         parameters.put( ContainerConstants.ASSEMBLY_CLASSLOADER, getClass().getClassLoader() );
         return assembler.buildProfile( parameters );
+    }
+
+    public void testMalformedBlockListener() throws Exception
+    {
+        final DefaultConfiguration listener = new DefaultConfiguration("listner","","");
+        final DefaultConfiguration config = new DefaultConfiguration("config","","");
+        final Assembler assembler = new Assembler();
+
+        try
+        {
+            assembler.buildBlockListener(listener,config);
+            fail("buildBlockListner allowed no 'name' attribute");
+        }
+        catch( LoomException e )
+        {
+            assertEquals("Malformed listener entry in assembly.xml at \"\". " +
+                         "(Reason: Attribute named name not specified.).",
+                         e.getMessage());
+        }
+
+        listener.setAttribute("name","foo");
+
+        try
+        {
+            assembler.buildBlockListener(listener,config);
+            fail("buildBlockListner allowed no 'class' attribute");
+        }
+        catch( LoomException e )
+        {
+            assertEquals("Malformed listener entry in assembly.xml at \"\". " +
+                         "(Reason: Attribute named class not specified.).",
+                         e.getMessage());
+        }
     }
 }

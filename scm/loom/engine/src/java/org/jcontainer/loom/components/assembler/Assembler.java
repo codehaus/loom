@@ -106,7 +106,7 @@ import org.realityforge.salt.i18n.Resources;
  * and is in the format specified for <tt>assembly.xml</tt> files.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.14 $ $Date: 2003-11-05 07:27:08 $
+ * @version $Revision: 1.15 $ $Date: 2003-11-10 02:15:11 $
  */
 public class Assembler
     implements MetaDataBuilder
@@ -267,7 +267,7 @@ public class Assembler
      * @return the BlockListenerMetaData object
      * @throws LoomException if an error occurs
      */
-    private ComponentTemplate buildBlockListener( final Configuration listener,
+    ComponentTemplate buildBlockListener( final Configuration listener,
                                                   final Configuration config )
         throws LoomException
     {
@@ -299,7 +299,7 @@ public class Assembler
      * @return the created DependencyDirective array
      * @throws ConfigurationException if config data is malformed
      */
-    private DependencyDirective[] buildDependencies( final Configuration[] provides )
+    DependencyDirective[] buildDependencies( final Configuration[] provides )
         throws ConfigurationException
     {
         final ArrayList dependencies = new ArrayList();
