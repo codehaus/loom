@@ -144,7 +144,36 @@ public class VerifierTestCase
         {
             fail( "Expected verify to pass as specified " +
                   "good name for keyStore" );
-        }        
+        }
+    }
+
+    public void testConfig9()
+        throws Exception
+    {
+        try
+        {
+            verifyResource( "config9.xml" );
+        }
+        catch( final Throwable t )
+        {
+            fail( "Expected verify to pass as specified " +
+                  "valid reference for keyStore" );
+        }
+    }
+
+    public void testConfig10()
+        throws Exception
+    {
+        try
+        {
+            verifyResource( "config10.xml" );
+        }
+        catch( final Throwable t )
+        {
+            return;
+        }
+        fail( "Expected verify to fail as specified " +
+              "invalid reference for keyStore" );
     }
 
     private void verifyResource( final String resource )
