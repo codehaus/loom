@@ -4,6 +4,9 @@
  * This software is published under the terms of the JContainer
  * Software License version 1.1, a copy of which has been included
  * with this distribution in the LICENSE.txt file.
+ *
+ * This product includes software developed by the
+ * Apache Software Foundation (http://www.apache.org/).
  */
 package org.jcontainer.loom.tools.metadata;
 
@@ -11,18 +14,17 @@ import org.jcontainer.loom.tools.info.Attribute;
 import org.jcontainer.loom.tools.info.FeatureDescriptor;
 
 /**
- * The {@link org.jcontainer.loom.tools.metadata.DependencyMetaData} is the mapping of a component as a dependency
+ * The {@link DependencyMetaData} is the mapping of a component as a dependency
  * of another component. Each component declares dependencies (via
  * {@link org.jcontainer.loom.tools.info.ComponentInfo})
  * and for each dependency there must be a coressponding DependencyMetaData which
- * has a matching key. The name value in {@link org.jcontainer.loom.tools.metadata.DependencyMetaData} object must refer
+ * has a matching key. The name value in {@link DependencyMetaData} object must refer
  * to another Component that implements a service as specified in DependencyInfo.
  *
  * <p>Note that it is invalid to have circular dependencies.</p>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @author <a href="mailto:mcconnell@apache.org">Stephen McConnell</a>
- * @version $Revision: 1.3 $ $Date: 2003-07-05 05:37:09 $
+ * @version $Revision: 1.4 $ $Date: 2003-07-05 05:38:49 $
  */
 public final class DependencyMetaData
     extends FeatureDescriptor
@@ -53,7 +55,7 @@ public final class DependencyMetaData
      * Create Association between key and provider.
      *
      * @param key the key the client uses to access component
-     * @param providerName the name of {@link org.jcontainer.loom.tools.metadata.ComponentMetaData}
+     * @param providerName the name of {@link ComponentMetaData}
      *   that is associated as a service provider
      */
     public DependencyMetaData( final String key,
@@ -93,7 +95,7 @@ public final class DependencyMetaData
     }
 
     /**
-     * Return the name of a {@link org.jcontainer.loom.tools.metadata.ComponentMetaData} instance that will used to
+     * Return the name of a {@link ComponentMetaData} instance that will used to
      * fulfill the dependency.
      *
      * @return the name of the Component that will provide the dependency.
