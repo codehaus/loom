@@ -20,10 +20,6 @@ export CVSROOT
 
 cd $builddir
 
-# Clean old builds and make the target folder. Logs go here too.
-rm -Rf target
-mkdir target
-
 # Delete compiled local copies to start fresh each time
 rm -Rf ~/.maven/repository/loom/jars
 
