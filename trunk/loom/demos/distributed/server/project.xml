@@ -21,7 +21,7 @@
             <version>20031016.083103</version>
         </dependency>
         <dependency>
-        	<groupId>loom</groupId>
+            <groupId>loom</groupId>
             <artifactId>loom-tools</artifactId>
             <version>${pom.currentVersion}</version>
         </dependency>
@@ -37,7 +37,7 @@
             <version>20031005.002435</version>
         </dependency>
         <dependency> <!-- for metagenerating xinfo -->
-        	<id>qdox</id>
+            <id>qdox</id>
             <version>1.1</version>
         </dependency>
         <dependency>
@@ -51,10 +51,14 @@
             <version>20030801</version>
         </dependency>
         <dependency>
-        	<groupId>avalon</groupId>
+            <groupId>avalon</groupId>
             <artifactId>avalon-phoenix-client</artifactId>
             <version>20030819</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <sourceDirectory>src/java</sourceDirectory>
+    </build>
 
 </project>
