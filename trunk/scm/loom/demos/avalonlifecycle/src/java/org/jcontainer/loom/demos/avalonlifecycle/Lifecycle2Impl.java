@@ -107,13 +107,14 @@ import org.apache.avalon.framework.service.Serviceable;
  *   http://localhost:8082/mbean?objectname=Loom%3Aapplication%3Ddemo-avalonlifecycle%2Ctopic%3DApplication
  * .. and try stopt/starting the blocks.
  * @phoenix:block
+ * @dna.component
  * @author  Paul Hammant <Paul_Hammant@yahoo.com>
  * @version 1.0
  */
-public class Lifecycle2Impl implements LogEnabled, Startable, Initializable, Contextualizable,
+public class Lifecycle2Impl
+    implements LogEnabled, Startable, Initializable, Contextualizable,
     Serviceable, Configurable, Disposable
 {
-
     private Lifecycle1 m_lifecycle1;
 
     public Lifecycle2Impl()
@@ -123,70 +124,23 @@ public class Lifecycle2Impl implements LogEnabled, Startable, Initializable, Con
         System.out.flush();
     }
 
-    // Lifecycle methods themselves.
-
-
-    /**
-     * Enable Logging
-     * @param logger The logger to use
-     */
     public void enableLogging( Logger logger )
     {
         System.out.println( "Lifecycle2Impl.enableLogging() called." );
         System.out.flush();
     }
 
-    /**
-     * Start
-     * @throws Exception If a problem
-     */
-    public void start() throws Exception
-    {
-        System.out.println( "Lifecycle2Impl.start() called." );
-        System.out.flush();
-    }
-
-    /**
-     * Stop
-     * @throws Exception If a problem
-     */
-    public void stop() throws Exception
-    {
-        System.out.println( "Lifecycle2Impl.stop() called." );
-        System.out.flush();
-    }
-
-    /**
-     * Initialize
-     * @throws Exception If a problem
-     */
-    public void initialize() throws Exception
-    {
-        System.out.println( "Lifecycle2Impl.initialize() called." );
-        System.out.flush();
-
-        System.out.println( "Lifecycle2Impl.initialize(), Lifecycle1.myServiceMethod() "
-                            + "method called result = " + m_lifecycle1.myServiceMethod() );
-        System.out.flush();
-
-    }
-
-    /**
-     * Contextualize
-     * @throws ContextException If a problem
-     */
-    public void contextualize( Context context ) throws ContextException
+    public void contextualize( Context context )
+        throws ContextException
     {
         System.out.println( "Lifecycle2Impl.contextualize() called (things like base directory passed in here)." );
         System.out.flush();
     }
 
     /**
-     *
-     * @phoenix:dependency name="org.jcontainer.loom.demos.avalonlifecycle.Lifecycle1"
-     *
-     * @param serviceManager
-     * @throws ServiceException
+     * @dna.dependency key="org.jcontainer.loom.demos.avalonlifecycle.Lifecycle1"
+     *                 type="org.jcontainer.loom.demos.avalonlifecycle.Lifecycle1"
+     *                 optional="false"
      */
     public void service( ServiceManager serviceManager ) throws ServiceException
     {
@@ -197,23 +151,40 @@ public class Lifecycle2Impl implements LogEnabled, Startable, Initializable, Con
             serviceManager.lookup( Lifecycle1.class.getName() );
     }
 
-    /**
-     * Configure
-     * @throws ConfigurationException If a problem
-     */
-    public void configure( Configuration configuration ) throws ConfigurationException
+    public void configure( Configuration configuration )
+        throws ConfigurationException
     {
         System.out.println( "Lifecycle2Impl.configure() called (configuration from config.xml passed here)." );
         System.out.flush();
     }
 
-    /**
-     * Dispose
-     */
+    public void initialize()
+        throws Exception
+    {
+        System.out.println( "Lifecycle2Impl.initialize() called." );
+        System.out.flush();
+        System.out.println( "Lifecycle2Impl.initialize(), Lifecycle1.myServiceMethod() "
+                            + "method called result = " + m_lifecycle1.myServiceMethod() );
+        System.out.flush();
+    }
+
+    public void start()
+        throws Exception
+    {
+        System.out.println( "Lifecycle2Impl.start() called." );
+        System.out.flush();
+    }
+
+    public void stop()
+        throws Exception
+    {
+        System.out.println( "Lifecycle2Impl.stop() called." );
+        System.out.flush();
+    }
+
     public void dispose()
     {
         System.out.println( "Lifecycle2Impl.dispose() Called" );
         System.out.flush();
     }
-
 }
