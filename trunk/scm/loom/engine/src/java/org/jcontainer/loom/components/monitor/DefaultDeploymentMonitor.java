@@ -113,7 +113,7 @@ import org.realityforge.salt.io.FileUtil;
  * application as necessary.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.12 $ $Date: 2003-10-29 21:55:27 $
+ * @version $Revision: 1.13 $ $Date: 2003-10-29 22:20:42 $
  */
 public class DefaultDeploymentMonitor
     extends AbstractLogEnabled
@@ -131,17 +131,18 @@ public class DefaultDeploymentMonitor
         throws ConfigurationException
     {
         m_frequency = configuration.getChild( "scanner-frequency" ).getValueAsLong( 1000L );
+        final String appsDir =
+            configuration.getChild( "base-application-directory" ).getValue();
+        m_appsDir = new File( appsDir );
     }
 
     /**
      * @dna.dependency type="Deployer"
-     * @dna.dependency type="File" qualifier="apps"
      */
     public void compose( final ResourceLocator locator )
         throws MissingResourceException
     {
         m_deployer = (Deployer)locator.lookup( Deployer.class.getName() );
-        m_appsDir = (File)locator.lookup( File.class.getName() + "/apps" );
     }
 
     /**
