@@ -9,25 +9,31 @@
         <echo message="Cleaning all components"/>
         <maven:reactor
             basedir="${basedir}"
-            includes="*/project.xml,demo/*/project.xml"
+            includes="*/project.xml"
+            excludes="demos/*"
             goals="clean"
             banner="Cleaning"
+            ignoreFailures="false"/>
+            
+        <maven:maven
+            descriptor="${basedir}/demos/project.xml"
+            goals="clean-all"
             ignoreFailures="false"/>
     </goal>
 
     <goal name="build">
-        <echo message="Building all components"/>
+        <echo message="Build all components"/>
         <maven:reactor
             basedir="${basedir}"
-            includes="*/project.xml,demo/*/project.xml"
+            includes="*/project.xml"
             excludes="distribution/*"
-            goals="clean,jar:install"
+            goals="clean,build"
             banner="Building"
             ignoreFailures="false" />
 
         <maven:maven
             descriptor="${basedir}/distribution/project.xml"
-            goals="buildDist"
+            goals="build"
             ignoreFailures="false"/>
     </goal>
 
@@ -35,9 +41,9 @@
         <echo message="Deploying all components"/>
         <maven:reactor
             basedir="${basedir}"
-            includes="*/project.xml,demo/*/project.xml"
+            includes="*/project.xml"
             excludes="distribution/*"
-            goals="clean,jar:deploy"
+            goals="clean,deploy"
             banner="Deploying"
             ignoreFailures="false" />
     </goal>

@@ -1,8 +1,24 @@
 <?xml version="1.0"?>
-<project xmlns:ant="jelly:ant">
+<project default="main"
+         xmlns:ant="jelly:ant">
+         
     <ant:property name="maven.jar.manifest" value="${basedir}/src/etc/manifest.txt"/>
 
+    <goal name="main">
+        <attainGoal name="build"/>
+    </goal>
+
+    <goal name="build">
+        <attainGoal name="jar:install"/>
+    </goal>
+
+    <goal name="deploy">
+        <attainGoal name="jar:deploy"/>
+    </goal>
+    
     <preGoal name="jar:jar">
         <ant:copy file="${basedir}/src/etc/java.policy" todir="target/classes/META-INF/"/>
     </preGoal>
+    
 </project>
+
