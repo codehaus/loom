@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<project>
+    <extend>${basedir}/../project.xml</extend>
+    <pomVersion>3</pomVersion>
+    <name>Loom Integration Test</name>
+    <id>loom-integration-test</id>
+    <currentVersion>1.0dev</currentVersion>
+    <inceptionYear>2003</inceptionYear>
+    <package>org.jcontainer.loom.integrationtest</package>
+
+    <shortDescription>Test for Loom.</shortDescription>
+
+    <description>
+        These are the integration tests for the Loom Application Server.
+    </description>
+
+    <dependencies>
+        <dependency>
+            <id>avalon-framework</id>
+            <version>4.1.4</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <sourceDirectory>src/java</sourceDirectory>
+    </build>
+
+</project>
