@@ -13,50 +13,48 @@
         security policy and configure logging settings. A sample
                 <code>environment.xml</code>
         follows. Previously thread pool settings were also configured in this
-        section but this has been deprecated. Note that previously the information stored in
-                <code>environment.xml</code> was stored in a file named
-                <code>server.xml</code>.
+        section but this has been deprecated. 
             </p>
         </section>
         <section name="Sample environment.xml file">
             <source>
-                &lt;?xml version="1.0"?>
+&lt;?xml version="1.0"?>
 
-                &lt;environment>
+&lt;environment>
 
-                &lt;logs>
-                &lt;category name="" target="default" priority="DEBUG" />
-                &lt;category name="myAuthorizer" target="myAuthorizer-target"
-                priority="DEBUG" />
+    &lt;logs>
+		&lt;category name="" target="default" priority="DEBUG" />
+		&lt;category name="myAuthorizer" target="myAuthorizer-target"
+    				priority="DEBUG" />
+    	
+		&lt;log-target name="default"
+    	  	location="/logs/default.log" />
+		&lt;log-target name="myAuthorizer-target"
+      		location="/logs/authorizer.log" />
+    &lt;/logs>
 
-                &lt;log-target name="default"
-                  location="/logs/default.log" />
-                &lt;log-target name="myAuthorizer-target"
-                  location="/logs/authorizer.log" />
-                &lt;/logs>
+    &lt;policy>
+	    &lt;keystore name="foo-keystore"
+    		location="sar:/conf/keystore"
+    		type="JKS" />
 
-                &lt;policy>
-                &lt;keystore name="foo-keystore"
-                location="sar:/conf/keystore"
-                type="JKS" />
+	    &lt;grant code-base="file:${app.home}${/}some-dir${/}*"
+			key-store="foo-keystore" >
+			&lt;permission class="java.io.FilePermission"
+		    	target="${/}tmp${/}*"
+				action="read,write" />
+	    &lt;/grant>
 
-                &lt;grant code-base="file:${app.home}${/}some-dir${/}*"
-              key-store="foo-keystore" >
-                &lt;permission class="java.io.FilePermission"
-                    target="${/}tmp${/}*"
-                    action="read,write" />
-                &lt;/grant>
+    	&lt;grant signed-by="Bob"
+			code-base="sar:/SAR-INF/lib/*"
+			key-store="foo-keystore" >
+		    &lt;permission class="java.io.FilePermission"
+		        target="${/}tmp${/}*"
+				action="read,write" />
+ 	   &lt;/grant>
+    &lt;/policy>
 
-                &lt;grant signed-by="Bob"
-             code-base="sar:/SAR-INF/lib/*"
-             key-store="foo-keystore" >
-                &lt;permission class="java.io.FilePermission"
-                    target="${/}tmp${/}*"
-                    action="read,write" />
-                &lt;/grant>
-                &lt;/policy>
-
-                &lt;/environment>
+&lt;/environment>
 
             </source>
             <p>
@@ -92,30 +90,30 @@
         Below is example configuration.
             </p>
             <source>
-                &lt;?xml version="1.0"?>
-                &lt;environment>
-                &lt;logs version="1.1">
-                &lt;factories>
-                &lt;factory type="file" class="org.apache.avalon.excalibur.logger.factory.FileTargetFactory"/>
-                &lt;/factories>
+&lt;?xml version="1.0"?>
+&lt;environment>
+    &lt;logs version="1.1">
+	    &lt;factories>
+    		&lt;factory type="file" class="org.apache.avalon.excalibur.logger.factory.FileTargetFactory"/>
+   		&lt;/factories>
 
-                &lt;categories>
-                &lt;category name="" log-level="INFO">
-                &lt;log-target id-ref="default"/>
-                &lt;/category>
-                &lt;/categories>
+	    &lt;categories>
+    		&lt;category name="" log-level="INFO">
+    			&lt;log-target id-ref="default"/>
+    		&lt;/category>
+    	&lt;/categories>
 
-                &lt;targets>
-                &lt;file id="default">
-                &lt;filename>${app.home}/logs/default-&lt;/filename>
-                &lt;append>true&lt;/append>
-                &lt;rotation type="unique" pattern="yyyyMMdd" suffix=".log">
-                &lt;date>yyyyMMdd&lt;/date>
-                &lt;/rotation>
-                &lt;/file>
-                &lt;/targets>
-                &lt;/logs>
-                &lt;/environment>
+	    &lt;targets>
+		    &lt;file id="default">
+	    		&lt;filename>${app.home}/logs/default-&lt;/filename>
+	    		&lt;append>true&lt;/append>
+	   			&lt;rotation type="unique" pattern="yyyyMMdd" suffix=".log">
+	    			&lt;date>yyyyMMdd&lt;/date>
+	    		&lt;/rotation>
+		    &lt;/file>
+	    &lt;/targets>
+    &lt;/logs>
+&lt;/environment>
             </source>
         </section>
     </body>

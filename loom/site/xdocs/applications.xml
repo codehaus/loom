@@ -13,18 +13,6 @@
                 products that make them capable of being managed from within Loom. While
                 others are applications are assembled from reusable Blocks.
             </p>
-            <p>
-                The applications that take the wrapper approach are building on the sucess of
-                pre-existing projects on the Web.  These could be at Apache or from
-                SourceForge, and are not forked efforts.  They all do varioations of the same
-                thing - namely instantiate the pre-existing project's main bean and expose it
-                via a service interface to other phoenix blocks.  Some like HypersonicSQL
-                present no methods in their service interface, their who interface to the world
-                is through it's socket listener and a JDBC library on the client side.  All of
-                the wrapped products are still launchable via their normal 'main' method in
-                standalone mode.  These can be said to be dual mode, even if the code for
-                phoenix compatability is in our CVS rather than their depot.
-            </p>
         </section>
 
         <section name="Application list">

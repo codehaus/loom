@@ -19,54 +19,37 @@
             </p>
             <img src="../images/loom-layers.png" alt="Loom Layers"/>
             <p>
-              Shown above are three hosted server applications.  A mail server that would implement
-              multiple listeners for incoming and outgoing services (POP3, SMTP, IMAP etc).  Outlook,
-              Eudora and other mail clients would be able to connect to the server.  As it happens,
-              Apache has a project in progress called "James" that provides these services and Newsgroups.
-              Also shown is a Web server.  That would respond to HTTP/HTTPS requests from similar standards
-              based clients and be able to host it's own applications (web-apps and virtual websites). Lastly,
-              and non-existant currently at Apache is an EJB Server.  This would be able to host it's own
-              bean applications and might use the web server for it's HTTP needs.
+              Shown above are three hosted server applications.  
+              <ul>
+				<li>A Mail server - such as Apache James - that would implement multiple listeners for incoming and outgoing services (POP3, SMTP, IMAP etc).  Outlook,
+              Eudora and other mail clients would be able to connect to the server.</li>
+				<li>A Web server - such as Tomcat or Jetty - that would respond to HTTP/HTTPS requests from similar standards
+              based clients and be able to host it's own applications (web-apps and virtual websites).</li>
+                <li>A Beans server - in which we can include EJB servers - which communicate to remote clients
+              via RMI/AltRMI. </li>
+              </ul>
             </p>
         </section>
         <section name="Packaging of a Server Application">
             <p>
-                Loom application are distributed in a single archive.
+                Loom applications are distributed in a single Server Archive (SAR) file,
+                which is a jar file with a special SAR-INF directory, containing the libraries
+                and the XML configuration files.  The key features of a sar file are:
+              <ul>
+				<li> The server application is entirely contained within one sar file.  
+				</li>
+				<li> Blocks may be packaged in one or more jar files. 
+				</li>
+				<li> The jar files - along with any other libraries upon which the application
+              depends - are placed within the SAR-INF/lib directory.
+				</li>
+				<li>The assembly.xml, config.xml and environment.xml configuration files
+              contained in the root SAR-INF directory.
+				</li>
+              </ul>
             </p>
-            <subsection name="Packaging in terms of blocks">
-                <p>
-                  Loom hosts server applications made up of blocks.  The blocks may depend on libraries
-                  to function correctly.  The blocks are tied together with Assembly instructions and Configured
-                  externally.
-                </p>
-                <p>
-                    <strong>Loom application in block view</strong>
-                </p>
-                <img src="../images/loom-app-block.jpg" alt="Loom App Block"/>
-            </subsection>
-            <subsection name="Packaging in terms of block jar files">
-                <p>
-                  The server application is entirely contained within one "sar" file.  Sar is "Server ARchive".
-                  Each block is a jar file.  The dependant libraries are regular jars (placed
-                  within a directory "SAR-INF/lib" insde the sar file).  The Assembly and configuration instructions
-                  are in xml form and contained within a "SAR-INF" directory inside the sar file.
-                </p>
-                <img src="../images/loom-app-blockjars.jpg" alt="Loom application in block jar view"/>
-            </subsection>
-            <subsection name="FtpServer as a Loom application">
-                <p>
-                  FtpServer (part of the Avalon/Cornerstone project) is distributed in sar form.  Here is a
-                  view of it's blocks.  It has no third party jars that it depends on.
-                </p>
-                <p>
-                    <strong>FtpServer, a real Loom application</strong>
-                </p>
-                <img src="../images/loom-app-ftpserver.jpg" alt="Loom App FtpServer"/>
-            </subsection>
             <p>
-              Notes - Loom does not limit the number of blocks that it allows in a sar file.  We have taksdefs for Apache's Ant
-              tool for making sar files.  See the "Block Developers Guide" (left
-              margin of this page) for more what/how/why.
+              Loom provides an Ant task and a Maven plugin for creating sar files. 
             </p>
         </section>
     </body>
