@@ -29,7 +29,7 @@ import org.xml.sax.InputSource;
  * <a href="package-summary.html#external">package summary</a>.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-10-06 14:10:48 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-14 08:37:18 $
  */
 public final class BlockInfoReader
     extends AbstractLogEnabled
@@ -112,8 +112,6 @@ public final class BlockInfoReader
         }
 
         Configuration configuration = null;
-
-        configuration = info.getChild( "block" );
 
         final ServiceDescriptor[] services = buildServices( info );
 
