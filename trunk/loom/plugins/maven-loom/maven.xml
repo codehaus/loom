@@ -1,36 +1,6 @@
-<project default="main"
-    xmlns:ant="jelly:ant"
-    xmlns:deploy="deploy">
+<project default="build">
 
-    <goal name="main">
-        <attainGoal name="build"/>
-    </goal>
-
-    <goal name="build">
-        <attainGoal name="plugin"/>
-    </goal>
-
-    <goal name="install">
-        <attainGoal name="plugin:install"/>
-        <ant:copy file="${maven.build.dir}/${maven.final.name}.jar"
-            todir="${maven.repo.local}/${pom.groupId}/plugins"/>
-        <ant:delete dir="${maven.home}/plugins/${maven.final.name}.jar"/>
-        <ant:delete dir="${maven.home}/plugins/${maven.final.name}"/>
-        <ant:delete>
-            <ant:fileset dir="${maven.home}/plugins">
-                <ant:include name="${pom.artifactID}-*"/>
-            </ant:fileset>
-        </ant:delete>
-    </goal>
-
-    <goal name="deploy">
-        <attainGoal name="plugin:deploy"/>
-        <ant:property name="artifact" value="${maven.final.name}.jar"/>
-        <deploy:artifact
-            artifact="${maven.build.dir}/${artifact}"
-            type="plugins"
-            assureDirectoryCommand="mkdir -p"
-            siteCommand="cd @deployDirectory@; chmod g+w ${artifact}; chgrp ${maven.remote.group} ${artifact}"/>
-    </goal>
+    <goal name="build" prereqs="plugin:install"/>
+    <goal name="deploy" prereqs="plugin:deploy"/>
 
 </project>
