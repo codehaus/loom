@@ -12,11 +12,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
-import junit.framework.TestCase;
+
 import org.apache.avalon.phoenix.BlockContext;
 import org.apache.avalon.phoenix.metadata.BlockListenerMetaData;
 import org.apache.avalon.phoenix.metadata.BlockMetaData;
 import org.apache.avalon.phoenix.metadata.SarMetaData;
+
+import junit.framework.TestCase;
 import org.codehaus.spice.loggerstore.LoggerStore;
 import org.codehaus.spice.salt.io.FileUtil;
 import org.jcontainer.dna.Configuration;
@@ -31,7 +33,7 @@ import org.xml.sax.InputSource;
  * An basic test case for the LogManager.
  *
  * @author Peter Donald
- * @version $Revision: 1.16 $ $Date: 2003-12-03 10:44:47 $
+ * @version $Revision: 1.17 $ $Date: 2004-02-15 21:45:04 $
  */
 public class LogManagerTestCase
     extends TestCase
@@ -49,7 +51,7 @@ public class LogManagerTestCase
     {
         m_baseDirectory = generateDirectory();
         //Because log4j does not guarentee dir creation ;(
-        final File logDir = new File( generateDirectory(), "logs" );
+        final File logDir = new File( m_baseDirectory, "logs" );
         logDir.mkdirs();
     }
 
@@ -81,10 +83,11 @@ public class LogManagerTestCase
     private void runtTestForConfigFile( final int index )
         throws Exception
     {
-        final Logger hierarchy = createHierarchy( index );
-        runLoggerTest( hierarchy, DEFAULT_LOGFILE );
+        final LoggerStore hierarchy = createHierarchy( index );
+        final Logger rootLogger = hierarchy.getLogger();
+        runLoggerTest( rootLogger, DEFAULT_LOGFILE );
 
-        final Logger childLogger = hierarchy.getChildLogger( "myBlock" );
+        final Logger childLogger = hierarchy.getLogger( "myBlock" );
         runLoggerTest( childLogger, BLOCK_LOGFILE );
     }
 
@@ -99,26 +102,25 @@ public class LogManagerTestCase
     }
 
     private void assertFileGrew( final String logfile,
-                                 long before,
-                                 long after )
+                                 final long before,
+                                 final long after )
     {
-        assertTrue(
-            "Did " +
-            logfile +
-            " file grow?, Before: " +
-            before +
-            ", After: " +
-            after,
-            before < after );
+        assertTrue( "Did " +
+                    logfile +
+                    " file grow?, Before: " +
+                    before +
+                    ", After: " +
+                    after,
+                    before < after );
     }
 
     private long getFileSize( final String filename )
     {
         final File file = new File( m_baseDirectory, filename );
-        StringBuffer sb = new StringBuffer();
+        final StringBuffer sb = new StringBuffer();
         try
         {
-            FileReader fr = new FileReader( file );
+            final FileReader fr = new FileReader( file );
             int c = 0;
             while( c != -1 )
             {
@@ -133,7 +135,7 @@ public class LogManagerTestCase
         return sb.length();
     }
 
-    private Logger createHierarchy( final int index )
+    private LoggerStore createHierarchy( final int index )
         throws Exception
     {
         final Configuration logs = loadConfig( "config" + index + ".xml" );
@@ -141,18 +143,17 @@ public class LogManagerTestCase
         final SarMetaData sarMetaData =
             new SarMetaData( "test",
                              m_baseDirectory,
-                             new BlockMetaData[ 0 ],
-                             new BlockListenerMetaData[ 0 ] );
+                             new BlockMetaData[0],
+                             new BlockListenerMetaData[0] );
         cleanHomeDirectory( sarMetaData );
 
         //make sure directory is created else log4j will fail.
         if( 3 == index )
         {
             final File file =
-                new File(
-                    m_baseDirectory.getAbsolutePath() +
-                    File.separator +
-                    "logs" );
+                new File( m_baseDirectory.getAbsolutePath() +
+                          File.separator +
+                          "logs" );
             file.mkdirs();
         }
 
@@ -167,7 +168,7 @@ public class LogManagerTestCase
                                         sarMetaData.getHomeDirectory(),
                                         sarMetaData.getHomeDirectory(),
                                         context );
-        return store.getLogger();
+        return store;
     }
 
     private void cleanHomeDirectory( final SarMetaData sarMetaData )

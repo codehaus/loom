@@ -8,6 +8,7 @@
         <category name="" log-level="DEBUG">
             <log-target id-ref="default"/>
         </category>
+
         <category name="myBlock" log-level="DEBUG">
             <log-target id-ref="myBlock"/>
         </category>
