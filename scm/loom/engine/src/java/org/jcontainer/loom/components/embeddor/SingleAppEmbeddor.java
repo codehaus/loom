@@ -23,7 +23,7 @@ import org.jcontainer.loom.interfaces.Application;
  * <ul>
  *   <li>application-location = location of application directory or file
  * </ul>
- * Other parameters are inherited from PhoenixEmbeddor.
+ * Other parameters are inherited from Embeddor.
  *
  * @author <a href="colus@isoft.co.kr">Eung-ju Park</a>
  * @author <a href="peter at realityforge.org">Peter Donald</a>

@@ -15,11 +15,10 @@ import org.apache.avalon.framework.logger.Logger;
 import org.realityforge.xmlpolicy.verifier.PolicyVerifier;
 
 /**
- * A simple adapter for verifier to support logging to
- * Phoenixs subsystem.
+ * A simple adapter for verifier to support logging to container subsystems.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-29 04:38:21 $
+ * @version $Revision: 1.2 $ $Date: 2003-08-07 16:28:51 $
  */
 class SarPolicyVerifier
     extends PolicyVerifier
