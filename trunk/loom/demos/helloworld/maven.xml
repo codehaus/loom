@@ -12,4 +12,6 @@
 
     <goal name="deploy" prereqs="loom:deploy"/>
 
+    <goal name="docs" prereqs="build, javadoc, xdoc, pdf"/>
+
 </project>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+  <properties>
+    <title>Documentation Example</title>
+    <author>Author Name</author>
+    <author>Another Author Name</author>
+  </properties>
+  <body>
+    <section name="Examples">
+      <p>
+        Below you can see some basic documentation tags.
+        With these you should be able to create some basic
+        documentation for your project.
+      </p>
+      <p>
+        The external links under Examples in the menu are
+        there to show how to create a non collapsing menu.
+      </p>
+    </section>
+    <section name="Sections">
+      <p>
+        Here is a section.
+      </p>
+      <subsection name="Subsection">
+        <p>
+          Here is a subsection.
+        </p>
+      </subsection>
+    </section>
+    <section name="Source">
+      <subsection name="Java">
+        <source>/**
+ * Print the most important and probably most inspiring
+ * message from many softaware developers' careers.
+ */
+ public static void main( String arguments[] )
+ {
+     System.out.println( "Hello World!" );
+ }</source>
+      </subsection>
+      <subsection name="XML">
+        <source><![CDATA[<?xml version="1.0"?>
+<config>
+    <block-name>
+        <configuration/>
+    </block-name>
+</config>]]></source>
+     </subsection>
+    </section>
+    <section name="Lists">
+      <p>A numbered list</p>
+      <ol>
+        <li>one</li>
+        <li>two</li>
+      </ol>
+      <p>A bulleted list</p>
+      <ul>
+        <li>first</li>
+        <li>second</li>
+      </ul>
+    </section>
+    <section name="Tables">
+      <table name="Hello">
+        <tr>
+          <td>Col 1, Row 1</td><td>Col 2, Row 1</td>
+        </tr>
+        <tr>
+          <td>Col 1, Row 2</td><td>Col 2, Row 2</td>
+        </tr>
+      </table>
+    </section>
+  </body>
+</document>

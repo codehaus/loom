@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="HelloWorld">
+    <title>HelloWorld documentation example</title>
+    <body>
+        <links>
+            <item href="http://codehaus.org" name="Codehaus"/>
+            <item href="http://loom.codehaus.org" name="Loom"/>
+            <item href="demo-helloworld.pdf" img="images/pdf.gif"/>
+        </links>
+        <menu name="Main">
+            <item href="intro.html" name="Introduction"/>
+        </menu>
+        <menu name="Some examples">
+            <item href="examples.html" name="Examples"/>
+            <item href="http://www.codehaus.org" name="Codehaus" collapse="false">
+                <item href="http://jcontainer.codehaus.org" name="JContainer"/>
+                <item href="http://dna.codehaus.org" name="DNA"/>
+                <item href="http://loom.codehaus.org" name="Loom"/>
+                <item href="http://spice.codehaus.org" name="Spice"/>
+            </item>
+        </menu>
+        <search/>
+    </body>
+</project>
