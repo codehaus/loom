@@ -30,12 +30,7 @@ rm -Rf ~/.maven/repository/$mavenRepo/jars
 rm -f $logfile
 maven | tee $logfile
 
-# See if the "compiling" file is there. If it is, compilation
-# failed.
-if grep "BUILD SUCCESSFUL" $logfile ; then
-      echo "$name rebuild passed, emailing list"
-      tail $logfile | mail -s "[PASS] $name compilation." $mailto
-else
+if grep "BUILD FAILED" $logfile ; then
       echo "$name clean failed, emailing list"
       cat $logfile | mail -s "[FAIL] $name compilation." $mailto
 fi
