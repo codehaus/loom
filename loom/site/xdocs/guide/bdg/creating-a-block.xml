@@ -50,21 +50,20 @@
                 sample on how to use the task to generate metadata.
             </p>
             <source>
-                &lt;taskdef
-    name="generatemeta"
-    classname="org.codehaus.loom.info.GenerateLoomDescriptorsTask"&gt;
-                &lt;classpath refid="maven-sar.class.path" /&gt;
-                &lt;classpath refid="dna-tools.class.path" /&gt;
-                &lt;classpath refid="metaclass.class.path" /&gt;
-                &lt;classpath refid="qdox.class.path" /&gt;
-                &lt;/taskdef&gt;
+&lt;taskdef
+  name="generatemeta"
+  classname="org.codehaus.loom.info.GenerateLoomDescriptorsTask"&gt;
+    &lt;classpath refid="maven-sar.class.path" /&gt;
+    &lt;classpath refid="dna-tools.class.path" /&gt;
+    &lt;classpath refid="metaclass.class.path" /&gt;
+    &lt;classpath refid="qdox.class.path" /&gt;
+&lt;/taskdef&gt;
 
-                &lt;generatemeta dest="target/classes"&gt;
-                &lt;fileset dir="src/java"&gt;
-                &lt;include name="**/*.java"/&gt;
-                &lt;/fileset&gt;
-                &lt;/generatemeta&gt;
-            </source>
+&lt;generatemeta dest="target/classes"&gt;
+    &lt;fileset dir="src/java"&gt;
+        &lt;include name="**/*.java"/&gt;
+    &lt;/fileset&gt;
+&lt;/generatemeta&gt;</source>
         </section>
         <section name="Create the jar package">
             <p>
