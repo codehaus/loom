@@ -24,14 +24,15 @@ import org.jcontainer.loom.tools.metadata.ComponentMetaData;
 import org.jcontainer.loom.tools.metadata.DependencyMetaData;
 import org.jcontainer.loom.tools.metadata.MetaDataBuilder;
 import org.jcontainer.loom.tools.metadata.PartitionMetaData;
+import org.jcontainer.loom.tools.LoomToolConstants;
 
 /**
- * Assemble a {@link org.jcontainer.loom.tools.metadata.PartitionMetaData} object from a Configuration
+ * Assemble a {@link PartitionMetaData} object from a Configuration
  * object. The Configuration object represents the assembly descriptor
  * and is in the format specified for <tt>assembly.xml</tt> files.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-29 04:38:21 $
+ * @version $Revision: 1.2 $ $Date: 2003-07-07 13:20:11 $
  */
 public class Assembler
     extends AbstractLogEnabled
@@ -41,7 +42,7 @@ public class Assembler
         ResourceManager.getPackageResources( Assembler.class );
 
     /**
-     * Create a {@link org.jcontainer.loom.tools.metadata.PartitionMetaData} object based on specified
+     * Create a {@link PartitionMetaData} object based on specified
      * name and assembly configuration. This implementation takes two
      * parameters. {@link ContainerConstants#ASSEMBLY_NAME} specifies
      * the name of the assembly and
@@ -65,7 +66,7 @@ public class Assembler
     }
 
     /**
-     * Create a {@link org.jcontainer.loom.tools.metadata.PartitionMetaData} object based on specified
+     * Create a {@link PartitionMetaData} object based on specified
      * name and assembly configuration.
      *
      * @param name the name of Sar
@@ -81,28 +82,33 @@ public class Assembler
         final Configuration[] blockConfig = assembly.getChildren( "block" );
         final ComponentMetaData[] blocks = buildBlocks( blockConfig, config );
         final PartitionMetaData blockPartition =
-            new PartitionMetaData( ContainerConstants.BLOCK_PARTITION,
-                                   new String[]{ContainerConstants.LISTENER_PARTITION},
+            new PartitionMetaData( LoomToolConstants.BLOCK_PARTITION,
+                                   new String[]{LoomToolConstants.LISTENER_PARTITION},
                                    PartitionMetaData.EMPTY_SET,
-                                   blocks, Attribute.EMPTY_SET );
+                                   blocks,
+                                   Attribute.EMPTY_SET );
 
         final Configuration[] listenerConfig = assembly.getChildren( "listener" );
         final ComponentMetaData[] listeners = buildBlockListeners( listenerConfig, config );
         final PartitionMetaData listenerPartition =
-            new PartitionMetaData( ContainerConstants.LISTENER_PARTITION,
+            new PartitionMetaData( LoomToolConstants.LISTENER_PARTITION,
                                    new String[ 0 ],
                                    PartitionMetaData.EMPTY_SET,
-                                   listeners, Attribute.EMPTY_SET );
+                                   listeners,
+                                   Attribute.EMPTY_SET );
 
         final PartitionMetaData[] partitions =
             new PartitionMetaData[]{blockPartition, listenerPartition};
 
-        return new PartitionMetaData( name, new String[ 0 ], partitions,
-                                      new ComponentMetaData[ 0 ], Attribute.EMPTY_SET );
+        return new PartitionMetaData( name,
+                                      new String[ 0 ],
+                                      partitions,
+                                      ComponentMetaData.EMPTY_SET,
+                                      Attribute.EMPTY_SET );
     }
 
     /**
-     * Create an array of {@link org.jcontainer.loom.tools.metadata.ComponentMetaData} objects to represent
+     * Create an array of {@link ComponentMetaData} objects to represent
      * the &lt;block .../&gt; sections in <tt>assembly.xml</tt>.
      *
      * @param blocks the list of Configuration objects for blocks
@@ -123,7 +129,7 @@ public class Assembler
     }
 
     /**
-     * Create a single {@link org.jcontainer.loom.tools.metadata.ComponentMetaData} object to represent
+     * Create a single {@link ComponentMetaData} object to represent
      * specified &lt;block .../&gt; section.
      *
      * @param block the Configuration object for block
@@ -170,7 +176,7 @@ public class Assembler
     }
 
     /**
-     * Create an array of {@link org.jcontainer.loom.tools.metadata.ComponentMetaData} objects to represent
+     * Create an array of {@link ComponentMetaData} objects to represent
      * the &lt;listener .../&gt; sections in <tt>assembly.xml</tt>.
      *
      * @param listenerConfigs the list of Configuration objects for listenerConfigs
@@ -192,7 +198,7 @@ public class Assembler
     }
 
     /**
-     * Create a {@link org.jcontainer.loom.tools.metadata.ComponentMetaData} object to represent
+     * Create a {@link ComponentMetaData} object to represent
      * the specified &lt;listener .../&gt; section.
      *
      * @param listener the Configuration object for listener
@@ -209,8 +215,10 @@ public class Assembler
             final String classname = listener.getAttribute( "class" );
             final Configuration configuration = config.getChild( name );
             return new ComponentMetaData( name, classname,
-                                          new DependencyMetaData[ 0 ],
-                                          null, configuration, Attribute.EMPTY_SET );
+                                          DependencyMetaData.EMPTY_SET,
+                                          null,
+                                          configuration,
+                                          Attribute.EMPTY_SET );
         }
         catch( final ConfigurationException ce )
         {
@@ -243,6 +251,6 @@ public class Assembler
             dependencies.add( new DependencyMetaData( key, requiredName, alias, Attribute.EMPTY_SET ) );
         }
 
-        return (DependencyMetaData[])dependencies.toArray( new DependencyMetaData[ 0 ] );
+        return (DependencyMetaData[])dependencies.toArray( new DependencyMetaData[ dependencies.size() ] );
     }
 }
