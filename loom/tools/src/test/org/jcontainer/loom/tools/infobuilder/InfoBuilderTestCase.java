@@ -23,7 +23,6 @@ import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
-import org.jcontainer.loom.tools.qdox.DefaultInfoBuilder;
 import org.jcontainer.loom.tools.qdox.LegacyInfoBuilder;
 import org.realityforge.metaclass.model.Attribute;
 
@@ -31,7 +30,7 @@ import org.realityforge.metaclass.model.Attribute;
  * Abstract class which TestCases can extend.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.17 $ $Date: 2003-10-06 14:10:49 $
+ * @version $Revision: 1.18 $ $Date: 2003-10-11 08:41:56 $
  */
 public class InfoBuilderTestCase
     extends TestCase
@@ -42,9 +41,6 @@ public class InfoBuilderTestCase
     private static final String BASE_DIR = '/' + BASE_PACKAGE.replace( '.', '/' );
 
     private static final String COMPONENT2 = BASE_PACKAGE + "component2";
-
-    private static final String SOURCE1 = BASE_DIR + "QDoxComponent1.java";
-    private static final String SOURCE1_INFO = BASE_PACKAGE + "QDoxComponent1";
 
     private static final String LSOURCE1 = BASE_DIR + "QDoxLegacyComponent1.java";
     private static final String LSOURCE1_INFO = BASE_PACKAGE + "QDoxLegacyComponent1";
@@ -88,19 +84,6 @@ public class InfoBuilderTestCase
         InfoAssert.assertEqualInfos( " Dummy ComponentInfo written out and read back " +
                                      "in again should be equal",
                                      info,
-                                     actual );
-    }
-
-    public void testQDoxScan()
-        throws Exception
-    {
-        final ComponentInfo expected = loadComponentInfo( SOURCE1_INFO );
-        final JavaClass javaClass = loadJavaSource( SOURCE1 );
-        final DefaultInfoBuilder infoBuilder = new DefaultInfoBuilder();
-        final ComponentInfo actual = infoBuilder.buildComponentInfo( javaClass );
-
-        InfoAssert.assertEqualInfos( " ComponentInfo generated from source file",
-                                     expected,
                                      actual );
     }
 
