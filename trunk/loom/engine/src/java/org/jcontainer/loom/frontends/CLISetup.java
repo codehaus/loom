@@ -88,6 +88,7 @@ package org.jcontainer.loom.frontends;
 
 import java.util.List;
 import java.util.Properties;
+
 import org.codehaus.spice.salt.i18n.ResourceManager;
 import org.codehaus.spice.salt.i18n.Resources;
 import org.realityforge.cli.CLArgsParser;
@@ -111,6 +112,7 @@ class CLISetup
     private static final int LOG_FILE_OPT = 'l';
     private static final int PERSISTENT_OPT = 'p';
     private static final int CONFIGFILE_OPT = 'f';
+    private static final int STDOUT_OPT = 's';
 
     ///Parameters created by parsing CLI options
     private final Properties m_parameters = new Properties();
@@ -129,8 +131,7 @@ class CLISetup
     private void usage( final CLOptionDescriptor[] options )
     {
         System.err.println( m_command );
-        System.err.println(
-            "\t" + REZ.getString( "cli.desc.available.header" ) );
+        System.err.println( "\t" + REZ.getString( "cli.desc.available.header" ) );
         System.err.println( CLUtil.describeOptions( options ) );
     }
 
@@ -139,32 +140,37 @@ class CLISetup
      */
     private CLOptionDescriptor[] createCLOptions()
     {
-        final CLOptionDescriptor options[] = new CLOptionDescriptor[ 5 ];
-        options[ 0 ] =
-        new CLOptionDescriptor( "help",
-                                CLOptionDescriptor.ARGUMENT_DISALLOWED,
-                                HELP_OPT,
-                                REZ.getString( "cli.opt.help.desc" ) );
-        options[ 1 ] =
-        new CLOptionDescriptor( "log-file",
-                                CLOptionDescriptor.ARGUMENT_REQUIRED,
-                                LOG_FILE_OPT,
-                                REZ.getString( "cli.opt.log-file.desc" ) );
-        options[ 2 ] =
-        new CLOptionDescriptor( "debug-init",
-                                CLOptionDescriptor.ARGUMENT_DISALLOWED,
-                                DEBUG_LOG_OPT,
-                                REZ.getString( "cli.opt.debug-init.desc" ) );
-        options[ 3 ] =
-        new CLOptionDescriptor( "persistent",
-                                CLOptionDescriptor.ARGUMENT_DISALLOWED,
-                                PERSISTENT_OPT,
-                                REZ.getString( "cli.opt.persistent.desc" ) );
-        options[ 4 ] =
-        new CLOptionDescriptor( "configfile",
-                                CLOptionDescriptor.ARGUMENT_REQUIRED,
-                                CONFIGFILE_OPT,
-                                REZ.getString( "cli.opt.configfile.desc" ) );
+        final CLOptionDescriptor options[] = new CLOptionDescriptor[6];
+        options[0] =
+            new CLOptionDescriptor( "help",
+                                    CLOptionDescriptor.ARGUMENT_DISALLOWED,
+                                    HELP_OPT,
+                                    REZ.getString( "cli.opt.help.desc" ) );
+        options[1] =
+            new CLOptionDescriptor( "log-file",
+                                    CLOptionDescriptor.ARGUMENT_REQUIRED,
+                                    LOG_FILE_OPT,
+                                    REZ.getString( "cli.opt.log-file.desc" ) );
+        options[2] =
+            new CLOptionDescriptor( "debug-init",
+                                    CLOptionDescriptor.ARGUMENT_DISALLOWED,
+                                    DEBUG_LOG_OPT,
+                                    REZ.getString( "cli.opt.debug-init.desc" ) );
+        options[3] =
+            new CLOptionDescriptor( "persistent",
+                                    CLOptionDescriptor.ARGUMENT_DISALLOWED,
+                                    PERSISTENT_OPT,
+                                    REZ.getString( "cli.opt.persistent.desc" ) );
+        options[4] =
+            new CLOptionDescriptor( "configfile",
+                                    CLOptionDescriptor.ARGUMENT_REQUIRED,
+                                    CONFIGFILE_OPT,
+                                    REZ.getString( "cli.opt.configfile.desc" ) );
+        options[5] =
+            new CLOptionDescriptor( "std-out",
+                                    CLOptionDescriptor.ARGUMENT_DISALLOWED,
+                                    STDOUT_OPT,
+                                    REZ.getString( "cli.opt.configfile.stdout" ) );
         return options;
     }
 
@@ -224,6 +230,10 @@ class CLISetup
                 case CONFIGFILE_OPT:
                     m_parameters.setProperty( CLIMain.CONFIGFILE,
                                               option.getArgument() );
+                    break;
+
+                case STDOUT_OPT:
+                    m_parameters.setProperty( "log-stdout", "true" );
                     break;
             }
         }

@@ -92,11 +92,14 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Properties;
+
 import org.apache.log.Hierarchy;
 import org.apache.log.LogTarget;
 import org.apache.log.Priority;
 import org.apache.log.format.ExtendedPatternFormatter;
 import org.apache.log.output.io.FileTarget;
+import org.apache.log.output.io.StreamTarget;
+
 import org.codehaus.spice.salt.i18n.ResourceManager;
 import org.codehaus.spice.salt.i18n.Resources;
 import org.codehaus.spice.salt.lang.ExceptionUtil;
@@ -148,7 +151,7 @@ public final class CLIMain
     private Logger m_logger;
 
     private File m_home;
-    private FileTarget m_logTarget;
+    private StreamTarget m_logTarget;
 
     /**
      * Main entry point.
@@ -172,8 +175,7 @@ public final class CLIMain
             }
 
             System.out.println();
-            System.out.println(
-                ContainerConstants.SOFTWARE + " " + ContainerConstants.VERSION );
+            System.out.println( ContainerConstants.SOFTWARE + " " + ContainerConstants.VERSION );
             System.out.println();
 
             final Properties properties = setup.getParameters();
@@ -227,7 +229,7 @@ public final class CLIMain
 
         // If an Observer is present in the data object, then add it as an observer for
         //  m_observable
-        Observer observer = (Observer)data.get( Observer.class.getName() );
+        final Observer observer = (Observer)data.get( Observer.class.getName() );
         if( null != observer )
         {
             addObserver( observer );
@@ -270,18 +272,16 @@ public final class CLIMain
         try
         {
             final String configFilename = properties.getProperty( CONFIGFILE );
-            final Configuration original = ConfigurationUtil.buildFromXML(
-                new InputSource( configFilename ) );
+            final Configuration original = ConfigurationUtil.buildFromXML( new InputSource( configFilename ) );
             final File home = (File)data.get( HOME_DIR );
             final Properties params = new Properties();
             params.setProperty( "loom.home", home.getAbsolutePath() );
             final Configuration root = ConfigUtil.expandValues( original,
                                                                 params );
             final Configuration configuration = root.getChild( "embeddor" );
-            final String embeddorClassname = configuration.getAttribute(
-                "class" );
+            final String embeddorClassname = configuration.getAttribute( "class" );
             m_embeddor =
-            (Embeddor)Class.forName( embeddorClassname ).newInstance();
+                (Embeddor)Class.forName( embeddorClassname ).newInstance();
 
             m_logger = createLogger( properties );
             ContainerUtil.enableLogging( m_embeddor, m_logger );
@@ -312,10 +312,9 @@ public final class CLIMain
     }
 
     /**
-     * Uses {@link org.apache.log.Hierarchy} to create a new logger using "Loom"
-     * as its category, DEBUG as its priority and the log-destination from
-     * Parameters as its destination. TODO: allow configurable priorities and
-     * multiple logtargets.
+     * Uses {@link org.apache.log.Hierarchy} to create a new logger using "Loom" as its category, DEBUG as its priority
+     * and the log-destination from Parameters as its destination. TODO: allow configurable priorities and multiple
+     * logtargets.
      */
     private Logger createLogger( final Properties properties )
         throws Exception
@@ -325,10 +324,17 @@ public final class CLIMain
                                     m_home + DEFAULT_LOG_FILE );
         final String logPriority =
             properties.getProperty( "log-priority", "INFO" );
-        final ExtendedPatternFormatter formatter = new ExtendedPatternFormatter(
-            DEFAULT_FORMAT );
-        final File file = new File( logDestination );
-        m_logTarget = new FileTarget( file, false, formatter );
+        final ExtendedPatternFormatter formatter = new ExtendedPatternFormatter( DEFAULT_FORMAT );
+
+        if( "true".equals( properties.getProperty( "log-stdout", "false" ) ) )
+        {
+            m_logTarget = new StreamTarget( System.out, formatter );
+        }
+        else
+        {
+            final File file = new File( logDestination );
+            m_logTarget = new FileTarget( file, false, formatter );
+        }
 
         //Create an anonymous hierarchy so no other
         //components can get access to logging hierarchy
@@ -343,8 +349,7 @@ public final class CLIMain
     /**
      * Shut the embeddor down.
      *
-     * Note must be public so that the Frontend can shut it down via
-     * reflection.
+     * Note must be public so that the Frontend can shut it down via reflection.
      */
     public synchronized void shutdown()
     {
@@ -393,8 +398,8 @@ public final class CLIMain
         if( null != m_logger )
         {
             trace =
-            ExceptionUtil.prettyPrintStackTrace( throwable,
-                                                 "org.jcontainer.loom.components" );
+                ExceptionUtil.prettyPrintStackTrace( throwable,
+                                                     "org.jcontainer.loom.components" );
             m_logger.error( throwable.getMessage(), throwable );
         }
         else
