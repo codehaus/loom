@@ -1,0 +1,25 @@
+<project default="main"
+	xmlns:ant="jelly:ant"
+    xmlns:maven="jelly:maven">
+
+  <goal name="main">
+    <attainGoal name="build"/>
+  </goal>
+
+  <goal name="build">
+    <maven:maven
+        descriptor="${basedir}/plugins/project.xml"
+        goals="plugins-install"
+        ignoreFailures="false"/>
+    <attainGoal name="jar:jar"/>       
+  </goal>
+
+  <goal name="clean-all">
+    <maven:maven
+        descriptor="${basedir}/plugins/project.xml"
+        goals="plugins-clean"
+        ignoreFailures="false"/>
+    <attainGoal name="clean"/>
+  </goal>
+
+</project>
