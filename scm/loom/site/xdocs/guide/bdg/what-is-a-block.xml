@@ -5,7 +5,7 @@
     </properties>
     <body>
         <section name="Introduction">
-            <p>In Avalon Loom, there are three component layers:</p>
+            <p>In Loom, there are three component layers:</p>
             <ul>
                 <li>Blocks</li>
                 <li>Components</li>
