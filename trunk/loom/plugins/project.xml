@@ -2,13 +2,13 @@
 <project>
     <extend>${basedir}/../project.xml</extend>
     <name>Loom Plugins</name>
-    <currentVersion>1.0-beta1-dev</currentVersion>
     <groupId>loom</groupId>
+    <currentVersion>1.0-rc1</currentVersion>
 
     <distributionDirectory>/home/projects/loom/dist</distributionDirectory>
     <distributionSite>dist.codehaus.org</distributionSite>
     <siteDirectory>/home/projects/loom/public_html/plugins</siteDirectory>
-    <siteAddress>loom.codehays.org</siteAddress>
+    <siteAddress>loom.codehaus.org</siteAddress>
 
     <build>
         <sourceDirectory>${basedir}/src/java</sourceDirectory>
