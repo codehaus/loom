@@ -16,6 +16,7 @@ import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.tools.LoomToolConstants;
 import org.jcontainer.loom.tools.factory.ComponentBundle;
 import org.jcontainer.loom.tools.factory.ComponentFactory;
+import org.jcontainer.loom.tools.factory.DefaultComponentFactory;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
@@ -28,7 +29,7 @@ import org.jcontainer.loom.tools.profile.ProfileBuilder;
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.10 $ $Date: 2003-10-15 02:04:50 $
+ * @version $Revision: 1.11 $ $Date: 2003-10-16 00:20:28 $
  */
 public class PhoenixProfileBuilder
     extends AbstractLogEnabled
@@ -48,7 +49,7 @@ public class PhoenixProfileBuilder
         final PartitionMetaData metaData = m_assembler.buildAssembly( parameters );
         final ClassLoader classLoader =
             (ClassLoader)parameters.get( ContainerConstants.ASSEMBLY_CLASSLOADER );
-        final ComponentFactory factory = new PhoenixComponentFactory( classLoader );
+        final ComponentFactory factory = new DefaultComponentFactory( classLoader );
         setupLogger( factory, "factory" );
 
         return assembleSarProfile( metaData, factory );
