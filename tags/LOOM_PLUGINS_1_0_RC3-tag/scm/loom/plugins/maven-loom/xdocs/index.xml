@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<document>
+    <properties>
+        <title>Maven Loom Plugin</title>
+        <author>Mauro Talevi</author>
+    </properties>
+
+    <body>
+        <section name="Maven Loom Plugin">
+            <p>
+                Go to the <a href="http://loom.codehaus.org/Maven+Loom+usage">
+                Maven Loom</a> page for information about the Maven Loom plugin.
+            </p>
+        </section>
+    </body>
+</document>

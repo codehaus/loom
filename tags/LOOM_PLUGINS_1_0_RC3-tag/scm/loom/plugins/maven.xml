@@ -1,0 +1,66 @@
+<project default="plugins:build"  xmlns:artifact="artifact" xmlns:maven="jelly:maven">
+
+    <goal name="build" prereqs="plugin:install">
+		<copy todir="${maven.repo.local}/${pom.artifactDirectory}/plugins"
+			  file="${maven.build.dir}/${pom.artifactId}-${pom.currentVersion}.jar" verbose="yes"/>
+    </goal>
+    
+    <goal name="deploy" prereqs="plugin:install">
+		 <artifact:deploy
+		 		artifact="${maven.build.dir}/${maven.final.name}.jar"
+      		  	type="plugin"
+      		  	project="${pom}"/>
+    </goal>
+
+    <goal name="plugins:build"
+        description="Build all plugins">
+        <maven:reactor
+            basedir="${basedir}"
+            includes="*/project.xml"
+            goals="build"
+            banner="Building"
+            ignoreFailures="true"/>
+    </goal>
+
+    <goal
+        name="plugins:install"
+        description="Installs each plugin into plugins dir">
+        <maven:reactor
+            basedir="${basedir}"
+            includes="*/project.xml"
+            goals="install"
+            banner="Installing"
+            ignoreFailures="true"/>
+    </goal>
+
+    <goal name="plugins:deploy"
+        description="Deploys each plugin">
+        <maven:reactor
+            basedir="${basedir}"
+            includes="*/project.xml"
+            goals="deploy"
+            banner="Deploying"
+            ignoreFailures="true"/>
+    </goal>
+
+    <goal name="plugins:clean"
+        description="Cleans each plugin">
+        <maven:reactor
+            basedir="${basedir}"
+            includes="*/project.xml"
+            goals="clean:clean"
+            banner="Cleaning"
+            ignoreFailures="false"/>
+    </goal>
+
+    <goal name="plugins:docs"
+        description="Builds each plugin documentation">
+        <maven:reactor
+            basedir="${basedir}"
+            includes="*/project.xml"
+            goals="xdoc"
+            banner="Generating Docs"
+            ignoreFailures="false"/>
+    </goal>
+
+</project>
