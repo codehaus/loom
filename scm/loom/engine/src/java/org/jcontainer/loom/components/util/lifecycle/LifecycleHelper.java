@@ -84,7 +84,7 @@
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-package org.jcontainer.loom.tools.lifecycle;
+package org.jcontainer.loom.components.util.lifecycle;
 
 import org.apache.avalon.framework.activity.Disposable;
 import org.apache.avalon.framework.activity.Initializable;
@@ -105,8 +105,8 @@ import org.apache.avalon.framework.service.Serviceable;
 import org.apache.excalibur.instrument.InstrumentManageable;
 import org.apache.excalibur.instrument.InstrumentManager;
 import org.apache.excalibur.instrument.Instrumentable;
-import org.jcontainer.loom.tools.lifecycle.LifecycleException;
 import org.jcontainer.dna.AbstractLogEnabled;
+import org.jcontainer.loom.interfaces.LoomException;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
 
@@ -148,13 +148,13 @@ public class LifecycleHelper
      * @param entry the entry representing object
      * @param provider the resource provider
      * @return the newly created component
-     * @throws LifecycleException if an error occurs when the component passes
+     * @throws LoomException if an error occurs when the component passes
      *     through a specific lifecycle stage
      */
     public Object startup( final String name,
                            final Object entry,
                            final ResourceProvider provider )
-        throws LifecycleException
+        throws LoomException
     {
         int stage = 0;
         try
@@ -274,11 +274,11 @@ public class LifecycleHelper
      *
      * @param name the name of the component
      * @param object the component to shutdown
-     * @throws LifecycleException if unable to process component
+     * @throws LoomException if unable to process component
      */
     public void shutdown( final String name,
                           final Object object )
-        throws LifecycleException
+        throws LoomException
     {
         //Stage at which failure occured
         int stage = 0;
@@ -374,12 +374,12 @@ public class LifecycleHelper
      * @param name the name of block that caused failure
      * @param stage the stage
      * @param t the exception thrown
-     * @throws LifecycleException containing error
+     * @throws LoomException containing error
      */
     private void fail( final String name,
                        final int stage,
                        final Throwable t )
-        throws LifecycleException
+        throws LoomException
     {
         //final String reason = t.getMessage();
         final String reason = t.toString();
@@ -388,6 +388,6 @@ public class LifecycleHelper
                         name,
                         new Integer( stage ), reason );
         getLogger().error( message );
-        throw new LifecycleException( message, t );
+        throw new LoomException( message, t );
     }
 }

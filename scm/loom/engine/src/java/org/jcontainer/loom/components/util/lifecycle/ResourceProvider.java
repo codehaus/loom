@@ -84,7 +84,7 @@
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-package org.jcontainer.loom.tools.lifecycle;
+package org.jcontainer.loom.components.util.lifecycle;
 
 import org.apache.avalon.framework.component.ComponentManager;
 import org.apache.avalon.framework.configuration.Configuration;
@@ -99,7 +99,7 @@ import org.apache.excalibur.instrument.InstrumentManager;
  * are aquired.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-09-02 04:37:29 $
+ * @version $Revision: 1.1 $ $Date: 2003-10-16 05:40:46 $
  */
 public interface ResourceProvider
 {
@@ -108,7 +108,7 @@ public interface ResourceProvider
      *
      * @param entry the entry
      * @return the new object
-     * @throws Exception if unable to create resource
+     * @throws java.lang.Exception if unable to create resource
      */
     Object createObject( Object entry )
         throws Exception;
@@ -118,7 +118,7 @@ public interface ResourceProvider
      *
      * @param entry the entry
      * @return a new Logger for component
-     * @throws Exception if unable to create resource
+     * @throws java.lang.Exception if unable to create resource
      */
     Logger createLogger( Object entry )
         throws Exception;
@@ -128,7 +128,7 @@ public interface ResourceProvider
      *
      * @param entry the entry
      * @return a new Context for component
-     * @throws Exception if unable to create resource
+     * @throws java.lang.Exception if unable to create resource
      */
     Context createContext( Object entry )
         throws Exception;
@@ -138,7 +138,7 @@ public interface ResourceProvider
      *
      * @param entry the entry
      * @return a new ComponentManager for component
-     * @throws Exception if unable to create resource
+     * @throws java.lang.Exception if unable to create resource
      */
     ComponentManager createComponentManager( Object entry )
         throws Exception;
@@ -148,7 +148,7 @@ public interface ResourceProvider
      *
      * @param entry the entry
      * @return a new ServiceManager for component
-     * @throws Exception if unable to create resource
+     * @throws java.lang.Exception if unable to create resource
      */
     ServiceManager createServiceManager( Object entry )
         throws Exception;
@@ -158,7 +158,7 @@ public interface ResourceProvider
      *
      * @param entry the entry
      * @return a new Configuration object for component
-     * @throws Exception if unable to create resource
+     * @throws java.lang.Exception if unable to create resource
      */
     Configuration createConfiguration( Object entry )
         throws Exception;
@@ -168,7 +168,7 @@ public interface ResourceProvider
      *
      * @param entry the entry
      * @return a new Parameters object for component
-     * @throws Exception if unable to create resource
+     * @throws java.lang.Exception if unable to create resource
      */
     Parameters createParameters( Object entry )
         throws Exception;
@@ -178,7 +178,7 @@ public interface ResourceProvider
      *
      * @param entry the entry
      * @return a new InstrumentManager object for component
-     * @throws Exception if unable to create resource
+     * @throws java.lang.Exception if unable to create resource
      */
     InstrumentManager createInstrumentManager( Object entry )
         throws Exception;
@@ -188,7 +188,7 @@ public interface ResourceProvider
      *
      * @param entry the entry
      * @return the String to use as the instrumentable name
-     * @throws Exception if unable to create resource
+     * @throws java.lang.Exception if unable to create resource
      */
     String createInstrumentableName( Object entry )
         throws Exception;
