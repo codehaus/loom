@@ -34,7 +34,7 @@ import org.realityforge.xmlpolicy.metadata.PolicyMetaData;
  * PolicyMetaData.
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-06-05 09:40:38 $
+ * @version $Revision: 1.5 $ $Date: 2003-06-05 22:39:12 $
  */
 public class PolicyBuilder
 {
@@ -161,18 +161,11 @@ public class PolicyBuilder
         final String actions = metaData.getAction();
         final String signedBy = metaData.getSignedBy();
         final String keyStoreName = metaData.getKeyStore();
+        final String target = metaData.getTarget();
 
-        String target = metaData.getTarget();
         final Certificate[] signers =
             getSigners( signedBy, keyStoreName, keyStores );
-        try
-        {
-            return createPermission( type, target, actions, signers );
-        }
-        catch( final Exception e )
-        {
-            throw new Exception( e.getMessage() );
-        }
+        return createPermission( type, target, actions, signers );
     }
 
     /**
@@ -282,7 +275,7 @@ public class PolicyBuilder
      * @throws Exception if unable to create or load keystore
      */
     protected KeyStore createKeyStore( final String type,
-                                           final URL url )
+                                       final URL url )
         throws Exception
     {
         final KeyStore keyStore = KeyStore.getInstance( type );
