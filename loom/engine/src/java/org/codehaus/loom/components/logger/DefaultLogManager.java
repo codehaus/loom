@@ -99,10 +99,10 @@ import org.apache.avalon.framework.context.Context;
 import org.apache.avalon.framework.context.DefaultContext;
 import org.apache.avalon.framework.logger.Logger;
 import org.apache.avalon.phoenix.BlockContext;
-import org.codehaus.loom.components.util.ConfigurationConverter;
 import org.codehaus.loom.components.util.ResourceUtil;
 import org.codehaus.loom.interfaces.LogManager;
 import org.codehaus.spice.alchemist.logger.LoggerAlchemist;
+import org.codehaus.spice.alchemist.configuration.ConfigurationAlchemist;
 import org.codehaus.spice.configkit.PropertyExpander;
 import org.codehaus.spice.configkit.ResolverFactory;
 import org.codehaus.spice.loggerstore.LoggerStore;
@@ -286,7 +286,7 @@ public class DefaultLogManager
                 config.put( Context.class.getName(),
                             new DefaultContext( map ) );
                 config.put( Configuration.class.getName(),
-                            ConfigurationConverter.toConfiguration( logs ) );
+                            ConfigurationAlchemist.toAvalonConfiguration( logs ) );
                 return loggerManager.createLoggerStore( config );
             }
             else if( version.equals( "1.1" ) )
@@ -298,7 +298,7 @@ public class DefaultLogManager
                 config.put( Context.class.getName(),
                             new DefaultContext( normalisedMap ) );
                 config.put( Configuration.class.getName(),
-                            ConfigurationConverter.toConfiguration( logs ) );
+                            ConfigurationAlchemist.toAvalonConfiguration( logs ) );
                 return loggerManager.createLoggerStore( config );
             }
             else if( version.equals( "log4j" ) )

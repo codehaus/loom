@@ -15,7 +15,8 @@ import org.apache.avalon.framework.configuration.DefaultConfiguration;
  * objects.
  *
  * @author Peter Donald
- * @version $Revision: 1.2 $ $Date: 2004-05-01 12:48:33 $
+ * @version $Revision: 1.3 $ $Date: 2004-06-20 17:46:56 $
+ * @deprecated Use org.codehaus.spice.alchemist.configuration.ConfigurationAlchemist
  */
 public class ConfigurationConverter
 {

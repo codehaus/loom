@@ -103,7 +103,6 @@ import org.apache.avalon.framework.service.DefaultServiceManager;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.excalibur.instrument.InstrumentManager;
 import org.codehaus.dna.AbstractLogEnabled;
-import org.codehaus.loom.components.util.ConfigurationConverter;
 import org.codehaus.loom.components.util.info.ComponentInfo;
 import org.codehaus.loom.components.util.info.DependencyDescriptor;
 import org.codehaus.loom.components.util.lifecycle.ResourceProvider;
@@ -111,12 +110,13 @@ import org.codehaus.loom.components.util.metadata.ComponentTemplate;
 import org.codehaus.loom.components.util.metadata.DependencyDirective;
 import org.codehaus.loom.interfaces.Application;
 import org.codehaus.loom.interfaces.ApplicationContext;
+import org.codehaus.spice.alchemist.configuration.ConfigurationAlchemist;
 
 /**
  * The accessor used to access resources for a particular Block or Listener.
  *
  * @author Peter Donald
- * @version $Revision: 1.2 $ $Date: 2004-05-01 12:48:33 $
+ * @version $Revision: 1.3 $ $Date: 2004-06-20 17:46:56 $
  */
 class BlockResourceProvider
     extends AbstractLogEnabled
@@ -364,7 +364,7 @@ class BlockResourceProvider
         throws Exception
     {
         final ComponentTemplate template = getBlockEntry( entry ).getTemplate();
-        return ConfigurationConverter.toConfiguration(
+        return ConfigurationAlchemist.toAvalonConfiguration(
             template.getConfiguration() );
     }
 

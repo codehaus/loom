@@ -98,11 +98,11 @@ import org.apache.avalon.framework.context.DefaultContext;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.avalon.framework.service.DefaultServiceManager;
 import org.apache.avalon.framework.service.ServiceManager;
-import org.codehaus.loom.components.util.ConfigurationConverter;
 import org.codehaus.loom.components.util.factory.ComponentFactory;
 import org.codehaus.loom.components.util.info.ComponentInfo;
 import org.codehaus.loom.components.util.metadata.ComponentTemplate;
 import org.codehaus.loom.components.util.metadata.DependencyDirective;
+import org.codehaus.spice.alchemist.configuration.ConfigurationAlchemist;
 import org.codehaus.spice.salt.i18n.ResourceManager;
 import org.codehaus.spice.salt.i18n.Resources;
 import org.codehaus.dna.AbstractLogEnabled;
@@ -117,7 +117,7 @@ import org.codehaus.dna.AbstractLogEnabled;
  * (presumably via {@link org.codehaus.loom.components.util.verifier.AssemblyVerifier}</p>
  *
  * @author Peter Donald
- * @version $Revision: 1.2 $ $Date: 2004-05-01 12:48:35 $
+ * @version $Revision: 1.3 $ $Date: 2004-06-20 17:46:56 $
  */
 public abstract class AbstractResourceProvider
     extends AbstractLogEnabled
@@ -218,7 +218,7 @@ public abstract class AbstractResourceProvider
     {
         final ComponentTemplate component = getMetaData( entry );
         final Configuration configuration =
-            ConfigurationConverter.toConfiguration(
+            ConfigurationAlchemist.toAvalonConfiguration(
                 component.getConfiguration() );
         if( null == configuration )
         {
