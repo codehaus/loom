@@ -38,7 +38,7 @@
     </define:taglib>
 
     <goal name="buildDist">
-        <j:set var="distDir" value='target/${pom.artifactId}-${pom.currentVersion}'/>
+        <j:set var="distDir" value='target/${maven.final.name}'/>
         <ant:mkdir dir="${distDir}/tools/lib"/>
         <ant:mkdir dir="${distDir}/container/lib"/>
         <ant:mkdir dir="${distDir}/lib"/>
@@ -101,9 +101,24 @@
                 <ant:exclude name="*.dll"/>
             </ant:fileset>
         </ant:copy>
-
+        
+	    <!-- Create a tar.gz file -->
+	    <ant:tar longfile="gnu" tarfile="target/${maven.final.name}.tar">
+	      <ant:tarfileset dir="${distDir}" prefix="${maven.final.name}"/>
+	    </ant:tar>
+	
+	    <ant:gzip zipfile="target/${maven.final.name}.tar.gz"
+	    	src="target/${maven.final.name}.tar" />
+	    <ant:delete file="target/${maven.final.name}.tar"/>
+	
+	    <!-- Create a zip file -->
+	    <ant:zip destfile="target/${maven.final.name}.zip">
+	      <ant:zipfileset dir="${distDir}" prefix="${maven.final.name}"/>
+	    </ant:zip>
+    	
     </goal>
 
+	
     <preGoal name="buildDist">
         <j:set var="wrapperDir" value='target/wrapper'/>
         <ant:mkdir dir="${wrapperDir}"/>
