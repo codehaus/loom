@@ -90,7 +90,6 @@ import org.jcontainer.loom.tools.LoomToolConstants;
 import org.jcontainer.loom.tools.metadata.ComponentMetaData;
 import org.jcontainer.loom.tools.profile.ComponentProfile;
 import org.jcontainer.loom.tools.profile.PartitionProfile;
-import org.jcontainer.dna.Logger;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
@@ -120,7 +119,7 @@ import org.realityforge.salt.i18n.Resources;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.15 $ $Date: 2003-10-16 05:11:33 $
+ * @version $Revision: 1.16 $ $Date: 2003-10-16 05:50:53 $
  */
 public class SarVerifier
     extends AssemblyVerifier
@@ -147,12 +146,6 @@ public class SarVerifier
      * The Verifier for Info instances.
      */
     private final InfoVerifier m_infoVerifier = new InfoVerifier();
-
-    public void enableLogging( final Logger logger )
-    {
-        super.enableLogging( logger );
-        m_infoVerifier.enableLogging( logger );
-    }
 
     /**
      * Verify the specified {@link PartitionProfile} object.
