@@ -2,9 +2,7 @@
 <document>
     <properties>
     <title>Guide - for Server Assemblers</title>
-        
-        
-    <author email="dev@avalon.apache.org">Avalon Documentation Team</author>
+    <author email="jcontainer-interest@codehaus.org ">Loom Documentation Team</author>
   </properties>
     <body>
         <section name="Who Should Read This Book?">
