@@ -86,8 +86,9 @@
  */
 package org.jcontainer.loom.components.extensions.pkgmgr;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 import org.realityforge.extension.Extension;
 
 /**
@@ -97,7 +98,7 @@ import org.realityforge.extension.Extension;
  * directories.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-08-17 18:27:32 $
+ * @version $Revision: 1.4 $ $Date: 2003-11-11 11:29:51 $
  * @see ExtensionManager
  * @todo Determine an appropriate interface to this service and
  *       an appropriate mechanism via which to do searching and
@@ -200,14 +201,15 @@ public class PackageManager
                                                final Extension[] available )
         throws UnsatisfiedExtensionException
     {
-        final ArrayList dependencies = new ArrayList();
-        final ArrayList unsatisfied = new ArrayList();
+        final Set dependencies = new HashSet();
+        final Set unsatisfied = new HashSet();
 
         scanDependencies( required, available, dependencies, unsatisfied );
 
         if( 0 != unsatisfied.size() )
         {
-            final Extension extension = (Extension)unsatisfied.get( 0 );
+            final Extension extension =
+                (Extension)unsatisfied.iterator().next();
             throw new UnsatisfiedExtensionException( extension );
         }
 
@@ -233,8 +235,8 @@ public class PackageManager
      */
     public void scanDependencies( final Extension[] required,
                                   final Extension[] available,
-                                  final List dependencies,
-                                  final List unsatisfied )
+                                  final Set dependencies,
+                                  final Set unsatisfied )
     {
         for( int i = 0; i < required.length; i++ )
         {
@@ -261,8 +263,8 @@ public class PackageManager
      */
     public void scanDependencies( final Extension required,
                                   final Extension[] available,
-                                  final List dependencies,
-                                  final List unsatisfied )
+                                  final Set dependencies,
+                                  final Set unsatisfied )
     {
         //Check to see if extension is satisifed by the
         //list of available extensions passed in
@@ -277,10 +279,10 @@ public class PackageManager
 
         //Check to see if extension is satisifed by one
         //of the extensions already found
-        final int size = dependencies.size();
-        for( int i = 0; i < size; i++ )
+        final Iterator iterator = dependencies.iterator();
+        while( iterator.hasNext() )
         {
-            final OptionalPackage optionalPackage = (OptionalPackage)dependencies.get( i );
+            final OptionalPackage optionalPackage = (OptionalPackage)iterator.next();
             if( optionalPackage.isCompatible( required ) )
             {
                 return;

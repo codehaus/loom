@@ -90,27 +90,36 @@ import java.io.File;
 import java.net.URL;
 import java.security.Policy;
 import java.util.Arrays;
+import java.util.Set;
 import org.jcontainer.dna.LogEnabled;
 import org.jcontainer.dna.Logger;
 import org.jcontainer.dna.impl.ContainerUtil;
 import org.jcontainer.loom.components.extensions.pkgmgr.PackageManager;
+import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
 import org.jcontainer.loom.components.util.ResourceUtil;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
+import org.realityforge.classman.builder.SimpleLoaderResolver;
+import org.realityforge.extension.Extension;
 
 /**
  * a LoaderResolver that knows about container environment,
  * and the way it is split across multiple directories.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-10-16 14:45:45 $
+ * @version $Revision: 1.7 $ $Date: 2003-11-11 11:29:51 $
  */
 class SarLoaderResolver
-    extends DefaultLoaderResolver
+    extends SimpleLoaderResolver
     implements LogEnabled
 {
     private final static Resources REZ =
         ResourceManager.getPackageResources( SarLoaderResolver.class );
+
+    /**
+     * The PackageManager to use to resolve Extensions.
+     */
+    private PackageManager m_manager;
 
     /**
      * Logger to use when reporting information
@@ -142,7 +151,11 @@ class SarLoaderResolver
                        final File baseDirectory,
                        final File workDirectory )
     {
-        super( baseDirectory, manager );
+        super( baseDirectory );
+        if( null == manager )
+        {
+            throw new NullPointerException( "manager" );
+        }
         if( null == policy )
         {
             throw new NullPointerException( "policy" );
@@ -156,6 +169,7 @@ class SarLoaderResolver
             throw new NullPointerException( "workDirectory" );
         }
 
+        m_manager = manager;
         m_policy = policy;
         m_workDirectory = workDirectory;
     }
@@ -168,6 +182,20 @@ class SarLoaderResolver
     public void enableLogging( final Logger logger )
     {
         m_logger = logger;
+    }
+
+    public URL resolveExtension( final Extension extension )
+        throws Exception
+    {
+        if( null == m_manager )
+        {
+            final String message =
+                REZ.getString( "missing-packagemanager" );
+            throw new IllegalStateException( message );
+        }
+        final OptionalPackage optionalPackage =
+            m_manager.getOptionalPackage( extension );
+        return optionalPackage.getFile().toURL();
     }
 
     /**
@@ -266,5 +294,16 @@ class SarLoaderResolver
     protected void warn( final String message )
     {
         m_logger.warn( message );
+    }
+
+    protected void scanDependencies( final Extension[] required,
+                                     final Extension[] available,
+                                     final Set dependencies,
+                                     final Set unsatisfied )
+    {
+        m_manager.scanDependencies( required,
+                                    available,
+                                    dependencies,
+                                    unsatisfied );
     }
 }
