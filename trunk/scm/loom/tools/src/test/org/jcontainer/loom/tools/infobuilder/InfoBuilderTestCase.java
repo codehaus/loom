@@ -34,7 +34,7 @@ import org.realityforge.metaclass.model.Attribute;
  * Abstract class which TestCases can extend.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.11 $ $Date: 2003-10-06 12:48:52 $
+ * @version $Revision: 1.12 $ $Date: 2003-10-06 12:51:25 $
  */
 public class InfoBuilderTestCase
     extends TestCase
@@ -72,9 +72,26 @@ public class InfoBuilderTestCase
         throws Exception
     {
         final ComponentInfo info = loadComponentInfo( COMPONENT2 );
-        runWriteReadTest( info,
-                          new LegacyBlockInfoWriter(),
-                          new LegacyBlockInfoReader() );
+        final LegacyBlockInfoWriter writer = new LegacyBlockInfoWriter();
+        final LegacyBlockInfoReader reader = new LegacyBlockInfoReader();
+        ContainerUtil.enableLogging( writer, new ConsoleLogger() );
+        final File output = File.createTempFile( "info-test", ".xml" );
+        final FileOutputStream outputStream = new FileOutputStream( output );
+        writer.writeComponentInfo( info, outputStream );
+        outputStream.close();
+
+        ContainerUtil.enableLogging( reader, new ConsoleLogger() );
+        final String implementationKey = info.getDescriptor().getImplementationKey();
+        final FileInputStream inputStream = new FileInputStream( output );
+        final ComponentInfo actual = reader.createComponentInfo( implementationKey, inputStream );
+        inputStream.close();
+        //output.deleteOnExit();
+        //output.delete();
+
+        InfoAssert.assertEqualInfos( " Dummy ComponentInfo written out and read back " +
+                                     "in again should be equal",
+                                     info,
+                                     actual );
     }
 
     public void testQDoxScan()
@@ -117,31 +134,6 @@ public class InfoBuilderTestCase
         final JavaClass[] classes = source.getClasses();
         assertEquals( "source.getClasses()", 1, classes.length );
         return classes[ 0 ];
-    }
-
-    private void runWriteReadTest( final ComponentInfo expected,
-                                   final InfoWriter writer,
-                                   final InfoReader reader )
-        throws Exception
-    {
-        ContainerUtil.enableLogging( writer, new ConsoleLogger() );
-        final File output = File.createTempFile( "info-test", ".xml" );
-        final FileOutputStream outputStream = new FileOutputStream( output );
-        writer.writeComponentInfo( expected, outputStream );
-        outputStream.close();
-
-        ContainerUtil.enableLogging( reader, new ConsoleLogger() );
-        final String implementationKey = expected.getDescriptor().getImplementationKey();
-        final FileInputStream inputStream = new FileInputStream( output );
-        final ComponentInfo actual = reader.createComponentInfo( implementationKey, inputStream );
-        inputStream.close();
-        //output.deleteOnExit();
-        //output.delete();
-
-        InfoAssert.assertEqualInfos( " Dummy ComponentInfo written out and read back " +
-                                     "in again should be equal",
-                                     expected,
-                                     actual );
     }
 
     private ComponentInfo createDummyComponentInfo()

@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import org.apache.tools.ant.BuildException;
 import org.jcontainer.loom.tools.info.ComponentInfo;
-import org.jcontainer.loom.tools.infobuilder.InfoWriter;
 import org.jcontainer.loom.tools.infobuilder.LegacyBlockInfoWriter;
 import org.jcontainer.loom.tools.qdox.DefaultInfoBuilder;
 import org.jcontainer.loom.tools.qdox.LegacyInfoBuilder;
@@ -27,7 +26,7 @@ import org.jcontainer.loom.tools.qdox.LegacyInfoBuilder;
  *
  * @author Paul Hammant
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-10-06 12:48:52 $
+ * @version $Revision: 1.7 $ $Date: 2003-10-06 12:51:25 $
  */
 public class MetaGenerateTask
     extends AbstractQdoxTask
@@ -35,7 +34,7 @@ public class MetaGenerateTask
     /**
      * A utility object that writes out info as serialized object files.
      */
-    private static final InfoWriter c_infoWriter = new LegacyBlockInfoWriter();
+    private static final LegacyBlockInfoWriter c_infoWriter = new LegacyBlockInfoWriter();
 
     /**
      * The destination directory for metadata files.
@@ -192,7 +191,7 @@ public class MetaGenerateTask
         final OutputStream outputStream = new FileOutputStream( file );
         try
         {
-            getInfoWriter().writeComponentInfo( info, outputStream );
+            c_infoWriter.writeComponentInfo( info, outputStream );
         }
         catch( final Exception e )
         {
@@ -202,17 +201,6 @@ public class MetaGenerateTask
         {
             shutdownStream( outputStream );
         }
-    }
-
-    /**
-     * Return the correct info writer depending on
-     * what format the info will be output as
-     *
-     * @return the InfoWriter to output info with
-     */
-    private InfoWriter getInfoWriter()
-    {
-            return c_infoWriter;
     }
 
     /**

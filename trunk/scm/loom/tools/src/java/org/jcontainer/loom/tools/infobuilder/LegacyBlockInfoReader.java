@@ -30,11 +30,10 @@ import org.xml.sax.InputSource;
  * <a href="package-summary.html#external">package summary</a>.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.12 $ $Date: 2003-10-06 12:48:52 $
+ * @version $Revision: 1.13 $ $Date: 2003-10-06 12:51:25 $
  */
 public final class LegacyBlockInfoReader
     extends AbstractLogEnabled
-    implements InfoReader
 {
     /**
      * I18n resources.
