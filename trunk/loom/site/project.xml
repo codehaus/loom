@@ -67,9 +67,11 @@
         <developer>
             <name>Mauro Talevi</name>
             <id>mauro</id>
+            <email>mauro.talevi at aquilonia.org</email>
             <roles>
                 <role>Founder</role>
             </roles>
+            <timezone>GMT</timezone>
         </developer>
     </developers>
 
