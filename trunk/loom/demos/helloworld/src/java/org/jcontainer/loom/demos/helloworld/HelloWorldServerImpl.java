@@ -176,7 +176,7 @@ public final class HelloWorldServerImpl
         getLogger().info( "HelloWorldServer.compose()" );
 
         m_socketManager = (ServerSocketFactory)serviceManager.lookup( ServerSocketFactory.class.getName() );
-        m_connectionManager = (ConnectionManager)serviceManager.lookup( ConnectionManager.ROLE );
+        m_connectionManager = (ConnectionManager)serviceManager.lookup( ConnectionManager.class.getName() );
     }
 
     public void initialize()

@@ -92,12 +92,10 @@ import org.jcontainer.loom.tools.profile.ComponentProfile;
  * Handles parsing of configuration schema and validation against schema
  *
  * @author <a href="mailto:proyal@apache.org">Peter Royal</a>
- * @version CVS $Revision: 1.3 $ $Date: 2003-08-17 18:27:33 $
+ * @version CVS $Revision: 1.4 $ $Date: 2003-09-02 04:36:58 $
  */
 public interface ConfigurationValidator
 {
-    String ROLE = ConfigurationValidator.class.getName();
-
     /**
      * Check to see if configuration is valid for specified component.
      *

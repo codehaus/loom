@@ -96,8 +96,6 @@ import java.util.Map;
  */
 public interface Installer
 {
-    String ROLE = Installer.class.getName();
-
     /**
      * Install the Sar designated by url.
      *

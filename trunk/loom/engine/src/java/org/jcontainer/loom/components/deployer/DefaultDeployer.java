@@ -157,14 +157,14 @@ public class DefaultDeployer
     public void service( final ServiceManager serviceManager )
         throws ServiceException
     {
-        m_kernel = (Kernel)serviceManager.lookup( Kernel.ROLE );
+        m_kernel = (Kernel)serviceManager.lookup( Kernel.class.getName() );
         m_repository = (ConfigurationRepository)serviceManager.
-            lookup( ConfigurationRepository.ROLE );
+            lookup( ConfigurationRepository.class.getName() );
         m_classLoaderManager = (ClassLoaderManager)serviceManager.
-            lookup( ClassLoaderManager.ROLE );
-        m_logManager = (LogManager)serviceManager.lookup( LogManager.ROLE );
-        m_validator = (ConfigurationValidator)serviceManager.lookup( ConfigurationValidator.ROLE );
-        m_installer = (Installer)serviceManager.lookup( Installer.ROLE );
+            lookup( ClassLoaderManager.class.getName() );
+        m_logManager = (LogManager)serviceManager.lookup( LogManager.class.getName() );
+        m_validator = (ConfigurationValidator)serviceManager.lookup( ConfigurationValidator.class.getName() );
+        m_installer = (Installer)serviceManager.lookup( Installer.class.getName() );
     }
 
     public void initialize()

@@ -103,12 +103,10 @@ import org.realityforge.extension.Extension;
  * <code>guide/extensions/versioning.html</code></p>.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-08-17 18:27:32 $
+ * @version $Revision: 1.4 $ $Date: 2003-09-02 04:36:58 $
  */
 public interface ExtensionManager
 {
-    String ROLE = ExtensionManager.class.getName();
-
     /**
      * Return all the {@link OptionalPackage}s that satisfy specified
      * {@link Extension}. The array must be sorted with the packages that

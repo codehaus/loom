@@ -95,8 +95,6 @@ import org.jcomponent.loggerstore.LoggerStore;
  */
 public interface Kernel
 {
-    String ROLE = Kernel.class.getName();
-
     /**
      * Adds an application to the container
      */

@@ -27,19 +27,17 @@ import org.jcontainer.loom.tools.factory.ComponentBundle;
  * objects via different mechanisms.</p>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-29 01:07:35 $
+ * @version $Revision: 1.3 $ $Date: 2003-09-02 04:36:59 $
  */
 public interface ComponentFactory
 {
-    String ROLE = ComponentFactory.class.getName();
-
     /**
      * Create a {@link org.jcontainer.loom.tools.factory.ComponentBundle} for component
      * specified by implementationKey.
      *
      * @param implementationKey the key indicating type of component (usually classname)
      * @return the ComponentBundle for component
-     * @throws java.lang.Exception if unable to create Info object
+     * @throws Exception if unable to create Info object
      */
     ComponentBundle createBundle( String implementationKey )
         throws Exception;
@@ -50,7 +48,7 @@ public interface ComponentFactory
      *
      * @param implementationKey the key indicating type of component (usually classname)
      * @return an instance of component
-     * @throws java.lang.Exception if unable to create component
+     * @throws Exception if unable to create component
      */
     Object createComponent( String implementationKey )
         throws Exception;

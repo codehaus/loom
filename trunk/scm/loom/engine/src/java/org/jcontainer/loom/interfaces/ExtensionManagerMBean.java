@@ -94,12 +94,10 @@ import java.io.File;
  * @phoenix:mx-topic name="ExtensionManager"
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-08-17 18:27:33 $
+ * @version $Revision: 1.3 $ $Date: 2003-09-02 04:36:58 $
  */
 public interface ExtensionManagerMBean
 {
-    String ROLE = ExtensionManagerMBean.class.getName();
-
     /**
      * Retrieve an array of paths where each
      * element in array represents a directory

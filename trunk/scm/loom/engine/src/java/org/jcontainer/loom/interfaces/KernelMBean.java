@@ -96,8 +96,6 @@ package org.jcontainer.loom.interfaces;
  */
 public interface KernelMBean
 {
-    String ROLE = KernelMBean.class.getName();
-
     /**
      * Gets the list of applications running in the container
      *

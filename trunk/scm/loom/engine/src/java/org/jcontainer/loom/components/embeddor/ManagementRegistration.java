@@ -106,19 +106,19 @@ final class ManagementRegistration
 {
     private static final Map c_map = new HashMap();
     public static final ManagementRegistration KERNEL =
-        new ManagementRegistration( Kernel.ROLE,
+        new ManagementRegistration( Kernel.class.getName(),
                                     "Kernel",
                                     new Class[]{KernelMBean.class} );
     public static final ManagementRegistration EXTENSION_MANAGER =
-        new ManagementRegistration( ExtensionManager.ROLE,
+        new ManagementRegistration( ExtensionManager.class.getName(),
                                     "ExtensionManager",
                                     new Class[]{ExtensionManagerMBean.class} );
     public static final ManagementRegistration EMBEDDOR =
-        new ManagementRegistration( Embeddor.ROLE, "Embeddor", new Class[]{EmbeddorMBean.class} );
+        new ManagementRegistration( Embeddor.class.getName(), "Embeddor", new Class[]{EmbeddorMBean.class} );
     public static final ManagementRegistration DEPLOYER =
-        new ManagementRegistration( Deployer.ROLE, "Deployer", new Class[]{DeployerMBean.class} );
+        new ManagementRegistration( Deployer.class.getName(), "Deployer", new Class[]{DeployerMBean.class} );
     public static final ManagementRegistration LOG_MANAGER =
-        new ManagementRegistration( LogManager.ROLE, "LogManager", new Class[]{} );
+        new ManagementRegistration( LogManager.class.getName(), "LogManager", new Class[]{} );
     //TODO: Need information for SystemManager?
 
     private final String m_role;

@@ -573,7 +573,7 @@ public class DefaultEmbeddor
     protected final synchronized void deployFile( final String name, final File file )
         throws Exception
     {
-        final Deployer deployer = (Deployer)getEmbeddorComponent( Deployer.ROLE );
+        final Deployer deployer = (Deployer)getEmbeddorComponent( Deployer.class.getName() );
         deployer.deploy( name, file.toURL() );
     }
 
@@ -686,7 +686,7 @@ public class DefaultEmbeddor
         throws Exception
     {
         final SystemManager systemManager =
-            (SystemManager)getServiceManager().lookup( SystemManager.ROLE );
+            (SystemManager)getServiceManager().lookup( SystemManager.class.getName() );
 
         final SystemManager componentManager =
             systemManager.getSubContext( null, "component" );
@@ -721,7 +721,7 @@ public class DefaultEmbeddor
         throws Exception
     {
         final SystemManager systemManager =
-            (SystemManager)getServiceManager().lookup( SystemManager.ROLE );
+            (SystemManager)getServiceManager().lookup( SystemManager.class.getName() );
 
         final SystemManager componentManager = systemManager.getSubContext( null, "component" );
 
@@ -746,7 +746,7 @@ public class DefaultEmbeddor
     private ServiceManager getServiceManager()
     {
         final DefaultServiceManager serviceManager = new DefaultServiceManager();
-        serviceManager.put( Embeddor.ROLE, this );
+        serviceManager.put( Embeddor.class.getName(), this );
         for( int i = 0; i < m_entries.length; i++ )
         {
             final String role = m_entries[ i ].getRole();
@@ -767,7 +767,7 @@ public class DefaultEmbeddor
      */
     protected final Kernel getKernel()
     {
-        return (Kernel)getEmbeddorComponent( Kernel.ROLE );
+        return (Kernel)getEmbeddorComponent( Kernel.class.getName() );
     }
 
     /**

@@ -97,8 +97,6 @@ package org.jcontainer.loom.interfaces;
  */
 public interface ApplicationMBean
 {
-    String ROLE = ApplicationMBean.class.getName();
-
     /**
      * Get the name of the application.
      *

@@ -100,8 +100,6 @@ import java.net.URL;
  */
 public interface Deployer
 {
-    String ROLE = Deployer.class.getName();
-
     /**
      * Deploy an installation.
      *

@@ -98,8 +98,6 @@ import org.apache.avalon.framework.activity.Executable;
 public interface Embeddor
     extends Executable
 {
-    String ROLE = Embeddor.class.getName();
-
     /**
      * Request the Embeddor shutsdown.
      */

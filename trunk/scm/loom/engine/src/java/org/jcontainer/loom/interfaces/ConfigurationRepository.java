@@ -96,8 +96,6 @@ import org.apache.avalon.framework.configuration.ConfigurationException;
  */
 public interface ConfigurationRepository
 {
-    String ROLE = ConfigurationRepository.class.getName();
-
     /**
      * Process configuration information
      *

@@ -216,7 +216,7 @@ public class DefaultClassLoaderManager
         throws ServiceException
     {
         final ExtensionManager extensionManager =
-            (ExtensionManager)serviceManager.lookup( ExtensionManager.ROLE );
+            (ExtensionManager)serviceManager.lookup( ExtensionManager.class.getName() );
         m_packageManager = new PackageManager( extensionManager );
     }
 

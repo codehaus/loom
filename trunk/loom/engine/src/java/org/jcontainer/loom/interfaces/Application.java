@@ -98,9 +98,6 @@ package org.jcontainer.loom.interfaces;
  */
 public interface Application
 {
-    /** Role String for interface */
-    String ROLE = Application.class.getName();
-
     /**
      * Set the context in which the Application is "executed".
      *

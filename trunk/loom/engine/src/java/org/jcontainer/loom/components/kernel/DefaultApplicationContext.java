@@ -188,9 +188,9 @@ class DefaultApplicationContext
         throws ServiceException
     {
         m_systemManager = (SystemManager)serviceManager.
-            lookup( SystemManager.ROLE );
-        m_kernel = (Kernel)serviceManager.lookup( Kernel.ROLE );
-        m_instrumentManager = (InstrumentManager)serviceManager.lookup( InstrumentManager.ROLE );
+            lookup( SystemManager.class.getName() );
+        m_kernel = (Kernel)serviceManager.lookup( Kernel.class.getName() );
+        m_instrumentManager = (InstrumentManager)serviceManager.lookup( InstrumentManager.class.getName() );
     }
 
     public void initialize()

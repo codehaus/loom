@@ -99,8 +99,6 @@ import org.jcontainer.loom.tools.profile.PartitionProfile;
  */
 public interface ApplicationContext
 {
-    String ROLE = ApplicationContext.class.getName();
-
     File getHomeDirectory();
 
     PartitionProfile getPartitionProfile();
