@@ -136,7 +136,7 @@ public class DefaultLogManager
         throws Exception
     {
         final Map map = createLoggerManagerContext( context );
-		// normalise file paths for log4j to circumvent backslash replacement
+		// normalise file paths to circumvent backslash replacement
 		final Map normalisedMap = normaliseFilePaths( map );
         if( null == logs )
         {
@@ -163,7 +163,7 @@ public class DefaultLogManager
                                          Jdk14LoggerStoreFactory.class.getName(),
                                          homeDirectory,
                                          workDirectory,
-                                         map );
+                                         normalisedMap );
             if( null != store )
             {
                 return store;
@@ -172,7 +172,7 @@ public class DefaultLogManager
                                          LogKitLoggerStoreFactory.class.getName(),
                                          homeDirectory,
                                          workDirectory,
-                                         map );
+                                         normalisedMap );
             if( null != store )
             {
                 return store;
@@ -200,6 +200,8 @@ public class DefaultLogManager
                 ContainerUtil.enableLogging( loggerManager, getLogger() );
                 final HashMap config = new HashMap();
                 config.put( Logger.class.getName(), getLogger() );
+                // use the original context map as SimpleLogKitManager requires
+                // the File object in the context
                 config.put( Context.class.getName(), new DefaultContext( map ) );
                 config.put( Configuration.class.getName(), logs );
                 return loggerManager.createLoggerStore( config );
@@ -210,7 +212,7 @@ public class DefaultLogManager
                 ContainerUtil.enableLogging( loggerManager, getLogger() );
                 final HashMap config = new HashMap();
                 config.put( Logger.class.getName(), getLogger() );
-                config.put( Context.class.getName(), new DefaultContext( map ) );
+                config.put( Context.class.getName(), new DefaultContext( normalisedMap ) );
                 config.put( Configuration.class.getName(), logs );
                 return loggerManager.createLoggerStore( config );
             }
