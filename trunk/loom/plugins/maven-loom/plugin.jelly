@@ -15,7 +15,7 @@
     <!--==================================================================-->
     <goal name="loom:init" prereqs="dna:init" description="Setup Loom Descriptor Processing Tasks">
 
-        <ant:mc_interceptorSet id="maven.loom.interceptors">
+        <ant:metaclass_interceptorSet id="maven.loom.interceptors">
             <ant:interceptor name="org.codehaus.loom.info.PhoenixAttributeInterceptor">
                 <ant:classpath>
                     <ant:pathelement path="${plugin.dir}"/>
@@ -28,9 +28,9 @@
                     <!--<ant:path refid="maven.dependency.classpath"/>-->
                 </ant:classpath>
             </ant:interceptor>
-        </ant:mc_interceptorSet>
+        </ant:metaclass_interceptorSet>
 
-        <ant:mc_addToInterceptorSet dest="maven.metaclass.interceptors" source="maven.loom.interceptors"/>
+        <ant:metaclass_addToInterceptorSet dest="maven.metaclass.interceptors" source="maven.loom.interceptors"/>
     </goal>
 
     <!--==================================================================-->

@@ -101,12 +101,12 @@
         <dependency>
             <groupId>metaclass</groupId>
             <artifactId>metaclass-runtime</artifactId>
-            <version>1.0-rc3-dev</version>
+            <version>1.1-rc4-dev</version>
         </dependency>
-        <dependency> <!-- not yet ported to metaclass -->
-            <groupId>spice</groupId>
-            <artifactId>spice-metaclass-jmx</artifactId>
-            <version>20031017.081651</version>
+        <dependency> 
+            <groupId>metaclass</groupId>
+            <artifactId>metaclass-jmx</artifactId>
+            <version>1.1-rc4-dev</version>
         </dependency>
         <dependency>
             <groupId>loom</groupId>
