@@ -7,12 +7,12 @@
  */
 package org.realityforge.xmlpolicy.verifier;
 
-import org.apache.avalon.excalibur.i18n.ResourceManager;
-import org.apache.avalon.excalibur.i18n.Resources;
 import org.realityforge.xmlpolicy.metadata.GrantMetaData;
 import org.realityforge.xmlpolicy.metadata.KeyStoreMetaData;
 import org.realityforge.xmlpolicy.metadata.PermissionMetaData;
 import org.realityforge.xmlpolicy.metadata.PolicyMetaData;
+import org.realityforge.salt.i18n.Resources;
+import org.realityforge.salt.i18n.ResourceManager;
 
 /**
  * Verify Policy set is valid. Validity is defined as
@@ -28,7 +28,7 @@ import org.realityforge.xmlpolicy.metadata.PolicyMetaData;
  * </ul>
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-04 22:50:46 $
+ * @version $Revision: 1.3 $ $Date: 2003-06-04 23:20:19 $
  */
 public class PolicyVerifier
 {
