@@ -1,0 +1,19 @@
+<project default="main">
+
+	<goal name="main">
+    	<attainGoal name="build"/>
+  	</goal>
+
+  	<goal name="build">
+    	<attainGoal name="plugin"/>
+  	</goal>
+
+  	<goal name="install">
+    	<attainGoal name="plugin:install"/>
+  	</goal>
+
+  	<goal name="deploy">   
+		<attainGoal name="plugin:deploy"/>
+	</goal>
+
+</project>
