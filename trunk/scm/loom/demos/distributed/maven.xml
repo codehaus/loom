@@ -1,13 +1,14 @@
 <project default="main"
+    xmlns:j="jelly:core"
     xmlns:maven="jelly:maven">
 
     <goal name="main">
         <attainGoal name="build"/>
     </goal>
 
-    <goal name="clean-all">
-        <echo message="Cleaning all components"/>
-        <maven:reactor
+    <goal name="clean">
+         <echo message="Cleaning all components"/>
+         <maven:reactor
             basedir="${basedir}"
             includes="*/project.xml"
             goals="clean"
