@@ -22,7 +22,7 @@ import org.realityforge.metaclass.model.Attribute;
  * objects from DNA MetaClass descriptors.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-10-16 14:45:46 $
+ * @version $Revision: 1.2 $ $Date: 2003-10-18 07:29:55 $
  */
 public final class BlockInfoReader
 {
@@ -41,7 +41,7 @@ public final class BlockInfoReader
         if( null == attribute )
         {
             final String message =
-                "Type " + type.getName() + " does not specify the" +
+                "Type " + type.getName() + " does not specify the " +
                 "required MetaClass attributes to be a Component";
             throw new Exception( message );
         }
