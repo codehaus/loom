@@ -20,6 +20,7 @@ import org.jcontainer.loom.components.assembler.data.Component3;
 import org.jcontainer.loom.components.deployer.PhoenixProfileBuilder;
 import org.jcontainer.loom.components.util.ConfigurationBuilder;
 import org.jcontainer.loom.components.assembler.data.Service1;
+import org.jcontainer.loom.components.assembler.data.Listener1;
 import org.jcontainer.loom.components.util.metadata.DependencyDirective;
 import org.jcontainer.loom.components.util.profile.ComponentProfile;
 import org.jcontainer.loom.components.util.profile.PartitionProfile;
@@ -31,7 +32,7 @@ import org.xml.sax.InputSource;
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author <a href="mailto:peter.royal@pobox.com">Peter Royal</a>
- * @version $Revision: 1.11 $ $Date: 2003-11-05 03:32:33 $
+ * @version $Revision: 1.12 $ $Date: 2003-11-05 03:42:12 $
  */
 public class AssemblerTestCase
     extends TestCase
@@ -78,6 +79,17 @@ public class AssemblerTestCase
         assertTrue( "Block2 getBlockInfo non null",
                     null != block2.getInfo() );
         assertEquals( "Block2 isDisableProxy", true, isProxyDisabled( block2 ) );
+
+        final ComponentProfile[] listeners =
+            partitionProfile.getPartition( ContainerConstants.LISTENER_PARTITION ).
+            getComponents();
+        final ComponentProfile listener = listeners[ 0 ];
+
+        assertEquals( "Listener Count", 1, listeners.length );
+        assertEquals( "Listener1 getImplementationKey",
+                      Listener1.class.getName(),
+                      listener.getTemplate().getImplementationKey() );
+        assertEquals( "Listener1 getName", "l1", listener.getTemplate().getName() );
     }
 
     private boolean isProxyDisabled( final ComponentProfile block2 )
