@@ -11,7 +11,7 @@
     <dependencies>
         <dependency>
             <groupId>loom</groupId>
-            <artifactId>maven-sar-plugin</artifactId>
+            <artifactId>maven-loom-plugin</artifactId>
             <version>${pom.currentVersion}</version>
             <type>plugin</type>
         </dependency>
@@ -73,12 +73,12 @@
         <dependency>
             <groupId>spice</groupId>
             <artifactId>spice-alchemist</artifactId>
-            <version>20031120.105516</version>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>spice</groupId>
             <artifactId>spice-loggerstore</artifactId>
-            <version>20040127.234033</version>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>mx4j</groupId>
