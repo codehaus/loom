@@ -44,7 +44,7 @@ import org.realityforge.salt.i18n.Resources;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.9 $ $Date: 2003-07-06 07:51:26 $
+ * @version $Revision: 1.10 $ $Date: 2003-07-06 07:54:53 $
  */
 public class SarVerifier
     extends AssemblyVerifier
@@ -91,9 +91,9 @@ public class SarVerifier
                            final ClassLoader classLoader )
         throws VerifyException
     {
-        final org.jcontainer.loom.tools.profile.ComponentProfile[] blocks =
+        final ComponentProfile[] blocks =
             profile.getPartition( LoomToolConstants.BLOCK_PARTITION ).getComponents();
-        final org.jcontainer.loom.tools.profile.ComponentProfile[] listeners =
+        final ComponentProfile[] listeners =
             profile.getPartition( LoomToolConstants.LISTENER_PARTITION ).getComponents();
 
         String message;
