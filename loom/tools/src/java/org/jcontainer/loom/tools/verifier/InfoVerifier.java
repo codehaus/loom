@@ -7,13 +7,9 @@
  */
 package org.jcontainer.loom.tools.verifier;
 
-import org.apache.avalon.framework.component.Composable;
-import org.apache.avalon.framework.configuration.Configurable;
-import org.apache.avalon.framework.service.Serviceable;
-import org.jcontainer.dna.AbstractLogEnabled;
+import org.jcontainer.dna.LogEnabled;
 import org.jcontainer.dna.Logger;
 import org.jcontainer.loom.tools.info.ComponentInfo;
-import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
@@ -33,15 +29,15 @@ import org.realityforge.salt.i18n.Resources;
  *       dependencies are declared.</li>
  *   <li>Verify that the Class is Contextualizable if any context
  *       entrys are declared.</li>
- *   <li>Verify that the Class is {@link Configurable} if a Configuration
+ *   <li>Verify that the Class is Configurable if a Configuration
  *       schema is are declared.</li>
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.9 $ $Date: 2003-10-11 09:12:56 $
+ * @version $Revision: 1.10 $ $Date: 2003-10-16 00:24:46 $
  */
 public class InfoVerifier
-    extends AbstractLogEnabled
+    implements LogEnabled
 {
     /**
      * I18n utils.
@@ -52,33 +48,11 @@ public class InfoVerifier
     /**
      * The verifier for components in assembly.
      */
-    private final ComponentVerifier m_verifier;
-
-    /**
-     * Create an InfoVerifier using base Componern ComponentVerifier.
-     */
-    public InfoVerifier()
-    {
-        this( new ComponentVerifier() );
-    }
-
-    /**
-     * Create an AssemblyVerifier using specified Component ComponentVerifier.
-     */
-    public InfoVerifier( final ComponentVerifier verifier )
-    {
-        if( null == verifier )
-        {
-            throw new NullPointerException( "verifier" );
-        }
-
-        m_verifier = verifier;
-    }
+    private final ComponentVerifier m_verifier = new ComponentVerifier();
 
     public void enableLogging( final Logger logger )
     {
-        super.enableLogging( logger );
-        setupLogger( m_verifier );
+        m_verifier.enableLogging( logger );
     }
 
     /**
@@ -97,7 +71,7 @@ public class InfoVerifier
         throws VerifyException
     {
         final Class clazz = getClass( classLoader, name, implementationKey );
-        verifyType( name, implementationKey, info, clazz );
+        verifyType( name, info, clazz );
     }
 
     /**
@@ -105,128 +79,20 @@ public class InfoVerifier
      * advertised interfaces. And confrorm to expectations of {@link ComponentInfo}.
      *
      * @param name the name of component
-     * @param implementationKey the implementationKey of component
+     * @param type the component type
      * @throws VerifyException if an error occurs
      */
     public void verifyType( final String name,
-                            final String implementationKey,
                             final ComponentInfo info,
-                            final Class implementation )
+                            final Class type )
         throws VerifyException
     {
         final Class[] interfaces =
             getServiceClasses( name,
                                info.getServices(),
-                               implementation.getClassLoader() );
+                               type.getClassLoader() );
 
-        m_verifier.verifyComponent( name, implementation, interfaces, false );
-
-        verifyDependencyPresence( name, implementationKey, info, implementation );
-        verifyConfigurationSchemaPresence( name, implementationKey, info, implementation );
-        //verifyParametersSchemaPresence( name, implementationKey, info, implementation );
-    }
-
-    /**
-     * Verify that the if  the component is not
-     * Configurable that it does not declare configuraiton schema.
-     *
-     * @param name the name of component
-     * @param implementationKey the implementationKey of component
-     * @param implementation the class implementing component
-     * @throws VerifyException if fails verification check
-     */
-    protected void verifyConfigurationSchemaPresence( final String name,
-                                                      final String implementationKey,
-                                                      final ComponentInfo info,
-                                                      final Class implementation )
-        throws VerifyException
-    {
-        final SchemaDescriptor schema = info.getConfigurationSchema();
-        if( null == schema )
-        {
-            return;
-        }
-        else
-        {
-            if( !Configurable.class.isAssignableFrom( implementation ) )
-            {
-                final String message =
-                    REZ.format( "metadata.declare-uneeded-configuration-schema.error",
-                                name,
-                                implementationKey );
-                throw new VerifyException( message );
-            }
-        }
-    }
-
-    /**
-     * Verify that the if  the component is not
-     * Parameterizable that it does not declare parameters schema.
-     *
-     * @param name the name of component
-     * @param implementationKey the implementationKey of component
-     * @param implementation the class implementing component
-     * @throws VerifyException if fails verification check
-     */
-/*
-    protected void verifyParametersSchemaPresence( final String name,
-                                                   final String implementationKey,
-                                                   final ComponentInfo info,
-                                                   final Class implementation )
-        throws VerifyException
-    {
-        final SchemaDescriptor schema = info.getParametersSchema();
-        if( null == schema )
-        {
-            return;
-        }
-        else
-        {
-            if( !Parameterizable.class.isAssignableFrom( implementation ) )
-            {
-                final String message =
-                    REZ.format( "metadata.declare-uneeded-parameter-schema.error",
-                                name,
-                                implementationKey );
-                throw new VerifyException( message );
-            }
-        }
-    }
-*/
-
-    /**
-     * Verify the component assembly logic.
-     * The implications verifies that the component:
-     * <p>Is not Composable/Serviceable and does not declare dependencys</p>
-     * <p>or</p>
-     * <p>Is Composable/Serviceable and does declare dependencys</p>
-     *
-     * @param name the name of component
-     * @param implementationKey the implementationKey of component
-     * @param implementation the class implementing component
-     * @throws VerifyException if fails verification check
-     */
-    protected void verifyDependencyPresence( final String name,
-                                             final String implementationKey,
-                                             final ComponentInfo info,
-                                             final Class implementation )
-        throws VerifyException
-    {
-        final int count = info.getDependencies().length;
-        final boolean aquiresServices =
-            Composable.class.isAssignableFrom( implementation ) ||
-            Serviceable.class.isAssignableFrom( implementation );
-        if( !aquiresServices )
-        {
-            if( 0 != count )
-            {
-                final String message =
-                    REZ.format( "metadata.declare-uneeded-deps.error",
-                                name,
-                                implementationKey );
-                throw new VerifyException( message );
-            }
-        }
+        m_verifier.verifyComponent( name, type, interfaces, false );
     }
 
     /**
