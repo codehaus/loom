@@ -8,15 +8,15 @@
         <section name="Porting Phoenix 4.0.x applications">
             <p>
 		    Loom 1.0 supports applications running in Phoenix 4.0.x releases,
-		    provided that the sar is built using the
-                <a href="/plugins/maven-sar/">Maven Sar Plugin</a>
-		    provided by Loom and the appropriate libraries are bundles in the sar.
+		    provided that the Sar is built using the
+                <a href="/plugins/maven-loom/">Maven Loom Plugin</a>
+		    provided by Loom and the appropriate libraries are bundles in the Sar.
             </p>
 
             <p>
             For users that still have an
-                <a href="http://ant.apache.org">Apache Ant</a> based build, the Phoenix sar
-            task can still be used. Otherwise, it is possible to create a SAR using Ant's
+                <a href="http://ant.apache.org">Apache Ant</a> based build, the Phoenix Sar
+            task can still be used. Otherwise, it is possible to create a Loom Sar using Ant's
                 <code>jar</code> task.
             </p>
             <subsection name="Creating a Loom Sar with Maven">
@@ -24,34 +24,25 @@
 			Since the generation of metaclass descriptors is more generic in
 			Loom compared with Phoenix, but still fully compatible with it,
 			users can deploy applications running in Phoenix 4.0.x by simply
-			regenerating from the Java source the descriptors using the Maven Sar Plugin.
+			regenerating from the Java source the descriptors using the Maven Loom Plugin.
                 </p>
                 <p>
-			To create a sar, using the
-                    <a href="/plugins/maven-sar/">Maven Sar Plugin</a>
+			To create a Loom Sar, using the
+                    <a href="/plugins/maven-loom/">Maven Loom Plugin</a>
 			simply add the dependency to your Maven project
                     <source>
                         <![CDATA[
 <dependency>
     <groupId>loom</groupId>
-    <artifactId>maven-sar-plugin</artifactId>
+    <artifactId>maven-loom-plugin</artifactId>
     <version>[plugin-version]</version>
     <type>plugin</type>
 </dependency>
                     ]]>
                     </source>
-			And then make sure that the sar:metagenerate is invoked after java
-            compilation by adding the following to a custom maven.xml.
-                    <source>
-                        <![CDATA[
-<postGoal name="java:compile">
-    <attainGoal name="sar:metagenerate"/>
-</postGoal>
-                    ]]>
-                    </source>
 			and execute
                     <source>
-maven sar
+maven loom:sar
                     </source>
                 </p>
             </subsection>
@@ -64,7 +55,7 @@ maven sar
 			regenerating from the Java source the descriptors using the Maven Sar Plugin.
                 </p>
 
-                <p>To do so, use the following in your ant build file (JAR file versions may need to be adjusted to the
+                <p>To do so, use the following in your Ant build file (Jar file versions may need to be adjusted to the
                 latest releases) :
                     <source><![CDATA[
 <taskdef
@@ -83,7 +74,7 @@ maven sar
     <fileset dir="${src.dir}"/>
     <interceptor name="org.codehaus.loom.info.PhoenixAttributeInterceptor">
         <classpath>
-            <pathelement location="${path.to}/maven-sar-plugin-1.0-beta1-dev.jar"/>
+            <pathelement location="${path.to}/maven-loom-plugin-[version].jar"/>
         </classpath>
     </interceptor>
 </metaclassGen>
@@ -91,7 +82,7 @@ maven sar
                     ]]></source>
                 </p>
 
-                <p>For the time being, it is recommended to continue using the Ant-based SAR task to create a SAR.
+                <p>For the time being, it is recommended to continue using the Ant-based Sar task to create a Sar.
                 (instructions on how to create one without it are welcome!)</p>
             </subsection>
             <subsection name="Comparison of libraries bundled">
@@ -117,20 +108,25 @@ maven sar
                 </p>
 
                 <p>
-			Loom 1.0 comes with a lean set of libraries:
+			Loom 1.0 comes with a lean set of application libraries:
                     <ul>
+                        <li>asm</li>
                         <li>avalon-framework</li>
+                        <li>avalon-phoenix-client</li>
+                        <li>dna-api</li>
                         <li>excalibur-instrument</li>
                         <li>logkit</li>
                         <li>log4j</li>
+                        <li>metaclass-runtime</li>
                         <li>mx4j-jmx</li>
-                        <li>avalon-phoenix-client</li>
+                        <li>mx4j-tools</li>
                     </ul>
                 </p>
                 <p>
 			Phoenix 4.0.x ships a bigger set of libraries:
                     <ul>
                         <li>avalon-framework</li>
+                        <li>avalon-phoenix-client</li>
                         <li>excalibur-baxter</li>
                         <li>excalibur-cli</li>
                         <li>excalibur-collections</li>
@@ -149,7 +145,6 @@ maven sar
                         <li>isorelax.jar</li>
                         <li>jing.jar</li>
                         <li>logkit</li>
-                        <li>avalon-phoenix-client</li>
                         <li>xalan</li>
                         <li>xercesImpl</li>
                         <li>xml-apis</li>
