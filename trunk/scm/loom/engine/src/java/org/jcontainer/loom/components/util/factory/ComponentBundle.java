@@ -7,7 +7,6 @@
  */
 package org.jcontainer.loom.components.util.factory;
 
-import java.io.InputStream;
 import org.jcontainer.loom.components.util.info.ComponentInfo;
 
 /**
@@ -29,37 +28,15 @@ import org.jcontainer.loom.components.util.info.ComponentInfo;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-10-16 14:45:46 $
+ * @version $Revision: 1.2 $ $Date: 2003-11-03 06:11:26 $
  */
 public interface ComponentBundle
 {
     /**
-     * Return the {@link org.jcontainer.loom.components.util.info.ComponentInfo} that describes the
+     * Return the ComponentInfo that describes the
      * component.
      *
-     * @return the {@link org.jcontainer.loom.components.util.info.ComponentInfo} that describes the component.
+     * @return the ComponentInfo that describes the component.
      */
     ComponentInfo getComponentInfo();
-
-    /**
-     * Return an input stream for a resource associated with
-     * component. The resource name can be relative or absolute.
-     * Absolute names being with a '/' character.
-     *
-     * <p>When the component is implemented via a Java class (as
-     * opposed to a remote SOAP/RMI/JMX/other service), the resources
-     * are loaded from the same <code>ClassLoader</code> as
-     * implementation. The resources are loaded relative to the
-     * implementaion classes package and are often named after the
-     * classname of the component.</p>
-     *
-     * <p>For example, a component <code>com.biz.Foo</code> may have
-     * resources such as <code>com/biz/Foo-schema.xsd</code>,
-     * <code>com/biz/Foo.mxinfo</code> or
-     * <code>com/biz/Foo-profile.xml</code>.</p>
-     *
-     * @return the input stream for associated resource, or null
-     *         if no such resource
-     */
-    InputStream getResourceAsStream( String resource );
 }

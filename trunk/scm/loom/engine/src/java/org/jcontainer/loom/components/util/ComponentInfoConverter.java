@@ -17,18 +17,14 @@ import org.jcontainer.loom.components.util.info.ComponentInfo;
 import org.jcontainer.loom.components.util.info.SchemaDescriptor;
 
 /**
- * Convert a {@link org.jcontainer.loom.components.util.info.ComponentInfo} into a {@link BlockInfo}.
+ * Convert a ComponentInfo into a BlockInfo.
  *
  * @author <a href="mailto:peter@apache.org">Peter Donald</a>
- * @version $Revision: 1.9 $ $Date: 2003-10-16 14:45:46 $
+ * @version $Revision: 1.10 $ $Date: 2003-11-03 06:11:26 $
  */
 public class ComponentInfoConverter
 {
     private static final Version VERSION = new Version( 1, 0, 0 );
-
-    private ComponentInfoConverter()
-    {
-    }
 
     /**
      * Convert a ComponentInfo object into a BlockInfo object.

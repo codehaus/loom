@@ -13,11 +13,11 @@ import org.jcontainer.loom.components.util.info.ComponentInfo;
 import org.jcontainer.loom.components.util.infobuilder.BlockInfoReader;
 
 /**
- * The default implementation of {@link ComponentFactory}
- * that simply creates components from a {@link ClassLoader}.
+ * The default implementation of ComponentFactory
+ * that simply creates components from a ClassLoader.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-10-16 14:45:46 $
+ * @version $Revision: 1.2 $ $Date: 2003-11-03 06:11:26 $
  */
 public class DefaultComponentFactory
     implements ComponentFactory
@@ -96,14 +96,14 @@ public class DefaultComponentFactory
         throws Exception
     {
         final ComponentInfo info = createComponentInfo( implementationKey );
-        return new DefaultComponentBundle( info, getClassLoader() );
+        return new DefaultComponentBundle( info );
     }
 
     /**
-     * Create a {@link org.jcontainer.loom.components.util.info.ComponentInfo} for component with specified implementationKey.
+     * Create a ComponentInfo for component with specified implementationKey.
      *
      * @param implementationKey the implementationKey
-     * @return the created {@link org.jcontainer.loom.components.util.info.ComponentInfo}
+     * @return the created ComponentInfo
      * @throws Exception if unabel to create componentInfo
      */
     protected ComponentInfo createComponentInfo( final String implementationKey )
