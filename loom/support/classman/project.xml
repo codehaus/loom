@@ -32,14 +32,16 @@
             </properties>
         </dependency>
         <dependency>
-            <id>spice-salt</id>
+        	<groupId>spice</groupId>
+            <artifactId>spice-salt</artifactId>
             <version>0.8dev</version>
             <properties>
                 <category>runtime</category>
             </properties>
         </dependency>
         <dependency>
-            <id>excalibur-extension</id>
+        	<groupId>excalibur</groupId>
+            <artifactId>excalibur-extension</artifactId>
             <version>1.0</version>
             <properties>
                 <category>runtime</category>

@@ -24,7 +24,8 @@
 
     <dependencies>
         <dependency>
-            <id>spice-salt</id>
+        	<groupId>spice</groupId>
+            <artifactId>spice-salt</artifactId>
             <version>0.8dev</version>
             <properties>
                 <category>runtime</category>
