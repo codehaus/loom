@@ -127,4 +127,34 @@ public class BuilderTestCase
         }
     }
 
+    public void testMetaDataWithAPermissionAndCerts()
+        throws Exception
+    {
+        final PolicyBuilder builder = new TestPolicyBuilder();
+        final PermissionMetaData permission =
+            new PermissionMetaData( AllPermission.class.getName(), null, null,
+                                    null, null );
+        final GrantMetaData grant =
+            new GrantMetaData( "file:/", "jenny", "default",
+                               new PermissionMetaData[]{permission} );
+        final KeyStoreMetaData keyStore =
+            new KeyStoreMetaData( "default", "http://spice.sourceforge.net", "DoDgY" );
+        final PolicyMetaData metaData =
+            new PolicyMetaData( new KeyStoreMetaData[]{keyStore}, new GrantMetaData[]{grant} );
+        final TestResolver resolver = new TestResolver();
+        final Policy policy = builder.buildPolicy( metaData, resolver );
+        final CodeSource codesource =
+            new CodeSource( new URL( "file:/" ), new Certificate[]{MockCertificate.JENNY_CERTIFICATE} );
+        final PermissionCollection permissions = policy.getPermissions( codesource );
+        final Enumeration enumeration = permissions.elements();
+        while( enumeration.hasMoreElements() )
+        {
+            final Object perm = enumeration.nextElement();
+            if( perm instanceof AllPermission )
+            {
+                return;
+            }
+        }
+        fail( "Expected to get permission set with ALlPermission contained" );
+    }
 }
