@@ -145,6 +145,7 @@ public final class CLIMain
     private ShutdownHook m_hook;
 
     private boolean m_shuttingDown;
+    private Logger m_logger;
 
     /**
      * Main entry point.
@@ -268,8 +269,8 @@ public final class CLIMain
             final String embeddorClassname = configuration.getAttribute( "class" );
             m_embeddor = (Embeddor)Class.forName( embeddorClassname ).newInstance();
 
-            ContainerUtil.enableLogging( m_embeddor,
-                                         createLogger( properties ) );
+            m_logger = createLogger( properties );
+            ContainerUtil.enableLogging( m_embeddor, m_logger );
             ContainerUtil.parameterize( m_embeddor, reateParameters( properties ) );
             ContainerUtil.compose( m_embeddor, createLocator( data ) );
             ContainerUtil.configure( m_embeddor, configuration );
@@ -356,6 +357,10 @@ public final class CLIMain
         }
 
         final String message = REZ.getString( "main.abnormal-exit.notice" );
+        if( null != m_logger )
+        {
+            m_logger.info( message );
+        }
         System.out.print( message );
         System.out.print( " " );
         System.out.flush();
@@ -416,24 +421,50 @@ public final class CLIMain
      */
     private void handleException( final Throwable throwable )
     {
-        System.out.println( REZ.getString( "main.exception.header" ) );
-        System.out.println( "---------------------------------------------------------" );
-        System.out.println( "--- Message ---" );
-        System.out.println( throwable.getMessage() );
-        System.out.println( "--- Stack Trace ---" );
+        final StringBuffer sb = new StringBuffer();
+        sb.append( REZ.getString( "main.exception.header" ) );
+        sb.append( "\n" );
+        sb.append( "---------------------------------------------------------\n" );
+        sb.append( "--- Message ---\n" );
+        sb.append( throwable.getMessage() );
+        sb.append( "\n--- Stack Trace ---\n" );
 
+        boolean outputTrace = false;
         final Throwable root = ExceptionUtil.getRootCause( throwable );
-        Throwable element = throwable;
+        Throwable element = ExceptionUtil.getCause( throwable );
         while( root != element )
         {
-            System.out.println( element.getMessage() );
-            System.out.println( "--- Rethrown From ---" );
+            sb.append( "--- Rethrown From ---\n" );
+            sb.append( element.toString() );
+            sb.append( "\n" );
+            outputTrace = true;
             element = ExceptionUtil.getCause( element );
         }
-        System.out.println( ExceptionUtil.printStackTrace( root ) );
-        System.out.println( "---------------------------------------------------------" );
-        System.out.println( REZ.getString( "main.exception.footer" ) );
+        if( outputTrace )
+        {
+            sb.append( "---------------------------------------------------------\n" );
+        }
+        final String[] stackTrace = ExceptionUtil.captureStackTrace( root );
+        sb.append( stackTrace[ 0 ] );
+        sb.append( "\n" );
+        for( int i = 1; i < stackTrace.length; i++ )
+        {
+            final String message = stackTrace[ i ];
+            if( -1 != message.indexOf( "org.jcontainer.loom" ) )
+            {
+                break;
+            }
+            sb.append( message );
+            sb.append( "\n" );
+        }
+        sb.append( "---------------------------------------------------------\n" );
+        sb.append( REZ.getString( "main.exception.footer" ) );
 
+        if( null != m_logger )
+        {
+            m_logger.error( throwable.getMessage(), throwable );
+        }
+        System.out.println( sb );
         m_exitCode = 1;
     }
 }
