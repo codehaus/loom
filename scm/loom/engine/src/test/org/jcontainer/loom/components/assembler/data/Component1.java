@@ -15,7 +15,7 @@ import org.apache.avalon.framework.service.Serviceable;
  * A test component.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-07-19 01:51:02 $
+ * @version $Revision: 1.2 $ $Date: 2003-09-02 04:36:59 $
  */
 public class Component1
     implements Serviceable
@@ -23,6 +23,6 @@ public class Component1
     public void service( final ServiceManager manager )
         throws ServiceException
     {
-        manager.lookup( Service2.ROLE );
+        manager.lookup( Service2.class.getName() );
     }
 }

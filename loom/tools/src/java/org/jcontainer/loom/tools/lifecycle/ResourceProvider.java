@@ -99,19 +99,16 @@ import org.apache.excalibur.instrument.InstrumentManager;
  * are aquired.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-08-17 18:27:34 $
+ * @version $Revision: 1.3 $ $Date: 2003-09-02 04:37:29 $
  */
 public interface ResourceProvider
 {
-    /** Role string used to access service. */
-    String ROLE = ResourceProvider.class.getName();
-
     /**
      * Create the object specified by entry.
      *
      * @param entry the entry
      * @return the new object
-     * @throws java.lang.Exception if unable to create resource
+     * @throws Exception if unable to create resource
      */
     Object createObject( Object entry )
         throws Exception;
@@ -121,7 +118,7 @@ public interface ResourceProvider
      *
      * @param entry the entry
      * @return a new Logger for component
-     * @throws java.lang.Exception if unable to create resource
+     * @throws Exception if unable to create resource
      */
     Logger createLogger( Object entry )
         throws Exception;
@@ -131,7 +128,7 @@ public interface ResourceProvider
      *
      * @param entry the entry
      * @return a new Context for component
-     * @throws java.lang.Exception if unable to create resource
+     * @throws Exception if unable to create resource
      */
     Context createContext( Object entry )
         throws Exception;
@@ -141,7 +138,7 @@ public interface ResourceProvider
      *
      * @param entry the entry
      * @return a new ComponentManager for component
-     * @throws java.lang.Exception if unable to create resource
+     * @throws Exception if unable to create resource
      */
     ComponentManager createComponentManager( Object entry )
         throws Exception;
@@ -151,7 +148,7 @@ public interface ResourceProvider
      *
      * @param entry the entry
      * @return a new ServiceManager for component
-     * @throws java.lang.Exception if unable to create resource
+     * @throws Exception if unable to create resource
      */
     ServiceManager createServiceManager( Object entry )
         throws Exception;
@@ -161,7 +158,7 @@ public interface ResourceProvider
      *
      * @param entry the entry
      * @return a new Configuration object for component
-     * @throws java.lang.Exception if unable to create resource
+     * @throws Exception if unable to create resource
      */
     Configuration createConfiguration( Object entry )
         throws Exception;
@@ -171,7 +168,7 @@ public interface ResourceProvider
      *
      * @param entry the entry
      * @return a new Parameters object for component
-     * @throws java.lang.Exception if unable to create resource
+     * @throws Exception if unable to create resource
      */
     Parameters createParameters( Object entry )
         throws Exception;
@@ -181,7 +178,7 @@ public interface ResourceProvider
      *
      * @param entry the entry
      * @return a new InstrumentManager object for component
-     * @throws java.lang.Exception if unable to create resource
+     * @throws Exception if unable to create resource
      */
     InstrumentManager createInstrumentManager( Object entry )
         throws Exception;
@@ -191,7 +188,7 @@ public interface ResourceProvider
      *
      * @param entry the entry
      * @return the String to use as the instrumentable name
-     * @throws java.lang.Exception if unable to create resource
+     * @throws Exception if unable to create resource
      */
     String createInstrumentableName( Object entry )
         throws Exception;

@@ -98,8 +98,6 @@ import org.jcomponent.loggerstore.LoggerStore;
  */
 public interface LogManager
 {
-    String ROLE = LogManager.class.getName();
-
     /**
      * Create a Logger hierarchy for an applicaiton.
      *

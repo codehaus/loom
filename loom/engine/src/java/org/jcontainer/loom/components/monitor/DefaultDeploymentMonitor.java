@@ -117,7 +117,7 @@ import org.realityforge.salt.io.FileUtil;
  * application as necessary.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-08-17 18:27:33 $
+ * @version $Revision: 1.5 $ $Date: 2003-09-02 04:36:58 $
  */
 public class DefaultDeploymentMonitor
     extends AbstractLogEnabled
@@ -153,7 +153,7 @@ public class DefaultDeploymentMonitor
     public void service( final ServiceManager manager )
         throws ServiceException
     {
-        m_deployer = (Deployer)manager.lookup( Deployer.ROLE );
+        m_deployer = (Deployer)manager.lookup( Deployer.class.getName() );
     }
 
     /**

@@ -92,8 +92,6 @@ package org.jcontainer.loom.demos.helloworld;
  */
 public interface HelloWorldServer
 {
-    String ROLE = HelloWorldServer.class.getName();
-
     void setGreeting( String greeting );
 
     String getGreeting();

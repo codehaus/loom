@@ -95,8 +95,6 @@ package org.jcontainer.loom.interfaces;
  */
 public interface SystemManager
 {
-    String ROLE = SystemManager.class.getName();
-
     /**
      * Register an object for management.
      * The object is exported through some management scheme

@@ -16,12 +16,12 @@ import org.apache.avalon.framework.service.Serviceable;
  * A test component.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-07-07 10:34:51 $
+ * @version $Revision: 1.2 $ $Date: 2003-09-02 04:37:29 $
  */
 public class Component4
     implements Serviceable
 {
-    private static final String KEY = Service2.ROLE + "{}";
+    private static final String KEY = Service2.class.getName() + "{}";
 
     public void service( final ServiceManager manager )
         throws ServiceException

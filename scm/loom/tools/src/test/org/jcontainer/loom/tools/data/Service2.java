@@ -11,9 +11,8 @@ package org.jcontainer.loom.tools.data;
  * A test service.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-07-07 10:34:51 $
+ * @version $Revision: 1.2 $ $Date: 2003-09-02 04:37:29 $
  */
 public interface Service2
 {
-    String ROLE = Service2.class.getName();
 }

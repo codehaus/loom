@@ -174,11 +174,11 @@ public class DefaultKernel
     public void service( final ServiceManager serviceManager )
         throws ServiceException
     {
-        m_systemManager = (SystemManager)serviceManager.lookup( SystemManager.ROLE );
+        m_systemManager = (SystemManager)serviceManager.lookup( SystemManager.class.getName() );
         m_repository = (ConfigurationRepository)serviceManager.
-            lookup( ConfigurationRepository.ROLE );
-        m_validator = (ConfigurationValidator)serviceManager.lookup( ConfigurationValidator.ROLE );
-        m_instrumentManager = (InstrumentManager)serviceManager.lookup( InstrumentManager.ROLE );
+            lookup( ConfigurationRepository.class.getName() );
+        m_validator = (ConfigurationValidator)serviceManager.lookup( ConfigurationValidator.class.getName() );
+        m_instrumentManager = (InstrumentManager)serviceManager.lookup( InstrumentManager.class.getName() );
     }
 
     public void configure( final Configuration configuration )
@@ -454,11 +454,11 @@ public class DefaultKernel
     private ServiceManager createServiceManager()
     {
         final DefaultServiceManager serviceManager = new DefaultServiceManager();
-        serviceManager.put( SystemManager.ROLE, m_systemManager );
-        serviceManager.put( ConfigurationRepository.ROLE, m_repository );
-        serviceManager.put( ConfigurationValidator.ROLE, m_validator );
-        serviceManager.put( InstrumentManager.ROLE, m_instrumentManager );
-        serviceManager.put( Kernel.ROLE, this );
+        serviceManager.put( SystemManager.class.getName(), m_systemManager );
+        serviceManager.put( ConfigurationRepository.class.getName(), m_repository );
+        serviceManager.put( ConfigurationValidator.class.getName(), m_validator );
+        serviceManager.put( InstrumentManager.class.getName(), m_instrumentManager );
+        serviceManager.put( Kernel.class.getName(), this );
         serviceManager.makeReadOnly();
         return serviceManager;
     }

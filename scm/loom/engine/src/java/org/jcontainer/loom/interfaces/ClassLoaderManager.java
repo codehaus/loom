@@ -101,8 +101,6 @@ import org.apache.avalon.framework.configuration.Configuration;
  */
 public interface ClassLoaderManager
 {
-    String ROLE = ClassLoaderManager.class.getName();
-
     /**
      * Create a {@link ClassLoaderSet} for a specific application.
      *

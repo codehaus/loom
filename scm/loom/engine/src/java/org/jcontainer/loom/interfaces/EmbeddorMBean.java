@@ -98,8 +98,6 @@ import java.util.Date;
  */
 public interface EmbeddorMBean
 {
-    String ROLE = EmbeddorMBean.class.getName();
-
     /**
      * Get name by which the server is known.
      * Usually this defaults to {@link ContainerConstants.SOFTWARE} but the admin

@@ -99,8 +99,6 @@ import java.net.URL;
  */
 public interface DeployerMBean
 {
-    String ROLE = Deployer.class.getName();
-
     /**
      * Deploy an installation.
      *
