@@ -1,0 +1,66 @@
+<project default="main"
+  xmlns:maven="jelly:maven">
+
+  <goal name="main">
+    <attainGoal name="build"/>
+  </goal>
+
+  <goal 
+    name="build"
+    description="Build each plugin into an installable jar">
+    <maven:reactor
+      basedir="${basedir}"
+      includes="*/project.xml"
+      goals="build"
+      banner="Building"
+      ignoreFailures="true"
+    />
+  </goal>
+
+  <goal 
+    name="install"
+    description="Installs each plugin into plugins dir">
+    <maven:reactor
+      basedir="${basedir}"
+      includes="*/project.xml"
+      goals="install"
+      banner="Installing"
+      ignoreFailures="true"
+    />
+  </goal>
+
+  <goal 
+    name="deploy"
+    description="Deploys each plugin">
+    <maven:reactor
+      basedir="${basedir}"
+      includes="*/project.xml"
+      goals="deploy"
+      banner="Deploying"
+      ignoreFailures="true"
+    />
+  </goal>
+
+  <goal name="clean-all"
+    description="Cleans each plugin">
+    <maven:reactor
+      basedir="${basedir}"
+      includes="*/project.xml"
+      goals="clean"
+      banner="Cleaning"
+      ignoreFailures="false"
+    />
+  </goal>
+
+  <goal name="docs"
+    description="Builds each plugin documentation">
+    <maven:reactor
+      basedir="${basedir}"
+      includes="*/project.xml"
+      goals="xdoc"
+      banner="Generating Docs"
+      ignoreFailures="false"
+    />
+  </goal>
+
+</project>
