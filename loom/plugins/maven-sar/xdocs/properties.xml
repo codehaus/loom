@@ -61,7 +61,7 @@
           <td>maven.sar.metagenerate</td>
           <td>Yes</td>
           <td>Boolean to metagenerate xinfo from source. 
-              Defaults to <code>false</code>.
+              Defaults to <code>true</code>.
           </td>
         </tr>
         <tr>
