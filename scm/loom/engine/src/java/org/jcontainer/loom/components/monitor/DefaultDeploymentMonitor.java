@@ -94,21 +94,21 @@ import java.util.Iterator;
 import java.util.Set;
 import org.apache.avalon.excalibur.monitor.DirectoryResource;
 import org.apache.avalon.excalibur.monitor.impl.ActiveMonitor;
-import org.apache.avalon.framework.activity.Startable;
-import org.jcontainer.loom.interfaces.Deployer;
-import org.jcontainer.loom.components.ParameterConstants;
+import org.jcontainer.dna.AbstractLogEnabled;
+import org.jcontainer.dna.Active;
+import org.jcontainer.dna.Composable;
 import org.jcontainer.dna.Configurable;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.ConfigurationException;
-import org.jcontainer.dna.Composable;
-import org.jcontainer.dna.ResourceLocator;
 import org.jcontainer.dna.MissingResourceException;
+import org.jcontainer.dna.ParameterException;
 import org.jcontainer.dna.Parameterizable;
 import org.jcontainer.dna.Parameters;
-import org.jcontainer.dna.ParameterException;
-import org.jcontainer.dna.AbstractLogEnabled;
-import org.realityforge.salt.i18n.Resources;
+import org.jcontainer.dna.ResourceLocator;
+import org.jcontainer.loom.components.ParameterConstants;
+import org.jcontainer.loom.interfaces.Deployer;
 import org.realityforge.salt.i18n.ResourceManager;
+import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.io.FileUtil;
 
 /**
@@ -117,11 +117,11 @@ import org.realityforge.salt.io.FileUtil;
  * application as necessary.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.10 $ $Date: 2003-10-05 10:07:04 $
+ * @version $Revision: 1.11 $ $Date: 2003-10-05 13:45:40 $
  */
 public class DefaultDeploymentMonitor
     extends AbstractLogEnabled
-    implements Parameterizable, Configurable, Composable, Startable, PropertyChangeListener
+    implements Parameterizable, Configurable, Composable, Active, PropertyChangeListener
 {
     private final static Resources REZ =
         ResourceManager.getPackageResources( DefaultDeploymentMonitor.class );
@@ -159,7 +159,7 @@ public class DefaultDeploymentMonitor
     /**
      * Start the scanner.
      */
-    public void start()
+    public void initialize()
         throws Exception
     {
         final DirectoryResource resource =
@@ -174,9 +174,10 @@ public class DefaultDeploymentMonitor
     /**
      * Stop the scanner.
      */
-    public void stop()
+    public void dispose()
         throws Exception
     {
+        m_monitor.stop();
         m_monitor.stop();
     }
 
