@@ -19,7 +19,7 @@ import java.util.ArrayList;
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-10-14 00:57:02 $
+ * @version $Revision: 1.4 $ $Date: 2003-10-15 05:19:01 $
  */
 public class PhoenixAttributeInterceptorTestCase
     extends TestCase
@@ -251,12 +251,18 @@ public class PhoenixAttributeInterceptorTestCase
     {
         final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
         final Attribute attribute = new Attribute( "phoenix:configuration-schema" );
+        final JavaClass javaClass = new JavaClass();
+        javaClass.setName( "com.biz.MyClass" );
+        final JavaMethod method = new JavaMethod();
+        method.setParentClass( javaClass );
         final Attribute result =
-            interceptor.processMethodAttribute( new JavaMethod(), attribute );
+            interceptor.processMethodAttribute( method, attribute );
         assertNotNull( "attribute", result );
         assertEquals( "attribute.name", "dna.configuration", result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );
-        assertEquals( "attribute.parameterCount", 0, result.getParameterCount() );
+        assertEquals( "attribute.parameterCount", 1, result.getParameterCount() );
+        assertEquals( "attribute.parameter(location)",
+                      "MyClass-schema.xml", result.getParameter( "location" ) );
     }
 
     public void testProcessMethodAttributeWithPhoenixConfigurationSchemaSpecifyingType()
@@ -267,16 +273,45 @@ public class PhoenixAttributeInterceptorTestCase
         final String type = "BobbaFett";
         parameters.setProperty( "type", type );
         final Attribute attribute = new Attribute( "phoenix:configuration-schema", parameters );
+        final JavaClass javaClass = new JavaClass();
+        javaClass.setName( "com.biz.MyClass" );
+        final JavaMethod method = new JavaMethod();
+        method.setParentClass( javaClass );
         final Attribute result =
-            interceptor.processMethodAttribute( new JavaMethod(), attribute );
+            interceptor.processMethodAttribute( method, attribute );
         assertNotNull( "attribute", result );
         assertEquals( "attribute.name", "dna.configuration", result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );
-        assertEquals( "attribute.parameterCount", 1, result.getParameterCount() );
+        assertEquals( "attribute.parameterCount", 2, result.getParameterCount() );
         assertEquals( "attribute.parameter(type)",
                       type, result.getParameter( "type" ) );
+        assertEquals( "attribute.parameter(location)",
+                      "MyClass-schema.xml", result.getParameter( "location" ) );
     }
 
+    public void testProcessMethodAttributeWithPhoenixConfigurationSchemaSpecifyingRelaxType()
+        throws Exception
+    {
+        final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
+        final Properties parameters = new Properties();
+        parameters.setProperty( "type", "relax-ng" );
+        final Attribute attribute = new Attribute( "phoenix:configuration-schema", parameters );
+        final JavaClass javaClass = new JavaClass();
+        javaClass.setName( "com.biz.MyClass" );
+        final JavaMethod method = new JavaMethod();
+        method.setParentClass( javaClass );
+        final Attribute result =
+            interceptor.processMethodAttribute( method, attribute );
+        assertNotNull( "attribute", result );
+        assertEquals( "attribute.name", "dna.configuration", result.getName() );
+        assertEquals( "attribute.value", null, result.getValue() );
+        assertEquals( "attribute.parameterCount", 2, result.getParameterCount() );
+        assertEquals( "attribute.parameter(type)",
+                      "http://relaxng.org/ns/structure/1.0",
+                      result.getParameter( "type" ) );
+        assertEquals( "attribute.parameter(location)",
+                      "MyClass-schema.xml", result.getParameter( "location" ) );
+    }
     public void testProcessMethodAttributeWithPhoenixDependency()
         throws Exception
     {
