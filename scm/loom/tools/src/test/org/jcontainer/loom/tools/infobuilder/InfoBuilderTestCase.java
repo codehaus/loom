@@ -32,7 +32,7 @@ import org.realityforge.metaclass.model.Attribute;
  * Abstract class which TestCases can extend.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.15 $ $Date: 2003-10-06 13:32:45 $
+ * @version $Revision: 1.16 $ $Date: 2003-10-06 13:42:07 $
  */
 public class InfoBuilderTestCase
     extends TestCase
@@ -178,9 +178,9 @@ public class InfoBuilderTestCase
         return createInfoBuilder().buildComponentInfo( classname, classLoader );
     }
 
-    private InfoBuilder createInfoBuilder()
+    private BlockInfoReader createInfoBuilder()
     {
-        final InfoBuilder builder = new InfoBuilder();
+        final BlockInfoReader builder = new BlockInfoReader();
         builder.enableLogging( new ConsoleLogger() );
         return builder;
     }

@@ -10,10 +10,10 @@ package org.jcontainer.loom.tools.factory;
 import java.util.Map;
 import java.util.WeakHashMap;
 import org.jcontainer.loom.tools.info.ComponentInfo;
-import org.jcontainer.loom.tools.infobuilder.InfoBuilder;
 import org.jcontainer.loom.tools.factory.ComponentBundle;
 import org.jcontainer.loom.tools.factory.ComponentFactory;
 import org.jcontainer.loom.tools.factory.DefaultComponentBundle;
+import org.jcontainer.loom.tools.infobuilder.BlockInfoReader;
 import org.jcontainer.dna.AbstractLogEnabled;
 import org.jcontainer.dna.Logger;
 
@@ -22,7 +22,7 @@ import org.jcontainer.dna.Logger;
  * that simply creates components from a {@link java.lang.ClassLoader}.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-10-05 10:07:04 $
+ * @version $Revision: 1.4 $ $Date: 2003-10-06 13:42:07 $
  */
 public class DefaultComponentFactory
     extends AbstractLogEnabled
@@ -37,7 +37,7 @@ public class DefaultComponentFactory
      * The utility class that is used when building info
      * objects for Components.
      */
-    private final InfoBuilder m_infoBuilder = new InfoBuilder();
+    private final BlockInfoReader m_infoBuilder = new BlockInfoReader();
 
     /**
      * The classloader from which all resources are loaded.
