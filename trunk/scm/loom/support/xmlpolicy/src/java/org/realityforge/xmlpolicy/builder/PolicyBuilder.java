@@ -34,7 +34,7 @@ import org.realityforge.xmlpolicy.metadata.PolicyMetaData;
  * PolicyMetaData.
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-06-05 09:04:04 $
+ * @version $Revision: 1.4 $ $Date: 2003-06-05 09:40:38 $
  */
 public class PolicyBuilder
 {
@@ -281,7 +281,7 @@ public class PolicyBuilder
      * @return the create and configured keystore
      * @throws Exception if unable to create or load keystore
      */
-    private final KeyStore createKeyStore( final String type,
+    protected KeyStore createKeyStore( final String type,
                                            final URL url )
         throws Exception
     {
