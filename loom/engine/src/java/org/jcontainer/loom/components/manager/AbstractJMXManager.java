@@ -105,7 +105,7 @@ import org.realityforge.salt.i18n.Resources;
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author <a href="mailto:Huw@mmlive.com">Huw Roberts</a>
- * @version $Revision: 1.6 $ $Date: 2003-10-15 03:43:09 $
+ * @version $Revision: 1.7 $ $Date: 2003-10-16 09:22:06 $
  */
 public abstract class AbstractJMXManager
     extends AbstractSystemManager
@@ -181,9 +181,8 @@ public abstract class AbstractJMXManager
 
             while( i.hasNext() )
             {
-                final ObjectName objectName =
-                    createObjectName( name, target.getTopic( (String)i.next() ) );
-
+                final String topicName = (String)i.next();
+                final ObjectName objectName = createObjectName( name, topicName );
                 getMBeanServer().unregisterMBean( objectName );
             }
         }
@@ -270,9 +269,7 @@ public abstract class AbstractJMXManager
             }
 
             // use a proxy adapter class to manage object
-            exportTopic( topic,
-                         targetObject,
-                         targetName );
+            exportTopic( topic, targetObject, targetName, topicName );
         }
     }
 
@@ -286,11 +283,12 @@ public abstract class AbstractJMXManager
      */
     protected Object exportTopic( final ModelMBeanInfo topic,
                                   final Object target,
-                                  final String targetName )
+                                  final String targetName,
+                                  final String topicName )
         throws Exception
     {
         final Object mBean = new WrapperModelMBean( topic, target );
-        final ObjectName objectName = createObjectName( targetName, topic );
+        final ObjectName objectName = createObjectName( targetName, topicName );
         getMBeanServer().registerMBean( mBean, objectName );
         return mBean;
     }
@@ -302,10 +300,11 @@ public abstract class AbstractJMXManager
      * @return the {@link ObjectName} representing object
      * @throws MalformedObjectNameException if malformed name
      */
-    private ObjectName createObjectName( final String name, final ModelMBeanInfo topic )
+    private ObjectName createObjectName( final String name,
+                                         final String topicName )
         throws MalformedObjectNameException
     {
-        return new ObjectName( getDomain() + ":" + name + ",topic=" + topic.getDescription() );
+        return new ObjectName( getDomain() + ":" + name + ",topic=" + topicName );
     }
 
     /**
