@@ -12,15 +12,15 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.HashMap;
 import java.util.Map;
-import org.realityforge.classman.builder.DefaultLoaderResolver;
 import org.realityforge.classman.builder.LoaderBuilder;
+import org.realityforge.classman.builder.SimpleLoaderResolver;
 import org.realityforge.classman.metadata.ClassLoaderSetMetaData;
 import org.realityforge.classman.verifier.ClassLoaderVerifier;
 
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-27 03:45:17 $
+ * @version $Revision: 1.3 $ $Date: 2003-08-01 02:51:55 $
  */
 public class IntegrationTestCase
     extends AbstractLoaderTestCase
@@ -139,8 +139,8 @@ public class IntegrationTestCase
         final HashMap predefined = new HashMap();
         predefined.put( "*system*", ClassLoader.getSystemClassLoader() );
         final File baseDirectory = getBaseDirectory();
-        final DefaultLoaderResolver resolver =
-            new DefaultLoaderResolver( baseDirectory, null );
+        final SimpleLoaderResolver resolver =
+            new SimpleLoaderResolver( baseDirectory );
         return builder.buildClassLoaders( metaData, resolver, predefined );
     }
 }

@@ -7,15 +7,15 @@
  */
 package org.realityforge.classman.metadata;
 
-import org.apache.avalon.excalibur.extension.Extension;
+import org.realityforge.extension.Extension;
 
 /**
  * This class defines a specific classloader, made up of
- * entrys, {@link Extension} and
+ * entrys, {@link org.realityforge.extension.Extension} and
  * {@link FileSetMetaData} objects.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-27 03:45:05 $
+ * @version $Revision: 1.3 $ $Date: 2003-08-01 02:51:54 $
  */
 public class ClassLoaderMetaData
 {
