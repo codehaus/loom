@@ -5,7 +5,7 @@
  * Software License version 1.1, a copy of which has been included
  * with this distribution in the LICENSE.txt file.
  */
-package org.codehaus.spice.extension;
+package org.jcontainer.loom.extension;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -16,7 +16,7 @@ import junit.framework.TestCase;
  * TestCases for Extension.
  *
  * @author Peter Donald
- * @version $Revision: 1.4 $ $Date: 2004-03-21 23:45:45 $
+ * @version $Revision: 1.1 $ $Date: 2004-03-31 03:13:43 $
  */
 public class ExtensionTestCase
     extends TestCase
