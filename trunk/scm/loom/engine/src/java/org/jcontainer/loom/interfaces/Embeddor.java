@@ -86,8 +86,6 @@
  */
 package org.jcontainer.loom.interfaces;
 
-import org.apache.avalon.framework.activity.Executable;
-
 /**
  * This is the object that is interacted with to create, manage and
  * dispose of the kernel and related resources.
@@ -96,8 +94,15 @@ import org.apache.avalon.framework.activity.Executable;
  * @author <a href="peter at realityforge.org">Peter Donald</a>
  */
 public interface Embeddor
-    extends Executable
 {
+    /**
+     * Execute the action associated with this component.
+     *
+     * @throws Exception if an error occurs
+     */
+    void execute()
+        throws Exception;
+
     /**
      * Request the Embeddor shutsdown.
      */
