@@ -16,7 +16,7 @@ import org.realityforge.configkit.PropertyExpander;
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-10-05 08:10:20 $
+ * @version $Revision: 1.3 $ $Date: 2003-10-05 13:52:08 $
  */
 public class ConfigUtil
 {
@@ -62,6 +62,9 @@ public class ConfigUtil
         return output;
     }
 
+    /**
+     * @deprecated Use ConfigurationUtil on next DNA release
+     */
     public static boolean equals( final Configuration configuration1,
                                   final Configuration configuration2 )
     {

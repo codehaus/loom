@@ -90,12 +90,11 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import org.apache.avalon.framework.activity.Startable;
 import org.apache.avalon.phoenix.ApplicationListener;
 import org.apache.avalon.phoenix.BlockListener;
 import org.apache.avalon.phoenix.metadata.SarMetaData;
-import org.jcontainer.dna.Active;
 import org.jcontainer.dna.AbstractLogEnabled;
+import org.jcontainer.dna.Active;
 import org.jcontainer.dna.Logger;
 import org.jcontainer.loom.components.util.ComponentMetaDataConverter;
 import org.jcontainer.loom.interfaces.Application;
@@ -105,6 +104,8 @@ import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.tools.LoomToolConstants;
 import org.jcontainer.loom.tools.lifecycle.LifecycleException;
 import org.jcontainer.loom.tools.lifecycle.LifecycleHelper;
+import org.jcontainer.loom.tools.profile.ComponentProfile;
+import org.jcontainer.loom.tools.profile.PartitionProfile;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
@@ -118,7 +119,7 @@ import org.realityforge.salt.i18n.Resources;
  */
 public final class DefaultApplication
     extends AbstractLogEnabled
-    implements Application, ApplicationMBean, Active, Startable
+    implements Application, ApplicationMBean, Active
 {
     private static final Resources REZ =
         ResourceManager.getPackageResources( DefaultApplication.class );
@@ -173,112 +174,46 @@ public final class DefaultApplication
         }
         catch( final Throwable t )
         {
-            getLogger().info( "exception while loading listeners:" + t.getMessage() + "\n" );
+            getLogger().info( "Exception loading listeners:" + t.getMessage() + "\n", t );
+            throw new LoomException( t.getMessage(), t );
+        }
+        try
+        {
+            final PartitionProfile partition =
+                m_context.getPartitionProfile().getPartition( LoomToolConstants.BLOCK_PARTITION );
+            final ComponentProfile[] blocks = partition.getComponents();
+            for( int i = 0; i < blocks.length; i++ )
+            {
+                final String blockName = blocks[ i ].getMetaData().getName();
+                final BlockEntry blockEntry = new BlockEntry( blocks[ i ] );
+                m_entries.put( blockName, blockEntry );
+            }
+
+            // load blocks
+            runPhase( PHASE_STARTUP );
+        }
+        catch( final Throwable t )
+        {
+            getLogger().info( "exception while starting:" + t.getMessage() + "\n" );
             t.printStackTrace();
             throw new LoomException( t.getMessage(), t );
         }
-    }
 
-    /**
-     * Start the application running.
-     * This is only valid when isRunning() returns false,
-     * otherwise it will generate an IllegalStateException.
-     *
-     * @throws IllegalStateException if application is already running
-     * @throws LoomException if the application failed to start.
-     *            the message part of exception will contain more information
-     *            pertaining to why the application failed to startup
-     */
-    public void start()
-        throws IllegalStateException, LoomException
-    {
-        if( isRunning() )
-        {
-            throw new IllegalStateException();
-        }
-        else
-        {
-            try
-            {
-                final org.jcontainer.loom.tools.profile.PartitionProfile partition =
-                    m_context.getPartitionProfile().getPartition( LoomToolConstants.BLOCK_PARTITION );
-                final org.jcontainer.loom.tools.profile.ComponentProfile[] blocks = partition.getComponents();
-                for( int i = 0; i < blocks.length; i++ )
-                {
-                    final String blockName = blocks[ i ].getMetaData().getName();
-                    final BlockEntry blockEntry = new BlockEntry( blocks[ i ] );
-                    m_entries.put( blockName, blockEntry );
-                }
-
-                // load blocks
-                runPhase( PHASE_STARTUP );
-            }
-            catch( final Throwable t )
-            {
-                getLogger().info( "exception while starting:" + t.getMessage() + "\n" );
-                t.printStackTrace();
-                throw new LoomException( t.getMessage(), t );
-            }
-
-            m_running = true;
-        }
-    }
-
-    /**
-     * Shutdown and restart the application running.
-     * This is only valid when isRunning() returns true,
-     * otherwise it will generate an IllegalStateException.
-     * This is equivelent to  calling stop() and then start()
-     * in succession.
-     *
-     * @throws IllegalStateException if application is not already running
-     * @throws LoomException if the application failed to stop or start.
-     *            the message part of exception will contain more information
-     *            pertaining to why the application failed to startup/shutdown
-     */
-    public void restart()
-        throws IllegalStateException, LoomException
-    {
-        stop();
-        start();
-    }
-
-    /**
-     * Stop the application running.
-     * This is only valid when isRunning() returns true,
-     * otherwise it will generate an IllegalStateException.
-     *
-     * @throws IllegalStateException if application is not already running
-     * @throws LoomException if the application failed to shutdown.
-     *            the message part of exception will contain more information
-     *            pertaining to why the application failed to shutodwn
-     */
-    public void stop()
-        throws IllegalStateException, LoomException
-    {
-        if( !isRunning() )
-        {
-            throw new IllegalStateException();
-        }
-        else
-        {
-            try
-            {
-                runPhase( PHASE_SHUTDOWN );
-            }
-            catch( final Throwable t )
-            {
-                getLogger().info( "exception while stopping:" + t.getMessage() + "\n" );
-                t.printStackTrace();
-                throw new LoomException( t.getMessage(), t );
-            }
-
-            m_running = false;
-        }
+        m_running = true;
     }
 
     public void dispose()
     {
+        try
+        {
+            runPhase( PHASE_SHUTDOWN );
+        }
+        catch( final Throwable t )
+        {
+            getLogger().info( "Exception stopping:" + t.getMessage() + "\n", t );
+        }
+
+        m_running = false;
         m_entries.clear();
     }
 
@@ -396,7 +331,7 @@ public final class DefaultApplication
     private void doLoadBlockListeners()
         throws Exception
     {
-        final org.jcontainer.loom.tools.profile.ComponentProfile[] listeners =
+        final ComponentProfile[] listeners =
             getComponentsInPartition( LoomToolConstants.LISTENER_PARTITION );
         for( int i = 0; i < listeners.length; i++ )
         {
@@ -415,9 +350,9 @@ public final class DefaultApplication
         }
     }
 
-    private org.jcontainer.loom.tools.profile.ComponentProfile[] getComponentsInPartition( final String key )
+    private ComponentProfile[] getComponentsInPartition( final String key )
     {
-        final org.jcontainer.loom.tools.profile.PartitionProfile partition =
+        final PartitionProfile partition =
             m_context.getPartitionProfile().getPartition( key );
         return partition.getComponents();
     }
@@ -459,7 +394,7 @@ public final class DefaultApplication
     private final void doRunPhase( final String name )
         throws Exception
     {
-        final org.jcontainer.loom.tools.profile.ComponentProfile[] blocks =
+        final ComponentProfile[] blocks =
             getComponentsInPartition( LoomToolConstants.BLOCK_PARTITION );
         final String[] order = DependencyGraph.walkGraph( PHASE_STARTUP == name, blocks );
 
@@ -479,7 +414,7 @@ public final class DefaultApplication
         if( PHASE_STARTUP == name )
         {
             //... for startup, so indicate to applicable listeners
-            final org.jcontainer.loom.tools.profile.PartitionProfile partition = m_context.getPartitionProfile();
+            final PartitionProfile partition = m_context.getPartitionProfile();
             final File homeDirectory = m_context.getHomeDirectory();
             final SarMetaData sarMetaData =
                 ComponentMetaDataConverter.toSarMetaData( partition, homeDirectory );
@@ -615,7 +550,7 @@ public final class DefaultApplication
      * @throws Exception if an error occurs when listener passes
      *            through a specific lifecycle stage
      */
-    private void startupListener( final org.jcontainer.loom.tools.profile.ComponentProfile profile )
+    private void startupListener( final ComponentProfile profile )
         throws Exception
     {
         final String name = profile.getMetaData().getName();

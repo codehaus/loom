@@ -35,7 +35,7 @@ import org.xml.sax.InputSource;
  *  An basic test case for the Application.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-10-05 10:07:04 $
+ * @version $Revision: 1.7 $ $Date: 2003-10-05 13:52:08 $
  */
 public class ApplicationTestCase
     extends TestCase
@@ -324,8 +324,6 @@ public class ApplicationTestCase
             new MockApplicationContext( sarMetaData, new ConsoleLogger() );
         application.setApplicationContext( context );
         application.initialize();
-        application.start();
-        application.stop();
         application.dispose();
     }
 
