@@ -26,7 +26,7 @@ import java.util.jar.Manifest;
  * <code>guide/extensions/versioning.html</code>.</p>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-07-28 13:32:57 $
+ * @version $Revision: 1.3 $ $Date: 2003-08-01 03:35:20 $
  */
 public final class Specification
 {
@@ -221,6 +221,10 @@ public final class Specification
                           final String implementationVendor,
                           final String[] sections )
     {
+        if( null == specificationTitle )
+        {
+            throw new NullPointerException( "specificationTitle" );
+        }
         m_specificationTitle = specificationTitle;
         m_specificationVendor = specificationVendor;
 
@@ -241,11 +245,6 @@ public final class Specification
         m_implementationTitle = implementationTitle;
         m_implementationVendor = implementationVendor;
         m_implementationVersion = implementationVersion;
-
-        if( null == m_specificationTitle )
-        {
-            throw new NullPointerException( "specificationTitle" );
-        }
 
         String[] copy = null;
         if( null != sections )
