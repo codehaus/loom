@@ -89,14 +89,6 @@
             </p>
 
             <p>
-                <strong>Enterprise Object Broker (EOB)</strong>:
-                <a href="http://www.enterpriseobjectbroker.org">http://www.enterpriseobjectbroker.org</a>
-            </p>
-            <p>
-                This is an application server that uses the Jo! block.  It is not J2EE compatible.
-            </p>
-
-            <p>
                 <strong>Jesktop</strong>:
                 <a href="http://www.jesktop.com">http://www.jesktop.com</a>
             </p>
@@ -105,7 +97,7 @@
             </p>
 
             <p>
-                <strong>LoomJMS</strong>:
+                <strong>PhoenixJMS</strong>:
                 <a href="http://sourceforge.net/projects/phoenixjms">http://sourceforge.net/projects/phoenixjms</a>
             </p>
             <p>
@@ -120,15 +112,6 @@
                 A wrapper that allows the Hypersonic SQL engine
                 to be served from inside Loom.
             </p>
-
-            <p>
-                <strong>DeeBee</strong>:
-                <a href="http://spice.sourceforge.net/">http://spice.sourceforge.net/</a>
-            </p>
-            <p>
-                Also under infrequent development, an ambitious JDBC compliant RDBMS.
-            </p>
-
         </section>
 
     </body>
