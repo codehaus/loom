@@ -4,6 +4,11 @@
     <title>loom</title>
 
     <body>
+        <links>
+            <item href="http://jcontainer.org" name="JContainer"/>
+            <item href="http://codehaus.org" name="codehaus"/>
+        </links>
+    
         <search/>
         <menu name="Overview">
             <item href="/index.html" name="Introduction"/>

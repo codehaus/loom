@@ -51,5 +51,12 @@
           </p>
         </subsection>
     </section>
+    
+    <section name="Thanks to codehaus">
+        <img style="float: right; padding: 1ex;" src="http://codehaus.org/codehaus-small.gif"/>
+
+        <p>The JContainer Group would like to thank <a href="http://codehaus.org">codehaus</a> for
+        supplying resources to host the project</p>
+    </section>
   </body>
 </document>
