@@ -18,52 +18,58 @@
         </section>
         <section name="Sample environment.xml file">
             <source>
-                <![CDATA[
-<?xml version="1.0"?>
-
+<![CDATA[<?xml version="1.0"?>
 <environment>
 
     <logs>
-		<category name="" target="default" priority="DEBUG" />
-		<category name="myAuthorizer" target="myAuthorizer-target"
-    				priority="DEBUG" />
+        <category name="" target="default" priority="DEBUG"/>
 
-		<log-target name="default"
-    	  	location="/logs/default.log" />
-		<log-target name="myAuthorizer-target"
-      		location="/logs/authorizer.log" />
+        <category name="myAuthorizer"
+                  target="myAuthorizer-target"
+                  priority="DEBUG"/>
+
+        <log-target name="default"
+                    location="/logs/default.log"/>
+
+        <log-target name="myAuthorizer-target"
+                    location="/logs/authorizer.log"/>
     </logs>
 
     <policy>
-      <!-- define the keystore that is used to load signers from -->
-      <keystore name="myKeystore"
-                location="sar:/conf/keystore"
-                type="JKS"/>
+        <!--
+             Define the keystore that is used to
+             load signers from.
+        -->
+        <keystore name="myKeystore"
+                  location="sar:/conf/keystore"
+                  type="JKS"/>
 
-      <!-- grant the java classes defined in
-           /SAR-INF/classes/ directory the permission
-           to read and write files to temp directory. -->
-      <grant code-base="sar:/SAR-INF/classes/">
-        <permission class="java.io.FilePermission"
-                    target="${/}tmp${/}*"
-                    action="read,write"/>
-      </grant>
+        <!--
+             Grant the java classes defined in
+             /SAR-INF/classes/ directory the permission
+             to read and write files to temp directory.
+        -->
+        <grant code-base="sar:/SAR-INF/classes/">
+            <permission class="java.io.FilePermission"
+                        target="${/}tmp${/}*"
+                        action="read,write"/>
+        </grant>
 
-      <!-- grant the secure.jar the permission to connect
-           a socket to localhost ports 1024 and above,
-           as long as code has been signed by "Fred". -->
-      <grant code-base="sar:/SAR-INF/lib/secure.jar"
-             signed-by="Fred"
-             key-store="myKeystore" >
-        <permission class="java.io.FilePermission"
-                    target="localhost:1024-"
-                    action="accept,connect,listen"/>
-      </grant>
+        <!--
+             Grant the secure.jar the permission to connect
+             a socket to localhost ports 1024 and above,
+             as long as code has been signed by "Fred".
+        -->
+        <grant code-base="sar:/SAR-INF/lib/secure.jar"
+               signed-by="Fred"
+               key-store="myKeystore">
+            <permission class="java.io.FilePermission"
+                        target="localhost:1024-"
+                        action="accept,connect,listen"/>
+        </grant>
     </policy>
 
-</environment>
-
-                ]]></source>
+</environment>]]></source>
             <subsection name="Policy Descriptor Section">
                 <p>
         The format of the policy section should be largely self evident if the assembler
@@ -100,32 +106,30 @@
         Below is example configuration.
                 </p>
                 <source>
-                    <![CDATA[
-<?xml version="1.0"?>
+<![CDATA[<?xml version="1.0"?>
 <environment>
     <logs version="1.1">
-	    <factories>
-    		<factory type="file" class="org.apache.avalon.excalibur.logger.factory.FileTargetFactory"/>
-   		</factories>
+        <factories>
+            <factory type="file" class="org.apache.avalon.excalibur.logger.factory.FileTargetFactory"/>
+        </factories>
 
-	    <categories>
-    		<category name="" log-level="INFO">
-    			<log-target id-ref="default"/>
-    		</category>
-    	</categories>
+        <categories>
+            <category name="" log-level="INFO">
+                <log-target id-ref="default"/>
+            </category>
+        </categories>
 
-	    <targets>
-		    <file id="default">
-	    		<filename>${app.home}/logs/default-</filename>
-	    		<append>true</append>
-	   			<rotation type="unique" pattern="yyyyMMdd" suffix=".log">
-	    			<date>yyyyMMdd</date>
-	    		</rotation>
-		    </file>
-	    </targets>
+        <targets>
+            <file id="default">
+                <filename>${app.home}/logs/default-</filename>
+                <append>true</append>
+                <rotation type="unique" pattern="yyyyMMdd" suffix=".log">
+                    <date>yyyyMMdd</date>
+                </rotation>
+            </file>
+        </targets>
     </logs>
-</environment>
-    ]]></source>
+</environment>]]></source>
             </subsection>
         </section>
     </body>

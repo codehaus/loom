@@ -17,22 +17,19 @@
         </section>
         <section name="Sample config.xml file">
             <source>
-                &lt;?xml version="1.0"?>
+&lt;?xml version="1.0"?>
+&lt;config>
 
-                &lt;config>
+    &lt;myAuthorizer>
+        &lt;!-- ...configuration data here... -->
+    &lt;/myAuthorizer>
 
-                &lt;myAuthorizer>
-                &lt;!-- ...configuration data here... -->
-                &lt;/myAuthorizer>
+    &lt;myBlock>
+        &lt;param1>param1-value&lt;/param1>
+        &lt;an-integer>2&lt;/an-integer>
+    &lt;/myBlock>
 
-                &lt;myBlock>
-                &lt;param1>param1-value&lt;/param1>
-                &lt;an-integer>2&lt;/an-integer>
-                &lt;/myBlock>
-
-                &lt;/config>
-
-            </source>
+&lt;/config></source>
         </section>
     </body>
 </document>
