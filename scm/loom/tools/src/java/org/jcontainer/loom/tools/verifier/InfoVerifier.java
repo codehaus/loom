@@ -28,19 +28,17 @@ import org.realityforge.salt.i18n.Resources;
  *   <li>Verify that the Class objects for Component implement the
  *       service interfaces.</li>
  *   <li>Verify that the Class is a valid Avalon Component as per the
- *       rules in {@link org.jcontainer.loom.tools.verifier.ComponentVerifier} object.</li>
+ *       rules in {@link ComponentVerifier} object.</li>
  *   <li>Verify that the Class is Composable/Serviceable if and only if
  *       dependencies are declared.</li>
  *   <li>Verify that the Class is Contextualizable if any context
  *       entrys are declared.</li>
- *   <li>Verify that the Class is {@link org.apache.avalon.framework.configuration.Configurable} if a Configuration
- *       schema is are declared.</li>
- *   <li>Verify that the Class is {@link org.apache.avalon.framework.parameters.Parameterizable} if a Parameters
+ *   <li>Verify that the Class is {@link Configurable} if a Configuration
  *       schema is are declared.</li>
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.8 $ $Date: 2003-10-06 14:10:49 $
+ * @version $Revision: 1.9 $ $Date: 2003-10-11 09:12:56 $
  */
 public class InfoVerifier
     extends AbstractLogEnabled
@@ -85,12 +83,12 @@ public class InfoVerifier
 
     /**
      * Verfiy that specified components designate classes that implement the
-     * advertised interfaces. And confrorm to expectations of {@link org.jcontainer.loom.tools.info.ComponentInfo}.
+     * advertised interfaces. And confrorm to expectations of {@link ComponentInfo}.
      *
      * @param name the name of component
      * @param implementationKey the implementationKey of component
      * @param classLoader the ClassLoader to load component from
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if an error occurs
+     * @throws VerifyException if an error occurs
      */
     public void verifyType( final String name,
                             final String implementationKey,
@@ -104,11 +102,11 @@ public class InfoVerifier
 
     /**
      * Verfiy that specified components designate classes that implement the
-     * advertised interfaces. And confrorm to expectations of {@link org.jcontainer.loom.tools.info.ComponentInfo}.
+     * advertised interfaces. And confrorm to expectations of {@link ComponentInfo}.
      *
      * @param name the name of component
      * @param implementationKey the implementationKey of component
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if an error occurs
+     * @throws VerifyException if an error occurs
      */
     public void verifyType( final String name,
                             final String implementationKey,
@@ -135,7 +133,7 @@ public class InfoVerifier
      * @param name the name of component
      * @param implementationKey the implementationKey of component
      * @param implementation the class implementing component
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if fails verification check
+     * @throws VerifyException if fails verification check
      */
     protected void verifyConfigurationSchemaPresence( final String name,
                                                       final String implementationKey,
@@ -168,7 +166,7 @@ public class InfoVerifier
      * @param name the name of component
      * @param implementationKey the implementationKey of component
      * @param implementation the class implementing component
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if fails verification check
+     * @throws VerifyException if fails verification check
      */
 /*
     protected void verifyParametersSchemaPresence( final String name,
@@ -206,7 +204,7 @@ public class InfoVerifier
      * @param name the name of component
      * @param implementationKey the implementationKey of component
      * @param implementation the class implementing component
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if fails verification check
+     * @throws VerifyException if fails verification check
      */
     protected void verifyDependencyPresence( final String name,
                                              final String implementationKey,
@@ -240,7 +238,7 @@ public class InfoVerifier
      * @param services the services the component offers
      * @param classLoader the classLoader
      * @return an array of Classes for all the services
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if an error occurs
+     * @throws VerifyException if an error occurs
      */
     protected Class[] getServiceClasses( final String name,
                                          final ServiceDescriptor[] services,
@@ -276,7 +274,7 @@ public class InfoVerifier
      * @param name the name of component
      * @param implementationKey the implementationKey of component
      * @return the Class object
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if unable to aquire class object
+     * @throws VerifyException if unable to aquire class object
      */
     private Class getClass( final ClassLoader classLoader,
                             final String name,
