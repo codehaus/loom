@@ -9,6 +9,9 @@ package org.jcontainer.loom.components.deployer;
 
 import java.util.ArrayList;
 import java.util.Map;
+
+import org.jcontainer.dna.AbstractLogEnabled;
+import org.jcontainer.dna.Logger;
 import org.jcontainer.loom.components.assembler.Assembler;
 import org.jcontainer.loom.components.util.factory.ComponentFactory;
 import org.jcontainer.loom.components.util.factory.DefaultComponentFactory;
@@ -24,31 +27,28 @@ import org.jcontainer.loom.interfaces.ContainerConstants;
 
 /**
  * @author Peter Donald
- * @version $Revision: 1.18 $ $Date: 2003-11-29 13:44:16 $
+ * @version $Revision: 1.19 $ $Date: 2004-02-20 03:49:49 $
  */
-public class PhoenixProfileBuilder
+public class PhoenixProfileBuilder extends AbstractLogEnabled
     implements ProfileBuilder
 {
     private final Assembler m_assembler = new Assembler();
+    private Logger m_logger;
 
     public PartitionProfile buildProfile( final Map parameters )
         throws Exception
     {
-        final PartitionTemplate metaData = m_assembler.buildAssembly(
-            parameters );
+        final PartitionTemplate metaData = m_assembler.buildAssembly( parameters );
         final ClassLoader classLoader =
-            (ClassLoader)parameters.get(
-                ContainerConstants.ASSEMBLY_CLASSLOADER );
-        final ComponentFactory factory = new DefaultComponentFactory(
-            classLoader );
+            (ClassLoader)parameters.get( ContainerConstants.ASSEMBLY_CLASSLOADER );
+        final ComponentFactory factory = new DefaultComponentFactory( classLoader, getLogger() );
 
         return assembleSarProfile( metaData, factory, classLoader );
     }
 
-    private PartitionProfile assembleSarProfile(
-        final PartitionTemplate metaData,
-        final ComponentFactory factory,
-        final ClassLoader classLoader )
+    private PartitionProfile assembleSarProfile( final PartitionTemplate metaData,
+                                                 final ComponentFactory factory,
+                                                 final ClassLoader classLoader )
         throws Exception
     {
         final PartitionTemplate blockPartition =
@@ -68,18 +68,16 @@ public class PhoenixProfileBuilder
                                      ComponentProfile.EMPTY_SET );
     }
 
-    private PartitionProfile assembleListenerProfile(
-        final PartitionTemplate metaData,
-        final ClassLoader classLoader )
+    private PartitionProfile assembleListenerProfile( final PartitionTemplate metaData,
+                                                      final ClassLoader classLoader )
         throws Exception
     {
         final ArrayList componentSet = new ArrayList();
         final ComponentTemplate[] components = metaData.getComponents();
         for( int i = 0; i < components.length; i++ )
         {
-            final ComponentTemplate component = components[ i ];
-            final Class type = classLoader.loadClass(
-                component.getImplementationKey() );
+            final ComponentTemplate component = components[i];
+            final Class type = classLoader.loadClass( component.getImplementationKey() );
             final ComponentInfo info = createListenerInfo( type );
             final ComponentProfile profile = new ComponentProfile( info,
                                                                    component );
@@ -87,8 +85,7 @@ public class PhoenixProfileBuilder
         }
 
         final ComponentProfile[] profiles =
-            (ComponentProfile[])componentSet.toArray(
-                new ComponentProfile[ componentSet.size() ] );
+            (ComponentProfile[])componentSet.toArray( new ComponentProfile[componentSet.size()] );
         return new PartitionProfile( metaData,
                                      PartitionProfile.EMPTY_SET,
                                      profiles );
@@ -102,7 +99,7 @@ public class PhoenixProfileBuilder
         final PartitionTemplate[] partitions = metaData.getPartitions();
         for( int i = 0; i < partitions.length; i++ )
         {
-            final PartitionTemplate partition = partitions[ i ];
+            final PartitionTemplate partition = partitions[i];
             final PartitionProfile profile = assembleProfile( partition,
                                                               factory );
             partitionSet.add( profile );
@@ -112,7 +109,7 @@ public class PhoenixProfileBuilder
         final ComponentTemplate[] components = metaData.getComponents();
         for( int i = 0; i < components.length; i++ )
         {
-            final ComponentTemplate component = components[ i ];
+            final ComponentTemplate component = components[i];
             final ComponentInfo info =
                 factory.createInfo( component.getImplementationKey() );
             final ComponentProfile profile = new ComponentProfile( info,
@@ -121,21 +118,19 @@ public class PhoenixProfileBuilder
         }
 
         final PartitionProfile[] partitionProfiles =
-            (PartitionProfile[])partitionSet.toArray(
-                new PartitionProfile[ partitionSet.size() ] );
+            (PartitionProfile[])partitionSet.toArray( new PartitionProfile[partitionSet.size()] );
         final ComponentProfile[] componentProfiles =
-            (ComponentProfile[])componentSet.toArray(
-                new ComponentProfile[ componentSet.size() ] );
+            (ComponentProfile[])componentSet.toArray( new ComponentProfile[componentSet.size()] );
         return new PartitionProfile( metaData,
                                      partitionProfiles,
                                      componentProfiles );
     }
 
     /**
-     * Create a {@link org.jcontainer.loom.components.util.info.ComponentInfo}
-     * for a Listener with specified classname.
+     * Create a {@link org.jcontainer.loom.components.util.info.ComponentInfo} for a Listener with specified classname.
      *
      * @param type the listener type
+     *
      * @return the ComponentInfo for listener
      */
     private static ComponentInfo createListenerInfo( final Class type )

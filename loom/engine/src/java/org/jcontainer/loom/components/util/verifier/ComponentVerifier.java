@@ -9,6 +9,7 @@ package org.jcontainer.loom.components.util.verifier;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
+
 import org.apache.avalon.framework.activity.Disposable;
 import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.activity.Startable;
@@ -23,31 +24,35 @@ import org.apache.avalon.framework.logger.LogEnabled;
 import org.apache.avalon.framework.parameters.Parameterizable;
 import org.apache.avalon.framework.parameters.Reparameterizable;
 import org.apache.avalon.framework.service.Serviceable;
+
 import org.codehaus.spice.salt.i18n.ResourceManager;
 import org.codehaus.spice.salt.i18n.Resources;
+import org.jcontainer.dna.AbstractLogEnabled;
 import org.realityforge.metaclass.Attributes;
 import org.realityforge.metaclass.model.Attribute;
 
 /**
- * Utility class to help verify that component respects the rules of an Avalon
- * component.
+ * Utility class to help verify that component respects the rules of an Avalon component.
  *
  * @author Peter Donald
- * @version $Revision: 1.4 $ $Date: 2003-12-03 10:44:43 $
+ * @version $Revision: 1.5 $ $Date: 2004-02-20 03:49:49 $
  */
-public class ComponentVerifier
+public class ComponentVerifier extends AbstractLogEnabled
 {
-    /** I18n utils. */
+    /**
+     * I18n utils.
+     */
     private static final Resources REZ =
         ResourceManager.getPackageResources( ComponentVerifier.class );
 
     /**
-     * Constant for array of 0 classes. Saves recreating array everytime look up
-     * constructor with no args.
+     * Constant for array of 0 classes. Saves recreating array everytime look up constructor with no args.
      */
-    private static final Class[] EMPTY_TYPES = new Class[ 0 ];
+    private static final Class[] EMPTY_TYPES = new Class[0];
 
-    /** The interfaces representing lifecycle stages. */
+    /**
+     * The interfaces representing lifecycle stages.
+     */
     private static final Class[] FRAMEWORK_CLASSES = new Class[]
     {
         LogEnabled.class,
@@ -67,11 +72,11 @@ public class ComponentVerifier
     };
 
     /**
-     * Verfiy that specified components designate classes that implement the
-     * advertised interfaces.
+     * Verfiy that specified components designate classes that implement the advertised interfaces.
      *
      * @param name the name of component
      * @param type the component type
+     *
      * @throws java.lang.Exception if an error occurs
      */
     public void verifyType( final String name, final Class type )
@@ -81,26 +86,29 @@ public class ComponentVerifier
             Attributes.getAttribute( type, "dna.component" );
         if( null == attribute )
         {
-            final String message =
-                "Component " + name + " does not specify correct metadata";
-            throw new Exception( message );
+            final String msg = "Legacy? component " + name
+                + " does not specify correct metadata. Skipping type verification";
+
+            getLogger().warn( msg );
+
+//            final String message =
+//                "Component " + name + " does not specify correct metadata";
+//            throw new Exception( message );
         }
         final Class[] interfaces = getServiceClasses( name, type );
         verifyComponent( name, type, interfaces, false );
     }
 
     /**
-     * Verify that the supplied implementation class and service classes are
-     * valid for a component.
+     * Verify that the supplied implementation class and service classes are valid for a component.
      *
-     * @param name the name of component
+     * @param name           the name of component
      * @param implementation the implementation class of component
-     * @param services the classes representing services
-     * @param buildable if true will verify that it is instantiateable via
-     * class.newInstance(). May not be required for some components that are
-     * created via a factory.
-     * @throws java.lang.Exception if error thrown on failure and component
-     * fails check
+     * @param services       the classes representing services
+     * @param buildable      if true will verify that it is instantiateable via class.newInstance(). May not be required
+     *                       for some components that are created via a factory.
+     *
+     * @throws java.lang.Exception if error thrown on failure and component fails check
      */
     public void verifyComponent( final String name,
                                  final Class implementation,
@@ -118,14 +126,13 @@ public class ComponentVerifier
     }
 
     /**
-     * Verify that the supplied implementation implements the specified
-     * services.
+     * Verify that the supplied implementation implements the specified services.
      *
-     * @param name the name of component
+     * @param name           the name of component
      * @param implementation the class representign component
-     * @param services the services that the implementation must provide
-     * @throws java.lang.Exception if error thrown on failure and component
-     * fails check
+     * @param services       the services that the implementation must provide
+     *
+     * @throws java.lang.Exception if error thrown on failure and component fails check
      */
     public void verifyImplementsServices( final String name,
                                           final Class implementation,
@@ -134,13 +141,13 @@ public class ComponentVerifier
     {
         for( int i = 0; i < services.length; i++ )
         {
-            if( !services[ i ].isAssignableFrom( implementation ) )
+            if( !services[i].isAssignableFrom( implementation ) )
             {
                 final String message =
                     REZ.format( "verifier.noimpl-service.error",
                                 name,
                                 implementation.getName(),
-                                services[ i ].getName() );
+                                services[i].getName() );
                 throw new Exception( message );
             }
         }
@@ -149,10 +156,10 @@ public class ComponentVerifier
     /**
      * Verify that the supplied class is a valid class for a Component.
      *
-     * @param name the name of component
+     * @param name  the name of component
      * @param clazz the class representing component
-     * @throws java.lang.Exception if error thrown on failure and component
-     * fails check
+     *
+     * @throws java.lang.Exception if error thrown on failure and component fails check
      */
     public void verifyClass( final String name,
                              final Class clazz )
@@ -169,10 +176,10 @@ public class ComponentVerifier
     /**
      * Verify that the supplied classes are valid classes for a service.
      *
-     * @param name the name of component
+     * @param name    the name of component
      * @param classes the classes representign services
-     * @throws java.lang.Exception if error thrown on failure and component
-     * fails check
+     *
+     * @throws java.lang.Exception if error thrown on failure and component fails check
      */
     public void verifyServices( final String name,
                                 final Class[] classes )
@@ -180,17 +187,17 @@ public class ComponentVerifier
     {
         for( int i = 0; i < classes.length; i++ )
         {
-            verifyService( name, classes[ i ] );
+            verifyService( name, classes[i] );
         }
     }
 
     /**
      * Verify that the supplied class is a valid class for a service.
      *
-     * @param name the name of component
+     * @param name  the name of component
      * @param clazz the class representign service
-     * @throws java.lang.Exception if error thrown on failure and component
-     * fails check
+     *
+     * @throws java.lang.Exception if error thrown on failure and component fails check
      */
     public void verifyService( final String name,
                                final Class clazz )
@@ -202,13 +209,12 @@ public class ComponentVerifier
     }
 
     /**
-     * Verify that the implementation class does not implement incompatible
-     * lifecycle interfaces.
+     * Verify that the implementation class does not implement incompatible lifecycle interfaces.
      *
-     * @param name the name of component
+     * @param name           the name of component
      * @param implementation the implementation class
-     * @throws java.lang.Exception if error thrown on failure and component
-     * fails check
+     *
+     * @throws java.lang.Exception if error thrown on failure and component fails check
      */
     public void verifyLifecycles( final String name,
                                   final Class implementation )
@@ -217,8 +223,7 @@ public class ComponentVerifier
         final boolean composable =
             Composable.class.isAssignableFrom( implementation ) ||
             Recomposable.class.isAssignableFrom( implementation );
-        final boolean serviceable = Serviceable.class.isAssignableFrom(
-            implementation );
+        final boolean serviceable = Serviceable.class.isAssignableFrom( implementation );
         if( serviceable && composable )
         {
             final String message =
@@ -245,13 +250,12 @@ public class ComponentVerifier
     }
 
     /**
-     * Verify that the service implemented by specified component is an
-     * interface.
+     * Verify that the service implemented by specified component is an interface.
      *
-     * @param name the name of component
+     * @param name  the name of component
      * @param clazz the class representign service
-     * @throws java.lang.Exception if error thrown on failure and component
-     * fails check
+     *
+     * @throws java.lang.Exception if error thrown on failure and component fails check
      */
     public void verifyServiceIsaInterface( final String name,
                                            final Class clazz )
@@ -270,10 +274,10 @@ public class ComponentVerifier
     /**
      * Verify that the service implemented by specified component is public.
      *
-     * @param name the name of component
+     * @param name  the name of component
      * @param clazz the class representign service
-     * @throws java.lang.Exception if error thrown on failure and component
-     * fails check
+     *
+     * @throws java.lang.Exception if error thrown on failure and component fails check
      */
     public void verifyServiceIsPublic( final String name,
                                        final Class clazz )
@@ -292,13 +296,12 @@ public class ComponentVerifier
     }
 
     /**
-     * Verify that the service implemented by specified component does not
-     * extend any lifecycle interfaces.
+     * Verify that the service implemented by specified component does not extend any lifecycle interfaces.
      *
-     * @param name the name of component
+     * @param name  the name of component
      * @param clazz the class representign service
-     * @throws java.lang.Exception if error thrown on failure and component
-     * fails check
+     *
+     * @throws java.lang.Exception if error thrown on failure and component fails check
      */
     public void verifyServiceNotALifecycle( final String name,
                                             final Class clazz )
@@ -306,7 +309,7 @@ public class ComponentVerifier
     {
         for( int i = 0; i < FRAMEWORK_CLASSES.length; i++ )
         {
-            final Class lifecycle = FRAMEWORK_CLASSES[ i ];
+            final Class lifecycle = FRAMEWORK_CLASSES[i];
             if( lifecycle.isAssignableFrom( clazz ) )
             {
                 final String message =
@@ -322,10 +325,10 @@ public class ComponentVerifier
     /**
      * Verify that the component has a no-arg aka default constructor.
      *
-     * @param name the name of component
+     * @param name  the name of component
      * @param clazz the class representign component
-     * @throws java.lang.Exception if error thrown on failure and component
-     * fails check
+     *
+     * @throws java.lang.Exception if error thrown on failure and component fails check
      */
     public void verifyNoArgConstructor( final String name,
                                         final Class clazz )
@@ -356,10 +359,10 @@ public class ComponentVerifier
     /**
      * Verify that the component is not represented by abstract class.
      *
-     * @param name the name of component
+     * @param name  the name of component
      * @param clazz the class representign component
-     * @throws java.lang.Exception if error thrown on failure and component
-     * fails check
+     *
+     * @throws java.lang.Exception if error thrown on failure and component fails check
      */
     public void verifyNonAbstract( final String name,
                                    final Class clazz )
@@ -380,10 +383,10 @@ public class ComponentVerifier
     /**
      * Verify that the component is not represented by abstract class.
      *
-     * @param name the name of component
+     * @param name  the name of component
      * @param clazz the class representign component
-     * @throws java.lang.Exception if error thrown on failure and component
-     * fails check
+     *
+     * @throws java.lang.Exception if error thrown on failure and component fails check
      */
     public void verifyPublic( final String name,
                               final Class clazz )
@@ -404,10 +407,10 @@ public class ComponentVerifier
     /**
      * Verify that the component is not represented by primitive class.
      *
-     * @param name the name of component
+     * @param name  the name of component
      * @param clazz the class representign component
-     * @throws java.lang.Exception if error thrown on failure and component
-     * fails check
+     *
+     * @throws java.lang.Exception if error thrown on failure and component fails check
      */
     public void verifyNonPrimitive( final String name,
                                     final Class clazz )
@@ -426,10 +429,10 @@ public class ComponentVerifier
     /**
      * Verify that the component is not represented by interface class.
      *
-     * @param name the name of component
+     * @param name  the name of component
      * @param clazz the class representign component
-     * @throws java.lang.Exception if error thrown on failure and component
-     * fails check
+     *
+     * @throws java.lang.Exception if error thrown on failure and component fails check
      */
     public void verifyNonInterface( final String name,
                                     final Class clazz )
@@ -448,10 +451,10 @@ public class ComponentVerifier
     /**
      * Verify that the component is not represented by an array class.
      *
-     * @param name the name of component
+     * @param name  the name of component
      * @param clazz the class representign component
-     * @throws java.lang.Exception if error thrown on failure and component
-     * fails check
+     *
+     * @throws java.lang.Exception if error thrown on failure and component fails check
      */
     public void verifyNonArray( final String name,
                                 final Class clazz )
@@ -468,12 +471,14 @@ public class ComponentVerifier
     }
 
     /**
-     * Retrieve an array of Classes for all the services that a Component
-     * offers. This method also makes sure all services offered are interfaces.
+     * Retrieve an array of Classes for all the services that a Component offers. This method also makes sure all
+     * services offered are interfaces.
      *
      * @param name the name of component
      * @param type the component type
+     *
      * @return an array of Classes for all the services
+     *
      * @throws java.lang.Exception if an error occurs
      */
     protected Class[] getServiceClasses( final String name,
@@ -483,13 +488,13 @@ public class ComponentVerifier
         final ClassLoader classLoader = type.getClassLoader();
         final Attribute[] attributes =
             Attributes.getAttributes( type, "dna.service" );
-        final Class[] classes = new Class[ attributes.length ];
+        final Class[] classes = new Class[attributes.length];
         for( int i = 0; i < attributes.length; i++ )
         {
-            final String classname = attributes[ i ].getParameter( "type" );
+            final String classname = attributes[i].getParameter( "type" );
             try
             {
-                classes[ i ] = classLoader.loadClass( classname );
+                classes[i] = classLoader.loadClass( classname );
             }
             catch( final Throwable t )
             {

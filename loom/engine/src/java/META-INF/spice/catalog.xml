@@ -11,4 +11,7 @@
     <entity
         publicId="-//LOOM/Assembly DTD Version 1.1//EN"
         resource="org/jcontainer/loom/components/util/assembly_1_0.dtd"/>
+    <entity
+        publicId="-//PHOENIX/Block Info DTD Version 1.0//EN"
+        resource="org/jcontainer/loom/components/util/blockinfo_1_0.dtd"/>
 </catalog>

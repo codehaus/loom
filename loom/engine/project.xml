@@ -18,7 +18,7 @@
         <dependency>
             <groupId>spice</groupId>
             <artifactId>spice-metaclass</artifactId>
-            <version>1.0-rc2</version>
+            <version>1.0-rc3-dev</version>
         </dependency>
         <dependency>
             <groupId>spice</groupId>
@@ -46,9 +46,8 @@
             <version>1.2.2</version>
         </dependency>
         <dependency>
-            <groupId>avalon</groupId>
-            <artifactId>avalon-framework</artifactId>
-            <version>4.1.4</version>
+            <id>avalon-framework</id>
+            <version>4.1.5</version>
         </dependency>
         <dependency>
             <groupId>phoenix</groupId>
@@ -128,6 +127,11 @@
         <dependency>
             <id>oro</id>
             <version>2.0.7</version>
+        </dependency>
+        <dependency><!-- for spice-metaclass -->
+            <groupId>asm</groupId>
+            <artifactId>asm</artifactId>
+            <version>1.4</version>
         </dependency>
         <dependency><!-- for spice-configkit -->
             <id>isorelax</id>

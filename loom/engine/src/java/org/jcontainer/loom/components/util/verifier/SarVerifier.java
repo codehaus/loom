@@ -88,56 +88,69 @@ package org.jcontainer.loom.components.util.verifier;
 
 import org.codehaus.spice.salt.i18n.ResourceManager;
 import org.codehaus.spice.salt.i18n.Resources;
+import org.jcontainer.dna.Logger;
 import org.jcontainer.loom.components.util.metadata.ComponentTemplate;
 import org.jcontainer.loom.components.util.profile.ComponentProfile;
 import org.jcontainer.loom.components.util.profile.PartitionProfile;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 
 /**
- * This Class verifies that Sars are valid. It performs a number of checks to
- * make sure that the Sar represents a valid application and excluding runtime
- * errors will start up validly. Some of the checks it performs include;
+ * This Class verifies that Sars are valid. It performs a number of checks to make sure that the Sar represents a valid
+ * application and excluding runtime errors will start up validly. Some of the checks it performs include;
  *
- * <ul> <li>Verify names of Sar, Blocks and BlockListeners contain only letters,
- * digits or the '_' character.</li> <li>Verify that the names of the Blocks and
- * BlockListeners are unique to Sar.</li> <li>Verify that the dependendencies
- * specified in assembly.xml correspond to dependencies specified in BlockInfo
- * files.</li> <li>Verify that the inter-block dependendencies specified in
- * assembly.xml are valid. This essentially means that if Block A requires
- * Service S from Block B then Block B must provide Service S.</li> <li>Verify
- * that there are no circular dependendencies between blocks.</li> <li>Verify
- * that the Class objects for Blocks support the Block interface and any
- * specified Services.</li> <li>Verify that the Class objects for BlockListeners
- * support the BlockListener interface.</li> </ul>
+ * <ul> <li>Verify names of Sar, Blocks and BlockListeners contain only letters, digits or the '_' character.</li>
+ * <li>Verify that the names of the Blocks and BlockListeners are unique to Sar.</li> <li>Verify that the
+ * dependendencies specified in assembly.xml correspond to dependencies specified in BlockInfo files.</li> <li>Verify
+ * that the inter-block dependendencies specified in assembly.xml are valid. This essentially means that if Block A
+ * requires Service S from Block B then Block B must provide Service S.</li> <li>Verify that there are no circular
+ * dependendencies between blocks.</li> <li>Verify that the Class objects for Blocks support the Block interface and any
+ * specified Services.</li> <li>Verify that the Class objects for BlockListeners support the BlockListener
+ * interface.</li> </ul>
  *
  * @author Peter Donald
- * @version $Revision: 1.6 $ $Date: 2003-12-03 10:44:43 $
+ * @version $Revision: 1.7 $ $Date: 2004-02-20 03:49:49 $
  */
 public class SarVerifier
     extends AssemblyVerifier
 {
-    /** I18n utils. */
+    /**
+     * I18n utils.
+     */
     private static final Resources REZ =
         ResourceManager.getPackageResources( SarVerifier.class );
 
-    /** The Block class used to warn about deprecation. */
+    /**
+     * The Block class used to warn about deprecation.
+     */
     private static final Class BLOCK_CLASS =
         getClass( "org.apache.avalon.phoenix.Block" );
 
-    /** The BlockListener class used to warn about deprecation. */
+    /**
+     * The BlockListener class used to warn about deprecation.
+     */
     private static final Class BLOCKLISTENER_CLASS =
         getClass( "org.apache.avalon.phoenix.BlockListener" );
 
-    /** The Verifier for Info instances. */
+    /**
+     * The Verifier for Info instances.
+     */
     private final ComponentVerifier m_infoVerifier = new ComponentVerifier();
 
+    public void enableLogging( final Logger logger )
+    {
+        super.enableLogging( logger );
+
+        setupLogger( m_infoVerifier );
+    }
+
     /**
-     * Verify the specified {@link org.jcontainer.loom.components.util.profile.PartitionProfile}
-     * object. The rules used to verify {@link org.jcontainer.loom.components.util.profile.PartitionProfile}
-     * are specified in the Class javadocs.
+     * Verify the specified {@link org.jcontainer.loom.components.util.profile.PartitionProfile} object. The rules used
+     * to verify {@link org.jcontainer.loom.components.util.profile.PartitionProfile} are specified in the Class
+     * javadocs.
      *
-     * @param profile the Sar profile
+     * @param profile     the Sar profile
      * @param classLoader the classloader to load types from
+     *
      * @throws Exception if an error occurs
      */
     public void verifySar( final PartitionProfile profile,
@@ -174,11 +187,11 @@ public class SarVerifier
     }
 
     /**
-     * Verfiy that all Blocks specify classes that implement the advertised
-     * interfaces.
+     * Verfiy that all Blocks specify classes that implement the advertised interfaces.
      *
-     * @param blocks the ComponentProfile objects for the blocks
+     * @param blocks      the ComponentProfile objects for the blocks
      * @param classLoader the Classloader to load type from
+     *
      * @throws Exception if an error occurs
      */
     private void verifyBlocksType( final ComponentProfile[] blocks,
@@ -187,16 +200,16 @@ public class SarVerifier
     {
         for( int i = 0; i < blocks.length; i++ )
         {
-            verifyBlockType( blocks[ i ], classLoader );
+            verifyBlockType( blocks[i], classLoader );
         }
     }
 
     /**
-     * Verfiy that specified Block designate classes that implement the
-     * advertised interfaces.
+     * Verfiy that specified Block designate classes that implement the advertised interfaces.
      *
-     * @param block the BlockMetaData object for the blocks
+     * @param block       the BlockMetaData object for the blocks
      * @param classLoader the classloader to load type from
+     *
      * @throws Exception if an error occurs
      */
     private void verifyBlockType( final ComponentProfile block,
@@ -243,8 +256,9 @@ public class SarVerifier
     /**
      * Verfiy that all listeners implement BlockListener.
      *
-     * @param listeners the BlockListenerMetaData objects for the listeners
+     * @param listeners   the BlockListenerMetaData objects for the listeners
      * @param classLoader the classloader to load type from
+     *
      * @throws Exception if an error occurs
      */
     private void verifyListenersType( final ComponentProfile[] listeners,
@@ -253,16 +267,16 @@ public class SarVerifier
     {
         for( int i = 0; i < listeners.length; i++ )
         {
-            verifyListenerType( listeners[ i ], classLoader );
+            verifyListenerType( listeners[i], classLoader );
         }
     }
 
     /**
-     * Verfiy that specified Listener class implements the BlockListener
-     * interface.
+     * Verfiy that specified Listener class implements the BlockListener interface.
      *
-     * @param listener the BlockListenerMetaData object for the listener
+     * @param listener    the BlockListenerMetaData object for the listener
      * @param classLoader the classloader to laod type from
+     *
      * @throws Exception if an error occurs
      */
     private void verifyListenerType( final ComponentProfile listener,
@@ -285,6 +299,7 @@ public class SarVerifier
      * Verify that the Sat name specified is valid.
      *
      * @param name the sar name
+     *
      * @throws Exception if an error occurs
      */
     private void verifySarName( final String name )
@@ -298,10 +313,10 @@ public class SarVerifier
     }
 
     /**
-     * Return true if specified name is valid. Valid names consist of letters,
-     * digits or the '-' & '.' characters.
+     * Return true if specified name is valid. Valid names consist of letters, digits or the '-' & '.' characters.
      *
      * @param name the name to check
+     *
      * @return true if valid, false otherwise
      */
     public boolean isValidName( final String name )
@@ -321,12 +336,12 @@ public class SarVerifier
     }
 
     /**
-     * Verify that the names of the specified blocks and listeners are unique.
-     * It is not valid for the same name to be used in multiple Blocks and or
-     * BlockListeners.
+     * Verify that the names of the specified blocks and listeners are unique. It is not valid for the same name to be
+     * used in multiple Blocks and or BlockListeners.
      *
-     * @param blocks the Blocks
+     * @param blocks    the Blocks
      * @param listeners the listeners
+     *
      * @throws Exception if an error occurs
      */
     private void checkNamesUnique( final ComponentProfile[] blocks,
@@ -335,28 +350,27 @@ public class SarVerifier
     {
         for( int i = 0; i < blocks.length; i++ )
         {
-            final String name = blocks[ i ].getTemplate().getName();
+            final String name = blocks[i].getTemplate().getName();
             checkNameUnique( name, blocks, listeners, i, -1 );
         }
 
         for( int i = 0; i < listeners.length; i++ )
         {
-            final String name = listeners[ i ].getTemplate().getName();
+            final String name = listeners[i].getTemplate().getName();
             checkNameUnique( name, blocks, listeners, -1, i );
         }
     }
 
     /**
-     * Verify that the specified name is unique among specified blocks and
-     * listeners except for those indexes specified.
+     * Verify that the specified name is unique among specified blocks and listeners except for those indexes
+     * specified.
      *
-     * @param name the name to check for
-     * @param blocks the Blocks
-     * @param listeners the listeners
-     * @param blockIndex the index of block that is allowed to match in name (or
-     * -1 if name designates a listener)
-     * @param listenerIndex the index of listener that is allowed to match in
-     * name (or -1 if name designates a block)
+     * @param name          the name to check for
+     * @param blocks        the Blocks
+     * @param listeners     the listeners
+     * @param blockIndex    the index of block that is allowed to match in name (or -1 if name designates a listener)
+     * @param listenerIndex the index of listener that is allowed to match in name (or -1 if name designates a block)
+     *
      * @throws Exception if an error occurs
      */
     private void checkNameUnique( final String name,
@@ -369,7 +383,7 @@ public class SarVerifier
         //Verify no blocks have the same name
         for( int i = 0; i < blocks.length; i++ )
         {
-            final String other = blocks[ i ].getTemplate().getName();
+            final String other = blocks[i].getTemplate().getName();
             if( blockIndex != i && name.equals( other ) )
             {
                 final String message = REZ.format( "duplicate-name", name );
@@ -380,7 +394,7 @@ public class SarVerifier
         //Verify no listeners have the same name
         for( int i = 0; i < listeners.length; i++ )
         {
-            final String other = listeners[ i ].getTemplate().getName();
+            final String other = listeners[i].getTemplate().getName();
             if( listenerIndex != i && name.equals( other ) )
             {
                 final String message = REZ.format( "duplicate-name", name );
@@ -390,10 +404,10 @@ public class SarVerifier
     }
 
     /**
-     * Load class with specified name and throw a IllegalStateException if
-     * unable to load class.
+     * Load class with specified name and throw a IllegalStateException if unable to load class.
      *
      * @param classname the name of class to load
+     *
      * @return the Class object
      */
     private static Class getClass( final String classname )
