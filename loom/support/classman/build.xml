@@ -42,9 +42,11 @@
 
     <target name="test" description="o Run the test cases" depends="build,build-test-data">
         <mkdir dir="${target.reports}"/>
+        <property name="target.basedir" file="target/classes"/>
+        <echo message="target.basedir=${target.basedir}"/>
         <junit dir="./" printSummary="yes"
             haltonfailure="true" fork="true" haltonerror="true">
-            <sysproperty key="basedir" value="${target.classes}"/>
+            <sysproperty key="basedir" value="${target.basedir}"/>
             <formatter usefile="true" type="plain"/>
             <formatter usefile="false" type="plain"/>
             <classpath>
