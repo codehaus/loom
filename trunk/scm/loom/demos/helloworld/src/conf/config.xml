@@ -1,22 +1,9 @@
 <?xml version="1.0"?>
 <config>
 
-    <thread-pool>
-        <name>MyThreadPool</name>
-        <priority>5</priority>
-        <is-daemon>false</is-daemon>
-        <resource-limiting>false</resource-limiting>
-        <max-threads>10</max-threads>
-        <max-idle>5</max-idle>
-    </thread-pool>
-
     <helloworldserver>
         <port>8999</port>
         <bind>127.0.0.1</bind>
-        <helloworldhandler>
-            <connectiontimeout>360000</connectiontimeout>
-        </helloworldhandler>
-        <test></test>
     </helloworldserver>
 
 </config>

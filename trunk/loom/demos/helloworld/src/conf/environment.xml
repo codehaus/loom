@@ -3,16 +3,8 @@
 <environment>
 
     <logs>
-
-        <category name="" target="default"
-            priority="DEBUG"/>
-        <category name="objectstorage" target="objectstorage-target"
-            priority="DEBUG"/>
-
-        <log-target name="default"
-            location="/logs/demo.log"/>
-        <log-target name="objectstorage-target"
-            location="/logs/objectstorage.log"/>
+        <category name="" target="default" priority="DEBUG"/>
+        <log-target name="default" location="/logs/demo.log"/>
     </logs>
 
 </environment>

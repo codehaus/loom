@@ -4,32 +4,24 @@
 
 <assembly>
 
-    <block class="org.codehaus.spice.threadpool.impl.AvalonCommonsThreadPool"
-        name="thread-pool"/>
-
     <!-- The Connection Manager block -->
     <block class="org.codehaus.spice.netserve.connection.impl.AvalonAcceptorManager"
-        name="connections">
-        <provide name="thread-pool"
-            role="org.codehaus.spice.threadpool.ThreadPool"/>
+      name="connections">
     </block>
 
     <!-- The Socket Manager block -->
-    <block class="org.codehaus.spice.netserve.sockets.impl.DefaultServerSocketFactory" name="sockets"/>
+    <block class="org.codehaus.spice.netserve.sockets.impl.DefaultServerSocketFactory"
+      name="sockets"/>
 
-    <!-- The RMIfication block -->
-    <block class="org.apache.avalon.cornerstone.blocks.rmification.DefaultRMIfication"
-        name="rmification"/>
-
-    <!--                                        -->
-    <!-- Below this section are the demo blocks -->
-    <!--                                        -->
+    <!--                            -->
+    <!-- The Hello World demo block -->
+    <!--                            -->
     <block class="org.codehaus.loom.demos.helloworld.HelloWorldServerImpl"
-        name="helloworldserver">
+      name="helloworldserver">
         <provide name="sockets"
-            role="org.codehaus.spice.netserve.sockets.ServerSocketFactory"/>
+          role="org.codehaus.spice.netserve.sockets.ServerSocketFactory"/>
         <provide name="connections"
-            role="org.codehaus.spice.netserve.connection.SocketAcceptorManager"/>
+          role="org.codehaus.spice.netserve.connection.SocketAcceptorManager"/>
     </block>
 
 </assembly>
