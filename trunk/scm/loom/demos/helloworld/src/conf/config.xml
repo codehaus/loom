@@ -1,7 +1,4 @@
 <?xml version="1.0"?>
-<!DOCTYPE config PUBLIC "-//LOOM/Config DTD Version 1.0//EN" 
-                  "http://loom.jcontainer.org/dtds/config_1_0.dtd">
-
 <config>
 
   <thread-manager>
