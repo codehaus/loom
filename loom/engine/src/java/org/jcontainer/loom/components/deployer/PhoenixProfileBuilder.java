@@ -29,7 +29,7 @@ import org.jcontainer.loom.tools.profile.ProfileBuilder;
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.12 $ $Date: 2003-10-16 00:40:51 $
+ * @version $Revision: 1.13 $ $Date: 2003-10-16 00:56:16 $
  */
 public class PhoenixProfileBuilder
     extends AbstractLogEnabled
@@ -136,7 +136,6 @@ public class PhoenixProfileBuilder
     private static ComponentInfo createListenerInfo( final Class type )
     {
         return new ComponentInfo( type,
-                                  type.getName(),
                                   ServiceDescriptor.EMPTY_SET,
                                   DependencyDescriptor.EMPTY_SET,
                                   null );

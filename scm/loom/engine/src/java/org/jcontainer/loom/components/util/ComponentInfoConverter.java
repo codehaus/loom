@@ -20,7 +20,7 @@ import org.jcontainer.loom.tools.info.SchemaDescriptor;
  * Convert a {@link org.jcontainer.loom.tools.info.ComponentInfo} into a {@link BlockInfo}.
  *
  * @author <a href="mailto:peter@apache.org">Peter Donald</a>
- * @version $Revision: 1.7 $ $Date: 2003-10-15 04:20:42 $
+ * @version $Revision: 1.8 $ $Date: 2003-10-16 00:56:16 $
  */
 public class ComponentInfoConverter
 {
@@ -126,7 +126,7 @@ public class ComponentInfoConverter
         }
 
         return new BlockDescriptor( null,
-                                    component.getImplementationKey(),
+                                    component.getType().getName(),
                                     schemaType,
                                     VERSION );
     }

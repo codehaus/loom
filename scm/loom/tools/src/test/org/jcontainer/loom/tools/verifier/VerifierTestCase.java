@@ -23,7 +23,7 @@ import org.jcontainer.loom.tools.profile.PartitionProfile;
  *  An basic test case for the LogManager.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.16 $ $Date: 2003-10-16 00:40:51 $
+ * @version $Revision: 1.17 $ $Date: 2003-10-16 00:56:16 $
  */
 public class VerifierTestCase
     extends TestCase
@@ -78,12 +78,12 @@ public class VerifierTestCase
                                    new PartitionMetaData[]{blockMetaData, listenerMetaData},
                                    ComponentMetaData.EMPTY_SET );
         final ComponentInfo c1Info =
-            new ComponentInfo( null, C1_IMPLEMENTATION_KEY,
+            new ComponentInfo( null,
                                ServiceDescriptor.EMPTY_SET,
                                new DependencyDescriptor[]{new DependencyDescriptor( C2_SERVICE, C2_SERVICE, false )},
                                null );
         final ComponentInfo c2Info =
-            new ComponentInfo( null, C2_IMPLEMENTATION_KEY,
+            new ComponentInfo( null,
                                new ServiceDescriptor[]{new ServiceDescriptor( C2_SERVICE )},
                                DependencyDescriptor.EMPTY_SET,
                                null );
@@ -166,14 +166,14 @@ public class VerifierTestCase
                                    ComponentMetaData.EMPTY_SET );
 
         final ComponentInfo c3Info =
-            new ComponentInfo( null, C3_IMPLEMENTATION_KEY,
+            new ComponentInfo( null,
                                ServiceDescriptor.EMPTY_SET,
                                new DependencyDescriptor[]{new DependencyDescriptor( C2_SERVICE + DependencyDescriptor.ARRAY_POSTFIX,
                                                                                     C2_SERVICE + DependencyDescriptor.ARRAY_POSTFIX,
                                                                                     false )},
                                null );
         final ComponentInfo c2Info =
-            new ComponentInfo( null, C2_IMPLEMENTATION_KEY,
+            new ComponentInfo( null,
                                new ServiceDescriptor[]{new ServiceDescriptor( C2_SERVICE )},
                                DependencyDescriptor.EMPTY_SET,
                                null );
