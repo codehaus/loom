@@ -26,7 +26,7 @@ import org.jcontainer.loom.interfaces.Kernel;
 
 /**
  * @author Paul Hammant <a href="mailto:Paul_Hammant@yahoo.com">Paul_Hammant@yahoo.com</a>
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class BeanShellGUI
     extends JPanel
@@ -55,7 +55,7 @@ public class BeanShellGUI
         m_interpreter = new Interpreter( m_jConsole );
         try
         {
-            m_interpreter.set( "phoenix-kernel", kernel );
+            m_interpreter.set( "loom-kernel", kernel );
         }
         catch( EvalError ee )
         {

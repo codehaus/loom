@@ -40,7 +40,7 @@ import org.realityforge.salt.io.IOUtil;
  * and installing it as appropriate.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-07-13 00:15:36 $
+ * @version $Revision: 1.3 $ $Date: 2003-07-24 08:51:48 $
  */
 public class DefaultInstaller
     extends AbstractLogEnabled
@@ -83,13 +83,13 @@ public class DefaultInstaller
     public void parameterize( final Parameters parameters )
         throws ParameterException
     {
-        final String phoenixHome = parameters.getParameter( "phoenix.home" );
-        final String defaultWorkDir = phoenixHome + File.separator + "work";
-        final String defaultAppsDir = phoenixHome + File.separator + "apps";
+        final String loomHome = parameters.getParameter( "loom.home" );
+        final String defaultWorkDir = loomHome + File.separator + "work";
+        final String defaultAppsDir = loomHome + File.separator + "apps";
         final String rawWorkDir =
-            parameters.getParameter( "phoenix.work.dir", defaultWorkDir );
+            parameters.getParameter( "loom.work.dir", defaultWorkDir );
         final String rawAppsDir =
-            parameters.getParameter( "phoenix.apps.dir", defaultAppsDir );
+            parameters.getParameter( "loom.apps.dir", defaultAppsDir );
 
         final File workDir = new File( rawWorkDir );
         try

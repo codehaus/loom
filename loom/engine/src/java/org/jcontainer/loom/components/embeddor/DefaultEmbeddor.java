@@ -71,7 +71,7 @@ public class DefaultEmbeddor
      */
     private Context m_context;
 
-    private String m_phoenixHome;
+    private String m_loomHome;
 
     private EmbeddorEntry[] m_entries;
 
@@ -149,15 +149,15 @@ public class DefaultEmbeddor
      * the DefaultEmbeddor implementation of Embeddor. Note that some of
      * the embedded components may support other parameters.</p>
      * <ul>
-     * <li><b>phoenix.home</b>, the home directory of phoenix. Defaults
+     * <li><b>loom.home</b>, the home directory of loom. Defaults
      * to "..".</li>
      * <li><b>log-destination</b>, the file to save log
-     * messages in. If omitted, ${phoenix.home}/logs/phoenix.log is used.</li>
+     * messages in. If omitted, ${loom.home}/logs/loom.log is used.</li>
      * <li><b>log-priority</b>, the priority at which log messages are filteres.
      * If omitted, then INFO will be default level used.</li>
      * <li><b>applications-directory</b>, the directory in which
      * the default applications to be loaded by the kernel are stored
-     * (in .sar format). Defaults to ${phoenix.home}/apps</li>
+     * (in .sar format). Defaults to ${loom.home}/apps</li>
      * </ul>
      *
      * @param parameters the Parameters for embeddor
@@ -167,10 +167,10 @@ public class DefaultEmbeddor
         throws ParameterException
     {
         m_parameters = parameters;
-        m_phoenixHome = m_parameters.getParameter( "phoenix.home", ".." );
+        m_loomHome = m_parameters.getParameter( "loom.home", ".." );
         m_persistent = m_parameters.getParameterAsBoolean( "persistent", false );
-        m_appDir = m_parameters.getParameter( "phoenix.apps.dir",
-                                              m_phoenixHome + DEFAULT_APPS_PATH );
+        m_appDir = m_parameters.getParameter( "loom.apps.dir",
+                                              m_loomHome + DEFAULT_APPS_PATH );
     }
 
     public void configure( final Configuration configuration )
@@ -360,11 +360,11 @@ public class DefaultEmbeddor
     /**
      * Get location of Phoenix installation
      *
-     * @return the home directory of phoenix
+     * @return the home directory of loom
      */
     public String getHomeDirectory()
     {
-        return m_phoenixHome;
+        return m_loomHome;
     }
 
     /**
@@ -539,7 +539,7 @@ public class DefaultEmbeddor
     {
         final Parameters parameters = new Parameters();
         parameters.merge( m_parameters );
-        parameters.setParameter( "phoenix.apps.dir", m_appDir );
+        parameters.setParameter( "loom.apps.dir", m_appDir );
         return parameters;
     }
 

@@ -33,7 +33,7 @@ import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
 /**
- * This component is responsible for managing phoenix instance.
+ * This component is responsible for managing loom instance.
  *
  * @author <a href="mail@leosimons.com">Leo Simons</a>
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
@@ -50,9 +50,9 @@ public class MX4JSystemManager
         "com.sun.jndi.rmi.profile.RegistryContextFactory";
     private static final String DEFAULT_HTTPADAPTER_HOST = "localhost";
     private static final int DEFAULT_HTTPADAPTER_PORT =
-        Integer.getInteger( "phoenix.adapter.http", 8082 ).intValue();
+        Integer.getInteger( "loom.adapter.http", 8082 ).intValue();
     private static final int DEFAULT_RMIREGISTRY_PORT =
-        Integer.getInteger( "phoenix.rmiregistry.port", 1099 ).intValue();
+        Integer.getInteger( "loom.rmiregistry.port", 1099 ).intValue();
 
     private String m_host;
     private int m_port;
@@ -68,7 +68,7 @@ public class MX4JSystemManager
     public void contextualize( final Context context )
         throws ContextException
     {
-        m_homeDir = (File)context.get( "phoenix.home" );
+        m_homeDir = (File)context.get( "loom.home" );
     }
 
     public void configure( final Configuration configuration )

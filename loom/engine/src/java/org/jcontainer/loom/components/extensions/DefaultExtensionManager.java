@@ -27,7 +27,7 @@ import org.realityforge.salt.i18n.Resources;
 
 /**
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-07-13 00:15:36 $
+ * @version $Revision: 1.3 $ $Date: 2003-07-24 08:51:48 $
  */
 public class DefaultExtensionManager
     extends org.jcontainer.loom.components.extensions.pkgmgr.impl.DefaultExtensionManager
@@ -48,9 +48,9 @@ public class DefaultExtensionManager
     public void parameterize( final Parameters parameters )
         throws ParameterException
     {
-        final String phoenixHome = parameters.getParameter( "phoenix.home" );
-        final String defaultExtPath = phoenixHome + File.separator + "ext";
-        m_rawPath = parameters.getParameter( "phoenix.ext.path", defaultExtPath );
+        final String loomHome = parameters.getParameter( "loom.home" );
+        final String defaultExtPath = loomHome + File.separator + "ext";
+        m_rawPath = parameters.getParameter( "loom.ext.path", defaultExtPath );
     }
 
     public void initialize()
