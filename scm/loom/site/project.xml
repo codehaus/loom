@@ -119,6 +119,11 @@
             <artifactId>loom-extension</artifactId>
             <version>${pom.currentVersion}</version>
         </dependency>
+        <dependency><!-- for metaclass-runtime -->
+            <groupId>asm</groupId>
+            <artifactId>asm</artifactId>
+            <version>1.4</version>
+        </dependency>
         <dependency><!-- for spice-configkit -->
             <id>isorelax</id>
             <version>20020414</version>
