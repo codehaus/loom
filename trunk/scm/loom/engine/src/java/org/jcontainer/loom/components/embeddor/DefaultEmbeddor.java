@@ -114,6 +114,7 @@ import org.jcontainer.loom.interfaces.EmbeddorMBean;
 import org.jcontainer.loom.interfaces.Kernel;
 import org.jcontainer.loom.interfaces.SystemManager;
 import org.jcontainer.loom.interfaces.LoomException;
+import org.jcontainer.loom.components.util.ExtensionFileFilter;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
 
@@ -216,9 +217,9 @@ public class DefaultEmbeddor
      * type include parameters used to setup proeprties of the embeddor.
      * The second type include the implementation names of the components
      * that the Embeddor manages. For instance if you want to replace the
-     * {@link org.jcontainer.loom.interfaces.ConfigurationRepository}
+     * {@link org.jcontainer.loom.interfaces.ConfigurationInterceptor}
      * with your own repository you would pass in a parameter such as;</p>
-     * <p>org.jcontainer.loom.interfaces.ConfigurationRepository =
+     * <p>org.jcontainer.loom.interfaces.ConfigurationInterceptor =
      * com.biz.MyCustomConfigurationRepository</p>
      *
      * <p>Of the other type of parameters, the following are supported by

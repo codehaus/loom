@@ -106,7 +106,7 @@ import org.apache.avalon.phoenix.BlockContext;
 import org.jcomponent.loggerstore.LoggerStore;
 import org.jcontainer.loom.interfaces.ClassLoaderManager;
 import org.jcontainer.loom.interfaces.ClassLoaderSet;
-import org.jcontainer.loom.interfaces.ConfigurationRepository;
+import org.jcontainer.loom.interfaces.ConfigurationInterceptor;
 import org.jcontainer.loom.interfaces.ConfigurationValidator;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.Deployer;
@@ -144,7 +144,7 @@ public class DefaultDeployer
     private LogManager m_logManager;
     private Kernel m_kernel;
     private Installer m_installer;
-    private ConfigurationRepository m_repository;
+    private ConfigurationInterceptor m_repository;
     private ClassLoaderManager m_classLoaderManager;
     private ConfigurationValidator m_validator;
 
@@ -158,8 +158,8 @@ public class DefaultDeployer
         throws ServiceException
     {
         m_kernel = (Kernel)serviceManager.lookup( Kernel.class.getName() );
-        m_repository = (ConfigurationRepository)serviceManager.
-            lookup( ConfigurationRepository.class.getName() );
+        m_repository = (ConfigurationInterceptor)serviceManager.
+            lookup( ConfigurationInterceptor.class.getName() );
         m_classLoaderManager = (ClassLoaderManager)serviceManager.
             lookup( ClassLoaderManager.class.getName() );
         m_logManager = (LogManager)serviceManager.lookup( LogManager.class.getName() );
