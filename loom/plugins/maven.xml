@@ -5,16 +5,14 @@
     <attainGoal name="build"/>
   </goal>
 
-  <goal 
-    name="build"
-    description="Build each plugin into an installable jar">
+  <goal name="build"
+    description="Build all plugins">
     <maven:reactor
       basedir="${basedir}"
       includes="*/project.xml"
       goals="build"
       banner="Building"
-      ignoreFailures="true"
-    />
+      ignoreFailures="true"/>
   </goal>
 
   <goal 
@@ -25,31 +23,27 @@
       includes="*/project.xml"
       goals="install"
       banner="Installing"
-      ignoreFailures="true"
-    />
+      ignoreFailures="true"/>
   </goal>
 
-  <goal 
-    name="deploy"
+  <goal name="deploy"
     description="Deploys each plugin">
     <maven:reactor
       basedir="${basedir}"
       includes="*/project.xml"
       goals="deploy"
       banner="Deploying"
-      ignoreFailures="true"
-    />
+      ignoreFailures="true"/>
   </goal>
 
-  <goal name="clean-all"
+  <goal name="clean"
     description="Cleans each plugin">
     <maven:reactor
       basedir="${basedir}"
       includes="*/project.xml"
       goals="clean"
       banner="Cleaning"
-      ignoreFailures="false"
-    />
+      ignoreFailures="false"/>
   </goal>
 
   <goal name="docs"
@@ -59,8 +53,7 @@
       includes="*/project.xml"
       goals="xdoc"
       banner="Generating Docs"
-      ignoreFailures="false"
-    />
+      ignoreFailures="false"/>
   </goal>
 
 </project>
