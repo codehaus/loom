@@ -29,4 +29,4 @@ LOOM_HOME=`cd "$PRGDIR/.." ; pwd`
 
 unset THIS_PROG
 
-$LOOM_HOME/bin/loom.sh run $*
+$LOOM_HOME/bin/loom.sh run -t $*
