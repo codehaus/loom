@@ -11,9 +11,8 @@
 package org.jcontainer.loom.tools.verifier;
 
 import org.apache.avalon.framework.logger.Logger;
-import org.apache.avalon.phoenix.containerkit.metadata.ComponentMetaData;
-import org.apache.avalon.phoenix.containerkit.verifier.AssemblyVerifier;
 import org.apache.avalon.phoenix.interfaces.ContainerConstants;
+import org.jcontainer.loom.tools.metadata.ComponentMetaData;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
@@ -43,7 +42,7 @@ import org.realityforge.salt.i18n.Resources;
  * </ul>
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-06-29 00:45:53 $
+ * @version $Revision: 1.5 $ $Date: 2003-06-29 00:51:16 $
  */
 public class SarVerifier
     extends AssemblyVerifier

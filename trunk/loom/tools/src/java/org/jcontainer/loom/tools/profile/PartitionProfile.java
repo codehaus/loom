@@ -7,7 +7,7 @@
  */
 package org.jcontainer.loom.tools.profile;
 
-import org.apache.avalon.phoenix.containerkit.metadata.PartitionMetaData;
+import org.jcontainer.loom.tools.metadata.PartitionMetaData;
 
 /**
  * The PartitionProfile contains the set of data required
@@ -16,7 +16,7 @@ import org.apache.avalon.phoenix.containerkit.metadata.PartitionMetaData;
  * objects.
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-29 00:45:53 $
+ * @version $Revision: 1.3 $ $Date: 2003-06-29 00:51:16 $
  */
 public class PartitionProfile
 {
@@ -26,7 +26,7 @@ public class PartitionProfile
     public static final PartitionProfile[] EMPTY_SET = new PartitionProfile[ 0 ];
 
     /**
-     * The {@link org.apache.avalon.phoenix.containerkit.metadata.PartitionMetaData} for this partition.
+     * The {@link org.jcontainer.loom.tools.metadata.PartitionMetaData} for this partition.
      */
     private final PartitionMetaData m_metaData;
 
