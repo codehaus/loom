@@ -8,13 +8,13 @@
 package org.jcontainer.loom.tools.ant;
 
 import org.apache.avalon.framework.logger.ConsoleLogger;
-import org.apache.avalon.phoenix.framework.tools.verifier.InfoVerifier;
 import org.apache.tools.ant.AntClassLoader;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 import org.apache.tools.ant.types.Path;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.infobuilder.InfoBuilder;
+import org.jcontainer.loom.tools.verifier.InfoVerifier;
 
 /**
  * Simple task to load a {@link org.jcontainer.loom.tools.info.ComponentInfo} descriptor,
@@ -22,7 +22,7 @@ import org.jcontainer.loom.tools.infobuilder.InfoBuilder;
  * is compatible with the {@link org.jcontainer.loom.tools.info.ComponentInfo}.
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-06-26 09:35:27 $
+ * @version $Revision: 1.4 $ $Date: 2003-06-26 09:42:03 $
  */
 public class ComponentVerifierTask
     extends Task

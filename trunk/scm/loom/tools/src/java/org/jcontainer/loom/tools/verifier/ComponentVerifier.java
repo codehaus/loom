@@ -24,15 +24,15 @@ import org.apache.avalon.framework.logger.LogEnabled;
 import org.apache.avalon.framework.parameters.Parameterizable;
 import org.apache.avalon.framework.parameters.Reparameterizable;
 import org.apache.avalon.framework.service.Serviceable;
-import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
+import org.realityforge.salt.i18n.Resources;
 
 /**
  * Utility class to help verify that component respects the
  * rules of an Avalon component.
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-26 09:41:28 $
+ * @version $Revision: 1.2 $ $Date: 2003-06-26 09:42:03 $
  */
 public class ComponentVerifier
     extends AbstractLogEnabled

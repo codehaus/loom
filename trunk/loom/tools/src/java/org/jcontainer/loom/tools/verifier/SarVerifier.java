@@ -15,8 +15,6 @@ import org.apache.avalon.phoenix.containerkit.metadata.ComponentMetaData;
 import org.apache.avalon.phoenix.containerkit.profile.ComponentProfile;
 import org.apache.avalon.phoenix.containerkit.profile.PartitionProfile;
 import org.apache.avalon.phoenix.containerkit.verifier.AssemblyVerifier;
-import org.apache.avalon.phoenix.framework.tools.verifier.InfoVerifier;
-import org.apache.avalon.phoenix.framework.tools.verifier.VerifyException;
 import org.apache.avalon.phoenix.interfaces.ContainerConstants;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
@@ -47,7 +45,7 @@ import org.realityforge.salt.i18n.Resources;
  * </ul>
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-26 08:52:32 $
+ * @version $Revision: 1.3 $ $Date: 2003-06-26 09:42:03 $
  */
 public class SarVerifier
     extends AssemblyVerifier
@@ -75,7 +73,7 @@ public class SarVerifier
      *
      * @param profile the Sar profile
      * @param classLoader the classloader to load types from
-     * @throws org.apache.avalon.phoenix.framework.tools.verifier.VerifyException if an error occurs
+     * @throws org.jcontainer.loom.tools.verifier.VerifyException if an error occurs
      */
     public void verifySar( final PartitionProfile profile,
                            final ClassLoader classLoader )
@@ -114,7 +112,7 @@ public class SarVerifier
      *
      * @param blocks the ComponentProfile objects for the blocks
      * @param classLoader the Classloader to load type from
-     * @throws org.apache.avalon.phoenix.framework.tools.verifier.VerifyException if an error occurs
+     * @throws org.jcontainer.loom.tools.verifier.VerifyException if an error occurs
      */
     private void verifyBlocksType( final ComponentProfile[] blocks,
                                    final ClassLoader classLoader )
@@ -132,7 +130,7 @@ public class SarVerifier
      *
      * @param block the BlockMetaData object for the blocks
      * @param classLoader the classloader to load type from
-     * @throws org.apache.avalon.phoenix.framework.tools.verifier.VerifyException if an error occurs
+     * @throws org.jcontainer.loom.tools.verifier.VerifyException if an error occurs
      */
     private void verifyBlockType( final ComponentProfile block,
                                   final ClassLoader classLoader )
@@ -182,7 +180,7 @@ public class SarVerifier
      *
      * @param listeners the BlockListenerMetaData objects for the listeners
      * @param classLoader the classloader to load type from
-     * @throws org.apache.avalon.phoenix.framework.tools.verifier.VerifyException if an error occurs
+     * @throws org.jcontainer.loom.tools.verifier.VerifyException if an error occurs
      */
     private void verifyListenersType( final ComponentProfile[] listeners,
                                       final ClassLoader classLoader )
@@ -199,7 +197,7 @@ public class SarVerifier
      *
      * @param listener the BlockListenerMetaData object for the listener
      * @param classLoader the classloader to laod type from
-     * @throws org.apache.avalon.phoenix.framework.tools.verifier.VerifyException if an error occurs
+     * @throws org.jcontainer.loom.tools.verifier.VerifyException if an error occurs
      */
     private void verifyListenerType( final ComponentProfile listener,
                                      final ClassLoader classLoader )
@@ -221,7 +219,7 @@ public class SarVerifier
      * Verify that the Sat name specified is valid.
      *
      * @param name the sar name
-     * @throws org.apache.avalon.phoenix.framework.tools.verifier.VerifyException if an error occurs
+     * @throws org.jcontainer.loom.tools.verifier.VerifyException if an error occurs
      */
     private void verifySarName( final String name )
         throws VerifyException
@@ -263,7 +261,7 @@ public class SarVerifier
      *
      * @param blocks the Blocks
      * @param listeners the listeners
-     * @throws org.apache.avalon.phoenix.framework.tools.verifier.VerifyException if an error occurs
+     * @throws org.jcontainer.loom.tools.verifier.VerifyException if an error occurs
      */
     private void checkNamesUnique( final ComponentProfile[] blocks,
                                    final ComponentProfile[] listeners )
@@ -293,7 +291,7 @@ public class SarVerifier
      *                   match in name (or -1 if name designates a listener)
      * @param listenerIndex the index of listener that is allowed to
      *                      match in name (or -1 if name designates a block)
-     * @throws org.apache.avalon.phoenix.framework.tools.verifier.VerifyException if an error occurs
+     * @throws org.jcontainer.loom.tools.verifier.VerifyException if an error occurs
      */
     private void checkNameUnique( final String name,
                                   final ComponentProfile[] blocks,
