@@ -12,7 +12,7 @@ package org.jcontainer.loom.tools;
  * building component assemblys.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-07-03 06:44:22 $
+ * @version $Revision: 1.2 $ $Date: 2003-07-07 10:22:37 $
  */
 public interface LoomToolConstants
 {
@@ -24,5 +24,5 @@ public interface LoomToolConstants
     /**
      * Name of partition containing listeners.
      */
-    String LISTENER_PARTITION = "Loom:Listener";
+    String LISTENER_PARTITION = "Loom:ListenerPartition";
 }
