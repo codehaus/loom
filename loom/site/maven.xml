@@ -88,4 +88,19 @@
         </j:forEach>
     </goal>
 
+    <postGoal name="aggregate-components-source">
+        <ant:mkdir dir="${maven.aggregated.src}/java/org/jcontainer/loom/interfaces"/>
+        <ant:tstamp/>
+        <j:file name="${maven.aggregated.src}/java/org/jcontainer/loom/interfaces/Version.java"
+            omitXmlDeclaration="true" escapeText="false" >
+            package org.jcontainer.loom.interfaces;
+            interface Version
+            {
+            String SOFTWARE = "${pom.name}";
+            String VERSION = "${pom.currentVersion}";
+            String DATE = "${TODAY}";
+            }
+        </j:file>
+    </postGoal>
+
 </project>
