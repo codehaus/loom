@@ -11,14 +11,14 @@ import java.io.File;
 import java.io.InputStream;
 import org.apache.avalon.framework.logger.Logger;
 import org.apache.excalibur.instrument.InstrumentManager;
-import org.jcomponent.alchemist.LoggerAlchemist;
+import org.codehaus.spice.alchemist.LoggerAlchemist;
 import org.jcontainer.loom.components.instrument.NoopInstrumentManager;
 import org.jcontainer.loom.components.util.profile.PartitionProfile;
 import org.jcontainer.loom.interfaces.ApplicationContext;
 
 /**
  * @author Peter Donald
- * @version $Revision: 1.9 $ $Date: 2003-12-04 07:57:05 $
+ * @version $Revision: 1.10 $ $Date: 2003-12-15 17:32:46 $
  */
 class MockApplicationContext
     implements ApplicationContext

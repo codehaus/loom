@@ -121,9 +121,9 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>jcomponent</groupId>
-            <artifactId>jcomponent-alchemist</artifactId>
-            <version>20031025.132828</version>
+            <groupId>spice</groupId>
+            <artifactId>spice-alchemist</artifactId>
+            <version>20031120.105516</version>
             <properties>
                 <category>container</category>
             </properties>
@@ -235,10 +235,10 @@
                 <category>container</category>
             </properties>
         </dependency>
-        <dependency> <!-- for jcomponent-loggerstore -->
+        <dependency> <!-- for spice-loggerstore -->
             <groupId>excalibur</groupId>
             <artifactId>excalibur-logger</artifactId>
-            <version>20030713</version>
+            <version>20031215.105842</version>
             <properties>
                 <category>container</category>
             </properties>

@@ -27,22 +27,22 @@
             <version>4.0.4</version>
         </dependency>
         <dependency>
-            <groupId>jcomponent</groupId>
-            <artifactId>jcomponent-netserve</artifactId>
-            <version>20031107.190306</version>
+            <groupId>spice</groupId>
+            <artifactId>spice-netserve</artifactId>
+            <version>1.0-b1</version>
             <properties>
                 <sar.bundle>true</sar.bundle>
             </properties>
         </dependency>
         <dependency>
-            <groupId>jcomponent</groupId>
-            <artifactId>jcomponent-threadpool</artifactId>
-            <version>20030831.040503</version>
+            <groupId>spice</groupId>
+            <artifactId>spice-threadpool</artifactId>
+            <version>1.0-b1</version>
             <properties>
                 <sar.bundle>true</sar.bundle>
             </properties>
         </dependency>
-        <dependency> <!-- for jcomponent-threadpool -->
+        <dependency> <!-- for spice-threadpool -->
             <id>commons-pool</id>
             <version>20030623.172700</version>
             <properties>
