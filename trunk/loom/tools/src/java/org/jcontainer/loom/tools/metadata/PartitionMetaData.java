@@ -19,7 +19,7 @@ import org.jcontainer.loom.tools.info.FeatureDescriptor;
  * each other.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-29 01:07:36 $
+ * @version $Revision: 1.3 $ $Date: 2003-07-19 01:51:59 $
  */
 public class PartitionMetaData
     extends FeatureDescriptor
@@ -149,7 +149,8 @@ public class PartitionMetaData
                 return partition;
             }
         }
-        return null;
+
+        throw new IllegalArgumentException( "Missing partition named " + name );
     }
 
     /**
