@@ -63,13 +63,6 @@
             </properties>
         </dependency>
         <dependency>
-            <id>excalibur-monitor</id>
-            <version>1.1</version>
-            <properties>
-                <category>container</category>
-            </properties>
-        </dependency>
-        <dependency>
             <id>excalibur-instrument</id>
             <version>1.0</version>
             <properties>
