@@ -93,9 +93,6 @@ import java.util.Observer;
 import org.apache.avalon.framework.container.ContainerUtil;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.logger.Logger;
-import org.apache.avalon.framework.parameters.ParameterException;
-import org.apache.avalon.framework.parameters.Parameterizable;
-import org.apache.avalon.framework.parameters.Parameters;
 import org.jcontainer.dna.Active;
 import org.jcontainer.dna.Composable;
 import org.jcontainer.dna.Configurable;
@@ -103,7 +100,11 @@ import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.ConfigurationException;
 import org.jcontainer.dna.MissingResourceException;
 import org.jcontainer.dna.ResourceLocator;
+import org.jcontainer.dna.Parameterizable;
+import org.jcontainer.dna.Parameters;
+import org.jcontainer.dna.ParameterException;
 import org.jcontainer.dna.impl.DefaultResourceLocator;
+import org.jcontainer.dna.impl.DefaultParameters;
 import org.jcontainer.loom.components.util.ExtensionFileFilter;
 import org.jcontainer.loom.components.ParameterConstants;
 import org.jcontainer.loom.interfaces.ContainerConstants;
@@ -593,7 +594,7 @@ public class DefaultEmbeddor
         final Logger childLogger = getLogger().getChildLogger( loggerName );
         ContainerUtil.enableLogging( object, childLogger );
         org.jcontainer.dna.impl.ContainerUtil.compose( object, getResourceLocator() );
-        ContainerUtil.parameterize( object, createChildParameters() );
+        org.jcontainer.dna.impl.ContainerUtil.parameterize( object, createChildParameters() );
         org.jcontainer.dna.impl.ContainerUtil.configure( object, config );
         org.jcontainer.dna.impl.ContainerUtil.initialize( object );
         ContainerUtil.start( object );
@@ -601,10 +602,21 @@ public class DefaultEmbeddor
 
     private Parameters createChildParameters()
     {
-        final Parameters parameters = new Parameters();
-        parameters.merge( m_parameters );
-        parameters.setParameter( "loom.apps.dir", m_appDir );
+        final DefaultParameters parameters = new DefaultParameters();
+        copyValue( ParameterConstants.EXT_PATH, parameters );
+        copyValue( ParameterConstants.HOME_DIR, parameters );
+        copyValue( ParameterConstants.WORK_DIR, parameters );
+        parameters.setParameter( ParameterConstants.APPS_DIR, m_appDir );
         return parameters;
+    }
+
+    private void copyValue( final String name, final DefaultParameters parameters )
+    {
+        final String value = m_parameters.getParameter( name, null );
+        if( null != value )
+        {
+            parameters.setParameter( name, value );
+        }
     }
 
     private void shutdownComponents()

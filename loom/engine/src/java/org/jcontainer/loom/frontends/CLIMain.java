@@ -96,13 +96,13 @@ import org.apache.avalon.framework.container.ContainerUtil;
 import org.apache.avalon.framework.logger.AvalonFormatter;
 import org.apache.avalon.framework.logger.LogKitLogger;
 import org.apache.avalon.framework.logger.Logger;
-import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.log.Hierarchy;
 import org.apache.log.LogTarget;
 import org.apache.log.Priority;
 import org.apache.log.output.io.FileTarget;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.impl.ConfigurationUtil;
+import org.jcontainer.dna.impl.DefaultParameters;
 import org.jcontainer.dna.impl.DefaultResourceLocator;
 import org.jcontainer.loom.components.ParameterConstants;
 import org.jcontainer.loom.components.util.ConfigUtil;
@@ -270,16 +270,8 @@ public final class CLIMain
 
             ContainerUtil.enableLogging( m_embeddor,
                                          createLogger( properties ) );
-            ContainerUtil.parameterize( m_embeddor, Parameters.fromProperties( properties ) );
-            final DefaultResourceLocator locator = new DefaultResourceLocator();
-            final Iterator iterator = data.keySet().iterator();
-            while( iterator.hasNext() )
-            {
-                final String key = (String)iterator.next();
-                final Object value = data.get( key );
-                locator.put( key, value );
-            }
-            org.jcontainer.dna.impl.ContainerUtil.compose( m_embeddor, locator );
+            org.jcontainer.dna.impl.ContainerUtil.parameterize( m_embeddor, reateParameters( properties ) );
+            org.jcontainer.dna.impl.ContainerUtil.compose( m_embeddor, createLocator( data ) );
             org.jcontainer.dna.impl.ContainerUtil.configure( m_embeddor, configuration );
             org.jcontainer.dna.impl.ContainerUtil.initialize( m_embeddor );
         }
@@ -290,6 +282,32 @@ public final class CLIMain
         }
 
         return true;
+    }
+
+    private DefaultParameters reateParameters( final Properties properties )
+    {
+        final DefaultParameters parameters = new DefaultParameters();
+        final Iterator iterator = properties.keySet().iterator();
+        while( iterator.hasNext() )
+        {
+            final String name = (String)iterator.next();
+            final String value = properties.getProperty( name );
+            parameters.setParameter( name, value );
+        }
+        return parameters;
+    }
+
+    private DefaultResourceLocator createLocator( final Map data )
+    {
+        final DefaultResourceLocator locator = new DefaultResourceLocator();
+        final Iterator iterator = data.keySet().iterator();
+        while( iterator.hasNext() )
+        {
+            final String key = (String)iterator.next();
+            final Object value = data.get( key );
+            locator.put( key, value );
+        }
+        return locator;
     }
 
     /**

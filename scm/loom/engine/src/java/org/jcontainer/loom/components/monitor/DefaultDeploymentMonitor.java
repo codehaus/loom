@@ -97,9 +97,6 @@ import org.apache.avalon.excalibur.monitor.impl.ActiveMonitor;
 import org.apache.avalon.framework.activity.Startable;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.logger.LogEnabled;
-import org.apache.avalon.framework.parameters.ParameterException;
-import org.apache.avalon.framework.parameters.Parameterizable;
-import org.apache.avalon.framework.parameters.Parameters;
 import org.jcontainer.loom.interfaces.Deployer;
 import org.jcontainer.loom.components.ParameterConstants;
 import org.jcontainer.dna.Configurable;
@@ -108,6 +105,9 @@ import org.jcontainer.dna.ConfigurationException;
 import org.jcontainer.dna.Composable;
 import org.jcontainer.dna.ResourceLocator;
 import org.jcontainer.dna.MissingResourceException;
+import org.jcontainer.dna.Parameterizable;
+import org.jcontainer.dna.Parameters;
+import org.jcontainer.dna.ParameterException;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.io.FileUtil;
@@ -118,7 +118,7 @@ import org.realityforge.salt.io.FileUtil;
  * application as necessary.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.8 $ $Date: 2003-10-05 08:10:20 $
+ * @version $Revision: 1.9 $ $Date: 2003-10-05 08:47:14 $
  */
 public class DefaultDeploymentMonitor
     extends AbstractLogEnabled

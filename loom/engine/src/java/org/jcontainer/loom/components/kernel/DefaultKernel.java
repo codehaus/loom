@@ -383,7 +383,8 @@ public class DefaultKernel
             if( null != application )
             {
                 entry.setApplication( null );
-                ContainerUtil.shutdown( application );
+                ContainerUtil.stop( application );
+                org.jcontainer.dna.impl.ContainerUtil.dispose( application );
             }
             else
             {
