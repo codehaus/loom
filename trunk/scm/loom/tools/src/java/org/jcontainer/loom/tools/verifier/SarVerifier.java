@@ -41,8 +41,8 @@ import org.realityforge.salt.i18n.Resources;
  *       BlockListener interface.</li>
  * </ul>
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-06-29 00:51:16 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.6 $ $Date: 2003-06-29 01:07:36 $
  */
 public class SarVerifier
     extends AssemblyVerifier

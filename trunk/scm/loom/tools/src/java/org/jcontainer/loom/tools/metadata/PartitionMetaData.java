@@ -18,8 +18,8 @@ import org.jcontainer.loom.tools.info.FeatureDescriptor;
  * other partitions. Partitions can also be nested one inside
  * each other.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-29 00:49:10 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.2 $ $Date: 2003-06-29 01:07:36 $
  */
 public class PartitionMetaData
     extends FeatureDescriptor

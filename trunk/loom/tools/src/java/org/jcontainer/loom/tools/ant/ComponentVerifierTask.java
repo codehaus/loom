@@ -21,8 +21,8 @@ import org.jcontainer.loom.tools.verifier.InfoVerifier;
  * a component class and verify that the implementation class
  * is compatible with the {@link org.jcontainer.loom.tools.info.ComponentInfo}.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-06-26 09:42:03 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.5 $ $Date: 2003-06-29 01:07:35 $
  */
 public class ComponentVerifierTask
     extends Task

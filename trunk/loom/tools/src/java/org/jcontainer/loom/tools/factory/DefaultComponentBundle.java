@@ -14,8 +14,8 @@ import org.jcontainer.loom.tools.factory.ComponentBundle;
 /**
  *
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-29 00:53:44 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.2 $ $Date: 2003-06-29 01:07:35 $
  */
 public class DefaultComponentBundle
     implements ComponentBundle

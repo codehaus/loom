@@ -42,8 +42,8 @@ import org.realityforge.salt.i18n.Resources;
  *       schema is are declared.</li>
  * </ul>
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-06-29 00:45:53 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.5 $ $Date: 2003-06-29 01:07:36 $
  */
 public class InfoVerifier
     extends AbstractLogEnabled

@@ -16,8 +16,8 @@ import org.jcontainer.loom.tools.info.ComponentInfo;
  * so that the Info objesct could be built from non-XML sources
  * and no XML classes need be in the classpath.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-26 09:34:20 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.2 $ $Date: 2003-06-29 01:07:35 $
  */
 public interface InfoReader
 {

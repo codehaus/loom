@@ -18,8 +18,8 @@ import org.jcontainer.loom.tools.info.ContextDescriptor;
  * from QDoxs JavaClass object model. Subclasses interpret different dialects
  * of javadocs markup.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-26 08:42:06 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.2 $ $Date: 2003-06-29 01:07:36 $
  */
 class AbstractInfoBuilder
 {

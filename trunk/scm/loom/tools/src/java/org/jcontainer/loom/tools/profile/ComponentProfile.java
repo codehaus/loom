@@ -17,8 +17,8 @@ import org.jcontainer.loom.tools.metadata.ComponentMetaData;
  * and the {@link org.jcontainer.loom.tools.metadata.ComponentMetaData} defines the data required to
  * construct a specific instance of the component.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-29 00:51:16 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.3 $ $Date: 2003-06-29 01:07:36 $
  */
 public class ComponentProfile
 {

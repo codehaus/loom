@@ -17,8 +17,8 @@ package org.jcontainer.loom.tools.info;
  * Attributes that can be used to store extra information
  * about Logger requirements.</p>
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-26 08:52:31 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.3 $ $Date: 2003-06-29 01:07:35 $
  */
 public class LoggerDescriptor
     extends FeatureDescriptor

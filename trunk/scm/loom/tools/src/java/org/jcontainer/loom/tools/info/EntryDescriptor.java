@@ -27,8 +27,8 @@ import java.io.Serializable;
  * about entry. See {@link org.jcontainer.loom.tools.info.ComponentDescriptor} for example
  * of how to declare the container specific Attributes.</p>
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-26 08:37:43 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.2 $ $Date: 2003-06-29 01:07:35 $
  */
 public final class EntryDescriptor
     extends FeatureDescriptor

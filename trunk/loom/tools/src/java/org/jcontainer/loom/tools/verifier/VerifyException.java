@@ -10,8 +10,8 @@ package org.jcontainer.loom.tools.verifier;
 /**
  * Exception to indicate error verifying a Block or application.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-26 09:41:28 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.2 $ $Date: 2003-06-29 01:07:36 $
  */
 public final class VerifyException
     extends Exception
