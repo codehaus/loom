@@ -4,9 +4,6 @@
  * This software is published under the terms of the JContainer
  * Software License version 1.1, a copy of which has been included
  * with this distribution in the LICENSE.txt file.
- *
- * This product includes software developed by the
- * Apache Software Foundation (http://www.apache.org/).
  */
 package org.jcontainer.loom.components.util;
 
@@ -22,12 +19,14 @@ import org.jcontainer.loom.tools.info.Attribute;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.metadata.ComponentMetaData;
 import org.jcontainer.loom.tools.LoomToolConstants;
+import org.jcontainer.loom.tools.profile.ComponentProfile;
+import org.jcontainer.loom.tools.profile.PartitionProfile;
 
 /**
  * Convert a {@link org.jcontainer.loom.tools.metadata.ComponentMetaData} into a {@link BlockMetaData}.
  *
  * @author <a href="mailto:peter@apache.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-07-19 01:51:33 $
+ * @version $Revision: 1.3 $ $Date: 2003-07-19 01:54:23 $
  */
 public class ComponentMetaDataConverter
 {
@@ -35,12 +34,12 @@ public class ComponentMetaDataConverter
     {
     }
 
-    public static SarMetaData toSarMetaData( final org.jcontainer.loom.tools.profile.PartitionProfile partition,
+    public static SarMetaData toSarMetaData( final PartitionProfile partition,
                                              final File homeDirectory )
     {
-        final org.jcontainer.loom.tools.profile.PartitionProfile blockPartition =
+        final PartitionProfile blockPartition =
             partition.getPartition( LoomToolConstants.BLOCK_PARTITION );
-        final org.jcontainer.loom.tools.profile.PartitionProfile listenerPartition =
+        final PartitionProfile listenerPartition =
             partition.getPartition( LoomToolConstants.LISTENER_PARTITION );
         final BlockListenerMetaData[] listeners =
             toBlockListeners( listenerPartition.getMetaData().getComponents() );
@@ -53,18 +52,18 @@ public class ComponentMetaDataConverter
     }
 
     /**
-     * Convert a set of {@link org.jcontainer.loom.tools.profile.ComponentProfile} object
+     * Convert a set of {@link ComponentProfile} object
      * into a set of {@link BlockMetaData} objects.
      *
-     * @param components the {@link org.jcontainer.loom.tools.profile.ComponentProfile} objects
+     * @param components the {@link ComponentProfile} objects
      * @return the {@link BlockMetaData} objects
      */
-    private static BlockMetaData[] toBlocks( final org.jcontainer.loom.tools.profile.ComponentProfile[] components )
+    private static BlockMetaData[] toBlocks( final ComponentProfile[] components )
     {
         final ArrayList listenerSet = new ArrayList();
         for( int i = 0; i < components.length; i++ )
         {
-            final org.jcontainer.loom.tools.profile.ComponentProfile component = components[ i ];
+            final ComponentProfile component = components[ i ];
             final BlockMetaData block =
                 toBlockMetaData( component.getMetaData(), component.getInfo() );
             listenerSet.add( block );
@@ -153,7 +152,3 @@ public class ComponentMetaDataConverter
         return (DependencyMetaData[])depends.toArray( new DependencyMetaData[ depends.size() ] );
     }
 }
-
-
-
-
