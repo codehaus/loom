@@ -271,7 +271,7 @@ public final class CLIMain
 
             m_logger = createLogger( properties );
             ContainerUtil.enableLogging( m_embeddor, m_logger );
-            ContainerUtil.parameterize( m_embeddor, reateParameters( properties ) );
+            ContainerUtil.parameterize( m_embeddor, createParameters( properties ) );
             ContainerUtil.compose( m_embeddor, createLocator( data ) );
             ContainerUtil.configure( m_embeddor, configuration );
             ContainerUtil.initialize( m_embeddor );
@@ -285,7 +285,7 @@ public final class CLIMain
         return true;
     }
 
-    private DefaultParameters reateParameters( final Properties properties )
+    private DefaultParameters createParameters( final Properties properties )
     {
         final DefaultParameters parameters = new DefaultParameters();
         final Iterator iterator = properties.keySet().iterator();
