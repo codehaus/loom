@@ -10,28 +10,15 @@
 
     <dependencies>
         <dependency>
+            <groupId>loom</groupId>
+            <artifactId>maven-sar-plugin</artifactId>
+            <version>${pom.currentVersion}</version>
+            <type>plugin</type>
+        </dependency>
+        <dependency>
             <groupId>spice</groupId>
             <artifactId>spice-metaclass-jmx</artifactId>
             <version>20031017.081651</version>
-        </dependency>
-        <dependency>
-            <id>qdox</id>
-            <version>1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>loom</groupId>
-            <artifactId>loom-info</artifactId>
-            <version>${pom.currentVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>dna</groupId>
-            <artifactId>dna-tools</artifactId>
-            <version>20031016.083103</version>
-        </dependency>
-        <dependency>
-            <groupId>spice</groupId>
-            <artifactId>spice-metaclass</artifactId>
-            <version>20031005.002435</version>
         </dependency>
         <dependency>
             <groupId>dna</groupId>
