@@ -115,13 +115,6 @@
             </properties>
         </dependency>
         <dependency>
-            <id>bsh</id>
-            <version>1.2b7</version>
-            <properties>
-                <category>container</category>
-            </properties>
-        </dependency>
-        <dependency>
             <id>excalibur-instrument-manager-interfaces</id>
             <version>0.1</version>
             <properties>
