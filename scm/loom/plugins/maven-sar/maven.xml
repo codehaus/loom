@@ -16,8 +16,10 @@
             todir="${maven.repo.local}/${pom.groupId}/plugins"/>
         <ant:delete dir="${maven.home}/plugins/${maven.final.name}.jar"/>
         <ant:delete dir="${maven.home}/plugins/${maven.final.name}"/>
-        <ant:delete dir="${maven.home}/plugins">
-            <ant:include name="${pom.artifactID}-*"/>
+        <ant:delete>
+            <ant:fileset dir="${maven.home}/plugins">
+                <ant:include name="${pom.artifactID}-*"/>
+            </ant:fileset>
         </ant:delete>
     </goal>
 
