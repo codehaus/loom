@@ -220,7 +220,7 @@
                 <category>tools</category>
             </properties>
         </dependency>
-        <dependency> <!-- for unit testing -->
+        <dependency> <!-- for jcomponent-loggerstore -->
             <groupId>excalibur</groupId>
             <artifactId>excalibur-logger</artifactId>
             <version>20030713</version>
