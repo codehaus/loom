@@ -79,7 +79,17 @@
             </includes>
             <excludes>
                 <exclude>**/Abstract*.java</exclude>
-            </excludes>
+            </excludes>            
+	        <resources>
+                <resource>
+                    <directory>src/test</directory>
+                    <includes>
+                        <include>**/*.xml</include>
+                        <include>**/*.xinfo</include>
+                        <include>**/*.java</include>
+                    </includes>
+                </resource>
+            </resources>
         </unitTest>
 
         <resources>
