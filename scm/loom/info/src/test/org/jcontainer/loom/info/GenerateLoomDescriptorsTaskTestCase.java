@@ -11,20 +11,19 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Modifier;
 import junit.framework.TestCase;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.types.FileSet;
+import org.realityforge.metaclass.Attributes;
 import org.realityforge.metaclass.introspector.DefaultMetaClassAccessor;
 import org.realityforge.metaclass.io.MetaClassIOBinary;
-import org.realityforge.metaclass.model.ClassDescriptor;
 import org.realityforge.metaclass.model.Attribute;
-import org.realityforge.metaclass.Attributes;
+import org.realityforge.metaclass.model.ClassDescriptor;
 
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-10-16 08:43:28 $
+ * @version $Revision: 1.3 $ $Date: 2003-10-25 22:54:36 $
  */
 public class GenerateLoomDescriptorsTaskTestCase
     extends TestCase
@@ -72,7 +71,6 @@ public class GenerateLoomDescriptorsTaskTestCase
         final FileInputStream input = new FileInputStream( destFile );
         final ClassDescriptor descriptor = io.deserializeClass( input );
         assertEquals( "descriptor.name", "com.biz.MyClass", descriptor.getName() );
-        assertEquals( "descriptor.modifiers", Modifier.PUBLIC, descriptor.getModifiers() );
         assertEquals( "descriptor.attributes.length", 1, descriptor.getAttributes().length );
         assertEquals( "descriptor.attributes[0].name", "dna.component", descriptor.getAttributes()[ 0 ].getName() );
         assertEquals( "descriptor.methods.length", 0, descriptor.getMethods().length );
@@ -129,7 +127,6 @@ public class GenerateLoomDescriptorsTaskTestCase
         final FileInputStream input = new FileInputStream( destFile );
         final ClassDescriptor descriptor = io.deserializeClass( input );
         assertEquals( "descriptor.name", "com.biz.MyClass", descriptor.getName() );
-        assertEquals( "descriptor.modifiers", Modifier.PUBLIC, descriptor.getModifiers() );
         final Attribute[] classAttributes = descriptor.getAttributes();
         assertEquals( "descriptor.attributes.length", 1, classAttributes.length );
         final Attribute componentAttribute =
