@@ -116,8 +116,8 @@ import org.codehaus.spice.netserve.sockets.ServerSocketFactory;
  */
 public final class HelloWorldServerImpl
     extends AbstractLogEnabled
-    implements HelloWorldServer, HelloWorldServerMBean, Contextualizable,
-     Serviceable, Configurable, Initializable, Disposable
+    implements HelloWorldServer, Contextualizable, Serviceable,
+      Configurable, Initializable, Disposable
 {
 
     private ServerSocketFactory m_socketManager;
