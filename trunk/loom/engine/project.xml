@@ -22,7 +22,7 @@
         <dependency>
             <groupId>dna</groupId>
             <artifactId>dna-impl</artifactId>
-            <version>1.0</version>
+            <version>20031005.014103</version>
         </dependency>
         <dependency>
             <groupId>avalon</groupId>
