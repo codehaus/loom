@@ -4,6 +4,12 @@
     xmlns:ant="jelly:ant"
     default="java:jar">
 
+    <preGoal name="xdoc:copy-user-resources">
+        <ant:mkdir dir="${basedir}/xdocs"/>
+        <ant:copy file="${basedir}/src/java/org/realityforge/classman/reader/classloader.dtd"
+            todir="${basedir}/target/docs"/>
+    </preGoal>
+
     <preGoal name="test:compile">
         <mkdir dir="target/testdata"/>
         <javac destdir="target/testdata"
