@@ -7,11 +7,11 @@
  */
 package org.jcontainer.loom.components.util.factory;
 
-
+import org.jcontainer.loom.components.util.info.ComponentInfo;
 
 /**
  * This interface defines the mechanism via which a
- * component or its associated {@link org.jcontainer.loom.components.util.factory.ComponentBundle} can
+ * component or its associated ComponentInfo can
  * be created.
  *
  * <p>Usually the component or ComponentBundle will just be loaded
@@ -27,19 +27,18 @@ package org.jcontainer.loom.components.util.factory;
  * objects via different mechanisms.</p>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-10-16 14:45:46 $
+ * @version $Revision: 1.2 $ $Date: 2003-11-03 06:17:58 $
  */
 public interface ComponentFactory
 {
     /**
-     * Create a {@link org.jcontainer.loom.components.util.factory.ComponentBundle} for component
-     * specified by implementationKey.
+     * Create a ComponentInfo for component specified by implementationKey.
      *
      * @param implementationKey the key indicating type of component (usually classname)
-     * @return the ComponentBundle for component
-     * @throws java.lang.Exception if unable to create Info object
+     * @return the ComponentInfo for component
+     * @throws Exception if unable to create Info object
      */
-    ComponentBundle createBundle( String implementationKey )
+    ComponentInfo createInfo( String implementationKey )
         throws Exception;
 
     /**

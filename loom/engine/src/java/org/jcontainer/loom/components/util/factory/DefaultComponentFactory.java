@@ -17,7 +17,7 @@ import org.jcontainer.loom.components.util.infobuilder.BlockInfoReader;
  * that simply creates components from a ClassLoader.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-11-03 06:11:26 $
+ * @version $Revision: 1.3 $ $Date: 2003-11-03 06:17:58 $
  */
 public class DefaultComponentFactory
     implements ComponentFactory
@@ -56,15 +56,15 @@ public class DefaultComponentFactory
      * Create a component by creating info for class
      * with specified name and loaded from factorys ClassLoader.
      *
-     * @see ComponentFactory#createBundle
+     * @see ComponentFactory#createInfo
      */
-    public ComponentBundle createBundle( final String implementationKey )
+    public ComponentInfo createInfo( final String implementationKey )
         throws Exception
     {
-        ComponentBundle bundle = (ComponentBundle)m_infos.get( implementationKey );
+        ComponentInfo bundle = (ComponentInfo)m_infos.get( implementationKey );
         if( null == bundle )
         {
-            bundle = newBundle( implementationKey );
+            bundle = createComponentInfo( implementationKey );
             m_infos.put( implementationKey, bundle );
         }
 
@@ -82,21 +82,6 @@ public class DefaultComponentFactory
     {
         final Class clazz = getClassLoader().loadClass( implementationKey );
         return clazz.newInstance();
-    }
-
-    /**
-     * Create a bundle for specified key.
-     * Note that this does not cache bundle in any way.
-     *
-     * @param implementationKey the implementationKey
-     * @return the new ComponentBundle
-     * @throws Exception if unable to create bundle
-     */
-    protected ComponentBundle newBundle( final String implementationKey )
-        throws Exception
-    {
-        final ComponentInfo info = createComponentInfo( implementationKey );
-        return new DefaultComponentBundle( info );
     }
 
     /**

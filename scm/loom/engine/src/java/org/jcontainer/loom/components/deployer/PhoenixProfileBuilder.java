@@ -10,7 +10,6 @@ package org.jcontainer.loom.components.deployer;
 import java.util.ArrayList;
 import java.util.Map;
 import org.jcontainer.loom.components.assembler.Assembler;
-import org.jcontainer.loom.components.util.factory.ComponentBundle;
 import org.jcontainer.loom.components.util.factory.ComponentFactory;
 import org.jcontainer.loom.components.util.factory.DefaultComponentFactory;
 import org.jcontainer.loom.components.util.info.ComponentInfo;
@@ -26,7 +25,7 @@ import org.jcontainer.loom.interfaces.ContainerConstants;
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.15 $ $Date: 2003-10-16 14:45:45 $
+ * @version $Revision: 1.16 $ $Date: 2003-11-03 06:17:58 $
  */
 public class PhoenixProfileBuilder
     implements ProfileBuilder
@@ -102,9 +101,8 @@ public class PhoenixProfileBuilder
         for( int i = 0; i < components.length; i++ )
         {
             final ComponentMetaData component = components[ i ];
-            final ComponentBundle bundle =
-                factory.createBundle( component.getImplementationKey() );
-            final ComponentInfo info = bundle.getComponentInfo();
+            final ComponentInfo info =
+                factory.createInfo( component.getImplementationKey() );
             final ComponentProfile profile = new ComponentProfile( info, component );
             componentSet.add( profile );
         }
