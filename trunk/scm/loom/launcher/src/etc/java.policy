@@ -7,3 +7,8 @@ grant codeBase "file:${loom.home}/bin/*" {
 grant codeBase "file:${loom.home}/container/lib/*" {
 	permission java.security.AllPermission;
 };
+
+// Give full permissions to wrapper.jar
+grant codeBase "file:${loom.home}/ext/wrapper.jar" {
+    permission java.security.AllPermission;
+}; 
