@@ -91,8 +91,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Map;
+
 import org.apache.avalon.framework.logger.Logger;
 import org.apache.excalibur.instrument.InstrumentManager;
+import org.jcomponent.alchemist.LoggerAlchemist;
 import org.jcomponent.loggerstore.LoggerStore;
 import org.jcontainer.dna.AbstractLogEnabled;
 import org.jcontainer.dna.Active;
@@ -296,7 +298,7 @@ class DefaultApplicationContext
     public Logger getLogger( final String category )
         throws Exception
     {
-        return m_store.getLogger( category );
+        return LoggerAlchemist.toAvalonLogger( m_store.getLogger( category ) );
     }
 
     /**

@@ -91,22 +91,25 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.container.ContainerUtil;
 import org.apache.avalon.framework.context.Context;
 import org.apache.avalon.framework.context.DefaultContext;
 import org.apache.avalon.framework.logger.Logger;
 import org.apache.avalon.phoenix.BlockContext;
-import org.jcomponent.loggerstore.DOMLog4JLoggerStoreFactory;
-import org.jcomponent.loggerstore.InitialLoggerStoreFactory;
-import org.jcomponent.loggerstore.Jdk14LoggerStoreFactory;
-import org.jcomponent.loggerstore.LogKitLoggerStoreFactory;
+import org.jcomponent.alchemist.LoggerAlchemist;
 import org.jcomponent.loggerstore.LoggerStore;
 import org.jcomponent.loggerstore.LoggerStoreFactory;
-import org.jcomponent.loggerstore.PropertyLog4JLoggerStoreFactory;
-import org.jcomponent.loggerstore.SimpleLogKitLoggerStoreFactory;
+import org.jcomponent.loggerstore.factories.DOMLog4JLoggerStoreFactory;
+import org.jcomponent.loggerstore.factories.InitialLoggerStoreFactory;
+import org.jcomponent.loggerstore.factories.Jdk14LoggerStoreFactory;
+import org.jcomponent.loggerstore.factories.LogKitLoggerStoreFactory;
+import org.jcomponent.loggerstore.factories.PropertyLog4JLoggerStoreFactory;
+import org.jcomponent.loggerstore.factories.SimpleLogKitLoggerStoreFactory;
 import org.jcontainer.dna.AbstractLogEnabled;
 import org.jcontainer.dna.ParameterException;
 import org.jcontainer.dna.Parameterizable;
@@ -114,7 +117,6 @@ import org.jcontainer.dna.Parameters;
 import org.jcontainer.dna.impl.ConfigurationUtil;
 import org.jcontainer.loom.components.ParameterConstants;
 import org.jcontainer.loom.components.util.ConfigurationConverter;
-import org.jcontainer.loom.components.util.DNAAvalonLogger;
 import org.jcontainer.loom.components.util.ResourceUtil;
 import org.jcontainer.loom.interfaces.LogManager;
 import org.realityforge.configkit.PropertyExpander;
@@ -274,7 +276,7 @@ public class DefaultLogManager
                 getLogger().debug( message );
             }
 
-            final DNAAvalonLogger logger = new DNAAvalonLogger( getLogger() );
+            Logger logger = LoggerAlchemist.toAvalonLogger( getLogger() );
             if( version.equals( "1.0" ) )
             {
                 final LoggerStoreFactory loggerManager = new SimpleLogKitLoggerStoreFactory();
