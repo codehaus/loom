@@ -1,88 +1,9 @@
-/* ====================================================================
- * JContainer Software License, version 1.1
+/*
+ * Copyright (C) The JContainer Group. All rights reserved.
  *
- * Copyright (c) 2003, JContainer Group. All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
- *
- * 3. Neither the name of the JContainer Group nor the name "Loom" nor
- *    the names of its contributors may be used to endorse or promote
- *    products derived from this software without specific prior
- *    written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
- * FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE
- * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
- * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
- * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
- * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
- *
- * ====================================================================
- *
- * JContainer Loom includes code from the Apache Software Foundation
- *
- * ====================================================================
- * The Apache Software License, Version 1.1
- *
- * Copyright (c) 1997-2003 The Apache Software Foundation. All rights
- * reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
- *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *    "This product includes software developed by the
- *    Apache Software Foundation (http://www.apache.org/)."
- *    Alternately, this acknowledgment may appear in the software
- *    itself, if and wherever such third-party acknowledgments
- *    normally appear.
- *
- * 4. The names "Jakarta", "Avalon", and "Apache Software Foundation"
- *    must not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact apache@apache.org.
- *
- * 5. Products derived from this software may not be called "Apache",
- *    nor may "Apache" appear in their name, without prior written
- *    permission of the Apache Software Foundation.
- *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE APACHE SOFTWARE FOUNDATION OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
+ * This software is published under the terms of the JContainer
+ * Software License version 1.1, a copy of which has been included
+ * with this distribution in the LICENSE.txt file.
  */
 package org.jcontainer.loom.components.validator;
 
@@ -98,6 +19,7 @@ import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.jcontainer.loom.interfaces.ConfigurationValidator;
 import org.jcontainer.loom.tools.configuration.ConfigurationBuilder;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
+import org.jcontainer.loom.tools.profile.ComponentProfile;
 import org.realityforge.configkit.ConfigValidator;
 import org.realityforge.configkit.ConfigValidatorFactory;
 import org.realityforge.configkit.ValidationResult;
@@ -122,7 +44,7 @@ import org.xml.sax.InputSource;
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author <a href="mailto:proyal at apache.org">Peter Royal</a>
- * @version $Revision: 1.2 $ $Date: 2003-08-17 18:27:33 $
+ * @version $Revision: 1.3 $ $Date: 2003-10-05 00:33:57 $
  * @phoenix.component
  */
 public class DefaultConfigurationValidator
@@ -161,7 +83,7 @@ public class DefaultConfigurationValidator
      * @return true if configuration is valid
      * @throws ConfigurationException if expected schema is missing
      */
-    public boolean isValid( final org.jcontainer.loom.tools.profile.ComponentProfile component,
+    public boolean isValid( final ComponentProfile component,
                             final ClassLoader classLoader )
         throws ConfigurationException
     {
@@ -251,7 +173,7 @@ public class DefaultConfigurationValidator
      * @return the InputSource for schema
      * @throws ConfigurationException if unable to locate schema
      */
-    private InputSource getSchemaInputSource( final org.jcontainer.loom.tools.profile.ComponentProfile component, final ClassLoader classLoader ) throws ConfigurationException
+    private InputSource getSchemaInputSource( final ComponentProfile component, final ClassLoader classLoader ) throws ConfigurationException
     {
         final SchemaDescriptor schema = component.getInfo().getConfigurationSchema();
         final String resource = calcSchemaResource( component );
@@ -278,7 +200,7 @@ public class DefaultConfigurationValidator
      * @param component the component profile
      * @return the absolute name of schema resource
      */
-    private String calcSchemaResource( final org.jcontainer.loom.tools.profile.ComponentProfile component )
+    private String calcSchemaResource( final ComponentProfile component )
     {
         final SchemaDescriptor schema = component.getInfo().getConfigurationSchema();
         final String location = schema.getLocation();
