@@ -109,16 +109,10 @@ import org.apache.avalon.framework.service.Serviceable;
  * @phoenix:block
  * @phoenix:service name="org.jcontainer.loom.demos.avalonlifecycle.Lifecycle1"
  * @author  Paul Hammant <Paul_Hammant@yahoo.com>
- * @version 1.0
  */
 public class Lifecycle1Impl implements LogEnabled, Startable, Initializable, Contextualizable,
     Serviceable, Configurable, Disposable, Lifecycle1
 {
-
-    /**
-     * The method from our service interface -> Lifecycle1
-     * @return
-     */
     public int myServiceMethod()
     {
         System.out.println( "Lifecycle1Impl.myServiceMethod() called." );
@@ -133,87 +127,57 @@ public class Lifecycle1Impl implements LogEnabled, Startable, Initializable, Con
         System.out.flush();
     }
 
-    // Lifecycle methods themselves.
-
-
-    /**
-     * Enable Logging
-     * @param logger The logger to use
-     */
     public void enableLogging( Logger logger )
     {
         System.out.println( "Lifecycle1Impl.enableLogging() called." );
         System.out.flush();
     }
 
-    /**
-     * Start
-     * @throws Exception If a problem
-     */
-    public void start() throws Exception
-    {
-        System.out.println( "Lifecycle1Impl.start() called." );
-        System.out.flush();
-    }
-
-    /**
-     * Stop
-     * @throws Exception If a problem
-     */
-    public void stop() throws Exception
-    {
-        System.out.println( "Lifecycle1Impl.stop() called." );
-        System.out.flush();
-    }
-
-    /**
-     * Initialize
-     * @throws Exception If a problem
-     */
-    public void initialize() throws Exception
-    {
-        System.out.println( "Lifecycle1Impl.initialize() called." );
-        System.out.flush();
-    }
-
-    /**
-     * Contextualize
-     * @throws ContextException If a problem
-     */
-    public void contextualize( Context context ) throws ContextException
+    public void contextualize( Context context )
+        throws ContextException
     {
         System.out.println( "Lifecycle1Impl.contextualize() called (things like base directory passed in here)." );
         System.out.flush();
     }
 
-    /**
-     * Service : No dependencies.
-     * @param serviceManager
-     * @throws ServiceException
-     */
-    public void service( ServiceManager serviceManager ) throws ServiceException
+    public void service( ServiceManager serviceManager )
+        throws ServiceException
     {
         System.out.println( "Lifecycle1Impl.service() called (lookup on other services possible now)." );
         System.out.flush();
     }
 
-    /**
-     * Configure
-     * @throws ConfigurationException If a problem
-     */
-    public void configure( Configuration configuration ) throws ConfigurationException
+    public void configure( Configuration configuration )
+        throws ConfigurationException
     {
         System.out.println( "Lifecycle1Impl.configure() called (configuration from config.xml passed here)." );
         System.out.flush();
     }
 
-    /**
-     * Dispose
-     */
+    public void initialize()
+        throws Exception
+    {
+        System.out.println( "Lifecycle1Impl.initialize() called." );
+        System.out.flush();
+    }
+
+    public void start()
+        throws Exception
+    {
+        System.out.println( "Lifecycle1Impl.start() called." );
+        System.out.flush();
+    }
+
+    public void stop()
+        throws Exception
+    {
+        System.out.println( "Lifecycle1Impl.stop() called." );
+        System.out.flush();
+    }
+
     public void dispose()
     {
         System.out.println( "Lifecycle1Impl.dispose() Called" );
         System.out.flush();
     }
-
 }
