@@ -9,14 +9,12 @@
  * Apache Software Foundation (http://www.apache.org/).
  */
 package org.realityforge.extension;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
-
 /**
  * <p>Utility class that represents either an available "Optional Package"
  * (formerly known as "Standard Extension") as described in the manifest
@@ -29,7 +27,7 @@ import java.util.jar.Manifest;
  *
  * @author <a href="mailto:craigmcc at apache.org">Craig R. McClanahan</a>
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-07-31 08:30:36 $
+ * @version $Revision: 1.3 $ $Date: 2003-08-04 01:52:53 $
  */
 public final class Extension
 {
@@ -38,7 +36,6 @@ public final class Extension
      * @see Attributes.Name#EXTENSION_LIST
      */
     public static final Attributes.Name EXTENSION_LIST = Attributes.Name.EXTENSION_LIST;
-
     /**
      * <code>Name</code> object for <code>Optional-Extension-List</code>
      * manifest attribute used for declaring optional dependencies on
@@ -51,83 +48,71 @@ public final class Extension
      */
     public static final Attributes.Name OPTIONAL_EXTENSION_LIST =
         new Attributes.Name( "Optional-Extension-List" );
-
     /**
      * Manifest Attribute Name object for EXTENSION_NAME.
      * @see Attributes.Name#EXTENSION_NAME
      */
     public static final Attributes.Name EXTENSION_NAME =
         Attributes.Name.EXTENSION_NAME;
-
     /**
      * Manifest Attribute Name object for SPECIFICATION_VERSION.
      * @see Attributes.Name#SPECIFICATION_VERSION
      */
     public static final Attributes.Name SPECIFICATION_VERSION =
         Attributes.Name.SPECIFICATION_VERSION;
-
     /**
      * Manifest Attribute Name object for SPECIFICATION_VENDOR.
      * @see Attributes.Name#SPECIFICATION_VENDOR
      */
     public static final Attributes.Name SPECIFICATION_VENDOR =
         Attributes.Name.SPECIFICATION_VENDOR;
-
     /**
      * Manifest Attribute Name object for IMPLEMENTATION_VERSION.
      * @see Attributes.Name#IMPLEMENTATION_VERSION
      */
     public static final Attributes.Name IMPLEMENTATION_VERSION =
         Attributes.Name.IMPLEMENTATION_VERSION;
-
     /**
      * Manifest Attribute Name object for IMPLEMENTATION_VENDOR.
      * @see Attributes.Name#IMPLEMENTATION_VENDOR
      */
     public static final Attributes.Name IMPLEMENTATION_VENDOR =
         Attributes.Name.IMPLEMENTATION_VENDOR;
-
     /**
      * Manifest Attribute Name object for IMPLEMENTATION_URL.
      * @see Attributes.Name#IMPLEMENTATION_URL
      */
     public static final Attributes.Name IMPLEMENTATION_URL =
         Attributes.Name.IMPLEMENTATION_URL;
-
     /**
      * Manifest Attribute Name object for IMPLEMENTATION_VENDOR_ID.
      * @see Attributes.Name#IMPLEMENTATION_VENDOR_ID
      */
     public static final Attributes.Name IMPLEMENTATION_VENDOR_ID =
         Attributes.Name.IMPLEMENTATION_VENDOR_ID;
-
     /**
      * Enum indicating that extension is compatible with other extension.
      */
     public static final Compatability COMPATIBLE =
         new Compatability( "COMPATIBLE" );
-
     /**
      * Enum indicating that extension requires an upgrade
      * of specification to be compatible with other extension.
      */
     public static final Compatability REQUIRE_SPECIFICATION_UPGRADE =
         new Compatability( "REQUIRE_SPECIFICATION_UPGRADE" );
-
     /**
      * Enum indicating that extension requires a vendor
      * switch to be compatible with other extension.
      */
     public static final Compatability REQUIRE_VENDOR_SWITCH =
         new Compatability( "REQUIRE_VENDOR_SWITCH" );
-
     /**
      * Enum indicating that extension requires an upgrade
      * of implementation to be compatible with other extension.
      */
     public static final Compatability REQUIRE_IMPLEMENTATION_UPGRADE =
         new Compatability( "REQUIRE_IMPLEMENTATION_UPGRADE" );
-
     /**
      * Enum indicating that extension is incompatible with
      * other extension in ways other than other enums
@@ -136,48 +121,40 @@ public final class Extension
      */
     public static final Compatability INCOMPATIBLE =
         new Compatability( "INCOMPATIBLE" );
-
     /**
      * The name of the optional package being made available, or required.
      */
     private String m_extensionName;
-
     /**
      * The version number (dotted decimal notation) of the specification
      * to which this optional package conforms.
      */
     private DeweyDecimal m_specificationVersion;
-
     /**
      * The name of the company or organization that originated the
      * specification to which this optional package conforms.
      */
     private String m_specificationVendor;
-
     /**
      * The unique identifier of the company that produced the optional
      * package contained in this JAR file.
      */
     private String m_implementationVendorID;
-
     /**
      * The name of the company or organization that produced this
      * implementation of this optional package.
      */
     private String m_implementationVendor;
-
     /**
      * The version number (dotted decimal notation) for this implementation
      * of the optional package.
      */
     private String m_implementationVersion;
-
     /**
      * The URL from which the most recent version of this optional package
      * can be obtained if it is not already installed.
      */
     private String m_implementationURL;
-
     /**
      * Return an array of <code>Extension</code> objects representing optional
      * packages that are available in the JAR file associated with the
@@ -193,9 +170,7 @@ public final class Extension
         {
             return new Extension[ 0 ];
         }
-
         final ArrayList results = new ArrayList();
-
         final Attributes mainAttributes = manifest.getMainAttributes();
         if( null != mainAttributes )
         {
@@ -205,7 +180,6 @@ public final class Extension
                 results.add( extension );
             }
         }
-
         final Map entries = manifest.getEntries();
         final Iterator keys = entries.keySet().iterator();
         while( keys.hasNext() )
@@ -218,10 +192,8 @@ public final class Extension
                 results.add( extension );
             }
         }
-
         return (Extension[])results.toArray( new Extension[ results.size() ] );
     }
-
     /**
      * Retrieve the set of <code>Extension</code> objects that are available
      * by the specified Manifest objects. If there are no such optional
@@ -233,7 +205,6 @@ public final class Extension
     public static Extension[] getAvailable( final Manifest[] manifests )
     {
         final ArrayList set = new ArrayList();
-
         for( int i = 0; i < manifests.length; i++ )
         {
             final Extension[] extensions = getAvailable( manifests[ i ] );
@@ -242,10 +213,8 @@ public final class Extension
                 set.add( extensions[ j ] );
             }
         }
-
         return (Extension[])set.toArray( new Extension[ set.size() ] );
     }
-
     /**
      * Return the set of <code>Extension</code> objects representing optional
      * packages that are required by the application contained in the JAR
@@ -259,7 +228,6 @@ public final class Extension
     {
         return getListed( manifest, EXTENSION_LIST );
     }
-
     /**
      * Retrieve the set of <code>Extension</code> objects that are required
      * by the specified Manifest objects. If there are no such optional
@@ -271,7 +239,6 @@ public final class Extension
     public static Extension[] getRequired( final Manifest[] manifests )
     {
         final ArrayList set = new ArrayList();
-
         for( int i = 0; i < manifests.length; i++ )
         {
             final Extension[] extensions = getRequired( manifests[ i ] );
@@ -280,10 +247,8 @@ public final class Extension
                 set.add( extensions[ j ] );
             }
         }
-
         return (Extension[])set.toArray( new Extension[ set.size() ] );
     }
-
     /**
      * Return the set of <code>Extension</code> objects representing "Optional
      * Packages" that the application declares they will use if present. If
@@ -296,7 +261,6 @@ public final class Extension
     {
         return getListed( manifest, OPTIONAL_EXTENSION_LIST );
     }
-
     /**
      * Add Extension to the specified manifest Attributes.
      *
@@ -308,7 +272,6 @@ public final class Extension
     {
         addExtension( extension, "", attributes );
     }
-
     /**
      * Add Extension to the specified manifest Attributes.
      * Use the specified prefix so that dependencies can added
@@ -324,42 +287,36 @@ public final class Extension
     {
         attributes.putValue( prefix + EXTENSION_NAME,
                              extension.getExtensionName() );
-
         final String specificationVendor = extension.getSpecificationVendor();
         if( null != specificationVendor )
         {
             attributes.putValue( prefix + SPECIFICATION_VENDOR,
                                  specificationVendor );
         }
-
         final DeweyDecimal specificationVersion = extension.getSpecificationVersion();
         if( null != specificationVersion )
         {
             attributes.putValue( prefix + SPECIFICATION_VERSION,
                                  specificationVersion.toString() );
         }
-
         final String implementationVendorID = extension.getImplementationVendorID();
         if( null != implementationVendorID )
         {
             attributes.putValue( prefix + IMPLEMENTATION_VENDOR_ID,
                                  implementationVendorID );
         }
-
         final String implementationVendor = extension.getImplementationVendor();
         if( null != implementationVendor )
         {
             attributes.putValue( prefix + IMPLEMENTATION_VENDOR,
                                  implementationVendor );
         }
-
         final String implementationVersion = extension.getImplementationVersion();
         if( null != implementationVersion )
         {
             attributes.putValue( prefix + IMPLEMENTATION_VERSION,
                                  implementationVersion.toString() );
         }
-
         final String implementationURL = extension.getImplementationURL();
         if( null != implementationURL )
         {
@@ -367,7 +324,6 @@ public final class Extension
                                  implementationURL );
         }
     }
-
     /**
      * The constructor to create Extension object.
      * Note that every component is allowed to be specified
@@ -395,7 +351,6 @@ public final class Extension
         }
         m_extensionName = extensionName;
         m_specificationVendor = specificationVendor;
-
         if( null != specificationVersion )
         {
             try
@@ -409,13 +364,11 @@ public final class Extension
                 throw new IllegalArgumentException( error );
             }
         }
-
         m_implementationURL = implementationURL;
         m_implementationVendor = implementationVendor;
         m_implementationVendorID = implementationVendorId;
         m_implementationVersion = implementationVersion;
     }
-
     /**
      * Get the name of the extension.
      *
@@ -425,7 +378,6 @@ public final class Extension
     {
         return m_extensionName;
     }
-
     /**
      * Get the vendor of the extensions specification.
      *
@@ -435,7 +387,6 @@ public final class Extension
     {
         return m_specificationVendor;
     }
-
     /**
      * Get the version of the extensions specification.
      *
@@ -445,7 +396,6 @@ public final class Extension
     {
         return m_specificationVersion;
     }
-
     /**
      * Get the url of the extensions implementation.
      *
@@ -455,7 +405,6 @@ public final class Extension
     {
         return m_implementationURL;
     }
-
     /**
      * Get the vendor of the extensions implementation.
      *
@@ -465,7 +414,6 @@ public final class Extension
     {
         return m_implementationVendor;
     }
-
     /**
      * Get the vendorID of the extensions implementation.
      *
@@ -475,7 +423,6 @@ public final class Extension
     {
         return m_implementationVendorID;
     }
-
     /**
      * Get the version of the extensions implementation.
      *
@@ -485,7 +432,6 @@ public final class Extension
     {
         return m_implementationVersion;
     }
-
     /**
      * Return a Compatibility enum indicating the relationship of this
      * <code>Extension</code> with the specified <code>Extension</code>.
@@ -501,7 +447,6 @@ public final class Extension
         {
             return INCOMPATIBLE;
         }
-
         // Available specification version must be >= required
         final DeweyDecimal specificationVersion = required.getSpecificationVersion();
         if( null != specificationVersion )
@@ -512,7 +457,6 @@ public final class Extension
                 return REQUIRE_SPECIFICATION_UPGRADE;
             }
         }
-
         // Implementation Vendor ID must match
         final String implementationVendorId = required.getImplementationVendorID();
         if( null != implementationVendorId )
@@ -524,11 +468,9 @@ public final class Extension
             }
         }
 
-
         // This available optional package satisfies the requirements
         return COMPATIBLE;
     }
-
     /**
      * Return <code>true</code> if the specified <code>Extension</code>
      * (which represents an optional package required by an application)
@@ -543,7 +485,6 @@ public final class Extension
     {
         return ( COMPATIBLE == getCompatibilityWith( required ) );
     }
-
     /**
      * Return a String representation of this object.
      *
@@ -553,12 +494,10 @@ public final class Extension
     {
         final String lineSeparator = System.getProperty( "line.separator" );
         final String brace = ": ";
-
         final StringBuffer sb = new StringBuffer( EXTENSION_NAME.toString() );
         sb.append( brace );
         sb.append( m_extensionName );
         sb.append( lineSeparator );
-
         if( null != m_specificationVersion )
         {
             sb.append( SPECIFICATION_VERSION );
@@ -566,7 +505,6 @@ public final class Extension
             sb.append( m_specificationVersion );
             sb.append( lineSeparator );
         }
-
         if( null != m_specificationVendor )
         {
             sb.append( SPECIFICATION_VENDOR );
@@ -574,7 +512,6 @@ public final class Extension
             sb.append( m_specificationVendor );
             sb.append( lineSeparator );
         }
-
         if( null != m_implementationVersion )
         {
             sb.append( IMPLEMENTATION_VERSION );
@@ -582,7 +519,6 @@ public final class Extension
             sb.append( m_implementationVersion );
             sb.append( lineSeparator );
         }
-
         if( null != m_implementationVendorID )
         {
             sb.append( IMPLEMENTATION_VENDOR_ID );
@@ -590,7 +526,6 @@ public final class Extension
             sb.append( m_implementationVendorID );
             sb.append( lineSeparator );
         }
-
         if( null != m_implementationVendor )
         {
             sb.append( IMPLEMENTATION_VENDOR );
@@ -598,7 +533,6 @@ public final class Extension
             sb.append( m_implementationVendor );
             sb.append( lineSeparator );
         }
-
         if( null != m_implementationURL )
         {
             sb.append( IMPLEMENTATION_URL );
@@ -606,10 +540,8 @@ public final class Extension
             sb.append( m_implementationURL );
             sb.append( lineSeparator );
         }
-
         return sb.toString();
     }
-
     /**
      * Return <code>true</code> if the first version number is greater than
      * or equal to the second; otherwise return <code>false</code>.
@@ -621,7 +553,6 @@ public final class Extension
     {
         return first.isGreaterThanOrEqual( second );
     }
-
     /**
      * Retrieve all the extensions listed under a particular key
      * (Usually EXTENSION_LIST or OPTIONAL_EXTENSION_LIST).
@@ -636,12 +567,10 @@ public final class Extension
     {
         final ArrayList results = new ArrayList();
         final Attributes mainAttributes = manifest.getMainAttributes();
-
         if( null != mainAttributes )
         {
             getExtension( mainAttributes, results, listKey );
         }
-
         final Map entries = manifest.getEntries();
         final Iterator keys = entries.keySet().iterator();
         while( keys.hasNext() )
@@ -650,10 +579,8 @@ public final class Extension
             final Attributes attributes = (Attributes)entries.get( key );
             getExtension( attributes, results, listKey );
         }
-
         return (Extension[])results.toArray( new Extension[ 0 ] );
     }
-
     /**
      * Add required optional packages defined in the specified attributes entry, if any.
      *
@@ -671,20 +598,17 @@ public final class Extension
         {
             return;
         }
-
         final String[] extentions = split( names, " " );
         for( int i = 0; i < extentions.length; i++ )
         {
             final String prefix = extentions[ i ] + "-";
             final Extension extension = getExtension( prefix, attributes );
-
             if( null != extension )
             {
                 required.add( extension );
             }
         }
     }
-
     /**
      * Splits the string on every token into an array of strings.
      *
@@ -696,15 +620,12 @@ public final class Extension
     {
         final StringTokenizer tokenizer = new StringTokenizer( string, onToken );
         final String[] result = new String[ tokenizer.countTokens() ];
-
         for( int i = 0; i < result.length; i++ )
         {
             result[ i ] = tokenizer.nextToken();
         }
-
         return result;
     }
-
     /**
      * Extract an Extension from Attributes.
      * Prefix indicates the prefix checked for each string.
@@ -727,12 +648,10 @@ public final class Extension
         {
             return null;
         }
-
         final String specVendorKey = prefix + SPECIFICATION_VENDOR;
         final String specVendor = getTrimmedString( attributes.getValue( specVendorKey ) );
         final String specVersionKey = prefix + SPECIFICATION_VERSION;
         final String specVersion = getTrimmedString( attributes.getValue( specVersionKey ) );
-
         final String impVersionKey = prefix + IMPLEMENTATION_VERSION;
         final String impVersion = getTrimmedString( attributes.getValue( impVersionKey ) );
         final String impVendorKey = prefix + IMPLEMENTATION_VENDOR;
@@ -741,11 +660,9 @@ public final class Extension
         final String impVendorId = getTrimmedString( attributes.getValue( impVendorIDKey ) );
         final String impURLKey = prefix + IMPLEMENTATION_URL;
         final String impURL = getTrimmedString( attributes.getValue( impURLKey ) );
-
         return new Extension( name, specVersion, specVendor, impVersion,
                               impVendor, impVendorId, impURL );
     }
-
     /**
      * Trim the supplied string if the string is non-null
      *
