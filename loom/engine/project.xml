@@ -10,6 +10,16 @@
 
     <dependencies>
         <dependency>
+            <groupId>dna</groupId>
+            <artifactId>dna-api</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>dna</groupId>
+            <artifactId>dna-impl</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
             <groupId>avalon</groupId>
             <artifactId>avalon-logkit</artifactId>
             <version>20030527</version>
