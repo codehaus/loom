@@ -102,7 +102,7 @@ import org.apache.avalon.phoenix.BlockContext;
 import org.codehaus.loom.components.util.ConfigurationConverter;
 import org.codehaus.loom.components.util.ResourceUtil;
 import org.codehaus.loom.interfaces.LogManager;
-import org.codehaus.spice.alchemist.LoggerAlchemist;
+import org.codehaus.spice.alchemist.logger.LoggerAlchemist;
 import org.codehaus.spice.configkit.PropertyExpander;
 import org.codehaus.spice.configkit.ResolverFactory;
 import org.codehaus.spice.loggerstore.LoggerStore;

@@ -14,11 +14,11 @@ import org.apache.excalibur.instrument.InstrumentManager;
 import org.codehaus.loom.components.instrument.NoopInstrumentManager;
 import org.codehaus.loom.components.util.profile.PartitionProfile;
 import org.codehaus.loom.interfaces.ApplicationContext;
-import org.codehaus.spice.alchemist.LoggerAlchemist;
+import org.codehaus.spice.alchemist.logger.LoggerAlchemist;
 
 /**
  * @author Peter Donald
- * @version $Revision: 1.2 $ $Date: 2004-05-01 12:48:33 $
+ * @version $Revision: 1.3 $ $Date: 2004-06-18 10:51:11 $
  */
 class MockApplicationContext
     implements ApplicationContext
