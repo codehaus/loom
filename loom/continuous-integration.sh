@@ -3,6 +3,7 @@
 mailto=jcontainer-interest@lists.codehaus.org
 #mailto=osi@pobox.com
 builddir=.
+logfile=cleanbuild.log
 
 #JAVA_HOME=/usr/local/j2sdk1.4.1
 #MAVEN_HOME=~bwalding/maven
@@ -24,15 +25,15 @@ cd $builddir
 rm -Rf ~/.maven/repository/loom/jars
 
 # Compile and test
-rm target/cleanbuild.log
-maven | tee target/cleanbuild.log
+rm $logfile
+maven | tee $logfile
 
 # See if the "compiling" file is there. If it is, compilation
 # failed.
-if grep "BUILD SUCCESSFUL" target/cleanbuild.log ; then
+if grep "BUILD SUCCESSFUL" $logfile ; then
       echo "Rebuild passed, emailing list"
-      tail target/cleanbuild.log | mail -s "[PASS] Loom compilation." $mailto
+      tail $logfile | mail -s "[PASS] Loom compilation." $mailto
 else
       echo "Clean failed, emailing list"
-      cat target/cleanbuild.log | mail -s "[FAIL] Loom compilation." $mailto
+      cat $logfile | mail -s "[FAIL] Loom compilation." $mailto
 fi
