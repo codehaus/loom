@@ -104,13 +104,13 @@ public interface SystemManager
      * @param name the name to register object under
      * @param object the object
      * @param interfaces the interfaces to register the component under
-     * @throws ManagerException if an error occurs. An error could occur if the object doesn't
+     * @throws LoomException if an error occurs. An error could occur if the object doesn't
      *            implement the interfaces, the interfaces parameter contain non-instance
      *            classes, the name is already registered etc.
      * @throws IllegalArgumentException if object or interfaces is null
      */
     void register( String name, Object object, Class[] interfaces )
-        throws ManagerException, IllegalArgumentException;
+        throws LoomException, IllegalArgumentException;
 
     /**
      * Register an object for management.
@@ -120,20 +120,20 @@ public interface SystemManager
      *
      * @param name the name to register object under
      * @param object the object
-     * @throws ManagerException if an error occurs such as name already registered.
+     * @throws LoomException if an error occurs such as name already registered.
      * @throws IllegalArgumentException if object is null
      */
     void register( String name, Object object )
-        throws ManagerException, IllegalArgumentException;
+        throws LoomException, IllegalArgumentException;
 
     /**
      * Unregister named object.
      *
      * @param name the name of object to unregister
-     * @throws ManagerException if an error occurs such as when no such object registered.
+     * @throws LoomException if an error occurs such as when no such object registered.
      */
     void unregister( String name )
-        throws ManagerException;
+        throws LoomException;
 
     /**
      * Returns the subcontext of the specified name.  If it does not exist it
@@ -141,9 +141,9 @@ public interface SystemManager
      *
      * @param name name of the object in the parent context that will own this one
      * @param type of objects that will be managed in this context
-     * @throws ManagerException if context cannot be created or retrieved
+     * @throws LoomException if context cannot be created or retrieved
      * @return  the subcontext with the specified name
      */
     SystemManager getSubContext( String name, String type )
-        throws ManagerException;
+        throws LoomException;
 }

@@ -86,7 +86,7 @@
  */
 package org.jcontainer.loom.components.manager;
 
-import org.jcontainer.loom.interfaces.ManagerException;
+import org.jcontainer.loom.interfaces.LoomException;
 
 /**
  * Null SystemManager.
@@ -99,19 +99,19 @@ public class NoopSystemManager
     protected Object export( final String name,
                              final Object object,
                              final Class[] interfaces )
-        throws ManagerException
+        throws LoomException
     {
         return object;
     }
 
     protected void unexport( final String name,
                              final Object exportedObject )
-        throws ManagerException
+        throws LoomException
     {
     }
 
     protected void verifyInterface( final Class clazz )
-        throws ManagerException
+        throws LoomException
     {
     }
 }

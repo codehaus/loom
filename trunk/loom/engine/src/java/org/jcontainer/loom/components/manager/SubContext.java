@@ -87,7 +87,7 @@
 package org.jcontainer.loom.components.manager;
 
 import java.util.HashMap;
-import org.jcontainer.loom.interfaces.ManagerException;
+import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.interfaces.SystemManager;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
@@ -142,13 +142,13 @@ class SubContext
      * @param name the name to register object under
      * @param object the object
      * @param interfaces the interfaces to register the component under
-     * @throws ManagerException if an error occurs. An error could occur if the object doesn't
+     * @throws LoomException if an error occurs. An error could occur if the object doesn't
      *            implement the interfaces, the interfaces parameter contain non-instance
      *            classes, the name is already registered etc.
      * @throws IllegalArgumentException if object or interfaces is null
      */
     public void register( final String name, final Object object, final Class[] interfaces )
-        throws ManagerException, IllegalArgumentException
+        throws LoomException, IllegalArgumentException
     {
         m_parent.register( jmxName( name ), object, interfaces );
     }
@@ -161,11 +161,11 @@ class SubContext
      *
      * @param name the name to register object under
      * @param object the object
-     * @throws ManagerException if an error occurs such as name already registered.
+     * @throws LoomException if an error occurs such as name already registered.
      * @throws IllegalArgumentException if object is null
      */
     public void register( final String name, final Object object )
-        throws ManagerException, IllegalArgumentException
+        throws LoomException, IllegalArgumentException
     {
         m_parent.register( jmxName( name ), object );
     }
@@ -174,10 +174,10 @@ class SubContext
      * Unregister named object.
      *
      * @param name the name of object to unregister
-     * @throws ManagerException if an error occurs such as when no such object registered.
+     * @throws LoomException if an error occurs such as when no such object registered.
      */
     public void unregister( final String name )
-        throws ManagerException
+        throws LoomException
     {
         m_parent.unregister( jmxName( name ) );
     }
@@ -187,23 +187,23 @@ class SubContext
      * is created.
      *
      * @return the subcontext with the specified name
-     * @throws ManagerException if context cannot be created or retrieved
+     * @throws LoomException if context cannot be created or retrieved
      */
     public SystemManager getSubContext( final String name,
                                         final String type )
-        throws ManagerException
+        throws LoomException
     {
         if( null == type || EMPTY_STRING.equals( type ) )
         {
             final String message =
                 REZ.getString( "subcontext.error.no.subcontext" );
-            throw new ManagerException( message );
+            throw new LoomException( message );
         }
         else if( null != name && this.m_type == null )
         {
             final String message =
                 REZ.getString( "subcontext.error.no.subcontext" );
-            throw new ManagerException( message );
+            throw new LoomException( message );
         }
 
         // get from list if possible

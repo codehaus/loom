@@ -96,7 +96,7 @@ import javax.management.modelmbean.ModelMBean;
 import javax.management.modelmbean.ModelMBeanInfo;
 
 import org.jcontainer.loom.interfaces.ContainerConstants;
-import org.jcontainer.loom.interfaces.ManagerException;
+import org.jcontainer.loom.interfaces.LoomException;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
 
@@ -105,7 +105,7 @@ import org.realityforge.salt.i18n.ResourceManager;
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author <a href="mailto:Huw@mmlive.com">Huw Roberts</a>
- * @version $Revision: 1.4 $ $Date: 2003-08-17 18:27:33 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-05 00:15:39 $
  */
 public abstract class AbstractJMXManager
     extends AbstractSystemManager
@@ -144,12 +144,12 @@ public abstract class AbstractJMXManager
      * @param object the object
      * @param interfaces the interfaces
      * @return the exported object
-     * @throws ManagerException if an error occurs
+     * @throws LoomException if an error occurs
      */
     protected Object export( final String name,
                              final Object object,
                              final Class[] interfaces )
-        throws ManagerException
+        throws LoomException
     {
         try
         {
@@ -161,7 +161,7 @@ public abstract class AbstractJMXManager
         {
             final String message = REZ.format( "jmxmanager.error.export.fail", name );
             getLogger().error( message, e );
-            throw new ManagerException( message, e );
+            throw new LoomException( message, e );
         }
     }
 
@@ -170,11 +170,11 @@ public abstract class AbstractJMXManager
      *
      * @param name the name of object
      * @param exportedObject the object return by export
-     * @throws ManagerException if an error occurs
+     * @throws LoomException if an error occurs
      */
     protected void unexport( final String name,
                              final Object exportedObject )
-        throws ManagerException
+        throws LoomException
     {
         try
         {
@@ -195,7 +195,7 @@ public abstract class AbstractJMXManager
             final String message =
                 REZ.format( "jmxmanager.error.unexport.fail", name );
             getLogger().error( message, e );
-            throw new ManagerException( message, e );
+            throw new LoomException( message, e );
         }
     }
 
@@ -203,10 +203,10 @@ public abstract class AbstractJMXManager
      * Verify that an interface conforms to the requirements of management medium.
      *
      * @param clazz the interface class
-     * @throws ManagerException if verification fails
+     * @throws LoomException if verification fails
      */
     protected void verifyInterface( final Class clazz )
-        throws ManagerException
+        throws LoomException
     {
         //TODO: check it extends all right things and that it
         //has all the right return types etc. Blocks must have
@@ -344,11 +344,11 @@ public abstract class AbstractJMXManager
      *
      * @param target the object to create MBean for
      * @return the MBean to be exported
-     * @throws ManagerException if an error occurs
+     * @throws LoomException if an error occurs
      */
     private Object createMBean( final ModelMBeanInfo topic,
                                 final Object target )
-        throws ManagerException
+        throws LoomException
     {
         final String className = topic.getClassName();
         // Load the ModelMBean implementation class
@@ -363,7 +363,7 @@ public abstract class AbstractJMXManager
                 REZ.format( "jmxmanager.error.mbean.load.class",
                             className );
             getLogger().error( message, e );
-            throw new ManagerException( message, e );
+            throw new LoomException( message, e );
         }
 
         // Create a new ModelMBean instance
@@ -379,7 +379,7 @@ public abstract class AbstractJMXManager
                 REZ.format( "jmxmanager.error.mbean.instantiate",
                             className );
             getLogger().error( message, e );
-            throw new ManagerException( message, e );
+            throw new LoomException( message, e );
         }
 
         // Set the managed resource (if any)
@@ -396,7 +396,7 @@ public abstract class AbstractJMXManager
                 REZ.format( "jmxmanager.error.mbean.set.resource",
                             className );
             getLogger().error( message, e );
-            throw new ManagerException( message, e );
+            throw new LoomException( message, e );
         }
 
         return mbean;
