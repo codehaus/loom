@@ -19,14 +19,23 @@
         <dependency>
             <id>oro</id>
             <version>2.0.7</version>
+            <properties>
+                <category>runtime</category>
+            </properties>
         </dependency>
         <dependency>
             <id>excalibur-i18n</id>
             <version>1.0</version>
+            <properties>
+                <category>runtime</category>
+            </properties>
         </dependency>
         <dependency>
             <id>excalibur-extension</id>
             <version>1.0a</version>
+            <properties>
+                <category>runtime</category>
+            </properties>
         </dependency>
     </dependencies>
 
