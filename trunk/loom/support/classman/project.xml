@@ -42,7 +42,7 @@
         <dependency>
             <groupId>spice</groupId>
             <artifactId>spice-extension</artifactId>
-            <version>1.0dev</version>
+            <version>1.0</version>
             <properties>
                 <category>runtime</category>
             </properties>
