@@ -185,6 +185,8 @@
                 <ant:exclude name="*.dll"/>
             </ant:fileset>
         </ant:copy>
+
+        <ant:copy file="${basedir}/../LICENSE.txt" todir="${distDir}"/>
         
 	    <!-- Create a tar.gz file -->
 	    <ant:tar longfile="gnu" tarfile="${maven.build.dir}/${maven.final.name}.tar">
