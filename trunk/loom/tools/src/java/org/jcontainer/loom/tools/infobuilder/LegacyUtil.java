@@ -13,7 +13,6 @@ import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ContextDescriptor;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.tools.info.EntryDescriptor;
-import org.jcontainer.loom.tools.info.FeatureDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
 import org.realityforge.metaclass.model.Attribute;
 
@@ -22,7 +21,7 @@ import org.realityforge.metaclass.model.Attribute;
  * to enablesupport of Legacy BlockInfo files.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.7 $ $Date: 2003-10-06 12:48:52 $
+ * @version $Revision: 1.8 $ $Date: 2003-10-06 13:10:02 $
  */
 public class LegacyUtil
 {
@@ -32,6 +31,7 @@ public class LegacyUtil
         new ContextDescriptor( "org.apache.avalon.phoenix.BlockContext",
                                EntryDescriptor.EMPTY_SET,
                                Attribute.EMPTY_SET );
+    public static final Version VERSION = new Version( 1, 0, 0 );
 
     private LegacyUtil()
     {
@@ -56,22 +56,6 @@ public class LegacyUtil
     }
 
     /**
-     * Return the version specified (if any) for feature.
-     *
-     * @param feature the feature
-     * @return the version string
-     */
-    public static String getVersionString( final FeatureDescriptor feature )
-    {
-        final Attribute tag = feature.getAttribute( "avalon" );
-        if( null != tag )
-        {
-            return tag.getParameter( "version" );
-        }
-        return null;
-    }
-
-    /**
      * Return true if specified service is a management service.
      *
      * @param service the service
@@ -81,25 +65,6 @@ public class LegacyUtil
     {
         final Attribute tag = service.getAttribute( MX_ATTRIBUTE_NAME );
         return null != tag;
-    }
-
-    /**
-     * Create a version for a feature. Defaults to 1.0 if not specified.
-     *
-     * @param feature the feature
-     * @return the Version object
-     */
-    public static Version toVersion( final FeatureDescriptor feature )
-    {
-        final String version = getVersionString( feature );
-        if( null == version )
-        {
-            return new Version( 1, 0, 0 );
-        }
-        else
-        {
-            return Version.getVersion( version );
-        }
     }
 
     /**
