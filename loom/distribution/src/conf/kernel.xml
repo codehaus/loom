@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<phoenix>
+<loom>
     <embeddor role="org.jcontainer.loom.interfaces.Embeddor"
         class="org.jcontainer.loom.components.embeddor.DefaultEmbeddor">
 
@@ -224,4 +224,5 @@
         </component>
                 -->
     </embeddor>
-</phoenix>
+
+</loom>
