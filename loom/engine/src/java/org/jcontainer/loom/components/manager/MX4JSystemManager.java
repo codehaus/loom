@@ -29,6 +29,7 @@ import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.context.Context;
 import org.apache.avalon.framework.context.ContextException;
 import org.apache.avalon.framework.context.Contextualizable;
+import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
@@ -245,7 +246,7 @@ public class MX4JSystemManager
     {
         MX4JLoggerAdapter.setLogger( getLogger() );
         Log.redirectTo( new MX4JLoggerAdapter() );
-        return MBeanServerFactory.createMBeanServer( "Phoenix" );
+        return MBeanServerFactory.createMBeanServer( ContainerConstants.SOFTWARE );
     }
 
     private void stopJMXMBean( final MBeanServer mBeanServer, final String name )

@@ -18,6 +18,7 @@ import javax.management.MBeanServerFactory;
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
+import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
 
@@ -127,6 +128,6 @@ public class ExtendedMX4JSystemManager
     {
         MX4JLoggerAdapter.setLogger( getLogger() );
         mx4j.log.Log.redirectTo( new MX4JLoggerAdapter() );
-        return MBeanServerFactory.createMBeanServer( "Phoenix" );
+        return MBeanServerFactory.createMBeanServer( ContainerConstants.SOFTWARE );
     }
 }
