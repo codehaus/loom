@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly>
+	<block name="apacheds" class="org.codehaus.loom.apps.apacheds.ApacheDSService"/>
+</assembly>

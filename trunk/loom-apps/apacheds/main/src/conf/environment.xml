@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<environment>
+    <logs>
+        <category name="" target="default" priority="DEBUG"/>
+        <log-target name="default"
+                    location="/logs/default.log"/>
+    </logs>
+    
+</environment>
