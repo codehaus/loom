@@ -90,7 +90,6 @@ import java.io.File;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
-import org.apache.avalon.framework.ExceptionUtil;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.DefaultConfigurationBuilder;
 import org.apache.avalon.framework.container.ContainerUtil;
@@ -107,6 +106,7 @@ import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.Embeddor;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
+import org.realityforge.salt.lang.ExceptionUtil;
 
 /**
  * The class to load the kernel and start it running.
