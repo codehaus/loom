@@ -3,7 +3,7 @@
     <extend>${basedir}/../../tools/maven/project.xml</extend>
     <name>XMLPolicy</name>
     <id>spice-xmlpolicy</id>
-    <currentVersion>1.1</currentVersion>
+    <currentVersion>1.2-dev</currentVersion>
     <inceptionYear>2002</inceptionYear>
     <package>org.codehaus.spice.xmlpolicy</package>
 
