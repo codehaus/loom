@@ -20,9 +20,9 @@ import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.tools.info.LoggerDescriptor;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
-import org.xml.sax.InputSource;
-import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
+import org.realityforge.salt.i18n.Resources;
+import org.xml.sax.InputSource;
 
 /**
  * A LegacyBlockInfoReader is responsible for building {@link org.jcontainer.loom.tools.info.ComponentInfo}
@@ -31,7 +31,7 @@ import org.realityforge.salt.i18n.ResourceManager;
  * <a href="package-summary.html#external">package summary</a>.
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-06-26 09:36:30 $
+ * @version $Revision: 1.4 $ $Date: 2003-06-26 09:42:03 $
  */
 public final class LegacyBlockInfoReader
     extends AbstractLogEnabled

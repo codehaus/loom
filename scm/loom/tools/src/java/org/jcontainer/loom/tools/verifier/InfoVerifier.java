@@ -20,8 +20,6 @@ import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ContextDescriptor;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
-import org.jcontainer.loom.tools.verifier.ComponentVerifier;
-import org.jcontainer.loom.tools.verifier.VerifyException;
 
 /**
  * This Class verifies that an implementation is valid wrt the
@@ -45,7 +43,7 @@ import org.jcontainer.loom.tools.verifier.VerifyException;
  * </ul>
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-26 09:41:28 $
+ * @version $Revision: 1.2 $ $Date: 2003-06-26 09:42:03 $
  */
 public class InfoVerifier
     extends AbstractLogEnabled
