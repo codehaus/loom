@@ -18,38 +18,38 @@
         <dependency>
             <groupId>metaclass</groupId>
             <artifactId>metaclass-runtime</artifactId>
-            <version>1.1-rc4-dev</version>
+            <version>1.1</version>
         </dependency>
         <dependency>
             <groupId>metaclass</groupId>
             <artifactId>metaclass-tools</artifactId>
-            <version>1.1-rc4-dev</version>
+            <version>1.1</version>
         </dependency>
         <dependency>
             <groupId>metaclass</groupId>
             <artifactId>maven-metaclass-plugin</artifactId>
-            <version>1.1-rc4-dev</version>
+            <version>1.1</version>
             <type>plugin</type>
         </dependency>
         <dependency> 
             <groupId>metaclass</groupId>
             <artifactId>metaclass-jmx</artifactId>
-            <version>1.1-rc4-dev</version>
+            <version>1.1</version>
         </dependency>
         <dependency>
             <groupId>dna</groupId>
             <artifactId>dna-api</artifactId>
-            <version>1.1-rc4-dev</version>
+            <version>1.1</version>
         </dependency>
         <dependency>
             <groupId>dna</groupId>
             <artifactId>dna-impl</artifactId>
-            <version>1.1-rc4-dev</version>
+            <version>1.1</version>
         </dependency>
         <dependency>
             <groupId>dna</groupId>
             <artifactId>maven-dna-plugin</artifactId>
-            <version>1.1-rc4-dev</version>
+            <version>1.1</version>
             <type>plugin</type>
         </dependency>
         <dependency>
