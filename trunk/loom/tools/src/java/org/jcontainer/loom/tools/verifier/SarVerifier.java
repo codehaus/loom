@@ -18,8 +18,8 @@ import org.apache.avalon.phoenix.containerkit.verifier.AssemblyVerifier;
 import org.apache.avalon.phoenix.framework.tools.verifier.InfoVerifier;
 import org.apache.avalon.phoenix.framework.tools.verifier.VerifyException;
 import org.apache.avalon.phoenix.interfaces.ContainerConstants;
-import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
+import org.realityforge.salt.i18n.Resources;
 
 /**
  * This Class verifies that Sars are valid. It performs a number
@@ -47,7 +47,7 @@ import org.realityforge.salt.i18n.ResourceManager;
  * </ul>
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-26 08:22:11 $
+ * @version $Revision: 1.2 $ $Date: 2003-06-26 08:52:32 $
  */
 public class SarVerifier
     extends AssemblyVerifier

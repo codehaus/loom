@@ -20,7 +20,6 @@ import org.jcontainer.loom.tools.info.EntryDescriptor;
 import org.jcontainer.loom.tools.info.LoggerDescriptor;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
-import org.jcontainer.loom.tools.qdox.AbstractInfoBuilder;
 
 /**
  * This is a utility class that is used to build a ComponentInfo object
@@ -28,7 +27,7 @@ import org.jcontainer.loom.tools.qdox.AbstractInfoBuilder;
  * all of the javadoc tags present in JavaClass object model.
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-26 08:42:06 $
+ * @version $Revision: 1.2 $ $Date: 2003-06-26 08:52:32 $
  */
 public class DefaultInfoBuilder
     extends AbstractInfoBuilder

@@ -7,8 +7,6 @@
  */
 package org.jcontainer.loom.tools.info;
 
-import org.jcontainer.loom.tools.info.FeatureDescriptor;
-
 /**
  * A descriptor describing the Loggers that the Component
  * will use. The name of each Logger is relative to the
@@ -20,7 +18,7 @@ import org.jcontainer.loom.tools.info.FeatureDescriptor;
  * about Logger requirements.</p>
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-26 08:37:43 $
+ * @version $Revision: 1.2 $ $Date: 2003-06-26 08:52:31 $
  */
 public class LoggerDescriptor
     extends FeatureDescriptor
