@@ -6,11 +6,14 @@
     <body>
         <section name="Introduction">
             <p>
-        Currently deploying a server application under Loom is simply a matter
-        of dropping the .sar file into the appropriate directory (
-                <code>apps/</code>)
-        and restarting Loom. In the future there will be more advanced methods
-        of deploying and undeploying Server Applications without restarting Loom.
+        Currently deploying a server application under Loom is simply
+        a matter of dropping the .sar file into the appropriate directory
+        (<code>apps/</code>).
+            </p>
+            <p>
+        If the hot deployment monitor is enabled (default), applications
+        can be added, removed and updated in the <code>apps/</code>
+        directory without restarting Loom.
             </p>
             <subsection name="Target Audience">
                 <p>
