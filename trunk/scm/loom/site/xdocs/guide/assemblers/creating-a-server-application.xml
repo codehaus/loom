@@ -2,7 +2,6 @@
 <document>
     <properties>
         <title>Guide - Creating a Server Application</title>
-        <author email="peter at apache.org">Peter Donald</author>
     </properties>
     <body>
         <section name="Introduction">
