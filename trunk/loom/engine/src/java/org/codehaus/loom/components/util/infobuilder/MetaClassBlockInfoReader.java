@@ -19,10 +19,11 @@ import org.codehaus.metaclass.Attributes;
 import org.codehaus.metaclass.model.Attribute;
 
 /**
- * A BlockInfoReader is responsible for building ComponentInfo objects from DNA MetaClass descriptors.
+ * A BlockInfoReader is responsible for building
+ * ComponentInfo objects from DNA MetaClass descriptors.
  *
  * @author Peter Donald
- * @version $Revision: 1.3 $ $Date: 2004-07-11 00:44:30 $
+ * @version $Revision: 1.4 $ $Date: 2004-12-22 06:57:40 $
  */
 public final class MetaClassBlockInfoReader implements BlockInfoReader
 {
@@ -30,7 +31,7 @@ public final class MetaClassBlockInfoReader implements BlockInfoReader
         throws Exception
     {
         final Attribute attribute =
-            Attributes.getAttribute( type, "dna.component" );
+          Attributes.getAttribute( type, "dna.component" );
         if( null == attribute )
         {
             final String message =
@@ -63,8 +64,7 @@ public final class MetaClassBlockInfoReader implements BlockInfoReader
     private SchemaDescriptor buildConfigurationSchema( final Class type )
     {
         final Class[] types =
-            new Class[]{
-                org.apache.avalon.framework.configuration.Configuration.class};
+          new Class[]{org.apache.avalon.framework.configuration.Configuration.class};
         try
         {
             final Method method = type.getMethod( "configure", types );
@@ -85,7 +85,9 @@ public final class MetaClassBlockInfoReader implements BlockInfoReader
     }
 
     /**
-     * A utility method to build an array of DependencyDescriptor objects from specified configuration and classname.
+     * A utility method to build an array of
+     * DependencyDescriptor objects from specified
+     * configuration and classname.
      *
      * @param type the component type
      *
@@ -108,7 +110,7 @@ public final class MetaClassBlockInfoReader implements BlockInfoReader
             final String key = attribute.getParameter( "key" );
             final String depType = attribute.getParameter( "type" );
             final boolean optional =
-                attribute.getParameter( "optional" ).equals( "false" );
+              attribute.getParameter( "optional", "" ).equals( "true" );
             deps.add( new DependencyDescriptor( key, depType, optional ) );
         }
 
@@ -127,8 +129,7 @@ public final class MetaClassBlockInfoReader implements BlockInfoReader
         try
         {
             final Class[] types1 =
-                new Class[]{
-                    org.apache.avalon.framework.component.ComponentManager.class};
+              new Class[]{org.apache.avalon.framework.component.ComponentManager.class};
             return type.getMethod( "compose", types1 );
         }
         catch( final NoSuchMethodException nsme )
@@ -137,8 +138,7 @@ public final class MetaClassBlockInfoReader implements BlockInfoReader
         try
         {
             final Class[] types2 =
-                new Class[]{
-                    org.apache.avalon.framework.service.ServiceManager.class};
+              new Class[]{org.apache.avalon.framework.service.ServiceManager.class};
             return type.getMethod( "service", types2 );
         }
         catch( NoSuchMethodException e )
@@ -148,7 +148,9 @@ public final class MetaClassBlockInfoReader implements BlockInfoReader
     }
 
     /**
-     * A utility method to build an array of ServiceDescriptor objects from specified configuraiton.
+     * A utility method to build an array of
+     * ServiceDescriptor objects from specified
+     * configuraiton.
      *
      * @param type the type
      *
@@ -158,8 +160,8 @@ public final class MetaClassBlockInfoReader implements BlockInfoReader
     {
         final List services = new ArrayList();
 
-        final Attribute[] attributes = Attributes.getAttributes( type,
-                                                                 "dna.service" );
+        final Attribute[] attributes =
+          Attributes.getAttributes( type, "dna.service" );
         for( int i = 0; i < attributes.length; i++ )
         {
             final Attribute attribute = attributes[i];
