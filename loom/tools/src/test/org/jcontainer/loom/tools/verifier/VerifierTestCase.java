@@ -8,14 +8,13 @@
 package org.jcontainer.loom.tools.verifier;
 
 import org.apache.avalon.framework.logger.ConsoleLogger;
-import org.apache.avalon.phoenix.containerkit.profile.PartitionProfile;
 import org.apache.avalon.phoenix.test.AbstractContainerTestCase;
 
 /**
  *  An basic test case for the LogManager.
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-26 09:45:38 $
+ * @version $Revision: 1.3 $ $Date: 2003-06-29 00:46:24 $
  */
 public class VerifierTestCase
     extends AbstractContainerTestCase
@@ -39,7 +38,7 @@ public class VerifierTestCase
 
     protected void verify( final String config ) throws Exception
     {
-        final PartitionProfile sarMetaData = assembleSar( config );
+        final org.jcontainer.loom.tools.profile.PartitionProfile sarMetaData = assembleSar( config );
         final ClassLoader classLoader = getClass().getClassLoader();
         final SarVerifier verifier = new SarVerifier();
         verifier.enableLogging( new ConsoleLogger() );
