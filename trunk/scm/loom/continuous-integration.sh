@@ -31,8 +31,8 @@ maven | tee target/cleanbuild.log
 # failed.
 if grep "BUILD SUCCESSFUL" target/cleanbuild.log ; then
       echo "Rebuild passed, emailing list"
-      tail target/cleanbuild.log | mail -s "[PASS] Clean build passed" $mailto
+      tail target/cleanbuild.log | mail -s "[PASS] Loom compilation." $mailto
 else
       echo "Clean failed, emailing list"
-      cat target/cleanbuild.log | mail -s "[FAIL] Clean failed" $mailto
+      cat target/cleanbuild.log | mail -s "[FAIL] Loom compilation." $mailto
 fi
