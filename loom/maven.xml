@@ -20,6 +20,7 @@
         <maven:reactor
             basedir="${basedir}"
             includes="*/project.xml"
+            excludes="distribution/*"
             goals="clean,jar:install"
             banner="Building"
             ignoreFailures="false" />
@@ -35,6 +36,7 @@
         <maven:reactor
             basedir="${basedir}"
             includes="*/project.xml"
+            excludes="distribution/*"
             goals="clean,jar:deploy"
             banner="Deploying"
             ignoreFailures="false" />
