@@ -14,7 +14,7 @@
             goals="clean"
             banner="Cleaning"
             ignoreFailures="false"/>
-            
+
         <maven:maven
             descriptor="${basedir}/demos/project.xml"
             goals="clean-all"
@@ -25,12 +25,11 @@
         <echo message="Build all components"/>
         <maven:reactor
             basedir="${basedir}"
-            includes="*/project.xml,demos/*/project.xml"
-            excludes="distribution/*,demos/project.xml"
+            includes="*/project.xml"
+            excludes="distribution/*,demos/project.xml,demos/*/project.xml,integration-test/project.xml"
             goals="clean,build"
             banner="Building"
-            ignoreFailures="false" />
-
+            ignoreFailures="false"/>
         <maven:maven
             descriptor="${basedir}/distribution/project.xml"
             goals="build"
@@ -45,7 +44,7 @@
             excludes="distribution/*"
             goals="clean,deploy"
             banner="Deploying"
-            ignoreFailures="false" />
+            ignoreFailures="false"/>
     </goal>
 
 </project>
