@@ -7,27 +7,32 @@
 
 	<body>
 	
-	<section name="Introduction">
+	<section name="Porting Phoenix 4.0.x applications">
 		<p>
-		    Loom 1.0 is based on the (unreleased) Phoenix 4.1 codebase,
-		    and has several enhancements over the Phoenix 4.0.x releases.   
+		    Loom 1.0 supports applications running in Phoenix 4.0.x releases,
+		    provided that the appropriate libraries are bundles in the sar.
 		</p>
 		<p>
-			The main difference between the Phoenix 4.0.x and Loom 1.0 distributions
-			is that some of the libraries in the <code>lib/</code> directory have 
-			been removed in Loom as they are not used by the container. 
+			Compared to the Phoenix 4.0.x distribution, in Loom 1.0 distribution 
+			some of the libraries in the <code>lib/</code> directory 
+			have been removed as they are not used by the container. 
 			If your app uses any of the excluded libraries, 
 			you simply need to bundle them with the sar.  
 		</p>		
+	<subsection name="Comparison of libraries bundled">
 		<p>
-			Apart from library changes to the sar, you need not make any 
-			further change.  Loom 1.0 is a drop-in replacement for Phoenix 4.0.x.
-		</p>		
-	</section>
-	
-	<section name="Library difference">
+			Loom 1.0 comes with a lean set of libraries:
+<source>
+avalon-framework
+excalibur-instrument
+logkit
+log4j
+mx4j-jmx
+phoenix-client
+</source>		
+		</p>
 		<p>
-			Phoenix 4.0.x ships the following libraries:
+			Phoenix 4.0.x ships a bigger set of libraries:
 <source>
 avalon-framework
 excalibur-baxter
@@ -54,17 +59,8 @@ xercesImpl
 xml-apis
 </source>		
 		</p>
-		<p>
-			Loom 1.0 comes with a much leaner set of libraries:
-<source>
-avalon-framework
-excalibur-instrument
-logkit
-log4j
-mx4j-jmx
-phoenix-client
-</source>		
-		</p>
+	</subsection>
 	</section>
+	
 	</body>
 </document>
