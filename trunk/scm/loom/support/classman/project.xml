@@ -4,7 +4,7 @@
     <name>ClassMan</name>
     <id>spice-classman</id>
     <currentVersion>1.1</currentVersion>
-    <package>org.codehaus.spice.salt</package>
+    <package>org.codehaus.spice.classman</package>
     <inceptionYear>2002</inceptionYear>
 
     <shortDescription>Toolkit to construct ClassLoader lattices from an XML descriptor.</shortDescription>
