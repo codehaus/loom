@@ -37,6 +37,11 @@
             <name>1.0-rc2</name>
             <tag>LOOM_1_0_RC2-tag</tag>
         </version>
+        <version>
+            <id>1.0-rc1</id>
+            <name>1.0-rc1</name>
+            <tag>LOOM_1_0_RC1-tag</tag>
+        </version>
     </versions>
 
     <licenses>
