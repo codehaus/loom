@@ -13,6 +13,10 @@
             goals="clean"
             banner="Cleaning"
             ignoreFailures="false"/>
+        <maven:maven
+            descriptor="${basedir}/distributed/project.xml"
+            goals="clean-all"
+            ignoreFailures="false"/>
     </goal>
 
     <goal name="build">
