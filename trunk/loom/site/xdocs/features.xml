@@ -1,70 +1,29 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <document>
- <properties>
-    <title>Features</title>
 
- <author email="leosimons@apache.org">Leo Simons</author>
-  </properties>
-<body>
+    <properties>
+        <title>Features</title>
+        <author email="peter at realityforge.org">Peter Donald</author>
+    </properties>
 
-<section name="Introduction">
-
-<p>This document is not complete yet...</p>
-
-</section>
-
-<section name="Extensible architecture">
-    <p>Loom is written as an extensible micro-kernel. This allows you to:</p>
-    <ul>
-        <li>Customise behaviour quickly</li>
-        <li>Plug in extra functionality effortlessly</li>
-        <li>Remove unneeded functionality for a small footprint</li>
-    </ul>
-</section>
-
-<section name="Flexible environment">
-    <p>Loom has native support for use in the following environments:</p>
-    <ul>
-        <li>Command-line stand-alone program</li>
-        <li>Unix daemon</li>
-<!--        <li>Embedded in other programs (including servlet engines)</li> -->
-    </ul>
-</section>
-
-<section name="Integrated management">
-    <p>Loom enables JMX management of your software:</p>
-    <ul>
-        <li>All aspects of phoenix itself are manageable, including
-        startup/shutdown, deployment, management and logging.</li>
-        <li>Applications running in phoenix are manageable, exposing
-        their lifecycle (configuration, startup/shutdown, etc) and
-        everything else you mark as manageable.</li>
-    </ul>
-</section>
-
-<section name="Ease and speed up application development">
-    <p>Loom is a container for (server) applications. It can host
-    multiple applications within the same JVM, while keeping them securely
-    isolated from each other.</p>
-
-    <p>Loom provides simple XML configuration files that allow you to
-    rapidly assemble a customised server applications from readily available
-    components (called blocks).</p>
-
-    <p>Loom provides the following services to hosted applications:</p>
-    <ul>
-        <li>Lifecycle management</li>
-        <li>Configuration management and persistence</li>
-        <li>Resource management and sharing</li>
-        <li>Management exposure through JMX</li>
-        <li>Automatic (re)deployment</li>
-        <li>An isolated environment</li>
-    </ul>
-
-    <p>Loom leverages the Avalon Framework, making it compatible with other
-    Avalon-based projects like Excalibur and Cornerstone, enabling you to
-    easily reuse their functionality.</p>
-</section>
-
-</body>
+    <body>
+        <section name="Features">
+            <p>
+                Loom is an extensible Component Container designed to enable
+                rapid development of component based solutions. In particular it
+                provides;
+            </p>
+            <ul>
+                <li>Ant tasks to generate component descriptors from javadoc markup.</li>
+                <li>Ant tasks to validate component matches its descriptor prior to deployment.</li>
+                <li>Validation of all configuration files via schema prior to deployment.</li>
+                <li>Hosting of multiple applications in one JVM.</li>
+                <li>Management of applications and components via JMX.</li>
+                <li>Remote management interface either via web pages or RMI.</li>
+                <li>Definition of components using Avalon Framework interfaces.</li>
+                <li>The Application Server can run as command line program or
+                    as a unix daemon or windows service.</li>
+            </ul>
+        </section>
+    </body>
 </document>
