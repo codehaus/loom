@@ -42,7 +42,7 @@ import org.realityforge.salt.i18n.ResourceManager;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-07-03 06:35:49 $
+ * @version $Revision: 1.4 $ $Date: 2003-07-07 13:13:00 $
  */
 public class AssemblyVerifier
     extends AbstractLogEnabled
@@ -318,7 +318,7 @@ public class AssemblyVerifier
             if( !isValidName( name ) )
             {
                 final String message =
-                    REZ.getString( "assembly.bad-name.error", name );
+                    REZ.format( "assembly.bad-name.error", name );
                 throw new VerifyException( message );
             }
         }
@@ -386,7 +386,7 @@ public class AssemblyVerifier
             if( index != i && other.equals( name ) )
             {
                 final String message =
-                    REZ.getString( "assembly.duplicate-name.error", name );
+                    REZ.format( "assembly.duplicate-name.error", name );
                 throw new VerifyException( message );
             }
         }

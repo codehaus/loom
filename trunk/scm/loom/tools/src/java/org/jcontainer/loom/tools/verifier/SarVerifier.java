@@ -44,7 +44,7 @@ import org.realityforge.salt.i18n.Resources;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.10 $ $Date: 2003-07-06 07:54:53 $
+ * @version $Revision: 1.11 $ $Date: 2003-07-07 13:13:00 $
  */
 public class SarVerifier
     extends AssemblyVerifier
@@ -238,7 +238,7 @@ public class SarVerifier
     {
         if( !isValidName( name ) )
         {
-            final String message = REZ.getString( "invalid-sar-name", name );
+            final String message = REZ.format( "invalid-sar-name", name );
             throw new VerifyException( message );
         }
     }
@@ -318,7 +318,7 @@ public class SarVerifier
             final String other = blocks[ i ].getMetaData().getName();
             if( blockIndex != i && name.equals( other ) )
             {
-                final String message = REZ.getString( "duplicate-name", name );
+                final String message = REZ.format( "duplicate-name", name );
                 throw new VerifyException( message );
             }
         }
@@ -329,7 +329,7 @@ public class SarVerifier
             final String other = listeners[ i ].getMetaData().getName();
             if( listenerIndex != i && name.equals( other ) )
             {
-                final String message = REZ.getString( "duplicate-name", name );
+                final String message = REZ.format( "duplicate-name", name );
                 throw new VerifyException( message );
             }
         }

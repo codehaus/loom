@@ -33,7 +33,7 @@ import org.xml.sax.InputSource;
  * is specified in the <a href="package-summary.html#external">package summary</a>.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-06-29 01:07:35 $
+ * @version $Revision: 1.6 $ $Date: 2003-07-07 13:12:59 $
  */
 public final class XMLInfoReader
     extends AbstractLogEnabled
@@ -76,8 +76,8 @@ public final class XMLInfoReader
         if( getLogger().isDebugEnabled() )
         {
             final String message =
-                REZ.getString( "builder.creating-info.notice",
-                               classname );
+                REZ.format( "builder.creating-info.notice",
+                            classname );
             getLogger().debug( message );
         }
 
