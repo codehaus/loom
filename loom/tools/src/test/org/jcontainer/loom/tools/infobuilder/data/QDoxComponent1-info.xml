@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE component-info
+      PUBLIC "-//AVALON/Component Info DTD Version 1.0//EN"
+             "http://avalon.apache.org/dtds/info/componentinfo_1_0.dtd" >
+
+<component-info>
+    <component type="org.jcontainer.loom.tools.infobuilder.data.QDoxComponent1"/>
+
+    <loggers>
+        <logger/>
+        <logger name="foo"/>
+    </loggers>
+
+    <context>
+        <entry key="foo" type="java.lang.ClassLoader"/>
+        <entry key="bar" type="org.apache.avalon.framework.logger.Logger"/>
+        <entry key="baz" type="java.io.File"/>
+    </context>
+
+    <services>
+        <service type="org.jcontainer.loom.tools.infobuilder.data.Service1"/>
+        <service type="org.jcontainer.loom.tools.infobuilder.data.otherpkg.Service2"/>
+        <service type="org.jcontainer.loom.tools.infobuilder.data.otherpkg.Service3"/>
+    </services>
+
+    <dependencies>
+        <dependency key="foo" type="org.jcontainer.loom.tools.infobuilder.data.otherpkg.Service3"/>
+        <dependency type="org.jcontainer.loom.tools.infobuilder.data.otherpkg.Service3"/>
+        <dependency type="org.jcontainer.loom.tools.infobuilder.data.otherpkg.Service2" optional="true"/>
+    </dependencies>
+
+    <configuration-schema type="http://relaxng.org/ns/structure/1.0"/>
+
+</component-info>
