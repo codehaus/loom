@@ -597,7 +597,6 @@ public class DefaultEmbeddor
         ContainerUtil.parameterize( object, createChildParameters() );
         ContainerUtil.configure( object, config );
         ContainerUtil.initialize( object );
-        org.apache.avalon.framework.container.ContainerUtil.start( object );
     }
 
     private Parameters createChildParameters()
@@ -630,7 +629,6 @@ public class DefaultEmbeddor
             {
                 continue;
             }
-            org.apache.avalon.framework.container.ContainerUtil.stop( object );
             ContainerUtil.dispose( object );
         }
     }
