@@ -6,7 +6,9 @@
         <component role="org.codehaus.loom.interfaces.Installer"
             class="org.codehaus.loom.components.installer.DefaultInstaller"
             logger="installer">
+            <!-- Directory to temporary extract libraries to -->
             <base-work-dir>${loom.home}/work</base-work-dir>
+            <!-- Directory to extract configurations to -->
             <base-application-dir>${loom.home}/apps</base-application-dir>
         </component>
 
@@ -159,15 +161,13 @@
         </component>
         -->
 
-        <!--
-        Disable the Hot-Deployment monitor by commenting out the following component.
-        -->
         <component
             class="org.codehaus.loom.components.monitor.DefaultDeploymentMonitor"
             logger="monitor">
+            <!-- Directory to deploy SAR archives from -->
+            <base-application-directory>${loom.home}/apps</base-application-directory>
             <!--Amount of time in seconds between checks of the deployment directory -->
             <scanner-frequency>5</scanner-frequency>
-            <base-application-directory>${loom.home}/apps</base-application-directory>
         </component>
     </embeddor>
 </loom>
