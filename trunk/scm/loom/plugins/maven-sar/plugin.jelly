@@ -7,8 +7,8 @@
     xmlns:util="jelly:util">
 
     <j:set var="maven.sar.final.name" value="${pom.artifactId}.sar"/>
-    <j:set var="metagenerate" value='${context.getVariable("maven.sar.metagenerate")}'/>
-    <j:set var="logging" value='${context.getVariable("maven.sar.logging")}'/>
+    <j:set var="metagenerate" value="${context.getVariable('maven.sar.metagenerate')}"/>
+    <j:set var="logging" value="${context.getVariable('maven.sar.logging')}"/>
 
     <!--==================================================================-->
     <!-- Default goal : Builds a sar file                                 -->
