@@ -42,13 +42,13 @@ if grep "BUILD SUCCESSFUL" target/cleanbuild.log ; then
     # failed.
     if grep "BUILD SUCCESSFUL" target/cleanbuild.log ; then
       echo "Build passed, emailing list"
-      tail target/cleanbuild.log | mutt -s "[PASS] Clean build passed" $mailto
+      tail target/cleanbuild.log | mail -s "[PASS] Clean build passed" $mailto
     else
       # Mail Maven's output to the dev list.
       echo "Build failed, emailing list"
-      cat target/cleanbuild.log | mutt -s "[FAIL] Clean build failed" $mailto
+      cat target/cleanbuild.log | mail -s "[FAIL] Clean build failed" $mailto
     fi
 else
       echo "Clean failed, emailing list"
-      cat target/cleanbuild.log | mutt -s "[FAIL] Clean failed" $mailto
+      cat target/cleanbuild.log | mail -s "[FAIL] Clean failed" $mailto
 fi
