@@ -32,9 +32,9 @@
             </properties>
         </dependency>
         <dependency>
-        	<groupId>spice</groupId>
+            <groupId>spice</groupId>
             <artifactId>spice-salt</artifactId>
-            <version>0.8dev</version>
+            <version>1.0</version>
             <properties>
                 <category>runtime</category>
             </properties>

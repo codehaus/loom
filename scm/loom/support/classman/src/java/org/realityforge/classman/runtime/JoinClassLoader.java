@@ -14,32 +14,31 @@ import java.util.Enumeration;
 import java.util.Vector;
 
 /**
- * The <tt>JoinClassLoader</tt> is a {@link ClassLoader} that joins
- * a list of ClassLoaders together. The JoinClassLoader has a list of
- * ClassLoaders specified from which resources and classes can be loaded
- * from. The JoinClassLoader will attempt to load the Class or resources
- * from each ClassLoader in succession.
+ * The <tt>JoinClassLoader</tt> is a {@link ClassLoader} that joins a list of
+ * ClassLoaders together. The JoinClassLoader has a list of ClassLoaders
+ * specified from which resources and classes can be loaded from. The
+ * JoinClassLoader will attempt to load the Class or resources from each
+ * ClassLoader in succession.
  *
- * <p>Note that it is recomended that each ClassLoader be made up of
- * distinct, non-overlapping sets of resources or else ClassCastExceptions
- * may result along with other undersired behaviour. </p>
+ * <p>Note that it is recomended that each ClassLoader be made up of distinct,
+ * non-overlapping sets of resources or else ClassCastExceptions may result
+ * along with other undersired behaviour. </p>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-27 03:45:08 $
+ * @version $Revision: 1.3 $ $Date: 2003-12-02 07:28:52 $
  */
 public class JoinClassLoader
     extends SecureClassLoader
 {
     /**
-     * The list of classLoaders to search through
-     * each time a class or resource is requested.
+     * The list of classLoaders to search through each time a class or resource
+     * is requested.
      */
     private final ClassLoader[] m_classLoaders;
 
     /**
-     * Construct a join ClassLoader that defines parent ClassLoader
-     * and list of ClassLoaders to search for classes or resources
-     * when requested.
+     * Construct a join ClassLoader that defines parent ClassLoader and list of
+     * ClassLoaders to search for classes or resources when requested.
      *
      * @param parent the parent classloader
      * @param classLoaders the classloaders to search
@@ -63,8 +62,8 @@ public class JoinClassLoader
     }
 
     /**
-     * Overide findClass to find a class by searching all the
-     * ClassLoaders for class.
+     * Overide findClass to find a class by searching all the ClassLoaders for
+     * class.
      *
      * @param name the name of class
      * @return the Class instance
@@ -90,8 +89,8 @@ public class JoinClassLoader
     }
 
     /**
-     * Overide findResources to retrieve all the resources
-     * from all classloaders with a particular name.
+     * Overide findResources to retrieve all the resources from all classloaders
+     * with a particular name.
      *
      * @param name the resources to search for
      * @return an enumeration of all resources with specified name

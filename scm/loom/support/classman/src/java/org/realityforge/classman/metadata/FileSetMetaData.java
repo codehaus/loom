@@ -8,31 +8,23 @@
 package org.realityforge.classman.metadata;
 
 /**
- * This class represent a set of files anchored in a base
- * directory. The set of files is determined by the include and
- * excludes that are specified for fileset. If no includes or
- * excludes are specified then all files in base directory
- * are added to fileset.
+ * This class represent a set of files anchored in a base directory. The set of
+ * files is determined by the include and excludes that are specified for
+ * fileset. If no includes or excludes are specified then all files in base
+ * directory are added to fileset.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-27 03:45:07 $
+ * @version $Revision: 1.3 $ $Date: 2003-12-02 07:28:52 $
  */
 public class FileSetMetaData
 {
-    /**
-     * The base directory from which to apply all the
-     * includes/excludes.
-     */
+    /** The base directory from which to apply all the includes/excludes. */
     private final String m_baseDirectory;
 
-    /**
-     * The set of patterns to include in fileset.
-     */
+    /** The set of patterns to include in fileset. */
     private final String[] m_includes;
 
-    /**
-     * The set of patterns to exclude from fileset.
-     */
+    /** The set of patterns to exclude from fileset. */
     private final String[] m_excludes;
 
     public FileSetMetaData( final String baseDirectory,

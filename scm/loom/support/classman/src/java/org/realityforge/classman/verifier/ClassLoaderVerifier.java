@@ -7,42 +7,32 @@
  */
 package org.realityforge.classman.verifier;
 
+import org.codehaus.spice.salt.i18n.ResourceManager;
+import org.codehaus.spice.salt.i18n.Resources;
 import org.realityforge.classman.metadata.ClassLoaderMetaData;
 import org.realityforge.classman.metadata.ClassLoaderSetMetaData;
 import org.realityforge.classman.metadata.JoinMetaData;
-import org.realityforge.salt.i18n.Resources;
-import org.realityforge.salt.i18n.ResourceManager;
 
 /**
- * Verify ClassLoader set is valid. Validity is defined as
- * <ul>
- *   <li>With exception of predefined names, all ClassLoader
- *       names should be defined starting with letters or '_'
- *       and then continuing with Alpha-Numeric characters,
- *       '-', '.' or '_'.</li>
- *   <li>No ClassLoader can have a parent ClassLoader that is
- *       not predefined or not defined in ClassLoaderSet.</li>
- *   <li>No "join" ClassLoader can link against a non-existent
- *       ClassLoader.</li>
- *   <li>No "join" ClassLoader can join multiple instances
- *       of same ClassLoader.</li>
- *   <li>No ClassLoader can have multiple entrys that point
- *       to the same location.</li>
- *   <li>No ClassLoader (either predefined, join or regular)
- *       can have the same name.</li>
- *   <li>The default ClassLoader must exist.</li>
- *   <li>There must be no circular dependencies between join
- *       classloaders.</li>
- * </ul>
+ * Verify ClassLoader set is valid. Validity is defined as <ul> <li>With
+ * exception of predefined names, all ClassLoader names should be defined
+ * starting with letters or '_' and then continuing with Alpha-Numeric
+ * characters, '-', '.' or '_'.</li> <li>No ClassLoader can have a parent
+ * ClassLoader that is not predefined or not defined in ClassLoaderSet.</li>
+ * <li>No "join" ClassLoader can link against a non-existent ClassLoader.</li>
+ * <li>No "join" ClassLoader can join multiple instances of same
+ * ClassLoader.</li> <li>No ClassLoader can have multiple entrys that point to
+ * the same location.</li> <li>No ClassLoader (either predefined, join or
+ * regular) can have the same name.</li> <li>The default ClassLoader must
+ * exist.</li> <li>There must be no circular dependencies between join
+ * classloaders.</li> </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-06-27 03:45:08 $
+ * @version $Revision: 1.7 $ $Date: 2003-12-02 07:28:52 $
  */
 public class ClassLoaderVerifier
 {
-    /**
-     * i18n resources for used to present messages.
-     */
+    /** i18n resources for used to present messages. */
     private static final Resources REZ =
         ResourceManager.getPackageResources( ClassLoaderVerifier.class );
 
@@ -91,8 +81,7 @@ public class ClassLoaderVerifier
     }
 
     /**
-     * Log an informational message.
-     * Sub-classes should overide this.
+     * Log an informational message. Sub-classes should overide this.
      *
      * @param message the message
      */
@@ -141,16 +130,15 @@ public class ClassLoaderVerifier
             {
                 final String message =
                     REZ.format( "invalid-parent.error",
-                                   classLoader.getName(),
-                                   parent );
+                                classLoader.getName(),
+                                parent );
                 throw new Exception( message );
             }
         }
     }
 
     /**
-     * Verify that each join ClassLoader only
-     * links to ClassLoaders that exist.
+     * Verify that each join ClassLoader only links to ClassLoaders that exist.
      *
      * @throws Exception if validity check fails
      */
@@ -165,8 +153,7 @@ public class ClassLoaderVerifier
     }
 
     /**
-     * Verify that each join ClassLoader only
-     * links to ClassLoaders that exist.
+     * Verify that each join ClassLoader only links to ClassLoaders that exist.
      *
      * @throws Exception if validity check fails
      */
@@ -182,8 +169,8 @@ public class ClassLoaderVerifier
             {
                 final String message =
                     REZ.format( "bad-join-link.error",
-                                   join.getName(),
-                                   classloader );
+                                join.getName(),
+                                classloader );
                 throw new Exception( message );
             }
         }
@@ -202,7 +189,7 @@ public class ClassLoaderVerifier
         {
             final String message =
                 REZ.format( "empty-name.error",
-                               name );
+                            name );
             throw new Exception( message );
         }
         final char ch = name.charAt( 0 );
@@ -211,7 +198,7 @@ public class ClassLoaderVerifier
         {
             final String message =
                 REZ.format( "name-invalid-start.error",
-                               name );
+                            name );
             throw new Exception( message );
         }
 
@@ -225,20 +212,20 @@ public class ClassLoaderVerifier
             {
                 final String message =
                     REZ.format( "name-invalid-char.error",
-                                   name,
-                                   String.valueOf( c ) );
+                                name,
+                                String.valueOf( c ) );
                 throw new Exception( message );
             }
         }
     }
 
     /**
-     * Verify that each regular ClassLoader only
-     * contains unique entrys.
+     * Verify that each regular ClassLoader only contains unique entrys.
      *
      * @throws Exception if validity check fails
      */
-    private void verifyUniqueClassLoaderEntrys( final ClassLoaderSetMetaData set )
+    private void verifyUniqueClassLoaderEntrys(
+        final ClassLoaderSetMetaData set )
         throws Exception
     {
         final ClassLoaderMetaData[] classLoaders = set.getClassLoaders();
@@ -249,12 +236,12 @@ public class ClassLoaderVerifier
     }
 
     /**
-     * Verify that each regular ClassLoader only
-     * contains unique entrys.
+     * Verify that each regular ClassLoader only contains unique entrys.
      *
      * @throws Exception if validity check fails
      */
-    private void verifyUniqueClassLoaderEntrys( final ClassLoaderMetaData classLoader )
+    private void verifyUniqueClassLoaderEntrys(
+        final ClassLoaderMetaData classLoader )
         throws Exception
     {
         final String[] entrys = classLoader.getEntrys();
@@ -267,8 +254,8 @@ public class ClassLoaderVerifier
                 {
                     final String message =
                         REZ.format( "classloader-dup-entrys.error",
-                                       classLoader.getName(),
-                                       location );
+                                    classLoader.getName(),
+                                    location );
                     throw new Exception( message );
                 }
             }
@@ -309,8 +296,8 @@ public class ClassLoaderVerifier
                 {
                     final String message =
                         REZ.format( "join-dup-entrys.error",
-                                       join.getName(),
-                                       name );
+                                    join.getName(),
+                                    name );
                     throw new Exception( message );
                 }
             }
@@ -336,9 +323,9 @@ public class ClassLoaderVerifier
                 {
                     final String message =
                         REZ.format( "duplicate-name.error",
-                                       "predefined",
-                                       "predefined",
-                                       name );
+                                    "predefined",
+                                    "predefined",
+                                    name );
                     throw new Exception( message );
                 }
             }
@@ -351,7 +338,8 @@ public class ClassLoaderVerifier
      * @param set the set of ClassLoader defs to search in
      * @throws Exception if validity check fails
      */
-    private void verifyUniqueClassLoaderNames( final ClassLoaderSetMetaData set )
+    private void verifyUniqueClassLoaderNames(
+        final ClassLoaderSetMetaData set )
         throws Exception
     {
         final ClassLoaderMetaData[] classLoaders = set.getClassLoaders();
@@ -366,8 +354,8 @@ public class ClassLoaderVerifier
     }
 
     /**
-     * Verify that the specified name is unique in set
-     * except for specified entity.
+     * Verify that the specified name is unique in set except for specified
+     * entity.
      *
      * @param set the set of classloaders
      * @param name the name
@@ -387,9 +375,9 @@ public class ClassLoaderVerifier
         {
             final String message =
                 REZ.format( "duplicate-name.error",
-                               type,
-                               "predefined",
-                               name );
+                            type,
+                            "predefined",
+                            name );
             throw new Exception( message );
         }
 
@@ -406,9 +394,9 @@ public class ClassLoaderVerifier
             {
                 final String message =
                     REZ.format( "duplicate-name.error",
-                                   type,
-                                   "join",
-                                   name );
+                                type,
+                                "join",
+                                name );
                 throw new Exception( message );
             }
         }
@@ -425,9 +413,9 @@ public class ClassLoaderVerifier
             {
                 final String message =
                     REZ.format( "duplicate-name.error",
-                                   type,
-                                   "classloader",
-                                   name );
+                                type,
+                                "classloader",
+                                name );
                 throw new Exception( message );
             }
         }
@@ -467,7 +455,7 @@ public class ClassLoaderVerifier
         {
             final String message =
                 REZ.format( "missing-default-loader.error",
-                               name );
+                            name );
             throw new Exception( message );
         }
     }

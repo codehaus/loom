@@ -23,11 +23,11 @@ join 	       the join classloaders
 classloader  the regular classloaders
 -->
 <!ELEMENT classloaders (predefined*,classloader*,join*)>
-  <!ATTLIST classloaders id ID #IMPLIED
-          xmlns CDATA #FIXED "http://jakarta.apache.org/avalon/dtds/phoenix/classloaders_1_0.dtd" >
-  <!ATTLIST classloaders
-        default CDATA #REQUIRED
-        version CDATA #REQUIRED >
+<!ATTLIST classloaders id ID #IMPLIED
+xmlns CDATA #FIXED "http://jakarta.apache.org/avalon/dtds/phoenix/classloaders_1_0.dtd" >
+<!ATTLIST classloaders
+default CDATA #REQUIRED
+version CDATA #REQUIRED >
 
 <!--
 The classloader element describes a regular classloader It defines:
@@ -44,9 +44,9 @@ fileset 	    an fileset in classloader
 extension    an extension in classloader
 -->
 <!ELEMENT classloader          (entry*,fileset*,extension*)>
-  <!ATTLIST classloader
-       name CDATA #REQUIRED
-       parent CDATA #REQUIRED >
+<!ATTLIST classloader
+name CDATA #REQUIRED
+parent CDATA #REQUIRED >
 
 <!--
 The predefined element defines a predefined classloader. It defines:
@@ -55,7 +55,7 @@ Attributes:
 name	        the name of classloader.
 -->
 <!ELEMENT predefined EMPTY>
-  <!ATTLIST predefined name CDATA #REQUIRED >
+<!ATTLIST predefined name CDATA #REQUIRED >
 
 <!--
 The classloader element describes a regular classloader It defines:
@@ -69,7 +69,7 @@ Elements:
 classloader-ref  a reference to all classloaders that are joined
 -->
 <!ELEMENT join          (classloader-ref*)>
-  <!ATTLIST join name CDATA #REQUIRED >
+<!ATTLIST join name CDATA #REQUIRED >
 
 <!--
 The classloader-ref defines a ClassLoader that are part of join.
@@ -79,7 +79,7 @@ Attributes:
 name     the name of other classloader that will join with
 -->
 <!ELEMENT classloader-ref EMPTY>
-  <!ATTLIST classloader-ref name CDATA #REQUIRED>
+<!ATTLIST classloader-ref name CDATA #REQUIRED>
 
 <!--
 The entry describes a entry in ClassLoader. It defines:
@@ -88,7 +88,7 @@ Attributes:
 location     the location (URL) to add to classloader
 -->
 <!ELEMENT entry EMPTY>
-  <!ATTLIST entry location CDATA #REQUIRED>
+<!ATTLIST entry location CDATA #REQUIRED>
 
 <!--
 The classloader element describes a regular classloader It defines:
@@ -102,7 +102,7 @@ Elements:
 classloader-ref  a reference to all classloaders that are joined
 -->
 <!ELEMENT fileset          ((include|exclude)*)>
-  <!ATTLIST fileset dir CDATA #REQUIRED >
+<!ATTLIST fileset dir CDATA #REQUIRED >
 
 <!--
 The entry describes a include for fileset. It defines:
@@ -111,7 +111,7 @@ Attributes:
 name     the pattern to include
 -->
 <!ELEMENT include EMPTY>
-  <!ATTLIST include name CDATA #REQUIRED>
+<!ATTLIST include name CDATA #REQUIRED>
 
 <!--
 The entry describes a exclude for fileset. It defines:
@@ -120,19 +120,19 @@ Attributes:
 name     the pattern to exclude
 -->
 <!ELEMENT exclude EMPTY>
-  <!ATTLIST exclude name CDATA #REQUIRED>
+<!ATTLIST exclude name CDATA #REQUIRED>
 
 
 <!--
 The extension describes a extension for ClassLoader.
 -->
 <!ELEMENT extension EMPTY>
-  <!ATTLIST extension
-       name CDATA #REQUIRED
-       specification-version CDATA #IMPLIED
-       specification-vendor CDATA #IMPLIED
-       implementation-version CDATA #IMPLIED
-       implementation-vendor CDATA #IMPLIED
-       implementation-vendor-id CDATA #IMPLIED
-       implementation-url CDATA #IMPLIED
-  >
+<!ATTLIST extension
+name CDATA #REQUIRED
+specification-version CDATA #IMPLIED
+specification-vendor CDATA #IMPLIED
+implementation-version CDATA #IMPLIED
+implementation-vendor CDATA #IMPLIED
+implementation-vendor-id CDATA #IMPLIED
+implementation-url CDATA #IMPLIED
+>
