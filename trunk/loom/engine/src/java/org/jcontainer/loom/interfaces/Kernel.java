@@ -89,6 +89,7 @@ package org.jcontainer.loom.interfaces;
 import java.io.File;
 import java.util.Map;
 import org.jcomponent.loggerstore.LoggerStore;
+import org.jcontainer.loom.tools.profile.PartitionProfile;
 
 /**
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
@@ -98,7 +99,7 @@ public interface Kernel
     /**
      * Adds an application to the container
      */
-    void addApplication( org.jcontainer.loom.tools.profile.PartitionProfile profile,
+    void addApplication( PartitionProfile profile,
                          File homeDirectory, File workDirectory,
                          ClassLoader classLoader,
                          LoggerStore store,
