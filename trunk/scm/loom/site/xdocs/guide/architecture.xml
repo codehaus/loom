@@ -19,7 +19,7 @@
             <p>
                 <strong>Loom layer diagram</strong>
             </p>
-                <figure src="images/phoenix-layers.jpg" alt="Loom Layers"/>
+                <img src="../images/loom-layers.jpg" alt="Loom Layers"/>
             <p>
               Shown above are three hosted server applications.  A mail server that would implement
               multiple listeners for incoming and outgoing services (POP3, SMTP, IMAP etc).  Outlook,
@@ -63,7 +63,7 @@
                 <p>
                     <strong>FtpServer, a real Loom application</strong>
                 </p>
-                    <figure src="images/phoenix-app-ftpserver.jpg" alt="Loom App FtpServer"/>
+                    <img src="../images/loom-app-ftpserver.jpg" alt="Loom App FtpServer"/>
             </subsection>
             <p>
               Notes - Loom does not limit the number of blocks that it allows in a sar file.  We have taksdefs for Apache's Ant
