@@ -93,6 +93,7 @@ import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.jcontainer.loom.interfaces.ContainerConstants;
+import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.tools.LoomToolConstants;
 import org.jcontainer.loom.tools.info.Attribute;
 import org.jcontainer.loom.tools.metadata.ComponentMetaData;
@@ -108,7 +109,7 @@ import org.realityforge.salt.i18n.Resources;
  * and is in the format specified for <tt>assembly.xml</tt> files.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-08-17 18:27:32 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-05 00:13:54 $
  */
 public class Assembler
     extends AbstractLogEnabled
@@ -127,7 +128,7 @@ public class Assembler
      *
      * @param parameters the parameters for constructing assembly
      * @return the new PartitionMetaData
-     * @throws AssemblyException if an error occurs
+     * @throws LoomException if an error occurs
      */
     public PartitionMetaData buildAssembly( final Map parameters )
         throws Exception
@@ -148,12 +149,12 @@ public class Assembler
      * @param name the name of Sar
      * @param assembly the assembly configuration object
      * @return the new PartitionMetaData
-     * @throws AssemblyException if an error occurs
+     * @throws LoomException if an error occurs
      */
     private PartitionMetaData assembleSar( final String name,
                                            final Configuration config,
                                            final Configuration assembly )
-        throws AssemblyException
+        throws LoomException
     {
         final Configuration[] blockConfig = assembly.getChildren( "block" );
         final ComponentMetaData[] blocks = buildBlocks( blockConfig, config );
@@ -189,11 +190,11 @@ public class Assembler
      *
      * @param blocks the list of Configuration objects for blocks
      * @return the BlockMetaData array
-     * @throws AssemblyException if an error occurs
+     * @throws LoomException if an error occurs
      */
     private ComponentMetaData[] buildBlocks( final Configuration[] blocks,
                                              final Configuration config )
-        throws AssemblyException
+        throws LoomException
     {
         final ArrayList blockSet = new ArrayList();
         for( int i = 0; i < blocks.length; i++ )
@@ -210,11 +211,11 @@ public class Assembler
      *
      * @param block the Configuration object for block
      * @return the BlockMetaData object
-     * @throws AssemblyException if an error occurs
+     * @throws LoomException if an error occurs
      */
     private ComponentMetaData buildBlock( final Configuration block,
                                           final Configuration config )
-        throws AssemblyException
+        throws LoomException
     {
         try
         {
@@ -247,7 +248,7 @@ public class Assembler
         {
             final String message =
                 REZ.format( "block-entry-malformed", block.getLocation(), ce.getMessage() );
-            throw new AssemblyException( message, ce );
+            throw new LoomException( message, ce );
         }
     }
 
@@ -257,11 +258,11 @@ public class Assembler
      *
      * @param listenerConfigs the list of Configuration objects for listenerConfigs
      * @return the array of listeners
-     * @throws AssemblyException if an error occurs
+     * @throws LoomException if an error occurs
      */
     private ComponentMetaData[] buildBlockListeners( final Configuration[] listenerConfigs,
                                                      final Configuration config )
-        throws AssemblyException
+        throws LoomException
     {
         final List listeners = new ArrayList();
         for( int i = 0; i < listenerConfigs.length; i++ )
@@ -279,11 +280,11 @@ public class Assembler
      *
      * @param listener the Configuration object for listener
      * @return the BlockListenerMetaData object
-     * @throws AssemblyException if an error occurs
+     * @throws LoomException if an error occurs
      */
     private ComponentMetaData buildBlockListener( final Configuration listener,
                                                   final Configuration config )
-        throws AssemblyException
+        throws LoomException
     {
         try
         {
@@ -302,7 +303,7 @@ public class Assembler
                 REZ.format( "listener-entry-malformed",
                             listener.getLocation(),
                             ce.getMessage() );
-            throw new AssemblyException( message, ce );
+            throw new LoomException( message, ce );
         }
     }
 
