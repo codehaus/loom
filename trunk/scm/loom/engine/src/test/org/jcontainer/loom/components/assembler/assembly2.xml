@@ -16,11 +16,11 @@
     <block class="org.jcontainer.loom.components.assembler.data.Component3"
         name="c3">
         <provide name="c2a"
-            role="org.jcontainer.loom.components.assembler.data.Service2"/>
+            role="org.jcontainer.loom.components.assembler.data.Service1"/>
         <provide name="c2b"
-            role="org.jcontainer.loom.components.assembler.data.Service2"/>
+            role="org.jcontainer.loom.components.assembler.data.Service1"/>
         <provide name="c2c"
-            role="org.jcontainer.loom.components.assembler.data.Service2"/>
+            role="org.jcontainer.loom.components.assembler.data.Service1"/>
     </block>
 
 </assembly>

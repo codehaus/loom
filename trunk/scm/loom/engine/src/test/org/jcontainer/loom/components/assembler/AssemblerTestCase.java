@@ -30,7 +30,8 @@ import org.xml.sax.InputSource;
  *  An basic test case for the LogManager.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.10 $ $Date: 2003-11-05 03:19:21 $
+ * @author <a href="mailto:peter.royal@pobox.com">Peter Royal</a>
+ * @version $Revision: 1.11 $ $Date: 2003-11-05 03:32:33 $
  */
 public class AssemblerTestCase
     extends TestCase
@@ -84,7 +85,7 @@ public class AssemblerTestCase
         return block2.getTemplate().isDisableProxy();
     }
 
-    public void _testComplex()
+    public void testComplex()
         throws Exception
     {
         final PartitionProfile partitionProfile = assembleSar( "assembly2.xml" );
