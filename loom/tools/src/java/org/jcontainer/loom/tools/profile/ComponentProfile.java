@@ -18,10 +18,15 @@ import org.jcontainer.loom.tools.metadata.ComponentMetaData;
  * construct a specific instance of the component.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-07-05 05:26:00 $
+ * @version $Revision: 1.6 $ $Date: 2003-07-05 05:26:51 $
  */
 public class ComponentProfile
 {
+    /**
+     * An empty array of component profiles.
+     */
+    public static final ComponentProfile[] EMPTY_SET = new ComponentProfile[ 0 ];
+
     /**
      * The {@link ComponentInfo} that describes
      * the type of this component.
