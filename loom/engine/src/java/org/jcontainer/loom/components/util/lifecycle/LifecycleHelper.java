@@ -107,7 +107,7 @@ import org.apache.excalibur.instrument.InstrumentManager;
 import org.apache.excalibur.instrument.Instrumentable;
 import org.codehaus.spice.salt.i18n.ResourceManager;
 import org.codehaus.spice.salt.i18n.Resources;
-import org.jcontainer.dna.AbstractLogEnabled;
+import org.codehaus.dna.AbstractLogEnabled;
 import org.jcontainer.loom.interfaces.LoomException;
 
 /**

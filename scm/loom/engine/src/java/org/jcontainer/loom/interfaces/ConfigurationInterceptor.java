@@ -7,8 +7,8 @@
  */
 package org.jcontainer.loom.interfaces;
 
-import org.jcontainer.dna.Configuration;
-import org.jcontainer.dna.ConfigurationException;
+import org.codehaus.dna.Configuration;
+import org.codehaus.dna.ConfigurationException;
 
 /**
  * Repository from which all configuration data is retrieved.

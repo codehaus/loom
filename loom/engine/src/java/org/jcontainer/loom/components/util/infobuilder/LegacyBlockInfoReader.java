@@ -11,10 +11,10 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import org.codehaus.spice.salt.i18n.ResourceManager;
 import org.codehaus.spice.salt.i18n.Resources;
-import org.jcontainer.dna.AbstractLogEnabled;
-import org.jcontainer.dna.Configuration;
-import org.jcontainer.dna.ConfigurationException;
-import org.jcontainer.dna.Logger;
+import org.codehaus.dna.AbstractLogEnabled;
+import org.codehaus.dna.Configuration;
+import org.codehaus.dna.ConfigurationException;
+import org.codehaus.dna.Logger;
 import org.jcontainer.loom.components.util.ConfigurationBuilder;
 import org.jcontainer.loom.components.util.info.ComponentInfo;
 import org.jcontainer.loom.components.util.info.DependencyDescriptor;
@@ -30,7 +30,7 @@ import org.xml.sax.InputSource;
  * href="package-summary.html#external">package summary</a>.
  *
  * @author Peter Donald
- * @version $Revision: 1.2 $ $Date: 2004-03-22 00:22:42 $
+ * @version $Revision: 1.3 $ $Date: 2004-04-18 23:09:52 $
  */
 public final class LegacyBlockInfoReader
     extends AbstractLogEnabled

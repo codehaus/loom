@@ -90,9 +90,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import org.jcontainer.dna.Configuration;
-import org.jcontainer.dna.ConfigurationException;
-import org.jcontainer.dna.impl.DefaultConfiguration;
+import org.codehaus.dna.Configuration;
+import org.codehaus.dna.ConfigurationException;
+import org.codehaus.dna.impl.DefaultConfiguration;
 
 /**
  * The ConfigurationMerger will take a Configuration object and layer it over

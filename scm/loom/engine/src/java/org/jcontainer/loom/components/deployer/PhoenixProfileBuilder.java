@@ -10,8 +10,8 @@ package org.jcontainer.loom.components.deployer;
 import java.util.ArrayList;
 import java.util.Map;
 
-import org.jcontainer.dna.AbstractLogEnabled;
-import org.jcontainer.dna.Logger;
+import org.codehaus.dna.AbstractLogEnabled;
+import org.codehaus.dna.Logger;
 import org.jcontainer.loom.components.assembler.Assembler;
 import org.jcontainer.loom.components.util.factory.ComponentFactory;
 import org.jcontainer.loom.components.util.factory.DefaultComponentFactory;
@@ -27,7 +27,7 @@ import org.jcontainer.loom.interfaces.ContainerConstants;
 
 /**
  * @author Peter Donald
- * @version $Revision: 1.19 $ $Date: 2004-02-20 03:49:49 $
+ * @version $Revision: 1.20 $ $Date: 2004-04-18 23:09:51 $
  */
 public class PhoenixProfileBuilder extends AbstractLogEnabled
     implements ProfileBuilder

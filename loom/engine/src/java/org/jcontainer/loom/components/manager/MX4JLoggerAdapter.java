@@ -94,14 +94,14 @@ import mx4j.log.Logger;
 public class MX4JLoggerAdapter
     extends Logger
 {
-    private static org.jcontainer.dna.Logger m_dnaLogger;
+    private static org.codehaus.dna.Logger m_dnaLogger;
 
     /**
      * This is really bad.  A static way of introducing a logger to a tool.
      *
      * @param logger the Avalon logger.
      */
-    public static void setLogger( final org.jcontainer.dna.Logger logger )
+    public static void setLogger( final org.codehaus.dna.Logger logger )
     {
         m_dnaLogger = logger;
     }

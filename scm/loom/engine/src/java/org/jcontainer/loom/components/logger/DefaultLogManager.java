@@ -112,11 +112,11 @@ import org.codehaus.spice.loggerstore.factories.PropertyLog4JLoggerStoreFactory;
 import org.codehaus.spice.loggerstore.factories.SimpleLogKitLoggerStoreFactory;
 import org.codehaus.spice.salt.i18n.ResourceManager;
 import org.codehaus.spice.salt.i18n.Resources;
-import org.jcontainer.dna.AbstractLogEnabled;
-import org.jcontainer.dna.Composable;
-import org.jcontainer.dna.MissingResourceException;
-import org.jcontainer.dna.ResourceLocator;
-import org.jcontainer.dna.impl.ConfigurationUtil;
+import org.codehaus.dna.AbstractLogEnabled;
+import org.codehaus.dna.Composable;
+import org.codehaus.dna.MissingResourceException;
+import org.codehaus.dna.ResourceLocator;
+import org.codehaus.dna.impl.ConfigurationUtil;
 import org.jcontainer.loom.components.util.ConfigurationConverter;
 import org.jcontainer.loom.components.util.ResourceUtil;
 import org.jcontainer.loom.interfaces.LogManager;
@@ -209,7 +209,7 @@ public class DefaultLogManager
      * @throws Exception if unable to create Loggers
      */
     public LoggerStore
-        createHierarchy( final org.jcontainer.dna.Configuration logs,
+        createHierarchy( final org.codehaus.dna.Configuration logs,
                          final File homeDirectory,
                          final File workDirectory,
                          final Map context )
@@ -323,7 +323,7 @@ public class DefaultLogManager
     }
 
     private Element
-        buildLog4JConfiguration( final org.jcontainer.dna.Configuration logs )
+        buildLog4JConfiguration( final org.codehaus.dna.Configuration logs )
     {
         final Element element = ConfigurationUtil.toElement( logs );
         final Document document = element.getOwnerDocument();

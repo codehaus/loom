@@ -93,16 +93,16 @@ import org.apache.excalibur.instrument.InstrumentManager;
 import org.codehaus.spice.loggerstore.LoggerStore;
 import org.codehaus.spice.salt.i18n.ResourceManager;
 import org.codehaus.spice.salt.i18n.Resources;
-import org.jcontainer.dna.AbstractLogEnabled;
-import org.jcontainer.dna.Active;
-import org.jcontainer.dna.Composable;
-import org.jcontainer.dna.Configurable;
-import org.jcontainer.dna.Configuration;
-import org.jcontainer.dna.ConfigurationException;
-import org.jcontainer.dna.Logger;
-import org.jcontainer.dna.MissingResourceException;
-import org.jcontainer.dna.ResourceLocator;
-import org.jcontainer.dna.impl.DefaultResourceLocator;
+import org.codehaus.dna.AbstractLogEnabled;
+import org.codehaus.dna.Active;
+import org.codehaus.dna.Composable;
+import org.codehaus.dna.Configurable;
+import org.codehaus.dna.Configuration;
+import org.codehaus.dna.ConfigurationException;
+import org.codehaus.dna.Logger;
+import org.codehaus.dna.MissingResourceException;
+import org.codehaus.dna.ResourceLocator;
+import org.codehaus.dna.impl.DefaultResourceLocator;
 import org.jcontainer.loom.components.application.DefaultApplication;
 import org.jcontainer.loom.components.util.profile.PartitionProfile;
 import org.jcontainer.loom.interfaces.Application;
@@ -312,14 +312,14 @@ public class DefaultKernel
                     final Application newApp = new DefaultApplication();
                     final Logger childLogger =
                         getLogger().getChildLogger( name );
-                    org.jcontainer.dna.impl.ContainerUtil.enableLogging(
+                    org.codehaus.dna.impl.ContainerUtil.enableLogging(
                         newApp, childLogger );
 
                     final ApplicationContext context =
                         createApplicationContext( entry );
                     newApp.setApplicationContext( context );
 
-                    org.jcontainer.dna.impl.ContainerUtil.initialize( newApp );
+                    org.codehaus.dna.impl.ContainerUtil.initialize( newApp );
 
                     application = newApp;
                 }
@@ -387,7 +387,7 @@ public class DefaultKernel
             {
                 entry.setApplication( null );
                 ContainerUtil.stop( application );
-                org.jcontainer.dna.impl.ContainerUtil.dispose( application );
+                org.codehaus.dna.impl.ContainerUtil.dispose( application );
             }
             else
             {
@@ -439,11 +439,11 @@ public class DefaultKernel
                                            entry.getClassLoader(),
                                            entry.getLoggerStore() );
 
-        org.jcontainer.dna.impl.ContainerUtil.
+        org.codehaus.dna.impl.ContainerUtil.
             enableLogging( context, createContextLogger( name ) );
-        org.jcontainer.dna.impl.ContainerUtil.
+        org.codehaus.dna.impl.ContainerUtil.
             compose( context, createResourceLocator() );
-        org.jcontainer.dna.impl.ContainerUtil.initialize( context );
+        org.codehaus.dna.impl.ContainerUtil.initialize( context );
         return context;
     }
 

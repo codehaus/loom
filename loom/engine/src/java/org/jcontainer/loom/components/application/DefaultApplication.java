@@ -97,9 +97,9 @@ import org.apache.avalon.phoenix.metadata.SarMetaData;
 
 import org.codehaus.spice.salt.i18n.ResourceManager;
 import org.codehaus.spice.salt.i18n.Resources;
-import org.jcontainer.dna.AbstractLogEnabled;
-import org.jcontainer.dna.Active;
-import org.jcontainer.dna.Logger;
+import org.codehaus.dna.AbstractLogEnabled;
+import org.codehaus.dna.Active;
+import org.codehaus.dna.Logger;
 import org.jcontainer.loom.components.util.ComponentMetaDataConverter;
 import org.jcontainer.loom.components.util.lifecycle.LifecycleHelper;
 import org.jcontainer.loom.components.util.profile.ComponentProfile;

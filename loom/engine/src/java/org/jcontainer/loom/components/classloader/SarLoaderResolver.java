@@ -95,9 +95,9 @@ import org.jcontainer.loom.classman.builder.SimpleLoaderResolver;
 import org.jcontainer.loom.extension.Extension;
 import org.codehaus.spice.salt.i18n.ResourceManager;
 import org.codehaus.spice.salt.i18n.Resources;
-import org.jcontainer.dna.LogEnabled;
-import org.jcontainer.dna.Logger;
-import org.jcontainer.dna.impl.ContainerUtil;
+import org.codehaus.dna.LogEnabled;
+import org.codehaus.dna.Logger;
+import org.codehaus.dna.impl.ContainerUtil;
 import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
 import org.jcontainer.loom.components.extensions.pkgmgr.PackageManager;
 import org.jcontainer.loom.components.util.ResourceUtil;
@@ -107,7 +107,7 @@ import org.jcontainer.loom.components.util.ResourceUtil;
  * split across multiple directories.
  *
  * @author Peter Donald
- * @version $Revision: 1.11 $ $Date: 2004-03-31 03:39:03 $
+ * @version $Revision: 1.12 $ $Date: 2004-04-18 23:09:51 $
  */
 class SarLoaderResolver
     extends SimpleLoaderResolver

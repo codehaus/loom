@@ -12,10 +12,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import junit.framework.TestCase;
-import org.jcontainer.dna.Configuration;
-import org.jcontainer.dna.ConfigurationException;
-import org.jcontainer.dna.impl.ConsoleLogger;
-import org.jcontainer.dna.impl.DefaultConfiguration;
+import org.codehaus.dna.Configuration;
+import org.codehaus.dna.ConfigurationException;
+import org.codehaus.dna.impl.ConsoleLogger;
+import org.codehaus.dna.impl.DefaultConfiguration;
 import org.jcontainer.loom.components.assembler.data.Component1;
 import org.jcontainer.loom.components.assembler.data.Component2;
 import org.jcontainer.loom.components.assembler.data.Component3;
@@ -35,7 +35,7 @@ import org.xml.sax.InputSource;
  *
  * @author Peter Donald
  * @author <a href="mailto:peter.royal@pobox.com">Peter Royal</a>
- * @version $Revision: 1.16 $ $Date: 2004-02-20 03:49:49 $
+ * @version $Revision: 1.17 $ $Date: 2004-04-18 23:09:52 $
  */
 public class AssemblerTestCase
     extends TestCase

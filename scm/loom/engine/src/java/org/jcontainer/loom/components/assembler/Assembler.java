@@ -91,8 +91,8 @@ import java.util.List;
 import java.util.Map;
 import org.codehaus.spice.salt.i18n.ResourceManager;
 import org.codehaus.spice.salt.i18n.Resources;
-import org.jcontainer.dna.Configuration;
-import org.jcontainer.dna.ConfigurationException;
+import org.codehaus.dna.Configuration;
+import org.codehaus.dna.ConfigurationException;
 import org.jcontainer.loom.components.util.metadata.ComponentTemplate;
 import org.jcontainer.loom.components.util.metadata.DependencyDirective;
 import org.jcontainer.loom.components.util.metadata.MetaDataBuilder;
@@ -106,7 +106,7 @@ import org.jcontainer.loom.interfaces.LoomException;
  * specified for <tt>assembly.xml</tt> files.
  *
  * @author Peter Donald
- * @version $Revision: 1.18 $ $Date: 2003-12-03 10:44:34 $
+ * @version $Revision: 1.19 $ $Date: 2004-04-18 23:09:51 $
  */
 public class Assembler
     implements MetaDataBuilder
