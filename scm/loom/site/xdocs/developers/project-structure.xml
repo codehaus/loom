@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<document>
+  <properties>
+    <title>Project Structure</title>
+    
+      
+  <author email="leosimons@apache.org">Leo Simons</author>
+  </properties>
+  <body>
+      <section name="Introduction">
+<p>Avalon Phoenix has seen lots of refactoring to create an intuitive
+code layout. It is usually quite easy to find what you need. This document
+provides an overview of the project structure. It is still under
+construction.</p>
+      </section>
+      <section name="Package structure">
+<source>
+org.apache.avalon.phoenix
+|
+|- components
+|  |- application
+|  |- classloader
+|  |- configuration
+|  |- deployer
+|     |- installer
+|  |- embeddor
+|  |- extensions
+|  |- kernel
+|  |- logger
+|  |- manager
+|     |- rmiadaptor
+|- frontends
+|- interfaces
+|- launcher
+|- metadata
+|- metainfo
+|- tools
+   |- assembler
+   |- configuration
+   |- infobuilder
+   |- tasks
+   |- verifier
+   |- xdoclet
+</source>
+      </section>
+      <section name="CVS Directory structure">
+<source>
+avalon-phoenix
+|
+|- lib : for third party libraries
+|
+|- src
+|  |
+|  |- conf : jar manifest
+|  |- java : java sources
+|  |- manifest : jar manifest files
+|  |- pdk : sources for PDK
+|  |- schema : DTDs for XML files
+|  |- script : shell scripts for usage in a standalone setup
+|  |- test : unit tests
+|  |- xdocs : site documentation in xml format
+|
+|- build.xml
+|- docs.xml
+|
+|- BUILDING.txt
+|- LICENSE.txt
+|- README.txt
+|- WARNING.txt
+</source>
+      </section>
+  </body>
+</document>
