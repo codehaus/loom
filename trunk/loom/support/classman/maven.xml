@@ -18,7 +18,7 @@
 
     <preGoal name="xdoc:copy-user-resources">
         <ant:mkdir dir="${basedir}/xdocs"/>
-        <ant:copy file="${basedir}/src/java/org/jcontainer/loom/classman/reader/classloader.dtd"
+        <ant:copy file="${basedir}/src/java/org/codehaus/loom/classman/reader/classloader.dtd"
             todir="${basedir}/target/docs"/>
     </preGoal>
 

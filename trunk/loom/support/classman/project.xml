@@ -3,7 +3,7 @@
     <extend>${basedir}/../../project.xml</extend>
     <name>ClassMan</name>
     <id>loom-classman</id>
-    <package>org.jcontainer.loom.classman</package>
+    <package>org.codehaus.loom.classman</package>
     <inceptionYear>2002</inceptionYear>
 
     <shortDescription>Toolkit to construct ClassLoader lattices from an XML descriptor.</shortDescription>
