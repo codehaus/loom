@@ -6,20 +6,24 @@
   
   <body>
     <section name="Plugins">
-		<ul>
-      		<li><a href="/plugins/sar/index.html">Maven Sar Plugin</a></li>
-        </ul>
+      <table>
+        <tr>
+          <td><a href="/plugins/maven-sar/">Maven Sar Plugin</a></td>
+          <td>Generates Loom/Phoenix Sar files using Maven</td>
+        </tr>
+      </table>
     </section>
-    <section name="Download">
+    <section name="Downloads">
 		<p>The Loom plugins are downloadable from <a href="http://dist.jcontainer.org/maven/loom/plugins">
 			JContainer Maven Repository</a>.  
 		</p>
-		<p>If you are using Maven as your build system, simply
+		<p>To install in your local Maven plugin repository, ensure that <code>http://dist.jcontainer.org/maven</code>
+		   is part of the <code>maven.repo.remote</code> list and simply
 			specify the plugin name as a dependency with type <code>plugin</code>:
 <source><![CDATA[
   <dependency>
     <groupId>loom</groupId>
-    <artifactId>loom-sar-plugin</artifactId>
+    <artifactId>maven-sar-plugin</artifactId>
     <version>1.0</version>
     <type>plugin</type>
   </dependency>
