@@ -21,7 +21,7 @@ import org.apache.avalon.phoenix.BlockEvent;
  * Application. To receive notification events, the implementation class
  * should be specified in the <tt>assembly.xml</tt> descriptor.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @deprecated This interface has been replaced by ApplicationListener
  */
 public interface BlockListener

@@ -14,7 +14,7 @@ package org.apache.avalon.phoenix.metainfo;
  * block (if any) and also contains information useful to presenting
  * information in administative screens (like human readable names etc).
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  */
 public class BlockInfo
 {

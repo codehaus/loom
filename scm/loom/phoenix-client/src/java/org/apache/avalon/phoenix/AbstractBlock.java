@@ -26,8 +26,8 @@ import org.apache.avalon.phoenix.BlockContext;
  * easier.
  *
  * @author <a href="mailto:bloritsch@apache.org">Berin Loritsch</a>
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version CVS $Revision: 1.1 $ $Date: 2003-06-26 09:45:01 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version CVS $Revision: 1.2 $ $Date: 2003-06-29 01:27:26 $
  * @deprecated As Block interface is deprecated this class is also
  *             deprecated with no replacement.
  */

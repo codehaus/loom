@@ -12,7 +12,7 @@ import java.io.File;
 /**
  * MetaData for the application.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  */
 public class SarMetaData
 {

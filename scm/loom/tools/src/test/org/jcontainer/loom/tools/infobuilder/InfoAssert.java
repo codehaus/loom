@@ -21,8 +21,8 @@ import org.jcontainer.loom.tools.info.ServiceDescriptor;
 /**
  * A set of utilities for asserting  facts about info objects.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-26 09:01:27 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.2 $ $Date: 2003-06-29 01:24:39 $
  */
 public class InfoAssert
 {

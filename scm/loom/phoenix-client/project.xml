@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<project>
+<!--    <pomVersion>3</pomVersion> -->
+    <name>Phoenix Client API</name>
+    <id>phoenix-client</id>
+<!--
+    <currentVersion>1.0dev</currentVersion>
+    <inceptionYear>1999-2003</inceptionYear>
+
+    <package>org.apache.avalon.phoenix</package>
+
+    <shortDescription>API Layer for Legacy Phoenix components.</shortDescription>
+
+    <description>
+        The toolkit provides an API that is compatible with Legacy
+        Phoenix components.
+    </description>
+
+    <dependencies>
+        <dependency>
+            <id>avalon-framework</id>
+            <version>4.0</version>
+        </dependency>
+    </dependencies>
+-->
+    <build>
+        <sourceDirectory>src/java</sourceDirectory>
+        <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
+    </build>
+
+</project>
