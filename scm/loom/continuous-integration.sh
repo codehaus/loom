@@ -25,6 +25,8 @@ cd $builddir
 
 # Delete compiled local copies to start fresh each time
 rm -Rf ~/.maven/repository/$mavenRepo/jars
+rm -Rf ~/.maven/repository/$mavenRepo/plugins
+rm -Rf ~/.maven/plugins/maven-sar-plugin-i*
 
 # Compile and test
 rm -f $logfile
