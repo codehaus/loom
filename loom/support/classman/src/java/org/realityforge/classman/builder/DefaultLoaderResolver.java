@@ -22,7 +22,7 @@ import org.realityforge.salt.io.FileUtil;
  * {@link #m_baseDirectory} value.
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-04 23:47:37 $
+ * @version $Revision: 1.3 $ $Date: 2003-06-05 00:20:08 $
  */
 public class DefaultLoaderResolver
     extends SimpleLoaderResolver
@@ -75,11 +75,7 @@ public class DefaultLoaderResolver
     {
         //woefully inefficient .. but then again - no need
         //for efficency here
-        String newBaseDirectory = FileUtil.normalize( baseDirectory );
-        if( ".".equals( newBaseDirectory ) )
-        {
-            newBaseDirectory = "";
-        }
+        final String newBaseDirectory = FileUtil.normalize( baseDirectory );
         final String[] newIncludes = prefixPatterns( newBaseDirectory, includes );
         final String[] newExcludes = prefixPatterns( newBaseDirectory, excludes );
         final PathMatcher matcher = new PathMatcher( newIncludes, newExcludes );
@@ -156,7 +152,7 @@ public class DefaultLoaderResolver
     private String[] prefixPatterns( final String prefix,
                                      final String[] patterns )
     {
-        if( 0 == prefix.length() )
+        if( 0 == prefix.length() || "".equals( prefix ) )
         {
             return patterns;
         }
