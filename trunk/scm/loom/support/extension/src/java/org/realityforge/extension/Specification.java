@@ -6,7 +6,6 @@
  * with this distribution in the LICENSE.txt file.
  */
 package org.realityforge.extension;
-
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,7 +13,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
-
 /**
  * <p>Utility class that represents either an available "Optional Package"
  * (formerly known as "Standard Extension") as described in the manifest
@@ -26,7 +24,7 @@ import java.util.jar.Manifest;
  * <code>guide/extensions/versioning.html</code>.</p>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-08-01 03:35:20 $
+ * @version $Revision: 1.4 $ $Date: 2003-08-04 01:52:53 $
  */
 public final class Specification
 {
@@ -35,65 +33,55 @@ public final class Specification
      * @see Attributes.Name#SPECIFICATION_TITLE
      */
     public static final Attributes.Name SPECIFICATION_TITLE = Attributes.Name.SPECIFICATION_TITLE;
-
     /**
      * Manifest Attribute Name object for SPECIFICATION_VERSION.
      * @see Attributes.Name#SPECIFICATION_VERSION
      */
     public static final Attributes.Name SPECIFICATION_VERSION = Attributes.Name.SPECIFICATION_VERSION;
-
     /**
      * Manifest Attribute Name object for SPECIFICATION_VENDOR.
      * @see Attributes.Name#SPECIFICATION_VENDOR
      */
     public static final Attributes.Name SPECIFICATION_VENDOR = Attributes.Name.SPECIFICATION_VENDOR;
-
     /**
      * Manifest Attribute Name object for IMPLEMENTATION_TITLE.
      * @see Attributes.Name#IMPLEMENTATION_TITLE
      */
     public static final Attributes.Name IMPLEMENTATION_TITLE = Attributes.Name.IMPLEMENTATION_TITLE;
-
     /**
      * Manifest Attribute Name object for IMPLEMENTATION_VERSION.
      * @see Attributes.Name#IMPLEMENTATION_VERSION
      */
     public static final Attributes.Name IMPLEMENTATION_VERSION = Attributes.Name.IMPLEMENTATION_VERSION;
-
     /**
      * Manifest Attribute Name object for IMPLEMENTATION_VENDOR.
      * @see Attributes.Name#IMPLEMENTATION_VENDOR
      */
     public static final Attributes.Name IMPLEMENTATION_VENDOR = Attributes.Name.IMPLEMENTATION_VENDOR;
-
     /**
      * Enum indicating that extension is compatible with other Package
      * Specification.
      */
     public static final Compatability COMPATIBLE =
         new Compatability( "COMPATIBLE" );
-
     /**
      * Enum indicating that extension requires an upgrade
      * of specification to be compatible with other Package Specification.
      */
     public static final Compatability REQUIRE_SPECIFICATION_UPGRADE =
         new Compatability( "REQUIRE_SPECIFICATION_UPGRADE" );
-
     /**
      * Enum indicating that extension requires a vendor
      * switch to be compatible with other Package Specification.
      */
     public static final Compatability REQUIRE_VENDOR_SWITCH =
         new Compatability( "REQUIRE_VENDOR_SWITCH" );
-
     /**
      * Enum indicating that extension requires an upgrade
      * of implementation to be compatible with other Package Specification.
      */
     public static final Compatability REQUIRE_IMPLEMENTATION_CHANGE =
         new Compatability( "REQUIRE_IMPLEMENTATION_CHANGE" );
-
     /**
      * Enum indicating that extension is incompatible with
      * other Package Specification in ways other than other enums
@@ -102,46 +90,38 @@ public final class Specification
      */
     public static final Compatability INCOMPATIBLE =
         new Compatability( "INCOMPATIBLE" );
-
     /**
      * The name of the Package Specification.
      */
     private String m_specificationTitle;
-
     /**
      * The version number (dotted decimal notation) of the specification
      * to which this optional package conforms.
      */
     private DeweyDecimal m_specificationVersion;
-
     /**
      * The name of the company or organization that originated the
      * specification to which this specification conforms.
      */
     private String m_specificationVendor;
-
     /**
      * The title of implementation.
      */
     private String m_implementationTitle;
-
     /**
      * The name of the company or organization that produced this
      * implementation of this specification.
      */
     private String m_implementationVendor;
-
     /**
      * The version string for implementation. The version string is
      * opaque.
      */
     private String m_implementationVersion;
-
     /**
      * The sections of jar that the specification applies to.
      */
     private String[] m_sections;
-
     /**
      * Return an array of <code>Package Specification</code> objects.
      * If there are no such optional packages, a zero-length array is returned.
@@ -156,9 +136,7 @@ public final class Specification
         {
             return new Specification[ 0 ];
         }
-
         final ArrayList results = new ArrayList();
-
         final Map entries = manifest.getEntries();
         final Iterator keys = entries.keySet().iterator();
         while( keys.hasNext() )
@@ -171,11 +149,9 @@ public final class Specification
                 results.add( specification );
             }
         }
-
         final ArrayList trimmedResults = removeDuplicates( results );
         return (Specification[])trimmedResults.toArray( new Specification[ 0 ] );
     }
-
     /**
      * The constructor to create Package Specification object.
      * Note that every component is allowed to be specified
@@ -199,7 +175,6 @@ public final class Specification
               implementationTitle, implementationVersion, implementationVendor,
               null );
     }
-
     /**
      * The constructor to create Package Specification object.
      * Note that every component is allowed to be specified
@@ -227,7 +202,6 @@ public final class Specification
         }
         m_specificationTitle = specificationTitle;
         m_specificationVendor = specificationVendor;
-
         if( null != specificationVersion )
         {
             try
@@ -241,11 +215,9 @@ public final class Specification
                 throw new IllegalArgumentException( error );
             }
         }
-
         m_implementationTitle = implementationTitle;
         m_implementationVendor = implementationVendor;
         m_implementationVersion = implementationVersion;
-
         String[] copy = null;
         if( null != sections )
         {
@@ -254,7 +226,6 @@ public final class Specification
         }
         m_sections = copy;
     }
-
     /**
      * Get the title of the specification.
      *
@@ -264,7 +235,6 @@ public final class Specification
     {
         return m_specificationTitle;
     }
-
     /**
      * Get the vendor of the specification.
      *
@@ -274,7 +244,6 @@ public final class Specification
     {
         return m_specificationVendor;
     }
-
     /**
      * Get the title of the specification.
      *
@@ -284,7 +253,6 @@ public final class Specification
     {
         return m_implementationTitle;
     }
-
     /**
      * Get the version of the specification.
      *
@@ -294,7 +262,6 @@ public final class Specification
     {
         return m_specificationVersion;
     }
-
     /**
      * Get the vendor of the extensions implementation.
      *
@@ -304,7 +271,6 @@ public final class Specification
     {
         return m_implementationVendor;
     }
-
     /**
      * Get the version of the implementation.
      *
@@ -314,7 +280,6 @@ public final class Specification
     {
         return m_implementationVersion;
     }
-
     /**
      * Return an array containing sections to which specification applies
      * or null if relevant to no sections.
@@ -335,7 +300,6 @@ public final class Specification
             return sections;
         }
     }
-
     /**
      * Return a Compatibility enum indicating the relationship of this
      * <code>Package Specification</code> with the specified <code>Extension</code>.
@@ -351,7 +315,6 @@ public final class Specification
         {
             return INCOMPATIBLE;
         }
-
         // Available specification version must be >= required
         final DeweyDecimal specificationVersion = other.getSpecificationVersion();
         if( null != specificationVersion )
@@ -362,7 +325,6 @@ public final class Specification
                 return REQUIRE_SPECIFICATION_UPGRADE;
             }
         }
-
         // Implementation Vendor ID must match
         final String implementationVendor = other.getImplementationVendor();
         if( null != implementationVendor )
@@ -373,7 +335,6 @@ public final class Specification
                 return REQUIRE_VENDOR_SWITCH;
             }
         }
-
         // Implementation version must be >= required
         final String implementationVersion = other.getImplementationVersion();
         if( null != implementationVersion )
@@ -384,11 +345,9 @@ public final class Specification
                 return REQUIRE_IMPLEMENTATION_CHANGE;
             }
         }
-
         // This available optional package satisfies the requirements
         return COMPATIBLE;
     }
-
     /**
      * Return <code>true</code> if the specified <code>package</code>
      * is satisfied by this <code>Specification</code>. Otherwise, return
@@ -401,7 +360,6 @@ public final class Specification
     {
         return ( COMPATIBLE == getCompatibilityWith( other ) );
     }
-
     /**
      * Return a String representation of this object.
      *
@@ -411,12 +369,10 @@ public final class Specification
     {
         final String lineSeparator = System.getProperty( "line.separator" );
         final String brace = ": ";
-
         final StringBuffer sb = new StringBuffer( SPECIFICATION_TITLE.toString() );
         sb.append( brace );
         sb.append( m_specificationTitle );
         sb.append( lineSeparator );
-
         if( null != m_specificationVersion )
         {
             sb.append( SPECIFICATION_VERSION );
@@ -424,7 +380,6 @@ public final class Specification
             sb.append( m_specificationVersion );
             sb.append( lineSeparator );
         }
-
         if( null != m_specificationVendor )
         {
             sb.append( SPECIFICATION_VENDOR );
@@ -432,7 +387,6 @@ public final class Specification
             sb.append( m_specificationVendor );
             sb.append( lineSeparator );
         }
-
         if( null != m_implementationTitle )
         {
             sb.append( IMPLEMENTATION_TITLE );
@@ -440,7 +394,6 @@ public final class Specification
             sb.append( m_implementationTitle );
             sb.append( lineSeparator );
         }
-
         if( null != m_implementationVersion )
         {
             sb.append( IMPLEMENTATION_VERSION );
@@ -448,7 +401,6 @@ public final class Specification
             sb.append( m_implementationVersion );
             sb.append( lineSeparator );
         }
-
         if( null != m_implementationVendor )
         {
             sb.append( IMPLEMENTATION_VENDOR );
@@ -456,10 +408,8 @@ public final class Specification
             sb.append( m_implementationVendor );
             sb.append( lineSeparator );
         }
-
         return sb.toString();
     }
-
     /**
      * Return <code>true</code> if the first version number is greater than
      * or equal to the second; otherwise return <code>false</code>.
@@ -471,7 +421,6 @@ public final class Specification
     {
         return first.isGreaterThanOrEqual( second );
     }
-
     /**
      * Combine all specifications objects that are identical except
      * for the sections.
@@ -503,17 +452,14 @@ public final class Specification
                     iterator.remove();
                 }
             }
-
             final Specification merged =
                 mergeInSections( specification, sections );
             results.add( merged );
             //Reset list of sections
             sections.clear();
         }
-
         return results;
     }
-
     /**
      * Test if two specifications are equal except for their sections.
      *
@@ -533,7 +479,6 @@ public final class Specification
             specification.getImplementationVersion().equals( other.getImplementationVersion() ) &&
             specification.getImplementationVendor().equals( other.getImplementationVendor() );
     }
-
     /**
      * Merge the specified sections into specified section and return result.
      * If no sections to be added then just return original specification.
@@ -552,10 +497,8 @@ public final class Specification
         else
         {
             sectionsToAdd.addAll( Arrays.asList( specification.getSections() ) );
-
             final String[] sections =
                 (String[])sectionsToAdd.toArray( new String[ sectionsToAdd.size() ] );
-
             return new Specification( specification.getSpecificationTitle(),
                                       specification.getSpecificationVersion().toString(),
                                       specification.getSpecificationVendor(),
@@ -565,7 +508,6 @@ public final class Specification
                                       sections );
         }
     }
-
     /**
      * Trim the supplied string if the string is non-null
      *
@@ -583,7 +525,6 @@ public final class Specification
             return value.trim();
         }
     }
-
     /**
      * Extract an Package Specification from Attributes.
      *
@@ -602,37 +543,31 @@ public final class Specification
         {
             return null;
         }
-
         final String specVendor = getTrimmedString( attributes.getValue( SPECIFICATION_VENDOR ) );
         if( null == specVendor )
         {
             throw new ParseException( "Missing " + SPECIFICATION_VENDOR, 0 );
         }
-
         final String specVersion = getTrimmedString( attributes.getValue( SPECIFICATION_VERSION ) );
         if( null == specVersion )
         {
             throw new ParseException( "Missing " + SPECIFICATION_VERSION, 0 );
         }
-
         final String impTitle = getTrimmedString( attributes.getValue( IMPLEMENTATION_TITLE ) );
         if( null == impTitle )
         {
             throw new ParseException( "Missing " + IMPLEMENTATION_TITLE, 0 );
         }
-
         final String impVersion = getTrimmedString( attributes.getValue( IMPLEMENTATION_VERSION ) );
         if( null == impVersion )
         {
             throw new ParseException( "Missing " + IMPLEMENTATION_VERSION, 0 );
         }
-
         final String impVendor = getTrimmedString( attributes.getValue( IMPLEMENTATION_VENDOR ) );
         if( null == impVendor )
         {
             throw new ParseException( "Missing " + IMPLEMENTATION_VENDOR, 0 );
         }
-
         return new Specification( name, specVersion, specVendor,
                                   impTitle, impVersion, impVendor,
                                   new String[]{section} );

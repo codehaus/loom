@@ -6,14 +6,13 @@
  * with this distribution in the LICENSE.txt file.
  */
 package org.realityforge.extension;
-
 /**
  * Enum used in {@link Extension} to indicate the compatability
  * of one extension to another. See {@link Extension} for instances
  * of object.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-07-28 13:30:46 $
+ * @version $Revision: 1.2 $ $Date: 2003-08-04 01:52:52 $
  * @see Extension
  */
 public final class Compatability
@@ -22,7 +21,6 @@ public final class Compatability
      * A string representaiton of compatability level.
      */
     private final String m_name;
-
     /**
      * Create a compatability enum with specified name.
      *
@@ -36,7 +34,6 @@ public final class Compatability
         }
         m_name = name;
     }
-
     /**
      * Return name of compatability level.
      *
@@ -46,7 +43,6 @@ public final class Compatability
     {
         return m_name;
     }
-
     /**
      * Return name of compatability level.
      *
