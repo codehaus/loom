@@ -123,10 +123,44 @@
             <id>relaxngDatatype</id>
             <version>20020414</version>
         </dependency>
+        <dependency> <!-- for unit testing -->
+            <groupId>excalibur</groupId>
+            <artifactId>excalibur-logger</artifactId>
+            <version>20030713</version>
+        </dependency>
+        <dependency><!-- for unit testing -->
+            <groupId>avalon</groupId>
+            <artifactId>avalon-logkit</artifactId>
+            <version>20030527</version>
+        </dependency>
+        <dependency><!-- for unit testing -->
+            <groupId>excalibur</groupId>
+            <artifactId>excalibur-i18n</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
     <build>
         <sourceDirectory>src/java</sourceDirectory>
+        <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
+
+        <unitTest>
+            <includes>
+                <include>**/*TestCase.java</include>
+            </includes>
+            <excludes>
+                <exclude>**/Abstract*.java</exclude>
+            </excludes>
+        </unitTest>
+
+        <resources>
+            <resource>
+                <directory>${basedir}/src/java</directory>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </resource>
+        </resources>
     </build>
 
 </project>
