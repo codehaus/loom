@@ -1,7 +1,7 @@
 /* ====================================================================
  * Loom Software License, version 1.1
  *
- * Copyright (c) 2003, Loom Group. All rights reserved.
+ * Copyright (c) 2003-2005, Loom Group. All rights reserved.
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:

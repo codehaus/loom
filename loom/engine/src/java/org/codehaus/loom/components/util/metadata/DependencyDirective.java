@@ -1,7 +1,7 @@
 /* ====================================================================
  * Loom Software License, version 1.1
  *
- * Copyright (c) 2003, Loom Group. All rights reserved.
+ * Copyright (c) 2003-2005, Loom Group. All rights reserved.
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -97,7 +97,7 @@ package org.codehaus.loom.components.util.metadata;
  * <p>Note that it is invalid to have circular dependencies.</p>
  *
  * @author Peter Donald
- * @version $Revision: 1.3 $ $Date: 2004-08-17 23:14:32 $
+ * @version $Revision: 1.4 $ $Date: 2005-02-22 08:57:36 $
  */
 public final class DependencyDirective
 {

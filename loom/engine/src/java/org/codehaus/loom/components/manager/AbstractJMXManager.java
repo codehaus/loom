@@ -1,7 +1,7 @@
 /* ====================================================================
  * Loom Software License, version 1.1
  *
- * Copyright (c) 2003, Loom Group. All rights reserved.
+ * Copyright (c) 2003-2005, Loom Group. All rights reserved.
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -102,7 +102,7 @@ import org.codehaus.spice.salt.i18n.Resources;
  *
  * @author Peter Donald
  * @author <a href="mailto:Huw@mmlive.com">Huw Roberts</a>
- * @version $Revision: 1.4 $ $Date: 2004-08-17 23:14:32 $
+ * @version $Revision: 1.5 $ $Date: 2005-02-22 08:57:36 $
  */
 public abstract class AbstractJMXManager
     extends AbstractSystemManager
