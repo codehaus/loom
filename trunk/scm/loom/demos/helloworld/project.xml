@@ -3,7 +3,7 @@
     <pomVersion>3</pomVersion>
     <name>Loom HelloWorld Demo</name>
     <groupId>loom</groupId>
-    <artifactId>demo-helloworld</artifactId>
+    <id>demo-helloworld</id>
     <currentVersion>1.0dev</currentVersion>
     <inceptionYear>1999-2003</inceptionYear>
     <package>org.jcontainer.loom.demos.helloworld</package>
@@ -17,27 +17,13 @@
     <dependencies>
         <dependency>
             <groupId>avalon</groupId>
-            <artifactId>avalon-logkit</artifactId>
-            <version>20030527</version>
-            <properties>
-                <category>shared</category>
-            </properties>
-        </dependency>
-        <dependency>
-            <groupId>avalon</groupId>
             <artifactId>avalon-framework</artifactId>
             <version>20030713</version>
-            <properties>
-                <category>shared</category>
-            </properties>
         </dependency>
         <dependency>
             <groupId>avalon</groupId>
             <artifactId>avalon-cornerstone</artifactId>
             <version>20030801</version>
-            <properties>
-                <category>shared</category>
-            </properties>
         </dependency>
         <dependency>
         	<groupId>loom</groupId>
@@ -48,22 +34,6 @@
         	<groupId>loom</groupId>
             <artifactId>loom-tools</artifactId>
             <version>1.0dev</version>
-        </dependency>
-        <dependency>
-            <groupId>mx4j</groupId>
-            <artifactId>mx4j-jmx</artifactId>
-            <version>1.1</version>
-            <properties>
-                <category>shared</category>
-            </properties>
-        </dependency>
-        <dependency>
-            <groupId>mx4j</groupId>
-            <artifactId>mx4j-tools</artifactId>
-            <version>1.1</version>
-            <properties>
-                <category>container</category>
-            </properties>
         </dependency>
     </dependencies>
 
