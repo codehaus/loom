@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<document>
+    <properties>
+    <title>Specification of assembly.xml </title>
+        
+
+        
+            <author email="peter at apache.org">Peter Donald</author>
+        
+    </properties>
+    <body>
+        <section name="The Assembly File">
+            <p>
+                The <source>assembly.xml</source> file defines how to assemble the
+                application.  It defines the blocks that make up the application,
+                and how to connect them together.  It also defines the
+                application listeners to include in the application.
+            </p>
+
+            <p>
+                In previous versions of Phoenix, configuration data was also
+                stored in the assembly file.  This is no longer the case;
+                Configuration is now stored in a separate
+                <a href="config-xml-specification.html">Configuration File</a>.
+            </p>
+
+            <p>
+                The root element of the assembly file must be an
+                <source>&lt;assembly></source> element.  The root element
+                must contain a child element for each block and application
+                listener which is part of the application.  These elements
+                are described below.
+            </p>
+        </section>
+
+        <section name="The &lt;block> Element">
+            <p>
+                The <source>&lt;block></source> element defines a block, and
+                how to provide services to the block.  The
+                <source>&lt;block></source> element takes the following
+                attributes:
+            </p>
+
+            <table>
+                <tr>
+          <th>Attribute</th>
+          <th>Description</th>
+        </tr>
+                <tr>
+                    <td>class</td>
+                    <td>
+                        The fully-qualified name of the block's implementing class.
+                        This class must be public, with a public no-args
+                        constructor.  There must be a corresponding
+                        <a href="blockinfo-specification.html">BlockInfo</a>
+                        file for the class.
+                    </td>
+                </tr>
+                <tr>
+                    <td>name</td>
+                    <td>
+                        A unique name for the block.  This name is used to
+                        refer to the block in other parts of the assembly file,
+                        and in the configuration file.  The block name may
+                        only contain letters, digits, '-' and '.'.
+                    </td>
+                </tr>
+            </table>
+
+            <subsection name="The &lt;provide> Element">
+                <p>
+                    The <source>&lt;provide></source> element defines how to
+                    provide a particular service to the block.  It connects
+                    the block to another block that provides the required service.
+                    There must be at least one <source>&lt;provide></source>
+                    element for each dependency listed in the block's
+                    <a href="blockinfo-specification.html">BlockInfo</a>
+                    file.  For array and mapped services, there may be more than
+                    one <source>&lt;provide></source> element for each
+                    dependency.  The <source>&lt;provide></source> element takes
+                    the following attributes:
+                </p>
+
+                <table>
+                    <tr>
+            <th>Attribute</th>
+            <th>Description</th>
+          </tr>
+                    <tr>
+                        <td>alias</td>
+                        <td>
+                            The key to use for the service, for mapped services.
+                            Defaults to the value of the <source>name</source>
+                            attribute.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>name</td>
+                        <td>
+                            The name of the block to use to provide the service
+                            to the target block.  This must refer to another
+                            block in the same application.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>role</td>
+                        <td>
+                            The role of the service.  This must refer to
+                            one of the dependencies listed in the block's
+                            BlockInfo file.  The service name and version
+                            specified by the dependency must match one of the
+                            services listed in the provider block's
+                            BlockInfo file.
+                        </td>
+                    </tr>
+                </table>
+            </subsection>
+
+            <subsection name="The &lt;proxy> Element">
+                <p>
+                    The <source>&lt;proxy></source> element controls whether
+                    Phoenix will wrap the block with a proxy object before
+                    supplying it to other blocks.  The <source>&lt;proxy></source>
+                    element takes the following attributes:
+                </p>
+                <table>
+                    <tr>
+            <th>Attribute</th>
+            <th>Description</th>
+          </tr>
+                    <tr>
+                        <td>disable</td>
+                        <td>Disables the use of a proxy object.  Default is false.</td>
+                    </tr>
+                </table>
+            </subsection>
+        </section>
+
+        <section name="The &lt;listener> Element">
+            <p>
+                The <source>&lt;listener></source> element defines an application
+                listener.  The <source>&lt;listener></source> element takes the
+                following attributes:
+            </p>
+            <table>
+                <tr>
+          <th>Attribute</th>
+          <th>Description</th>
+        </tr>
+                <tr>
+                    <td>class</td>
+                    <td>
+                        The fully qualified name of the listener class.
+                        This class must be public and provide a public
+                        no-args constructor.  It must implement the
+                        <source>org.apache.avalon.phoenix.ApplicationListener</source>
+                        interface.
+                    </td>
+                </tr>
+                <tr>
+                    <td>name</td>
+                    <td>
+                        A unique name for the listener, which is used to
+                        refer to the listener in the configuration file.
+                        The name may only contain letters, digits, '-' and '.'.
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+        <section name="The &lt;block-listener> Element (Deprecated)">
+            <p>
+                The <source>&lt;block-listener></source> element defines
+                a block listener.  Note that the use of block listeners
+                is deprecated.  The <source>&lt;block-listener></source> element
+                takes the same attributes as the <source>&lt;listener></source>
+                element.
+            </p>
+        </section>
+
+        <section name="Sample Assembly File">
+            
+            <p>
+                Below is an example assembly file.  It defines 2 blocks, called
+                <source>myAuthorizer</source> and <source>myBlock</source>, and a
+                listener.  Block <source>myBlock</source> uses the
+                <source>Authorizer</source> service provided by block
+                <source>myAuthorizer</source>.
+            </p>
+
+            <source>
+
+&lt;?xml version="1.0"?>
+
+&lt;assembly>
+
+    &lt;block name="myAuthorizer"
+           class="com.biz.cornerstone.blocks.MyAuthorizer">
+    &lt;/block>
+
+    &lt;block name="myBlock"
+           class="com.biz.cornerstone.blocks.MyBlock">
+        &lt;provide name="myAuthorizer"
+                 role="com.biz.cornerstone.services.Authorizer"/>
+    &lt;/block>
+
+    &lt;listener name="myListener"
+              class="com.biz.cornerstone.listeners.MyListener">
+    &lt;/listener>
+
+&lt;/assembly>
+            </source>
+        </section>
+    </body>
+</document>
