@@ -9,13 +9,4 @@
         Distribuited Client Demo app for deployment in Loom Application Server.
     </description>
 
-    <dependencies>
-        <dependency>
-            <groupId>loom</groupId>
-            <artifactId>maven-sar-plugin</artifactId>
-            <version>${pom.currentVersion}</version>
-            <type>plugin</type>
-        </dependency>
-    </dependencies>
-
 </project>
