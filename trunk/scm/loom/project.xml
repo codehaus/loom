@@ -97,10 +97,14 @@
             </roles>
             <timezone>0</timezone>
         </developer>
-        <contributor>
+        <developer>
             <name>Johan Sjoberg</name>
-            <email>johan.sjoberg at codehaus.org</email>
-        </contributor>
+            <id>sjoberg</id>
+            <roles>
+                <role>Hacker</role>
+            </roles>
+            <timezone>+2</timezone>
+        </developer>
     </developers>
 
     <contributors>
