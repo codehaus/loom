@@ -1,0 +1,27 @@
+<project 
+	xmlns:ant="jelly:ant" 
+	xmlns:j="jelly:core" 
+	xmlns:u="jelly:util">
+  
+  <goal name="test-clean">
+    <attainGoal name="clean"/>
+  </goal>
+  
+  <goal name="test-sar-init">
+    <attainGoal name="sar:init"/>
+  </goal>
+  
+  <goal name="test-taskdef">
+    <pathconvert targetos="unix" property="path.unix" refid="maven.dependency.classpath">
+    </pathconvert>
+    <ant:echo message="classpath is: ${path.unix}"/>
+
+    <ant:taskdef name="sar"
+            classname="org.jcontainer.loom.tools.ant.SarTask">
+        <ant:classpath>
+            <ant:path refid="maven.dependency.classpath"/>
+        </ant:classpath>
+    </ant:taskdef>
+  </goal>
+  
+</project>
