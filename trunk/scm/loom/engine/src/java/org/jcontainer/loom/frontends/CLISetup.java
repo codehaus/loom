@@ -109,7 +109,6 @@ class CLISetup
     private static final int DEBUG_LOG_OPT = 'd';
     private static final int HELP_OPT = 'h';
     private static final int LOG_FILE_OPT = 'l';
-    private static final int APPS_PATH_OPT = 'a';
     private static final int PERSISTENT_OPT = 'p';
     private static final int CONFIGFILE_OPT = 'f';
     private static final int DISABLE_HOOK_OPT = 2;
@@ -140,7 +139,7 @@ class CLISetup
      */
     private CLOptionDescriptor[] createCLOptions()
     {
-        final CLOptionDescriptor options[] = new CLOptionDescriptor[ 7 ];
+        final CLOptionDescriptor options[] = new CLOptionDescriptor[ 6 ];
         options[ 0 ] =
             new CLOptionDescriptor( "help",
                                     CLOptionDescriptor.ARGUMENT_DISALLOWED,
@@ -152,26 +151,21 @@ class CLISetup
                                     LOG_FILE_OPT,
                                     REZ.getString( "cli.opt.log-file.desc" ) );
         options[ 2 ] =
-            new CLOptionDescriptor( "apps-path",
-                                    CLOptionDescriptor.ARGUMENT_REQUIRED,
-                                    APPS_PATH_OPT,
-                                    REZ.getString( "cli.opt.apps-path.desc" ) );
-        options[ 3 ] =
             new CLOptionDescriptor( "debug-init",
                                     CLOptionDescriptor.ARGUMENT_DISALLOWED,
                                     DEBUG_LOG_OPT,
                                     REZ.getString( "cli.opt.debug-init.desc" ) );
-        options[ 4 ] =
+        options[ 3 ] =
             new CLOptionDescriptor( "disable-hook",
                                     CLOptionDescriptor.ARGUMENT_DISALLOWED,
                                     DISABLE_HOOK_OPT,
                                     REZ.getString( "cli.opt.disable-hook.desc" ) );
-        options[ 5 ] =
+        options[ 4 ] =
             new CLOptionDescriptor( "persistent",
                                     CLOptionDescriptor.ARGUMENT_DISALLOWED,
                                     PERSISTENT_OPT,
                                     REZ.getString( "cli.opt.persistent.desc" ) );
-        options[ 6 ] =
+        options[ 5 ] =
             new CLOptionDescriptor( "configfile",
                                     CLOptionDescriptor.ARGUMENT_REQUIRED,
                                     CONFIGFILE_OPT,
@@ -223,11 +217,6 @@ class CLISetup
 
                 case LOG_FILE_OPT:
                     m_parameters.setProperty( "log-destination", option.getArgument() );
-                    break;
-
-                case APPS_PATH_OPT:
-                    m_parameters.setProperty( CLIMain.APPS_DIR,
-                                              option.getArgument() );
                     break;
 
                 case PERSISTENT_OPT:

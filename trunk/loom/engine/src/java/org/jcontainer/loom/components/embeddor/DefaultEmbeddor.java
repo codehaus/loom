@@ -87,7 +87,6 @@
 package org.jcontainer.loom.components.embeddor;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Observer;
 import org.jcontainer.dna.AbstractLogEnabled;
@@ -101,7 +100,6 @@ import org.jcontainer.dna.MissingResourceException;
 import org.jcontainer.dna.ResourceLocator;
 import org.jcontainer.dna.impl.ContainerUtil;
 import org.jcontainer.dna.impl.DefaultResourceLocator;
-import org.jcontainer.loom.components.util.ExtensionFileFilter;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.Deployer;
 import org.jcontainer.loom.interfaces.Embeddor;
@@ -158,7 +156,6 @@ public class DefaultEmbeddor
     /**
      * The default directory in which applications are deployed from.
      */
-    private File m_appDir;
     private ClassLoader m_commonClassLoader;
     private ClassLoader m_containerClassLoader;
 
@@ -188,7 +185,6 @@ public class DefaultEmbeddor
         m_containerClassLoader = (ClassLoader)
             locator.lookup( ClassLoader.class.getName() + "/container" );
         m_loomHome = (File)locator.lookup( File.class.getName() + "/home" );
-        m_appDir = (File)locator.lookup( File.class.getName() + "/apps" );
         final Boolean persistent =
             (Boolean)locator.lookup( Boolean.class.getName() + "/persistent" );
         m_persistent = persistent.booleanValue();
@@ -245,8 +241,6 @@ public class DefaultEmbeddor
     public void execute()
         throws Exception
     {
-        deployDefaultApplications();
-
         //  If the kernel is empty at this point, it is because the server was
         //  started without supplying any applications, display a message to
         //  give the user a clue as to why the server is shutting down
@@ -472,50 +466,6 @@ public class DefaultEmbeddor
         }
     }
 
-    /**
-     * The deployer is used to load the applications from the
-     * default-apps-location specified in Parameters.
-     *
-     * @throws Exception if an error occurs
-     */
-    protected void deployDefaultApplications()
-        throws Exception
-    {
-        if( null != m_appDir )
-        {
-            final ExtensionFileFilter filter = new ExtensionFileFilter( ".sar" );
-            final File[] files = m_appDir.listFiles( filter );
-            if( null != files )
-            {
-                deployFiles( files );
-            }
-        }
-    }
-
-    private void deployFiles( final File[] files )
-        throws Exception
-    {
-        Arrays.sort( files );
-        for( int i = 0; i < files.length; i++ )
-        {
-            deployFile( files[ i ] );
-        }
-    }
-
-    private void deployFile( final File file )
-        throws Exception
-    {
-        final String filename = file.getName();
-        int index = filename.lastIndexOf( '.' );
-        if( -1 == index )
-        {
-            index = filename.length();
-        }
-        final String name = filename.substring( 0, index );
-        final File canonicalFile = file.getCanonicalFile();
-        deployFile( name, canonicalFile );
-    }
-
     protected final synchronized void deployFile( final String name, final File file )
         throws Exception
     {
@@ -677,7 +627,6 @@ public class DefaultEmbeddor
         }
 
         locator.put( File.class.getName() + "/home", m_loomHome );
-        locator.put( File.class.getName() + "/apps", m_appDir );
         locator.put( ClassLoader.class.getName() + "/common", m_commonClassLoader );
         locator.put( ClassLoader.class.getName() + "/container", m_containerClassLoader );
 
