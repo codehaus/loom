@@ -106,19 +106,13 @@ public interface ContainerConstants
     /** The date on which software was built. */
     String DATE = Version.DATE;
 
-    /**
-     * The name which the assembly is registered into Loom using.
-     */
+    /** The name which the assembly is registered into Loom using. */
     String ASSEMBLY_NAME = "loom:assembly-name";
 
-    /**
-     * The name of the config file which is used to load config data.
-     */
+    /** The name of the config file which is used to load config data. */
     String CONFIG_DESCRIPTOR = "loom:config";
 
-    /**
-     * The name of the config file which is used to load assembly data.
-     */
+    /** The name of the config file which is used to load assembly data. */
     String ASSEMBLY_DESCRIPTOR = "loom:assembly";
 
     /** The default classloader to use to load components. */
@@ -145,14 +139,10 @@ public interface ContainerConstants
      */
     String INSTALL_WORK = "install:work";
 
-    /**
-     * The URL to block configuration data. Type: {@link java.lang.String}
-     */
+    /** The URL to block configuration data. Type: {@link java.lang.String} */
     String INSTALL_CONFIG = "install:config";
 
-    /**
-     * The URL to assembly data. Type: {@link java.lang.String}
-     */
+    /** The URL to assembly data. Type: {@link java.lang.String} */
     String INSTALL_ASSEMBLY = "install:assembly";
 
     /**

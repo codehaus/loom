@@ -87,15 +87,15 @@
 package org.jcontainer.loom.components.manager;
 
 import java.util.HashMap;
-import org.jcontainer.loom.interfaces.LoomException;
-import org.jcontainer.loom.interfaces.SystemManager;
 import org.codehaus.spice.salt.i18n.ResourceManager;
 import org.codehaus.spice.salt.i18n.Resources;
+import org.jcontainer.loom.interfaces.LoomException;
+import org.jcontainer.loom.interfaces.SystemManager;
 
 /**
- * Implements a management context local to a particular process with which
- * it can register its managed object.  The naming scheme that results is
- * meant to be compatible with jmx.
+ * Implements a management context local to a particular process with which it
+ * can register its managed object.  The naming scheme that results is meant to
+ * be compatible with jmx.
  *
  * @author <a href="mailto:huw@apache.org">Huw Roberts</a>
  */
@@ -134,14 +134,15 @@ class SubContext
     }
 
     /**
-     * Register an object for management.
-     * The object is exported through some management scheme
-     * (typically JMX). Note that the particular management scheme
-     * will most likely use reflection to extract manageable information.
+     * Register an object for management. The object is exported through some
+     * management scheme (typically JMX). Note that the particular management
+     * scheme will most likely use reflection to extract manageable
+     * information.
      *
      * @param name the name to register object under
      * @param object the object
-     * @throws LoomException if an error occurs such as name already registered.
+     * @throws LoomException if an error occurs such as name already
+     * registered.
      * @throws IllegalArgumentException if object is null
      */
     public void register( final String name, final Object object )
@@ -154,7 +155,8 @@ class SubContext
      * Unregister named object.
      *
      * @param name the name of object to unregister
-     * @throws LoomException if an error occurs such as when no such object registered.
+     * @throws LoomException if an error occurs such as when no such object
+     * registered.
      */
     public void unregister( final String name )
         throws LoomException
@@ -163,8 +165,8 @@ class SubContext
     }
 
     /**
-     * Returns the subcontext of the specified name.  If it does not exist it
-     * is created.
+     * Returns the subcontext of the specified name.  If it does not exist it is
+     * created.
      *
      * @return the subcontext with the specified name
      * @throws LoomException if context cannot be created or retrieved
@@ -202,8 +204,8 @@ class SubContext
     }
 
     /**
-     *  Helper method used to generate the jmx name by appending the current name
-     *  and passing up the chain to the root context
+     * Helper method used to generate the jmx name by appending the current name
+     * and passing up the chain to the root context
      */
     private String jmxName( final String name )
     {
@@ -224,8 +226,7 @@ class SubContext
     }
 
     /**
-     *  Helper method to get key used to store subcontexts
-     * in m_subcontexts
+     * Helper method to get key used to store subcontexts in m_subcontexts
      */
     private String contextKey( final String parent,
                                final String type )

@@ -102,17 +102,17 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 
 /**
- * A demo of the lifecycle methods.  Mount the SAR fle contaning there blocks in Loom, go
- * to the JMX console ..
- *   http://localhost:8082/mbean?objectname=Loom%3Aapplication%3Ddemo-avalonlifecycle%2Ctopic%3DApplication
+ * A demo of the lifecycle methods.  Mount the SAR fle contaning there blocks in
+ * Loom, go to the JMX console .. http://localhost:8082/mbean?objectname=Loom%3Aapplication%3Ddemo-avalonlifecycle%2Ctopic%3DApplication
  * .. and try stopt/starting the blocks.
- * @dna.component
- * @author  Paul Hammant <Paul_Hammant@yahoo.com>
+ *
+ * @author Paul Hammant <Paul_Hammant@yahoo.com>
  * @version 1.0
+ * @dna.component
  */
 public class Lifecycle2Impl
     implements LogEnabled, Startable, Initializable, Contextualizable,
-    Serviceable, Configurable, Disposable
+               Serviceable, Configurable, Disposable
 {
     private Lifecycle1 m_lifecycle1;
 
@@ -132,18 +132,21 @@ public class Lifecycle2Impl
     public void contextualize( Context context )
         throws ContextException
     {
-        System.out.println( "Lifecycle2Impl.contextualize() called (things like base directory passed in here)." );
+        System.out.println(
+            "Lifecycle2Impl.contextualize() called (things like base directory passed in here)." );
         System.out.flush();
     }
 
     /**
      * @dna.dependency type="Lifecycle1"
      */
-    public void service( ServiceManager serviceManager ) throws ServiceException
+    public void service( ServiceManager serviceManager )
+        throws ServiceException
     {
         System.out.println( "Lifecycle2Impl.service() called "
                             + "(lookup on other services possible now)." );
-        System.out.println( "Lifecycle2Impl.service(), Lifecycle1 service looked up" );
+        System.out.println(
+            "Lifecycle2Impl.service(), Lifecycle1 service looked up" );
         m_lifecycle1 = (Lifecycle1)
             serviceManager.lookup( Lifecycle1.class.getName() );
     }
@@ -151,7 +154,8 @@ public class Lifecycle2Impl
     public void configure( Configuration configuration )
         throws ConfigurationException
     {
-        System.out.println( "Lifecycle2Impl.configure() called (configuration from config.xml passed here)." );
+        System.out.println(
+            "Lifecycle2Impl.configure() called (configuration from config.xml passed here)." );
         System.out.flush();
     }
 
@@ -160,8 +164,11 @@ public class Lifecycle2Impl
     {
         System.out.println( "Lifecycle2Impl.initialize() called." );
         System.out.flush();
-        System.out.println( "Lifecycle2Impl.initialize(), Lifecycle1.myServiceMethod() "
-                            + "method called result = " + m_lifecycle1.myServiceMethod() );
+        System.out.println(
+            "Lifecycle2Impl.initialize(), Lifecycle1.myServiceMethod() "
+            +
+            "method called result = " +
+            m_lifecycle1.myServiceMethod() );
         System.out.flush();
     }
 

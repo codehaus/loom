@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <document>
-  <properties>
-    <title>Guide - for Deployers</title>
-    <author email="jcontainer-interest@codehaus.org ">Loom Documentation Team</author>
-  </properties>
-  <body>
-    <section name="Introduction">
-      <p>
+    <properties>
+        <title>Guide - for Deployers</title>
+        <author email="jcontainer-interest@codehaus.org ">Loom Documentation Team</author>
+    </properties>
+    <body>
+        <section name="Introduction">
+            <p>
         Currently deploying a server application under Loom is simply a matter
-        of dropping the .sar file into the appropriate directory (<code>apps/</code>)
+        of dropping the .sar file into the appropriate directory (
+                <code>apps/</code>)
         and restarting Loom. In the future there will be more advanced methods
         of deploying and undeploying Server Applications without restarting Loom.
-      </p>
-      <subsection name="Target Audience">
-        <p>
+            </p>
+            <subsection name="Target Audience">
+                <p>
           This documentation describes the methods through which you can deploy
           Server Applications under the Loom kernel. It will be expanded as
           the system becomes more complete.
-        </p>
-      </subsection>
-    </section>
-  </body>
+                </p>
+            </subsection>
+        </section>
+    </body>
 </document>

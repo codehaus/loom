@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <document>
     <properties>
-    <title>Guide - for Server Assemblers</title>
-    <author email="jcontainer-interest@codehaus.org ">Loom Documentation Team</author>
-  </properties>
+        <title>Guide - for Server Assemblers</title>
+        <author email="jcontainer-interest@codehaus.org ">Loom Documentation Team</author>
+    </properties>
     <body>
         <section name="Who Should Read This Guide?">
             <p>

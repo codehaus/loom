@@ -19,7 +19,8 @@ import org.jcontainer.loom.interfaces.ConfigurationValidator;
 public class NoopConfigurationValidator
     implements ConfigurationValidator
 {
-    public boolean isValid( ComponentProfile component, ClassLoader classLoader )
+    public boolean isValid( ComponentProfile component,
+                            ClassLoader classLoader )
         throws ConfigurationException
     {
         return true;

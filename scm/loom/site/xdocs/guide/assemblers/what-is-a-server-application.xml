@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <document>
-  <properties>
-    <title>Guide - What is a Server Application?</title>
-    <author email="peter at apache.org">Peter Donald</author>
-    <author email="bloritsch@apache.org">Berin Loritsch</author>
-  </properties>
-  <body>
-    <section name="Introduction">
-      <p>
+    <properties>
+        <title>Guide - What is a Server Application?</title>
+        <author email="peter at apache.org">Peter Donald</author>
+        <author email="bloritsch@apache.org">Berin Loritsch</author>
+    </properties>
+    <body>
+        <section name="Introduction">
+            <p>
         In Loom, a Server Application is a set of Blocks that act in concert
         to provide a unified user service. Example Server Applications include a Mail
         Server, File Server, Web Server etc. The Server Application is a high level
         component that contains a set of Block components.
-      </p>
-      <p>
+            </p>
+            <p>
         A Server Application requires a number of components other than Blocks to
         be complete. A Server Application requires configuration files to define
         Server Application wide settings (threading, security, logging), to define
         how blocks are wired together, and to define configuration data for the
         Block instances. A Block can also require other resources that are
         application specific.
-      </p>
-    </section>
+            </p>
+        </section>
 
-  </body>
+    </body>
 </document>

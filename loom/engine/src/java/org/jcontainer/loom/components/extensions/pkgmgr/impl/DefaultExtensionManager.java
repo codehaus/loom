@@ -96,9 +96,9 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
+import org.codehaus.spice.extension.Extension;
 import org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager;
 import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
-import org.codehaus.spice.extension.Extension;
 
 /**
  * <p>Interface used to contain "Optional Packages" (formerly known as "Standard
@@ -107,7 +107,7 @@ import org.codehaus.spice.extension.Extension;
  * Optional Packages.</p>
  *
  * @author Peter Donald
- * @version $Revision: 1.6 $ $Date: 2003-12-03 02:54:41 $
+ * @version $Revision: 1.7 $ $Date: 2003-12-03 10:44:41 $
  * @see OptionalPackage
  * @see ExtensionManager
  */

@@ -89,37 +89,36 @@ package org.jcontainer.loom.components.configuration.merger;
 import java.util.HashSet;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.ConfigurationException;
-import org.jcontainer.dna.impl.DefaultConfiguration;
 import org.jcontainer.dna.impl.ConfigurationUtil;
-import org.jcontainer.loom.components.util.ConfigUtil;
+import org.jcontainer.dna.impl.DefaultConfiguration;
 
 /**
- * The ConfigurationSplitter will take two Configuration objects and calculate the
- * differences between them.
+ * The ConfigurationSplitter will take two Configuration objects and calculate
+ * the differences between them.
  *
- * The resulting Configuration will contain special attribute that can be used by the
- * ConfigurationMerger to reconstruct the original Configuration
+ * The resulting Configuration will contain special attribute that can be used
+ * by the ConfigurationMerger to reconstruct the original Configuration
  *
- * @see ConfigurationMerger
  * @author <a href="mailto:proyal@apache.org">Peter Royal</a>
+ * @see ConfigurationMerger
  */
 public class ConfigurationSplitter
 {
     /**
-     * Split a configuration, given a merged configuration and a base configuration.
-     * Functionally equivalent to producing a <i>diff</i> between the merged and base.
+     * Split a configuration, given a merged configuration and a base
+     * configuration. Functionally equivalent to producing a <i>diff</i> between
+     * the merged and base.
      *
-     * @param merged Configuration that is a combination of the <i>result</i> and
-     *        the <i>base</i> param
-     * @param base Configuration that when merged with the <i>result</i> will yield the
-     *        <i>merged</i> param
-     *
-     * @return a Configuration that when merged with the <i>base</i> will yeild the
-     *         <i>merged</i>
-     *
+     * @param merged Configuration that is a combination of the <i>result</i>
+     * and the <i>base</i> param
+     * @param base Configuration that when merged with the <i>result</i> will
+     * yield the <i>merged</i> param
+     * @return a Configuration that when merged with the <i>base</i> will yeild
+     *         the <i>merged</i>
      * @throws ConfigurationException if unable to split
      */
-    public static Configuration split( final Configuration merged, final Configuration base )
+    public static Configuration split( final Configuration merged,
+                                       final Configuration base )
         throws ConfigurationException
     {
         final DefaultConfiguration layer = doSplit( merged, base, false );
@@ -137,7 +136,8 @@ public class ConfigurationSplitter
         final DefaultConfiguration layer =
             new DefaultConfiguration( base.getName(),
                                       merged.getPath(),
-                                      "Merged [merged: " + merged.getLocation()
+                                      "Merged [merged: " +
+                                      merged.getLocation()
                                       + ", base: " + base.getLocation() + "]" );
 
         copyAttributes( layer, merged, base );
@@ -212,7 +212,10 @@ public class ConfigurationSplitter
                 else
                 {
                     throw new ConfigurationException( "Multiple children in base with name '"
-                                                      + name + "' and attr '" + keyAttr
+                                                      +
+                                                      name +
+                                                      "' and attr '" +
+                                                      keyAttr
                                                       + " = " + keyValue + "'",
                                                       merged.getPath(),
                                                       merged.getLocation() );
@@ -225,7 +228,9 @@ public class ConfigurationSplitter
             }
             else if( !ConfigurationUtil.equals( kids[ i ], mergedWith ) )
             {
-                final DefaultConfiguration layerChild = doSplit( kids[ i ], mergedWith, keyAttr );
+                final DefaultConfiguration layerChild = doSplit( kids[ i ],
+                                                                 mergedWith,
+                                                                 keyAttr );
 
                 layerChild.makeReadOnly();
 
@@ -249,7 +254,11 @@ public class ConfigurationSplitter
                 final String attr = attrs[ j ];
 
                 if( !testedAttributes.contains( attr )
-                    && isUniqueAttribute( attr, c[ i ].getAttribute( attr ), i, c ) )
+                    &&
+                    isUniqueAttribute( attr,
+                                       c[ i ].getAttribute( attr ),
+                                       i,
+                                       c ) )
                 {
                     if( null == uniqueAttr )
                     {
@@ -257,12 +266,20 @@ public class ConfigurationSplitter
                     }
                     else
                     {
-                        throw new ConfigurationException( "Multiple unique attributes for child "
-                                                          + "[name: " + c[ 0 ].getName()
-                                                          + ", unique1: " + uniqueAttr
-                                                          + ", unique2: " + attr + "]",
-                                                          "",
-                                                          "");
+                        throw new ConfigurationException(
+                            "Multiple unique attributes for child "
+                            +
+                            "[name: " +
+                            c[ 0 ].getName()
+                            +
+                            ", unique1: " +
+                            uniqueAttr
+                            +
+                            ", unique2: " +
+                            attr +
+                            "]",
+                            "",
+                            "" );
                     }
                 }
                 else
@@ -274,10 +291,13 @@ public class ConfigurationSplitter
 
         if( null == uniqueAttr )
         {
-            throw new ConfigurationException( "Unable to find unique attribute for "
-                                              + "children of name: " + c[ 0 ].getName(),
-                                              c[ 0 ].getPath(),
-                                              c[ 0 ].getLocation() );
+            throw new ConfigurationException(
+                "Unable to find unique attribute for "
+                +
+                "children of name: " +
+                c[ 0 ].getName(),
+                c[ 0 ].getPath(),
+                c[ 0 ].getLocation() );
         }
 
         return uniqueAttr;

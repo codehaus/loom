@@ -93,6 +93,8 @@ import java.util.List;
 import org.apache.avalon.phoenix.ApplicationListener;
 import org.apache.avalon.phoenix.BlockListener;
 import org.apache.avalon.phoenix.metadata.SarMetaData;
+import org.codehaus.spice.salt.i18n.ResourceManager;
+import org.codehaus.spice.salt.i18n.Resources;
 import org.jcontainer.dna.AbstractLogEnabled;
 import org.jcontainer.dna.Active;
 import org.jcontainer.dna.Logger;
@@ -104,8 +106,6 @@ import org.jcontainer.loom.interfaces.Application;
 import org.jcontainer.loom.interfaces.ApplicationContext;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.LoomException;
-import org.codehaus.spice.salt.i18n.ResourceManager;
-import org.codehaus.spice.salt.i18n.Resources;
 
 /**
  * This is the basic container of blocks. A server application represents an

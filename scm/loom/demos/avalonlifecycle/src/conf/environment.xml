@@ -4,15 +4,15 @@
 
     <logs>
 
-      <category name="" target="default"
-                priority="DEBUG" />
-      <category name="objectstorage" target="objectstorage-target"
-                priority="DEBUG" />
+        <category name="" target="default"
+            priority="DEBUG"/>
+        <category name="objectstorage" target="objectstorage-target"
+            priority="DEBUG"/>
 
-      <log-target name="default"
-                  location="/logs/avalon-demo.log" />
-      <log-target name="objectstorage-target"
-                  location="/logs/objectstorage.log" />
+        <log-target name="default"
+            location="/logs/avalon-demo.log"/>
+        <log-target name="objectstorage-target"
+            location="/logs/objectstorage.log"/>
     </logs>
 
 </environment>

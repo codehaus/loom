@@ -2,8 +2,8 @@
 
 <config>
 
-  <distributed-server>
-      <port>1234</port> 
-  </distributed-server>
-  
+    <distributed-server>
+        <port>1234</port>
+    </distributed-server>
+
 </config>

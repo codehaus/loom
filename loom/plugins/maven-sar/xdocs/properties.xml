@@ -1,85 +1,105 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <document>
 
-  <properties>
-    <title>Sar Properties</title>
-    <author email="mauro.talevi at aquilonia.org">Mauro Talevi</author>
-  </properties>
+    <properties>
+        <title>Sar Properties</title>
+        <author email="mauro.talevi at aquilonia.org">Mauro Talevi</author>
+    </properties>
 
-  <body>
-    <section name="Sar Settings">
-      <table>
-        <tr><th>Property</th><th>Optional?</th><th>Description</th></tr>
-        <tr>
-          <td>maven.sar.src</td>
-          <td>Yes</td>
-          <td>Location of sar source in source tree.
-              Defaults to <code>${maven.src.dir}</code>.
-          </td>
-        </tr>
-        <tr>
-          <td>maven.sar.assembly</td>
-          <td>Yes</td>
-          <td>Location of the <code>assembly.xml</code> file.
-              Defaults to <code>${maven.sar.src}/conf/assembly.xml</code>.
-          </td>
-        </tr>
-        <tr>
-          <td>maven.sar.config</td>
-          <td>Yes</td>
-          <td>Location of the <code>config.xml</code> file.
-              Defaults to <code>${maven.sar.src}/conf/config.xml</code>.
-          </td>
-        </tr>
-        <tr>
-          <td>maven.sar.environment</td>
-          <td>Yes</td>
-          <td>Location of the <code>environment.xml</code> file.
-              Defaults to <code>${maven.sar.src}/conf/environment.xml</code>.
-          </td>
-        </tr>
-        <tr>
-          <td>maven.sar.logging</td>
-          <td>Yes</td>
-          <td>Location of the logging configuration file which can be specified
-          	  in alternative to the <code>logs</code> element in  <code>environment.xml</code>
+    <body>
+        <section name="Sar Settings">
+            <table>
+                <tr>
+                    <th>Property</th>
+                    <th>Optional?</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>maven.sar.src</td>
+                    <td>Yes</td>
+                    <td>Location of sar source in source tree.
+              Defaults to
+                        <code>${maven.src.dir}</code>.
+                    </td>
+                </tr>
+                <tr>
+                    <td>maven.sar.assembly</td>
+                    <td>Yes</td>
+                    <td>Location of the
+                        <code>assembly.xml</code> file.
+              Defaults to
+                        <code>${maven.sar.src}/conf/assembly.xml</code>.
+                    </td>
+                </tr>
+                <tr>
+                    <td>maven.sar.config</td>
+                    <td>Yes</td>
+                    <td>Location of the
+                        <code>config.xml</code> file.
+              Defaults to
+                        <code>${maven.sar.src}/conf/config.xml</code>.
+                    </td>
+                </tr>
+                <tr>
+                    <td>maven.sar.environment</td>
+                    <td>Yes</td>
+                    <td>Location of the
+                        <code>environment.xml</code> file.
+              Defaults to
+                        <code>${maven.sar.src}/conf/environment.xml</code>.
+                    </td>
+                </tr>
+                <tr>
+                    <td>maven.sar.logging</td>
+                    <td>Yes</td>
+                    <td>Location of the logging configuration file which can be specified
+          	  in alternative to the
+                        <code>logs</code> element in
+                        <code>environment.xml</code>
           	  (which takes precedence over the logging configuration).
           	  The recognised valid logging file names are:
-			  <code>log4j.properties</code>, <code>log4j.xml</code>,
-			  <code>logging.properties</code>, <code>excalibur-logger.xml</code>.
+                        <code>log4j.properties</code>,
+                        <code>log4j.xml</code>,
+                        <code>logging.properties</code>,
+                        <code>excalibur-logger.xml</code>.
               Has no default.
-          </td>
-        </tr>
-        <tr>
-          <td>maven.sar.build.dir</td>
-          <td>Yes</td>
-          <td>Directory where the sar will be generated.
-              Defaults to <code>${maven.build.dir}</code>.
-          </td>
-        </tr>
-        <tr>
-          <td>maven.sar.lib.include</td>
-          <td>Yes</td>
-          <td>Build artifacts to include in sar.
-              Defaults to <code>${pom.artifactId}*.jar</code>. Files are relative to <code>${maven.sar.build.dir}</code>.
-          </td>
-        </tr>
-        <tr>
-          <td>maven.sar.lib.exclude</td>
-          <td>Yes</td>
-          <td>Build artifacts to exclude in sar.
-              Defaults to none. Files are relative to <code>${maven.sar.build.dir}</code>.
-          </td>
-        </tr>
-      </table>
-    </section>
-    <section name="Including jars in the sar">
-	  <p>
-	    To include a dependency in the sar you need to set the <code>sar.bundle</code> property to
-	    <code>true</code>:
-	  </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>maven.sar.build.dir</td>
+                    <td>Yes</td>
+                    <td>Directory where the sar will be generated.
+              Defaults to
+                        <code>${maven.build.dir}</code>.
+                    </td>
+                </tr>
+                <tr>
+                    <td>maven.sar.lib.include</td>
+                    <td>Yes</td>
+                    <td>Build artifacts to include in sar.
+              Defaults to
+                        <code>${pom.artifactId}*.jar</code>. Files are relative to
+                        <code>${maven.sar.build.dir}</code>.
+                    </td>
+                </tr>
+                <tr>
+                    <td>maven.sar.lib.exclude</td>
+                    <td>Yes</td>
+                    <td>Build artifacts to exclude in sar.
+              Defaults to none. Files are relative to
+                        <code>${maven.sar.build.dir}</code>.
+                    </td>
+                </tr>
+            </table>
+        </section>
+        <section name="Including jars in the sar">
+            <p>
+	    To include a dependency in the sar you need to set the
+                <code>sar.bundle</code> property to
+                <code>true</code>:
+            </p>
 
-<source><![CDATA[
+            <source><![CDATA[
   <dependency>
     <id>jarid</id>
     <version>jarversion</version>
@@ -87,16 +107,18 @@
       <sar.bundle>true</sar.bundle>
     </properties>
   </dependency>
-]]></source>
+            ]]></source>
 
-    </section>
-    <section name="Including resources in the app">
-	  <p>
-	    To include a resource in the app you need to set the corresponding <code>targetPath</code>
-	    to <code>SAR-INF</code>:
-	  </p>
+        </section>
+        <section name="Including resources in the app">
+            <p>
+	    To include a resource in the app you need to set the corresponding
+                <code>targetPath</code>
+	    to
+                <code>SAR-INF</code>:
+            </p>
 
-<source><![CDATA[
+            <source><![CDATA[
     <build>
         <resources>
             <resource>
@@ -111,8 +133,8 @@
             </resource>
         </resources>
     </build>
-]]></source>
+            ]]></source>
 
-    </section>
-  </body>
+        </section>
+    </body>
 </document>

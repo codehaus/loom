@@ -98,14 +98,14 @@ import org.apache.avalon.framework.context.DefaultContext;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.avalon.framework.service.DefaultServiceManager;
 import org.apache.avalon.framework.service.ServiceManager;
+import org.codehaus.spice.salt.i18n.ResourceManager;
+import org.codehaus.spice.salt.i18n.Resources;
 import org.jcontainer.dna.AbstractLogEnabled;
 import org.jcontainer.loom.components.util.ConfigurationConverter;
 import org.jcontainer.loom.components.util.factory.ComponentFactory;
 import org.jcontainer.loom.components.util.info.ComponentInfo;
 import org.jcontainer.loom.components.util.metadata.ComponentTemplate;
 import org.jcontainer.loom.components.util.metadata.DependencyDirective;
-import org.codehaus.spice.salt.i18n.ResourceManager;
-import org.codehaus.spice.salt.i18n.Resources;
 
 /**
  * This is a base object via which the {@link org.jcontainer.loom.components.util.lifecycle.LifecycleHelper}
@@ -117,7 +117,7 @@ import org.codehaus.spice.salt.i18n.Resources;
  * (presumably via {@link org.jcontainer.loom.components.util.verifier.AssemblyVerifier}</p>
  *
  * @author Peter Donald
- * @version $Revision: 1.7 $ $Date: 2003-12-03 02:54:43 $
+ * @version $Revision: 1.8 $ $Date: 2003-12-03 10:44:42 $
  */
 public abstract class AbstractResourceProvider
     extends AbstractLogEnabled

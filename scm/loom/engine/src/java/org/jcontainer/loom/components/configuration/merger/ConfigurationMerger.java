@@ -94,25 +94,22 @@ import org.jcontainer.dna.ConfigurationException;
 import org.jcontainer.dna.impl.DefaultConfiguration;
 
 /**
- * The ConfigurationMerger will take a Configuration object and layer it over another.
+ * The ConfigurationMerger will take a Configuration object and layer it over
+ * another.
  *
- * It will use special attributes on the layer's children to control how children
- * of the layer and base are combined. In order for a child of the layer to be merged with a
- * child of the base, the following must hold true:
- * <ol>
- *   <li>The child in the <b>layer</b> Configuration has an attribute named
- *       <code>phoenix-configuration:merge</code> and its value is equal to a boolean
- *       <code>TRUE</code>
- *   </li>
- *   <li>There must be a single child in both the layer and base with the same getName() <b>OR</b>
- *       there exists an attribute named <code>phoenix-configuration:key-attribute</code>
- *       that names an attribute that exists on both the layer and base that can be used to match
- *       multiple children of the same getName()
- *   </li>
- * </ol>
+ * It will use special attributes on the layer's children to control how
+ * children of the layer and base are combined. In order for a child of the
+ * layer to be merged with a child of the base, the following must hold true:
+ * <ol> <li>The child in the <b>layer</b> Configuration has an attribute named
+ * <code>phoenix-configuration:merge</code> and its value is equal to a boolean
+ * <code>TRUE</code> </li> <li>There must be a single child in both the layer
+ * and base with the same getName() <b>OR</b> there exists an attribute named
+ * <code>phoenix-configuration:key-attribute</code> that names an attribute that
+ * exists on both the layer and base that can be used to match multiple children
+ * of the same getName() </li> </ol>
  *
- * @see ConfigurationSplitter
  * @author <a href="mailto:proyal@apache.org">Peter Royal</a>
+ * @see ConfigurationSplitter
  */
 public class ConfigurationMerger
 {
@@ -121,18 +118,18 @@ public class ConfigurationMerger
      *
      * @param layer Configuration to <i>layer</i> over the base
      * @param base Configuration <i>layer</i> will be merged with
-     *
      * @return Result of merge
-     *
-     * @exception ConfigurationException if unable to merge
+     * @throws ConfigurationException if unable to merge
      */
-    public static Configuration merge( final Configuration layer, final Configuration base )
+    public static Configuration merge( final Configuration layer,
+                                       final Configuration base )
         throws ConfigurationException
     {
         final DefaultConfiguration merged =
             new DefaultConfiguration( base.getName(),
                                       base.getPath(),
-                                      "Merged [layer: " + layer.getLocation()
+                                      "Merged [layer: " +
+                                      layer.getLocation()
                                       + ", base: " + base.getLocation() + "]" );
 
         copyAttributes( base, merged );
@@ -160,7 +157,9 @@ public class ConfigurationMerger
 
         for( int i = 0; i < lc.length; i++ )
         {
-            final Configuration mergeWith = getMergePartner( lc[ i ], layer, base );
+            final Configuration mergeWith = getMergePartner( lc[ i ],
+                                                             layer,
+                                                             base );
 
             if( null == mergeWith )
             {
@@ -190,9 +189,12 @@ public class ConfigurationMerger
     {
         if( toMerge.getAttributeAsBoolean( Constants.MERGE_ATTR, false ) )
         {
-            final String keyAttribute = toMerge.getAttribute( Constants.KEY_ATTR, null );
+            final String keyAttribute = toMerge.getAttribute(
+                Constants.KEY_ATTR, null );
             final String keyvalue =
-                keyAttribute == null ? null : toMerge.getAttribute( keyAttribute );
+                keyAttribute == null ?
+                null :
+                toMerge.getAttribute( keyAttribute );
 
             final Configuration[] layerKids = match( layer,
                                                      toMerge.getName(),
@@ -211,7 +213,8 @@ public class ConfigurationMerger
             else
             {
                 throw new ConfigurationException( "Unable to merge configuration item, "
-                                                  + "multiple matches on child or base [name: "
+                                                  +
+                                                  "multiple matches on child or base [name: "
                                                   + toMerge.getName() + "]",
                                                   toMerge.getPath(),
                                                   toMerge.getLocation() );
@@ -221,7 +224,8 @@ public class ConfigurationMerger
         return null;
     }
 
-    private static String getValue( final Configuration layer, final Configuration base )
+    private static String getValue( final Configuration layer,
+                                    final Configuration base )
     {
         try
         {
@@ -243,16 +247,21 @@ public class ConfigurationMerger
         {
             if( !names[ i ].startsWith( Constants.MERGE_METADATA_PREFIX ) )
             {
-                dest.setAttribute( names[ i ], source.getAttribute( names[ i ] ) );
+                dest.setAttribute( names[ i ],
+                                   source.getAttribute( names[ i ] ) );
             }
         }
     }
 
     /**
-     * Return all occurance of a configuration child containing the supplied attribute name.
+     * Return all occurance of a configuration child containing the supplied
+     * attribute name.
+     *
      * @param config the configuration
-     * @param element the name of child elements to select from the configuration
-     * @param attribute the attribute name to filter (null will match any attribute name)
+     * @param element the name of child elements to select from the
+     * configuration
+     * @param attribute the attribute name to filter (null will match any
+     * attribute name)
      * @return an array of configuration instances matching the query
      */
     public static Configuration[] match( final Configuration config,
@@ -263,11 +272,16 @@ public class ConfigurationMerger
     }
 
     /**
-     * Return occurance of a configuration child containing the supplied attribute name and value.
+     * Return occurance of a configuration child containing the supplied
+     * attribute name and value.
+     *
      * @param config the configuration
-     * @param element the name of child elements to select from the configuration
-     * @param attribute the attribute name to filter (null will match any attribute name )
-     * @param value the attribute value to match (null will match any attribute value)
+     * @param element the name of child elements to select from the
+     * configuration
+     * @param attribute the attribute name to filter (null will match any
+     * attribute name )
+     * @param value the attribute value to match (null will match any attribute
+     * value)
      * @return an array of configuration instances matching the query
      */
     public static Configuration[] match( final Configuration config,

@@ -16,7 +16,7 @@ import org.jcontainer.loom.components.util.metadata.PartitionTemplate;
  * objects.
  *
  * @author Peter Donald
- * @version $Revision: 1.3 $ $Date: 2003-11-29 13:44:27 $
+ * @version $Revision: 1.4 $ $Date: 2003-12-03 10:44:43 $
  */
 public class PartitionProfile
 {
@@ -26,14 +26,10 @@ public class PartitionProfile
     /** The PartitionTemplate for this partition. */
     private final PartitionTemplate m_metaData;
 
-    /**
-     * An array of partitions that are contained by this object.
-     */
+    /** An array of partitions that are contained by this object. */
     private final PartitionProfile[] m_partitions;
 
-    /**
-     * An array of partitions that are contained by this object.
-     */
+    /** An array of partitions that are contained by this object. */
     private final ComponentProfile[] m_components;
 
     /**

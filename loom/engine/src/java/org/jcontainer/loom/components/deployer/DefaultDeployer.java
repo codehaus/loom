@@ -94,6 +94,9 @@ import java.util.Hashtable;
 import java.util.Map;
 import java.util.Set;
 import org.apache.avalon.phoenix.BlockContext;
+import org.codehaus.spice.loggerstore.LoggerStore;
+import org.codehaus.spice.salt.i18n.ResourceManager;
+import org.codehaus.spice.salt.i18n.Resources;
 import org.jcontainer.dna.AbstractLogEnabled;
 import org.jcontainer.dna.Active;
 import org.jcontainer.dna.Composable;
@@ -117,9 +120,6 @@ import org.jcontainer.loom.interfaces.Installer;
 import org.jcontainer.loom.interfaces.Kernel;
 import org.jcontainer.loom.interfaces.LogManager;
 import org.jcontainer.loom.interfaces.LoomException;
-import org.codehaus.spice.salt.i18n.ResourceManager;
-import org.codehaus.spice.salt.i18n.Resources;
-import org.codehaus.spice.loggerstore.LoggerStore;
 import org.xml.sax.InputSource;
 
 /**

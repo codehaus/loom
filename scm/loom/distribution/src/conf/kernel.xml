@@ -99,13 +99,13 @@
             class="org.jcontainer.loom.components.configuration.NoopConfigurationInterceptor"
             logger="config"/>
 
-<!--
-        <component role="org.jcontainer.loom.interfaces.ConfigurationInterceptor"
-            class="org.jcontainer.loom.components.configuration.FileSystemPersistentConfigurationInterceptor"
-            logger="config">
-            <storage-directory>${loom.home}/conf/apps</storage-directory>
-        </component>
--->
+        <!--
+                <component role="org.jcontainer.loom.interfaces.ConfigurationInterceptor"
+                    class="org.jcontainer.loom.components.configuration.FileSystemPersistentConfigurationInterceptor"
+                    logger="config">
+                    <storage-directory>${loom.home}/conf/apps</storage-directory>
+                </component>
+        -->
 
         <component role="org.jcontainer.loom.interfaces.ConfigurationValidator"
             class="org.jcontainer.loom.components.validator.DefaultConfigurationValidator"

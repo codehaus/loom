@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <document>
-  <properties>
-    <title>Maven Sar Plug-in Goals</title>
-    <author email="mauro.talevi at aquilonia.org">Mauro Talevi</author>
-  </properties>
-  <body>
-    <goals>
-      <goal>
-        <name>sar</name>
-        <description>Build a sar file</description>
-      </goal>
-      <goal>
-        <name>sar:init</name>
-        <description>Initialize the file system and define tasks</description>
-      </goal>
-      <goal>
-        <name>sar:install</name>
-        <description>Install the sar in the local repository</description>
-      </goal>
-      <goal>
-        <name>sar:metagenerate</name>
-        <description>Metagenerate xinfo files</description>
-      </goal>
-      <goal>
-        <name>sar:sar</name>
-        <description>Build a sar file</description>
-      </goal>
-      <goal>
-        <name>sar:install</name>
-        <description>Install the sar in the local repository</description>
-      </goal>
-      <goal>
-        <name>sar:install-snapshot</name>
-        <description>Install snapshot of the sar in the local repository</description>
-      </goal>
-      <goal>
-        <name>sar:deploy</name>
-        <description>Deploy the sar to the remote repository</description>
-      </goal>
-      <goal>
-        <name>sar:deploy-snapshot</name>
-        <description>Deploy snapshot of the sar to the remote repository</description>
-      </goal>
-    </goals>
-  </body>
+    <properties>
+        <title>Maven Sar Plug-in Goals</title>
+        <author email="mauro.talevi at aquilonia.org">Mauro Talevi</author>
+    </properties>
+    <body>
+        <goals>
+            <goal>
+                <name>sar</name>
+                <description>Build a sar file</description>
+            </goal>
+            <goal>
+                <name>sar:init</name>
+                <description>Initialize the file system and define tasks</description>
+            </goal>
+            <goal>
+                <name>sar:install</name>
+                <description>Install the sar in the local repository</description>
+            </goal>
+            <goal>
+                <name>sar:metagenerate</name>
+                <description>Metagenerate xinfo files</description>
+            </goal>
+            <goal>
+                <name>sar:sar</name>
+                <description>Build a sar file</description>
+            </goal>
+            <goal>
+                <name>sar:install</name>
+                <description>Install the sar in the local repository</description>
+            </goal>
+            <goal>
+                <name>sar:install-snapshot</name>
+                <description>Install snapshot of the sar in the local repository</description>
+            </goal>
+            <goal>
+                <name>sar:deploy</name>
+                <description>Deploy the sar to the remote repository</description>
+            </goal>
+            <goal>
+                <name>sar:deploy-snapshot</name>
+                <description>Deploy snapshot of the sar to the remote repository</description>
+            </goal>
+        </goals>
+    </body>
 </document>

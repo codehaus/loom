@@ -26,13 +26,14 @@
                 Like normal blocks, an application listener can be
                 <code>LogEnabled</code> and take configuration via
                 <code>Configurable</code>. The special feature
-                is that it must implement <code>ApplicationListener</code>
+                is that it must implement
+                <code>ApplicationListener</code>
                 and implement the eight methods that are a consequence of
                 that. The following section in assembly.xml causes
                 instantiation of the application listener:
             </p>
             <source>
-&lt;listener class="pkg.MyApplicationListener" name="a-suitable-name" /&gt;
+                &lt;listener class="pkg.MyApplicationListener" name="a-suitable-name" /&gt;
             </source>
         </section>
 

@@ -138,7 +138,8 @@ public class SocketThread
         }
     }
 
-    class ConnectionThread extends Thread
+    class ConnectionThread
+        extends Thread
     {
         private Socket m_socket;
 

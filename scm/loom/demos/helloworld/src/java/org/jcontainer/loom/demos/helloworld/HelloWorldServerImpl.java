@@ -90,7 +90,6 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.UnknownHostException;
-
 import org.apache.avalon.framework.activity.Disposable;
 import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.configuration.Configurable;
@@ -108,18 +107,17 @@ import org.jcomponent.netserve.connection.SocketAcceptorManager;
 import org.jcomponent.netserve.sockets.ServerSocketFactory;
 
 /**
+ * @author Paul Hammant <Paul_Hammant@yahoo.com>
+ * @author Federico Barbieri <scoobie@pop.systemy.it>
+ * @version 1.0
  * @dna.component
  * @dna.service type="HelloWorldServer"
  * @mx.interface topic="HelloWorldServer" name="org.jcontainer.loom.demos.helloworld.HelloWorldServerMBean"
- *
- * @author  Paul Hammant <Paul_Hammant@yahoo.com>
- * @author  Federico Barbieri <scoobie@pop.systemy.it>
- * @version 1.0
  */
 public final class HelloWorldServerImpl
     extends AbstractLogEnabled
     implements HelloWorldServer, HelloWorldServerMBean, Contextualizable,
-    Serviceable, Configurable, Initializable, Disposable
+               Serviceable, Configurable, Initializable, Disposable
 {
     private ServerSocketFactory m_socketManager;
     private SocketAcceptorManager m_socketAcceptorManager;
@@ -152,12 +150,14 @@ public final class HelloWorldServerImpl
 
         try
         {
-            final String bindAddress = configuration.getChild( "bind" ).getValue();
+            final String bindAddress = configuration.getChild( "bind" )
+                .getValue();
             m_bindTo = InetAddress.getByName( bindAddress );
         }
         catch( final UnknownHostException unhe )
         {
-            throw new ConfigurationException( "Malformed bind parameter", unhe );
+            throw new ConfigurationException( "Malformed bind parameter",
+                                              unhe );
         }
     }
 
@@ -170,19 +170,31 @@ public final class HelloWorldServerImpl
     {
         getLogger().info( "HelloWorldServer.compose()" );
 
-        m_socketManager = (ServerSocketFactory)serviceManager.lookup( ServerSocketFactory.class.getName() );
-        m_socketAcceptorManager = (SocketAcceptorManager)serviceManager.lookup( SocketAcceptorManager.class.getName() );
+        m_socketManager =
+        (ServerSocketFactory)serviceManager.lookup(
+            ServerSocketFactory.class.getName() );
+        m_socketAcceptorManager =
+        (SocketAcceptorManager)serviceManager.lookup(
+            SocketAcceptorManager.class.getName() );
     }
 
     public void initialize()
         throws Exception
     {
-        m_serverSocket = m_socketManager.createServerSocket( m_port, 5, m_bindTo );
+        m_serverSocket =
+        m_socketManager.createServerSocket( m_port, 5, m_bindTo );
 
-        m_socketAcceptorManager.connect( m_connectionName, m_serverSocket, createHandler() );
+        m_socketAcceptorManager.connect( m_connectionName,
+                                         m_serverSocket,
+                                         createHandler() );
 
         // This is only to help newbies.....
-        System.out.println( "HelloWorld server running with a greeting of '" + m_greeting + "'.  Point your browser to http://localhost:" + m_port + " to see its page" );
+        System.out.println(
+            "HelloWorld server running with a greeting of '" +
+            m_greeting +
+            "'.  Point your browser to http://localhost:" +
+            m_port +
+            " to see its page" );
     }
 
     public void dispose()

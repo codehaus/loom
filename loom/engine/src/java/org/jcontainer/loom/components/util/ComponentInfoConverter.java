@@ -20,7 +20,7 @@ import org.jcontainer.loom.components.util.info.SchemaDescriptor;
  * Convert a ComponentInfo into a BlockInfo.
  *
  * @author <a href="mailto:peter@apache.org">Peter Donald</a>
- * @version $Revision: 1.10 $ $Date: 2003-11-03 06:11:26 $
+ * @version $Revision: 1.11 $ $Date: 2003-12-03 10:44:42 $
  */
 public class ComponentInfoConverter
 {
@@ -35,7 +35,8 @@ public class ComponentInfoConverter
     public static BlockInfo toBlockInfo( final ComponentInfo component )
     {
         final BlockDescriptor descriptor = toBlockDescriptor( component );
-        final ServiceDescriptor[] services = toPhoenixServices( component.getServices() );
+        final ServiceDescriptor[] services = toPhoenixServices(
+            component.getServices() );
         final ServiceDescriptor[] mxServices = new ServiceDescriptor[ 0 ];
         final DependencyDescriptor[] dependencys =
             toPhoenixDependencys( component.getDependencies() );
@@ -60,7 +61,8 @@ public class ComponentInfoConverter
         {
             serviceSet.add( toPhoenixService( services[ i ] ) );
         }
-        return (ServiceDescriptor[])serviceSet.toArray( new ServiceDescriptor[ serviceSet.size() ] );
+        return (ServiceDescriptor[])serviceSet.toArray(
+            new ServiceDescriptor[ serviceSet.size() ] );
     }
 
     /**
@@ -89,7 +91,8 @@ public class ComponentInfoConverter
         {
             depends.add( toPhoenixDependency( dependencies[ i ] ) );
         }
-        return (DependencyDescriptor[])depends.toArray( new DependencyDescriptor[ depends.size() ] );
+        return (DependencyDescriptor[])depends.toArray(
+            new DependencyDescriptor[ depends.size() ] );
     }
 
     /**
@@ -112,7 +115,8 @@ public class ComponentInfoConverter
      * @param component the info
      * @return the BlockDescriptor
      */
-    private static BlockDescriptor toBlockDescriptor( final ComponentInfo component )
+    private static BlockDescriptor toBlockDescriptor(
+        final ComponentInfo component )
     {
         final SchemaDescriptor schema = component.getConfigurationSchema();
         String schemaType = null;

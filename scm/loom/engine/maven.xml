@@ -35,7 +35,7 @@
     </goal>
 
     <postGoal name="test:compile">
-        <attainGoal name="generateMetaData" />
+        <attainGoal name="generateMetaData"/>
     </postGoal>
 
     <goal name="generateMetaData" prereqs="dna:metagenerate">

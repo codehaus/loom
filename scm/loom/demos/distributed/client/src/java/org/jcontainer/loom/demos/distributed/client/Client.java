@@ -86,7 +86,6 @@
  */
 package org.jcontainer.loom.demos.distributed.client;
 
-
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -101,7 +100,8 @@ public class Client
     {
         if( args.length < 3 )
         {
-            System.out.println( "Usage java -jar client.jar <hostname> <port> <message>" );
+            System.out.println(
+                "Usage java -jar client.jar <hostname> <port> <message>" );
             System.exit( 10 );
         }
 
@@ -109,7 +109,8 @@ public class Client
         final int port = Integer.parseInt( args[ 1 ] );
         final String message = args[ 2 ];
         final Socket socket = new Socket( host, port );
-        final ObjectOutputStream oos = new ObjectOutputStream( socket.getOutputStream() );
+        final ObjectOutputStream oos = new ObjectOutputStream(
+            socket.getOutputStream() );
 
         oos.writeObject( message );
         oos.close();

@@ -95,6 +95,9 @@ import java.util.Iterator;
 import java.util.Set;
 import org.apache.avalon.excalibur.monitor.DirectoryResource;
 import org.apache.avalon.excalibur.monitor.impl.ActiveMonitor;
+import org.codehaus.spice.salt.i18n.ResourceManager;
+import org.codehaus.spice.salt.i18n.Resources;
+import org.codehaus.spice.salt.io.FileUtil;
 import org.jcontainer.dna.AbstractLogEnabled;
 import org.jcontainer.dna.Active;
 import org.jcontainer.dna.Composable;
@@ -105,16 +108,13 @@ import org.jcontainer.dna.MissingResourceException;
 import org.jcontainer.dna.ResourceLocator;
 import org.jcontainer.loom.components.util.ExtensionFileFilter;
 import org.jcontainer.loom.interfaces.Deployer;
-import org.codehaus.spice.salt.i18n.ResourceManager;
-import org.codehaus.spice.salt.i18n.Resources;
-import org.codehaus.spice.salt.io.FileUtil;
 
 /**
  * This class is responsible for monitoring the deployment directory and
  * deploying, undelploying or redeploying an application as necessary.
  *
  * @author Peter Donald
- * @version $Revision: 1.16 $ $Date: 2003-12-03 02:54:43 $
+ * @version $Revision: 1.17 $ $Date: 2003-12-03 10:44:42 $
  */
 public class DefaultDeploymentMonitor
     extends AbstractLogEnabled

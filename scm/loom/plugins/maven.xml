@@ -1,59 +1,59 @@
 <project default="main"
-  xmlns:maven="jelly:maven">
+    xmlns:maven="jelly:maven">
 
-  <goal name="main">
-    <attainGoal name="build"/>
-  </goal>
+    <goal name="main">
+        <attainGoal name="build"/>
+    </goal>
 
-  <goal name="loom:build"
-    description="Build all plugins">
-    <maven:reactor
-      basedir="${basedir}"
-      includes="*/project.xml"
-      goals="build"
-      banner="Building"
-      ignoreFailures="true"/>
-  </goal>
+    <goal name="loom:build"
+        description="Build all plugins">
+        <maven:reactor
+            basedir="${basedir}"
+            includes="*/project.xml"
+            goals="build"
+            banner="Building"
+            ignoreFailures="true"/>
+    </goal>
 
-  <goal
-    name="loom:install"
-    description="Installs each plugin into plugins dir">
-    <maven:reactor
-      basedir="${basedir}"
-      includes="*/project.xml"
-      goals="install"
-      banner="Installing"
-      ignoreFailures="true"/>
-  </goal>
+    <goal
+        name="loom:install"
+        description="Installs each plugin into plugins dir">
+        <maven:reactor
+            basedir="${basedir}"
+            includes="*/project.xml"
+            goals="install"
+            banner="Installing"
+            ignoreFailures="true"/>
+    </goal>
 
-  <goal name="loom:deploy"
-    description="Deploys each plugin">
-    <maven:reactor
-      basedir="${basedir}"
-      includes="*/project.xml"
-      goals="deploy"
-      banner="Deploying"
-      ignoreFailures="true"/>
-  </goal>
+    <goal name="loom:deploy"
+        description="Deploys each plugin">
+        <maven:reactor
+            basedir="${basedir}"
+            includes="*/project.xml"
+            goals="deploy"
+            banner="Deploying"
+            ignoreFailures="true"/>
+    </goal>
 
-  <goal name="loom:clean"
-    description="Cleans each plugin">
-    <maven:reactor
-      basedir="${basedir}"
-      includes="*/project.xml"
-      goals="clean:clean"
-      banner="Cleaning"
-      ignoreFailures="false"/>
-  </goal>
+    <goal name="loom:clean"
+        description="Cleans each plugin">
+        <maven:reactor
+            basedir="${basedir}"
+            includes="*/project.xml"
+            goals="clean:clean"
+            banner="Cleaning"
+            ignoreFailures="false"/>
+    </goal>
 
-  <goal name="loom:docs"
-    description="Builds each plugin documentation">
-    <maven:reactor
-      basedir="${basedir}"
-      includes="*/project.xml"
-      goals="xdoc"
-      banner="Generating Docs"
-      ignoreFailures="false"/>
-  </goal>
+    <goal name="loom:docs"
+        description="Builds each plugin documentation">
+        <maven:reactor
+            basedir="${basedir}"
+            includes="*/project.xml"
+            goals="xdoc"
+            banner="Generating Docs"
+            ignoreFailures="false"/>
+    </goal>
 
 </project>

@@ -91,15 +91,14 @@ import java.io.InterruptedIOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.SocketException;
-
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.phoenix.BlockContext;
 import org.jcomponent.netserve.connection.RequestHandler;
 
-
 /**
  * This handles an individual incoming request.  It outputs a greeting as html.
- * @author  Paul Hammant <Paul_Hammant@yahoo.com>
+ *
+ * @author Paul Hammant <Paul_Hammant@yahoo.com>
  * @author Federico Barbieri <scoobie@systemy.it>
  * @version 1.0
  */
@@ -119,11 +118,11 @@ final class HelloWorldHandler
     }
 
     /**
-     * Handle a connection.
-     * This handler is responsible for processing connections as they occur.
+     * Handle a connection. This handler is responsible for processing
+     * connections as they occur.
      *
      * @param socket the connection
-     * @exception IOException if an error reading from socket occurs
+     * @throws IOException if an error reading from socket occurs
      */
     public void handleConnection( final Socket socket )
     {
@@ -132,8 +131,11 @@ final class HelloWorldHandler
 
         try
         {
-			final PrintWriter out = new PrintWriter( socket.getOutputStream(), true );
-            out.println( "<html><body><b>" + m_greeting + "!</b><br> Requests so far = " +
+            final PrintWriter out = new PrintWriter( socket.getOutputStream(),
+                                                     true );
+            out.println( "<html><body><b>" +
+                         m_greeting +
+                         "!</b><br> Requests so far = " +
                          ++c_counter + "<br>" );
             out.println( "you are " + remoteHost + " at " + remoteIP + "<br>" );
             out.println( "<p>The application will shutdown after 10 requests" );
@@ -143,16 +145,20 @@ final class HelloWorldHandler
         }
         catch( final SocketException se )
         {
-            getLogger().debug( "Socket to " + remoteHost + " closed remotely in HelloWorld", se );
+            getLogger().debug(
+                "Socket to " + remoteHost + " closed remotely in HelloWorld",
+                se );
         }
         catch( final InterruptedIOException iioe )
         {
-            getLogger().debug( "Socket to " + remoteHost + " timeout in HelloWorld", iioe );
+            getLogger().debug(
+                "Socket to " + remoteHost + " timeout in HelloWorld", iioe );
         }
         catch( final IOException ioe )
         {
-            getLogger().debug( "Exception in HelloWorld handling socket to " + remoteHost,
-                               ioe );
+            getLogger().debug(
+                "Exception in HelloWorld handling socket to " + remoteHost,
+                ioe );
         }
         catch( final Exception e )
         {
@@ -170,7 +176,8 @@ final class HelloWorldHandler
             }
         }
 
-        getLogger().info( "Connection from " + remoteHost + " (" + remoteIP + ")" );
+        getLogger().info(
+            "Connection from " + remoteHost + " (" + remoteIP + ")" );
 
 
         // A test of shutting down a block & app programatically.
@@ -181,9 +188,10 @@ final class HelloWorldHandler
         }
     }
 
-	/**
-     * Shutdown the handler and any requests currently being handled. 
-	 */
-	public void shutdown(long timeout) {
-	}
+    /**
+     * Shutdown the handler and any requests currently being handled.
+     */
+    public void shutdown( long timeout )
+    {
+    }
 }

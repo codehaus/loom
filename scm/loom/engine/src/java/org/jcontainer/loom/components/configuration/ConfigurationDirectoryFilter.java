@@ -89,7 +89,8 @@ package org.jcontainer.loom.components.configuration;
 import java.io.File;
 import java.io.FileFilter;
 
-class ConfigurationDirectoryFilter implements FileFilter
+class ConfigurationDirectoryFilter
+    implements FileFilter
 {
     public boolean accept( final File pathname )
     {

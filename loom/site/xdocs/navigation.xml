@@ -5,7 +5,7 @@
 
     <body>
         <links>
-		    <item href="http://loom.jcontainer.org" name="Loom"/>
+            <item href="http://loom.jcontainer.org" name="Loom"/>
             <item href="http://jcontainer.org" name="JContainer"/>
             <item href="http://codehaus.org" name="Codehaus"/>
         </links>
@@ -27,19 +27,19 @@
             <item href="/guide/index.html" name="Overview"/>
             <item href="/guide/architecture.html" name="Architecture"/>
             <item href="/guide/roles.html" name="Development Roles">
-	            <item href="/guide/administrator.html" name="Administrators"/>
-	            <item href="/guide/deployers.html" name="Deployers"/>
-	            <item href="/guide/assemblers/index.html" name="Assemblers" collapse="true">
-	                <item href="/guide/assemblers/what-is-a-server-application.html" name="What is a Server Application"/>
-	                <item href="/guide/assemblers/creating-a-server-application.html" name="Creating a Server Application"/>
-	            </item>
-	            <item href="/guide/bdg/index.html" name="Block Developers" collapse="true">
-	                <item href="/guide/bdg/what-is-a-block.html" name="What is a Block"/>
-	                <item href="/guide/bdg/creating-a-block.html" name="Creating a Block"/>
-	                <item href="/guide/bdg/what-is-an-application-listener.html" name="What is an Application Listener"/>
-	                <item href="/guide/bdg/making-loom-compatible-comps.html" name="Making Compatible Components"/>
-	                <item href="/guide/bdg/doclet-tags.html" name="Doclet Tags"/>
-	            </item>
+                <item href="/guide/administrator.html" name="Administrators"/>
+                <item href="/guide/deployers.html" name="Deployers"/>
+                <item href="/guide/assemblers/index.html" name="Assemblers" collapse="true">
+                    <item href="/guide/assemblers/what-is-a-server-application.html" name="What is a Server Application"/>
+                    <item href="/guide/assemblers/creating-a-server-application.html" name="Creating a Server Application"/>
+                </item>
+                <item href="/guide/bdg/index.html" name="Block Developers" collapse="true">
+                    <item href="/guide/bdg/what-is-a-block.html" name="What is a Block"/>
+                    <item href="/guide/bdg/creating-a-block.html" name="Creating a Block"/>
+                    <item href="/guide/bdg/what-is-an-application-listener.html" name="What is an Application Listener"/>
+                    <item href="/guide/bdg/making-loom-compatible-comps.html" name="Making Compatible Components"/>
+                    <item href="/guide/bdg/doclet-tags.html" name="Doclet Tags"/>
+                </item>
             </item>
             <item href="/guide/mx/index.html" name="Management Guide" collapse="true">
                 <item href="/guide/mx/overview.html" name="Overview"/>
