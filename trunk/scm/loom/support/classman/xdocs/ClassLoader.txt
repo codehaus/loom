@@ -1,7 +1,7 @@
 This is the mail in which the <classloaders/> section in
 environment.xml was proposed.
 
-From: Peter Donald <peter at realityforge.org>
+From: Peter Donald
 To: Avalon Development <dev@avalon.apache.org>
 Subject: [phoenix] ClassLoader section in environment.xml
 Date: Sat, 1 Dec 2001 15:07:28 +1100
@@ -112,7 +112,7 @@ For additional commands, e-mail: <mailto:avalon-dev-help@jakarta.apache.org>
 
 Re: [phoenix] ClassLoader section in environment.xml
 Date: Sat, 1 Dec 2001 15:36:21 +1100
-From: Peter Donald <peter at realityforge.org>
+From: Peter Donald
  To: "Avalon Developers List" <dev@avalon.apache.org>
 Reply to: "Avalon Developers List" <dev@avalon.apache.org>
 

@@ -3,7 +3,7 @@
    This is the DTD defining the ClassLoader 1.0
    descriptor (XML) file format/syntax.
 
-   Author: Peter Donald <peter at realityforge.org>
+   Author: Peter Donald
 
    This descriptor is used to describe a mechanism of defining
    a set of ClassLoaders and the arrangment of specified ClassLoaders.
