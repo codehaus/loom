@@ -15,6 +15,7 @@ import org.apache.tools.ant.BuildException;
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author <a href="mailto:stefan.bodewig@epost.de">Stefan Bodewig</a>
+ * @deprecated Use SarTask instead
  */
 public class Sar
     extends SarTask
