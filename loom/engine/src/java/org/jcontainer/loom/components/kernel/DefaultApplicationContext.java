@@ -105,6 +105,7 @@ import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.Kernel;
 import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.interfaces.SystemManager;
+import org.jcontainer.loom.tools.profile.PartitionProfile;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
@@ -135,7 +136,7 @@ class DefaultApplicationContext
 
     private SystemManager m_blockManager;
 
-    private final org.jcontainer.loom.tools.profile.PartitionProfile m_profile;
+    private final PartitionProfile m_profile;
     private final File m_workDirectory;
     private final File m_homeDirectory;
 
@@ -149,7 +150,7 @@ class DefaultApplicationContext
      */
     private Kernel m_kernel;
 
-    protected DefaultApplicationContext( final org.jcontainer.loom.tools.profile.PartitionProfile profile,
+    protected DefaultApplicationContext( final PartitionProfile profile,
                                          final File homeDirectory,
                                          final File workDirectory,
                                          final ClassLoader classLoader,
@@ -233,7 +234,7 @@ class DefaultApplicationContext
         }
     }
 
-    public org.jcontainer.loom.tools.profile.PartitionProfile getPartitionProfile()
+    public PartitionProfile getPartitionProfile()
     {
         return m_profile;
     }
