@@ -91,7 +91,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
- * SocketThread accepts socket connections 
+ * SocketThread accepts socket connections
  *
  * @author <a href="mailto:Paul_Hammant@yahoo.com">Paul Hammant</a>
  */
@@ -101,12 +101,10 @@ public class SocketThread
     private ServerImpl m_ServerImpl;
     private ServerSocket m_serverSocket;
 
-    protected SocketThread( final ServerImpl ServerImpl,
+    protected SocketThread( final ServerImpl serverImpl,
                             final int port )
     {
-
-        m_ServerImpl = ServerImpl;
-
+        m_ServerImpl = serverImpl;
         try
         {
             m_serverSocket = new ServerSocket( port );
@@ -119,11 +117,6 @@ public class SocketThread
         }
     }
 
-    /**
-     * Method run
-     *
-     *
-     */
     public void run()
     {
 
@@ -131,20 +124,20 @@ public class SocketThread
         {
             try
             {
-                ConnectionThread ct = new ConnectionThread( m_serverSocket.accept() );
+                final ConnectionThread ct =
+                    new ConnectionThread( m_serverSocket.accept() );
                 ct.start();
             }
-            catch( IOException ioe )
+            catch( final IOException ioe )
             {
-                System.out.println( "Some problem with getting a socket for the connection." );
+                final String message =
+                    "Some problem with getting a socket for the connection.";
+                System.out.println( message );
                 ioe.printStackTrace();
             }
         }
     }
 
-    /**
-     * Class ConnectionThread
-     */
     class ConnectionThread extends Thread
     {
         private Socket m_socket;
