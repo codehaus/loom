@@ -44,9 +44,5 @@
             <item href="/reference/environment-xml-specification.html" name="environment.xml Specification"/>
             <item href="/reference/blockinfo-specification.html" name="BlockInfo Specification"/>
         </menu>
-        <menu name="For Developers">
-            <item href="/developers/a-future.html" name="A Future"/>
-            <item href="/developers/alternate-kernel.html" name="Alternate Kernels"/>
-        </menu>
     </body>
 </project>
