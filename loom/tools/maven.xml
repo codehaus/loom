@@ -6,6 +6,7 @@
 
     <postGoal name="test:compile">
         <j:set var="maven.test.dest" value="target/test-classes"/>
+
         <ant:echo message="Copying test data to=${maven.test.dest}"/>
         <ant:mkdir dir="${maven.test.dest}"/>
         <ant:copy todir="${maven.test.dest}">
