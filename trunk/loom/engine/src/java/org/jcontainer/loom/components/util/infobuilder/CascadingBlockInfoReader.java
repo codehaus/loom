@@ -7,7 +7,7 @@
  */
 package org.jcontainer.loom.components.util.infobuilder;
 
-import org.jcontainer.dna.Logger;
+import org.codehaus.dna.Logger;
 import org.jcontainer.loom.components.util.info.ComponentInfo;
 
 /**

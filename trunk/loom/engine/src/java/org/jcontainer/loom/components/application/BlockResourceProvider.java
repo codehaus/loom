@@ -102,7 +102,7 @@ import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.avalon.framework.service.DefaultServiceManager;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.excalibur.instrument.InstrumentManager;
-import org.jcontainer.dna.AbstractLogEnabled;
+import org.codehaus.dna.AbstractLogEnabled;
 import org.jcontainer.loom.components.util.ConfigurationConverter;
 import org.jcontainer.loom.components.util.info.ComponentInfo;
 import org.jcontainer.loom.components.util.info.DependencyDescriptor;
@@ -116,7 +116,7 @@ import org.jcontainer.loom.interfaces.ApplicationContext;
  * The accessor used to access resources for a particular Block or Listener.
  *
  * @author Peter Donald
- * @version $Revision: 1.12 $ $Date: 2003-11-29 13:44:15 $
+ * @version $Revision: 1.13 $ $Date: 2004-04-18 23:09:53 $
  */
 class BlockResourceProvider
     extends AbstractLogEnabled

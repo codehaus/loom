@@ -91,8 +91,8 @@ import java.net.URL;
 import java.security.Policy;
 import java.util.Map;
 import org.jcontainer.loom.xmlpolicy.builder.PolicyResolver;
-import org.jcontainer.dna.AbstractLogEnabled;
-import org.jcontainer.dna.impl.ContainerUtil;
+import org.codehaus.dna.AbstractLogEnabled;
+import org.codehaus.dna.impl.ContainerUtil;
 import org.jcontainer.loom.components.util.ResourceUtil;
 
 /**
@@ -100,7 +100,7 @@ import org.jcontainer.loom.components.util.ResourceUtil;
  * URLs).
  *
  * @author Peter Donald
- * @version $Revision: 1.11 $ $Date: 2004-03-31 03:39:03 $
+ * @version $Revision: 1.12 $ $Date: 2004-04-18 23:09:51 $
  */
 class SarPolicyResolver
     extends AbstractLogEnabled

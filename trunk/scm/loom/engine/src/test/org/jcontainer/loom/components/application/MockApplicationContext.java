@@ -18,16 +18,16 @@ import org.jcontainer.loom.interfaces.ApplicationContext;
 
 /**
  * @author Peter Donald
- * @version $Revision: 1.10 $ $Date: 2003-12-15 17:32:46 $
+ * @version $Revision: 1.11 $ $Date: 2004-04-18 23:09:52 $
  */
 class MockApplicationContext
     implements ApplicationContext
 {
     private final PartitionProfile m_sarMetaData;
-    private final org.jcontainer.dna.Logger m_logger;
+    private final org.codehaus.dna.Logger m_logger;
 
     public MockApplicationContext( final PartitionProfile sarMetaData,
-                                   final org.jcontainer.dna.Logger logger )
+                                   final org.codehaus.dna.Logger logger )
     {
         m_sarMetaData = sarMetaData;
         m_logger = logger;

@@ -86,7 +86,7 @@
  */
 package org.jcontainer.loom.components.embeddor;
 
-import org.jcontainer.dna.Configuration;
+import org.codehaus.dna.Configuration;
 
 /**
  * @author <a href="bauer@denic.de">Joerg Bauer</a>

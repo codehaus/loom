@@ -100,7 +100,7 @@ import org.apache.avalon.framework.service.DefaultServiceManager;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.codehaus.spice.salt.i18n.ResourceManager;
 import org.codehaus.spice.salt.i18n.Resources;
-import org.jcontainer.dna.AbstractLogEnabled;
+import org.codehaus.dna.AbstractLogEnabled;
 import org.jcontainer.loom.components.util.ConfigurationConverter;
 import org.jcontainer.loom.components.util.factory.ComponentFactory;
 import org.jcontainer.loom.components.util.info.ComponentInfo;
@@ -117,7 +117,7 @@ import org.jcontainer.loom.components.util.metadata.DependencyDirective;
  * (presumably via {@link org.jcontainer.loom.components.util.verifier.AssemblyVerifier}</p>
  *
  * @author Peter Donald
- * @version $Revision: 1.8 $ $Date: 2003-12-03 10:44:42 $
+ * @version $Revision: 1.9 $ $Date: 2004-04-18 23:09:51 $
  */
 public abstract class AbstractResourceProvider
     extends AbstractLogEnabled

@@ -88,8 +88,8 @@ package org.jcontainer.loom.components.manager;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.jcontainer.dna.AbstractLogEnabled;
-import org.jcontainer.dna.Active;
+import org.codehaus.dna.AbstractLogEnabled;
+import org.codehaus.dna.Active;
 import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.interfaces.SystemManager;
 

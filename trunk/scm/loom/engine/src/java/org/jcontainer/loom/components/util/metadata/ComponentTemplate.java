@@ -10,7 +10,7 @@ package org.jcontainer.loom.components.util.metadata;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.avalon.framework.parameters.Parameters;
-import org.jcontainer.dna.Configuration;
+import org.codehaus.dna.Configuration;
 
 /**
  * Each component declared in the application is represented by a
@@ -20,7 +20,7 @@ import org.jcontainer.dna.Configuration;
  * reused to create new components as needed.
  *
  * @author Peter Donald
- * @version $Revision: 1.3 $ $Date: 2003-12-03 10:44:43 $
+ * @version $Revision: 1.4 $ $Date: 2004-04-18 23:09:53 $
  */
 public class ComponentTemplate
 {

@@ -88,7 +88,7 @@ package org.jcontainer.loom.components.util.verifier;
 
 import org.codehaus.spice.salt.i18n.ResourceManager;
 import org.codehaus.spice.salt.i18n.Resources;
-import org.jcontainer.dna.Logger;
+import org.codehaus.dna.Logger;
 import org.jcontainer.loom.components.util.metadata.ComponentTemplate;
 import org.jcontainer.loom.components.util.profile.ComponentProfile;
 import org.jcontainer.loom.components.util.profile.PartitionProfile;
@@ -108,7 +108,7 @@ import org.jcontainer.loom.interfaces.ContainerConstants;
  * interface.</li> </ul>
  *
  * @author Peter Donald
- * @version $Revision: 1.7 $ $Date: 2004-02-20 03:49:49 $
+ * @version $Revision: 1.8 $ $Date: 2004-04-18 23:09:52 $
  */
 public class SarVerifier
     extends AssemblyVerifier

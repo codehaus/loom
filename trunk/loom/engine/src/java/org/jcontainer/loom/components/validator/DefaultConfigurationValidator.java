@@ -10,11 +10,11 @@ package org.jcontainer.loom.components.validator;
 import org.codehaus.spice.configkit.ComponentConfigUtil;
 import org.codehaus.spice.configkit.ConfigValidator;
 import org.codehaus.spice.configkit.ValidationResult;
-import org.jcontainer.dna.AbstractLogEnabled;
-import org.jcontainer.dna.Configuration;
-import org.jcontainer.dna.ConfigurationException;
-import org.jcontainer.dna.impl.ConfigurationUtil;
-import org.jcontainer.dna.impl.DefaultConfiguration;
+import org.codehaus.dna.AbstractLogEnabled;
+import org.codehaus.dna.Configuration;
+import org.codehaus.dna.ConfigurationException;
+import org.codehaus.dna.impl.ConfigurationUtil;
+import org.codehaus.dna.impl.DefaultConfiguration;
 import org.jcontainer.loom.components.util.ConfigUtil;
 import org.jcontainer.loom.components.util.ConfigurationBuilder;
 import org.jcontainer.loom.components.util.info.SchemaDescriptor;
@@ -28,7 +28,7 @@ import org.w3c.dom.Element;
  *
  * @author Peter Donald
  * @author Peter Royal
- * @version $Revision: 1.16 $ $Date: 2003-12-03 10:44:43 $
+ * @version $Revision: 1.17 $ $Date: 2004-04-18 23:09:53 $
  * @dna.component
  */
 public class DefaultConfigurationValidator

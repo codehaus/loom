@@ -11,9 +11,9 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import junit.framework.TestCase;
-import org.jcontainer.dna.Configuration;
-import org.jcontainer.dna.impl.ConsoleLogger;
-import org.jcontainer.dna.impl.DefaultConfiguration;
+import org.codehaus.dna.Configuration;
+import org.codehaus.dna.impl.ConsoleLogger;
+import org.codehaus.dna.impl.DefaultConfiguration;
 import org.jcontainer.loom.components.assembler.data.Component1;
 import org.jcontainer.loom.components.assembler.data.Component2;
 import org.jcontainer.loom.components.assembler.data.Component3;
@@ -36,7 +36,7 @@ import org.xml.sax.InputSource;
  * An basic test case for the Application.
  *
  * @author Peter Donald
- * @version $Revision: 1.18 $ $Date: 2003-11-29 13:44:29 $
+ * @version $Revision: 1.19 $ $Date: 2004-04-18 23:09:52 $
  */
 public class ApplicationTestCase
     extends TestCase

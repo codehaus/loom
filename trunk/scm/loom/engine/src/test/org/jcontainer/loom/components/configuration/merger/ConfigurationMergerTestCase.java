@@ -87,8 +87,8 @@
 package org.jcontainer.loom.components.configuration.merger;
 
 import junit.framework.TestCase;
-import org.jcontainer.dna.impl.ConfigurationUtil;
-import org.jcontainer.dna.impl.DefaultConfiguration;
+import org.codehaus.dna.impl.ConfigurationUtil;
+import org.codehaus.dna.impl.DefaultConfiguration;
 
 /**
  * @author Peter Royal

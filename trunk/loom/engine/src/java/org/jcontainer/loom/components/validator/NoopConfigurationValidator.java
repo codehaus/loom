@@ -7,7 +7,7 @@
  */
 package org.jcontainer.loom.components.validator;
 
-import org.jcontainer.dna.ConfigurationException;
+import org.codehaus.dna.ConfigurationException;
 import org.jcontainer.loom.components.util.profile.ComponentProfile;
 import org.jcontainer.loom.interfaces.ConfigurationValidator;
 

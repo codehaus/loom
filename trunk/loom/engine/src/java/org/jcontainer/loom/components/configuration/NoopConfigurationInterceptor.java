@@ -7,8 +7,8 @@
  */
 package org.jcontainer.loom.components.configuration;
 
-import org.jcontainer.dna.Configuration;
-import org.jcontainer.dna.ConfigurationException;
+import org.codehaus.dna.Configuration;
+import org.codehaus.dna.ConfigurationException;
 import org.jcontainer.loom.interfaces.ConfigurationInterceptor;
 
 /**

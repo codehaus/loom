@@ -91,9 +91,9 @@ import java.security.PermissionCollection;
 import java.security.Permissions;
 import java.util.Map;
 import org.jcontainer.loom.xmlpolicy.runtime.DefaultPolicy;
-import org.jcontainer.dna.Active;
-import org.jcontainer.dna.LogEnabled;
-import org.jcontainer.dna.Logger;
+import org.codehaus.dna.Active;
+import org.codehaus.dna.LogEnabled;
+import org.codehaus.dna.Logger;
 
 /**
  * Policy that extracts information from policy files.

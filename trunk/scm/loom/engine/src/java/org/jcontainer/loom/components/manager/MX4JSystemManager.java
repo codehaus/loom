@@ -101,9 +101,9 @@ import mx4j.log.Log;
 import mx4j.util.StandardMBeanProxy;
 import org.codehaus.spice.salt.i18n.ResourceManager;
 import org.codehaus.spice.salt.i18n.Resources;
-import org.jcontainer.dna.Configurable;
-import org.jcontainer.dna.Configuration;
-import org.jcontainer.dna.ConfigurationException;
+import org.codehaus.dna.Configurable;
+import org.codehaus.dna.Configuration;
+import org.codehaus.dna.ConfigurationException;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 
 /**

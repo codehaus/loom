@@ -21,11 +21,11 @@ import org.apache.avalon.phoenix.metadata.SarMetaData;
 import junit.framework.TestCase;
 import org.codehaus.spice.loggerstore.LoggerStore;
 import org.codehaus.spice.salt.io.FileUtil;
-import org.jcontainer.dna.Configuration;
-import org.jcontainer.dna.Logger;
-import org.jcontainer.dna.impl.ConfigurationUtil;
-import org.jcontainer.dna.impl.ConsoleLogger;
-import org.jcontainer.dna.impl.ContainerUtil;
+import org.codehaus.dna.Configuration;
+import org.codehaus.dna.Logger;
+import org.codehaus.dna.impl.ConfigurationUtil;
+import org.codehaus.dna.impl.ConsoleLogger;
+import org.codehaus.dna.impl.ContainerUtil;
 import org.jcontainer.loom.interfaces.LogManager;
 import org.xml.sax.InputSource;
 
@@ -33,7 +33,7 @@ import org.xml.sax.InputSource;
  * An basic test case for the LogManager.
  *
  * @author Peter Donald
- * @version $Revision: 1.17 $ $Date: 2004-02-15 21:45:04 $
+ * @version $Revision: 1.18 $ $Date: 2004-04-18 23:09:53 $
  */
 public class LogManagerTestCase
     extends TestCase

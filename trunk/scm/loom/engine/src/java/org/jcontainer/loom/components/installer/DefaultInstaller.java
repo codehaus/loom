@@ -102,11 +102,11 @@ import org.codehaus.spice.salt.i18n.ResourceManager;
 import org.codehaus.spice.salt.i18n.Resources;
 import org.codehaus.spice.salt.io.FileUtil;
 import org.codehaus.spice.salt.io.IOUtil;
-import org.jcontainer.dna.AbstractLogEnabled;
-import org.jcontainer.dna.Active;
-import org.jcontainer.dna.Configurable;
-import org.jcontainer.dna.Configuration;
-import org.jcontainer.dna.ConfigurationException;
+import org.codehaus.dna.AbstractLogEnabled;
+import org.codehaus.dna.Active;
+import org.codehaus.dna.Configurable;
+import org.codehaus.dna.Configuration;
+import org.codehaus.dna.ConfigurationException;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.Installer;
 import org.jcontainer.loom.interfaces.LoomException;
@@ -116,7 +116,7 @@ import org.jcontainer.loom.interfaces.LoomException;
  * appropriate.
  *
  * @author Peter Donald
- * @version $Revision: 1.15 $ $Date: 2003-12-03 10:44:41 $
+ * @version $Revision: 1.16 $ $Date: 2004-04-18 23:09:52 $
  */
 public class DefaultInstaller
     extends AbstractLogEnabled

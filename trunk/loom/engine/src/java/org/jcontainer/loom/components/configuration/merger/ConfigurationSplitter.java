@@ -87,10 +87,10 @@
 package org.jcontainer.loom.components.configuration.merger;
 
 import java.util.HashSet;
-import org.jcontainer.dna.Configuration;
-import org.jcontainer.dna.ConfigurationException;
-import org.jcontainer.dna.impl.ConfigurationUtil;
-import org.jcontainer.dna.impl.DefaultConfiguration;
+import org.codehaus.dna.Configuration;
+import org.codehaus.dna.ConfigurationException;
+import org.codehaus.dna.impl.ConfigurationUtil;
+import org.codehaus.dna.impl.DefaultConfiguration;
 
 /**
  * The ConfigurationSplitter will take two Configuration objects and calculate

@@ -10,7 +10,7 @@ package org.jcontainer.loom.components.util.factory;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-import org.jcontainer.dna.Logger;
+import org.codehaus.dna.Logger;
 import org.jcontainer.loom.components.util.info.ComponentInfo;
 import org.jcontainer.loom.components.util.infobuilder.BlockInfoReader;
 import org.jcontainer.loom.components.util.infobuilder.CascadingBlockInfoReader;
@@ -19,7 +19,7 @@ import org.jcontainer.loom.components.util.infobuilder.CascadingBlockInfoReader;
  * The default implementation of ComponentFactory that simply creates components from a ClassLoader.
  *
  * @author Peter Donald
- * @version $Revision: 1.5 $ $Date: 2004-02-20 03:49:49 $
+ * @version $Revision: 1.6 $ $Date: 2004-04-18 23:09:53 $
  */
 public class DefaultComponentFactory
     implements ComponentFactory

@@ -15,12 +15,12 @@ import org.apache.avalon.framework.configuration.DefaultConfiguration;
  * objects.
  *
  * @author Peter Donald
- * @version $Revision: 1.4 $ $Date: 2003-11-29 13:44:27 $
+ * @version $Revision: 1.5 $ $Date: 2004-04-18 23:09:51 $
  */
 public class ConfigurationConverter
 {
     public static Configuration toConfiguration(
-        final org.jcontainer.dna.Configuration configuration )
+        final org.codehaus.dna.Configuration configuration )
     {
         final DefaultConfiguration result =
             new DefaultConfiguration( configuration.getName(),
@@ -33,7 +33,7 @@ public class ConfigurationConverter
             result.setAttribute( name, value );
         }
 
-        final org.jcontainer.dna.Configuration[] children =
+        final org.codehaus.dna.Configuration[] children =
             configuration.getChildren();
         for( int i = 0; i < children.length; i++ )
         {

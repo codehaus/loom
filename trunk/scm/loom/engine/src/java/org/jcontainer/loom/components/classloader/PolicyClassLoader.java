@@ -93,8 +93,8 @@ import java.security.CodeSource;
 import java.security.PermissionCollection;
 import java.security.Policy;
 import java.util.Enumeration;
-import org.jcontainer.dna.LogEnabled;
-import org.jcontainer.dna.Logger;
+import org.codehaus.dna.LogEnabled;
+import org.codehaus.dna.Logger;
 
 /**
  * Classloader that uses a specified {@link Policy} object rather than system

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 import org.codehaus.spice.salt.i18n.ResourceManager;
 import org.codehaus.spice.salt.i18n.Resources;
-import org.jcontainer.dna.AbstractLogEnabled;
+import org.codehaus.dna.AbstractLogEnabled;
 import org.jcontainer.loom.components.util.info.ComponentInfo;
 import org.jcontainer.loom.components.util.info.DependencyDescriptor;
 import org.jcontainer.loom.components.util.info.ServiceDescriptor;
@@ -34,7 +34,7 @@ import org.jcontainer.loom.components.util.profile.ComponentProfile;
  * the service interfaces.</li> </ul>
  *
  * @author Peter Donald
- * @version $Revision: 1.7 $ $Date: 2003-12-03 10:44:43 $
+ * @version $Revision: 1.8 $ $Date: 2004-04-18 23:09:52 $
  */
 public class AssemblyVerifier
     extends AbstractLogEnabled

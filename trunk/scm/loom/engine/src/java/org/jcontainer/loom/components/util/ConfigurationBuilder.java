@@ -18,9 +18,9 @@ import org.codehaus.spice.configkit.ResolverFactory;
 import org.codehaus.spice.configkit.ValidateException;
 import org.codehaus.spice.configkit.ValidationIssue;
 import org.codehaus.spice.configkit.ValidationResult;
-import org.jcontainer.dna.Configuration;
-import org.jcontainer.dna.Logger;
-import org.jcontainer.dna.impl.SAXConfigurationHandler;
+import org.codehaus.dna.Configuration;
+import org.codehaus.dna.Logger;
+import org.codehaus.dna.impl.SAXConfigurationHandler;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
@@ -32,7 +32,7 @@ import org.xml.sax.XMLReader;
  * Utility class used to load Configuration trees from XML files.
  *
  * @author Peter Donald
- * @version $Revision: 1.5 $ $Date: 2003-12-03 10:44:42 $
+ * @version $Revision: 1.6 $ $Date: 2004-04-18 23:09:51 $
  */
 public class ConfigurationBuilder
 {
