@@ -100,7 +100,6 @@ import org.apache.avalon.framework.service.DefaultServiceManager;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.jcontainer.dna.AbstractLogEnabled;
 import org.jcontainer.loom.components.util.ConfigurationConverter;
-import org.jcontainer.loom.components.util.factory.ComponentBundle;
 import org.jcontainer.loom.components.util.factory.ComponentFactory;
 import org.jcontainer.loom.components.util.info.ComponentInfo;
 import org.jcontainer.loom.components.util.metadata.ComponentMetaData;
@@ -121,7 +120,7 @@ import org.realityforge.salt.i18n.Resources;
  * {@link org.jcontainer.loom.components.util.verifier.AssemblyVerifier}</p>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-10-16 14:45:46 $
+ * @version $Revision: 1.4 $ $Date: 2003-11-03 06:17:58 $
  */
 public abstract class AbstractResourceProvider
     extends AbstractLogEnabled
@@ -358,8 +357,7 @@ public abstract class AbstractResourceProvider
     {
         final ComponentMetaData component = getMetaData( componentEntry );
         final String impl = component.getImplementationKey();
-        final ComponentBundle bundle = m_factory.createBundle( impl );
-        final ComponentInfo info = bundle.getComponentInfo();
+        final ComponentInfo info = m_factory.createInfo( impl );
         final DependencyMetaData[] dependencies = component.getDependencies();
 
         final HashMap services = new HashMap();
