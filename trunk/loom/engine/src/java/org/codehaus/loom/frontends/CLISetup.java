@@ -110,6 +110,7 @@ class CLISetup
     private static final String PERSISTENT_OPT = "p";
     private static final String CONFIGFILE_OPT = "f";
     private static final String STDOUT_OPT = "s";
+    private static final String TEMPORARY_OPT = "t";
 
     ///Parameters created by parsing CLI options
     private final Properties m_parameters = new Properties();
@@ -152,6 +153,10 @@ class CLISetup
                            "persistent",
                            false,
                            REZ.getString( "cli.opt.persistent.desc" ) );
+        options.addOption( TEMPORARY_OPT,
+                           "temporary",
+                           false,
+                           REZ.getString( "cli.opt.temporary.desc" ) );
         return options;
     }
 
@@ -188,9 +193,13 @@ class CLISetup
             {
                 m_parameters.setProperty( "log-priority", "DEBUG" );
             }
+            if( line.hasOption( TEMPORARY_OPT ) )
+            {
+                m_parameters.setProperty( CLIMain.TEMPORARY, "true" );
+            }
             if( line.hasOption( PERSISTENT_OPT ) )
             {
-                m_parameters.setProperty( CLIMain.PERSISTENT, "true" );
+                m_parameters.setProperty( CLIMain.TEMPORARY, "false" );
             }
             if( line.hasOption( CONFIGFILE_OPT ) )
             {

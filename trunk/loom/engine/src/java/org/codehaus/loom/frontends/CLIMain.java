@@ -128,7 +128,7 @@ public final class CLIMain
         ResourceManager.getPackageResources( CLIMain.class );
 
     static final String HOME_DIR = File.class.getName() + "/home";
-    static final String PERSISTENT = Boolean.class.getName() + "/persistent";
+    static final String TEMPORARY = Boolean.class.getName() + "/temporary";
     static final String CONFIGFILE = "loom.configfile";
 
     private static final String DEFAULT_LOG_FILE =
@@ -191,18 +191,18 @@ public final class CLIMain
                                         configFile.toString() );
             }
 
-            final Boolean persistent;
-            if( !properties.containsKey( PERSISTENT ) )
+            final Boolean temporary;
+            if( !properties.containsKey( TEMPORARY ) )
             {
-                persistent = Boolean.FALSE;
+                temporary = Boolean.FALSE;
             }
             else
             {
                 final String property =
-                    properties.getProperty( PERSISTENT );
-                persistent = Boolean.valueOf( property );
+                    properties.getProperty( TEMPORARY );
+                temporary = Boolean.valueOf( property );
             }
-            data.put( PERSISTENT, persistent );
+            data.put( TEMPORARY, temporary );
 
             execute( properties, data, blocking );
         }
@@ -227,8 +227,8 @@ public final class CLIMain
             return;
         }
 
-        // If an Observer is present in the data object, then add it as an observer for
-        //  m_observable
+        // If an Observer is present in the data object,
+        // then add it as an observer for m_observable.
         final Observer observer = (Observer)data.get( Observer.class.getName() );
         if( null != observer )
         {
@@ -272,7 +272,8 @@ public final class CLIMain
         try
         {
             final String configFilename = properties.getProperty( CONFIGFILE );
-            final Configuration original = ConfigurationUtil.buildFromXML( new InputSource( configFilename ) );
+            final Configuration original =
+              ConfigurationUtil.buildFromXML( new InputSource( configFilename ) );
             final File home = (File)data.get( HOME_DIR );
             final Properties params = new Properties();
             params.setProperty( "loom.home", home.getAbsolutePath() );
@@ -281,7 +282,7 @@ public final class CLIMain
             final Configuration configuration = root.getChild( "embeddor" );
             final String embeddorClassname = configuration.getAttribute( "class" );
             m_embeddor =
-                (Embeddor)Class.forName( embeddorClassname ).newInstance();
+              (Embeddor)Class.forName( embeddorClassname ).newInstance();
 
             m_logger = createLogger( properties );
             ContainerUtil.enableLogging( m_embeddor, m_logger );
@@ -312,9 +313,11 @@ public final class CLIMain
     }
 
     /**
-     * Uses {@link org.apache.log.Hierarchy} to create a new logger using "Loom" as its category, DEBUG as its priority
-     * and the log-destination from Parameters as its destination. TODO: allow configurable priorities and multiple
-     * logtargets.
+     * Uses {@link org.apache.log.Hierarchy} to create a new
+     * logger using "Loom" as its category, DEBUG as its priority
+     * and the log-destination from Parameters as its destination.
+     *
+     * TODO: allow configurable priorities and multiple logtargets.
      */
     private Logger createLogger( final Properties properties )
         throws Exception
