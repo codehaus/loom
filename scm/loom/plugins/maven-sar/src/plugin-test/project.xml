@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project>
-  <id>test-maven-sar-plugin</id>
-
+    <id>test-maven-sar-plugin</id>
+	<name>Test project for Maven Sar Plugin</name>
 	<dependencies>
         <dependency>
             <groupId>loom</groupId>
             <artifactId>maven-sar-plugin</artifactId>
-            <version>1.0.1</version>
+            <version>1.0-beta1-dev</version>
+            <type>plugin</type>
         </dependency>
 	</dependencies>
 
