@@ -76,6 +76,13 @@
         </developer>
     </developers>
 
+    <contributors>
+        <contributor>
+            <name>Johan Sjöberg</name>
+            <email>johan.sjoberg@avaintec.com</email>
+        </contributor>
+    </contributors>
+
     <licenses>
         <license>
             <name>The JContainer Software License, Version 1.0</name>
