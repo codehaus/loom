@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="loom">
+
+    <title>loom</title>
+    
+    <body>
+        <search/>
+        <menu name="Overview">
+            <item href="/index.html" name="Introduction"/>
+            <item href="/features.html" name="Features"/>
+            <item href="/getting-started.html" name="Getting started"/>
+            <item href="/download.html" name="Download"/>
+            <item href="/install.html" name="Install"/>
+            <item href="/applications.html" name="Applications"/>
+        </menu>
+        <menu name="Guide">
+            <item href="/guide/architecture.html" name="Architectural Overview"/>
+            <item href="/guide/roles.html" name="Development Roles"/>                        
+            <item href="/guide/administrator.html" name="for Administrators"/>
+            <item href="/guide/deployers.html" name="for Deployers"/>
+            <item href="/guide/assemblers/index.html" name="for Assemblers" collapse="true">
+                <item href="/guide/assemblers/what-is-a-server-application.html" name="What is a Server Application"/>
+                <item href="/guide/assemblers/creating-a-server-application.html" name="Creating a Server Application"/>
+            </item>
+            <item href="/guide/bdg/index.html" name="for Block Developers" collapse="true">
+                <item href="/guide/bdg/creating-a-block.html" name="Creating a Block"/>
+                <item href="/guide/bdg/what-is-a-block.html" name="What is a Block"/>
+                <item href="/guide/bdg/what-is-an-application-listener.html" name="What is an Application Listener"/>
+                <item href="/guide/bdg/making-loom-compatible-comps.html" name="Making Compatible Components"/>
+                <item href="/guide/bdg/doclet-tags.html" name="Doclet Tags"/>
+            </item>
+            <item href="/guide/mx/index.html" name="Management Guide" collapse="true">
+                <item href="/guide/mx/overview.html" name="Overview"/>
+                <item href="/guide/mx/structure.html" name="Structure"/>
+                <item href="/guide/mx/mxinfo.html" name="MXINFO Specification"/>
+                <item href="/guide/mx/doclet-tags.html" name="Doclet Tags"/>
+            </item>
+            <item href="/guide/example-configuration.html" name="Example configuration"/>
+            <item href="/guide/punit.html" name="PUnit unit testing"/>
+        </menu>
+        <menu name="Reference">
+            <item href="/reference/config-xml-specification.html" name="config.xml Specification"/>
+            <item href="/reference/assembly-xml-specification.html" name="assembly.xml Specification"/>
+            <item href="/reference/environment-xml-specification.html" name="environment.xml Specification"/>
+            <item href="/reference/blockinfo-specification.html" name="BlockInfo Specification"/>
+        </menu>
+        <menu name="For Developers">
+            <item href="/developers/a-future.html" name="A Future"/>
+            <item href="/developers/project-structure.html" name="Project Structure"/>
+            <item href="/developers/alternate-kernel.html" name="Alternate Kernels"/>
+        </menu>
+    </body>
+</project>

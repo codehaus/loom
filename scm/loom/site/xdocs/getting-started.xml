@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<document>
+
+ <properties>
+   <title>Getting Started</title>
+
+
+
+ <author email="dev@avalon.apache.org">Phoenix Documentation Team</author>
+    <author email="leosimons@apache.org">Leo Simons</author>
+    <author email="Paul_Hammant@yahoo.com">Paul Hammant</author>
+  </properties>
+
+<body>
+
+<section name="Introduction">
+
+<p>
+    This document provides developers with simple documentation for getting
+    started with Phoenix. For information about the overall structure of
+    Avalon Framework (on which Phoenix is based), please refer to the
+    <a href="http://avalon.apache.org/framework/index.html">Framework documentation</a>.
+</p>
+
+<p>
+    Instructions for downloading and installing Phoenix can be found on the
+    <a href="install.html">Install</a> document.
+</p>
+
+<p>
+    More detailed instructions will be added to this document in the future. Feel free
+    to send in patches ;)
+</p>
+
+</section>
+
+<section name="View Detailed API Documentation">
+
+<p>
+    To generate a full set of detailed API documentation for Avalon, go to the base
+    directory of source distribution and run the appropriate build script for your
+    platform with the parameter 'javadocs'.
+
+<source>
+> build.[bat|sh] javadocs
+</source>
+
+</p>
+
+</section>
+<section name="Run the HelloWorld example">
+
+<p>
+    After you have successfully built Phoenix, you can verify that it
+    has compiled correctly by running the HelloWorld demo Service Application.
+</p>
+<p>
+    Firstly you will need to get the demo-helloworld.sar file and drop it into
+    the apps directory of Phoenix.  Currently it needs to be built from CVS -
+    <i>TODO -- demo application</i>
+</p>
+<p>
+    Then fire up phoenix with the following command:
+
+    <source>
+> bin/run.[bat|sh]
+    </source>
+</p>
+
+<p>
+    Next, fire up your favorite webbrowser and point it to http://localhost:8999/,
+    where localhost is the network name of your machine ("localhost") should
+    work on all windows platforms.<br/>
+    If all goes well, you will see something like the following:
+
+    <source>
+Hello World!
+Requests so far = 1
+you are 127.0.0.1 at 127.0.0.1
+    </source>
+</p>
+<p>
+    This shows that Phoenix has unpacked and launched the server application contained
+    within the demo-helloworld.sar file.  If you close and relaunch Phoenix, it should
+    restart the application.
+</p>
+<p>
+    As examples go this is a fairly simple one.  You should ignore the altrmihelloworldserver,
+    rmihelloworldserver and soaphelloworldserver packages as they are retrofitting the
+    helloworld demo with remote capability using three technologies.  HelloWorld uses
+    connection management from the Avalon-Cornerstone project, which is good as it allows us to
+    share connection pooling across multiple servers.
+</p>
+</section>
+<section name="The Phoenix Developer Kit - A different example">
+<p>
+    This self contained kit could be considered a starter project for someone wanting to make a
+    Phoenix compatible application.  The idea is that you start with this skeleton including
+    Ant build script and then add in more and more as your se code to copy from elsewhere.
+</p>
+<p>
+    This  also demonstrates that it is possible to make a server application that is dual mode.
+    Dual mode to us is the ability for the server application to run inside Phoenix and to
+    stand-alone from the command line.  It is a little bit of a sleight of hand as the codebase
+    would be zipped into two forms - the sar file for phoenix and a jar file for standalone.
+</p>
+<p>
+    The Phoenix development kit originates in Phoenix's CVS.  When you have that file, unzip it
+    and immediately launch ant to make the jars and sars.  There are four:
+    </p>
+      <ol>
+      <li>phoenix-demo.sar - the server app in Phoenix form</li>
+      <li>phoenix-demo-block.sar - used inside the sar</li>
+      <li>phoenix-demo-client.sar - a client app to test the server</li>
+      <li>phoenix-demo-server.sar - the server app in standalone form</li>
+    </ol>
+      <p>
+
+    The Server app in standalone mode after being tested with the client app(see below):
+
+    <source>
+java -jar phoenix-demo-server.jar
+PDK Demo listening on port 7654
+Ctrl-C to exit
+String passed = Hello!!!!!
+    </source>
+
+    The Server app running inside Phoenix and after being tested with the client app (see below):
+
+    <source>
+Phoenix 4.0a4
+
+Server started on port 1234
+String passed = Hello!!!!!
+    </source>
+
+    The client application being used to poke the server :
+
+    <source>
+java -jar phoenix-demo-client.jar localhost 7654 Hello!!!!!
+    </source>
+
+    (Change the port to 1234 from 7654 to poke the in-Phoenix server).
+
+</p>
+<p>
+    Note - because of the need to make this dual mode, the PDK does not use Cornerstone
+    components.  We normally recommend that people should reuse components from cornerstone as
+    the potential for sharing will be much higher.
+</p>
+</section>
+</body>
+</document>

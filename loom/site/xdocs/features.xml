@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<document>
+ <properties>
+    <title>Features</title>
+  
+ <author email="leosimons@apache.org">Leo Simons</author>
+  </properties>
+<body>
+
+<section name="Introduction">
+
+<p>This document is not complete yet...</p>
+
+</section>
+
+<section name="Extensible architecture">
+    <p>Phoenix is written as an extensible micro-kernel. This allows you to:</p>
+    <ul>
+        <li>Customise behaviour quickly</li>
+        <li>Plug in extra functionality effortlessly</li>
+        <li>Remove unneeded functionality for a small footprint</li>
+    </ul>
+</section>
+
+<section name="Flexible environment">
+    <p>Phoenix has native support for use in the following environments:</p>
+    <ul>
+        <li>Command-line stand-alone program</li>
+        <li>Unix daemon</li>
+        <li>Embedded in other programs (including servlet engines)</li>
+    </ul>
+</section>
+
+<section name="Integrated management">
+    <p>Phoenix enables JMX management of your software:</p>
+    <ul>
+        <li>All aspects of phoenix itself are manageable, including
+        startup/shutdown, deployment, management and logging.</li>
+        <li>Applications running in phoenix are manageable, exposing
+        their lifecycle (configuration, startup/shutdown, etc) and
+        everything else you mark as manageable.</li>
+    </ul>
+</section>
+
+<section name="Ease and speed up application development">
+    <p>Phoenix is a container for (server) applications. It can host
+    multiple applications within the same JVM, while keeping them securely
+    isolated from each other.</p>
+
+    <p>Phoenix provides simple XML configuration files that allow you to
+    rapidly assemble a customised server applications from readily available
+    components (called blocks).</p>
+
+    <p>Phoenix provides the following services to hosted applications:</p>
+    <ul>
+        <li>Lifecycle management</li>
+        <li>Configuration management and persistence</li>
+        <li>Resource management and sharing</li>
+        <li>Management exposure through JMX</li>
+        <li>Automatic (re)deployment</li>
+        <li>An isolated environment</li>
+    </ul>
+
+    <p>Phoenix leverages the Avalon Framework, making it compatible with other
+    Avalon-based projects like Excalibur and Cornerstone, enabling you to
+    easily reuse their functionality.</p>
+</section>
+
+</body>
+</document>
