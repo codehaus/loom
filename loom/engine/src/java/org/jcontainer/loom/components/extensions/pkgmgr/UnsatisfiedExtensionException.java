@@ -91,21 +91,19 @@ import org.realityforge.extension.Extension;
 /**
  * Exception indicating an extension was not found in Package Repository.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-08-17 18:27:32 $
+ * @author Peter Donald
+ * @version $Revision: 1.4 $ $Date: 2003-11-29 13:44:19 $
  * @see Extension
  */
 public class UnsatisfiedExtensionException
     extends Exception
 {
-    /**
-     * The unsatisfied Extension.
-     */
+    /** The unsatisfied Extension. */
     private final Extension m_extension;
 
     /**
-     * Construct the <code>UnsatisfiedPackageException</code>
-     * for specified {@link Extension}.
+     * Construct the <code>UnsatisfiedPackageException</code> for specified
+     * {@link Extension}.
      *
      * @param extension the extension that caused exception
      */
@@ -120,8 +118,8 @@ public class UnsatisfiedExtensionException
     }
 
     /**
-     * Return the unsatisfied {@link Extension} that
-     * caused this exception tho be thrown.
+     * Return the unsatisfied {@link Extension} that caused this exception tho
+     * be thrown.
      *
      * @return the unsatisfied Extension
      */

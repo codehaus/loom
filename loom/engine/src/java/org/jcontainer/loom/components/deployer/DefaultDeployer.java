@@ -125,7 +125,7 @@ import org.xml.sax.InputSource;
 /**
  * Deploy .sar files into a kernel using this class.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @author Peter Donald
  * @dna.component
  * @mx.component
  */
@@ -162,8 +162,11 @@ public class DefaultDeployer
             lookup( ConfigurationInterceptor.class.getName() );
         m_classLoaderManager = (ClassLoaderManager)locator.
             lookup( ClassLoaderManager.class.getName() );
-        m_logManager = (LogManager)locator.lookup( LogManager.class.getName() );
-        m_validator = (ConfigurationValidator)locator.lookup( ConfigurationValidator.class.getName() );
+        m_logManager =
+        (LogManager)locator.lookup( LogManager.class.getName() );
+        m_validator =
+        (ConfigurationValidator)locator.lookup(
+            ConfigurationValidator.class.getName() );
         m_installer = (Installer)locator.lookup( Installer.class.getName() );
     }
 
@@ -174,8 +177,8 @@ public class DefaultDeployer
     }
 
     /**
-     * Dispose the dpeloyer which effectively means undeploying
-     * all the currently deployed apps.
+     * Dispose the dpeloyer which effectively means undeploying all the
+     * currently deployed apps.
      */
     public void dispose()
     {
@@ -201,9 +204,9 @@ public class DefaultDeployer
     }
 
     /**
+     * @throws LoomException if an error occurs
      * @mx.operation description="Redeploy an installation."
      * @mx.parameter name="name" description="the name of deployment"
-     * @throws LoomException if an error occurs
      */
     public void redeploy( final String name )
         throws LoomException
@@ -218,7 +221,8 @@ public class DefaultDeployer
         }
         try
         {
-            final File source = (File)installation.get( ContainerConstants.INSTALL_SOURCE );
+            final File source = (File)installation.get(
+                ContainerConstants.INSTALL_SOURCE );
             redeploy( name, source.toURL() );
         }
         catch( final LoomException e )
@@ -258,9 +262,9 @@ public class DefaultDeployer
     }
 
     /**
+     * @throws LoomException if an error occurs
      * @mx.operation description="Undeploy an installation."
      * @mx.parameter name="name" description="the name of deployment"
-     * @throws LoomException if an error occurs
      */
     public void undeploy( final String name )
         throws LoomException
@@ -285,10 +289,10 @@ public class DefaultDeployer
     }
 
     /**
+     * @throws LoomException if an error occurs
      * @mx.operation description="Deploy an installation."
      * @mx.parameter name="name" description="the name of deployment"
      * @mx.parameter name="sarURL" description="the installation to deploy"
-     * @throws LoomException if an error occurs
      */
     public void deploy( final String name, final String sarURL )
         throws LoomException
@@ -304,10 +308,10 @@ public class DefaultDeployer
     }
 
     /**
+     * @throws LoomException if an error occurs
      * @mx.operation description="Deploy an installation."
      * @mx.parameter name="name" description="the name of deployment"
      * @mx.parameter name="location" description="the installation to deploy"
-     * @throws LoomException if an error occurs
      */
     public void deploy( final String name, final URL location )
         throws LoomException
@@ -335,9 +339,13 @@ public class DefaultDeployer
             installation = m_installer.install( name, location );
 
             final Configuration config =
-                getConfigurationFor( installation, ContainerConstants.INSTALL_CONFIG, null );
+                getConfigurationFor( installation,
+                                     ContainerConstants.INSTALL_CONFIG,
+                                     null );
             final Configuration environment =
-                getConfigurationFor( installation, ContainerConstants.INSTALL_ENVIRONMENT, null );
+                getConfigurationFor( installation,
+                                     ContainerConstants.INSTALL_ENVIRONMENT,
+                                     null );
             final Configuration assembly =
                 getConfigurationFor( installation,
                                      ContainerConstants.INSTALL_ASSEMBLY,
@@ -358,7 +366,10 @@ public class DefaultDeployer
             //specific classloader to load the targets which will cause
             //CastClassExceptions
             final LoggerStore store =
-                m_logManager.createHierarchy( logs, homeDirectory, workDirectory, data );
+                m_logManager.createHierarchy( logs,
+                                              homeDirectory,
+                                              workDirectory,
+                                              data );
 
             final ClassLoaderSet classLoaderSet =
                 m_classLoaderManager.createClassLoaderSet( environment,
@@ -367,16 +378,19 @@ public class DefaultDeployer
                                                            workDirectory );
             final ClassLoader classLoader = classLoaderSet.getDefaultClassLoader();
 
-            final Configuration newConfig = processConfiguration( name, config );
+            final Configuration newConfig = processConfiguration( name,
+                                                                  config );
 
             final Map parameters = new HashMap();
             parameters.put( ContainerConstants.ASSEMBLY_NAME, name );
             parameters.put( ContainerConstants.ASSEMBLY_DESCRIPTOR, assembly );
             parameters.put( ContainerConstants.CONFIG_DESCRIPTOR, newConfig );
-            parameters.put( ContainerConstants.ASSEMBLY_CLASSLOADER, classLoader );
+            parameters.put( ContainerConstants.ASSEMBLY_CLASSLOADER,
+                            classLoader );
 
             //assemble all the blocks for application
-            final PartitionProfile profile = m_builder.buildProfile( parameters );
+            final PartitionProfile profile = m_builder.buildProfile(
+                parameters );
 
             m_verifier.verifySar( profile, classLoader );
 
@@ -434,26 +448,30 @@ public class DefaultDeployer
      * @return the Configuration
      * @throws LoomException if an error occurs
      */
-    private Configuration getConfigurationFor( final Map install, final String key, final String schema )
+    private Configuration getConfigurationFor( final Map install,
+                                               final String key,
+                                               final String schema )
         throws LoomException
     {
         final String location = (String)install.get( key );
         try
         {
-            return ConfigurationBuilder.build( new InputSource( location ), schema, getLogger() );
+            return ConfigurationBuilder.build( new InputSource( location ),
+                                               schema,
+                                               getLogger() );
         }
         catch( final Exception e )
         {
-            final String message = REZ.format( "deploy.error.config.create", location );
+            final String message = REZ.format( "deploy.error.config.create",
+                                               location );
             getLogger().error( message, e );
             throw new LoomException( message, e );
         }
     }
 
     /**
-     * Pass the configuration to the configurationManager
-     * and give it a chance to process the configuration in
-     * one form or another.
+     * Pass the configuration to the configurationManager and give it a chance
+     * to process the configuration in one form or another.
      *
      * @param configuration the block configurations.
      * @throws LoomException if an error occurs
@@ -487,7 +505,8 @@ public class DefaultDeployer
     }
 
     /**
-     * Verify that configuration present in config file is valid for this assembly.
+     * Verify that configuration present in config file is valid for this
+     * assembly.
      *
      * @param profile the PartitionProfile
      * @param config the block configurations.
@@ -522,7 +541,8 @@ public class DefaultDeployer
     }
 
     /**
-     * Verify that configuration conforms to schema for all components in this assembly.
+     * Verify that configuration conforms to schema for all components in this
+     * assembly.
      *
      * @param profile the PartitionProfile
      * @param classLoader the classloader application is loaded in
@@ -554,7 +574,8 @@ public class DefaultDeployer
             {
                 final String message =
                     "Unable to validate configuration of component " +
-                    component.getTemplate().getName() + " of type " +
+                    component.getTemplate().getName() +
+                    " of type " +
                     component.getInfo().getType().getName();
                 throw new LoomException( message );
             }

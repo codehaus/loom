@@ -14,7 +14,7 @@ import org.jcontainer.loom.interfaces.ConfigurationInterceptor;
 /**
  * Interceptor that does not make any changes to configuration.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @author Peter Donald
  */
 public class NoopConfigurationInterceptor
     implements ConfigurationInterceptor

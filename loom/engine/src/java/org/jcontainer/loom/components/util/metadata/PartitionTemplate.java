@@ -7,49 +7,40 @@
  */
 package org.jcontainer.loom.components.util.metadata;
 
-
-
 /**
- * In each Assembly there may be groups of components that
- * are activated together and treated as a group. These
- * components are all "visible" to each other as peers.
- * The group will have a name and may use resources from
- * other partitions. Partitions can also be nested one inside
- * each other.
+ * In each Assembly there may be groups of components that are activated
+ * together and treated as a group. These components are all "visible" to each
+ * other as peers. The group will have a name and may use resources from other
+ * partitions. Partitions can also be nested one inside each other.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-11-03 06:43:15 $
+ * @author Peter Donald
+ * @version $Revision: 1.2 $ $Date: 2003-11-29 13:44:26 $
  */
 public class PartitionTemplate
 {
-    /**
-     * Constant for an empty set of partitions.
-     */
+    /** Constant for an empty set of partitions. */
     public static final PartitionTemplate[] EMPTY_SET = new PartitionTemplate[ 0 ];
 
     /**
-     * The name of the partition. This is an
-     * abstract name used during assembly.
+     * The name of the partition. This is an abstract name used during
+     * assembly.
      */
     private final String m_name;
 
     /**
-     * An array listing the set of other partitions required by
-     * this partition. The required partitions must be initialized
-     * and in ready state prior to this partition starting and this
-     * partition must be shutdown prior
+     * An array listing the set of other partitions required by this partition.
+     * The required partitions must be initialized and in ready state prior to
+     * this partition starting and this partition must be shutdown prior
      */
     private final String[] m_depends;
 
     /**
-     * AN array of partitions that are contained by this
-     * object.
+     * AN array of partitions that are contained by this object.
      */
     private final PartitionTemplate[] m_partitions;
 
     /**
-     * AN array of components that are contained by this
-     * object.
+     * AN array of components that are contained by this object.
      */
     private final ComponentTemplate[] m_components;
 

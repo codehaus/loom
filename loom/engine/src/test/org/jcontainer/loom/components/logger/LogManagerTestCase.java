@@ -12,9 +12,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
-
 import junit.framework.TestCase;
-
 import org.apache.avalon.phoenix.BlockContext;
 import org.apache.avalon.phoenix.metadata.BlockListenerMetaData;
 import org.apache.avalon.phoenix.metadata.BlockMetaData;
@@ -30,19 +28,24 @@ import org.realityforge.salt.io.FileUtil;
 import org.xml.sax.InputSource;
 
 /**
- *  An basic test case for the LogManager.
+ * An basic test case for the LogManager.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.12 $ $Date: 2003-10-25 16:23:22 $
+ * @author Peter Donald
+ * @version $Revision: 1.13 $ $Date: 2003-11-29 13:44:30 $
  */
 public class LogManagerTestCase
     extends TestCase
 {
-    private static final String DEFAULT_LOGFILE = "logs" + File.separator + "default.log";
-    private static final String BLOCK_LOGFILE = "logs" + File.separator + "myBlock.log";
+    private static final String DEFAULT_LOGFILE = "logs" +
+        File.separator +
+        "default.log";
+    private static final String BLOCK_LOGFILE = "logs" +
+        File.separator +
+        "myBlock.log";
     private File m_baseDirectory;
 
-    protected void setUp() throws Exception
+    protected void setUp()
+        throws Exception
     {
         m_baseDirectory = generateDirectory();
         //Because log4j does not guarentee dir creation ;(
@@ -75,7 +78,8 @@ public class LogManagerTestCase
         runtTestForConfigFile( 3 );
     }
 
-    private void runtTestForConfigFile( final int index ) throws Exception
+    private void runtTestForConfigFile( final int index )
+        throws Exception
     {
         final Logger hierarchy = createHierarchy( index );
         runLoggerTest( hierarchy, DEFAULT_LOGFILE );
@@ -94,10 +98,18 @@ public class LogManagerTestCase
         assertFileGrew( logfile, before, after );
     }
 
-    private void assertFileGrew( final String logfile, long before, long after )
+    private void assertFileGrew( final String logfile,
+                                 long before,
+                                 long after )
     {
-        assertTrue( "Did " + logfile + " file grow?, Before: " + before + ", After: " + after,
-                    before < after );
+        assertTrue(
+            "Did " +
+            logfile +
+            " file grow?, Before: " +
+            before +
+            ", After: " +
+            after,
+            before < after );
     }
 
     private long getFileSize( final String filename )
@@ -137,13 +149,17 @@ public class LogManagerTestCase
         if( 3 == index )
         {
             final File file =
-                new File( m_baseDirectory.getAbsolutePath() + File.separator + "logs" );
+                new File(
+                    m_baseDirectory.getAbsolutePath() +
+                    File.separator +
+                    "logs" );
             file.mkdirs();
         }
 
         final HashMap context = new HashMap();
         context.put( BlockContext.APP_NAME, sarMetaData.getName() );
-        context.put( BlockContext.APP_HOME_DIR, sarMetaData.getHomeDirectory() );
+        context.put( BlockContext.APP_HOME_DIR,
+                     sarMetaData.getHomeDirectory() );
         context.put( "classloader", getClass().getClassLoader() );
 
         final LoggerStore store =
@@ -175,7 +191,8 @@ public class LogManagerTestCase
     {
         final File baseDirectory = getBaseDirectory();
         final File dir =
-            File.createTempFile( "mgtest", ".tmp", baseDirectory ).getCanonicalFile();
+            File.createTempFile( "mgtest", ".tmp", baseDirectory )
+            .getCanonicalFile();
         dir.delete();
         dir.mkdirs();
         assertTrue( "dir.exists()", dir.exists() );

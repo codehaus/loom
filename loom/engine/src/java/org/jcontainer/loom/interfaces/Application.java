@@ -90,11 +90,12 @@ package org.jcontainer.loom.interfaces;
  * The Application is a self-contained component that performs a specific
  * function.
  *
- * Example ServerApplications may be a Mail Server, File Server, Directory Server etc.
- * Example JesktopApplications may be a Spreadsheet program, browser, mail client
- * Example WebApplications may be a particular website or application within a website
+ * Example ServerApplications may be a Mail Server, File Server, Directory
+ * Server etc. Example JesktopApplications may be a Spreadsheet program,
+ * browser, mail client Example WebApplications may be a particular website or
+ * application within a website
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @author Peter Donald
  */
 public interface Application
 {
@@ -107,14 +108,12 @@ public interface Application
 
     /**
      * Retrieve names of Blocks contained in application.
-     *
-     * @return
      */
     String[] getBlockNames();
 
     /**
-     * Retrieve Block with specified name.
-     * If no such block exists a null  will be returned.
+     * Retrieve Block with specified name. If no such block exists a null  will
+     * be returned.
      *
      * @param name the name of block to retrieve
      * @return the coresponding block or null if none

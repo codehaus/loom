@@ -15,8 +15,8 @@ import org.apache.avalon.framework.service.Serviceable;
 /**
  * A test component.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-10-16 14:45:54 $
+ * @author Peter Donald
+ * @version $Revision: 1.3 $ $Date: 2003-11-29 13:44:30 $
  * @dna.component
  */
 public class Component3
@@ -44,11 +44,13 @@ public class Component3
         checkEntry( services, 2 );
     }
 
-    private void checkEntry( final Service1[] services, final int index ) throws ServiceException
+    private void checkEntry( final Service1[] services, final int index )
+        throws ServiceException
     {
         if( null == services[ index ] )
         {
-            final String message = "Expected non null service entry for " + index;
+            final String message = "Expected non null service entry for " +
+                index;
             throw new ServiceException( Service1[].class.getName(), message );
         }
     }

@@ -13,66 +13,58 @@ import org.apache.avalon.framework.parameters.Parameters;
 import org.jcontainer.dna.Configuration;
 
 /**
- * Each component declared in the application is represented by
- * a ComponentTemplate. Note that this does not necessarily imply
- * that there is only one instance of actual component. The
- * ComponentTemplate could represent a pool of components, a single
- * component or a component prototype that is reused to create
- * new components as needed.
+ * Each component declared in the application is represented by a
+ * ComponentTemplate. Note that this does not necessarily imply that there is
+ * only one instance of actual component. The ComponentTemplate could represent
+ * a pool of components, a single component or a component prototype that is
+ * reused to create new components as needed.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-11-03 06:43:15 $
+ * @author Peter Donald
+ * @version $Revision: 1.2 $ $Date: 2003-11-29 13:44:26 $
  */
 public class ComponentTemplate
 {
-    /**
-     * Empty set of component metadata.
-     */
+    /** Empty set of component metadata. */
     public static final ComponentTemplate[] EMPTY_SET = new ComponentTemplate[ 0 ];
 
     /**
-     * The name of the component. This is an
-     * abstract name used during assembly.
+     * The name of the component. This is an abstract name used during
+     * assembly.
      */
     private final String m_name;
 
     /**
-     * The implementationKey for this component.
-     * Usually this represents a classname but
-     * alternative mechanisms could be used (ie URL
-     * of webservice).
+     * The implementationKey for this component. Usually this represents a
+     * classname but alternative mechanisms could be used (ie URL of
+     * webservice).
      */
     private final String m_implementationKey;
 
     /**
-     * The resolution of any dependencies required by
-     * the component type.
+     * The resolution of any dependencies required by the component type.
      */
     private final DependencyDirective[] m_dependencies;
 
-    /**
-     * The parameters for component (if any).
-     */
+    /** The parameters for component (if any). */
     private final Parameters m_parameters;
 
-    /**
-     * The configuration for component (if any).
-     */
+    /** The configuration for component (if any). */
     private final Configuration m_configuration;
 
-    /**
-     * True if proxy should be disabled.
-     */
+    /** True if proxy should be disabled. */
     private final boolean m_disableProxy;
 
     /**
      * Create a ComponentTemplate.
      *
      * @param name the abstract name of component meta data instance
-     * @param implementationKey the key used to create component (usually a classname)
+     * @param implementationKey the key used to create component (usually a
+     * classname)
      * @param dependencies the meta data for any dependencies
-     * @param parameters the parameters that the component will be provided (may be null)
-     * @param configuration the configuration that the component will be provided (may be null)
+     * @param parameters the parameters that the component will be provided (may
+     * be null)
+     * @param configuration the configuration that the component will be
+     * provided (may be null)
      * @param disableProxy true if proxy should be disabled
      */
     public ComponentTemplate( final String name,
@@ -182,7 +174,8 @@ public class ComponentTemplate
     }
 
     /**
-     * Return all the dependencies for key. Used for Map and array dependencies.
+     * Return all the dependencies for key. Used for Map and array
+     * dependencies.
      *
      * @return all the dependencies for key
      */

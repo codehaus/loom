@@ -114,7 +114,7 @@ import org.xml.sax.InputSource;
 /**
  * The class to load the kernel and start it running.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @author Peter Donald
  * @author <a href="mailto:mail@leosimons.com">Leo Simons</a>
  */
 public final class CLIMain
@@ -161,7 +161,9 @@ public final class CLIMain
     {
         try
         {
-            final String command = "java " + getClass().getName() + " [options]";
+            final String command = "java " +
+                getClass().getName() +
+                " [options]";
             final CLISetup setup = new CLISetup( command );
 
             if( false == setup.parseCommandLineOptions( args ) )
@@ -170,7 +172,8 @@ public final class CLIMain
             }
 
             System.out.println();
-            System.out.println( ContainerConstants.SOFTWARE + " " + ContainerConstants.VERSION );
+            System.out.println(
+                ContainerConstants.SOFTWARE + " " + ContainerConstants.VERSION );
             System.out.println();
 
             final Properties properties = setup.getParameters();
@@ -267,14 +270,18 @@ public final class CLIMain
         try
         {
             final String configFilename = properties.getProperty( CONFIGFILE );
-            final Configuration original = ConfigurationUtil.buildFromXML( new InputSource( configFilename ) );
+            final Configuration original = ConfigurationUtil.buildFromXML(
+                new InputSource( configFilename ) );
             final File home = (File)data.get( HOME_DIR );
             final Properties params = new Properties();
             params.setProperty( "loom.home", home.getAbsolutePath() );
-            final Configuration root = ConfigUtil.expandValues( original, params );
+            final Configuration root = ConfigUtil.expandValues( original,
+                                                                params );
             final Configuration configuration = root.getChild( "embeddor" );
-            final String embeddorClassname = configuration.getAttribute( "class" );
-            m_embeddor = (Embeddor)Class.forName( embeddorClassname ).newInstance();
+            final String embeddorClassname = configuration.getAttribute(
+                "class" );
+            m_embeddor =
+            (Embeddor)Class.forName( embeddorClassname ).newInstance();
 
             m_logger = createLogger( properties );
             ContainerUtil.enableLogging( m_embeddor, m_logger );
@@ -305,21 +312,21 @@ public final class CLIMain
     }
 
     /**
-     * Uses {@link org.apache.log.Hierarchy} to create a new
-     * logger using "Loom" as its category, DEBUG as its
-     * priority and the log-destination from Parameters as its
-     * destination.
-     * TODO: allow configurable priorities and multiple
-     * logtargets.
+     * Uses {@link org.apache.log.Hierarchy} to create a new logger using "Loom"
+     * as its category, DEBUG as its priority and the log-destination from
+     * Parameters as its destination. TODO: allow configurable priorities and
+     * multiple logtargets.
      */
     private Logger createLogger( final Properties properties )
         throws Exception
     {
         final String logDestination =
-            properties.getProperty( "log-destination", m_home + DEFAULT_LOG_FILE );
+            properties.getProperty( "log-destination",
+                                    m_home + DEFAULT_LOG_FILE );
         final String logPriority =
             properties.getProperty( "log-priority", "INFO" );
-        final ExtendedPatternFormatter formatter = new ExtendedPatternFormatter( DEFAULT_FORMAT );
+        final ExtendedPatternFormatter formatter = new ExtendedPatternFormatter(
+            DEFAULT_FORMAT );
         final File file = new File( logDestination );
         m_logTarget = new FileTarget( file, false, formatter );
 
@@ -336,8 +343,8 @@ public final class CLIMain
     /**
      * Shut the embeddor down.
      *
-     * Note must be public so that the Frontend can
-     * shut it down via reflection.
+     * Note must be public so that the Frontend can shut it down via
+     * reflection.
      */
     public synchronized void shutdown()
     {
@@ -386,8 +393,8 @@ public final class CLIMain
         if( null != m_logger )
         {
             trace =
-                ExceptionUtil.prettyPrintStackTrace( throwable,
-                                                     "org.jcontainer.loom.components" );
+            ExceptionUtil.prettyPrintStackTrace( throwable,
+                                                 "org.jcontainer.loom.components" );
             m_logger.error( throwable.getMessage(), throwable );
         }
         else

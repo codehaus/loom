@@ -92,8 +92,8 @@ import org.apache.avalon.framework.context.ContextException;
 /**
  * This provides utility methods for properties.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version CVS $Revision: 1.3 $ $Date: 2003-10-05 13:47:12 $
+ * @author Peter Donald
+ * @version CVS $Revision: 1.4 $ $Date: 2003-11-29 13:44:27 $
  * @since 4.0
  */
 public final class PropertyUtil
@@ -103,14 +103,15 @@ public final class PropertyUtil
     }
 
     /**
-     * Resolve a string property. This evaluates all property
-     * substitutions based on specified context.
+     * Resolve a string property. This evaluates all property substitutions
+     * based on specified context.
      *
      * @param property the property to resolve
      * @param context the context in which to resolve property
-     * @param ignoreUndefined if false will throw an PropertyException if property is not found
+     * @param ignoreUndefined if false will throw an PropertyException if
+     * property is not found
      * @return the reolved property
-     * @exception java.lang.Exception if an error occurs
+     * @throws java.lang.Exception if an error occurs
      */
     public static Object resolveProperty( final String property,
                                           final Context context,
@@ -163,13 +164,15 @@ public final class PropertyUtil
         return sb.toString();
     }
 
-    private static int findBeginning( final String property, final int currentPosition )
+    private static int findBeginning( final String property,
+                                      final int currentPosition )
     {
         //TODO: Check if it is commented out
         return property.indexOf( "${", currentPosition );
     }
 
-    private static int findEnding( final String property, final int currentPosition )
+    private static int findEnding( final String property,
+                                   final int currentPosition )
         throws Exception
     {
         //TODO: Check if it is commented out
@@ -183,15 +186,15 @@ public final class PropertyUtil
     }
 
     /**
-     * Retrieve a value from the specified context using the specified key.
-     * If there is no such value and ignoreUndefined is not false then a
-     * Exception is generated.
+     * Retrieve a value from the specified context using the specified key. If
+     * there is no such value and ignoreUndefined is not false then a Exception
+     * is generated.
      *
      * @param key the key of value in context
      * @param context the Context
      * @param ignoreUndefined true if undefined variables are ignored
      * @return the object retrieved from context
-     * @exception java.lang.Exception if an error occurs
+     * @throws java.lang.Exception if an error occurs
      */
     private static Object resolveValue( final String key,
                                         final Context context,
@@ -217,7 +220,9 @@ public final class PropertyUtil
             }
             else
             {
-                throw new Exception( "Unable to find " + key + " to expand during "
+                throw new Exception( "Unable to find " +
+                                     key +
+                                     " to expand during "
                                      + "property resolution." );
             }
         }

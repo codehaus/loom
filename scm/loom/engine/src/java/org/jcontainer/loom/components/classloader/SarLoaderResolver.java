@@ -94,20 +94,20 @@ import java.util.Set;
 import org.jcontainer.dna.LogEnabled;
 import org.jcontainer.dna.Logger;
 import org.jcontainer.dna.impl.ContainerUtil;
-import org.jcontainer.loom.components.extensions.pkgmgr.PackageManager;
 import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
+import org.jcontainer.loom.components.extensions.pkgmgr.PackageManager;
 import org.jcontainer.loom.components.util.ResourceUtil;
-import org.realityforge.salt.i18n.ResourceManager;
-import org.realityforge.salt.i18n.Resources;
 import org.realityforge.classman.builder.SimpleLoaderResolver;
 import org.realityforge.extension.Extension;
+import org.realityforge.salt.i18n.ResourceManager;
+import org.realityforge.salt.i18n.Resources;
 
 /**
- * a LoaderResolver that knows about container environment,
- * and the way it is split across multiple directories.
+ * a LoaderResolver that knows about container environment, and the way it is
+ * split across multiple directories.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.7 $ $Date: 2003-11-11 11:29:51 $
+ * @author Peter Donald
+ * @version $Revision: 1.8 $ $Date: 2003-11-29 13:44:15 $
  */
 class SarLoaderResolver
     extends SimpleLoaderResolver
@@ -116,30 +116,21 @@ class SarLoaderResolver
     private final static Resources REZ =
         ResourceManager.getPackageResources( SarLoaderResolver.class );
 
-    /**
-     * The PackageManager to use to resolve Extensions.
-     */
+    /** The PackageManager to use to resolve Extensions. */
     private PackageManager m_manager;
 
-    /**
-     * Logger to use when reporting information
-     */
+    /** Logger to use when reporting information */
     private Logger m_logger;
 
-    /**
-     * The policy object to use when creating ClassLoaders
-     */
+    /** The policy object to use when creating ClassLoaders */
     private Policy m_policy;
 
-    /**
-     * Base work directory for application.
-     */
+    /** Base work directory for application. */
     private File m_workDirectory;
 
     /**
-     * Create a resolver for a jar.
-     * The resolver merges both the work and base directory
-     * hierarchies.
+     * Create a resolver for a jar. The resolver merges both the work and base
+     * directory hierarchies.
      *
      * @param manager the PackageManager
      * @param policy the policy to use when creating classloaders
@@ -216,8 +207,8 @@ class SarLoaderResolver
     }
 
     /**
-     * Resolve a fileset. Make sure it is resolved against
-     * both the work and the base directories of application.
+     * Resolve a fileset. Make sure it is resolved against both the work and the
+     * base directories of application.
      *
      * @param baseDirectory the base directory of fileset
      * @param includes the fileset includes
@@ -231,12 +222,22 @@ class SarLoaderResolver
         throws Exception
     {
         final URL[] baseURLs =
-            resolveFileSet( getBaseDirectory(), baseDirectory, includes, excludes );
+            resolveFileSet( getBaseDirectory(),
+                            baseDirectory,
+                            includes,
+                            excludes );
         final URL[] workURLs =
-            resolveFileSet( m_workDirectory, baseDirectory, includes, excludes );
+            resolveFileSet( m_workDirectory,
+                            baseDirectory,
+                            includes,
+                            excludes );
         final URL[] urls = new URL[ baseURLs.length + workURLs.length ];
         System.arraycopy( baseURLs, 0, urls, 0, baseURLs.length );
-        System.arraycopy( workURLs, 0, urls, baseURLs.length, workURLs.length );
+        System.arraycopy( workURLs,
+                          0,
+                          urls,
+                          baseURLs.length,
+                          workURLs.length );
         return urls;
     }
 

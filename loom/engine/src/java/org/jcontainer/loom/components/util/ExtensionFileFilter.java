@@ -11,9 +11,8 @@ import java.io.File;
 import java.io.FilenameFilter;
 
 /**
- *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-10-05 00:31:36 $
+ * @author Peter Donald
+ * @version $Revision: 1.3 $ $Date: 2003-11-29 13:44:27 $
  */
 public class ExtensionFileFilter
     implements FilenameFilter

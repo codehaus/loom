@@ -11,31 +11,26 @@ import org.jcontainer.loom.components.util.info.ComponentInfo;
 import org.jcontainer.loom.components.util.metadata.ComponentTemplate;
 
 /**
- * The ComponentProfile defines a component as a conjunction
- * of the ComponentInfo and ComponentTemplate.
- * The ComponentInfo defines the type of the component
- * and the ComponentTemplate defines the data required to
+ * The ComponentProfile defines a component as a conjunction of the
+ * ComponentInfo and ComponentTemplate. The ComponentInfo defines the type of
+ * the component and the ComponentTemplate defines the data required to
  * construct a specific instance of the component.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-11-03 06:43:15 $
+ * @author Peter Donald
+ * @version $Revision: 1.4 $ $Date: 2003-11-29 13:44:27 $
  */
 public class ComponentProfile
 {
-    /**
-     * An empty array of component profiles.
-     */
+    /** An empty array of component profiles. */
     public static final ComponentProfile[] EMPTY_SET = new ComponentProfile[ 0 ];
 
     /**
-     * The ComponentInfo that describes
-     * the type of this component.
+     * The ComponentInfo that describes the type of this component.
      */
     private final ComponentInfo m_info;
 
     /**
-     * The ComponentTemplate that describes
-     * this component.
+     * The ComponentTemplate that describes this component.
      */
     private final ComponentTemplate m_metaData;
 
@@ -71,6 +66,7 @@ public class ComponentProfile
 
     /**
      * Returns the underlying ComponentTemplate instance.
+     *
      * @return the component meta data instance
      */
     public ComponentTemplate getTemplate()

@@ -92,19 +92,17 @@ import org.realityforge.extension.DeweyDecimal;
 import org.realityforge.extension.Extension;
 
 /**
- * A simple class to compare two extensions and sort them
- * on spec version and then on impl version. Unspecified
- * versions rate lower than specified versions.
+ * A simple class to compare two extensions and sort them on spec version and
+ * then on impl version. Unspecified versions rate lower than specified
+ * versions.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-10-16 14:45:45 $
+ * @author Peter Donald
+ * @version $Revision: 1.5 $ $Date: 2003-11-29 13:44:19 $
  */
 class OptionalPackageComparator
     implements Comparator
 {
-    /**
-     * The name of extension the comparator is working with.
-     */
+    /** The name of extension the comparator is working with. */
     private final String m_name;
 
     public OptionalPackageComparator( final String name )

@@ -129,7 +129,7 @@ import org.xml.sax.EntityResolver;
 /**
  * Interface that is used to manage Log objects for a Sar.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @author Peter Donald
  */
 public class DefaultLogManager
     extends AbstractLogEnabled
@@ -142,9 +142,7 @@ public class DefaultLogManager
 
     private final InitialLoggerStoreFactory m_factory = new InitialLoggerStoreFactory();
 
-    /**
-     * Hold the value of loom.home
-     */
+    /** Hold the value of loom.home */
     private File m_loomHome;
 
     /**
@@ -165,9 +163,9 @@ public class DefaultLogManager
     }
 
     /**
-     * Normalises file paths by replacing File.separatorChar with '/'
-     * and storing the path in the map in place of the File object
-     * which would be converted back to using the File.separatorChar
+     * Normalises file paths by replacing File.separatorChar with '/' and
+     * storing the path in the map in place of the File object which would be
+     * converted back to using the File.separatorChar
      *
      * @param data the Map containing the File objects
      * @return the Map with the normalised File paths
@@ -210,10 +208,11 @@ public class DefaultLogManager
      * @return the Log hierarchy
      * @throws Exception if unable to create Loggers
      */
-    public LoggerStore createHierarchy( final org.jcontainer.dna.Configuration logs,
-                                        final File homeDirectory,
-                                        final File workDirectory,
-                                        final Map context )
+    public LoggerStore createHierarchy(
+        final org.jcontainer.dna.Configuration logs,
+        final File homeDirectory,
+        final File workDirectory,
+        final Map context )
         throws Exception
     {
         final Map map = createLoggerManagerContext( context );
@@ -284,7 +283,8 @@ public class DefaultLogManager
                 config.put( Logger.class.getName(), logger );
                 // use the original context map as SimpleLogKitManager requires
                 // the File object in the context
-                config.put( Context.class.getName(), new DefaultContext( map ) );
+                config.put( Context.class.getName(),
+                            new DefaultContext( map ) );
                 config.put( Configuration.class.getName(),
                             ConfigurationConverter.toConfiguration( logs ) );
                 return loggerManager.createLoggerStore( config );
@@ -295,7 +295,8 @@ public class DefaultLogManager
                 ContainerUtil.enableLogging( loggerManager, logger );
                 final HashMap config = new HashMap();
                 config.put( Logger.class.getName(), logger );
-                config.put( Context.class.getName(), new DefaultContext( normalisedMap ) );
+                config.put( Context.class.getName(),
+                            new DefaultContext( normalisedMap ) );
                 config.put( Configuration.class.getName(),
                             ConfigurationConverter.toConfiguration( logs ) );
                 return loggerManager.createLoggerStore( config );
@@ -313,17 +314,21 @@ public class DefaultLogManager
             else
             {
                 final String message =
-                    "Unknown logger version '" + version + "' in environment.xml";
+                    "Unknown logger version '" +
+                    version +
+                    "' in environment.xml";
                 throw new IllegalStateException( message );
             }
         }
     }
 
-    private Element buildLog4JConfiguration( final org.jcontainer.dna.Configuration logs )
+    private Element buildLog4JConfiguration(
+        final org.jcontainer.dna.Configuration logs )
     {
         final Element element = ConfigurationUtil.toElement( logs );
         final Document document = element.getOwnerDocument();
-        final Element newElement = document.createElement( "log4j:configuration" );
+        final Element newElement = document.createElement(
+            "log4j:configuration" );
         final NodeList childNodes = element.getChildNodes();
         final int length = childNodes.getLength();
         for( int i = 0; i < length; i++ )
@@ -369,7 +374,8 @@ public class DefaultLogManager
 
                 //TODO: Need to set up config files for entity resolver
                 final EntityResolver resolver =
-                    ResolverFactory.createResolver( getClass().getClassLoader() );
+                    ResolverFactory.createResolver(
+                        getClass().getClassLoader() );
                 builder.setEntityResolver( resolver );
                 final Document document = builder.parse( file );
                 final Element element = document.getDocumentElement();

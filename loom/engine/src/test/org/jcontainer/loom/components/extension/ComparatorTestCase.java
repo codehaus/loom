@@ -87,19 +87,17 @@
 package org.jcontainer.loom.components.extension;
 
 import java.io.File;
-
 import junit.framework.TestCase;
-
-import org.realityforge.extension.Extension;
 import org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager;
 import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
 import org.jcontainer.loom.components.extensions.pkgmgr.impl.DelegatingExtensionManager;
+import org.realityforge.extension.Extension;
 
 /**
  * A basic test case for comparator.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-10-05 03:25:09 $
+ * @author Peter Donald
+ * @version $Revision: 1.5 $ $Date: 2003-11-29 13:44:30 $
  */
 public class ComparatorTestCase
     extends TestCase
@@ -181,20 +179,29 @@ public class ComparatorTestCase
                                  final String vendor2 )
     {
         final ExtensionManager manager =
-            createExtensionManager( specVersion1, implVersion1, specVersion2, implVersion2 );
+            createExtensionManager( specVersion1,
+                                    implVersion1,
+                                    specVersion2,
+                                    implVersion2 );
         final OptionalPackage[] pkgs = getOptionalPackages( manager );
 
         assertEquals( "pkgs.length", 2, pkgs.length );
 
         final Extension extension1 = pkgs[ 0 ].getAvailableExtensions()[ 0 ];
         final Extension extension2 = pkgs[ 1 ].getAvailableExtensions()[ 0 ];
-        assertEquals( "pkgs[0].vendor", vendor1, extension1.getImplementationVendor() );
-        assertEquals( "pkgs[1].vendor", vendor2, extension2.getImplementationVendor() );
+        assertEquals( "pkgs[0].vendor",
+                      vendor1,
+                      extension1.getImplementationVendor() );
+        assertEquals( "pkgs[1].vendor",
+                      vendor2,
+                      extension2.getImplementationVendor() );
     }
 
-    private OptionalPackage[] getOptionalPackages( final ExtensionManager manager )
+    private OptionalPackage[] getOptionalPackages(
+        final ExtensionManager manager )
     {
-        return manager.getOptionalPackages( new Extension( NAME, null, null, null, null, null, null ) );
+        return manager.getOptionalPackages(
+            new Extension( NAME, null, null, null, null, null, null ) );
     }
 
     private ExtensionManager createExtensionManager( final String specVersion1,
@@ -225,7 +232,8 @@ public class ComparatorTestCase
         return new OptionalPackage( file, available, required );
     }
 
-    private ExtensionManager createExtensionManager( final OptionalPackage[] packages )
+    private ExtensionManager createExtensionManager(
+        final OptionalPackage[] packages )
     {
         final TestExtensionManager manager =
             new TestExtensionManager( packages );

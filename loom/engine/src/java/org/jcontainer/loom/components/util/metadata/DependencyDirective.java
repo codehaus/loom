@@ -87,39 +87,35 @@
 package org.jcontainer.loom.components.util.metadata;
 
 /**
- * The DependencyDirective is the mapping of a component as a dependency
- * of another component. Each component declares dependencies (via
- * ComponentInfo) and for each dependency there must be a coressponding
- * DependencyDirective which has a matching key. The name value in
- * DependencyDirective object must refer to another Component that implements
- * a service as specified in DependencyInfo.
+ * The DependencyDirective is the mapping of a component as a dependency of
+ * another component. Each component declares dependencies (via ComponentInfo)
+ * and for each dependency there must be a coressponding DependencyDirective
+ * which has a matching key. The name value in DependencyDirective object must
+ * refer to another Component that implements a service as specified in
+ * DependencyInfo.
  *
  * <p>Note that it is invalid to have circular dependencies.</p>
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-11-03 06:43:15 $
+ * @author Peter Donald
+ * @version $Revision: 1.2 $ $Date: 2003-11-29 13:44:26 $
  */
 public final class DependencyDirective
 {
-    /**
-     * Empty set of dependencys.
-     */
+    /** Empty set of dependencys. */
     public static final DependencyDirective[] EMPTY_SET = new DependencyDirective[ 0 ];
 
-    /**
-     * The key that the client component will use to access a dependency.
-     */
+    /** The key that the client component will use to access a dependency. */
     private final String m_key;
 
     /**
-     * the name of the component profile that represents a component
-     * type that is capable of fullfilling the dependency.
+     * the name of the component profile that represents a component type that
+     * is capable of fullfilling the dependency.
      */
     private final String m_providerName;
 
     /**
-     * The key that is used when the dependency is a map dependency.
-     * Usually this defaults to the same value as the key.
+     * The key that is used when the dependency is a map dependency. Usually
+     * this defaults to the same value as the key.
      */
     private final String m_alias;
 
@@ -127,12 +123,12 @@ public final class DependencyDirective
      * Create Association between key and provider.
      *
      * @param key the key the client uses to access component
-     * @param providerName the name of ComponentTemplate
-     *   that is associated as a service provider
+     * @param providerName the name of ComponentTemplate that is associated as a
+     * service provider
      */
     public DependencyDirective( final String key,
-                               final String providerName,
-                               final String alias )
+                                final String providerName,
+                                final String alias )
     {
         if( null == key )
         {
@@ -155,8 +151,10 @@ public final class DependencyDirective
      * Return the key that will be used by a component instance to access a
      * dependent service.
      *
-     * @return the name that the client component will use to access dependency.
-     * @see org.apache.avalon.framework.service.ServiceManager#lookup( java.lang.String )
+     * @return the name that the client component will use to access
+     *         dependency.
+     * @see org.apache.avalon.framework.service.ServiceManager#lookup(
+        *      java.lang.String )
      */
     public String getKey()
     {
@@ -164,8 +162,8 @@ public final class DependencyDirective
     }
 
     /**
-     * Return the name of a ComponentTemplate instance that will used to
-     * fulfill the dependency.
+     * Return the name of a ComponentTemplate instance that will used to fulfill
+     * the dependency.
      *
      * @return the name of the Component that will provide the dependency.
      */
@@ -175,11 +173,11 @@ public final class DependencyDirective
     }
 
     /**
-     * The key under which the dependency is placed in map if dependency is
-     * a Map dependency.
+     * The key under which the dependency is placed in map if dependency is a
+     * Map dependency.
      *
-     * @return the key under which the dependency is placed in map if dependency is
-     *         a Map dependency.
+     * @return the key under which the dependency is placed in map if dependency
+     *         is a Map dependency.
      */
     public String getAlias()
     {

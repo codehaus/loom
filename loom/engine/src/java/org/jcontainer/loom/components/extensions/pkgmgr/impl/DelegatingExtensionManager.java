@@ -93,18 +93,16 @@ import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
 import org.realityforge.extension.Extension;
 
 /**
- * A {@link ExtensionManager} that can delegate to multiple
- * different package repositories.
+ * A {@link ExtensionManager} that can delegate to multiple different package
+ * repositories.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-10-16 14:45:45 $
+ * @author Peter Donald
+ * @version $Revision: 1.5 $ $Date: 2003-11-29 13:44:19 $
  */
 public class DelegatingExtensionManager
     implements ExtensionManager
 {
-    /**
-     * The list containing the {@link ExtensionManager} objects.
-     */
+    /** The list containing the {@link ExtensionManager} objects. */
     private final ArrayList m_extensionManagers = new ArrayList();
 
     /**
@@ -117,7 +115,8 @@ public class DelegatingExtensionManager
     /**
      * Default constructor that delegates to specified extensionManagers.
      */
-    public DelegatingExtensionManager( final ExtensionManager[] extensionManagers )
+    public DelegatingExtensionManager(
+        final ExtensionManager[] extensionManagers )
     {
         for( int i = 0; i < extensionManagers.length; i++ )
         {
@@ -126,12 +125,13 @@ public class DelegatingExtensionManager
     }
 
     /**
-     * Add a extensionManager to list of repositories delegated to
-     * to find Optional Packages.
+     * Add a extensionManager to list of repositories delegated to to find
+     * Optional Packages.
      *
      * @param extensionManager the extensionManager to add
      */
-    protected synchronized void addExtensionManager( final ExtensionManager extensionManager )
+    protected synchronized void addExtensionManager(
+        final ExtensionManager extensionManager )
     {
         if( !m_extensionManagers.contains( extensionManager ) )
         {
@@ -140,48 +140,52 @@ public class DelegatingExtensionManager
     }
 
     /**
-     * Add a extensionManager to list of repositories delegated to
-     * to find Optional Packages.
+     * Add a extensionManager to list of repositories delegated to to find
+     * Optional Packages.
      *
      * @param extensionManager the extensionManager to add
      * @deprecated Use addExtensionManager instead
      */
-    protected void addPackageRepository( final ExtensionManager extensionManager )
+    protected void addPackageRepository(
+        final ExtensionManager extensionManager )
     {
         addExtensionManager( extensionManager );
     }
 
     /**
-     * Remove a repository from list of repositories delegated to
-     * to find Optional Packages.
+     * Remove a repository from list of repositories delegated to to find
+     * Optional Packages.
      *
      * @param repository the repository to remove
      */
-    protected synchronized void removeExtensionManager( final ExtensionManager repository )
+    protected synchronized void removeExtensionManager(
+        final ExtensionManager repository )
     {
         m_extensionManagers.remove( repository );
     }
 
     /**
-     * Remove a extensionManager from list of repositories delegated to
-     * to find Optional Packages.
+     * Remove a extensionManager from list of repositories delegated to to find
+     * Optional Packages.
      *
      * @param extensionManager the extensionManager to remove
      * @deprecated Use removeExtensionManager instead.
      */
-    protected void removePackageRepository( final ExtensionManager extensionManager )
+    protected void removePackageRepository(
+        final ExtensionManager extensionManager )
     {
         removeExtensionManager( extensionManager );
     }
 
     /**
-     * Scan through list of respositories and return all the matching {@link OptionalPackage}
-     * objects that match in any repository.
+     * Scan through list of respositories and return all the matching {@link
+     * OptionalPackage} objects that match in any repository.
      *
      * @param extension the extension to search for
      * @return the matching {@link OptionalPackage} objects.
      */
-    public synchronized OptionalPackage[] getOptionalPackages( final Extension extension )
+    public synchronized OptionalPackage[] getOptionalPackages(
+        final Extension extension )
     {
         final ArrayList resultPackages = new ArrayList();
 

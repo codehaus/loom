@@ -96,7 +96,7 @@ import org.jcontainer.loom.interfaces.SystemManager;
 /**
  * This is abstract implementation of SystemManager.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @author Peter Donald
  */
 public abstract class AbstractSystemManager
     extends AbstractLogEnabled
@@ -146,22 +146,22 @@ public abstract class AbstractSystemManager
     }
 
     /**
-     * Returns the subcontext of the specified name.  If it does not exist it
-     * is created.
+     * Returns the subcontext of the specified name.  If it does not exist it is
+     * created.
      *
+     * @return the subcontext with the specified name
      * @throws LoomException if context cannot be created or retrieved
-     * @return  the subcontext with the specified name
      */
-    public SystemManager getSubContext( final String parent, final String type )
+    public SystemManager getSubContext( final String parent,
+                                        final String type )
         throws LoomException
     {
         return m_subContext.getSubContext( parent, type );
     }
 
     /**
-     * Export the object to the particular management medium using
-     * the supplied object and interfaces.
-     * This needs to be implemented by subclasses.
+     * Export the object to the particular management medium using the supplied
+     * object and interfaces. This needs to be implemented by subclasses.
      *
      * @param name the name of object
      * @param object the object
@@ -182,8 +182,8 @@ public abstract class AbstractSystemManager
         throws LoomException;
 
     /**
-     * Helper method to help check before an objects registration.
-     * Verifies name and object are not null and verifies no entry exists using name.
+     * Helper method to help check before an objects registration. Verifies name
+     * and object are not null and verifies no entry exists using name.
      *
      * @param name the name of object
      * @param object the object to be registered
@@ -204,7 +204,8 @@ public abstract class AbstractSystemManager
 
         if( null != m_entries.get( name ) )
         {
-            final String message = name + " already registered in SystemManager";
+            final String message = name +
+                " already registered in SystemManager";
             throw new LoomException( message );
         }
     }

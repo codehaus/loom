@@ -91,7 +91,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Map;
-
 import org.apache.avalon.framework.logger.Logger;
 import org.apache.excalibur.instrument.InstrumentManager;
 import org.jcomponent.alchemist.LoggerAlchemist;
@@ -114,7 +113,7 @@ import org.realityforge.salt.i18n.Resources;
 /**
  * Manage the "frame" in which Applications operate.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @author Peter Donald
  * @author <a href="mailto:proyal@apache.org">Peter Royal</a>
  */
 class DefaultApplicationContext
@@ -142,14 +141,10 @@ class DefaultApplicationContext
     private final File m_workDirectory;
     private final File m_homeDirectory;
 
-    /**
-     * The map containing all the named loaders.
-     */
+    /** The map containing all the named loaders. */
     private final Map m_loaders;
 
-    /**
-     * The kernel associate with context
-     */
+    /** The kernel associate with context */
     private Kernel m_kernel;
 
     protected DefaultApplicationContext( final PartitionProfile profile,
@@ -198,7 +193,8 @@ class DefaultApplicationContext
         m_systemManager = (SystemManager)locator.
             lookup( SystemManager.class.getName() );
         m_kernel = (Kernel)locator.lookup( Kernel.class.getName() );
-        m_instrumentManager = (InstrumentManager)locator.lookup( InstrumentManager.class.getName() );
+        m_instrumentManager =
+        (InstrumentManager)locator.lookup( InstrumentManager.class.getName() );
     }
 
     public void initialize()
@@ -289,8 +285,8 @@ class DefaultApplicationContext
     }
 
     /**
-     * Get logger with category for application.
-     * Note that this name may not be the absolute category.
+     * Get logger with category for application. Note that this name may not be
+     * the absolute category.
      *
      * @param category the logger category
      * @return the Logger
@@ -302,9 +298,8 @@ class DefaultApplicationContext
     }
 
     /**
-     * Export specified object into management system.
-     * The object is exported using specifed interface
-     * and using the specified name.
+     * Export specified object into management system. The object is exported
+     * using specifed interface and using the specified name.
      *
      * @param name the name of object to export
      * @param object the actual object to export
@@ -342,10 +337,10 @@ class DefaultApplicationContext
     }
 
     /**
-     *  Returns the local SystemManager where the blocks should be registered
-     *  for management.
+     * Returns the local SystemManager where the blocks should be registered for
+     * management.
      *
-     *  TODO: context should probably be passed in by reference from the kernel
+     * TODO: context should probably be passed in by reference from the kernel
      */
     private SystemManager getManagementContext()
         throws LoomException
@@ -373,7 +368,11 @@ class DefaultApplicationContext
      */
     public String getInstrumentableName( String component )
     {
-        return ContainerConstants.ROOT_INSTRUMENT_CATEGORY + "." + getName() + "." + component;
+        return ContainerConstants.ROOT_INSTRUMENT_CATEGORY +
+            "." +
+            getName() +
+            "." +
+            component;
     }
 
     private String getName()

@@ -10,8 +10,8 @@ package org.jcontainer.loom.components.assembler.data;
 /**
  * A test service.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-10-16 14:45:54 $
+ * @author Peter Donald
+ * @version $Revision: 1.2 $ $Date: 2003-11-29 13:44:30 $
  */
 public interface Service1
 {

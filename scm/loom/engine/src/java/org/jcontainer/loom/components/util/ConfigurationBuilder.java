@@ -31,16 +31,14 @@ import org.xml.sax.XMLReader;
 /**
  * Utility class used to load Configuration trees from XML files.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-10-16 14:45:46 $
+ * @author Peter Donald
+ * @version $Revision: 1.3 $ $Date: 2003-11-29 13:44:27 $
  */
 public class ConfigurationBuilder
 {
     public static final String ASSEMBLY_SCHEMA = "-//LOOM/Assembly DTD Version 1.0//EN";
 
-    /**
-     * The resolver that builder uses.
-     */
+    /** The resolver that builder uses. */
     private static EntityResolver c_resolver;
 
     /**
@@ -67,24 +65,27 @@ public class ConfigurationBuilder
         }
         else
         {
-            final InputSource inputSource = c_resolver.resolveEntity( publicId, null );
+            final InputSource inputSource = c_resolver.resolveEntity( publicId,
+                                                                      null );
             if( null == inputSource )
             {
-                final String message = "Unable to locate schema with publicID=" + publicId;
+                final String message = "Unable to locate schema with publicID=" +
+                    publicId;
                 throw new IllegalStateException( message );
             }
 
             final ConfigValidator validator =
                 ConfigValidatorFactory.create( inputSource, c_resolver );
-            final ValidationResult result = validator.validate( input, (ContentHandler)handler );
+            final ValidationResult result = validator.validate( input,
+                                                                (ContentHandler)handler );
             processValidationResults( result, logger );
         }
         return handler.getConfiguration();
     }
 
     /**
-     * Process validation results. Print out any warnings or
-     * errors and if validation failed then throw an exception.
+     * Process validation results. Print out any warnings or errors and if
+     * validation failed then throw an exception.
      *
      * @param result the validation results
      * @param logger the logger to print messages to
@@ -101,7 +102,9 @@ public class ConfigurationBuilder
             {
                 final ValidationIssue issue = issues[ i ];
                 final SAXParseException exception = issue.getException();
-                final String message = exception.getMessage() + " on line " + exception.getLineNumber();
+                final String message = exception.getMessage() +
+                    " on line " +
+                    exception.getLineNumber();
                 if( issue.isWarning() )
                 {
                     logger.info( message );
@@ -126,7 +129,8 @@ public class ConfigurationBuilder
         if( null == c_resolver )
         {
             c_resolver =
-                ResolverFactory.createResolver( ConfigurationBuilder.class.getClassLoader() );
+            ResolverFactory.createResolver(
+                ConfigurationBuilder.class.getClassLoader() );
         }
     }
 }

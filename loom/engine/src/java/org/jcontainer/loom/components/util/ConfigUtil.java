@@ -14,9 +14,8 @@ import org.jcontainer.dna.impl.DefaultConfiguration;
 import org.realityforge.configkit.PropertyExpander;
 
 /**
- *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-10-05 13:52:08 $
+ * @author Peter Donald
+ * @version $Revision: 1.4 $ $Date: 2003-11-29 13:44:27 $
  */
 public class ConfigUtil
 {
@@ -28,7 +27,10 @@ public class ConfigUtil
         return expandValues( expander, input, data );
     }
 
-    private static Configuration expandValues( final PropertyExpander expander, final Configuration input, final Map data ) throws Exception
+    private static Configuration expandValues( final PropertyExpander expander,
+                                               final Configuration input,
+                                               final Map data )
+        throws Exception
     {
         final DefaultConfiguration output =
             new DefaultConfiguration( input.getName(),

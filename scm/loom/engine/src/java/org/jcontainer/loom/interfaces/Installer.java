@@ -92,7 +92,7 @@ import java.util.Map;
 /**
  * A basic service to Install an application.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @author Peter Donald
  */
 public interface Installer
 {

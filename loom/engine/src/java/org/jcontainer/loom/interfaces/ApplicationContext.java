@@ -95,7 +95,7 @@ import org.jcontainer.loom.components.util.profile.PartitionProfile;
 /**
  * Manage the "context" in which Applications operate.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @author Peter Donald
  */
 public interface ApplicationContext
 {
@@ -104,15 +104,14 @@ public interface ApplicationContext
     PartitionProfile getPartitionProfile();
 
     /**
-     * A application can request that it be be shutdown. In most cases
-     * the kernel will schedule the shutdown to occur in another thread.
+     * A application can request that it be be shutdown. In most cases the
+     * kernel will schedule the shutdown to occur in another thread.
      */
     void requestShutdown();
 
     /**
-     * Export specified object into management system.
-     * The object is exported using specifed interface
-     * and using the specified name.
+     * Export specified object into management system. The object is exported
+     * using specifed interface and using the specified name.
      *
      * @param name the name of object to export
      * @param object the actual object to export
@@ -136,24 +135,23 @@ public interface ApplicationContext
     ClassLoader getClassLoader();
 
     /**
-     * This method grants access to a named ClassLoader. The ClassLoaders
-     * for an application are declared in the <tt>environment.xml</tt>
-     * descriptor. See the Specification for details.
+     * This method grants access to a named ClassLoader. The ClassLoaders for an
+     * application are declared in the <tt>environment.xml</tt> descriptor. See
+     * the Specification for details.
      */
     ClassLoader getClassLoader( String name )
         throws Exception;
 
     /**
-     * Retrieve a resource from the SAR file. The specified
-     * name is relative the root of the archive. So you could
-     * use it to retrieve a html page from within sar by loading
-     * the resource named "data/main.html" or similar.
+     * Retrieve a resource from the SAR file. The specified name is relative the
+     * root of the archive. So you could use it to retrieve a html page from
+     * within sar by loading the resource named "data/main.html" or similar.
      */
     InputStream getResourceAsStream( String name );
 
     /**
-     * Get logger with category for application.
-     * Note that this name may not be the absolute category.
+     * Get logger with category for application. Note that this name may not be
+     * the absolute category.
      *
      * @param name the name of logger
      * @return the Logger

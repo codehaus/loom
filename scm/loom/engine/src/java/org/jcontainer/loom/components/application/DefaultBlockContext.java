@@ -96,7 +96,7 @@ import org.jcontainer.loom.interfaces.ApplicationContext;
 /**
  * Context via which Blocks communicate with container.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @author Peter Donald
  */
 final class DefaultBlockContext
     implements BlockContext
@@ -116,7 +116,9 @@ final class DefaultBlockContext
     {
         if( BlockContext.APP_NAME.equals( key ) )
         {
-            return m_applicationContext.getPartitionProfile().getMetaData().getName();
+            return m_applicationContext.getPartitionProfile()
+                .getMetaData()
+                .getName();
         }
         else if( BlockContext.APP_HOME_DIR.equals( key ) )
         {
@@ -166,7 +168,8 @@ final class DefaultBlockContext
     {
         try
         {
-            return m_applicationContext.getLogger( getName() ).getChildLogger( name );
+            return m_applicationContext.getLogger( getName() ).getChildLogger(
+                name );
         }
         catch( Exception e )
         {

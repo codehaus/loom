@@ -13,29 +13,25 @@ import org.jcontainer.loom.components.util.info.ComponentInfo;
 import org.jcontainer.loom.components.util.infobuilder.BlockInfoReader;
 
 /**
- * The default implementation of ComponentFactory
- * that simply creates components from a ClassLoader.
+ * The default implementation of ComponentFactory that simply creates components
+ * from a ClassLoader.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-11-03 06:17:58 $
+ * @author Peter Donald
+ * @version $Revision: 1.4 $ $Date: 2003-11-29 13:44:21 $
  */
 public class DefaultComponentFactory
     implements ComponentFactory
 {
-    /**
-     * Cache of ComponentInfo objects.
-     */
+    /** Cache of ComponentInfo objects. */
     private final Map m_infos = new WeakHashMap();
 
     /**
-     * The utility class that is used when building info
-     * objects for Components.
+     * The utility class that is used when building info objects for
+     * Components.
      */
     private final BlockInfoReader m_infoBuilder = new BlockInfoReader();
 
-    /**
-     * The classloader from which all resources are loaded.
-     */
+    /** The classloader from which all resources are loaded. */
     private final ClassLoader m_classLoader;
 
     /**
@@ -53,8 +49,8 @@ public class DefaultComponentFactory
     }
 
     /**
-     * Create a component by creating info for class
-     * with specified name and loaded from factorys ClassLoader.
+     * Create a component by creating info for class with specified name and
+     * loaded from factorys ClassLoader.
      *
      * @see ComponentFactory#createInfo
      */
@@ -72,8 +68,8 @@ public class DefaultComponentFactory
     }
 
     /**
-     * Create a component by creating instance of class
-     * with specified name and loaded from factorys ClassLoader.
+     * Create a component by creating instance of class with specified name and
+     * loaded from factorys ClassLoader.
      *
      * @see ComponentFactory#createComponent
      */
@@ -91,7 +87,8 @@ public class DefaultComponentFactory
      * @return the created ComponentInfo
      * @throws Exception if unabel to create componentInfo
      */
-    protected ComponentInfo createComponentInfo( final String implementationKey )
+    protected ComponentInfo createComponentInfo(
+        final String implementationKey )
         throws Exception
     {
         final Class type = getClassLoader().loadClass( implementationKey );

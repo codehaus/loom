@@ -9,6 +9,10 @@ package org.jcontainer.loom.components.util.verifier;
 
 import junit.framework.TestCase;
 import org.jcontainer.dna.impl.ConsoleLogger;
+import org.jcontainer.loom.components.assembler.data.Component1;
+import org.jcontainer.loom.components.assembler.data.Component2;
+import org.jcontainer.loom.components.assembler.data.Component3;
+import org.jcontainer.loom.components.assembler.data.Service1;
 import org.jcontainer.loom.components.util.info.ComponentInfo;
 import org.jcontainer.loom.components.util.info.DependencyDescriptor;
 import org.jcontainer.loom.components.util.info.ServiceDescriptor;
@@ -17,18 +21,13 @@ import org.jcontainer.loom.components.util.metadata.DependencyDirective;
 import org.jcontainer.loom.components.util.metadata.PartitionTemplate;
 import org.jcontainer.loom.components.util.profile.ComponentProfile;
 import org.jcontainer.loom.components.util.profile.PartitionProfile;
-import org.jcontainer.loom.components.util.verifier.SarVerifier;
 import org.jcontainer.loom.interfaces.ContainerConstants;
-import org.jcontainer.loom.components.assembler.data.Service1;
-import org.jcontainer.loom.components.assembler.data.Component1;
-import org.jcontainer.loom.components.assembler.data.Component2;
-import org.jcontainer.loom.components.assembler.data.Component3;
 
 /**
- *  An basic test case for the LogManager.
+ * An basic test case for the LogManager.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-11-03 06:43:16 $
+ * @author Peter Donald
+ * @version $Revision: 1.3 $ $Date: 2003-11-29 13:44:31 $
  */
 public class VerifierTestCase
     extends TestCase
@@ -38,8 +37,8 @@ public class VerifierTestCase
     {
         final DependencyDirective dependency =
             new DependencyDirective( Service1.class.getName(),
-                                    "c2",
-                                    Service1.class.getName() );
+                                     "c2",
+                                     Service1.class.getName() );
         final ComponentTemplate c1MetaData =
             new ComponentTemplate( "c1",
                                    Component1.class.getName(),
@@ -61,22 +60,31 @@ public class VerifierTestCase
                                    ComponentTemplate.EMPTY_SET );
         final PartitionTemplate blockMetaData =
             new PartitionTemplate( ContainerConstants.BLOCK_PARTITION,
-                                   new String[]{ContainerConstants.LISTENER_PARTITION},
+                                   new String[]{
+                                       ContainerConstants.LISTENER_PARTITION},
                                    PartitionTemplate.EMPTY_SET,
-                                   new ComponentTemplate[]{c1MetaData, c2MetaData} );
+                                   new ComponentTemplate[]{c1MetaData,
+                                                           c2MetaData} );
         final PartitionTemplate metaData =
             new PartitionTemplate( "assembly1",
                                    new String[ 0 ],
-                                   new PartitionTemplate[]{blockMetaData, listenerMetaData},
+                                   new PartitionTemplate[]{blockMetaData,
+                                                           listenerMetaData},
                                    ComponentTemplate.EMPTY_SET );
         final ComponentInfo c1Info =
             new ComponentInfo( Component1.class,
                                ServiceDescriptor.EMPTY_SET,
-                               new DependencyDescriptor[]{new DependencyDescriptor( Service1.class.getName(), Service1.class.getName(), false )},
+                               new DependencyDescriptor[]{
+                                   new DependencyDescriptor(
+                                       Service1.class.getName(),
+                                       Service1.class.getName(),
+                                       false )},
                                null );
         final ComponentInfo c2Info =
             new ComponentInfo( Component2.class,
-                               new ServiceDescriptor[]{new ServiceDescriptor( Service1.class.getName() )},
+                               new ServiceDescriptor[]{
+                                   new ServiceDescriptor(
+                                       Service1.class.getName() )},
                                DependencyDescriptor.EMPTY_SET,
                                null );
         final ComponentProfile c1Profile =
@@ -93,7 +101,8 @@ public class VerifierTestCase
                                   ComponentProfile.EMPTY_SET );
         final PartitionProfile profile =
             new PartitionProfile( metaData,
-                                  new PartitionProfile[]{blockProfile, listenerProfile},
+                                  new PartitionProfile[]{blockProfile,
+                                                         listenerProfile},
                                   ComponentProfile.EMPTY_SET );
         verify( profile );
     }
@@ -102,21 +111,26 @@ public class VerifierTestCase
         throws Exception
     {
         final DependencyDirective dependency1 =
-            new DependencyDirective( Service1.class.getName() + DependencyDescriptor.ARRAY_POSTFIX,
-                                    "c2a",
-                                    Service1.class.getName() );
+            new DependencyDirective(
+                Service1.class.getName() + DependencyDescriptor.ARRAY_POSTFIX,
+                "c2a",
+                Service1.class.getName() );
         final DependencyDirective dependency2 =
-            new DependencyDirective( Service1.class.getName() + DependencyDescriptor.ARRAY_POSTFIX,
-                                    "c2b",
-                                    Service1.class.getName() );
+            new DependencyDirective(
+                Service1.class.getName() + DependencyDescriptor.ARRAY_POSTFIX,
+                "c2b",
+                Service1.class.getName() );
         final DependencyDirective dependency3 =
-            new DependencyDirective( Service1.class.getName() + DependencyDescriptor.ARRAY_POSTFIX,
-                                    "c2c",
-                                    Service1.class.getName() );
+            new DependencyDirective(
+                Service1.class.getName() + DependencyDescriptor.ARRAY_POSTFIX,
+                "c2c",
+                Service1.class.getName() );
         final ComponentTemplate c3MetaData =
             new ComponentTemplate( "c3",
                                    Component3.class.getName(),
-                                   new DependencyDirective[]{dependency1, dependency2, dependency3},
+                                   new DependencyDirective[]{dependency1,
+                                                             dependency2,
+                                                             dependency3},
                                    null,
                                    null,
                                    false );
@@ -148,25 +162,36 @@ public class VerifierTestCase
                                    ComponentTemplate.EMPTY_SET );
         final PartitionTemplate blockMetaData =
             new PartitionTemplate( ContainerConstants.BLOCK_PARTITION,
-                                   new String[]{ContainerConstants.LISTENER_PARTITION},
+                                   new String[]{
+                                       ContainerConstants.LISTENER_PARTITION},
                                    PartitionTemplate.EMPTY_SET,
-                                   new ComponentTemplate[]{c2aMetaData, c2bMetaData, c2cMetaData, c3MetaData} );
+                                   new ComponentTemplate[]{c2aMetaData,
+                                                           c2bMetaData,
+                                                           c2cMetaData,
+                                                           c3MetaData} );
         final PartitionTemplate metaData =
             new PartitionTemplate( "assembly1",
                                    new String[ 0 ],
-                                   new PartitionTemplate[]{blockMetaData, listenerMetaData},
+                                   new PartitionTemplate[]{blockMetaData,
+                                                           listenerMetaData},
                                    ComponentTemplate.EMPTY_SET );
 
         final ComponentInfo c3Info =
             new ComponentInfo( Component3.class,
                                ServiceDescriptor.EMPTY_SET,
-                               new DependencyDescriptor[]{new DependencyDescriptor( Service1.class.getName() + DependencyDescriptor.ARRAY_POSTFIX,
-                                                                                    Service1.class.getName() + DependencyDescriptor.ARRAY_POSTFIX,
-                                                                                    false )},
+                               new DependencyDescriptor[]{
+                                   new DependencyDescriptor(
+                                       Service1.class.getName() +
+                                       DependencyDescriptor.ARRAY_POSTFIX,
+                                       Service1.class.getName() +
+                                       DependencyDescriptor.ARRAY_POSTFIX,
+                                       false )},
                                null );
         final ComponentInfo c2Info =
             new ComponentInfo( Component2.class,
-                               new ServiceDescriptor[]{new ServiceDescriptor( Service1.class.getName() )},
+                               new ServiceDescriptor[]{
+                                   new ServiceDescriptor(
+                                       Service1.class.getName() )},
                                DependencyDescriptor.EMPTY_SET,
                                null );
         final ComponentProfile c3Profile =
@@ -180,14 +205,18 @@ public class VerifierTestCase
         final PartitionProfile blockProfile =
             new PartitionProfile( blockMetaData,
                                   PartitionProfile.EMPTY_SET,
-                                  new ComponentProfile[]{c3Profile, c2aProfile, c2bProfile, c2cProfile} );
+                                  new ComponentProfile[]{c3Profile,
+                                                         c2aProfile,
+                                                         c2bProfile,
+                                                         c2cProfile} );
         final PartitionProfile listenerProfile =
             new PartitionProfile( listenerMetaData,
                                   PartitionProfile.EMPTY_SET,
                                   ComponentProfile.EMPTY_SET );
         final PartitionProfile profile =
             new PartitionProfile( metaData,
-                                  new PartitionProfile[]{blockProfile, listenerProfile},
+                                  new PartitionProfile[]{blockProfile,
+                                                         listenerProfile},
                                   ComponentProfile.EMPTY_SET );
         verify( profile );
     }

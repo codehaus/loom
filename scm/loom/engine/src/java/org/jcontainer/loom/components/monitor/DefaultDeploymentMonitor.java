@@ -110,12 +110,11 @@ import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.io.FileUtil;
 
 /**
- * This class is responsible for monitoring the deployment
- * directory and deploying, undelploying or redeploying an
- * application as necessary.
+ * This class is responsible for monitoring the deployment directory and
+ * deploying, undelploying or redeploying an application as necessary.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.14 $ $Date: 2003-10-29 22:46:17 $
+ * @author Peter Donald
+ * @version $Revision: 1.15 $ $Date: 2003-11-29 13:44:21 $
  */
 public class DefaultDeploymentMonitor
     extends AbstractLogEnabled
@@ -132,7 +131,8 @@ public class DefaultDeploymentMonitor
     public void configure( Configuration configuration )
         throws ConfigurationException
     {
-        m_frequency = configuration.getChild( "scanner-frequency" ).getValueAsLong( 1000L );
+        m_frequency =
+        configuration.getChild( "scanner-frequency" ).getValueAsLong( 1000L );
         final String appsDir =
             configuration.getChild( "base-application-directory" ).getValue();
         m_appsDir = new File( appsDir );
@@ -174,8 +174,8 @@ public class DefaultDeploymentMonitor
     }
 
     /**
-     * This method is called when the scanner detects that the contents
-     * of deployment directory has changed.
+     * This method is called when the scanner detects that the contents of
+     * deployment directory has changed.
      */
     public void propertyChange( final PropertyChangeEvent event )
     {
@@ -316,7 +316,6 @@ public class DefaultDeploymentMonitor
      * Return true if file represents a loom deployment.
      *
      * @param file the file
-     * @return
      */
     private boolean isDeployment( final File file )
     {

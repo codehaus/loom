@@ -10,42 +10,32 @@ package org.jcontainer.loom.components.util.info;
 import java.io.Serializable;
 
 /**
- * This class contains the meta information about a particular
- * component type. It describes;
+ * This class contains the meta information about a particular component type.
+ * It describes;
  *
- * <ul>
- *   <li>Human presentable meta data such as name, version, description etc
- *   useful when assembling the system.</li>
- *   <li>the context object capabilities that this component requires</li>
- *   <li>the services that this component type is capable of providing</li>
- *   <li>the services that this component type requires to operate (and the
- *   names via which services are accessed)</li>
+ * <ul> <li>Human presentable meta data such as name, version, description etc
+ * useful when assembling the system.</li> <li>the context object capabilities
+ * that this component requires</li> <li>the services that this component type
+ * is capable of providing</li> <li>the services that this component type
+ * requires to operate (and the names via which services are accessed)</li>
  * </ul>
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-10-16 14:45:46 $
+ * @author Peter Donald
+ * @version $Revision: 1.2 $ $Date: 2003-11-29 13:44:23 $
  */
 public class ComponentInfo
     implements Serializable
 {
-    /**
-     * The type of the component.
-     */
+    /** The type of the component. */
     private final Class m_type;
 
-    /**
-     * Descriptors for the services exported by component.
-     */
+    /** Descriptors for the services exported by component. */
     private final ServiceDescriptor[] m_services;
 
-    /**
-     * Descriptor for the schema of components parameters.
-     */
+    /** Descriptor for the schema of components parameters. */
     private final SchemaDescriptor m_configurationSchema;
 
-    /**
-     * Descriptor for the service dependencies of component.
-     */
+    /** Descriptor for the service dependencies of component. */
     private final DependencyDescriptor[] m_dependencies;
 
     /**

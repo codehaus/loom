@@ -112,11 +112,11 @@ import org.realityforge.salt.io.FileUtil;
 import org.realityforge.salt.io.IOUtil;
 
 /**
- * An Installer is responsible for taking a URL for Sar
- * and installing it as appropriate.
+ * An Installer is responsible for taking a URL for Sar and installing it as
+ * appropriate.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.12 $ $Date: 2003-10-29 22:20:42 $
+ * @author Peter Donald
+ * @version $Revision: 1.13 $ $Date: 2003-11-29 13:44:20 $
  */
 public class DefaultInstaller
     extends AbstractLogEnabled
@@ -131,23 +131,26 @@ public class DefaultInstaller
     private static final String CLASSES = "SAR-INF/classes/";
 
     //The names on the native filesystem
-    private static final String FS_CONFIG_XML = "SAR-INF" + File.separator + "config.xml";
-    private static final String FS_ASSEMBLY_XML = "SAR-INF" + File.separator + "assembly.xml";
-    private static final String FS_ENV_XML = "SAR-INF" + File.separator + "environment.xml";
+    private static final String FS_CONFIG_XML = "SAR-INF" +
+        File.separator +
+        "config.xml";
+    private static final String FS_ASSEMBLY_XML = "SAR-INF" +
+        File.separator +
+        "assembly.xml";
+    private static final String FS_ENV_XML = "SAR-INF" +
+        File.separator +
+        "environment.xml";
     private static final String FS_CLASSES =
         "SAR-INF" + File.separator + "classes" + File.separator;
 
     /**
-     * The directory which is used as the base for
-     * extracting all temporary files from archives. It is
-     * expected that the temporary files will be deleted when
-     * the .sar file is undeployed.
+     * The directory which is used as the base for extracting all temporary
+     * files from archives. It is expected that the temporary files will be
+     * deleted when the .sar file is undeployed.
      */
     private File m_baseWorkDirectory;
 
-    /**
-     * The base directory in which applications are deployed.
-     */
+    /** The base directory in which applications are deployed. */
     private File m_baseDirectory;
 
     public void configure( final Configuration configuration )
@@ -268,16 +271,16 @@ public class DefaultInstaller
     }
 
     /**
-     * Utility method to lock repository to disallow other installers to access it.
-     * Currently a no-op.
+     * Utility method to lock repository to disallow other installers to access
+     * it. Currently a no-op.
      */
     private void lock()
     {
     }
 
     /**
-     * Utility method to unlock repository to allow other installers to access it.
-     * Currently a no-op.
+     * Utility method to unlock repository to allow other installers to access
+     * it. Currently a no-op.
      */
     private void unlock()
     {
@@ -311,9 +314,12 @@ public class DefaultInstaller
             expandZipFile( zipFile, directory, workDir, url );
 
             //Prepare and create Installation
-            final String assembly = getURLAsString( new File( directory, FS_ASSEMBLY_XML ) );
-            final String config = getURLAsString( new File( directory, FS_CONFIG_XML ) );
-            final String environment = getURLAsString( new File( directory, FS_ENV_XML ) );
+            final String assembly = getURLAsString(
+                new File( directory, FS_ASSEMBLY_XML ) );
+            final String config = getURLAsString(
+                new File( directory, FS_CONFIG_XML ) );
+            final String environment = getURLAsString(
+                new File( directory, FS_ENV_XML ) );
 
             success = true;
             final Map install = new HashMap();
@@ -338,8 +344,8 @@ public class DefaultInstaller
      * Expand the specified Zip file.
      *
      * @param zipFile the zip file
-     * @param directory the directory where to extract non-jar,
-     *        non-classes files
+     * @param directory the directory where to extract non-jar, non-classes
+     * files
      * @param workDir the directory to extract classes/jar files
      * @param url the url of deployment (for error reporting purposes)
      * @throws LoomException if an error occurs extracting files
@@ -387,8 +393,7 @@ public class DefaultInstaller
     }
 
     /**
-     * Handle the extraction of normal resources
-     * from zip file/
+     * Handle the extraction of normal resources from zip file/
      */
     private void handleFile( final ZipFile zipFile,
                              final ZipEntry entry,
@@ -427,7 +432,8 @@ public class DefaultInstaller
         throws LoomException
     {
         if( name.startsWith( LIB )
-            && name.endsWith( ".jar" )
+            &&
+            name.endsWith( ".jar" )
             && LIB.length() == name.lastIndexOf( "/" ) )
         {
             final File file = new File( workDir, name );
@@ -500,8 +506,7 @@ public class DefaultInstaller
     }
 
     /**
-     * Create working directory inside baseWorkDir
-     * for specified application.
+     * Create working directory inside baseWorkDir for specified application.
      *
      * @param name the name of the application
      * @return the working directory for app
@@ -514,8 +519,7 @@ public class DefaultInstaller
     }
 
     /**
-     * Fix the specified name so that it does not start
-     * with a "/" character.
+     * Fix the specified name so that it does not start with a "/" character.
      *
      * @param name the name to fix
      * @return the name stripped of initial "/" if necessary
@@ -533,10 +537,9 @@ public class DefaultInstaller
     }
 
     /**
-     * Get File object for URL.
-     * Currently it assumes that URL is a file URL but in the
-     * future it will allow downloading of remote URLs thus enabling
-     * a deploy from anywhere functionality.
+     * Get File object for URL. Currently it assumes that URL is a file URL but
+     * in the future it will allow downloading of remote URLs thus enabling a
+     * deploy from anywhere functionality.
      *
      * @param url the url of deployment
      * @return the File for deployment

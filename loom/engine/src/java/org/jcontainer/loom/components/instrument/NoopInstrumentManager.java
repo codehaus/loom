@@ -11,14 +11,14 @@ import org.apache.excalibur.instrument.InstrumentManager;
 import org.apache.excalibur.instrument.Instrumentable;
 
 /**
- *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-07-24 08:41:25 $
+ * @author Peter Donald
+ * @version $Revision: 1.2 $ $Date: 2003-11-29 13:44:20 $
  */
 public class NoopInstrumentManager
     implements InstrumentManager
 {
-    public void registerInstrumentable( Instrumentable instrumentable, String instrumentableName )
+    public void registerInstrumentable( Instrumentable instrumentable,
+                                        String instrumentableName )
         throws Exception
     {
     }

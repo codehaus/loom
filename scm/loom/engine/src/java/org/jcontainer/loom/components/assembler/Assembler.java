@@ -101,12 +101,12 @@ import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
 /**
- * Assemble a {@link PartitionTemplate} object from a Configuration
- * object. The Configuration object represents the assembly descriptor
- * and is in the format specified for <tt>assembly.xml</tt> files.
+ * Assemble a {@link PartitionTemplate} object from a Configuration object. The
+ * Configuration object represents the assembly descriptor and is in the format
+ * specified for <tt>assembly.xml</tt> files.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.15 $ $Date: 2003-11-10 02:15:11 $
+ * @author Peter Donald
+ * @version $Revision: 1.16 $ $Date: 2003-11-29 13:44:15 $
  */
 public class Assembler
     implements MetaDataBuilder
@@ -115,12 +115,11 @@ public class Assembler
         ResourceManager.getPackageResources( Assembler.class );
 
     /**
-     * Create a {@link PartitionTemplate} object based on specified
-     * name and assembly configuration. This implementation takes two
-     * parameters. {@link ContainerConstants#ASSEMBLY_NAME} specifies
-     * the name of the assembly and
-     * {@link ContainerConstants#ASSEMBLY_DESCRIPTOR} specifies the configuration
-     * tree to use when assembling Partition.
+     * Create a {@link PartitionTemplate} object based on specified name and
+     * assembly configuration. This implementation takes two parameters. {@link
+     * ContainerConstants#ASSEMBLY_NAME} specifies the name of the assembly and
+     * {@link ContainerConstants#ASSEMBLY_DESCRIPTOR} specifies the
+     * configuration tree to use when assembling Partition.
      *
      * @param parameters the parameters for constructing assembly
      * @return the new PartitionTemplate
@@ -132,15 +131,17 @@ public class Assembler
         final String name =
             (String)parameters.get( ContainerConstants.ASSEMBLY_NAME );
         final Configuration assembly =
-            (Configuration)parameters.get( ContainerConstants.ASSEMBLY_DESCRIPTOR );
+            (Configuration)parameters.get(
+                ContainerConstants.ASSEMBLY_DESCRIPTOR );
         final Configuration config =
-            (Configuration)parameters.get( ContainerConstants.CONFIG_DESCRIPTOR );
+            (Configuration)parameters.get(
+                ContainerConstants.CONFIG_DESCRIPTOR );
         return assembleSar( name, config, assembly );
     }
 
     /**
-     * Create a {@link PartitionTemplate} object based on specified
-     * name and assembly configuration.
+     * Create a {@link PartitionTemplate} object based on specified name and
+     * assembly configuration.
      *
      * @param name the name of Sar
      * @param assembly the assembly configuration object
@@ -156,12 +157,15 @@ public class Assembler
         final ComponentTemplate[] blocks = buildBlocks( blockConfig, config );
         final PartitionTemplate blockPartition =
             new PartitionTemplate( ContainerConstants.BLOCK_PARTITION,
-                                   new String[]{ContainerConstants.LISTENER_PARTITION},
+                                   new String[]{
+                                       ContainerConstants.LISTENER_PARTITION},
                                    PartitionTemplate.EMPTY_SET,
                                    blocks );
 
-        final Configuration[] listenerConfig = assembly.getChildren( "listener" );
-        final ComponentTemplate[] listeners = buildBlockListeners( listenerConfig, config );
+        final Configuration[] listenerConfig = assembly.getChildren(
+            "listener" );
+        final ComponentTemplate[] listeners = buildBlockListeners(
+            listenerConfig, config );
         final PartitionTemplate listenerPartition =
             new PartitionTemplate( ContainerConstants.LISTENER_PARTITION,
                                    new String[ 0 ],
@@ -178,8 +182,8 @@ public class Assembler
     }
 
     /**
-     * Create an array of {@link ComponentTemplate} objects to represent
-     * the &lt;block .../&gt; sections in <tt>assembly.xml</tt>.
+     * Create an array of {@link ComponentTemplate} objects to represent the
+     * &lt;block .../&gt; sections in <tt>assembly.xml</tt>.
      *
      * @param blocks the list of Configuration objects for blocks
      * @return the BlockMetaData array
@@ -195,12 +199,13 @@ public class Assembler
             blockSet.add( buildBlock( blocks[ i ], config ) );
         }
 
-        return (ComponentTemplate[])blockSet.toArray( new ComponentTemplate[ blockSet.size() ] );
+        return (ComponentTemplate[])blockSet.toArray(
+            new ComponentTemplate[ blockSet.size() ] );
     }
 
     /**
-     * Create a single {@link ComponentTemplate} object to represent
-     * specified &lt;block .../&gt; section.
+     * Create a single {@link ComponentTemplate} object to represent specified
+     * &lt;block .../&gt; section.
      *
      * @param block the Configuration object for block
      * @return the BlockMetaData object
@@ -220,7 +225,8 @@ public class Assembler
                 proxy.getAttributeAsBoolean( "disable", false );
 
             final Configuration[] provides = block.getChildren( "provide" );
-            final DependencyDirective[] dependencys = buildDependencies( provides );
+            final DependencyDirective[] dependencys = buildDependencies(
+                provides );
 
             final Configuration configuration = config.getChild( name );
 
@@ -232,27 +238,32 @@ public class Assembler
         catch( final ConfigurationException ce )
         {
             final String message =
-                REZ.format( "block-entry-malformed", block.getLocation(), ce.getMessage() );
+                REZ.format( "block-entry-malformed",
+                            block.getLocation(),
+                            ce.getMessage() );
             throw new LoomException( message, ce );
         }
     }
 
     /**
-     * Create an array of {@link ComponentTemplate} objects to represent
-     * the &lt;listener .../&gt; sections in <tt>assembly.xml</tt>.
+     * Create an array of {@link ComponentTemplate} objects to represent the
+     * &lt;listener .../&gt; sections in <tt>assembly.xml</tt>.
      *
-     * @param listenerConfigs the list of Configuration objects for listenerConfigs
+     * @param listenerConfigs the list of Configuration objects for
+     * listenerConfigs
      * @return the array of listeners
      * @throws LoomException if an error occurs
      */
-    private ComponentTemplate[] buildBlockListeners( final Configuration[] listenerConfigs,
-                                                     final Configuration config )
+    private ComponentTemplate[] buildBlockListeners(
+        final Configuration[] listenerConfigs,
+        final Configuration config )
         throws LoomException
     {
         final List listeners = new ArrayList();
         for( int i = 0; i < listenerConfigs.length; i++ )
         {
-            final ComponentTemplate listener = buildBlockListener( listenerConfigs[ i ], config );
+            final ComponentTemplate listener = buildBlockListener(
+                listenerConfigs[ i ], config );
             listeners.add( listener );
         }
         return (ComponentTemplate[])listeners.
@@ -260,15 +271,15 @@ public class Assembler
     }
 
     /**
-     * Create a {@link ComponentTemplate} object to represent
-     * the specified &lt;listener .../&gt; section.
+     * Create a {@link ComponentTemplate} object to represent the specified
+     * &lt;listener .../&gt; section.
      *
      * @param listener the Configuration object for listener
      * @return the BlockListenerMetaData object
      * @throws LoomException if an error occurs
      */
     ComponentTemplate buildBlockListener( final Configuration listener,
-                                                  final Configuration config )
+                                          final Configuration config )
         throws LoomException
     {
         try
@@ -293,7 +304,8 @@ public class Assembler
     }
 
     /**
-     * Helper method to build an array of DependencyMetaDatas from input config data.
+     * Helper method to build an array of DependencyMetaDatas from input config
+     * data.
      *
      * @param provides the set of provides elements for block
      * @return the created DependencyDirective array
@@ -305,11 +317,13 @@ public class Assembler
         final ArrayList dependencies = new ArrayList();
         for( int j = 0; j < provides.length; j++ )
         {
-            final DependencyDirective directive = buildDependency( provides[ j ] );
+            final DependencyDirective directive = buildDependency(
+                provides[ j ] );
             dependencies.add( directive );
         }
 
-        return (DependencyDirective[])dependencies.toArray( new DependencyDirective[ dependencies.size() ] );
+        return (DependencyDirective[])dependencies.toArray(
+            new DependencyDirective[ dependencies.size() ] );
     }
 
     /**

@@ -100,8 +100,8 @@ import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
 /**
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.15 $ $Date: 2003-10-29 22:20:41 $
+ * @author Peter Donald
+ * @version $Revision: 1.16 $ $Date: 2003-11-29 13:44:20 $
  * @dna.component
  * @mx.component
  */
@@ -141,14 +141,11 @@ public class DefaultExtensionManager
     }
 
     /**
-     * Retrieve an array of paths where each
-     * element in array represents a directory
-     * in which the ExtensionManager will look
-     * for Extensions.
-     *
-     * @mx.attribute description="The list of paths to search in"
+     * Retrieve an array of paths where each element in array represents a
+     * directory in which the ExtensionManager will look for Extensions.
      *
      * @return the list of paths to search in
+     * @mx.attribute description="The list of paths to search in"
      */
     public File[] getPaths()
     {
@@ -156,13 +153,12 @@ public class DefaultExtensionManager
     }
 
     /**
-     * Force the ExtensionManager to rescan the paths
-     * to discover new Extensions that have been added
-     * or remove old Extensions that have been removed.
+     * Force the ExtensionManager to rescan the paths to discover new Extensions
+     * that have been added or remove old Extensions that have been removed.
      *
      * @mx.operation description="Force the ExtensionManager to rescan the paths
-     * to discover new Extensions that have been added
-     * or remove old Extensions that have been removed."
+     * to discover new Extensions that have been added or remove old Extensions
+     * that have been removed."
      */
     public void rescanPath()
     {

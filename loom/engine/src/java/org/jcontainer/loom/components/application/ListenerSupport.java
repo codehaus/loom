@@ -93,14 +93,13 @@ import org.apache.avalon.phoenix.BlockListener;
 import org.apache.avalon.phoenix.metadata.SarMetaData;
 import org.apache.avalon.phoenix.metainfo.BlockInfo;
 import org.jcontainer.loom.components.util.ComponentInfoConverter;
-import org.jcontainer.loom.components.util.profile.ComponentProfile;
 
 /**
- * Manage a set of {@link ApplicationListener} objects and propogate
- * {@link ApplicationEvent} notifications to these listeners.  Not all
- * events pass an Applicationevent parameter.
+ * Manage a set of {@link ApplicationListener} objects and propogate {@link
+ * ApplicationEvent} notifications to these listeners.  Not all events pass an
+ * Applicationevent parameter.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @author Peter Donald
  * @author <a href="mailto:Paul_Hammant@yahoo.com">Paul Hammant</a>
  */
 final class ListenerSupport
@@ -112,8 +111,8 @@ final class ListenerSupport
     private ApplicationListener[] m_listeners = new ApplicationListener[ 0 ];
 
     /**
-     * fire Event indicating that the Application represented
-     * by specified metaData is starting.
+     * fire Event indicating that the Application represented by specified
+     * metaData is starting.
      *
      * @param metaData the metaData
      */
@@ -126,8 +125,8 @@ final class ListenerSupport
     }
 
     /**
-     * fire Event indicating that Block represented by
-     * specific entry has been added.
+     * fire Event indicating that Block represented by specific entry has been
+     * added.
      *
      * @param entry the entry
      */
@@ -137,8 +136,8 @@ final class ListenerSupport
     }
 
     /**
-     * fire Event indicating that Block represented by
-     * specific entry is being removed.
+     * fire Event indicating that Block represented by specific entry is being
+     * removed.
      *
      * @param entry the entry
      */
@@ -148,42 +147,44 @@ final class ListenerSupport
     }
 
     /**
-     * Utility method to create an event for a
-     * specific entry.
+     * Utility method to create an event for a specific entry.
      *
      * @param entry the entry
      * @return the new event
      */
     private BlockEvent createEvent( final BlockEntry entry )
     {
-        final BlockInfo blockInfo = 
+        final BlockInfo blockInfo =
             ComponentInfoConverter.toBlockInfo( entry.getInfo() );
         return new BlockEvent( entry.getName(),
-                            entry.getProxy(),
-                            blockInfo );
+                               entry.getProxy(),
+                               blockInfo );
     }
 
     /**
-     * Add a ApplicationListener to those requiring notification of
-     * {@link ApplicationEvent}s.
+     * Add a ApplicationListener to those requiring notification of {@link
+     * ApplicationEvent}s.
      *
      * @param listener the ApplicationListener
      */
-    public synchronized void addApplicationListener( final ApplicationListener listener )
+    public synchronized void addApplicationListener(
+        final ApplicationListener listener )
     {
-        final ApplicationListener[] listeners = new ApplicationListener[ 1 + m_listeners.length ];
+        final ApplicationListener[] listeners = new ApplicationListener[ 1 +
+            m_listeners.length ];
         System.arraycopy( m_listeners, 0, listeners, 0, m_listeners.length );
         listeners[ m_listeners.length ] = listener;
         m_listeners = listeners;
     }
 
     /**
-     * Remove a ApplicationListener from those requiring notification of
-     * {@link ApplicationEvent}s.
+     * Remove a ApplicationListener from those requiring notification of {@link
+     * ApplicationEvent}s.
      *
      * @param listener the ApplicationListener
      */
-    public synchronized void removeApplicationListener( final ApplicationListener listener )
+    public synchronized void removeApplicationListener(
+        final ApplicationListener listener )
     {
         int index = 0;
         while( index < m_listeners.length )
@@ -201,27 +202,36 @@ final class ListenerSupport
                 new ApplicationListener[ m_listeners.length - 1 ];
             System.arraycopy( m_listeners, 0, listeners, 0, index );
             final int length = m_listeners.length - index - 1;
-            System.arraycopy( m_listeners, index + 1, listeners, index, length );
+            System.arraycopy( m_listeners,
+                              index + 1,
+                              listeners,
+                              index,
+                              length );
         }
     }
 
     /**
-     * Add a BlockListener to those requiring notification of
-     * {@link BlockEvent}s.
+     * Add a BlockListener to those requiring notification of {@link
+     * BlockEvent}s.
      *
      * @param listener the BlockListener
      */
     public synchronized void addBlockListener( final BlockListener listener )
     {
-        final BlockListener[] listeners = new BlockListener[ 1 + m_blockListeners.length ];
-        System.arraycopy( m_blockListeners, 0, listeners, 0, m_blockListeners.length );
+        final BlockListener[] listeners = new BlockListener[ 1 +
+            m_blockListeners.length ];
+        System.arraycopy( m_blockListeners,
+                          0,
+                          listeners,
+                          0,
+                          m_blockListeners.length );
         listeners[ m_listeners.length ] = listener;
         m_blockListeners = listeners;
     }
 
     /**
-     * Remove a BlockListener from those requiring notification of
-     * {@link BlockEvent}s.
+     * Remove a BlockListener from those requiring notification of {@link
+     * BlockEvent}s.
      *
      * @param listener the BlockListener
      */
@@ -243,7 +253,11 @@ final class ListenerSupport
                 new BlockListener[ m_blockListeners.length - 1 ];
             System.arraycopy( m_blockListeners, 0, listeners, 0, index );
             final int length = m_blockListeners.length - index - 1;
-            System.arraycopy( m_blockListeners, index + 1, listeners, index, length );
+            System.arraycopy( m_blockListeners,
+                              index + 1,
+                              listeners,
+                              index,
+                              length );
         }
     }
 
@@ -252,7 +266,8 @@ final class ListenerSupport
      *
      * @param event the ApplicationEvent
      */
-    private synchronized void applicationStarting( final ApplicationEvent event )
+    private synchronized void applicationStarting(
+        final ApplicationEvent event )
         throws Exception
     {
         for( int i = 0; i < m_listeners.length; i++ )
@@ -263,7 +278,6 @@ final class ListenerSupport
 
     /**
      * Notification that the application has started.
-     *
      */
     public synchronized void applicationStarted()
     {
@@ -275,7 +289,6 @@ final class ListenerSupport
 
     /**
      * Notification that the application is stopping
-     *
      */
     public synchronized void applicationStopping()
     {
@@ -287,7 +300,6 @@ final class ListenerSupport
 
     /**
      * Notification that the application has stopped
-     *
      */
     public synchronized void applicationStopped()
     {
@@ -299,9 +311,9 @@ final class ListenerSupport
 
     /**
      * Notification that the application has failed
-     *
      */
-    public synchronized void applicationFailure( final Exception causeOfFailure )
+    public synchronized void applicationFailure(
+        final Exception causeOfFailure )
     {
         for( int i = 0; i < m_listeners.length; i++ )
         {
@@ -310,8 +322,7 @@ final class ListenerSupport
     }
 
     /**
-     * Notification that a block has just been added
-     * to Server Application.
+     * Notification that a block has just been added to Server Application.
      *
      * @param event the BlockEvent
      */
@@ -330,8 +341,8 @@ final class ListenerSupport
     }
 
     /**
-     * Notification that a block is just about to be
-     * removed from Server Application.
+     * Notification that a block is just about to be removed from Server
+     * Application.
      *
      * @param event the BlockEvent
      */

@@ -97,12 +97,12 @@ import org.jcontainer.dna.LogEnabled;
 import org.jcontainer.dna.Logger;
 
 /**
- * Classloader that uses a specified {@link Policy} object
- * rather than system {@link Policy} object.
+ * Classloader that uses a specified {@link Policy} object rather than system
+ * {@link Policy} object.
  *
  * <p>Note that parts of this were cloned from other projects</p>
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @author Peter Donald
  */
 class PolicyClassLoader
     extends URLClassLoader
@@ -115,8 +115,8 @@ class PolicyClassLoader
     private Logger m_logger;
 
     /**
-     * Construct a ClassLoader using specified URLs, parent
-     * ClassLoader and Policy object.
+     * Construct a ClassLoader using specified URLs, parent ClassLoader and
+     * Policy object.
      *
      * @param urls the URLs to load resources from
      * @param parent the parent ClassLoader
@@ -140,9 +140,8 @@ class PolicyClassLoader
     }
 
     /**
-     * Overide findClass to log debugging information
-     * indicating that a class is being loaded from application
-     * ClassLoader.
+     * Overide findClass to log debugging information indicating that a class is
+     * being loaded from application ClassLoader.
      *
      * @param name the name of class ot load
      * @return the Class loaded
@@ -159,8 +158,8 @@ class PolicyClassLoader
     }
 
     /**
-     * Overide so we can have a per-application security policy with
-     * no side-effects to other applications.
+     * Overide so we can have a per-application security policy with no
+     * side-effects to other applications.
      *
      * @param codeSource the codeSource to get permissions for
      * @return the PermissionCollection
@@ -175,9 +174,9 @@ class PolicyClassLoader
     }
 
     /**
-     * Return an enumeration of {@link URL}s representing all of the
-     * resources with the given name. If no resources with this name are found,
-     * return an empty enumeration.
+     * Return an enumeration of {@link URL}s representing all of the resources
+     * with the given name. If no resources with this name are found, return an
+     * empty enumeration.
      *
      * <p>Note that this method is overidden to provide debugging
      * information.</p>
@@ -198,9 +197,8 @@ class PolicyClassLoader
     }
 
     /**
-     * Find the resource in the ClassLoader. Return a {@link URL}
-     * object if found, otherwise return null if this resource cannot
-     * be found.
+     * Find the resource in the ClassLoader. Return a {@link URL} object if
+     * found, otherwise return null if this resource cannot be found.
      *
      * <p>Note that this method is overidden to provide debugging
      * information.</p>

@@ -95,11 +95,10 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.excalibur.instrument.InstrumentManager;
 
 /**
- * The interface via which resources required for a component
- * are aquired.
+ * The interface via which resources required for a component are aquired.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-10-16 05:40:46 $
+ * @author Peter Donald
+ * @version $Revision: 1.2 $ $Date: 2003-11-29 13:44:26 $
  */
 public interface ResourceProvider
 {

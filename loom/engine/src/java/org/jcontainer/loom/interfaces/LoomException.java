@@ -10,14 +10,12 @@ package org.jcontainer.loom.interfaces;
 /**
  * Exception to indicate that a problem occured.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @author Peter Donald
  */
 public final class LoomException
     extends Exception
 {
-    /**
-     * the cause of the exception.
-     */
+    /** the cause of the exception. */
     private final Throwable m_cause;
 
     /**
