@@ -97,9 +97,6 @@ import org.apache.avalon.framework.context.Context;
 import org.apache.avalon.framework.context.ContextException;
 import org.apache.avalon.framework.context.Contextualizable;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
-import org.apache.avalon.framework.service.ServiceException;
-import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.avalon.framework.service.Serviceable;
 import org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager;
 import org.jcontainer.loom.components.extensions.pkgmgr.PackageManager;
 import org.jcontainer.loom.interfaces.ClassLoaderManager;
@@ -107,6 +104,9 @@ import org.jcontainer.loom.interfaces.ClassLoaderSet;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.ConfigurationException;
 import org.jcontainer.dna.Active;
+import org.jcontainer.dna.Composable;
+import org.jcontainer.dna.ResourceLocator;
+import org.jcontainer.dna.MissingResourceException;
 import org.jcontainer.dna.impl.ConfigurationUtil;
 import org.realityforge.classman.builder.LoaderBuilder;
 import org.realityforge.classman.builder.LoaderResolver;
@@ -139,7 +139,7 @@ import org.w3c.dom.Element;
  */
 public class DefaultClassLoaderManager
     extends AbstractLogEnabled
-    implements ClassLoaderManager, Contextualizable, Serviceable, Active
+    implements ClassLoaderManager, Contextualizable, Composable, Active
 {
     /**
      * Constant for name of element that indicates custom
@@ -210,13 +210,13 @@ public class DefaultClassLoaderManager
     }
 
     /**
-     * @loom.dependency interface="ExtensionManager"
+     * @dna.dependency type="ExtensionManager"
      */
-    public void service( final ServiceManager serviceManager )
-        throws ServiceException
+    public void compose( final ResourceLocator locator )
+        throws MissingResourceException
     {
         final ExtensionManager extensionManager =
-            (ExtensionManager)serviceManager.lookup( ExtensionManager.class.getName() );
+            (ExtensionManager)locator.lookup( ExtensionManager.class.getName() );
         m_packageManager = new PackageManager( extensionManager );
     }
 

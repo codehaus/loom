@@ -100,13 +100,13 @@ import org.apache.avalon.framework.logger.LogEnabled;
 import org.apache.avalon.framework.parameters.ParameterException;
 import org.apache.avalon.framework.parameters.Parameterizable;
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.avalon.framework.service.ServiceException;
-import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.avalon.framework.service.Serviceable;
 import org.jcontainer.loom.interfaces.Deployer;
 import org.jcontainer.dna.Configurable;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.ConfigurationException;
+import org.jcontainer.dna.Composable;
+import org.jcontainer.dna.ResourceLocator;
+import org.jcontainer.dna.MissingResourceException;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.io.FileUtil;
@@ -117,11 +117,11 @@ import org.realityforge.salt.io.FileUtil;
  * application as necessary.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-10-05 03:25:09 $
+ * @version $Revision: 1.7 $ $Date: 2003-10-05 03:52:09 $
  */
 public class DefaultDeploymentMonitor
     extends AbstractLogEnabled
-    implements LogEnabled, Parameterizable, Configurable, Serviceable, Startable, PropertyChangeListener
+    implements LogEnabled, Parameterizable, Configurable, Composable, Startable, PropertyChangeListener
 {
     private final static Resources REZ =
         ResourceManager.getPackageResources( DefaultDeploymentMonitor.class );
@@ -148,12 +148,12 @@ public class DefaultDeploymentMonitor
     }
 
     /**
-     * Aquire Deployer service for dpeloyment
+     * @dna.dependency type="Deployer"
      */
-    public void service( final ServiceManager manager )
-        throws ServiceException
+    public void compose( final ResourceLocator locator )
+        throws MissingResourceException
     {
-        m_deployer = (Deployer)manager.lookup( Deployer.class.getName() );
+        m_deployer = (Deployer)locator.lookup( Deployer.class.getName() );
     }
 
     /**
