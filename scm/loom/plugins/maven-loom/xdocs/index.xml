@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
 <document>
-
     <properties>
         <title>Maven Loom Plugin</title>
         <author>Mauro Talevi</author>
@@ -8,8 +7,9 @@
 
     <body>
         <section name="Maven Loom Plugin">
-            <p>This plug-in provides the ability to generate a Loom app packaged
-               as a Sar file, and install and deploy it.
+            <p>
+                Go to the <a href="http://loom.codehaus.org/Maven+Loom+usage">
+                Maven Loom</a> page for information about the Maven Loom plugin.
             </p>
         </section>
     </body>
