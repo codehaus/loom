@@ -134,15 +134,16 @@ public class DefaultEmbeddor
     private EmbeddorEntry[] m_entries;
 
     /**
-     * If true, flag indicates that the Embeddor should continue running even
-     * when there are no applications in kernel. Otherwise the Embeddor will
-     * shutdown when it detects there is no longer any applications running.
+     * If true, flag indicates that the Embeddor should
+     * shut down when there are no more applications in the
+     * kernel. Otherwise the Embeddor will be persistent.
      */
-    private boolean m_persistent;
+    private boolean m_temporary;
 
     /**
-     * Flag is set to true when the embeddor should  shut itself down. It is set
-     * to true as a result of a call to shutdown() method.
+     * Flag is set to true when the embeddor should shut
+     * itself down. It is set to true as a result of a call
+     * to the shutdown() method.
      *
      * @see Embeddor#shutdown()
      */
@@ -182,9 +183,9 @@ public class DefaultEmbeddor
         m_containerClassLoader = (ClassLoader)
             locator.lookup( ClassLoader.class.getName() + "/container" );
         m_loomHome = (File)locator.lookup( File.class.getName() + "/home" );
-        final Boolean persistent =
-            (Boolean)locator.lookup( Boolean.class.getName() + "/persistent" );
-        m_persistent = persistent.booleanValue();
+        final Boolean temporary =
+            (Boolean)locator.lookup( Boolean.class.getName() + "/temporary" );
+        m_temporary = temporary.booleanValue();
     }
 
     public void configure( final Configuration configuration )
@@ -241,10 +242,10 @@ public class DefaultEmbeddor
         throws Exception
     {
         // If the kernel is empty at this point, it is because the server was
-        // started without supplying any applications. If 'persistent' wasn't
+        // started without supplying any applications. If 'temporary' was
         // set to true, display a message to give the user a clue as to why
         // the server is shutting down immediately.
-        if( emptyKernel() && !m_persistent )
+        if( emptyKernel() && m_temporary )
         {
             final String message = REZ.getString(
                 "embeddor.error.start.no-apps" );
@@ -256,15 +257,13 @@ public class DefaultEmbeddor
             while( true )
             {
                 // wait() for shutdown() to take action...
-                if( m_shutdown
-                    || ( emptyKernel() && !m_persistent ) )
+                if( m_shutdown || ( emptyKernel() && m_temporary ) )
                 {
                     // The server will shut itself down when all applications are disposed.
                     if( emptyKernel() )
                     {
                         final String message =
-                            REZ.getString(
-                                "embeddor.shutdown.all-apps-disposed" );
+                            REZ.getString( "embeddor.shutdown.all-apps-disposed" );
                         getLogger().info( message );
                     }
                     break;
