@@ -19,6 +19,9 @@
             <item href="/porting-guide.html" name="Porting Guide"/>
             <item href="/applications.html" name="Applications"/>
         </menu>
+        <menu name="Plugins">
+            <item href="/plugins/index.html" name="Plugins"/>
+        </menu>
         <menu name="Guide">
             <item href="/guide/architecture.html" name="Architectural Overview"/>
             <item href="/guide/roles.html" name="Development Roles">

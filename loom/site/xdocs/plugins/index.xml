@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document>
+  <properties>
+    <title>Loom Plugins</title>
+  </properties>
+  
+  <body>
+    <section name="Plugins">
+		<ul>
+      		<li><a href="/plugins/sar/index.html">Maven Sar Plugin</a></li>
+        </ul>
+    </section>
+    <section name="Download">
+		<p>The Loom plugins are downloadable from <a href="http://dist.jcontainer.org/maven/loom/plugins">
+			JContainer Maven Repository</a>.  
+		</p>
+		<p>If you are using Maven as your build system, simply
+			specify the plugin name as a dependency with type <code>plugin</code>:
+<source><![CDATA[
+  <dependency>
+    <groupId>loom</groupId>
+    <artifactId>loom-sar-plugin</artifactId>
+    <version>1.0</version>
+    <type>plugin</type>
+  </dependency>
+]]></source>
+		</p>
+    </section>
+    
+  </body>
+</document>
