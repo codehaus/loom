@@ -34,7 +34,7 @@
  *
  * ====================================================================
  *
- * Loom Loom includes code from the Apache Software Foundation
+ * Loom includes code from the Apache Software Foundation
  *
  * ====================================================================
  * The Apache Software License, Version 1.1
@@ -92,7 +92,7 @@ import org.codehaus.loom.components.util.profile.ComponentProfile;
  * Handles parsing of configuration schema and validation against schema
  *
  * @author <a href="mailto:proyal@apache.org">Peter Royal</a>
- * @version CVS $Revision: 1.2 $ $Date: 2004-05-01 12:48:33 $
+ * @version CVS $Revision: 1.3 $ $Date: 2004-08-17 23:14:33 $
  */
 public interface ConfigurationValidator
 {

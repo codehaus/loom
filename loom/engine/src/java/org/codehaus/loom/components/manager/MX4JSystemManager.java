@@ -34,7 +34,7 @@
  *
  * ====================================================================
  *
- * Loom Loom includes code from the Apache Software Foundation
+ * Loom includes code from the Apache Software Foundation
  *
  * ====================================================================
  * The Apache Software License, Version 1.1

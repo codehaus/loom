@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module version="4" relativePaths="false">
+<module version="4" relativePaths="false" type="JAVA_MODULE">
   <component name="ModuleRootManager" />
   <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/engine/target/classes" />
@@ -44,6 +44,8 @@
     <orderEntry type="module" module-name="dna" />
     <orderEntry type="module" module-name="metaclass" />
     <orderEntry type="module" module-name="salt" />
+    <orderEntry type="module" module-name="netserve" />
+    <orderEntryProperties />
   </component>
 </module>
 

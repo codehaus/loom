@@ -34,7 +34,7 @@
  *
  * ====================================================================
  *
- * Loom Loom includes code from the Apache Software Foundation
+ * Loom includes code from the Apache Software Foundation
  *
  * ====================================================================
  * The Apache Software License, Version 1.1
@@ -116,7 +116,7 @@ import org.codehaus.spice.alchemist.configuration.ConfigurationAlchemist;
  * The accessor used to access resources for a particular Block or Listener.
  *
  * @author Peter Donald
- * @version $Revision: 1.3 $ $Date: 2004-06-20 17:46:56 $
+ * @version $Revision: 1.4 $ $Date: 2004-08-17 23:14:32 $
  */
 class BlockResourceProvider
     extends AbstractLogEnabled

@@ -34,7 +34,7 @@
  *
  * ====================================================================
  *
- * Loom Loom includes code from the Apache Software Foundation
+ * Loom includes code from the Apache Software Foundation
  *
  * ====================================================================
  * The Apache Software License, Version 1.1
@@ -107,7 +107,7 @@ import java.lang.reflect.Proxy;
  *
  * @author Peter Donald
  * @author <a href="mailto:Paul_Hammant@yahoo.com">Paul Hammant</a>
- * @version CVS $Revision: 1.2 $ $Date: 2004-05-01 12:48:33 $
+ * @version CVS $Revision: 1.3 $ $Date: 2004-08-17 23:14:32 $
  */
 final class BlockInvocationHandler
     implements InvocationHandler
