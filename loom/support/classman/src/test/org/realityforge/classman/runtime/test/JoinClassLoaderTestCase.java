@@ -20,7 +20,7 @@ import org.realityforge.classman.test.DataConstants;
  * Unit test for join classloader.
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-04-04 13:52:14 $
+ * @version $Revision: 1.2 $ $Date: 2003-04-09 10:19:51 $
  */
 public class JoinClassLoaderTestCase
     extends AbstractLoaderTestCase
@@ -60,7 +60,7 @@ public class JoinClassLoaderTestCase
             fail( "Expected that would be unable to load non-existent class" );
         }
         catch( ClassNotFoundException e )
-        {            
+        {
         }
 
         try
@@ -85,6 +85,14 @@ public class JoinClassLoaderTestCase
                        resources1 );
         assertTrue( "Count of resource from classloader", resources1.hasMoreElements() );
         assertEquals( "Resource found from classloader", url1, resources1.nextElement() );
+
+        if( System.getProperty("gump","false").equals( "true") )
+        {
+            //Can't test the rest of this as it requires
+            //explicit classloader setup that gump ignores.
+            return;
+        }
+
         assertTrue( "Second Count of resource from classloader", !resources1.hasMoreElements() );
 
         final Enumeration resources2 = join.getResources( "noexist.txt" );
