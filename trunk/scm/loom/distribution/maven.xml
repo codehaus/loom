@@ -119,6 +119,15 @@
     </goal>
     
     <goal name="build">
+    	<attainGoal name="build:bin"/>
+    	<attainGoal name="build:src"/>
+    </goal>
+
+    <preGoal name="build:bin">
+        <wrapper:install/>    	
+    </preGoal>
+
+    <goal name="build:bin">
         <j:set var="distDir" value='${maven.build.dir}/${maven.final.name}'/>
         <ant:mkdir dir="${distDir}/tools/lib"/>
         <ant:mkdir dir="${distDir}/container/lib"/>
@@ -211,14 +220,29 @@
         </ant:copy>
     </goal>
 
-	
-    <preGoal name="build">
-        <wrapper:install/>    	
-    </preGoal>
+    <goal name="build:src" prereqs="scm:checkout-project">
+        <!-- Create a tar.gz file -->
+        <ant:tar longfile="gnu" tarfile="${maven.build.dir}/${maven.final.name.src}.tar">
+            <ant:tarfileset dir="${maven.scm.checkout.dir}/${maven.scm.cvs.module}" prefix="${maven.final.name.src}"/>
+        </ant:tar>
 
-    <goal name="deploy">
-        <archive:deploy distribution="${maven.final.name}.zip"/>
-        <archive:deploy distribution="${maven.final.name}.tar.gz"/>
+        <ant:gzip zipfile="${maven.build.dir}/${maven.final.name.src}.tar.gz"
+            src="${maven.build.dir}/${maven.final.name.src}.tar"/>
+        <ant:delete file="${maven.build.dir}/${maven.final.name.src}.tar"/>
+
+        <!-- Create a zip file -->
+        <ant:zip destfile="${maven.build.dir}/${maven.final.name.src}.zip">
+            <ant:zipfileset dir="${maven.scm.checkout.dir}/${maven.scm.cvs.module}" prefix="${maven.final.name.src}"/>
+        </ant:zip>
+
     </goal>
+
+    <goal name="deploy" prereqs="build">
+        <archive:deploy distribution="${maven.final.name}.zip"/>
+        <archive:deploy distribution="${maven.final.name.src}.zip"/>
+        <archive:deploy distribution="${maven.final.name}.tar.gz"/>
+        <archive:deploy distribution="${maven.final.name.src}.tar.gz"/>
+    </goal>
+
 
 </project>
