@@ -12,7 +12,7 @@
     <dependencies>
         <dependency>
             <groupId>loom</groupId>
-            <artifactId>maven-sar-plugin</artifactId>
+            <artifactId>maven-loom-plugin</artifactId>
             <version>${pom.currentVersion}</version>
             <type>plugin</type>
         </dependency>

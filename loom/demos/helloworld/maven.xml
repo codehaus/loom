@@ -7,7 +7,7 @@
 
     <goal name="build">
         <attainGoal name="jar:jar"/>
-        <attainGoal name="sar:sar"/>
+        <attainGoal name="loom:sar"/>
         <ant:copy todir="${basedir}/../../distribution/deploy/apps"
             overwrite="true">
             <ant:fileset dir="${maven.build.dir}">
@@ -17,11 +17,11 @@
     </goal>
 
     <goal name="deploy">
-        <attainGoal name="sar:deploy"/>
+        <attainGoal name="loom:deploy"/>
     </goal>
 
     <postGoal name="java:compile">
-        <attainGoal name="sar:metagenerate"/>
+        <attainGoal name="loom:metagenerate"/>
     </postGoal>
 
 </project>
