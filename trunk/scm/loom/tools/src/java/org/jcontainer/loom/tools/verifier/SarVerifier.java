@@ -120,7 +120,7 @@ import org.realityforge.salt.i18n.Resources;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.13 $ $Date: 2003-10-05 10:07:05 $
+ * @version $Revision: 1.14 $ $Date: 2003-10-16 04:36:16 $
  */
 public class SarVerifier
     extends AssemblyVerifier
@@ -228,9 +228,8 @@ public class SarVerifier
         final Class clazz = loadClass( "block", metaData, classLoader );
 
         m_infoVerifier.verifyType( metaData.getName(),
-                                   metaData.getImplementationKey(),
                                    block.getInfo(),
-                                   classLoader );
+                                   block.getInfo().getType() );
 
         if( BLOCK_CLASS.isAssignableFrom( clazz ) )
         {
