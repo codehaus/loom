@@ -39,6 +39,18 @@
           </td>
         </tr>
         <tr>
+          <td>maven.sar.logging</td>
+          <td>Yes</td>
+          <td>Location of the logging configuration file which can be specified
+          	  in alternative to the <code>logs</code> element in  <code>environment.xml</code>
+          	  (which takes precedence over the logging configuration).
+          	  The recognised valid logging file names are:
+			  <code>log4j.properties</code>, <code>log4j.xml</code>, 
+			  <code>logging.properties</code>, <code>excalibur-logger.xml</code>.
+              Has no default.
+          </td>
+        </tr>
+        <tr>
           <td>maven.sar.build.dir</td>
           <td>Yes</td>
           <td>Directory where the sar will be generated. 
@@ -74,26 +86,25 @@
           </td>
         </tr>
         <tr>
-          <td>maven.sar.artifacts.include</td>
+          <td>maven.sar.lib.include</td>
           <td>Yes</td>
-          <td>Artifacts to include in sar.
+          <td>Build artifacts to include in sar.
               Defaults to <code>${pom.artifactId}*.jar</code>. Files are relative to <code>${maven.sar.build.dir}</code>.
           </td>
         </tr>
         <tr>
-          <td>maven.sar.artifacts.exclude</td>
+          <td>maven.sar.lib.exclude</td>
           <td>Yes</td>
-          <td>Artifacts to exclude in sar.
+          <td>Build artifacts to exclude in sar.
               Defaults to none. Files are relative to <code>${maven.sar.build.dir}</code>.
           </td>
         </tr>
       </table>
     </section>
-    <section name="Including Jars in the app">
+    <section name="Including jars in the sar">
 	  <p>
-	    You must tell Maven what jars you want included in the Webapp. This
-	    is achieved by specifying meta-information in the POM, using the
-	    following syntax:
+	    To include a dependency in the sar you need to set the <code>sar.bundle</code> property to
+	    <code>true</code>:
 	  </p>
 
 <source><![CDATA[
@@ -101,9 +112,33 @@
     <id>jarid</id>
     <version>jarversion</version>
     <properties>
-      <sar.bundle.jar>true</sar.bundle.jar>
+      <sar.bundle>true</sar.bundle>
     </properties>
   </dependency>
+]]></source>
+
+    </section>
+    <section name="Including resources in the app">
+	  <p>
+	    To include a resource in the app you need to set the corresponding <code>targetPath</code>
+	    to <code>SAR-INF</code>:
+	  </p>
+
+<source><![CDATA[
+    <build>
+        <resources>
+            <resource>
+                <directory>${basedir}/src/conf</directory>
+                <targetPath>SAR-INF</targetPath>
+                <includes>
+                    <include>**/somedescriptor.xml</include>
+                </includes>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </resource>
+        </resources>
+    </build>
 ]]></source>
 
     </section>
