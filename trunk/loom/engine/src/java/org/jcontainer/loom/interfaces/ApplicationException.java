@@ -10,8 +10,6 @@
  */
 package org.jcontainer.loom.interfaces;
 
-import org.apache.avalon.framework.CascadingException;
-
 /**
  * Exception to indicate that an Application failed to
  * startup or shutdown cleanly.
@@ -19,8 +17,10 @@ import org.apache.avalon.framework.CascadingException;
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  */
 public final class ApplicationException
-    extends CascadingException
+    extends Exception
 {
+    private final Throwable m_cause;
+
     /**
      * Construct a new <code>ApplicationException</code> instance.
      *
@@ -39,6 +39,17 @@ public final class ApplicationException
      */
     public ApplicationException( final String message, final Throwable throwable )
     {
-        super( message, throwable );
+        super( message );
+        m_cause = throwable;
+    }
+
+    /**
+     * Return the cause of exception.
+     *
+     * @return the cause of exception. (May be null).
+     */
+    public Throwable getCause()
+    {
+        return m_cause;
     }
 }
