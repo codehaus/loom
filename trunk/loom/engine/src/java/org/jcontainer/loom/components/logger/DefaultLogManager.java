@@ -37,6 +37,7 @@ import org.realityforge.loggerstore.LogKitLoggerStoreFactory;
 import org.realityforge.loggerstore.LoggerStore;
 import org.realityforge.loggerstore.LoggerStoreFactory;
 import org.realityforge.loggerstore.PropertyLog4JLoggerStoreFactory;
+import org.realityforge.loggerstore.SimpleLogKitLoggerStoreFactory;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.w3c.dom.Document;
@@ -152,7 +153,7 @@ public class DefaultLogManager
 
             if( version.equals( "1.0" ) )
             {
-                final LoggerStoreFactory loggerManager = new SimpleLoggerStoreFactory();
+                final LoggerStoreFactory loggerManager = new SimpleLogKitLoggerStoreFactory();
                 ContainerUtil.enableLogging( loggerManager, getLogger() );
                 final HashMap config = new HashMap();
                 config.put( Logger.class.getName(), getLogger() );
