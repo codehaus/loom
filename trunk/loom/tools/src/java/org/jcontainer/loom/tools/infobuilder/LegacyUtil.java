@@ -23,7 +23,7 @@ import org.realityforge.metaclass.model.Attribute;
  * to enablesupport of Legacy BlockInfo files.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-10-05 01:13:14 $
+ * @version $Revision: 1.6 $ $Date: 2003-10-05 01:18:58 $
  */
 public class LegacyUtil
 {
@@ -126,7 +126,6 @@ public class LegacyUtil
                                   ServiceDescriptor.EMPTY_SET,
                                   ContextDescriptor.EMPTY_CONTEXT,
                                   DependencyDescriptor.EMPTY_SET,
-                                  null,
                                   null );
     }
 

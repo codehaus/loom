@@ -30,7 +30,7 @@ import org.xml.sax.InputSource;
  * <a href="package-summary.html#external">package summary</a>.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.8 $ $Date: 2003-10-05 01:13:14 $
+ * @version $Revision: 1.9 $ $Date: 2003-10-05 01:18:58 $
  */
 public final class LegacyBlockInfoReader
     extends AbstractLogEnabled
@@ -120,7 +120,7 @@ public final class LegacyBlockInfoReader
         return new ComponentInfo( descriptor,
                                   services,
                                   LegacyUtil.CONTEXT_DESCRIPTOR,
-                                  dependencies, schema, null );
+                                  dependencies, schema );
     }
 
     /**

@@ -35,7 +35,7 @@ import org.realityforge.metaclass.model.Attribute;
  * Abstract class which TestCases can extend.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.7 $ $Date: 2003-10-05 01:13:14 $
+ * @version $Revision: 1.8 $ $Date: 2003-10-05 01:18:58 $
  */
 public class InfoBuilderTestCase
     extends TestCase
@@ -99,17 +99,12 @@ public class InfoBuilderTestCase
         final ComponentDescriptor component =
             new ComponentDescriptor( "org.realityforge.Component1", Attribute.EMPTY_SET );
 
-        final SchemaDescriptor schema =
-            new SchemaDescriptor( "",
-                                  "",
-                                  Attribute.EMPTY_SET );
-
         return new ComponentInfo( component,
                                   ServiceDescriptor.EMPTY_SET,
                                   ContextDescriptor.EMPTY_CONTEXT,
                                   DependencyDescriptor.EMPTY_SET,
-                                  null,
-                                  schema );
+                                  null
+        );
     }
 
     public void testWriteSerComponent1()
@@ -242,7 +237,7 @@ public class InfoBuilderTestCase
                                   Attribute.EMPTY_SET );
 
         return new ComponentInfo( component, services,
-                                  context, deps, schema, null );
+                                  context, deps, schema );
     }
 
     private ServiceDescriptor createServiceDescriptor()

@@ -28,7 +28,7 @@ import org.realityforge.metaclass.model.Attribute;
  *  An basic test case for the LogManager.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.8 $ $Date: 2003-10-05 01:13:14 $
+ * @version $Revision: 1.9 $ $Date: 2003-10-05 01:18:58 $
  */
 public class VerifierTestCase
     extends TestCase
@@ -91,14 +91,12 @@ public class VerifierTestCase
                                ServiceDescriptor.EMPTY_SET,
                                new ContextDescriptor( Context.class.getName(), EntryDescriptor.EMPTY_SET, Attribute.EMPTY_SET ),
                                new DependencyDescriptor[]{new DependencyDescriptor( C2_SERVICE, C2_SERVICE, false, Attribute.EMPTY_SET )},
-                               null,
                                null );
         final ComponentInfo c2Info =
             new ComponentInfo( new ComponentDescriptor( C2_IMPLEMENTATION_KEY, Attribute.EMPTY_SET ),
                                new ServiceDescriptor[]{new ServiceDescriptor( C2_SERVICE, Attribute.EMPTY_SET )},
                                new ContextDescriptor( Context.class.getName(), EntryDescriptor.EMPTY_SET, Attribute.EMPTY_SET ),
                                DependencyDescriptor.EMPTY_SET,
-                               null,
                                null );
         final ComponentProfile c1Profile =
             new ComponentProfile( c1Info, c1MetaData );
@@ -192,14 +190,12 @@ public class VerifierTestCase
                                                                                     C2_SERVICE + DependencyDescriptor.ARRAY_POSTFIX,
                                                                                     false,
                                                                                     Attribute.EMPTY_SET )},
-                               null,
                                null );
         final ComponentInfo c2Info =
             new ComponentInfo( new ComponentDescriptor( C2_IMPLEMENTATION_KEY, Attribute.EMPTY_SET ),
                                new ServiceDescriptor[]{new ServiceDescriptor( C2_SERVICE, Attribute.EMPTY_SET )},
                                new ContextDescriptor( Context.class.getName(), EntryDescriptor.EMPTY_SET, Attribute.EMPTY_SET ),
                                DependencyDescriptor.EMPTY_SET,
-                               null,
                                null );
         final ComponentProfile c3Profile =
             new ComponentProfile( c3Info, c3MetaData );

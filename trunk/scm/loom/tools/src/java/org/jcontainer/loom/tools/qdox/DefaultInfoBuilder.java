@@ -26,7 +26,7 @@ import org.realityforge.metaclass.model.Attribute;
  * all of the javadoc tags present in JavaClass object model.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-10-05 01:13:14 $
+ * @version $Revision: 1.6 $ $Date: 2003-10-05 01:18:58 $
  */
 public class DefaultInfoBuilder
     extends AbstractInfoBuilder
@@ -43,14 +43,12 @@ public class DefaultInfoBuilder
         final ServiceDescriptor[] services = buildServices( javaClass );
         final ContextDescriptor context = buildContext( javaClass );
         final SchemaDescriptor configurationSchema = buildConfigurationSchema( javaClass );
-        final SchemaDescriptor parametersSchema = buildParametersSchema( javaClass );
 
         final DependencyDescriptor[] dependencies = buildDependencies( javaClass );
 
         return new ComponentInfo( component, services,
                                   context, dependencies,
-                                  configurationSchema,
-                                  parametersSchema );
+                                  configurationSchema );
     }
 
     /**
@@ -145,35 +143,6 @@ public class DefaultInfoBuilder
         }
 
         final DocletTag tag = method.getTagByName( "phoenix.configuration" );
-        if( null == tag )
-        {
-            return null;
-        }
-        else
-        {
-            final String location = getNamedParameter( tag, "location", "" );
-            final String type = getNamedParameter( tag, "type", "" );
-
-            return new SchemaDescriptor( location, type, Attribute.EMPTY_SET );
-        }
-    }
-
-    /**
-     * Build the parameters schema descriptor for specified class.
-     *
-     * @param javaClass the class
-     * @return the schema descriptor
-     */
-    private SchemaDescriptor buildParametersSchema( final JavaClass javaClass )
-    {
-        final JavaMethod method =
-            getLifecycleMethod( javaClass, "parameterize", PARAMETERS_CLASS );
-        if( null == method )
-        {
-            return null;
-        }
-
-        final DocletTag tag = method.getTagByName( "phoenix.parameters" );
         if( null == tag )
         {
             return null;

@@ -21,7 +21,7 @@ import org.realityforge.metaclass.model.Attribute;
  * A set of utilities for asserting  facts about info objects.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-10-05 01:13:14 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-05 01:18:58 $
  */
 public class InfoAssert
 {
@@ -56,10 +56,6 @@ public class InfoAssert
         final SchemaDescriptor expectedSchema = expected.getConfigurationSchema();
         final SchemaDescriptor actualSchema = actual.getConfigurationSchema();
         assertEqualSchema( message + "/Configuration", expectedSchema, actualSchema );
-
-        final SchemaDescriptor expectedPSchema = expected.getParametersSchema();
-        final SchemaDescriptor actualPSchema = actual.getParametersSchema();
-        assertEqualSchema( message + "/Parameters", expectedPSchema, actualPSchema );
 
         final ContextDescriptor expectedContext = expected.getContext();
         final ContextDescriptor actualContext = actual.getContext();

@@ -35,7 +35,7 @@ import org.xml.sax.InputSource;
  *  An basic test case for the Application.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-10-05 01:13:13 $
+ * @version $Revision: 1.4 $ $Date: 2003-10-05 01:18:58 $
  */
 public class ApplicationTestCase
     extends TestCase
@@ -58,16 +58,16 @@ public class ApplicationTestCase
                                                                                 S1_NAME,
                                                                                 false,
                                                                                 Attribute.EMPTY_SET )},
-                           null,
-                           null );
+                           null
+        );
 
     private static final ComponentInfo C2 =
         new ComponentInfo( new ComponentDescriptor( C2_NAME, Attribute.EMPTY_SET ),
                            new ServiceDescriptor[]{new ServiceDescriptor( S1_NAME, Attribute.EMPTY_SET )},
                            LegacyUtil.CONTEXT_DESCRIPTOR,
                            DependencyDescriptor.EMPTY_SET,
-                           null,
-                           null );
+                           null
+        );
 
     private static final ComponentInfo C3 =
         new ComponentInfo( new ComponentDescriptor( C3_NAME, Attribute.EMPTY_SET ),
@@ -77,8 +77,8 @@ public class ApplicationTestCase
                                                                                 S1_ARRAY_NAME,
                                                                                 false,
                                                                                 Attribute.EMPTY_SET )},
-                           null,
-                           null );
+                           null
+        );
 
     private static final ComponentInfo C4 =
         new ComponentInfo( new ComponentDescriptor( C4_NAME, Attribute.EMPTY_SET ),
@@ -88,8 +88,8 @@ public class ApplicationTestCase
                                                                                 S1_MAP_NAME,
                                                                                 false,
                                                                                 Attribute.EMPTY_SET )},
-                           null,
-                           null );
+                           null
+        );
 
     public ApplicationTestCase( final String name )
     {
