@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<project
+    xmlns:j="jelly:core"
+    xmlns:ant="jelly:ant"
+    default="java:jar">
+
+    <postGoal name="test:compile">
+        <j:set var="maven.test.dest" value="target/test-classes"/>
+        <ant:echo message="Copying test data to=${maven.test.dest}"/>
+        <ant:mkdir dir="${maven.test.dest}"/>
+        <ant:copy todir="${maven.test.dest}">
+            <ant:fileset dir="src/test"/>
+        </ant:copy>
+    </postGoal>
+
+</project>
+
+
