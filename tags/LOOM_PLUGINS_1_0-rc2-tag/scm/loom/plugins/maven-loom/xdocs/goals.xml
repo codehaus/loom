@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<document>
+    <properties>
+        <title>Maven Loom Plug-in Goals</title>
+        <author>Mauro Talevi</author>
+    </properties>
+    <body>
+        <goals>
+            <goal>
+                <name>loom</name>
+                <description>Defaults to loom:sar</description>
+            </goal>
+            <goal>
+                <name>loom:init</name>
+                <description>Initialize the file system and define tasks</description>
+            </goal>
+            <goal>
+                <name>loom:sar</name>
+                <description>Build a sar file</description>
+            </goal>
+            <goal>
+                <name>loom:install</name>
+                <description>Install the sar in the local repository</description>
+            </goal>
+            <goal>
+                <name>loom:metagenerate</name>
+                <description>Metagenerate xinfo files</description>
+            </goal>
+            <goal>
+                <name>loom:install</name>
+                <description>Install the sar in the local repository</description>
+            </goal>
+            <goal>
+                <name>loom:install-snapshot</name>
+                <description>Install snapshot of the sar in the local repository</description>
+            </goal>
+            <goal>
+                <name>loom:deploy</name>
+                <description>Deploy the sar to the remote repository</description>
+            </goal>
+            <goal>
+                <name>loom:deploy-snapshot</name>
+                <description>Deploy snapshot of the sar to the remote repository</description>
+            </goal>
+        </goals>
+    </body>
+</document>
