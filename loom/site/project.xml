@@ -81,10 +81,6 @@
     </build>
 
     <reports>
-<!--        <report>maven-changes-plugin</report>-->
-<!--        <report>maven-changlog-plugin</report>-->
-<!--        <report>maven-checkstyle-plugin</report>-->
-<!--        <report>maven-junit-report-plugin</report>-->
-<!--        <report>maven-tasklist-plugin</report>-->
+        <report>maven-license-plugin</report>
     </reports>
 </project>
