@@ -14,13 +14,13 @@ import org.jcontainer.loom.tools.info.ComponentInfo;
  * The ComponentBundle gives access to the sum total of all the
  * metadata and resources about a component. This includes all
  * the resources associated with a particular component and the
- * associated {@link org.jcontainer.loom.tools.info.ComponentInfo}.
+ * associated {@link ComponentInfo}.
  *
  * <p>Additional resources that may be associated with a component
  * include but are not limited to;</p>
  *
  * <ul>
- *   <li>Resource property files for i18n of {@link org.jcontainer.loom.tools.info.ComponentInfo}</li>
+ *   <li>Resource property files for i18n of {@link ComponentInfo}</li>
  *   <li>XML schema or DTD that is used when validating a components
  *       configuration, such as in Phoenix.</li>
  *   <li>Descriptor used to define management interface of
@@ -29,15 +29,15 @@ import org.jcontainer.loom.tools.info.ComponentInfo;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-29 01:07:35 $
+ * @version $Revision: 1.3 $ $Date: 2003-10-11 09:11:45 $
  */
 public interface ComponentBundle
 {
     /**
-     * Return the {@link org.jcontainer.loom.tools.info.ComponentInfo} that describes the
+     * Return the {@link ComponentInfo} that describes the
      * component.
      *
-     * @return the {@link org.jcontainer.loom.tools.info.ComponentInfo} that describes the component.
+     * @return the {@link ComponentInfo} that describes the component.
      */
     ComponentInfo getComponentInfo();
 

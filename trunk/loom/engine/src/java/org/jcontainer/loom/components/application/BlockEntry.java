@@ -89,6 +89,7 @@ package org.jcontainer.loom.components.application;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
+import org.jcontainer.loom.tools.profile.ComponentProfile;
 import org.realityforge.metaclass.model.Attribute;
 
 /**
@@ -101,10 +102,10 @@ class BlockEntry
     private static final Class BLOCK_CLASS = getBlockClass();
 
     private Object m_object;
-    private final org.jcontainer.loom.tools.profile.ComponentProfile m_componentProfile;
+    private final ComponentProfile m_componentProfile;
     private BlockInvocationHandler m_invocationHandler;
 
-    public BlockEntry( final org.jcontainer.loom.tools.profile.ComponentProfile componentProfile )
+    public BlockEntry( final ComponentProfile componentProfile )
     {
         invalidate();
         m_componentProfile = componentProfile;
@@ -115,7 +116,7 @@ class BlockEntry
         return getProfile().getMetaData().getName();
     }
 
-    public org.jcontainer.loom.tools.profile.ComponentProfile getProfile()
+    public ComponentProfile getProfile()
     {
         return m_componentProfile;
     }
