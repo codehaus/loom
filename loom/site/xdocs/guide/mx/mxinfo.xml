@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<document>
+  <properties>
+    <title>Management Guide - MXINFO File Format</title>
+    
+    
+  <author email="huw@apache.org">Huw Roberts</author>
+  </properties>
+  <body>
+    <section name="Introduction">
+      <p>
+        The MXINFO file is contains information about how the object it describes can be managed.  It
+        includes functional information intended for the management application, and descriptive data
+        to help guide the user.
+      </p>
+      <p>
+        An mxinfo file is created at design time.  It can be generated 
+        automatically using xdoclet tags (<a href="doclet-tags.html">described here</a>) 
+        or by hand.  
+      </p>
+      <p>
+        At runtime it is expected that the mxinfo file will be have the same name 
+        as the class it describes (e.g. FtpServer.class would be described by an
+        FtpServer.mxinfo file), and be located in the same package as that class.  
+        At startup the mxinfo file is parsed and, in conjuntion with class introspection, 
+        is used to define the in-memory metadata for management of the target object.
+      </p>
+      <p>
+        Note that a target object is not restricted to having a single mxinfo file, although the specifics of how that
+        works is dependant on the management component.  Finally, its worth
+        pointing out that an mxinfo file generated from interface can be applied to
+        any class that implements the interface.
+      </p>
+    </section>
+    <section name="Example">
+      <p>
+        Since mxinfo files are somewhat confusing in the abstract, but straight forward in practice,
+        the rest of this section describes an imaginary, yet somewhat plausible, mxinfo file.
+      </p>
+      <source>
+        
+&lt;?xml version="1.0"?>
+&lt;!DOCTYPE mxinfo PUBLIC "-//PHOENIX/Mx Info DTD Version 1.0//EN"
+                  "http://jakarta.apache.org/avalon/dtds/phoenix/mxinfo_1_0.dtd">
+
+&lt;mxinfo>
+
+    &lt;topic name="ftpServer" >
+
+      &lt;!-- attributes -->
+      &lt;attribute
+        name="addressString"
+        description="Address String"
+        isWriteable="no"
+        type="java.lang.String"
+      />
+      &lt;attribute
+        name="serverAddress"
+        description="Server bind address."
+        isWriteable="no"
+        type="java.net.InetAddress"
+      />
+
+      &lt;!-- operations -->
+      &lt;operation
+        name="getDefaultRoot"
+        description="Gets the default root"
+        type="java.lang.String"
+      >
+      &lt;/operation>
+      &lt;operation
+        name="getServerPort"
+        description="Returns port that the server listens on"
+        type="java.lang.String"
+      >
+        &lt;param
+          name="instance"
+          description="no description"
+          type="java.lang.Integer"
+        />
+      &lt;/operation>
+
+    &lt;/topic>
+
+    &lt;proxy name="userManager" />
+
+&lt;/mxinfo>
+
+      </source>
+    </section> 
+  </body>
+</document>

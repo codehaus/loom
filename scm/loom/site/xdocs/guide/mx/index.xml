@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<document>
+    <properties>
+    <title>Management Guide</title>
+        
+        
+    <author email="huw@apache.org">Huw Roberts</author>
+  </properties>
+    <body>
+        <section name="Introduction">
+            <p>
+                Management refers to how a running instance of Phoenix, along with
+                its components, applications and blocks is supervised and manipulated.
+                This guide covers the steps required to write management-enabled
+                applications using Phoenix.
+            </p>
+        </section>
+        <section name="Overview">
+            <p>
+                Management in Phoenix is divided into two distinct areas.  The first 
+                area is the the management metadata.  This is information about which
+                applications, blocks and
+                components should be managed, the operations and attributes
+                to expose, and descriptions for each these to help guide the user.
+                Each block and component
+                stores this data in an 'MXINFO file' that is distributed along
+                with the class files that make up Phoenix and the Phoenix-enabled
+                applications.
+            </p>
+            <p>
+                The second area is the Phoenix component that uses the
+                MXINFO files to generate a user interface through which Phoenix
+                and its applications are interacted with.  It is anticipated that a number
+                of such interfaces will be developed.  The current implementation
+                of the management component uses the MXINFO files to generate
+                ModelMBeans that are then registered and exposed through a slightly 
+                customized JMX implementation called  
+                <a href="http://mx4j.sourceforge.net/">MX4J</a>.    
+            </p>
+            <p>
+                Note that nothing about the MXINFO file is dependant on using
+                JMX, and the block author does not need to know or care about
+                how Phoenix, the application, and its blocks will be managed.  
+                His/her responsibility is limited to creating an MXINFO file.
+            </p>
+            <p>
+                The guide is broken into a number of sections, each
+                covering a particular aspect of the management picture.
+            </p>
+        </section>
+        <section name="Organizing Structure for Management Data">
+            <p>
+                This section provides a conceptual overview of the elements that
+                are used to represent management information within Phoenix.
+                An understanding of these elements and their relationships is 
+                essential for all users of the management functionality.
+            </p>
+            <p>
+                <a href="structure.html">Structure</a>
+            </p>               
+        </section>
+        <section name="Step-By-Step Walk-Through">
+            <p>
+                This section walks through the steps that are needed to make a
+                block manageable.  The emphasis is on illuminating the process,
+                it does not cover every feature or option.
+            </p>
+            <p>
+                <a href="overview.html">Step-by-Step</a>
+            </p>
+        </section>
+        <section name="MXINFO File Format">
+            <p>
+                Management meta-data is stored in MXINFO files.  This section 
+                describes its structure, as well as the runtime requirements
+                of the management agent.
+            </p>
+            <p>
+                <a href="mxinfo.html">MXINFO Format</a>
+            </p>
+        </section>
+        <section name="Using XDoclet Tags to Generate MXINFO file">
+            <p>
+                Instead of writing MXINFO files directly it is recommended that
+                component and block authors make use of custom tags inserted 
+                into the source code.  These tags are parsed using the 
+                <a href="http://xdoclet.sourceforge.net/">XDoclet</a>
+                engine to produce the MXINFO file.  This section describes
+                how to use the feature.
+            </p>
+            <p>
+                <a href="doclet-tags.html">XDoclet Tags</a>
+            </p>
+        </section>        
+    </body>
+</document>
