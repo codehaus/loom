@@ -29,13 +29,6 @@
                 <category>runtime</category>
             </properties>
         </dependency>
-        <dependency>
-            <id>excalibur-extension</id>
-            <version>1.0a</version>
-            <properties>
-                <category>runtime</category>
-            </properties>
-        </dependency>
     </dependencies>
 
     <developers>
