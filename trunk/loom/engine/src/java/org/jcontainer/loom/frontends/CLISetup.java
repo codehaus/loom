@@ -86,33 +86,30 @@
  */
 package org.jcontainer.loom.frontends;
 
-import java.util.List;
 import java.util.Properties;
-
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+import org.apache.commons.cli.PosixParser;
 import org.codehaus.spice.salt.i18n.ResourceManager;
 import org.codehaus.spice.salt.i18n.Resources;
-import org.realityforge.cli.CLArgsParser;
-import org.realityforge.cli.CLOption;
-import org.realityforge.cli.CLOptionDescriptor;
-import org.realityforge.cli.CLUtil;
 
 /**
  * The class prepare parameters based on input options.
- *
- * @author Peter Donald
- * @author <a href="mail@leosimons.com">Leo Simons</a>
  */
 class CLISetup
 {
-    private static final Resources REZ =
-        ResourceManager.getPackageResources( CLISetup.class );
+    private static final Resources REZ = ResourceManager.getPackageResources(
+        CLISetup.class );
 
-    private static final int DEBUG_LOG_OPT = 'd';
-    private static final int HELP_OPT = 'h';
-    private static final int LOG_FILE_OPT = 'l';
-    private static final int PERSISTENT_OPT = 'p';
-    private static final int CONFIGFILE_OPT = 'f';
-    private static final int STDOUT_OPT = 's';
+    private static final String DEBUG_LOG_OPT = "d";
+    private static final String HELP_OPT = "h";
+    private static final String LOG_FILE_OPT = "l";
+    private static final String PERSISTENT_OPT = "p";
+    private static final String CONFIGFILE_OPT = "f";
+    private static final String STDOUT_OPT = "s";
 
     ///Parameters created by parsing CLI options
     private final Properties m_parameters = new Properties();
@@ -126,51 +123,35 @@ class CLISetup
     }
 
     /**
-     * Display usage report.
-     */
-    private void usage( final CLOptionDescriptor[] options )
-    {
-        System.err.println( m_command );
-        System.err.println( "\t" + REZ.getString( "cli.desc.available.header" ) );
-        System.err.println( CLUtil.describeOptions( options ) );
-    }
-
-    /**
      * Initialise the options for command line parser.
      */
-    private CLOptionDescriptor[] createCLOptions()
+    private Options createCLOptions()
     {
-        final CLOptionDescriptor options[] = new CLOptionDescriptor[6];
-        options[0] =
-            new CLOptionDescriptor( "help",
-                                    CLOptionDescriptor.ARGUMENT_DISALLOWED,
-                                    HELP_OPT,
-                                    REZ.getString( "cli.opt.help.desc" ) );
-        options[1] =
-            new CLOptionDescriptor( "log-file",
-                                    CLOptionDescriptor.ARGUMENT_REQUIRED,
-                                    LOG_FILE_OPT,
-                                    REZ.getString( "cli.opt.log-file.desc" ) );
-        options[2] =
-            new CLOptionDescriptor( "debug-init",
-                                    CLOptionDescriptor.ARGUMENT_DISALLOWED,
-                                    DEBUG_LOG_OPT,
-                                    REZ.getString( "cli.opt.debug-init.desc" ) );
-        options[3] =
-            new CLOptionDescriptor( "persistent",
-                                    CLOptionDescriptor.ARGUMENT_DISALLOWED,
-                                    PERSISTENT_OPT,
-                                    REZ.getString( "cli.opt.persistent.desc" ) );
-        options[4] =
-            new CLOptionDescriptor( "configfile",
-                                    CLOptionDescriptor.ARGUMENT_REQUIRED,
-                                    CONFIGFILE_OPT,
-                                    REZ.getString( "cli.opt.configfile.desc" ) );
-        options[5] =
-            new CLOptionDescriptor( "std-out",
-                                    CLOptionDescriptor.ARGUMENT_DISALLOWED,
-                                    STDOUT_OPT,
-                                    REZ.getString( "cli.opt.configfile.stdout" ) );
+        final Options options = new Options();
+        options.addOption( STDOUT_OPT,
+                           "std-out",
+                           false,
+                           REZ.getString( "cli.opt.configfile.desc" ) );
+        options.addOption( HELP_OPT,
+                           "help",
+                           false,
+                           REZ.getString( "cli.opt.help.desc" ) );
+        options.addOption( CONFIGFILE_OPT,
+                           "configfile",
+                           true,
+                           REZ.getString( "cli.opt.configfile.desc" ) );
+        options.addOption( LOG_FILE_OPT,
+                           "log-file",
+                           true,
+                           REZ.getString( "cli.opt.log-file.desc" ) );
+        options.addOption( DEBUG_LOG_OPT,
+                           "debug-init",
+                           false,
+                           REZ.getString( "cli.opt.debug-init.desc" ) );
+        options.addOption( PERSISTENT_OPT,
+                           "persistent",
+                           false,
+                           REZ.getString( "cli.opt.persistent.desc" ) );
         return options;
     }
 
@@ -181,63 +162,58 @@ class CLISetup
 
     public boolean parseCommandLineOptions( final String[] args )
     {
-        final CLOptionDescriptor[] options = createCLOptions();
-        final CLArgsParser parser = new CLArgsParser( args, options );
+        // create the command line parser
+        final CommandLineParser parser = new PosixParser();
 
-        if( null != parser.getErrorString() )
+        // create the Options
+        final Options options = createCLOptions();
+        try
+        {
+            // parse the command line arguments
+            final CommandLine line = parser.parse( options, args );
+
+            if( line.hasOption( HELP_OPT ) )
+            {
+                final HelpFormatter formatter = new HelpFormatter();
+                formatter.printHelp( m_command, options );
+                return false;
+            }
+            if( line.getArgList().size() > 0 )
+            {
+                final String message = REZ.getString( "cli.error.unknown.arg" );
+                System.err.println( message );
+                return false;
+            }
+            if( line.hasOption( DEBUG_LOG_OPT ) )
+            {
+                m_parameters.setProperty( "log-priority", "DEBUG" );
+            }
+            if( line.hasOption( PERSISTENT_OPT ) )
+            {
+                m_parameters.setProperty( CLIMain.PERSISTENT, "true" );
+            }
+            if( line.hasOption( CONFIGFILE_OPT ) )
+            {
+                final String file = line.getOptionValue( CONFIGFILE_OPT );
+                m_parameters.setProperty( CLIMain.CONFIGFILE, file );
+            }
+            if( line.hasOption( LOG_FILE_OPT ) )
+            {
+                final String file = line.getOptionValue( LOG_FILE_OPT );
+                m_parameters.setProperty( "log-destination", file );
+            }
+            if( line.hasOption( STDOUT_OPT ) )
+            {
+                m_parameters.setProperty( "log-stdout", "true" );
+            }
+            return true;
+        }
+        catch( final ParseException pe )
         {
             final String message = REZ.format( "cli.error.parser",
-                                               parser.getErrorString() );
+                                               pe.getMessage() );
             System.err.println( message );
             return false;
         }
-
-        final List clOptions = parser.getArguments();
-        final int size = clOptions.size();
-
-        for( int i = 0; i < size; i++ )
-        {
-            final CLOption option = (CLOption)clOptions.get( i );
-
-            switch( option.getDescriptor().getId() )
-            {
-                case 0:
-                    {
-                        final String message =
-                            REZ.format( "cli.error.unknown.arg",
-                                        option.getArgument() );
-                        System.err.println( message );
-                    }
-                    return false;
-
-                case HELP_OPT:
-                    usage( options );
-                    return false;
-
-                case DEBUG_LOG_OPT:
-                    m_parameters.setProperty( "log-priority", "DEBUG" );
-                    break;
-
-                case LOG_FILE_OPT:
-                    m_parameters.setProperty( "log-destination",
-                                              option.getArgument() );
-                    break;
-
-                case PERSISTENT_OPT:
-                    m_parameters.setProperty( CLIMain.PERSISTENT, "true" );
-                    break;
-
-                case CONFIGFILE_OPT:
-                    m_parameters.setProperty( CLIMain.CONFIGFILE,
-                                              option.getArgument() );
-                    break;
-
-                case STDOUT_OPT:
-                    m_parameters.setProperty( "log-stdout", "true" );
-                    break;
-            }
-        }
-
-        return true;
     }
 }
