@@ -60,17 +60,19 @@
         		<ant:zipfileset file="${logging}" prefix="SAR-INF/"/>
             </j:if>
             <!-- Add build artifacts -->
-            <ant:lib dir="${maven.sar.build.dir}">
+            <ant:zipfileset dir="${maven.sar.build.dir}" 
+            		     prefix="SAR-INF/lib">
                 <ant:include name="${maven.sar.lib.include}"/>
                 <ant:exclude name="${maven.sar.lib.exclude}"/>
-            </ant:lib>
+            </ant:zipfileset>
             <!-- Add dependency artifacts -->
             <j:forEach var="artifact" items="${pom.artifacts}">
                 <j:set var="dependency" value="${artifact.dependency}"/>
                 <j:if test="${dependency.getProperty('sar.bundle')=='true'}">
-                    <ant:lib dir="${maven.repo.local}/${dependency.artifactDirectory}/jars/">
+                    <ant:zipfileset dir="${maven.repo.local}/${dependency.artifactDirectory}/jars/"
+                    				prefix="SAR-INF/lib">
                         <ant:include name="${dependency.artifact}"/>
-                    </ant:lib>
+                    </ant:zipfileset>
                 </j:if>
             </j:forEach>
             <!-- Add resources with targetPath = 'SAR-INF' -->
