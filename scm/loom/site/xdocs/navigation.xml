@@ -24,7 +24,8 @@
             <item href="/plugins/index.html" name="Plugins"/>
         </menu>
         <menu name="Guide">
-            <item href="/guide/architecture.html" name="Architectural Overview"/>
+            <item href="/guide/index.html" name="Overview"/>
+            <item href="/guide/architecture.html" name="Architecture"/>
             <item href="/guide/roles.html" name="Development Roles">
 	            <item href="/guide/administrator.html" name="Administrators"/>
 	            <item href="/guide/deployers.html" name="Deployers"/>

@@ -4,52 +4,23 @@
     <title>Overview</title>
   </properties>
   
-  
   <body>
     <section name="Introduction">
       <p>
-        Loom is a micro-kernel designed and implemented on top of the 
-        Apache Avalon Framework.  Please refer to the
-	    <a href="http://avalon.apache.org/framework/">Avalon Framework</a> 
-	    documentation for more information about the framework.
+  		Loom  is a micro-kernel designed and implemented on top of the  
+  		<a href="http://dna.jcontainer.org">DNA</a> framework and supports components developed 
+  		using the  <a href="http://avalon.apache.org/framework/">Avalon</a>. 
+		In the future Loom will support DNA and <a href="http://picocontainer.org">Pico</a> components. 
 	  </p>
 	  <p>
-        Loom provides a number of facilities to manage the
-        environment of Server Applications. Such facilities include log management,
-        classloading, thread management and security. In the future it will
-        conditionally support extra facilities such as central server management,
-        server pools, and other facilities aimed at reducing the time to market. 
-        The API defines a standard method of piecing together server components and 
-        creating a server.
-      </p>
-    </section>
-    <section name="Documentation is coming">
-      <p>
-        Some of the information on this site is currently a bit out of date. We are
-    working hard to fix this. If you come across any inconsistencies or have a
-    problem, please don't hesitate to contact us through the mailing list. Thank
-    you.
-      </p>
-    </section>
-    <section name="Guide to Loom">
-      <p>
-        This guide starts with an architectural overview of Loom. Then, we identify
-    the different roles that typically exist in daily use of Loom. For each of
-    these, we provide a basic guide. We finish with a complete example.
-      </p>
-        <subsection name="Target Audience">
-          <p>
-            This documentation is aimed towards people who:
-            </p><ul>
-          <li>wish to create applications that run within Loom</li>
-          <li>wish to create components (blocks) for use within Loom</li>
-          <li>wish to setup and administer Loom</li>
-              <li>are interested in the design principles of Loom</li>
-              <li>wish to develop code that will be incorporated into Loom</li>
-              <li>wish to reuse Loom concepts in their own application</li>
-            </ul><p>
-          </p>
-        </subsection>
+  		Loom provides a number of facilities to manage the environment of Server Applications. 
+  		Such facilities include log management, classloading, thread management and security. 
+  		In the future it will conditionally support extra facilities such as central server management, 
+  		server pools, and other facilities aimed at reducing the time to market.
+	  </p>
+	  <p>
+		The API defines a standard method of piecing together server components and creating a server.
+	  </p>
     </section>
     
     <section name="Acknowledgements">
