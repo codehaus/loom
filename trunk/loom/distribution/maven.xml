@@ -133,7 +133,6 @@
         <ant:copy todir="${distDir}/bin">
             <ant:fileset dir="src/script"/>
         </ant:copy>
-        <chmod file="${distDir}/bin/*.sh" perm="u+x"/>
 
         <ant:mkdir dir="${distDir}/work"/>
 
@@ -153,6 +152,8 @@
             </ant:fileset>
         </ant:copy>
 
+         <chmod file="${distDir}/bin/*.sh" perm="u+x"/>
+         <chmod file="${distDir}/bin/wrapper" perm="u+x"/>
         <ant:copy file="${basedir}/../LICENSE.txt" todir="${distDir}"/>
     </postGoal>
 
