@@ -15,34 +15,12 @@ import org.realityforge.metaclass.model.Attribute;
  * to enablesupport of Legacy BlockInfo files.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.13 $ $Date: 2003-10-11 09:06:09 $
+ * @version $Revision: 1.14 $ $Date: 2003-10-11 09:06:50 $
  */
 public class LegacyUtil
 {
     public static final String MX_ATTRIBUTE_NAME = "phoenix:mx";
     public static final Attribute MX_ATTRIBUTE = new Attribute( MX_ATTRIBUTE_NAME );
-
-    private LegacyUtil()
-    {
-    }
-
-    /**
-     * Return the version specified (if any) for feature.
-     *
-     * @param type the type
-     * @return the translated schema type
-     */
-    public static String translateToSchemaUri( final String type )
-    {
-        if( type.equals( "relax-ng" ) )
-        {
-            return "http://relaxng.org/ns/structure/1.0";
-        }
-        else
-        {
-            return type;
-        }
-    }
 
     /**
      * Return true if specified service is a management service.
