@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <extend>${basedir}/../project.xml</extend>
+  <id>maven-sar-plugin</id>
+  <name>Maven Sar Plugin</name>
+  <currentVersion>1.0</currentVersion>
+  <description>Maven Sar Plugin</description>
+  <shortDescription>Maven Sar Plugin</shortDescription>
+
+  <siteDirectory>/www/jcontainer.codehaus.org/loom/plugins/maven-sar</siteDirectory>
+
+  <versions>
+      <version>
+          <id>1.0</id>
+          <name>1.0</name>
+          <tag>MAVEN_SAR_PLUGIN_1_0-tag</tag>
+      </version>
+  </versions>
+  
+  <developers>
+    <developer>
+      <name>Mauro Talevi</name>
+      <id>mauro</id>
+      <email>mauro.talevi at aquilonia.org</email>
+    </developer>
+  </developers>
+</project>
