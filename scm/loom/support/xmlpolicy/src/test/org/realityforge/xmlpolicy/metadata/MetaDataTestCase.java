@@ -150,4 +150,38 @@ public class MetaDataTestCase
                           npe.getMessage() );
         }
     }
+
+
+    public void testNullPermissionsElementInPermissionCtor()
+        throws Exception
+    {
+        try
+        {
+            new PermissionMetaData( "", "", "", "", null );
+            fail( "Expected to fail due to null pointer in ctor" );
+        }
+        catch( final NullPointerException npe )
+        {
+            assertEquals( "NPE message",
+                          "permissions[0]",
+                          npe.getMessage() );
+        }
+    }
+
+    public void testNullSignedByNonNullKeyStoreInPermissionCtor()
+        throws Exception
+    {
+        try
+        {
+            new PermissionMetaData( "", "","", null, "default" );
+            fail( "Expected to fail due to null pointer in ctor" );
+        }
+        catch( final NullPointerException npe )
+        {
+            assertEquals( "NPE message",
+                          "signedBy",
+                          npe.getMessage() );
+        }
+    }
+
 }
