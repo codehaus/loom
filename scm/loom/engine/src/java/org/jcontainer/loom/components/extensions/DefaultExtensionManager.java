@@ -103,8 +103,8 @@ import org.realityforge.salt.i18n.Resources;
 
 /**
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.9 $ $Date: 2003-10-15 03:43:09 $
- * @phoenix:block
+ * @version $Revision: 1.10 $ $Date: 2003-10-16 09:23:58 $
+ * @dna.component
  * @mx.interface type="org.jcontainer.loom.interfaces.ExtensionManagerMBean"
  */
 public class DefaultExtensionManager

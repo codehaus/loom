@@ -23,6 +23,22 @@
             </properties>
         </dependency>
         <dependency>
+            <groupId>dna</groupId>
+            <artifactId>dna-tools</artifactId>
+            <version>20031016.083103</version>
+            <properties>
+                <category>tools</category>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>loom</groupId>
+            <artifactId>loom-info</artifactId>
+            <version>${pom.currentVersion}</version>
+            <properties>
+                <category>tools</category>
+            </properties>
+        </dependency>
+        <dependency>
             <groupId>loom</groupId>
             <artifactId>loom-tools</artifactId>
             <version>${pom.currentVersion}</version>
@@ -70,7 +86,7 @@
             </properties>
         </dependency>
         <dependency>
-        	<groupId>avalon</groupId>
+            <groupId>avalon</groupId>
             <artifactId>avalon-phoenix-client</artifactId>
             <version>20030819</version>
             <properties>

@@ -124,7 +124,7 @@ import org.realityforge.salt.i18n.Resources;
  * @author <a href="mail@leosimons.com">Leo Simons</a>
  * @author <a href="peter at realityforge.org">Peter Donald</a>
  * @author <a href="bauer@denic.de">Joerg Bauer</a>
- * @phoenix:block
+ * @dna.component
  * @mx.interface type="org.jcontainer.loom.interfaces.EmbeddorMBean"
  */
 public class DefaultEmbeddor

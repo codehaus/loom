@@ -30,12 +30,12 @@ bin/run.[bat|sh]
                 <p>
                   On Windows versions other than NT, you'll need to set
                   the LOOM_HOME environment variable first.
-                  To stop Loom running in the foreground simply used CTRL-C, which 
+                  To stop Loom running in the foreground simply used CTRL-C, which
                   will cause a clean shutdown.
                 </p>
                 <p>
                   In UNIX environments, you can also use the <code>loom.sh</code>
-                  script to start, stop and restart Loom.  It accepts the following 
+                  script to start, stop and restart Loom.  It accepts the following
                   (mutually exclusive) arguments
                 </p>
 <source>
@@ -53,15 +53,15 @@ loom.sh [start|stop|run|restart|check]
               </p>
               <p>
                 The main benifit of using the Java Service Wrapper is that it can
-                install Loom as a Linux/Unix deamon or a Windows NT service.  
+                install Loom as a Linux/Unix deamon or a Windows NT service.
                 It can also detect if the JVM
                 freezes up or crashes and restart the application immediately.
               </p>
               <p>
-                Loom distribution comes with both Linux and Windows Wrappers. 
-                To build Loom with a Wrapper for another Unix platform, simply change the 
-                <code>wrapper.nix</code> property in <code>loom/distribution/project.properties</code> 
-                to the appropriate platform and rebuild.  
+                Loom distribution comes with both Linux and Windows Wrappers.
+                To build Loom with a Wrapper for another Unix platform, simply change the
+                <code>wrapper.nix</code> property in <code>loom/distribution/project.properties</code>
+                to the appropriate platform and rebuild.
                 Loom will cache each new distribution downloaded in the Maven local repository.
               </p>
               <p>
@@ -114,7 +114,7 @@ package examplecomp.block;
 
 /**
  * TODO: describe LoomXDoclet setup.
- * @phoenix:mx name="examplecomp.block.WebServerMBean"
+ * @mx.component name="examplecomp.block.WebServerMBean"
  */
 public class WebServerBlock
     extends AbstractLoggable

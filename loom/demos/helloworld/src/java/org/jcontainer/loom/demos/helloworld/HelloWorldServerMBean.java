@@ -90,23 +90,18 @@ package org.jcontainer.loom.demos.helloworld;
 /**
  * Specifies methods to export via Management interface.
  *
- * @phoenix:mx-topic name="Greeting"
- *
+ * @mx.component name="Greeting"
  * @author  Huw Roberts <huw@mmlive.com>
- * @version 1.0
  */
 public interface HelloWorldServerMBean
 {
     /**
-     * The greeting that is returned to each HTTP request
-     *
-     * @phoenix:mx-attribute
+     * @mx.attribute description="The greeting that is returned to each HTTP request"
      */
-    public void setGreeting( final String greeting );
+    void setGreeting( final String greeting );
 
     /**
-     * Gets the greeting that is returned to each HTTP request
-     *
+     * @mx.attribute
      */
     String getGreeting();
 }

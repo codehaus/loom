@@ -18,6 +18,11 @@
         </dependency>
         <dependency>
             <groupId>dna</groupId>
+            <artifactId>dna-tools</artifactId>
+            <version>20031016.083103</version>
+        </dependency>
+        <dependency>
+            <groupId>dna</groupId>
             <artifactId>dna-api</artifactId>
             <version>1.0</version>
         </dependency>

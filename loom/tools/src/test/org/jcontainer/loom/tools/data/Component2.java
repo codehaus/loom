@@ -10,8 +10,8 @@ package org.jcontainer.loom.tools.data;
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-10-16 05:11:33 $
- * @phoenix:block
+ * @version $Revision: 1.3 $ $Date: 2003-10-16 09:23:58 $
+ * @dna.component
  * @dna.service type="org.jcontainer.loom.tools.data.Service2"
  */
 public class Component2

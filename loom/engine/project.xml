@@ -29,6 +29,11 @@
             <version>${pom.currentVersion}</version>
         </dependency>
         <dependency>
+            <groupId>dna</groupId>
+            <artifactId>dna-tools</artifactId>
+            <version>20031016.083103</version>
+        </dependency>
+        <dependency>
             <groupId>spice</groupId>
             <artifactId>spice-metaclass</artifactId>
             <version>20031005.002435</version>
