@@ -17,12 +17,12 @@
           its a lot faster than writing the <code>.xinfo</code> file by hand
         </li>
         <li>
-          its harder to make mistakes, since much of the data required for the 
+          its harder to make mistakes, since much of the data required for the
           xinfo file is parsed out of the source code
         </li>
       </ul>
       <p>
-        Using this feature requires that you markup the source code with the 
+        Using this feature requires that you markup the source code with the
         appropriate tags and then have the build script include the
         <code>MetaGenerateTask</code> task.  Both these steps are described
         below.
@@ -44,7 +44,7 @@
             <td>Purpose</td>
             <td>
               Marks the class as block and tells the MetaGenerateTask to generate
-              an xinfo file for it. 
+              an xinfo file for it.
             </td>
           </tr>
           <tr>
@@ -64,7 +64,7 @@
         </p>
         <source>
 /**
- * Ftp server starting point. Loom will load this from the jar file. 
+ * Ftp server starting point. Loom will load this from the jar file.
  * This is also the starting point of remote admin.
  *
  * @phoenix:block
@@ -168,7 +168,7 @@
           <tr>
             <td>Notes</td>
             <td>
-              Can also specify a required version number?  Optional dependencies?         
+              Can also specify a required version number?  Optional dependencies?
             </td>
           </tr>
         </table>
@@ -185,7 +185,7 @@
     public void service(ServiceManager serviceManager) throws ServiceException {
         </source>
       </subsection>
-    </section> 
+    </section>
     <section name="Build Instructions">
       <p>
         To have xinfo files generated as part as your ant build
@@ -196,7 +196,7 @@
     &lt;!-- Make .xinfo, .mxinfo and manifest automatically for blocks -->
     &lt;target name="metagenerate">
 
-        &lt;taskdef name="generatemeta" classname="org.apache.avalon.phoenix.tools.metagenerate.MetaGenerateTask">
+        &lt;taskdef name="generatemeta" classname="org.jcontainer.loom.info.GenerateLoomDescriptorsTask">
           &lt;classpath refid="project.class.path" />
         &lt;/taskdef>
 
@@ -207,13 +207,13 @@
         &lt;/generatemeta>
 
     &lt;/target>
- 
+
       </source>
       <p>
         Where build.metagenerate is where the .xinfo files should be placed, and java.dir
         is the location of the source files.  Typically the build.metagenerate directory
         is an intermediate build directory.  Output from this task are then copied
-        to a release image directory and jar'ed as a subsequent step. 
+        to a release image directory and jar'ed as a subsequent step.
       </p>
       <p>
         The qdox jar and phoenix-client.jar need to be in the project.class.path.

@@ -32,13 +32,10 @@ import org.jcontainer.dna.impl.SAXConfigurationHandler;
  * Utility class used to load Configuration trees from XML files.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.9 $ $Date: 2003-10-05 10:07:04 $
+ * @version $Revision: 1.10 $ $Date: 2003-10-15 02:04:51 $
  */
 public class ConfigurationBuilder
 {
-    public static final String COMPONENTINFO_SCHEMA = "-//LOOM/Component Info DTD Version 1.0//EN";
-    public static final String BLOCKINFO_SCHEMA = "-//LOOM/Block Info DTD Version 1.0//EN";
-    public static final String MXINFO_SCHEMA = "-//LOOM/Mx Info DTD Version 1.0//EN";
     public static final String ASSEMBLY_SCHEMA = "-//LOOM/Assembly DTD Version 1.0//EN";
 
     /**

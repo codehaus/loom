@@ -8,20 +8,20 @@
 
   <!--==================================================================-->
   <!-- Default goal : Builds a sar file                                 -->
-  <!--==================================================================-->    
+  <!--==================================================================-->
   <goal name="sar" prereqs="sar:sar" description="Build a sar file"/>
 
   <!--==================================================================-->
   <!-- Initializations                                                  -->
-  <!--==================================================================-->    
+  <!--==================================================================-->
   <goal name="sar:init"
     description="Initialize the file system and define tasks">
 
-    <ant:property name="maven.sar.final.name" 
+    <ant:property name="maven.sar.final.name"
                  value="${pom.artifactId}.sar"/>
-  
+
     <ant:echo message="Defining sar task"/>
-    <ant:taskdef name="sar" 
+    <ant:taskdef name="sar"
             classname="org.jcontainer.loom.tools.ant.SarTask">
         <ant:classpath>
             <ant:path refid="maven.dependency.classpath"/>
@@ -36,39 +36,39 @@
 
   <!--==================================================================-->
   <!-- Metagenerate xinfo files - only if maven.sar.metagenerate=true   -->
-  <!--==================================================================-->    
+  <!--==================================================================-->
   <goal name="sar:metagenerate"  prereqs="sar:init"
          description="Metagenerate xinfo files">
     <j:if test="${metagenerate == 'true'}">
 	    <ant:echo message="Defining metagenerate task"/>
-	    <ant:taskdef name="metagenerate" 
-	            classname="org.jcontainer.loom.tools.metagenerate.MetaGenerateTask">
+	    <ant:taskdef name="metagenerate"
+	            classname="org.jcontainer.loom.info.GenerateLoomDescriptorsTask">
 	        <ant:classpath>
 	            <ant:path refid="maven.dependency.classpath"/>
 	            <ant:pathelement path="${maven.build.dest}"/>
 	        </ant:classpath>
 	    </ant:taskdef>
-	    <ant:echo message="Metagenerating xinfo files"/>
+	    <ant:echo message="Generating Component Descriptors"/>
 	    <!-- Ensure maven.build.dest exists -->
 	    <ant:mkdir dir="${maven.build.dest}"/>
-	    <metagenerate dest="${maven.build.dest}">
+	    <metagenerate destDir="${maven.build.dest}">
 	        <ant:fileset dir="${maven.sar.metagenerate.src}">
 	            <ant:include name="${maven.sar.metagenerate.include}"/>
 	            <ant:exclude name="${maven.sar.metagenerate.exclude}"/>
 	        </ant:fileset>
 	    </metagenerate>
-    </j:if>  
+    </j:if>
   </goal>
-  
+
   <postGoal name="sar:metagenerate">
     <attainGoal name="jar:jar"/>
   </postGoal>
 
   <!--==================================================================-->
   <!-- Builds a sar file                                                -->
-  <!--==================================================================-->    
+  <!--==================================================================-->
   <goal name="sar:sar" prereqs="sar:metagenerate" description="Build a sar file">
-    
+
     <ant:echo message="Building sar ${maven.sar.final.name}"/>
     <ant:mkdir dir="${maven.sar.build.dir}"/>
     <sar sarfile="${maven.sar.build.dir}/${maven.sar.final.name}"
@@ -83,13 +83,13 @@
         </ant:lib>
         <!-- Add dependency artifacts -->
 	    <j:forEach var="artifact" items="${pom.artifacts}">
-	    	<j:set var="dependency" value="${artifact.dependency}"/>     
+	    	<j:set var="dependency" value="${artifact.dependency}"/>
             <j:if test="${dependency.getProperty('sar.bundle')=='true'}">
   	            <ant:lib dir="${maven.repo.local}/${dependency.artifactDirectory}/jars/">
                     <ant:include name="${dependency.artifact}"/>
-                </ant:lib>    
-            </j:if>  
-        </j:forEach> 
+                </ant:lib>
+            </j:if>
+        </j:forEach>
         <!-- Add resources with targetPath = 'SAR-INF' -->
         <j:forEach var="resource" items="${pom.build.resources}">
             <ant:patternset id="maven.sar.resources.set">
@@ -136,12 +136,12 @@
             </ant:section>
         </ant:manifest>
     </sar>
-      
+
   </goal>
 
   <!--==================================================================-->
   <!-- Install the sar in the local repository                          -->
-  <!--==================================================================-->    
+  <!--==================================================================-->
   <goal name="sar:install"
         prereqs="sar:sar"
         description="Install the sar in the local repository">
@@ -149,13 +149,13 @@
      <artifact:install
         artifact="${maven.sar.build.dir}/${maven.sar.final.name}"
         type="sar"
-        project="${pom}"/>   
+        project="${pom}"/>
 
   </goal>
 
   <!--==================================================================-->
   <!-- Install snapshot of the sar in the local repository              -->
-  <!--==================================================================-->    
+  <!--==================================================================-->
   <goal name="sar:install-snapshot"
         prereqs="sar:sar"
         description="Install snapshot of the sar in the local repository">
@@ -163,13 +163,13 @@
      <artifact:install-snapshot
         artifact="${maven.sar.build.dir}/${maven.sar.final.name}"
         type="sar"
-        project="${pom}"/>   
+        project="${pom}"/>
 
   </goal>
 
   <!--==================================================================-->
   <!-- Deploy the sar to the remote repository                          -->
-  <!--==================================================================-->    
+  <!--==================================================================-->
   <goal name="sar:deploy"
         prereqs="sar:sar"
         description="Deploy the sar to the remote repository">
@@ -177,13 +177,13 @@
      <artifact:deploy
         artifact="${maven.sar.build.dir}/${maven.sar.final.name}"
         type="sar"
-        project="${pom}"/>   
-        
+        project="${pom}"/>
+
   </goal>
 
   <!--==================================================================-->
   <!-- Deploy snapshot of the sar to the remote repository              -->
-  <!--==================================================================-->    
+  <!--==================================================================-->
   <goal name="sar:deploy-snapshot"
         prereqs="sar:sar"
         description="Deploy snapshot of the sar to the remote repository">
@@ -191,15 +191,15 @@
      <artifact:deploy-snapshot
         artifact="${maven.sar.build.dir}/${maven.sar.final.name}"
         type="sar"
-        project="${pom}"/>   
-        
+        project="${pom}"/>
+
   </goal>
 
   <!--==================================================================-->
   <!-- Special no-op goal which can be used by other plugin which need  -->
   <!-- to get access to any of this plugin's property. This is          -->
   <!-- temporary, until we get explicit plugin dependencies.            -->
-  <!--==================================================================-->    
+  <!--==================================================================-->
   <goal name="sar:load"/>
 
 </project>
