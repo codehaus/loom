@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<project>
+
+    <pomVersion>3</pomVersion>
+
+    <name>JContainer Loom</name>
+    <id>loom-site</id>
+
+    <currentVersion>1.0</currentVersion>
+    <inceptionYear>2000</inceptionYear>
+    <!--<logo>/images/logo.gif</logo>-->
+
+    <organization>
+        <name>JContainer Group</name>
+        <url>http://jcontainer.org</url>
+	    <!--<logo>/images/logo.gif</logo>-->
+    </organization>
+
+    <shortDescription>JContainer Loom web site</shortDescription>
+    <description>JContainer Loom web site</description>
+
+    <url>http://jcontainer.org/loom</url>
+    <siteAddress>loom.jcontainer.org</siteAddress>
+    <issueTrackingUrl>http://jira.codehaus.org/secure/BrowseProject.jspa?id=10131</issueTrackingUrl>
+
+    <siteDirectory>/home/groups/jcontainer/loom/htdocs/</siteDirectory>
+
+    <mailingLists>
+        <mailingList>
+            <name>JContainer Interest List</name>
+            <subscribe>http://lists.codehaus.org/mailman/listinfo/jcontainer-interest</subscribe>
+            <unsubscribe>http://lists.codehaus.org/mailman/listinfo/jcontainer-interest</unsubscribe>
+            <archive>http://lists.codehaus.org/pipermail/jcontainer-interest</archive>
+        </mailingList>
+    </mailingLists>
+
+    <build>
+        <nagEmailAddress>jcontainer-interest@lists.codehaus.org</nagEmailAddress>
+    </build>
+</project>
