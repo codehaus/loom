@@ -151,8 +151,7 @@ public class MetaDataTestCase
         }
     }
 
-
-    public void testNullPermissionsElementInPermissionCtor()
+    public void testNullKeyStoreNonNullSignedByInPermissionCtor()
         throws Exception
     {
         try
@@ -163,7 +162,7 @@ public class MetaDataTestCase
         catch( final NullPointerException npe )
         {
             assertEquals( "NPE message",
-                          "permissions[0]",
+                          "keyStore",
                           npe.getMessage() );
         }
     }
