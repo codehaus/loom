@@ -1,7 +1,7 @@
 /* ====================================================================
- * JContainer Software License, version 1.1
+ * Loom Software License, version 1.1
  *
- * Copyright (c) 2003, JContainer Group. All rights reserved.
+ * Copyright (c) 2003, Loom Group. All rights reserved.
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -14,7 +14,7 @@
  *    the documentation and/or other materials provided with the
  *    distribution.
  *
- * 3. Neither the name of the JContainer Group nor the name "Loom" nor
+ * 3. Neither the name of the Loom Group nor the name "Loom" nor
  *    the names of its contributors may be used to endorse or promote
  *    products derived from this software without specific prior
  *    written permission.
@@ -34,7 +34,7 @@
  *
  * ====================================================================
  *
- * JContainer Loom includes code from the Apache Software Foundation
+ * Loom Loom includes code from the Apache Software Foundation
  *
  * ====================================================================
  * The Apache Software License, Version 1.1
@@ -98,7 +98,7 @@ import org.codehaus.loom.extension.Extension;
  * A basic test case for comparator.
  *
  * @author Peter Donald
- * @version $Revision: 1.1 $ $Date: 2004-04-19 22:24:07 $
+ * @version $Revision: 1.2 $ $Date: 2004-05-01 12:48:33 $
  */
 public class ComparatorTestCase
     extends TestCase
