@@ -86,20 +86,21 @@
  */
 package org.codehaus.loom.components.monitor;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-import org.apache.avalon.excalibur.monitor.DirectoryResource;
-import org.apache.avalon.excalibur.monitor.impl.ActiveMonitor;
+
+import org.codehaus.loom.components.util.monitor.DirectoryChangeListener;
+import org.codehaus.loom.components.util.monitor.DirectoryScanner;
 import org.codehaus.loom.components.util.ExtensionFileFilter;
 import org.codehaus.loom.interfaces.Deployer;
+
 import org.codehaus.spice.salt.i18n.ResourceManager;
 import org.codehaus.spice.salt.i18n.Resources;
 import org.codehaus.spice.salt.io.FileUtil;
+
 import org.codehaus.dna.AbstractLogEnabled;
 import org.codehaus.dna.Active;
 import org.codehaus.dna.Composable;
@@ -111,34 +112,54 @@ import org.codehaus.dna.ResourceLocator;
 
 /**
  * This class is responsible for monitoring the deployment directory and
- * deploying, undelploying or redeploying an application as necessary.
+ * deploying, undelploying or redeploying applicatios as necessary.
  *
  * @author Peter Donald
- * @version $Revision: 1.2 $ $Date: 2004-05-01 12:48:35 $
+ * @author Johan Sjoberg
+ * @version $Revision: 1.3 $ $Date: 2004-07-12 14:51:58 $
  */
 public class DefaultDeploymentMonitor
     extends AbstractLogEnabled
-    implements Configurable, Composable, Active, PropertyChangeListener
+    implements Configurable, Composable, Active, DirectoryChangeListener
 {
     private final static Resources REZ =
-        ResourceManager.getPackageResources( DefaultDeploymentMonitor.class );
+      ResourceManager.getPackageResources( DefaultDeploymentMonitor.class );
 
+    /** The application directory */
     private File m_appsDir;
-    private ActiveMonitor m_monitor;
+
+    /** Directory scanner */
+    private DirectoryScanner m_scanner;
+
+    /** Deployer that handles applications */
     private Deployer m_deployer;
+
+    /** Frequency to poll the directory */
     private long m_frequency;
 
+    /**
+     * Configure the class
+     * <br/>
+     * The parameters <code>scanner-frequency</code> and
+     * <code>base-application-directory</code> are used. The latter is
+     * mandatory. If no <code>scanner-frequency</code> is given it defaults
+     * to <code>1000L</code>, which means one second.
+     *
+     * @param configuration The configuration object
+     */
     public void configure( Configuration configuration )
         throws ConfigurationException
     {
         m_frequency =
-        configuration.getChild( "scanner-frequency" ).getValueAsLong( 1000L );
+          configuration.getChild( "scanner-frequency" ).getValueAsLong( 1000L );
         final String appsDir =
-            configuration.getChild( "base-application-directory" ).getValue();
+          configuration.getChild( "base-application-directory" ).getValue();
         m_appsDir = new File( appsDir );
     }
 
     /**
+     * Compose
+     *
      * @dna.dependency type="Deployer"
      */
     public void compose( final ResourceLocator locator )
@@ -154,13 +175,11 @@ public class DefaultDeploymentMonitor
         throws Exception
     {
         deployDefaultApplications();
-        final DirectoryResource resource =
-            new DirectoryResource( m_appsDir.getPath() );
-        resource.addPropertyChangeListener( this );
-        m_monitor = new ActiveMonitor();
-        m_monitor.setFrequency( m_frequency );
-        m_monitor.addResource( resource );
-        m_monitor.start();
+        m_scanner = new DirectoryScanner();
+        m_scanner.setDirectory( m_appsDir.getPath() );
+        m_scanner.setFrequency( m_frequency );
+        m_scanner.setDirectoryChangeListener( this );
+        m_scanner.start();
     }
 
     /**
@@ -169,22 +188,35 @@ public class DefaultDeploymentMonitor
     public void dispose()
         throws Exception
     {
-        m_monitor.stop();
-        m_monitor.stop();
+        m_scanner.stop();
     }
 
     /**
-     * This method is called when the scanner detects that the contents of
-     * deployment directory has changed.
+     * This method is called when the scanner notices changes
+     * in the deployment directory.
+     *
+     * @param type The type of change ( addition, removal or change )
+     * @param fileSet A set of <code>File</code>s that were changed
      */
-    public void propertyChange( final PropertyChangeEvent event )
+    public void directoryChange( final int type, final Set fileSet )
     {
-        final String name = event.getPropertyName();
-        final Set newValue = (Set)event.getNewValue();
-        final Set deployments = getDeployments( newValue );
+        final Set deployments = getDeployments( fileSet );
         final Iterator iterator = deployments.iterator();
+        if( getLogger().isDebugEnabled() )
+        {
+            final String message =
+              REZ.format( "monitor.directory-change.notice",
+                                new Integer( type ),
+                                new Integer( fileSet.size() ),
+                                new Integer( deployments.size() ) );
+            getLogger().debug( message );
+        }
+        if( deployments.isEmpty() )
+        {
+            return;
+        }
 
-        if( name.equals( DirectoryResource.ADDED ) )
+        if( DirectoryChangeListener.ADDITION == type )
         {
             while( iterator.hasNext() )
             {
@@ -192,7 +224,7 @@ public class DefaultDeploymentMonitor
                 deployApplication( file );
             }
         }
-        else if( name.equals( DirectoryResource.REMOVED ) )
+        else if( DirectoryChangeListener.REMOVAL == type )
         {
             while( iterator.hasNext() )
             {
@@ -200,7 +232,7 @@ public class DefaultDeploymentMonitor
                 undeployApplication( file );
             }
         }
-        else
+        else if( DirectoryChangeListener.MODIFICATION == type )
         {
             while( iterator.hasNext() )
             {
@@ -217,22 +249,18 @@ public class DefaultDeploymentMonitor
      */
     private void deployApplication( final File file )
     {
-        final String name =
-            FileUtil.removeExtension( file.getName() );
+        final String name = FileUtil.removeExtension( file.getName() );
         try
         {
             final String message =
-                REZ.format( "monitor.deploy.notice",
-                            name,
-                            file );
+              REZ.format( "monitor.deploy.notice", name, file );
             getLogger().info( message );
-
             m_deployer.deploy( name, file.toURL() );
         }
         catch( final Exception e )
         {
             final String message =
-                REZ.format( "monitor.no-deploy.error", file, e );
+              REZ.format( "monitor.no-deploy.error", file, e );
             getLogger().warn( message, e );
         }
     }
@@ -244,13 +272,11 @@ public class DefaultDeploymentMonitor
      */
     private void undeployApplication( final File file )
     {
-        final String name =
-            FileUtil.removeExtension( file.getName() );
+        final String name = FileUtil.removeExtension( file.getName() );
         try
         {
             final String message =
-                REZ.format( "monitor.undeploy.notice",
-                            name );
+                REZ.format( "monitor.undeploy.notice", name );
             getLogger().info( message );
             m_deployer.undeploy( name );
         }
@@ -274,22 +300,22 @@ public class DefaultDeploymentMonitor
         try
         {
             final String message =
-                REZ.format( "monitor.redeploy.notice",
-                            name,
-                            file );
+              REZ.format( "monitor.redeploy.notice", name, file );
             getLogger().info( message );
             m_deployer.redeploy( name, file.toURL() );
         }
         catch( final Exception e )
         {
             final String message =
-                REZ.format( "monitor.no-redeploy.error", file, e );
+              REZ.format( "monitor.no-redeploy.error", file, e );
             getLogger().warn( message, e );
         }
     }
 
     /**
      * Retrieve the set of files that are candidate deployments.
+     *
+     * @newValue The file set to check.
      */
     private Set getDeployments( final Set newValue )
     {
@@ -305,7 +331,7 @@ public class DefaultDeploymentMonitor
             else
             {
                 final String message =
-                    REZ.format( "monitor.skipping-file.notice", file );
+                  REZ.format( "monitor.skipping-file.notice", file );
                 getLogger().info( message );
             }
         }
@@ -313,15 +339,14 @@ public class DefaultDeploymentMonitor
     }
 
     /**
-     * Return true if file represents a loom deployment.
+     * Check if a file represents a loom deployment.
      *
-     * @param file the file
+     * @param file The file to check
+     * @returns true If file represents a loom deployment, else false
      */
     private boolean isDeployment( final File file )
     {
-        return
-            !file.isDirectory() &&
-            file.getName().endsWith( ".sar" );
+        return !file.isDirectory() && file.getName().endsWith( ".sar" );
     }
 
     /**
@@ -341,13 +366,19 @@ public class DefaultDeploymentMonitor
         }
     }
 
+    /**
+     * Deploy SAR files
+     *
+     * @param files A list of .sar files
+     * @throws Exception if an error occurs
+     */
     private void deployFiles( final File[] files )
         throws Exception
     {
         Arrays.sort( files );
         for( int i = 0; i < files.length; i++ )
         {
-            final File file = files[ i ];
+            final File file = files[i];
             deployApplication( file );
         }
     }
