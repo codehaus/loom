@@ -199,7 +199,14 @@
 	    <ant:zip destfile="${maven.build.dir}/${maven.final.name}.zip">
 	      <ant:zipfileset dir="${distDir}" prefix="${maven.final.name}"/>
 	    </ant:zip>
-    	
+
+    	<ant:copy todir="${maven.repo.local}/${pom.artifactDirectory}/distributions"
+      		overwrite="true">
+      		<ant:fileset dir="${maven.build.dir}">
+      			<ant:include name="${maven.final.name}.tar.gz"/>
+      			<ant:include name="${maven.final.name}.zip"/>
+      		</ant:fileset>
+        </ant:copy>
     </goal>
 
 	
