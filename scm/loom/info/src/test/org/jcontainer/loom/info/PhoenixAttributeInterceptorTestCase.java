@@ -9,7 +9,6 @@ package org.jcontainer.loom.info;
 
 import junit.framework.TestCase;
 import com.thoughtworks.qdox.model.JavaClass;
-import com.thoughtworks.qdox.model.JavaField;
 import com.thoughtworks.qdox.model.DocletTag;
 import com.thoughtworks.qdox.model.JavaMethod;
 import org.realityforge.metaclass.model.Attribute;
@@ -19,7 +18,7 @@ import java.util.ArrayList;
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-10-15 05:21:11 $
+ * @version $Revision: 1.6 $ $Date: 2003-10-16 08:43:28 $
  */
 public class PhoenixAttributeInterceptorTestCase
     extends TestCase
@@ -98,80 +97,6 @@ public class PhoenixAttributeInterceptorTestCase
         assertEquals( "attribute.parameter(type)", "X", result.getParameter( "type" ) );
     }
 
-    public void testProcessFieldAttributeWithoutTransformation()
-        throws Exception
-    {
-        final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
-        final Attribute attribute = new Attribute( "ignore-me" );
-        final Attribute result =
-            interceptor.processFieldAttribute( new JavaField(), attribute );
-        assertNotNull( "attribute", result );
-        assertEquals( "attribute.name", "ignore-me", result.getName() );
-        assertEquals( "attribute.value", null, result.getValue() );
-        assertEquals( "attribute.parameterCount", 0, result.getParameterCount() );
-    }
-
-    public void testProcessFieldAttributeWithMXDescription()
-        throws Exception
-    {
-        final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
-        final Attribute attribute = new Attribute( "phoenix:mx-description" );
-        final Attribute result =
-            interceptor.processFieldAttribute( new JavaField(), attribute );
-        assertNull( "attribute", result );
-    }
-
-    public void testProcessFieldAttributeWithMXAttributeAndNoDescriptionOrComment()
-        throws Exception
-    {
-        final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
-        final Attribute attribute = new Attribute( "phoenix:mx-attribute" );
-        final Attribute result =
-            interceptor.processFieldAttribute( new JavaField(), attribute );
-        assertNotNull( "attribute", result );
-        assertEquals( "attribute.name", "mx.attribute", result.getName() );
-        assertEquals( "attribute.value", null, result.getValue() );
-        assertEquals( "attribute.parameterCount", 0, result.getParameterCount() );
-    }
-
-    public void testProcessFieldAttributeWithMXAttributeAndDescription()
-        throws Exception
-    {
-        final String description = "A Random Thought";
-        final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
-        final Attribute attribute = new Attribute( "phoenix:mx-attribute" );
-        final JavaField field = new JavaField();
-        final ArrayList tags = new ArrayList();
-        tags.add( new DocletTag( "phoenix:mx-description", description ) );
-        field.setTags( tags );
-        final Attribute result =
-            interceptor.processFieldAttribute( field, attribute );
-        assertNotNull( "attribute", result );
-        assertEquals( "attribute.name", "mx.attribute", result.getName() );
-        assertEquals( "attribute.value", null, result.getValue() );
-        assertEquals( "attribute.parameterCount", 1, result.getParameterCount() );
-        assertEquals( "attribute.parameter(description)",
-                      description, result.getParameter( "description" ) );
-    }
-
-    public void testProcessFieldAttributeWithMXAttributeAndComment()
-        throws Exception
-    {
-        final String description = "A Random Thought";
-        final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
-        final Attribute attribute = new Attribute( "phoenix:mx-attribute" );
-        final JavaField field = new JavaField();
-        field.setComment( description );
-        final Attribute result =
-            interceptor.processFieldAttribute( field, attribute );
-        assertNotNull( "attribute", result );
-        assertEquals( "attribute.name", "mx.attribute", result.getName() );
-        assertEquals( "attribute.value", null, result.getValue() );
-        assertEquals( "attribute.parameterCount", 1, result.getParameterCount() );
-        assertEquals( "attribute.parameter(description)",
-                      description, result.getParameter( "description" ) );
-    }
-
     public void testProcessMethodAttributeWithoutTransformation()
         throws Exception
     {
@@ -199,6 +124,57 @@ public class PhoenixAttributeInterceptorTestCase
         throws Exception
     {
         final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
+        final Attribute attribute = new Attribute( "phoenix:mx-attribute" );
+        final Attribute result =
+            interceptor.processMethodAttribute( new JavaMethod(), attribute );
+        assertNotNull( "attribute", result );
+        assertEquals( "attribute.name", "mx.attribute", result.getName() );
+        assertEquals( "attribute.value", null, result.getValue() );
+        assertEquals( "attribute.parameterCount", 0, result.getParameterCount() );
+    }
+
+    public void testProcessMethodAttributeWithMXAttributeAndDescription()
+        throws Exception
+    {
+        final String description = "A Random Thought";
+        final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
+        final Attribute attribute = new Attribute( "phoenix:mx-attribute" );
+        final JavaMethod method = new JavaMethod();
+        final ArrayList tags = new ArrayList();
+        tags.add( new DocletTag( "phoenix:mx-description", description ) );
+        method.setTags( tags );
+        final Attribute result =
+            interceptor.processMethodAttribute( method, attribute );
+        assertNotNull( "attribute", result );
+        assertEquals( "attribute.name", "mx.attribute", result.getName() );
+        assertEquals( "attribute.value", null, result.getValue() );
+        assertEquals( "attribute.parameterCount", 1, result.getParameterCount() );
+        assertEquals( "attribute.parameter(description)",
+                      description, result.getParameter( "description" ) );
+    }
+
+    public void testProcessMethodAttributeWithMXAttributeAndComment()
+        throws Exception
+    {
+        final String description = "A Random Thought";
+        final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
+        final Attribute attribute = new Attribute( "phoenix:mx-attribute" );
+        final JavaMethod method = new JavaMethod();
+        method.setComment( description );
+        final Attribute result =
+            interceptor.processMethodAttribute( method, attribute );
+        assertNotNull( "attribute", result );
+        assertEquals( "attribute.name", "mx.attribute", result.getName() );
+        assertEquals( "attribute.value", null, result.getValue() );
+        assertEquals( "attribute.parameterCount", 1, result.getParameterCount() );
+        assertEquals( "attribute.parameter(description)",
+                      description, result.getParameter( "description" ) );
+    }
+
+    public void testProcessMethodAttributeWithMXOperationAndNoDescriptionOrComment()
+        throws Exception
+    {
+        final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
         final Attribute attribute = new Attribute( "phoenix:mx-operation" );
         final Attribute result =
             interceptor.processMethodAttribute( new JavaMethod(), attribute );
@@ -208,7 +184,7 @@ public class PhoenixAttributeInterceptorTestCase
         assertEquals( "attribute.parameterCount", 0, result.getParameterCount() );
     }
 
-    public void testProcessMethodAttributeWithMXAttributeAndDescription()
+    public void testProcessMethodAttributeWithMXOperationAndDescription()
         throws Exception
     {
         final String description = "A Random Thought";
@@ -228,7 +204,7 @@ public class PhoenixAttributeInterceptorTestCase
                       description, result.getParameter( "description" ) );
     }
 
-    public void testProcessMethodAttributeWithMXAttributeAndComment()
+    public void testProcessMethodAttributeWithMXOperationAndComment()
         throws Exception
     {
         final String description = "A Random Thought";
@@ -260,9 +236,7 @@ public class PhoenixAttributeInterceptorTestCase
         assertNotNull( "attribute", result );
         assertEquals( "attribute.name", "dna.configuration", result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );
-        assertEquals( "attribute.parameterCount", 1, result.getParameterCount() );
-        assertEquals( "attribute.parameter(location)",
-                      "MyClass-schema.xml", result.getParameter( "location" ) );
+        assertEquals( "attribute.parameterCount", 0, result.getParameterCount() );
     }
 
     public void testProcessMethodAttributeWithPhoenixConfigurationSchemaSpecifyingType()
@@ -282,11 +256,9 @@ public class PhoenixAttributeInterceptorTestCase
         assertNotNull( "attribute", result );
         assertEquals( "attribute.name", "dna.configuration", result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );
-        assertEquals( "attribute.parameterCount", 2, result.getParameterCount() );
+        assertEquals( "attribute.parameterCount", 1, result.getParameterCount() );
         assertEquals( "attribute.parameter(type)",
                       type, result.getParameter( "type" ) );
-        assertEquals( "attribute.parameter(location)",
-                      "MyClass-schema.xml", result.getParameter( "location" ) );
     }
 
     public void testProcessMethodAttributeWithPhoenixConfigurationSchemaSpecifyingRelaxType()
@@ -305,12 +277,10 @@ public class PhoenixAttributeInterceptorTestCase
         assertNotNull( "attribute", result );
         assertEquals( "attribute.name", "dna.configuration", result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );
-        assertEquals( "attribute.parameterCount", 2, result.getParameterCount() );
+        assertEquals( "attribute.parameterCount", 1, result.getParameterCount() );
         assertEquals( "attribute.parameter(type)",
                       "http://relaxng.org/ns/structure/1.0",
                       result.getParameter( "type" ) );
-        assertEquals( "attribute.parameter(location)",
-                      "MyClass-schema.xml", result.getParameter( "location" ) );
     }
 
     public void testProcessMethodAttributeWithPhoenixDependency()
@@ -460,21 +430,5 @@ public class PhoenixAttributeInterceptorTestCase
         assertEquals( "attributes[2].parameter(description)",
                       "This is the description",
                       attributes[ 2 ].getParameter( "description" ) );
-    }
-
-    public void testGetSchemaLocationForClassInDefaultPackage()
-        throws Exception
-    {
-        final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
-        final String location = interceptor.getSchemaLocationFor( "Foo" );
-        assertEquals( "location", "Foo-schema.xml", location );
-    }
-
-    public void testGetSchemaLocationForClassInNonDefaultPackage()
-        throws Exception
-    {
-        final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
-        final String location = interceptor.getSchemaLocationFor( "com.biz.Foo" );
-        assertEquals( "location", "Foo-schema.xml", location );
     }
 }

@@ -17,7 +17,7 @@ import com.thoughtworks.qdox.model.DocletTag;
  * "phoenix:mx-topic" or "phoenix:block" at the class level.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-10-13 05:21:27 $
+ * @version $Revision: 1.2 $ $Date: 2003-10-16 08:43:28 $
  */
 public class PhoenixJavaClassFilter
     implements JavaClassFilter
@@ -27,9 +27,12 @@ public class PhoenixJavaClassFilter
      */
     public JavaClass filterClass( final JavaClass javaClass )
     {
+        final DocletTag dnaTag = javaClass.getTagByName( "dna.component" );
         final DocletTag mxTag = javaClass.getTagByName( "phoenix:mx-topic" );
         final DocletTag blockTag = javaClass.getTagByName( "phoenix:block" );
-        if( null != mxTag || null != blockTag )
+        if( null != mxTag ||
+            null != dnaTag || 
+            null != blockTag )
         {
             return javaClass;
         }

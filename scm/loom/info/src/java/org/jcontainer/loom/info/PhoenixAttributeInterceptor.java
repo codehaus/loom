@@ -7,15 +7,14 @@
  */
 package org.jcontainer.loom.info;
 
+import com.thoughtworks.qdox.model.DocletTag;
 import com.thoughtworks.qdox.model.JavaClass;
 import com.thoughtworks.qdox.model.JavaMethod;
-import com.thoughtworks.qdox.model.JavaField;
-import com.thoughtworks.qdox.model.DocletTag;
-import java.util.Properties;
 import java.util.ArrayList;
+import java.util.Properties;
 import org.realityforge.metaclass.model.Attribute;
-import org.realityforge.metaclass.tools.qdox.QDoxAttributeInterceptor;
 import org.realityforge.metaclass.tools.qdox.DefaultQDoxAttributeInterceptor;
+import org.realityforge.metaclass.tools.qdox.QDoxAttributeInterceptor;
 
 /**
  * This is an Attribute interceptor that invoked during construction
@@ -23,7 +22,7 @@ import org.realityforge.metaclass.tools.qdox.DefaultQDoxAttributeInterceptor;
  * into modern DNA and MX attributes.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-10-15 05:21:10 $
+ * @version $Revision: 1.7 $ $Date: 2003-10-16 08:43:28 $
  */
 public class PhoenixAttributeInterceptor
     extends DefaultQDoxAttributeInterceptor
@@ -43,60 +42,23 @@ public class PhoenixAttributeInterceptor
         else if( name.equals( "phoenix:service" ) )
         {
             final Properties parameters = new Properties();
-            final String type = attribute.getParameter( "name", "" );
-            parameters.setProperty( "type", type );
+            final String type = attribute.getParameter( "name", null );
+            setParameter( parameters, "type", type );
             return new Attribute( "dna.service", parameters );
         }
         else if( name.equals( "phoenix:mx-topic" ) )
         {
             final String description = attribute.getParameter( "name", "" );
             final Properties parameters = new Properties();
-            parameters.setProperty( "description", description );
+            setParameter( parameters, "description", description );
             return new Attribute( "mx.component", parameters );
         }
         else if( name.equals( "phoenix:mx-proxy" ) )
         {
             final Properties parameters = new Properties();
             final String type = attribute.getParameter( "class", "" );
-            parameters.setProperty( "type", type );
+            setParameter( parameters, "type", type );
             return new Attribute( "mx.proxy", parameters );
-        }
-        else
-        {
-            return attribute;
-        }
-    }
-
-    /**
-     * @see QDoxAttributeInterceptor#processFieldAttribute(JavaField, Attribute)
-     */
-    public Attribute processFieldAttribute( final JavaField field,
-                                            final Attribute attribute )
-    {
-        final String name = attribute.getName();
-        if( name.equals( "phoenix:mx-attribute" ) )
-        {
-            final DocletTag descriptionTag =
-                field.getTagByName( "phoenix:mx-description" );
-            final String description;
-            if( null != descriptionTag )
-            {
-                description = descriptionTag.getValue();
-            }
-            else
-            {
-                description = field.getComment();
-            }
-            final Properties parameters = new Properties();
-            if( null != description )
-            {
-                parameters.setProperty( "description", description );
-            }
-            return new Attribute( "mx.attribute", parameters );
-        }
-        else if( name.equals( "phoenix:mx-description" ) )
-        {
-            return null;
         }
         else
         {
@@ -116,33 +78,25 @@ public class PhoenixAttributeInterceptor
             final String type =
                 attribute.getParameter( "type", null );
             final Properties parameters = new Properties();
-            if( null != type )
+            if( "relax-ng".equals( type ) )
             {
-                if( "relax-ng".equals( type ) )
-                {
-                    parameters.setProperty( "type",
-                                            "http://relaxng.org/ns/structure/1.0" );
-                }
-                else
-                {
-                    parameters.setProperty( "type", type );
-                }
+                setParameter( parameters,
+                              "type",
+                              "http://relaxng.org/ns/structure/1.0" );
             }
-            final String classname = method.getParentClass().getName();
-            final String location = getSchemaLocationFor( classname );
-            parameters.setProperty( "location", location );
+            else
+            {
+                setParameter( parameters, "type", type );
+            }
             return new Attribute( "dna.configuration", parameters );
         }
         else if( name.equals( "phoenix:dependency" ) )
         {
             final Properties parameters = new Properties();
             final String key = attribute.getParameter( "role", null );
-            final String type = attribute.getParameter( "name", "" );
-            parameters.setProperty( "type", type );
-            if( null != key )
-            {
-                parameters.setProperty( "key", key );
-            }
+            final String type = attribute.getParameter( "name", null );
+            setParameter( parameters, "type", type );
+            setParameter( parameters, "key", key );
             return new Attribute( "dna.dependency", parameters );
         }
         else if( name.equals( "phoenix:mx-operation" ) )
@@ -159,11 +113,25 @@ public class PhoenixAttributeInterceptor
                 description = method.getComment();
             }
             final Properties parameters = new Properties();
-            if( null != description )
-            {
-                parameters.setProperty( "description", description );
-            }
+            setParameter( parameters, "description", description );
             return new Attribute( "mx.operation", parameters );
+        }
+        if( name.equals( "phoenix:mx-attribute" ) )
+        {
+            final DocletTag descriptionTag =
+                method.getTagByName( "phoenix:mx-description" );
+            final String description;
+            if( null != descriptionTag )
+            {
+                description = descriptionTag.getValue();
+            }
+            else
+            {
+                description = method.getComment();
+            }
+            final Properties parameters = new Properties();
+            setParameter( parameters, "description", description );
+            return new Attribute( "mx.attribute", parameters );
         }
         else if( name.equals( "phoenix:mx-description" ) )
         {
@@ -194,7 +162,7 @@ public class PhoenixAttributeInterceptor
             {
                 final Properties parameters = new Properties();
                 final String type = attribute.getParameter( "name", "" );
-                parameters.setProperty( "type", type );
+                setParameter( parameters, "type", type );
                 result.add( new Attribute( "dna.service", parameters ) );
                 result.add( new Attribute( "mx.interface", parameters ) );
             }
@@ -236,8 +204,8 @@ public class PhoenixAttributeInterceptor
                     final String name = value.substring( 0, index ).trim();
                     final String description = value.substring( index + 1 );
                     final Properties parameters = new Properties();
-                    parameters.setProperty( "name", name );
-                    parameters.setProperty( "description", description );
+                    setParameter( parameters, "name", name );
+                    setParameter( parameters, "description", description );
                     result.add( new Attribute( "mx.parameter", parameters ) );
                 }
             }
@@ -246,21 +214,19 @@ public class PhoenixAttributeInterceptor
     }
 
     /**
-     * Get the location of the schema. By default it is "Foo-schema.xml"
-     * for the com.biz.Foo component.
+     * Set parameter if value not null.
      *
-     * @param classname the classname of component
-     * @return the location of the schema
+     * @param parameters the parameters object
+     * @param key the key
+     * @param value the value
      */
-    String getSchemaLocationFor( final String classname )
+    private void setParameter( final Properties parameters,
+                               final String key,
+                               final String value )
     {
-        final int index = classname.lastIndexOf( "." );
-        String location = classname;
-        if( -1 != index )
+        if( null != value )
         {
-            location = classname.substring( index + 1 );
+            parameters.setProperty( key, value );
         }
-        location += "-schema.xml";
-        return location;
     }
 }

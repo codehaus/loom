@@ -15,7 +15,7 @@ import java.util.ArrayList;
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-10-13 05:24:36 $
+ * @version $Revision: 1.2 $ $Date: 2003-10-16 08:43:28 $
  */
 public class PhoenixJavaClassFilterTestCase
     extends TestCase
@@ -48,6 +48,18 @@ public class PhoenixJavaClassFilterTestCase
         final JavaClass javaClass = new JavaClass();
         final ArrayList tags = new ArrayList();
         tags.add( new DocletTag( "phoenix:block", "" ) );
+        javaClass.setTags( tags );
+        final JavaClass result = filter.filterClass( javaClass );
+        assertEquals( "javaClass", javaClass, result );
+    }
+
+    public void testClassWithDNAComponent()
+        throws Exception
+    {
+        final PhoenixJavaClassFilter filter = new PhoenixJavaClassFilter();
+        final JavaClass javaClass = new JavaClass();
+        final ArrayList tags = new ArrayList();
+        tags.add( new DocletTag( "dna.component", "" ) );
         javaClass.setTags( tags );
         final JavaClass result = filter.filterClass( javaClass );
         assertEquals( "javaClass", javaClass, result );
