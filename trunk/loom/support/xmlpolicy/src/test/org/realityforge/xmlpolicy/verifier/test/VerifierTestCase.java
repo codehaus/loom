@@ -99,7 +99,52 @@ public class VerifierTestCase
         {
             fail( "Expected to pass when not specifying keystore" );
         }
+    }
 
+    public void testConfig6()
+        throws Exception
+    {
+        try
+        {
+            verifyResource( "config6.xml" );
+        }
+        catch( final Throwable t )
+        {
+            return;
+        }
+
+        fail( "Expected verify to fail as specified " +
+              "empty name for keyStore" );
+    }
+
+    public void testConfig7()
+        throws Exception
+    {
+        try
+        {
+            verifyResource( "config7.xml" );
+        }
+        catch( final Throwable t )
+        {
+            return;
+        }
+
+        fail( "Expected verify to fail as specified " +
+              "bad character in center of name for keyStore" );
+    }
+
+    public void testConfig8()
+        throws Exception
+    {
+        try
+        {
+            verifyResource( "config8.xml" );
+        }
+        catch( final Throwable t )
+        {
+            fail( "Expected verify to pass as specified " +
+                  "good name for keyStore" );
+        }        
     }
 
     private void verifyResource( final String resource )
