@@ -93,6 +93,7 @@ import org.apache.avalon.phoenix.BlockListener;
 import org.apache.avalon.phoenix.metadata.SarMetaData;
 import org.apache.avalon.phoenix.metainfo.BlockInfo;
 import org.jcontainer.loom.components.util.ComponentInfoConverter;
+import org.jcontainer.loom.components.util.profile.ComponentProfile;
 
 /**
  * Manage a set of {@link ApplicationListener} objects and propogate
@@ -155,7 +156,7 @@ final class ListenerSupport
      */
     private BlockEvent createEvent( final BlockEntry entry )
     {
-        final org.jcontainer.loom.components.util.profile.ComponentProfile profile = entry.getProfile();
+        final ComponentProfile profile = entry.getProfile();
         final BlockInfo blockInfo = ComponentInfoConverter.toBlockInfo( profile.getInfo() );
         final BlockEvent event =
             new BlockEvent( profile.getMetaData().getName(),

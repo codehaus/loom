@@ -89,6 +89,7 @@ package org.jcontainer.loom.components.application;
 import java.util.ArrayList;
 import org.jcontainer.loom.components.util.info.DependencyDescriptor;
 import org.jcontainer.loom.components.util.metadata.DependencyMetaData;
+import org.jcontainer.loom.components.util.profile.ComponentProfile;
 
 /**
  *
@@ -112,7 +113,7 @@ class DependencyGraph
      * @return the ordered node names
      */
     public static String[] walkGraph( final boolean forward,
-                                      final org.jcontainer.loom.components.util.profile.ComponentProfile[] blocks )
+                                      final ComponentProfile[] blocks )
     {
         final ArrayList result = new ArrayList();
 
@@ -128,8 +129,8 @@ class DependencyGraph
         return (String[])result.toArray( new String[ 0 ] );
     }
 
-    private static void visitBlock( final org.jcontainer.loom.components.util.profile.ComponentProfile block,
-                                    final org.jcontainer.loom.components.util.profile.ComponentProfile[] blocks,
+    private static void visitBlock( final ComponentProfile block,
+                                    final ComponentProfile[] blocks,
                                     final boolean forward,
                                     final ArrayList done,
                                     final ArrayList order )
@@ -159,8 +160,8 @@ class DependencyGraph
      *
      * @param block the BlockMetaData
      */
-    private static void visitDependencies( final org.jcontainer.loom.components.util.profile.ComponentProfile block,
-                                           final org.jcontainer.loom.components.util.profile.ComponentProfile[] blocks,
+    private static void visitDependencies( final ComponentProfile block,
+                                           final ComponentProfile[] blocks,
                                            final ArrayList done,
                                            final ArrayList order )
     {
@@ -172,7 +173,7 @@ class DependencyGraph
             for( int j = 0; j < dependencySet.length; j++ )
             {
                 final DependencyMetaData dependency = dependencySet[ j ];
-                final org.jcontainer.loom.components.util.profile.ComponentProfile other = getBlock( dependency.getProviderName(), blocks );
+                final ComponentProfile other = getBlock( dependency.getProviderName(), blocks );
                 visitBlock( other, blocks, true, done, order );
             }
         }
@@ -184,8 +185,8 @@ class DependencyGraph
      *
      * @param block the ComponentProfile
      */
-    private static void visitReverseDependencies( final org.jcontainer.loom.components.util.profile.ComponentProfile block,
-                                                  final org.jcontainer.loom.components.util.profile.ComponentProfile[] blocks,
+    private static void visitReverseDependencies( final ComponentProfile block,
+                                                  final ComponentProfile[] blocks,
                                                   final ArrayList done,
                                                   final ArrayList order )
     {
@@ -193,7 +194,7 @@ class DependencyGraph
 
         for( int i = 0; i < blocks.length; i++ )
         {
-            final org.jcontainer.loom.components.util.profile.ComponentProfile other = blocks[ i ];
+            final ComponentProfile other = blocks[ i ];
             final DependencyMetaData[] roles = other.getMetaData().getDependencies();
 
             for( int j = 0; j < roles.length; j++ )
@@ -214,8 +215,8 @@ class DependencyGraph
      * @param blocks the Block array
      * @return the Block
      */
-    private static org.jcontainer.loom.components.util.profile.ComponentProfile getBlock( final String name,
-                                                                                final org.jcontainer.loom.components.util.profile.ComponentProfile[] blocks )
+    private static ComponentProfile getBlock( final String name,
+                                              final ComponentProfile[] blocks )
     {
         for( int i = 0; i < blocks.length; i++ )
         {
