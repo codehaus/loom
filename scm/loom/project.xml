@@ -12,10 +12,10 @@
     </organization>
 
 	<groupId>loom</groupId>
-    <package>org.jcontainer.loom.${pom.artifactId.substring(5)}</package>
+    <package>org.jcontainer.loom</package>
     <url>http://loom.jcontainer.org</url>
     <logo>/images/loom-logo.png</logo>
-    <distributionDirectory>/www/dist.codehaus.org/jcontainer/maven/${groupId}</distributionDirectory>
+    <distributionDirectory>/www/dist.codehaus.org</distributionDirectory>
     <distributionSite>codehaus.org</distributionSite>
     <siteDirectory>/www/jcontainer.codehaus.org/loom/</siteDirectory>
     <siteAddress>loom.jcontainer.org</siteAddress>
