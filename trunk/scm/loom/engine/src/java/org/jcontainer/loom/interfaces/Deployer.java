@@ -105,29 +105,29 @@ public interface Deployer
      *
      * @param name the name of deployment
      * @param location the installation to deploy
-     * @throws DeploymentException if an error occurs
+     * @throws LoomException if an error occurs
      */
     void deploy( String name, URL location )
-        throws DeploymentException;
+        throws LoomException;
 
     /**
      * Undeploy and deploy an installation.
      *
      * @param name the name of deployment
      * @param location the installation to redeploy
-     * @throws DeploymentException if an error occurs
+     * @throws LoomException if an error occurs
      */
     void redeploy( String name, URL location )
-        throws DeploymentException;
+        throws LoomException;
 
     /**
      * Undeploy a resource from a location.
      *
      * @param name the name of deployment
-     * @throws DeploymentException if an error occurs
+     * @throws LoomException if an error occurs
      */
     void undeploy( String name )
-        throws DeploymentException;
+        throws LoomException;
 
     /**
      * Determine if a deployment has matching name.

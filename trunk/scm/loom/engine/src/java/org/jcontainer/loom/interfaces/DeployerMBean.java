@@ -106,13 +106,13 @@ public interface DeployerMBean
      *
      * @param name the name of deployment
      * @param sarURL the installation to deploy
-     * @throws DeploymentException if an error occurs
+     * @throws LoomException if an error occurs
      * @see #deploy(String,String)
      * @see #undeploy(String)
      * @see #redeploy(String)
      */
     void deploy( String name, String sarURL )
-        throws DeploymentException;
+        throws LoomException;
 
     /**
      * Deploy an installation.
@@ -121,13 +121,13 @@ public interface DeployerMBean
      *
      * @param name the name of deployment
      * @param location the installation to deploy
-     * @throws DeploymentException if an error occurs
+     * @throws LoomException if an error occurs
      * @see #deploy(String,String)
      * @see #undeploy(String)
      * @see #redeploy(String)
      */
     void deploy( String name, URL location )
-        throws DeploymentException;
+        throws LoomException;
 
     /**
      * Undeploy an installation.
@@ -135,13 +135,13 @@ public interface DeployerMBean
      * @phoenix:mx-operation
      *
      * @param name the name of deployment
-     * @throws DeploymentException if an error occurs
+     * @throws LoomException if an error occurs
      * @see #deploy(String,String)
      * @see #deploy(String,URL)
      * @see #redeploy(String)
      */
     void undeploy( String name )
-        throws DeploymentException;
+        throws LoomException;
 
     /**
      * Redeploy an installation.
@@ -149,11 +149,11 @@ public interface DeployerMBean
      * @phoenix:mx-operation
      *
      * @param name the name of deployment
-     * @throws DeploymentException if an error occurs
+     * @throws LoomException if an error occurs
      * @see #deploy(String,String)
      * @see #deploy(String,URL)
      * @see #undeploy(String)
      */
     void redeploy( String name )
-        throws DeploymentException;
+        throws LoomException;
 }

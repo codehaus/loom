@@ -104,8 +104,8 @@ import org.apache.avalon.framework.parameters.ParameterException;
 import org.apache.avalon.framework.parameters.Parameterizable;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.jcontainer.loom.interfaces.ContainerConstants;
-import org.jcontainer.loom.interfaces.InstallationException;
 import org.jcontainer.loom.interfaces.Installer;
+import org.jcontainer.loom.interfaces.LoomException;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.io.FileUtil;
@@ -116,7 +116,7 @@ import org.realityforge.salt.io.IOUtil;
  * and installing it as appropriate.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-08-17 18:27:33 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-05 00:12:37 $
  */
 public class DefaultInstaller
     extends AbstractLogEnabled
@@ -210,10 +210,10 @@ public class DefaultInstaller
      * Uninstall the Sar designated installation.
      *
      * @param installation the installation
-     * @throws InstallationException if an error occurs
+     * @throws LoomException if an error occurs
      */
     public void uninstall( final Map installation )
-        throws InstallationException
+        throws LoomException
     {
         final File work =
             (File)installation.get( ContainerConstants.INSTALL_WORK );
@@ -255,10 +255,10 @@ public class DefaultInstaller
      * Install the Sar designated by url.
      *
      * @param url the url of instalation
-     * @throws InstallationException if an error occurs
+     * @throws LoomException if an error occurs
      */
     public Map install( final String name, final URL url )
-        throws InstallationException
+        throws LoomException
     {
         lock();
         try
@@ -271,7 +271,7 @@ public class DefaultInstaller
             {
                 final String message =
                     REZ.format( "install.sar-isa-dir.error", name, url );
-                throw new InstallationException( message );
+                throw new LoomException( message );
             }
 
             //Get Zipfile representing .sar file
@@ -281,7 +281,7 @@ public class DefaultInstaller
         catch( final IOException ioe )
         {
             final String message = REZ.format( "bad-zip-file", url );
-            throw new InstallationException( message, ioe );
+            throw new LoomException( message, ioe );
         }
         finally
         {
@@ -317,7 +317,7 @@ public class DefaultInstaller
                                 final URL url,
                                 final File file,
                                 final ZipFile zipFile )
-        throws InstallationException
+        throws LoomException
     {
         final File directory =
             new File( m_baseDirectory, name ).getAbsoluteFile();
@@ -364,13 +364,13 @@ public class DefaultInstaller
      *        non-classes files
      * @param workDir the directory to extract classes/jar files
      * @param url the url of deployment (for error reporting purposes)
-     * @throws InstallationException if an error occurs extracting files
+     * @throws LoomException if an error occurs extracting files
      */
     private void expandZipFile( final ZipFile zipFile,
                                 final File directory,
                                 final File workDir,
                                 final URL url )
-        throws InstallationException
+        throws LoomException
     {
         final Enumeration entries = zipFile.entries();
         while( entries.hasMoreElements() )
@@ -416,7 +416,7 @@ public class DefaultInstaller
                              final ZipEntry entry,
                              final File destination,
                              final URL url )
-        throws InstallationException
+        throws LoomException
     {
         if( !destination.exists() )
         {
@@ -446,7 +446,7 @@ public class DefaultInstaller
                                 final ZipEntry entry,
                                 final String name,
                                 final File workDir )
-        throws InstallationException
+        throws LoomException
     {
         if( name.startsWith( LIB )
             && name.endsWith( ".jar" )
@@ -475,7 +475,7 @@ public class DefaultInstaller
                                    final ZipEntry entry,
                                    final String name,
                                    final File workDir )
-        throws InstallationException
+        throws LoomException
     {
         if( name.startsWith( CLASSES ) )
         {
@@ -562,15 +562,15 @@ public class DefaultInstaller
      *
      * @param url the url of deployment
      * @return the File for deployment
-     * @throws InstallationException if an error occurs
+     * @throws LoomException if an error occurs
      */
     private File getFileFor( final URL url )
-        throws InstallationException
+        throws LoomException
     {
         if( !url.getProtocol().equals( "file" ) )
         {
             final String message = REZ.format( "install-nonlocal", url );
-            throw new InstallationException( message );
+            throw new LoomException( message );
         }
 
         File file = new File( url.getFile() );
@@ -579,7 +579,7 @@ public class DefaultInstaller
         if( !file.exists() )
         {
             final String message = REZ.format( "install-nourl", file );
-            throw new InstallationException( message );
+            throw new LoomException( message );
         }
 
         return file;
@@ -591,7 +591,7 @@ public class DefaultInstaller
     private void expandFile( final ZipFile zipFile,
                              final ZipEntry entry,
                              final File file )
-        throws InstallationException
+        throws LoomException
     {
         InputStream input = null;
         OutputStream output = null;
@@ -610,7 +610,7 @@ public class DefaultInstaller
                             entry.getName(),
                             file,
                             ioe.getMessage() );
-            throw new InstallationException( message, ioe );
+            throw new LoomException( message, ioe );
         }
         finally
         {

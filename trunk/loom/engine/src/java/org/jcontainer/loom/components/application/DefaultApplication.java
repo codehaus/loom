@@ -101,7 +101,7 @@ import org.apache.avalon.phoenix.metadata.SarMetaData;
 import org.jcontainer.loom.components.util.ComponentMetaDataConverter;
 import org.jcontainer.loom.interfaces.Application;
 import org.jcontainer.loom.interfaces.ApplicationContext;
-import org.jcontainer.loom.interfaces.ApplicationException;
+import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.interfaces.ApplicationMBean;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.tools.LoomToolConstants;
@@ -177,7 +177,7 @@ public final class DefaultApplication
         {
             getLogger().info( "exception while loading listeners:" + t.getMessage() + "\n" );
             t.printStackTrace();
-            throw new ApplicationException( t.getMessage(), t );
+            throw new LoomException( t.getMessage(), t );
         }
     }
 
@@ -187,12 +187,12 @@ public final class DefaultApplication
      * otherwise it will generate an IllegalStateException.
      *
      * @throws IllegalStateException if application is already running
-     * @throws ApplicationException if the application failed to start.
+     * @throws LoomException if the application failed to start.
      *            the message part of exception will contain more information
      *            pertaining to why the application failed to startup
      */
     public void start()
-        throws IllegalStateException, ApplicationException
+        throws IllegalStateException, LoomException
     {
         if( isRunning() )
         {
@@ -219,7 +219,7 @@ public final class DefaultApplication
             {
                 getLogger().info( "exception while starting:" + t.getMessage() + "\n" );
                 t.printStackTrace();
-                throw new ApplicationException( t.getMessage(), t );
+                throw new LoomException( t.getMessage(), t );
             }
 
             m_running = true;
@@ -234,12 +234,12 @@ public final class DefaultApplication
      * in succession.
      *
      * @throws IllegalStateException if application is not already running
-     * @throws ApplicationException if the application failed to stop or start.
+     * @throws LoomException if the application failed to stop or start.
      *            the message part of exception will contain more information
      *            pertaining to why the application failed to startup/shutdown
      */
     public void restart()
-        throws IllegalStateException, ApplicationException
+        throws IllegalStateException, LoomException
     {
         stop();
         start();
@@ -251,12 +251,12 @@ public final class DefaultApplication
      * otherwise it will generate an IllegalStateException.
      *
      * @throws IllegalStateException if application is not already running
-     * @throws ApplicationException if the application failed to shutdown.
+     * @throws LoomException if the application failed to shutdown.
      *            the message part of exception will contain more information
      *            pertaining to why the application failed to shutodwn
      */
     public void stop()
-        throws IllegalStateException, ApplicationException
+        throws IllegalStateException, LoomException
     {
         if( !isRunning() )
         {
@@ -272,7 +272,7 @@ public final class DefaultApplication
             {
                 getLogger().info( "exception while stopping:" + t.getMessage() + "\n" );
                 t.printStackTrace();
-                throw new ApplicationException( t.getMessage(), t );
+                throw new LoomException( t.getMessage(), t );
             }
 
             m_running = false;
