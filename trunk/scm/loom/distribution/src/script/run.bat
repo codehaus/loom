@@ -86,6 +86,6 @@ rem uncomment to get enable remote debugging
 rem set DEBUG=-Xdebug -Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=y
 
 rem Kicking the tires and lighting the fires!!!
-"%LOOM_JAVACMD%" %DEBUG% "-Djava.ext.dirs=%LOOM_HOME%\lib;%LOOM_HOME%\tools\lib" "-Dloom.home=%LOOM_HOME%" "-Djava.security.policy=jar:file:%LOOM_HOME%/bin/loom-launcher.jar!/META-INF/java.policy" %LOOM_JVM_OPTS% %LOOM_SM% -jar "%LOOM_HOME%\bin\loom-launcher.jar" %1 %2 %3 %4 %5 %6 %7 %8 %9
+"%LOOM_JAVACMD%" %DEBUG% "-Djava.ext.dirs=%LOOM_HOME%\lib;%LOOM_HOME%\tools\lib" "-Djava.endorsed.dirs=%LOOM_HOME%\lib\endorsed" "-Dloom.home=%LOOM_HOME%" "-Djava.security.policy=jar:file:%LOOM_HOME%/bin/loom-launcher.jar!/META-INF/java.policy" %LOOM_JVM_OPTS% %LOOM_SM% -jar "%LOOM_HOME%\bin\loom-launcher.jar" %1 %2 %3 %4 %5 %6 %7 %8 %9
 
 :end
