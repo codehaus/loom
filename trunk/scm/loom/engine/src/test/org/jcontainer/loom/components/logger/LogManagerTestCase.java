@@ -8,10 +8,13 @@
 package org.jcontainer.loom.components.logger;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+
 import junit.framework.TestCase;
+
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.DefaultConfigurationBuilder;
 import org.apache.avalon.framework.container.ContainerUtil;
@@ -22,15 +25,14 @@ import org.apache.avalon.phoenix.metadata.BlockListenerMetaData;
 import org.apache.avalon.phoenix.metadata.BlockMetaData;
 import org.apache.avalon.phoenix.metadata.SarMetaData;
 import org.jcomponent.loggerstore.LoggerStore;
-import org.realityforge.salt.io.FileUtil;
-import org.jcontainer.loom.components.logger.DefaultLogManager;
 import org.jcontainer.loom.interfaces.LogManager;
+import org.realityforge.salt.io.FileUtil;
 
 /**
  *  An basic test case for the LogManager.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-07-24 23:45:23 $
+ * @version $Revision: 1.7 $ $Date: 2003-07-28 20:13:59 $
  */
 public class LogManagerTestCase
     extends TestCase
@@ -122,7 +124,18 @@ public class LogManagerTestCase
     {
         final File base = getBaseDir( index );
         final File file = new File( base, filename );
-        return file.length();
+		StringBuffer sb = new StringBuffer();
+		try {
+			FileReader fr = new FileReader( file );
+			int c = 0;
+			while ( c != -1 ){
+				c = fr.read();
+				sb.append(Character.forDigit(c,10));
+			}
+		} catch ( Exception e) {
+			e.printStackTrace();
+		}
+        return sb.length();
     }
 
     private File getBaseDir( final int index )
