@@ -87,11 +87,11 @@
 package org.jcontainer.loom.components.application;
 
 import java.util.ArrayList;
-import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.jcontainer.loom.interfaces.ApplicationContext;
 import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
 import org.jcontainer.loom.tools.infobuilder.LegacyUtil;
+import org.jcontainer.dna.AbstractLogEnabled;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
@@ -99,7 +99,7 @@ import org.realityforge.salt.i18n.Resources;
  * Utility class to help with exporting Blocks to management subsystem.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-10-05 00:12:36 $
+ * @version $Revision: 1.6 $ $Date: 2003-10-05 10:07:03 $
  */
 class ExportHelper
     extends AbstractLogEnabled

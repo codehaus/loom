@@ -101,10 +101,10 @@ import javax.management.modelmbean.ModelMBeanInfoSupport;
 import javax.management.modelmbean.ModelMBeanNotificationInfo;
 import javax.management.modelmbean.ModelMBeanOperationInfo;
 import javax.management.modelmbean.RequiredModelMBean;
-import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.jcontainer.loom.tools.configuration.ConfigurationBuilder;
 import org.jcontainer.dna.ConfigurationException;
 import org.jcontainer.dna.Configuration;
+import org.jcontainer.dna.AbstractLogEnabled;
 import org.xml.sax.InputSource;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
@@ -117,7 +117,7 @@ import org.realityforge.salt.i18n.ResourceManager;
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author <a href="mailto:huw@mmlive.com">Huw Roberts</a>
- * @version $Revision: 1.4 $ $Date: 2003-10-05 03:25:08 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-05 10:07:04 $
  */
 public final class MBeanInfoBuilder
     extends AbstractLogEnabled

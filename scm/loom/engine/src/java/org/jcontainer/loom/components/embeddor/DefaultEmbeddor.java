@@ -90,9 +90,6 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Observer;
-import org.apache.avalon.framework.container.ContainerUtil;
-import org.apache.avalon.framework.logger.AbstractLogEnabled;
-import org.apache.avalon.framework.logger.Logger;
 import org.jcontainer.dna.Active;
 import org.jcontainer.dna.Composable;
 import org.jcontainer.dna.Configurable;
@@ -103,8 +100,11 @@ import org.jcontainer.dna.ResourceLocator;
 import org.jcontainer.dna.Parameterizable;
 import org.jcontainer.dna.Parameters;
 import org.jcontainer.dna.ParameterException;
+import org.jcontainer.dna.AbstractLogEnabled;
+import org.jcontainer.dna.Logger;
 import org.jcontainer.dna.impl.DefaultResourceLocator;
 import org.jcontainer.dna.impl.DefaultParameters;
+import org.jcontainer.dna.impl.ContainerUtil;
 import org.jcontainer.loom.components.util.ExtensionFileFilter;
 import org.jcontainer.loom.components.ParameterConstants;
 import org.jcontainer.loom.interfaces.ContainerConstants;
@@ -275,7 +275,7 @@ public class DefaultEmbeddor
         {
             // whoops!
             final String message = REZ.getString( "embeddor.error.start.failed" );
-            getLogger().fatalError( message, e );
+            getLogger().error( message, e );
             throw e;
         }
     }
@@ -301,7 +301,7 @@ public class DefaultEmbeddor
         if( emptyKernel() )
         {
             final String message = REZ.getString( "embeddor.error.start.no-apps" );
-            getLogger().fatalError( message );
+            getLogger().error( message );
         }
         else
         {
@@ -372,7 +372,7 @@ public class DefaultEmbeddor
         {
             // whoops!
             final String message = REZ.getString( "embeddor.error.shutdown.failed" );
-            getLogger().fatalError( message, e );
+            getLogger().error( message, e );
         }
         for( int i = 0; i < m_entries.length; i++ )
         {
@@ -504,7 +504,7 @@ public class DefaultEmbeddor
         {
             final String message =
                 REZ.getString( "embeddor.error.createComponents.failed" );
-            getLogger().fatalError( message, e );
+            getLogger().error( message, e );
             throw new LoomException( message, e );
         }
     }
@@ -593,11 +593,11 @@ public class DefaultEmbeddor
     {
         final Logger childLogger = getLogger().getChildLogger( loggerName );
         ContainerUtil.enableLogging( object, childLogger );
-        org.jcontainer.dna.impl.ContainerUtil.compose( object, getResourceLocator() );
-        org.jcontainer.dna.impl.ContainerUtil.parameterize( object, createChildParameters() );
-        org.jcontainer.dna.impl.ContainerUtil.configure( object, config );
-        org.jcontainer.dna.impl.ContainerUtil.initialize( object );
-        ContainerUtil.start( object );
+        ContainerUtil.compose( object, getResourceLocator() );
+        ContainerUtil.parameterize( object, createChildParameters() );
+        ContainerUtil.configure( object, config );
+        ContainerUtil.initialize( object );
+        org.apache.avalon.framework.container.ContainerUtil.start( object );
     }
 
     private Parameters createChildParameters()
@@ -630,8 +630,8 @@ public class DefaultEmbeddor
             {
                 continue;
             }
-            ContainerUtil.stop( object );
-            org.jcontainer.dna.impl.ContainerUtil.dispose( object );
+            org.apache.avalon.framework.container.ContainerUtil.stop( object );
+            ContainerUtil.dispose( object );
         }
     }
 

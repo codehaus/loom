@@ -7,7 +7,6 @@
  */
 package org.jcontainer.loom.tools.ant;
 
-import org.apache.avalon.framework.logger.ConsoleLogger;
 import org.apache.tools.ant.AntClassLoader;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
@@ -15,6 +14,7 @@ import org.apache.tools.ant.types.Path;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.infobuilder.InfoBuilder;
 import org.jcontainer.loom.tools.verifier.InfoVerifier;
+import org.jcontainer.dna.impl.ConsoleLogger;
 
 /**
  * Simple task to load a {@link org.jcontainer.loom.tools.info.ComponentInfo} descriptor,
@@ -22,7 +22,7 @@ import org.jcontainer.loom.tools.verifier.InfoVerifier;
  * is compatible with the {@link org.jcontainer.loom.tools.info.ComponentInfo}.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-06-29 01:07:35 $
+ * @version $Revision: 1.6 $ $Date: 2003-10-05 10:07:04 $
  */
 public class ComponentVerifierTask
     extends Task

@@ -92,18 +92,18 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Properties;
-import org.apache.avalon.framework.container.ContainerUtil;
-import org.apache.avalon.framework.logger.AvalonFormatter;
-import org.apache.avalon.framework.logger.LogKitLogger;
-import org.apache.avalon.framework.logger.Logger;
 import org.apache.log.Hierarchy;
 import org.apache.log.LogTarget;
 import org.apache.log.Priority;
+import org.apache.log.format.ExtendedPatternFormatter;
 import org.apache.log.output.io.FileTarget;
 import org.jcontainer.dna.Configuration;
+import org.jcontainer.dna.Logger;
 import org.jcontainer.dna.impl.ConfigurationUtil;
+import org.jcontainer.dna.impl.ContainerUtil;
 import org.jcontainer.dna.impl.DefaultParameters;
 import org.jcontainer.dna.impl.DefaultResourceLocator;
+import org.jcontainer.dna.impl.LogkitLogger;
 import org.jcontainer.loom.components.ParameterConstants;
 import org.jcontainer.loom.components.util.ConfigUtil;
 import org.jcontainer.loom.interfaces.ContainerConstants;
@@ -270,10 +270,10 @@ public final class CLIMain
 
             ContainerUtil.enableLogging( m_embeddor,
                                          createLogger( properties ) );
-            org.jcontainer.dna.impl.ContainerUtil.parameterize( m_embeddor, reateParameters( properties ) );
-            org.jcontainer.dna.impl.ContainerUtil.compose( m_embeddor, createLocator( data ) );
-            org.jcontainer.dna.impl.ContainerUtil.configure( m_embeddor, configuration );
-            org.jcontainer.dna.impl.ContainerUtil.initialize( m_embeddor );
+            ContainerUtil.parameterize( m_embeddor, reateParameters( properties ) );
+            ContainerUtil.compose( m_embeddor, createLocator( data ) );
+            ContainerUtil.configure( m_embeddor, configuration );
+            ContainerUtil.initialize( m_embeddor );
         }
         catch( final Throwable throwable )
         {
@@ -326,7 +326,7 @@ public final class CLIMain
             properties.getProperty( "log-destination", loomHome + DEFAULT_LOG_FILE );
         final String logPriority =
             properties.getProperty( "log-priority", "INFO" );
-        final AvalonFormatter formatter = new AvalonFormatter( DEFAULT_FORMAT );
+        final ExtendedPatternFormatter formatter = new ExtendedPatternFormatter( DEFAULT_FORMAT );
         final File file = new File( logDestination );
         final FileTarget logTarget = new FileTarget( file, false, formatter );
 
@@ -337,7 +337,7 @@ public final class CLIMain
         logger.setLogTargets( new LogTarget[]{logTarget} );
         logger.setPriority( Priority.getPriorityForName( logPriority ) );
         logger.info( "Logger started" );
-        return new LogKitLogger( logger );
+        return new LogkitLogger( logger );
     }
 
     /**
@@ -391,7 +391,7 @@ public final class CLIMain
 
                 try
                 {
-                    org.jcontainer.dna.impl.ContainerUtil.dispose( m_embeddor );
+                    ContainerUtil.dispose( m_embeddor );
                 }
                 catch( final Throwable throwable )
                 {

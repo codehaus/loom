@@ -11,7 +11,6 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import junit.framework.TestCase;
-import org.apache.avalon.framework.logger.ConsoleLogger;
 import org.jcontainer.loom.components.deployer.PhoenixProfileBuilder;
 import org.jcontainer.loom.components.assembler.data.Component1;
 import org.jcontainer.loom.components.assembler.data.Service2;
@@ -25,13 +24,14 @@ import org.jcontainer.loom.tools.profile.ComponentProfile;
 import org.jcontainer.loom.tools.profile.PartitionProfile;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.impl.DefaultConfiguration;
+import org.jcontainer.dna.impl.ConsoleLogger;
 import org.xml.sax.InputSource;
 
 /**
  *  An basic test case for the LogManager.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-10-05 03:25:09 $
+ * @version $Revision: 1.3 $ $Date: 2003-10-05 10:07:04 $
  */
 public class AssemblerTestCase
     extends TestCase

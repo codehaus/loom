@@ -98,11 +98,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.jcontainer.dna.Active;
 import org.jcontainer.dna.Parameterizable;
 import org.jcontainer.dna.ParameterException;
 import org.jcontainer.dna.Parameters;
+import org.jcontainer.dna.AbstractLogEnabled;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.Installer;
 import org.jcontainer.loom.interfaces.LoomException;
@@ -117,7 +117,7 @@ import org.realityforge.salt.io.IOUtil;
  * and installing it as appropriate.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.8 $ $Date: 2003-10-05 08:47:14 $
+ * @version $Revision: 1.9 $ $Date: 2003-10-05 10:07:03 $
  */
 public class DefaultInstaller
     extends AbstractLogEnabled

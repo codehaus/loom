@@ -87,17 +87,17 @@
 package org.jcontainer.loom.components.deployer;
 
 import java.io.InputStream;
-import org.apache.avalon.framework.logger.Logger;
 import org.jcontainer.loom.tools.factory.DefaultComponentFactory;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.infobuilder.LegacyBlockInfoReader;
+import org.jcontainer.dna.Logger;
 
 /**
  * A Phoenix-specific {@link org.jcontainer.loom.tools.factory.ComponentFactory}
  * that makes sure {@link org.jcontainer.loom.tools.info.ComponentInfo} is loaded via BlockInfo loader.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-08-17 18:27:32 $
+ * @version $Revision: 1.3 $ $Date: 2003-10-05 10:07:03 $
  */
 public class PhoenixComponentFactory
     extends DefaultComponentFactory

@@ -9,7 +9,6 @@ package org.jcontainer.loom.tools.verifier;
 
 import junit.framework.TestCase;
 import org.apache.avalon.framework.context.Context;
-import org.apache.avalon.framework.logger.ConsoleLogger;
 import org.jcontainer.loom.tools.LoomToolConstants;
 import org.jcontainer.loom.tools.info.ComponentDescriptor;
 import org.jcontainer.loom.tools.info.ComponentInfo;
@@ -22,13 +21,14 @@ import org.jcontainer.loom.tools.metadata.DependencyMetaData;
 import org.jcontainer.loom.tools.metadata.PartitionMetaData;
 import org.jcontainer.loom.tools.profile.ComponentProfile;
 import org.jcontainer.loom.tools.profile.PartitionProfile;
+import org.jcontainer.dna.impl.ConsoleLogger;
 import org.realityforge.metaclass.model.Attribute;
 
 /**
  *  An basic test case for the LogManager.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.9 $ $Date: 2003-10-05 01:18:58 $
+ * @version $Revision: 1.10 $ $Date: 2003-10-05 10:07:05 $
  */
 public class VerifierTestCase
     extends TestCase

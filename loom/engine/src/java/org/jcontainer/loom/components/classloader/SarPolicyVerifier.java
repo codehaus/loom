@@ -86,15 +86,15 @@
  */
 package org.jcontainer.loom.components.classloader;
 
-import org.apache.avalon.framework.logger.LogEnabled;
-import org.apache.avalon.framework.logger.Logger;
 import org.realityforge.xmlpolicy.verifier.PolicyVerifier;
+import org.jcontainer.dna.LogEnabled;
+import org.jcontainer.dna.Logger;
 
 /**
  * A simple adapter for verifier to support logging to container subsystems.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-08-17 18:27:32 $
+ * @version $Revision: 1.4 $ $Date: 2003-10-05 10:07:03 $
  */
 class SarPolicyVerifier
     extends PolicyVerifier

@@ -93,15 +93,15 @@ import mx4j.log.Logger;
  */
 public class MX4JLoggerAdapter extends Logger
 {
-    private static org.apache.avalon.framework.logger.Logger avalonLogger;
+    private static org.jcontainer.dna.Logger m_dnaLogger;
 
     /**
      * This is really bad.  A static way of introducing a logger to a tool.
      * @param logger the Avalon logger.
      */
-    public static void setLogger( final org.apache.avalon.framework.logger.Logger logger )
+    public static void setLogger( final org.jcontainer.dna.Logger logger )
     {
-        avalonLogger = logger;
+        m_dnaLogger = logger;
     }
 
     /**
@@ -117,22 +117,22 @@ public class MX4JLoggerAdapter extends Logger
         switch( level )
         {
             case mx4j.log.Logger.DEBUG:
-                avalonLogger.debug( message.toString(), throwable );
+                m_dnaLogger.debug( message.toString(), throwable );
                 break;
             case mx4j.log.Logger.ERROR:
-                avalonLogger.error( message.toString(), throwable );
+                m_dnaLogger.error( message.toString(), throwable );
                 break;
             case mx4j.log.Logger.FATAL:
-                avalonLogger.fatalError( message.toString(), throwable );
+                m_dnaLogger.error( message.toString(), throwable );
                 break;
             case mx4j.log.Logger.INFO:
-                avalonLogger.info( message.toString(), throwable );
+                m_dnaLogger.info( message.toString(), throwable );
                 break;
             case mx4j.log.Logger.TRACE:
-                avalonLogger.debug( message.toString(), throwable );
+                m_dnaLogger.trace( message.toString(), throwable );
                 break;
             case mx4j.log.Logger.WARN:
-                avalonLogger.warn( message.toString(), throwable );
+                m_dnaLogger.warn( message.toString(), throwable );
                 break;
         }
     }

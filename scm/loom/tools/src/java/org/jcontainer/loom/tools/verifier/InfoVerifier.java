@@ -10,13 +10,13 @@ package org.jcontainer.loom.tools.verifier;
 import org.apache.avalon.framework.component.Composable;
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.context.Contextualizable;
-import org.apache.avalon.framework.logger.AbstractLogEnabled;
-import org.apache.avalon.framework.logger.Logger;
 import org.apache.avalon.framework.service.Serviceable;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ContextDescriptor;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
+import org.jcontainer.dna.AbstractLogEnabled;
+import org.jcontainer.dna.Logger;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
@@ -42,7 +42,7 @@ import org.realityforge.salt.i18n.Resources;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-10-05 01:18:58 $
+ * @version $Revision: 1.7 $ $Date: 2003-10-05 10:07:05 $
  */
 public class InfoVerifier
     extends AbstractLogEnabled

@@ -86,11 +86,11 @@
  */
 package org.jcontainer.loom.tools.verifier;
 
-import org.apache.avalon.framework.logger.Logger;
 import org.jcontainer.loom.tools.LoomToolConstants;
 import org.jcontainer.loom.tools.metadata.ComponentMetaData;
 import org.jcontainer.loom.tools.profile.ComponentProfile;
 import org.jcontainer.loom.tools.profile.PartitionProfile;
+import org.jcontainer.dna.Logger;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
@@ -120,7 +120,7 @@ import org.realityforge.salt.i18n.Resources;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.12 $ $Date: 2003-08-17 18:27:34 $
+ * @version $Revision: 1.13 $ $Date: 2003-10-05 10:07:05 $
  */
 public class SarVerifier
     extends AssemblyVerifier

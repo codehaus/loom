@@ -88,8 +88,6 @@ package org.jcontainer.loom.components.deployer;
 
 import java.util.ArrayList;
 import java.util.Map;
-import org.apache.avalon.framework.logger.AbstractLogEnabled;
-import org.apache.avalon.framework.logger.Logger;
 import org.jcontainer.loom.components.assembler.Assembler;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.tools.factory.ComponentBundle;
@@ -102,11 +100,13 @@ import org.jcontainer.loom.tools.profile.ProfileBuilder;
 import org.jcontainer.loom.tools.profile.PartitionProfile;
 import org.jcontainer.loom.tools.profile.ComponentProfile;
 import org.jcontainer.loom.tools.LoomToolConstants;
+import org.jcontainer.dna.AbstractLogEnabled;
+import org.jcontainer.dna.Logger;
 
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-08-17 18:27:32 $
+ * @version $Revision: 1.7 $ $Date: 2003-10-05 10:07:03 $
  */
 public class PhoenixProfileBuilder
     extends AbstractLogEnabled
