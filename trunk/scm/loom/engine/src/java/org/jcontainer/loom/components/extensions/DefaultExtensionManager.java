@@ -96,13 +96,14 @@ import org.apache.avalon.framework.parameters.Parameters;
 import org.jcontainer.dna.Active;
 import org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager;
 import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
+import org.jcontainer.loom.components.ParameterConstants;
 import org.jcontainer.loom.interfaces.ExtensionManagerMBean;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
 /**
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-10-05 03:41:36 $
+ * @version $Revision: 1.6 $ $Date: 2003-10-05 08:10:20 $
  */
 public class DefaultExtensionManager
     extends org.jcontainer.loom.components.extensions.pkgmgr.impl.DefaultExtensionManager
@@ -122,9 +123,9 @@ public class DefaultExtensionManager
     public void parameterize( final Parameters parameters )
         throws ParameterException
     {
-        final String loomHome = parameters.getParameter( "loom.home" );
+        final String loomHome = parameters.getParameter( ParameterConstants.HOME_DIR );
         final String defaultExtPath = loomHome + File.separator + "ext";
-        m_rawPath = parameters.getParameter( "loom.ext.path", defaultExtPath );
+        m_rawPath = parameters.getParameter( ParameterConstants.EXT_PATH, defaultExtPath );
     }
 
     public void initialize()

@@ -92,9 +92,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.xml.transform.stream.StreamResult;
-import org.apache.avalon.framework.context.Context;
-import org.apache.avalon.framework.context.ContextException;
-import org.apache.avalon.framework.context.Contextualizable;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.jcontainer.dna.Active;
 import org.jcontainer.dna.Configurable;
@@ -103,7 +100,6 @@ import org.jcontainer.dna.ConfigurationException;
 import org.jcontainer.dna.impl.ConfigurationUtil;
 import org.jcontainer.loom.components.configuration.merger.ConfigurationMerger;
 import org.jcontainer.loom.components.util.ExtensionFileFilter;
-import org.jcontainer.loom.components.util.PropertyUtil;
 import org.jcontainer.loom.interfaces.ConfigurationInterceptor;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
@@ -123,27 +119,21 @@ import org.xml.sax.InputSource;
  */
 public class FileSystemPersistentConfigurationInterceptor
     extends AbstractLogEnabled
-    implements ConfigurationInterceptor, Contextualizable, Configurable, Active
+    implements ConfigurationInterceptor, Configurable, Active
 {
     private static final Resources REZ =
         ResourceManager.getPackageResources( FileSystemPersistentConfigurationInterceptor.class );
 
     private final Map m_persistedConfigurations = new HashMap();
 
-    private Context m_context;
-
     private File m_storageDirectory;
     private String m_debugPath;
 
-    public void contextualize( final Context context )
-        throws ContextException
-    {
-        m_context = context;
-    }
-
     public void configure( final Configuration configuration ) throws ConfigurationException
     {
-        m_storageDirectory = new File( constructStoragePath( configuration ) );
+        final String path =
+            configuration.getChild( "storage-directory" ).getValue();
+        m_storageDirectory = new File( FileUtil.normalize( path ) );
 
         try
         {
@@ -191,38 +181,6 @@ public class FileSystemPersistentConfigurationInterceptor
         else
         {
             return configuration;
-        }
-    }
-
-    private String constructStoragePath( final Configuration configuration )
-        throws ConfigurationException
-    {
-        final String path =
-            configuration.getChild( "storage-directory" ).getValue( "${loom.home}/conf/apps" );
-
-        try
-        {
-            final Object opath = PropertyUtil.resolveProperty( path, m_context, false );
-            if( opath instanceof String )
-            {
-                return FileUtil.normalize( (String)opath );
-            }
-            else
-            {
-                final String message = REZ.format( "config.error.nonstring",
-                                                   opath.getClass().getName() );
-
-                throw new ConfigurationException( message,
-                                                  configuration.getPath(),
-                                                  configuration.getLocation() );
-            }
-        }
-        catch( Exception e )
-        {
-            final String message = REZ.format( "config.error.missingproperty",
-                                               configuration.getLocation() );
-
-            throw new ConfigurationException( message, e );
         }
     }
 

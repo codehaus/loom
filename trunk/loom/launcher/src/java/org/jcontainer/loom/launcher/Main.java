@@ -146,8 +146,8 @@ public final class Main
             final URL[] urls = LauncherUtils.getEngineClassPath();
             final URLClassLoader classLoader = new URLClassLoader( urls );
 
-            data.put( "common.classloader", ClassLoader.getSystemClassLoader() );
-            data.put( "container.classloader", classLoader );
+            data.put( ClassLoader.class.getName() + "/common", ClassLoader.getSystemClassLoader() );
+            data.put( ClassLoader.class.getName() + "/container", classLoader );
             data.put( "loom.home", new File( LauncherUtils.findLoomHome() ) );
 
             //Setup context classloader

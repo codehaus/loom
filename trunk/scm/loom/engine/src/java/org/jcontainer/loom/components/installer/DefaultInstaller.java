@@ -106,6 +106,7 @@ import org.jcontainer.dna.Active;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.Installer;
 import org.jcontainer.loom.interfaces.LoomException;
+import org.jcontainer.loom.components.ParameterConstants;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.io.FileUtil;
@@ -116,7 +117,7 @@ import org.realityforge.salt.io.IOUtil;
  * and installing it as appropriate.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-10-05 03:41:36 $
+ * @version $Revision: 1.7 $ $Date: 2003-10-05 08:10:20 $
  */
 public class DefaultInstaller
     extends AbstractLogEnabled
@@ -159,13 +160,13 @@ public class DefaultInstaller
     public void parameterize( final Parameters parameters )
         throws ParameterException
     {
-        final String loomHome = parameters.getParameter( "loom.home" );
+        final String loomHome = parameters.getParameter( ParameterConstants.HOME_DIR );
         final String defaultWorkDir = loomHome + File.separator + "work";
         final String defaultAppsDir = loomHome + File.separator + "apps";
         final String rawWorkDir =
-            parameters.getParameter( "loom.work.dir", defaultWorkDir );
+            parameters.getParameter( ParameterConstants.WORK_DIR, defaultWorkDir );
         final String rawAppsDir =
-            parameters.getParameter( "loom.apps.dir", defaultAppsDir );
+            parameters.getParameter( ParameterConstants.APPS_DIR, defaultAppsDir );
 
         final File workDir = new File( rawWorkDir );
         try

@@ -91,18 +91,14 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-
+import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.container.ContainerUtil;
 import org.apache.avalon.framework.context.Context;
-import org.apache.avalon.framework.context.ContextException;
-import org.apache.avalon.framework.context.Contextualizable;
 import org.apache.avalon.framework.context.DefaultContext;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.logger.Logger;
-import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.phoenix.BlockContext;
 import org.jcomponent.loggerstore.DOMLog4JLoggerStoreFactory;
 import org.jcomponent.loggerstore.InitialLoggerStoreFactory;
@@ -112,10 +108,14 @@ import org.jcomponent.loggerstore.LoggerStore;
 import org.jcomponent.loggerstore.LoggerStoreFactory;
 import org.jcomponent.loggerstore.PropertyLog4JLoggerStoreFactory;
 import org.jcomponent.loggerstore.SimpleLogKitLoggerStoreFactory;
+import org.jcontainer.dna.ParameterException;
+import org.jcontainer.dna.Parameterizable;
+import org.jcontainer.dna.Parameters;
+import org.jcontainer.dna.impl.ConfigurationUtil;
 import org.jcontainer.loom.components.util.ResourceUtil;
+import org.jcontainer.loom.components.ParameterConstants;
 import org.jcontainer.loom.interfaces.LogManager;
 import org.jcontainer.loom.tools.configuration.ConfigurationConverter;
-import org.jcontainer.dna.impl.ConfigurationUtil;
 import org.realityforge.configkit.PropertyExpander;
 import org.realityforge.configkit.ResolverFactory;
 import org.realityforge.salt.i18n.ResourceManager;
@@ -133,7 +133,7 @@ import org.xml.sax.EntityResolver;
  */
 public class DefaultLogManager
     extends AbstractLogEnabled
-    implements LogManager, Contextualizable
+    implements LogManager, Parameterizable
 {
     private static final Resources REZ =
         ResourceManager.getPackageResources( DefaultLogManager.class );
@@ -147,9 +147,11 @@ public class DefaultLogManager
      */
     private File m_loomHome;
 
-    public void contextualize( final Context context ) throws ContextException
+    public void parameterize( final Parameters parameters )
+        throws ParameterException
     {
-        m_loomHome = (File)context.get( "loom.home" );
+        final String homePath = parameters.getParameter( ParameterConstants.HOME_DIR );
+        m_loomHome = new File( homePath ).getAbsoluteFile();
     }
 
     private Map createLoggerManagerContext( final Map appContext )
@@ -280,7 +282,7 @@ public class DefaultLogManager
                 // use the original context map as SimpleLogKitManager requires
                 // the File object in the context
                 config.put( Context.class.getName(), new DefaultContext( map ) );
-                config.put( Configuration.class.getName(), 
+                config.put( Configuration.class.getName(),
                             ConfigurationConverter.toConfiguration( logs ) );
                 return loggerManager.createLoggerStore( config );
             }

@@ -87,13 +87,14 @@
 package org.jcontainer.loom.frontends;
 
 import java.util.List;
-import org.apache.avalon.framework.parameters.Parameters;
+import java.util.Properties;
 import org.realityforge.cli.CLArgsParser;
 import org.realityforge.cli.CLOption;
 import org.realityforge.cli.CLOptionDescriptor;
 import org.realityforge.cli.CLUtil;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
+import org.jcontainer.loom.components.ParameterConstants;
 
 /**
  * The class prepare parameters based on input options.
@@ -116,7 +117,7 @@ class CLISetup
     private static final int APPLICATION_OPT = 3;
 
     ///Parameters created by parsing CLI options
-    private final Parameters m_parameters = new Parameters();
+    private final Properties m_parameters = new Properties();
 
     ///Command used to execute program
     private final String m_command;
@@ -185,7 +186,7 @@ class CLISetup
         return options;
     }
 
-    public Parameters getParameters()
+    public Properties getParameters()
     {
         return m_parameters;
     }
@@ -224,31 +225,33 @@ class CLISetup
                     return false;
 
                 case DEBUG_LOG_OPT:
-                    m_parameters.setParameter( "log-priority", "DEBUG" );
+                    m_parameters.setProperty( "log-priority", "DEBUG" );
                     break;
 
                 case LOG_FILE_OPT:
-                    m_parameters.setParameter( "log-destination", option.getArgument() );
+                    m_parameters.setProperty( "log-destination", option.getArgument() );
                     break;
 
                 case APPS_PATH_OPT:
-                    m_parameters.setParameter( "loom.apps.dir", option.getArgument() );
+                    m_parameters.setProperty( ParameterConstants.APPS_DIR,
+                                              option.getArgument() );
                     break;
 
                 case APPLICATION_OPT:
-                    m_parameters.setParameter( "application-location", option.getArgument() );
+                    m_parameters.setProperty( ParameterConstants.APPLICATION_LOCATION,
+                                              option.getArgument() );
                     break;
 
                 case PERSISTENT_OPT:
-                    m_parameters.setParameter( "persistent", "true" );
+                    m_parameters.setProperty( ParameterConstants.PERSISTENT, "true" );
                     break;
 
                 case DISABLE_HOOK_OPT:
-                    m_parameters.setParameter( "disable-hook", "true" );
+                    m_parameters.setProperty( "disable-hook", "true" );
                     break;
 
                 case CONFIGFILE_OPT:
-                    m_parameters.setParameter( "loom.configfile", option.getArgument() );
+                    m_parameters.setProperty( "loom.configfile", option.getArgument() );
                     break;
             }
         }

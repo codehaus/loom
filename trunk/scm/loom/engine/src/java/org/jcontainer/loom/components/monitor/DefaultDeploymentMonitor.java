@@ -101,6 +101,7 @@ import org.apache.avalon.framework.parameters.ParameterException;
 import org.apache.avalon.framework.parameters.Parameterizable;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.jcontainer.loom.interfaces.Deployer;
+import org.jcontainer.loom.components.ParameterConstants;
 import org.jcontainer.dna.Configurable;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.ConfigurationException;
@@ -117,7 +118,7 @@ import org.realityforge.salt.io.FileUtil;
  * application as necessary.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.7 $ $Date: 2003-10-05 03:52:09 $
+ * @version $Revision: 1.8 $ $Date: 2003-10-05 08:10:20 $
  */
 public class DefaultDeploymentMonitor
     extends AbstractLogEnabled
@@ -138,7 +139,7 @@ public class DefaultDeploymentMonitor
     public void parameterize( final Parameters parameters )
         throws ParameterException
     {
-        m_appsDir = parameters.getParameter( "loom.apps.dir" );
+        m_appsDir = parameters.getParameter( ParameterConstants.APPS_DIR );
     }
 
     public void configure( Configuration configuration )

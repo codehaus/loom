@@ -92,22 +92,18 @@ import java.security.Policy;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import org.realityforge.extension.Extension;
-import org.apache.avalon.framework.context.Context;
-import org.apache.avalon.framework.context.ContextException;
-import org.apache.avalon.framework.context.Contextualizable;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
+import org.jcontainer.dna.Active;
+import org.jcontainer.dna.Composable;
+import org.jcontainer.dna.Configuration;
+import org.jcontainer.dna.ConfigurationException;
+import org.jcontainer.dna.MissingResourceException;
+import org.jcontainer.dna.ResourceLocator;
+import org.jcontainer.dna.impl.ConfigurationUtil;
 import org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager;
 import org.jcontainer.loom.components.extensions.pkgmgr.PackageManager;
 import org.jcontainer.loom.interfaces.ClassLoaderManager;
 import org.jcontainer.loom.interfaces.ClassLoaderSet;
-import org.jcontainer.dna.Configuration;
-import org.jcontainer.dna.ConfigurationException;
-import org.jcontainer.dna.Active;
-import org.jcontainer.dna.Composable;
-import org.jcontainer.dna.ResourceLocator;
-import org.jcontainer.dna.MissingResourceException;
-import org.jcontainer.dna.impl.ConfigurationUtil;
 import org.realityforge.classman.builder.LoaderBuilder;
 import org.realityforge.classman.builder.LoaderResolver;
 import org.realityforge.classman.metadata.ClassLoaderMetaData;
@@ -117,6 +113,7 @@ import org.realityforge.classman.metadata.JoinMetaData;
 import org.realityforge.classman.reader.ClassLoaderSetReader;
 import org.realityforge.classman.verifier.ClassLoaderVerifier;
 import org.realityforge.configkit.PropertyExpander;
+import org.realityforge.extension.Extension;
 import org.realityforge.xmlpolicy.builder.PolicyBuilder;
 import org.realityforge.xmlpolicy.metadata.PolicyMetaData;
 import org.realityforge.xmlpolicy.reader.PolicyReader;
@@ -139,7 +136,7 @@ import org.w3c.dom.Element;
  */
 public class DefaultClassLoaderManager
     extends AbstractLogEnabled
-    implements ClassLoaderManager, Contextualizable, Composable, Active
+    implements ClassLoaderManager, Composable, Active
 {
     /**
      * Constant for name of element that indicates custom
@@ -191,23 +188,6 @@ public class DefaultClassLoaderManager
      * The property expander that will expand properties in the policy configuraiton file.
      */
     private final PropertyExpander m_expander = new PropertyExpander();
-
-    /**
-     * Pass the Context to the Manager.
-     * It is expected that the there will be an entry
-     * <ul>
-     *   <b>common.classloader</b> : ClassLoader shared betweeen
-     *      container and applications</li>
-     * </ul>
-     *
-     * @param context the context
-     * @throws ContextException if context does not contain common classloader
-     */
-    public void contextualize( final Context context )
-        throws ContextException
-    {
-        m_commonClassLoader = (ClassLoader)context.get( "common.classloader" );
-    }
 
     /**
      * @dna.dependency type="ExtensionManager"
