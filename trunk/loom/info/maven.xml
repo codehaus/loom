@@ -1,0 +1,16 @@
+<project default="main"
+    xmlns:maven="jelly:maven">
+
+  <goal name="main">
+    <attainGoal name="build"/>
+  </goal>
+
+  <goal name="build">
+    <attainGoal name="jar:install"/>       
+  </goal>
+
+  <goal name="deploy">
+    <attainGoal name="jar:deploy"/>       
+  </goal>
+
+</project>
