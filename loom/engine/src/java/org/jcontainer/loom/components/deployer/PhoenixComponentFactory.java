@@ -89,7 +89,7 @@ package org.jcontainer.loom.components.deployer;
 import java.io.InputStream;
 import org.jcontainer.loom.tools.factory.DefaultComponentFactory;
 import org.jcontainer.loom.tools.info.ComponentInfo;
-import org.jcontainer.loom.tools.infobuilder.LegacyBlockInfoReader;
+import org.jcontainer.loom.tools.infobuilder.BlockInfoReader;
 import org.jcontainer.dna.Logger;
 
 /**
@@ -97,12 +97,12 @@ import org.jcontainer.dna.Logger;
  * that makes sure {@link org.jcontainer.loom.tools.info.ComponentInfo} is loaded via BlockInfo loader.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-10-05 10:07:03 $
+ * @version $Revision: 1.4 $ $Date: 2003-10-06 12:56:10 $
  */
 public class PhoenixComponentFactory
     extends DefaultComponentFactory
 {
-    private final LegacyBlockInfoReader m_infoReader = new LegacyBlockInfoReader();
+    private final BlockInfoReader m_infoReader = new BlockInfoReader();
 
     public PhoenixComponentFactory( final ClassLoader classLoader )
     {

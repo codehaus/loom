@@ -24,22 +24,22 @@ import org.realityforge.salt.i18n.Resources;
 import org.xml.sax.InputSource;
 
 /**
- * A LegacyBlockInfoReader is responsible for building {@link org.jcontainer.loom.tools.info.ComponentInfo}
+ * A BlockInfoReader is responsible for building {@link org.jcontainer.loom.tools.info.ComponentInfo}
  * objects from <a href="http://jakarta.apache.org/avalon/phoenix">Phoenixs</a>
  * BlockInfo descriptors. The format for descriptor is specified in the
  * <a href="package-summary.html#external">package summary</a>.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.13 $ $Date: 2003-10-06 12:51:25 $
+ * @version $Revision: 1.1 $ $Date: 2003-10-06 12:56:10 $
  */
-public final class LegacyBlockInfoReader
+public final class BlockInfoReader
     extends AbstractLogEnabled
 {
     /**
      * I18n resources.
      */
     private static final Resources REZ =
-        ResourceManager.getPackageResources( LegacyBlockInfoReader.class );
+        ResourceManager.getPackageResources( BlockInfoReader.class );
 
     /**
      * Create a {@link org.jcontainer.loom.tools.info.ComponentInfo} object for specified

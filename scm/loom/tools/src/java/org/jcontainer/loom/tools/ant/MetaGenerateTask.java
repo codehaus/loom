@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import org.apache.tools.ant.BuildException;
 import org.jcontainer.loom.tools.info.ComponentInfo;
-import org.jcontainer.loom.tools.infobuilder.LegacyBlockInfoWriter;
+import org.jcontainer.loom.tools.infobuilder.BlockInfoWriter;
 import org.jcontainer.loom.tools.qdox.DefaultInfoBuilder;
 import org.jcontainer.loom.tools.qdox.LegacyInfoBuilder;
 
@@ -26,7 +26,7 @@ import org.jcontainer.loom.tools.qdox.LegacyInfoBuilder;
  *
  * @author Paul Hammant
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.7 $ $Date: 2003-10-06 12:51:25 $
+ * @version $Revision: 1.8 $ $Date: 2003-10-06 12:56:10 $
  */
 public class MetaGenerateTask
     extends AbstractQdoxTask
@@ -34,7 +34,7 @@ public class MetaGenerateTask
     /**
      * A utility object that writes out info as serialized object files.
      */
-    private static final LegacyBlockInfoWriter c_infoWriter = new LegacyBlockInfoWriter();
+    private static final BlockInfoWriter c_infoWriter = new BlockInfoWriter();
 
     /**
      * The destination directory for metadata files.

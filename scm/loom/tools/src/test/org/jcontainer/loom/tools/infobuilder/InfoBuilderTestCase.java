@@ -34,7 +34,7 @@ import org.realityforge.metaclass.model.Attribute;
  * Abstract class which TestCases can extend.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.12 $ $Date: 2003-10-06 12:51:25 $
+ * @version $Revision: 1.13 $ $Date: 2003-10-06 12:56:11 $
  */
 public class InfoBuilderTestCase
     extends TestCase
@@ -72,8 +72,8 @@ public class InfoBuilderTestCase
         throws Exception
     {
         final ComponentInfo info = loadComponentInfo( COMPONENT2 );
-        final LegacyBlockInfoWriter writer = new LegacyBlockInfoWriter();
-        final LegacyBlockInfoReader reader = new LegacyBlockInfoReader();
+        final BlockInfoWriter writer = new BlockInfoWriter();
+        final BlockInfoReader reader = new BlockInfoReader();
         ContainerUtil.enableLogging( writer, new ConsoleLogger() );
         final File output = File.createTempFile( "info-test", ".xml" );
         final FileOutputStream outputStream = new FileOutputStream( output );

@@ -22,9 +22,9 @@ import org.jcontainer.loom.tools.info.ServiceDescriptor;
  * documents in legacy BlockInfo format.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-10-06 12:51:25 $
+ * @version $Revision: 1.1 $ $Date: 2003-10-06 12:56:10 $
  */
-public class LegacyBlockInfoWriter
+public class BlockInfoWriter
 {
     /**
      * Write out info representation to xml.
