@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<document>
+  <properties>
+    <title>Using Doclet Tags to Generate .xinfo files</title>
+    
+    
+  <author email="huw@apache.org">Huw Roberts</author>
+  </properties>
+  <body>
+    <section name="Introduction">
+      <p>
+        Each block requires a corresponding .xinfo file that is read by the
+        container at startup.  As the developer, you have the option of using
+        custom java doc tags to generate the .xinfo file.  This has a number of
+        advantages over generating the file by hand:
+      </p>
+      <ul>
+        <li>
+          its a lot faster than writing the xinfo file by hand
+        </li>
+        <li>
+          its harder to make mistakes, since much of the data required for the 
+          xinfo file is parsed out of the source code
+        </li>
+      </ul>
+      <p>
+        Using this feature requires that you markup the source code with the 
+        appropriate tags and then have the build script include the
+        <source>MetaGenerateTask</source> task.  Both these steps are described
+        below.
+       </p>
+    </section>
+    <section name="The Tags">
+      <p>
+        The following tags are defined:
+      </p>
+      <subsection name="phoenix:block">
+        <table>
+          <tr>
+            <td>Scope</td>
+            <td>
+              Applies to any class that is also a block.
+            </td>
+          </tr>
+          <tr>
+            <td>Purpose</td>
+            <td>
+              Marks the class as block and tells the MetaGenerateTask to generate
+              an xinfo file for it. 
+            </td>
+          </tr>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              None.
+            </td>
+          </tr>
+          <tr>
+            <td>Notes</td>
+            <td>
+            </td>
+          </tr>
+        </table>
+        <p>
+          Example:
+        </p>
+        <source>
+/**
+ * Ftp server starting point. Avalon framework will load this
+ * from the jar file. This is also the starting point of remote
+ * admin.
+ *
+ * @phoenix:block
+ * @phoenix:service name="org.apache.avalon.ftpserver.interfaces.FtpServerInterface"
+ *
+ */
+        </source>
+      </subsection>
+      <subsection name="phoenix:service">
+        <table>
+          <tr>
+            <td>Scope</td>
+            <td>
+              Applies to classes that are also blocks and export services..
+            </td>
+          </tr>
+          <tr>
+            <td>Purpose</td>
+            <td>
+              Identifies a service that is implemented by the block.  A class
+              can implement more than one service, in which case there will be
+              multiple phoenix:service tags.
+            </td>
+          </tr>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              Attribute "name" that is the full class name
+              of the interface that defines the service.
+            </td>
+          </tr>
+          <tr>
+            <td>Notes</td>
+            <td>
+              version tag should also be supported?.
+              The block must implement the interface for service it declares.
+            </td>
+          </tr>
+        </table>
+        <p>
+          Example: see above
+        </p>
+      </subsection>
+      <subsection name="phoenix:mx">
+        <table>
+          <tr>
+            <td>Scope</td>
+            <td>
+              Classes that are also blocks.
+            </td>
+          </tr>
+          <tr>
+            <td>Purpose</td>
+            <td>
+              Indicates the full name of an interface that defines management methods for this block.
+            </td>
+          </tr>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              Attribute "name" that is the full class name
+              of the interface that defines the management methods.
+            </td>
+          </tr>
+          <tr>
+            <td>Notes</td>
+            <td>
+            </td>
+          </tr>
+        </table>
+        <p>
+          Example:
+        </p>
+        <source>
+/**
+ * @phoenix:block
+ * @phoenix:mx name="org.apache.avalon.apps.demos.helloworldserver.HelloWorldServerMBean"
+ */
+        </source>
+      </subsection>
+      <subsection name="phoenix:dependency">
+        <table>
+          <tr>
+            <td>Scope</td>
+            <td>
+              Applies to the service() method of the block.
+            </td>
+          </tr>
+          <tr>
+            <td>Purpose</td>
+            <td>
+              Identifies a dependency of this block on an another service.
+            </td>
+          </tr>
+          <tr>
+            <td>Parameters</td>
+            <td>
+              Attribute "name" that is the name of the required service.
+            </td>
+          </tr>
+          <tr>
+            <td>Notes</td>
+            <td>
+              Can also specify a required version number?  Optional dependencies?         
+            </td>
+          </tr>
+        </table>
+        <p>
+          Example:
+        </p>
+        <source>
+    /*
+     * @phoenix:dependency name="org.apache.avalon.cornerstone.services.sockets.SocketManager"
+     * @phoenix:dependency name="org.apache.avalon.cornerstone.services.connection.ConnectionManager"
+     * @phoenix:dependency name="org.apache.avalon.ftpserver.usermanager.UserManagerInterface"
+     * @phoenix:dependency name="org.apache.avalon.ftpserver.ip.IpRestrictorInterface"
+     */
+    public void service(ServiceManager serviceManager) throws ServiceException {
+        </source>
+      </subsection>
+    </section> 
+    <section name="Build Instructions">
+      <p>
+        To have xinfo files generated as part as your ant build
+        script, include the MetaGenerateTask like this:
+      </p>
+      <source>
+
+    &lt;!-- Make .xinfo, .mxinfo and manifest automatically for blocks -->
+    &lt;target name="metagenerate">
+
+        &lt;taskdef name="generatemeta" classname="org.apache.avalon.phoenix.tools.metagenerate.MetaGenerateTask">
+          &lt;classpath refid="project.class.path" />
+        &lt;/taskdef>
+
+        &lt;generatemeta dest="${build.metagenerate}">
+          &lt;fileset dir="${java.dir}">
+            &lt;include name="**/*.java"/>
+          &lt;/fileset>
+        &lt;/generatemeta>
+
+    &lt;/target>
+ 
+      </source>
+      <p>
+        Where build.metagenerate is where the .xinfo files should be placed, and java.dir
+        is the location of the source files.  Typically the build.metagenerate directory
+        is an intermediate build directory.  Output from this task are then copied
+        to a release image directory and jar'ed as a subsequent step. 
+      </p>
+      <p>
+        The qdox jar and phoenix-client.jar need to be in the project.class.path.
+      </p>
+    </section>
+  </body>
+</document>
