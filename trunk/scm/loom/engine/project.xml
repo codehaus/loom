@@ -94,10 +94,6 @@
             <version>1.0</version>
         </dependency>
         <dependency>
-            <id>servletapi</id>
-            <version>2.3</version>
-        </dependency>
-        <dependency>
             <groupId>avalon</groupId>
             <artifactId>avalon-logkit</artifactId>
             <version>20030527</version>
