@@ -28,7 +28,7 @@
         <dependency>
             <groupId>loom</groupId>
             <artifactId>maven-sar-plugin</artifactId>
-            <version>${pom.currentVersion}</version>
+            <version>1.0</version>
             <type>plugin</type>
         </dependency>
         <dependency> <!-- for metagenerating xinfo -->
