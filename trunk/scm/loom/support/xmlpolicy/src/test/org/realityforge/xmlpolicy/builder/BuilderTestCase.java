@@ -7,13 +7,17 @@
  */
 package org.realityforge.xmlpolicy.builder;
 
+import java.net.URL;
+import java.security.AllPermission;
 import java.security.CodeSource;
 import java.security.PermissionCollection;
 import java.security.Policy;
 import java.security.cert.Certificate;
+import java.util.Enumeration;
 import junit.framework.TestCase;
 import org.realityforge.xmlpolicy.metadata.GrantMetaData;
 import org.realityforge.xmlpolicy.metadata.KeyStoreMetaData;
+import org.realityforge.xmlpolicy.metadata.PermissionMetaData;
 import org.realityforge.xmlpolicy.metadata.PolicyMetaData;
 
 /**
@@ -87,4 +91,40 @@ public class BuilderTestCase
         }
 
     }
+
+    public void testMetaDataWithAPermission()
+        throws Exception
+    {
+        final PolicyBuilder builder = new PolicyBuilder();
+        final PermissionMetaData permission =
+            new PermissionMetaData( AllPermission.class.getName(), null, null, null, null );
+        final GrantMetaData grant =
+            new GrantMetaData( "file:/", null, null,
+                               new PermissionMetaData[]{permission} );
+        final PolicyMetaData metaData =
+            new PolicyMetaData( new KeyStoreMetaData[ 0 ], new GrantMetaData[]{grant} );
+        final TestResolver resolver = new TestResolver();
+        try
+        {
+            final Policy policy = builder.buildPolicy( metaData, resolver );
+            final CodeSource codesource =
+                new CodeSource( new URL( "file:/" ), new Certificate[ 0 ] );
+            final PermissionCollection permissions = policy.getPermissions( codesource );
+            final Enumeration enumeration = permissions.elements();
+            while( enumeration.hasMoreElements() )
+            {
+                final Object perm = enumeration.nextElement();
+                if( perm instanceof AllPermission )
+                {
+                    return;
+                }
+            }
+            fail( "Expected to get permission set with ALlPermission contained" );
+        }
+        catch( final Exception e )
+        {
+            fail( "Expected to be able to build Policy with empty metadata" );
+        }
+    }
+
 }
