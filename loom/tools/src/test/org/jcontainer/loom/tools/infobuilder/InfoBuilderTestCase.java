@@ -36,13 +36,13 @@ import org.jcontainer.loom.tools.qdox.LegacyInfoBuilder;
  * Abstract class which TestCases can extend.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-06-29 01:24:48 $
+ * @version $Revision: 1.5 $ $Date: 2003-07-07 13:18:23 $
  */
 public class InfoBuilderTestCase
     extends TestCase
 {
     private static final String BASE_PACKAGE =
-        "org.jcontainer.loom.tools.infobuilder.test.data.";
+        "org.jcontainer.loom.tools.infobuilder.data.";
 
     private static final String BASE_DIR = '/' + BASE_PACKAGE.replace( '.', '/' );
 
