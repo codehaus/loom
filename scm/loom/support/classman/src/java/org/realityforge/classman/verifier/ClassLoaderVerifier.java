@@ -36,10 +36,13 @@ import org.realityforge.salt.i18n.ResourceManager;
  * </ul>
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-06-27 03:42:13 $
+ * @version $Revision: 1.5 $ $Date: 2003-06-27 03:42:48 $
  */
 public class ClassLoaderVerifier
 {
+    /**
+     * i18n resources for used to present messages.
+     */
     private static final Resources REZ =
         ResourceManager.getPackageResources( ClassLoaderVerifier.class );
 
