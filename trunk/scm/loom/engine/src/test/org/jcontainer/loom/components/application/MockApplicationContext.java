@@ -9,17 +9,17 @@ package org.jcontainer.loom.components.application;
 
 import java.io.File;
 import java.io.InputStream;
-import org.apache.excalibur.instrument.InstrumentManager;
 import org.apache.avalon.framework.logger.Logger;
-import org.jcontainer.loom.interfaces.ApplicationContext;
-import org.jcontainer.loom.tools.profile.PartitionProfile;
+import org.apache.excalibur.instrument.InstrumentManager;
 import org.jcontainer.loom.components.instrument.NoopInstrumentManager;
 import org.jcontainer.loom.components.util.DNAAvalonLogger;
+import org.jcontainer.loom.interfaces.ApplicationContext;
+import org.jcontainer.loom.tools.profile.PartitionProfile;
 
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-10-15 03:43:09 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-15 04:20:42 $
  */
 class MockApplicationContext
     implements ApplicationContext

@@ -7,9 +7,6 @@
  */
 package org.jcontainer.loom.tools.metadata;
 
-import org.jcontainer.loom.tools.info.FeatureDescriptor;
-import org.realityforge.metaclass.model.Attribute;
-
 /**
  * In each Assembly there may be groups of components that
  * are activated together and treated as a group. These
@@ -19,10 +16,9 @@ import org.realityforge.metaclass.model.Attribute;
  * each other.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-10-05 01:06:31 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-15 04:20:42 $
  */
 public class PartitionMetaData
-    extends FeatureDescriptor
 {
     /**
      * Constant for an empty set of partitions.
@@ -62,15 +58,12 @@ public class PartitionMetaData
      * @param depends the partitions depended upon by this parition
      * @param partitions the partitions contained by this partition
      * @param components the components contained by this partition
-     * @param attributes the extra attributes that are used to describe component
      */
     public PartitionMetaData( final String name,
                               final String[] depends,
                               final PartitionMetaData[] partitions,
-                              final ComponentMetaData[] components,
-                              final Attribute[] attributes )
+                              final ComponentMetaData[] components )
     {
-        super( attributes );
         if( null == name )
         {
             throw new NullPointerException( "name" );

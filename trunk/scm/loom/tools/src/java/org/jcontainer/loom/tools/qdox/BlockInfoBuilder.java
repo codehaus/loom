@@ -96,7 +96,6 @@ import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
 import org.jcontainer.loom.tools.infobuilder.LegacyUtil;
-import org.realityforge.metaclass.model.Attribute;
 
 /**
  * Build a ComponentInfo object by interpreting Phoenix style javadoc
@@ -104,7 +103,7 @@ import org.realityforge.metaclass.model.Attribute;
  *
  * @author Paul Hammant
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-10-14 08:42:16 $
+ * @version $Revision: 1.4 $ $Date: 2003-10-15 04:20:42 $
  */
 public class BlockInfoBuilder
 {
@@ -146,7 +145,7 @@ public class BlockInfoBuilder
         for( int i = 0; i < serviceTags.length; i++ )
         {
             final String type = getNamedParameter( serviceTags[ i ], "name" );
-            final ServiceDescriptor service = new ServiceDescriptor( type, Attribute.EMPTY_SET );
+            final ServiceDescriptor service = new ServiceDescriptor( type );
             services.add( service );
         }
         final DocletTag[] mxTags = javaClass.getTagsByName( "phoenix:mx" );
@@ -154,7 +153,7 @@ public class BlockInfoBuilder
         {
             final String type = getNamedParameter( mxTags[ i ], "name" );
             final ServiceDescriptor service =
-                new ServiceDescriptor( type, new Attribute[]{LegacyUtil.MX_ATTRIBUTE} );
+                new ServiceDescriptor( type );
             services.add( service );
         }
         return (ServiceDescriptor[])services.toArray( new ServiceDescriptor[ services.size() ] );
@@ -184,7 +183,7 @@ public class BlockInfoBuilder
         final String type = getNamedParameter( tag, "type" );
         final String classname = javaClass.getFullyQualifiedName();
         final String location = LegacyUtil.getSchemaLocationFor( classname );
-        return new SchemaDescriptor( location, type, Attribute.EMPTY_SET );
+        return new SchemaDescriptor( location, type );
     }
 
     /**
@@ -220,7 +219,7 @@ public class BlockInfoBuilder
                 final String type = resolveType( javaClass, unresolvedType );
                 final String key = getNamedParameter( tag, "role", type );
                 final DependencyDescriptor dependency =
-                    new DependencyDescriptor( key, type, false, Attribute.EMPTY_SET );
+                    new DependencyDescriptor( key, type, false );
                 deps.add( dependency );
             }
             return (DependencyDescriptor[])deps.toArray( new DependencyDescriptor[ deps.size() ] );

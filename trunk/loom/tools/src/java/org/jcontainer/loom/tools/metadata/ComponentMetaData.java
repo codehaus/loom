@@ -10,9 +10,7 @@ package org.jcontainer.loom.tools.metadata;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.avalon.framework.parameters.Parameters;
-import org.jcontainer.loom.tools.info.FeatureDescriptor;
 import org.jcontainer.dna.Configuration;
-import org.realityforge.metaclass.model.Attribute;
 
 /**
  * Each component declared in the application is represented by
@@ -23,10 +21,9 @@ import org.realityforge.metaclass.model.Attribute;
  * new components as needed.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-10-05 03:25:12 $
+ * @version $Revision: 1.7 $ $Date: 2003-10-15 04:20:42 $
  */
 public class ComponentMetaData
-    extends FeatureDescriptor
 {
     /**
      * Empty set of component metadata.
@@ -64,6 +61,11 @@ public class ComponentMetaData
     private final Configuration m_configuration;
 
     /**
+     * True if proxy should be disabled.
+     */
+    private final boolean m_disableProxy;
+
+    /**
      * Create a ComponentMetaData.
      *
      * @param name the abstract name of component meta data instance
@@ -71,16 +73,15 @@ public class ComponentMetaData
      * @param dependencies the meta data for any dependencies
      * @param parameters the parameters that the component will be provided (may be null)
      * @param configuration the configuration that the component will be provided (may be null)
-     * @param attributes the extra attributes that are used to describe component
+     * @param disableProxy true if proxy should be disabled
      */
     public ComponentMetaData( final String name,
                               final String implementationKey,
                               final DependencyMetaData[] dependencies,
                               final Parameters parameters,
                               final Configuration configuration,
-                              final Attribute[] attributes )
+                              final boolean disableProxy )
     {
-        super( attributes );
         if( null == name )
         {
             throw new NullPointerException( "name" );
@@ -99,6 +100,17 @@ public class ComponentMetaData
         m_parameters = parameters;
         m_configuration = configuration;
         m_implementationKey = implementationKey;
+        m_disableProxy = disableProxy;
+    }
+
+    /**
+     * Return true if proxy should not be created for object.
+     *
+     * @return true if proxy should not be created for object.
+     */
+    public boolean isDisableProxy()
+    {
+        return m_disableProxy;
     }
 
     /**

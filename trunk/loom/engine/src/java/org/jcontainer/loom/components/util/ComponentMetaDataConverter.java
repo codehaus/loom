@@ -14,19 +14,17 @@ import org.apache.avalon.phoenix.metadata.BlockMetaData;
 import org.apache.avalon.phoenix.metadata.DependencyMetaData;
 import org.apache.avalon.phoenix.metadata.SarMetaData;
 import org.apache.avalon.phoenix.metainfo.BlockInfo;
-import org.jcontainer.loom.interfaces.ContainerConstants;
+import org.jcontainer.loom.tools.LoomToolConstants;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.metadata.ComponentMetaData;
-import org.jcontainer.loom.tools.LoomToolConstants;
 import org.jcontainer.loom.tools.profile.ComponentProfile;
 import org.jcontainer.loom.tools.profile.PartitionProfile;
-import org.realityforge.metaclass.model.Attribute;
 
 /**
  * Convert a {@link ComponentMetaData} into a {@link BlockMetaData}.
  *
  * @author <a href="mailto:peter@apache.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-10-05 01:06:31 $
+ * @version $Revision: 1.6 $ $Date: 2003-10-15 04:20:42 $
  */
 public class ComponentMetaDataConverter
 {
@@ -99,7 +97,7 @@ public class ComponentMetaDataConverter
     public static BlockMetaData toBlockMetaData( final ComponentMetaData component,
                                                  final ComponentInfo info )
     {
-        final boolean disableProxy = isDisableProxy( component );
+        final boolean disableProxy = component.isDisableProxy();
         final DependencyMetaData[] dependencies =
             toPhoenixDependencys( component.getDependencies() );
 
@@ -108,27 +106,6 @@ public class ComponentMetaDataConverter
                                   dependencies,
                                   disableProxy,
                                   blockInfo );
-    }
-
-    /**
-     * Determine whether the proxy disabled flag should be
-     * true for specified component.
-     *
-     * @param component the component
-     * @return true if proxy should be disabled, false otherwise
-     */
-    private static boolean isDisableProxy( final ComponentMetaData component )
-    {
-        final Attribute[] attributes = component.getAttributes();
-        for( int i = 0; i < attributes.length; i++ )
-        {
-            final Attribute attribute = attributes[ i ];
-            if( attribute.getName().equals( ContainerConstants.DISABLE_PROXY_ATTR ) )
-            {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**
