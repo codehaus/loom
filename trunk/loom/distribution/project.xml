@@ -121,14 +121,6 @@
         </dependency>
         <dependency>
             <groupId>spice</groupId>
-            <artifactId>spice-alchemist</artifactId>
-            <version>20031120.105516</version>
-            <properties>
-                <category>container</category>
-            </properties>
-        </dependency>
-        <dependency>
-            <groupId>spice</groupId>
             <artifactId>spice-loggerstore</artifactId>
             <version>20040127.234033</version>
             <properties>
