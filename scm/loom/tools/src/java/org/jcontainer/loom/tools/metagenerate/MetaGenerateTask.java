@@ -24,8 +24,6 @@ import org.apache.tools.ant.BuildException;
 public class MetaGenerateTask
     extends org.apache.avalon.phoenix.framework.tools.ant.MetaGenerateTask
 {
-    //private boolean m_inheritance = true;
-
     /**
      * Inheritence : should parent classes of blocks be queried too?
      * @param inheritance
