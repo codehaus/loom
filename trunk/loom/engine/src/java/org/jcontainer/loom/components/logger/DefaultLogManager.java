@@ -6,7 +6,7 @@
  * with this distribution in the LICENSE.txt file.
  *
  * This product includes software developed by the
- * Apache Software Foundation (http://www.apache.org/).
+ï¿½*ï¿½Apache Software Foundation (http://www.apache.org/).
  */
 package org.jcontainer.loom.components.logger;
 
@@ -30,14 +30,14 @@ import org.jcontainer.loom.components.util.ResourceUtil;
 import org.jcontainer.loom.interfaces.LogManager;
 import org.realityforge.configkit.PropertyExpander;
 import org.realityforge.configkit.ResolverFactory;
-import org.realityforge.loggerstore.DOMLog4JLoggerStoreFactory;
-import org.realityforge.loggerstore.InitialLoggerStoreFactory;
-import org.realityforge.loggerstore.Jdk14LoggerStoreFactory;
-import org.realityforge.loggerstore.LogKitLoggerStoreFactory;
-import org.realityforge.loggerstore.LoggerStore;
-import org.realityforge.loggerstore.LoggerStoreFactory;
-import org.realityforge.loggerstore.PropertyLog4JLoggerStoreFactory;
-import org.realityforge.loggerstore.SimpleLogKitLoggerStoreFactory;
+import org.jcomponent.loggerstore.DOMLog4JLoggerStoreFactory;
+import org.jcomponent.loggerstore.InitialLoggerStoreFactory;
+import org.jcomponent.loggerstore.Jdk14LoggerStoreFactory;
+import org.jcomponent.loggerstore.LogKitLoggerStoreFactory;
+import org.jcomponent.loggerstore.LoggerStore;
+import org.jcomponent.loggerstore.LoggerStoreFactory;
+import org.jcomponent.loggerstore.PropertyLog4JLoggerStoreFactory;
+import org.jcomponent.loggerstore.SimpleLogKitLoggerStoreFactory;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.w3c.dom.Document;

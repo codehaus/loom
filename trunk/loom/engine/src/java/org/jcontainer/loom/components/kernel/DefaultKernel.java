@@ -6,7 +6,7 @@
  * with this distribution in the LICENSE.txt file.
  *
  * This product includes software developed by the
- * Apache Software Foundation (http://www.apache.org/).
+ï¿½*ï¿½Apache Software Foundation (http://www.apache.org/).
  */
 package org.jcontainer.loom.components.kernel;
 
@@ -36,7 +36,7 @@ import org.jcontainer.loom.interfaces.ConfigurationValidator;
 import org.jcontainer.loom.interfaces.Kernel;
 import org.jcontainer.loom.interfaces.KernelMBean;
 import org.jcontainer.loom.interfaces.SystemManager;
-import org.realityforge.loggerstore.LoggerStore;
+import org.jcomponent.loggerstore.LoggerStore;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
 

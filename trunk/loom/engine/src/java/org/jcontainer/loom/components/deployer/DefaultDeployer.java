@@ -6,7 +6,7 @@
  * with this distribution in the LICENSE.txt file.
  *
  * This product includes software developed by the
- * Apache Software Foundation (http://www.apache.org/).
+ï¿½*ï¿½Apache Software Foundation (http://www.apache.org/).
  */
 package org.jcontainer.loom.components.deployer;
 
@@ -45,7 +45,7 @@ import org.jcontainer.loom.tools.LoomToolConstants;
 import org.jcontainer.loom.tools.profile.ComponentProfile;
 import org.jcontainer.loom.tools.profile.PartitionProfile;
 import org.jcontainer.loom.tools.profile.ProfileBuilder;
-import org.realityforge.loggerstore.LoggerStore;
+import org.jcomponent.loggerstore.LoggerStore;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.xml.sax.InputSource;

@@ -21,7 +21,7 @@ import org.apache.avalon.phoenix.BlockContext;
 import org.apache.avalon.phoenix.metadata.BlockListenerMetaData;
 import org.apache.avalon.phoenix.metadata.BlockMetaData;
 import org.apache.avalon.phoenix.metadata.SarMetaData;
-import org.realityforge.loggerstore.LoggerStore;
+import org.jcomponent.loggerstore.LoggerStore;
 import org.realityforge.salt.io.FileUtil;
 import org.jcontainer.loom.components.logger.DefaultLogManager;
 import org.jcontainer.loom.interfaces.LogManager;
@@ -30,7 +30,7 @@ import org.jcontainer.loom.interfaces.LogManager;
  *  An basic test case for the LogManager.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-07-19 01:23:38 $
+ * @version $Revision: 1.4 $ $Date: 2003-07-20 13:09:53 $
  */
 public class LogManagerTestCase
     extends TestCase

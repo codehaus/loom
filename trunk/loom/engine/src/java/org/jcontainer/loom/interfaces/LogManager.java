@@ -6,14 +6,14 @@
  * with this distribution in the LICENSE.txt file.
  *
  * This product includes software developed by the
- * Apache Software Foundation (http://www.apache.org/).
+ï¿½*ï¿½Apache Software Foundation (http://www.apache.org/).
  */
 package org.jcontainer.loom.interfaces;
 
 import java.io.File;
 import java.util.Map;
 import org.apache.avalon.framework.configuration.Configuration;
-import org.realityforge.loggerstore.LoggerStore;
+import org.jcomponent.loggerstore.LoggerStore;
 
 /**
  * Interface that is used to manage Log objects for a Sar.
