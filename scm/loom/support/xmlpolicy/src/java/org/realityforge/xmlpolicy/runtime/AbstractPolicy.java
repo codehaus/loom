@@ -28,6 +28,9 @@ import org.realityforge.salt.io.FileUtil;
 public abstract class AbstractPolicy
     extends Policy
 {
+    /**
+     * List of PolicyEntry objects described by AbstractPolicy.
+     */
     private final ArrayList m_entries = new ArrayList();
 
     /**
