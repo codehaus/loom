@@ -1,10 +1,6 @@
 <?xml version="1.0"?>
 
-<project xmlns:j="jelly:core"
-    xmlns:ant="jelly:ant"
-    xmlns:artifact="artifact"
-    xmlns:license="license"
-    xmlns:util="jelly:util">
+<project xmlns:j="jelly:core" xmlns:ant="jelly:ant" xmlns:artifact="artifact" xmlns:license="license" xmlns:util="jelly:util">
 
     <j:set var="maven.sar.final.name" value="${pom.artifactId}.sar"/>
     <j:set var="logging" value="${context.getVariable('maven.sar.logging')}"/>
@@ -17,30 +13,30 @@
     <!--==================================================================-->
     <!-- Setup Descriptor Tools                                           -->
     <!--==================================================================-->
-    <goal name="sar:init"
-        prereqs="dna:init"
-        description="Setup Loom Descriptor Processing Tasks">
+    <goal name="sar:init" prereqs="dna:init" description="Setup Loom Descriptor Processing Tasks">
 
         <ant:mc_interceptorSet id="maven.loom.interceptors">
-            <ant:interceptor
-                name="org.jcontainer.loom.info.PhoenixAttributeInterceptor">
+            <ant:interceptor name="org.jcontainer.loom.info.PhoenixAttributeInterceptor">
                 <ant:classpath>
                     <ant:pathelement path="${plugin.dir}"/>
+                    <!--
+                    The following allows applications to resolve * imports for
+                    types in the source code. If this is not included then
+                    all imports must be fully specified or else they will be
+                    incorrectly specified in attributes file.
+                    -->
+                    <!--<ant:path refid="maven.dependency.classpath"/>-->
                 </ant:classpath>
             </ant:interceptor>
         </ant:mc_interceptorSet>
 
-        <ant:mc_addToInterceptorSet
-            dest="maven.metaclass.interceptors"
-            source="maven.loom.interceptors"/>
+        <ant:mc_addToInterceptorSet dest="maven.metaclass.interceptors" source="maven.loom.interceptors"/>
     </goal>
 
     <!--==================================================================-->
     <!-- Metagenerate descriptor files                                    -->
     <!--==================================================================-->
-    <goal name="sar:metagenerate"
-        prereqs="sar:init,metaclass:generate"
-        description="Generate Loom Descriptor Files">
+    <goal name="sar:metagenerate" prereqs="sar:init,metaclass:generate" description="Generate Loom Descriptor Files">
     </goal>
 
     <!--==================================================================-->
@@ -60,8 +56,7 @@
                 <ant:zipfileset file="${logging}" prefix="SAR-INF/"/>
             </j:if>
             <!-- Add build artifacts -->
-            <ant:zipfileset dir="${maven.sar.build.dir}"
-                prefix="SAR-INF/lib">
+            <ant:zipfileset dir="${maven.sar.build.dir}" prefix="SAR-INF/lib">
                 <ant:include name="${maven.sar.lib.include}"/>
                 <ant:exclude name="${maven.sar.lib.exclude}"/>
             </ant:zipfileset>
@@ -69,8 +64,7 @@
             <j:forEach var="artifact" items="${pom.artifacts}">
                 <j:set var="dependency" value="${artifact.dependency}"/>
                 <j:if test="${dependency.getProperty('sar.bundle')=='true'}">
-                    <ant:zipfileset dir="${maven.repo.local}/${dependency.artifactDirectory}/jars/"
-                        prefix="SAR-INF/lib">
+                    <ant:zipfileset dir="${maven.repo.local}/${dependency.artifactDirectory}/jars/" prefix="SAR-INF/lib">
                         <ant:include name="${dependency.artifact}"/>
                     </ant:zipfileset>
                 </j:if>
@@ -110,16 +104,11 @@
                 <ant:attribute name="Built-By" value="${user.name}"/>
                 <ant:section name="${pom.package}">
                     <ant:attribute name="Specification-Title" value="${pom.artifactId}"/>
-                    <ant:attribute name="Specification-Version"
-                        value="${pom.currentVersion}"/>
-                    <ant:attribute name="Specification-Vendor"
-                        value="${pom.organization.name}"/>
-                    <ant:attribute name="Implementation-Title"
-                        value="${pom.package}"/>
-                    <ant:attribute name="Implementation-Version"
-                        value="${pom.currentVersion}"/>
-                    <ant:attribute name="Implementation-Vendor"
-                        value="${pom.organization.name}"/>
+                    <ant:attribute name="Specification-Version" value="${pom.currentVersion}"/>
+                    <ant:attribute name="Specification-Vendor" value="${pom.organization.name}"/>
+                    <ant:attribute name="Implementation-Title" value="${pom.package}"/>
+                    <ant:attribute name="Implementation-Version" value="${pom.currentVersion}"/>
+                    <ant:attribute name="Implementation-Vendor" value="${pom.organization.name}"/>
                 </ant:section>
             </ant:manifest>
         </ant:jar>
@@ -129,56 +118,36 @@
     <!--==================================================================-->
     <!-- Install the sar in the local repository                          -->
     <!--==================================================================-->
-    <goal name="sar:install"
-        prereqs="sar:sar"
-        description="Install the sar in the local repository">
+    <goal name="sar:install" prereqs="sar:sar" description="Install the sar in the local repository">
 
-        <artifact:install
-            artifact="${maven.sar.build.dir}/${maven.sar.final.name}"
-            type="sar"
-            project="${pom}"/>
+        <artifact:install artifact="${maven.sar.build.dir}/${maven.sar.final.name}" type="sar" project="${pom}"/>
 
     </goal>
 
     <!--==================================================================-->
     <!-- Install snapshot of the sar in the local repository              -->
     <!--==================================================================-->
-    <goal name="sar:install-snapshot"
-        prereqs="sar:sar"
-        description="Install snapshot of the sar in the local repository">
+    <goal name="sar:install-snapshot" prereqs="sar:sar" description="Install snapshot of the sar in the local repository">
 
-        <artifact:install-snapshot
-            artifact="${maven.sar.build.dir}/${maven.sar.final.name}"
-            type="sar"
-            project="${pom}"/>
+        <artifact:install-snapshot artifact="${maven.sar.build.dir}/${maven.sar.final.name}" type="sar" project="${pom}"/>
 
     </goal>
 
     <!--==================================================================-->
     <!-- Deploy the sar to the remote repository                          -->
     <!--==================================================================-->
-    <goal name="sar:deploy"
-        prereqs="sar:sar"
-        description="Deploy the sar to the remote repository">
+    <goal name="sar:deploy" prereqs="sar:sar" description="Deploy the sar to the remote repository">
 
-        <artifact:deploy
-            artifact="${maven.sar.build.dir}/${maven.sar.final.name}"
-            type="sar"
-            project="${pom}"/>
+        <artifact:deploy artifact="${maven.sar.build.dir}/${maven.sar.final.name}" type="sar" project="${pom}"/>
 
     </goal>
 
     <!--==================================================================-->
     <!-- Deploy snapshot of the sar to the remote repository              -->
     <!--==================================================================-->
-    <goal name="sar:deploy-snapshot"
-        prereqs="sar:sar"
-        description="Deploy snapshot of the sar to the remote repository">
+    <goal name="sar:deploy-snapshot" prereqs="sar:sar" description="Deploy snapshot of the sar to the remote repository">
 
-        <artifact:deploy-snapshot
-            artifact="${maven.sar.build.dir}/${maven.sar.final.name}"
-            type="sar"
-            project="${pom}"/>
+        <artifact:deploy-snapshot artifact="${maven.sar.build.dir}/${maven.sar.final.name}" type="sar" project="${pom}"/>
 
     </goal>
 
