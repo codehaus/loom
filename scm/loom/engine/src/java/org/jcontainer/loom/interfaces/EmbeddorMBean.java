@@ -42,7 +42,7 @@ public interface EmbeddorMBean
      *
      * @phoenix:mx-attribute
      *
-     * @return the home directory of phoenix
+     * @return the home directory of loom
      */
     String getHomeDirectory();
 
