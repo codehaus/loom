@@ -223,9 +223,10 @@ public class MX4JSystemManager
         // Set the JNDI name with which will be registered
         mbean.setJNDIName( "jrmp" );
 
-        mbean.putJNDIProperty( javax.naming.Context.INITIAL_CONTEXT_FACTORY,
+        mbean.putNamingProperty( javax.naming.Context.INITIAL_CONTEXT_FACTORY,
                                m_namingFactory );
-        mbean.putJNDIProperty( javax.naming.Context.PROVIDER_URL, "rmi://localhost:" + m_rmi_registry_port );
+        mbean.putNamingProperty( javax.naming.Context.PROVIDER_URL,
+                                 "rmi://localhost:" + m_rmi_registry_port );
 
         // Register the JRMP adaptor in JNDI and start it
         mbean.start();
