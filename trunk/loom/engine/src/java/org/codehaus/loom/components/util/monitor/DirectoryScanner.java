@@ -15,65 +15,47 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Utility class that scans for changes in a directory. If changes are detected it will notify its
+ * Utility class that scans for changes in a directory.
+ * If changes are detected it will notify its
  * <code>DirectoryChangeListener</code>.
  *
  * @author Johan Sjoberg
  * @author Peter Donald
- * @version $Revision: 1.4 $ $Date: 2004-10-11 20:12:28 $
+ * @version $Revision: 1.5 $ $Date: 2004-12-04 10:45:31 $
  */
 public class DirectoryScanner implements Runnable
 {
-    /**
-     * The monitor thread
-     */
+    /** The monitor thread  */
     private final Thread m_monitorThread = new Thread( this );
 
-    /**
-     * Flag indicating if we are running or not
-     */
+    /** Flag indicating if we are running or not */
     private volatile boolean m_keepRunning = false;
 
-    /**
-     * Poll frequency
-     */
+    /** Poll frequency */
     private long m_frequency = 1000L * 5L;
 
-    /**
-     * Priority of the monitor thread
-     */
+    /** Priority of the monitor thread */
     private int m_priority = Thread.NORM_PRIORITY;
 
-    /**
-     * Class listening for changes in the directory
-     */
+    /** Class listening for changes in the directory */
     private DirectoryChangeListener m_directoryChangeListener;
 
-    /**
-     * Last modification time
-     */
+    /** Last modification time */
     private long m_lastModified;
 
-    /**
-     * The directory to monitor
-     */
+    /** The directory to monitor */
     private File m_directory;
 
-    /**
-     * Files in the monitored directory
-     */
+    /** Files in the monitored directory */
     private Set m_files;
 
-    /**
-     * File modification times
-     */
+    /** File modification times */
     private Map m_times;
 
     /**
      * Set the directory to be scanned.
      *
      * @param path The directory's path
-     *
      * @throws IllegalArgumentException if the directory doesn't exist.
      */
     public void setDirectory( final String path )
@@ -82,7 +64,7 @@ public class DirectoryScanner implements Runnable
         if( !m_directory.isDirectory() )
         {
             final String message =
-                "Argument [" + path + "] doesn't seem to be a directory.";
+              "Argument [" + path + "] doesn't seem to be a directory.";
             throw new IllegalArgumentException( message );
         }
         m_files = new HashSet();
@@ -98,7 +80,8 @@ public class DirectoryScanner implements Runnable
     }
 
     /**
-     * Set the <code>DirectoryChangeListener</code> to notify about changes in the directory.
+     * Set the <code>DirectoryChangeListener</code> to
+     * notify about changes in the directory.
      *
      * @param directoryChangeListener The listener
      */
@@ -171,8 +154,9 @@ public class DirectoryScanner implements Runnable
 
         final File[] files = m_directory.listFiles();
 
-        //This will be true if there is an IOException, or if the directory dissapears. Both reasons to not
-        //remove appslications :) -- PR
+        // This will be true if there is an IOException,
+        // or if the directory dissapears. Both reasons
+        // to not remove appslications :) -- PR
         if( null == files )
         {
             m_directoryChangeListener.unableToListContents();
@@ -208,8 +192,8 @@ public class DirectoryScanner implements Runnable
             final int addedCount = addedFiles.size();
             final int modifiedCount = modifiedFiles.size();
 
-            // If no new files have been added and
-            // none deleted then nothing to do
+            // If no new files have been added and none
+            // deleted then there is nothing to do.
             if( fileCount == lastCount && 0 == addedCount && 0 == modifiedCount )
             {
                 return;
@@ -217,8 +201,8 @@ public class DirectoryScanner implements Runnable
 
             final HashSet deletedFiles = new HashSet();
 
-            // If only new files were added and none were changed then
-            // we don't have to scan for deleted files
+            // If only new files were added and none were changed
+            // then we don't have to scan for deleted files.
             if( fileCount != lastCount + addedCount )
             {
                 final Iterator iterator = m_files.iterator();
@@ -237,15 +221,18 @@ public class DirectoryScanner implements Runnable
 
             if( 0 != addedCount )
             {
-                m_directoryChangeListener.directoryChange( DirectoryChangeListener.ADDITION, addedFiles );
+                m_directoryChangeListener.directoryChange(
+                  DirectoryChangeListener.ADDITION, addedFiles );
             }
             if( 0 != deletedCount )
             {
-                m_directoryChangeListener.directoryChange( DirectoryChangeListener.REMOVAL, deletedFiles );
+                m_directoryChangeListener.directoryChange(
+                  DirectoryChangeListener.REMOVAL, deletedFiles );
             }
             if( 0 != modifiedCount )
             {
-                m_directoryChangeListener.directoryChange( DirectoryChangeListener.MODIFICATION, modifiedFiles );
+                m_directoryChangeListener.directoryChange(
+                  DirectoryChangeListener.MODIFICATION, modifiedFiles );
             }
 
             existingFiles.addAll( addedFiles );
