@@ -24,7 +24,7 @@ import org.jcontainer.loom.interfaces.ContainerConstants;
  * Convert a ComponentTemplate into a BlockMetaData.
  *
  * @author <a href="mailto:peter@apache.org">Peter Donald</a>
- * @version $Revision: 1.8 $ $Date: 2003-11-03 06:43:15 $
+ * @version $Revision: 1.9 $ $Date: 2003-11-27 09:05:31 $
  */
 public class ComponentMetaDataConverter
 {
@@ -122,8 +122,7 @@ public class ComponentMetaDataConverter
         {
             final DependencyMetaData dependency =
                 new DependencyMetaData( dependencies[ i ].getProviderName(),
-                                        dependencies[ i ].getKey(),
-                                        dependencies[ i ].getAlias() );
+                                        dependencies[ i ].getKey() );
             depends.add( dependency );
         }
         return (DependencyMetaData[])depends.toArray( new DependencyMetaData[ depends.size() ] );
