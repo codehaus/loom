@@ -1,47 +1,121 @@
 <project default="main"
-    xmlns:maven="jelly:maven">
+    xmlns:j="jelly:core"
+    xmlns:maven="jelly:maven"
+    xmlns:util="jelly:util">
 
     <goal name="main">
         <attainGoal name="build"/>
     </goal>
 
-    <goal name="clean-all">
-        <echo message="Cleaning all components"/>
-        <maven:reactor
-            basedir="${basedir}"
-            includes="*/project.xml"
-            excludes="demos/*"
-            goals="clean"
-            banner="Cleaning"
-            ignoreFailures="false"/>
-
-        <maven:maven
-            descriptor="${basedir}/demos/project.xml"
-            goals="clean-all"
-            ignoreFailures="false"/>
+    <goal name="build">
+	   	<util:tokenize var="items" delim="," trim="true">${loom.build.include}</util:tokenize>
+		<j:forEach var="item" items="${items}">
+	        <attainGoal name="build:${item}"/>
+		</j:forEach> 
     </goal>
 
-    <goal name="build">
-        <echo message="Build all components"/>
+    <goal name="build:components">
+        <echo message="Build components"/>
         <maven:reactor
             basedir="${basedir}"
             includes="*/project.xml"
-            excludes="distribution/*,demos/project.xml,demos/*/project.xml,integration-test/project.xml"
+            excludes="distribution/project.xml,site/project.xml,demos/*/project.xml,integration-test/project.xml"
             goals="clean,build"
             banner="Building"
             ignoreFailures="false"/>
-        <maven:maven
-            descriptor="${basedir}/distribution/project.xml"
-            goals="build"
+    </goal>
+
+    <goal name="build:demos">
+        <echo message="Build demos"/>
+        <maven:reactor
+            basedir="${basedir}"
+            includes="demos/*/project.xml"
+            goals="clean,build"
+            banner="Building"
+            ignoreFailures="false"/>
+    </goal>
+
+    <goal name="build:distribution">
+        <echo message="Build distribution"/>
+        <maven:reactor
+            basedir="${basedir}"
+            includes="distribution/project.xml"
+            goals="clean,build"
+            banner="Building"
+            ignoreFailures="false"/>
+    </goal>
+
+    <goal name="clean">
+	   	<util:tokenize var="items" delim="," trim="true">${loom.clean.include}</util:tokenize>
+		<j:forEach var="item" items="${items}">
+	        <attainGoal name="clean:${item}"/>
+		</j:forEach> 
+    </goal>
+
+    <goal name="clean:components">
+        <echo message="Clean components"/>
+        <maven:reactor
+            basedir="${basedir}"
+            includes="*/project.xml"
+            excludes="distribution/project.xml,site/project.xml,demos/*/project.xml,integration-test/project.xml"
+            goals="clean"
+            banner="Cleaning"
+            ignoreFailures="false"/>
+    </goal>
+
+    <goal name="clean:distribution">
+        <echo message="Clean distribution"/>
+        <maven:reactor
+            basedir="${basedir}"
+            includes="distribution/project.xml"
+            goals="clean"
+            banner="Cleaning"
+            ignoreFailures="false"/>
+    </goal>
+
+    <goal name="clean:demos">
+        <echo message="Clean demos"/>
+        <maven:reactor
+            basedir="${basedir}"
+            includes="demos/*/project.xml"
+            goals="clean"
+            banner="Cleaning"
             ignoreFailures="false"/>
     </goal>
 
     <goal name="deploy">
+    	<util:tokenize var="items" delim="," trim="true">${loom.deploy.include}</util:tokenize>
+		<j:forEach var="item" items="${items}">
+	        <attainGoal name="deploy:${item}"/>
+		</j:forEach> 
+    </goal>
+
+    <goal name="deploy:components">
         <echo message="Deploying all components"/>
         <maven:reactor
             basedir="${basedir}"
             includes="*/project.xml"
-            excludes="distribution/*,demos/project.xml,demos/*/project.xml,integration-test/project.xml"
+            excludes="distribution/project.xml,site/project.xml,demos/*/project.xml,integration-test/project.xml"
+            goals="clean,deploy"
+            banner="Deploying"
+            ignoreFailures="false"/>
+    </goal>
+
+    <goal name="deploy:distribution">
+        <echo message="Deploy distribution"/>
+        <maven:reactor
+            basedir="${basedir}"
+            includes="distribution/project.xml"
+            goals="clean,deploy"
+            banner="Deploying"
+            ignoreFailures="false"/>
+    </goal>
+
+    <goal name="deploy:demos">
+        <echo message="Deploy demos"/>
+        <maven:reactor
+            basedir="${basedir}"
+            includes="demos/*/project.xml"
             goals="clean,deploy"
             banner="Deploying"
             ignoreFailures="false"/>
