@@ -134,7 +134,7 @@ if [ "$LOOM_SECURE" != "false" ] ; then
 fi
 
 # Get the run cmd
-RUN_CMD="$JAVA_HOME/bin/java $JVM_OPTS \
+RUN_CMD="$JAVA_HOME/bin/java \
     $JVM_OPTS \
     $DEBUG \
     -Djava.security.policy=jar:file:$LOOM_HOME/bin/loom-launcher.jar!/META-INF/java.policy \
