@@ -41,7 +41,7 @@
         </dependency>
         <dependency>
             <id>excalibur-monitor</id>
-            <version>20030713</version>
+            <version>1.1</version>
         </dependency>
         <dependency>
             <id>excalibur-instrument</id>
@@ -142,7 +142,7 @@
         <dependency> <!-- for unit testing -->
             <groupId>excalibur</groupId>
             <artifactId>excalibur-logger</artifactId>
-            <version>20031215.105842</version>
+            <version>1.1</version>
         </dependency>
         <dependency><!-- for unit testing -->
             <groupId>excalibur</groupId>
