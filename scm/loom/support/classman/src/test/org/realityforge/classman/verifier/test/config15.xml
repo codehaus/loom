@@ -1,7 +1,0 @@
-<classloaders default="X" version="1.0">
-    <predefined name="X"/>
-
-    <join name="X">
-    </join>
-
-</classloaders>

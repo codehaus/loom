@@ -1,9 +1,0 @@
-// Give loom launcher full permissions
-grant codeBase "file:${loom.home}/bin/*" {
-	permission java.security.AllPermission;
-};
-
-// Give loom launcher full permissions
-grant codeBase "file:${loom.home}/container/lib/*" {
-	permission java.security.AllPermission;
-};
