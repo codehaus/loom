@@ -89,7 +89,6 @@ package org.jcontainer.loom.components.kernel;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.avalon.framework.CascadingException;
 import org.apache.avalon.framework.activity.Disposable;
 import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.configuration.Configurable;
@@ -102,8 +101,9 @@ import org.apache.avalon.framework.service.DefaultServiceManager;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
-import org.jcontainer.loom.components.application.DefaultApplication;
 import org.apache.excalibur.instrument.InstrumentManager;
+import org.jcomponent.loggerstore.LoggerStore;
+import org.jcontainer.loom.components.application.DefaultApplication;
 import org.jcontainer.loom.interfaces.Application;
 import org.jcontainer.loom.interfaces.ApplicationContext;
 import org.jcontainer.loom.interfaces.ApplicationMBean;
@@ -111,10 +111,10 @@ import org.jcontainer.loom.interfaces.ConfigurationRepository;
 import org.jcontainer.loom.interfaces.ConfigurationValidator;
 import org.jcontainer.loom.interfaces.Kernel;
 import org.jcontainer.loom.interfaces.KernelMBean;
+import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.interfaces.SystemManager;
-import org.jcomponent.loggerstore.LoggerStore;
-import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
+import org.realityforge.salt.i18n.Resources;
 
 /**
  * The ServerKernel is the core of the container system.
@@ -322,7 +322,7 @@ public class DefaultKernel
                     final String message =
                         REZ.format( "kernel.error.entry.initialize",
                                     entry.getProfile().getMetaData().getName() );
-                    throw new CascadingException( message, t );
+                    throw new LoomException( message, t );
                 }
 
                 try
@@ -345,7 +345,7 @@ public class DefaultKernel
                         //so invalid instance is not used
                         entry.setApplication( null );
 
-                        throw new CascadingException( message, t );
+                        throw new LoomException( message, t );
                     }
                 }
 
@@ -362,7 +362,7 @@ public class DefaultKernel
                 {
                     final String message =
                         REZ.format( "kernel.error.entry.manage", name );
-                    throw new CascadingException( message, t );
+                    throw new LoomException( message, t );
                 }
             }
         }
@@ -484,7 +484,7 @@ public class DefaultKernel
             {
                 final String message =
                     REZ.format( "kernel.error.entry.unmanage", name );
-                throw new CascadingException( message, t );
+                throw new LoomException( message, t );
             }
 
             shutdown( entry );

@@ -91,7 +91,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
-import org.apache.avalon.framework.CascadingException;
 import org.apache.avalon.framework.activity.Disposable;
 import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.configuration.Configurable;
@@ -114,6 +113,7 @@ import org.jcontainer.loom.interfaces.Embeddor;
 import org.jcontainer.loom.interfaces.EmbeddorMBean;
 import org.jcontainer.loom.interfaces.Kernel;
 import org.jcontainer.loom.interfaces.SystemManager;
+import org.jcontainer.loom.interfaces.LoomException;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
 
@@ -513,7 +513,7 @@ public class DefaultEmbeddor
             final String message =
                 REZ.getString( "embeddor.error.createComponents.failed" );
             getLogger().fatalError( message, e );
-            throw new CascadingException( message, e );
+            throw new LoomException( message, e );
         }
     }
 
@@ -662,7 +662,7 @@ public class DefaultEmbeddor
         catch( final IllegalAccessException iae )
         {
             final String message = REZ.format( "bad-ctor.error", service.getName(), classname );
-            throw new CascadingException( message, iae );
+            throw new LoomException( message, iae );
         }
         catch( final InstantiationException ie )
         {
@@ -670,12 +670,12 @@ public class DefaultEmbeddor
                 REZ.format( "no-instantiate.error",
                             service.getName(),
                             classname );
-            throw new CascadingException( message, ie );
+            throw new LoomException( message, ie );
         }
         catch( final ClassNotFoundException cnfe )
         {
             final String message = REZ.format( "no-class.error", service.getName(), classname );
-            throw new CascadingException( message, cnfe );
+            throw new LoomException( message, cnfe );
         }
     }
 

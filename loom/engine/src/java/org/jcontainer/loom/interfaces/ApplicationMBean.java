@@ -160,12 +160,12 @@ public interface ApplicationMBean
      * @phoenix:mx-operation
      *
      * @throws IllegalStateException if application is already running
-     * @throws ApplicationException if the application failed to start.
+     * @throws LoomException if the application failed to start.
      *            the message part of exception will contain more information
      *            pertaining to why the application failed to startup
      */
     void start()
-        throws IllegalStateException, ApplicationException;
+        throws IllegalStateException, LoomException;
 
     /**
      * Shutdown and restart the application running.
@@ -177,12 +177,12 @@ public interface ApplicationMBean
      * @phoenix:mx-operation
      *
      * @throws IllegalStateException if application is not already running
-     * @throws ApplicationException if the application failed to stop or start.
+     * @throws LoomException if the application failed to stop or start.
      *            the message part of exception will contain more information
      *            pertaining to why the application failed to startup/shutdown
      */
     void restart()
-        throws IllegalStateException, ApplicationException;
+        throws IllegalStateException, LoomException;
 
     /**
      * Stop the application running.
@@ -192,10 +192,10 @@ public interface ApplicationMBean
      * @phoenix:mx-operation
      *
      * @throws IllegalStateException if application is not already running
-     * @throws ApplicationException if the application failed to shutdown.
+     * @throws LoomException if the application failed to shutdown.
      *            the message part of exception will contain more information
      *            pertaining to why the application failed to shutodwn
      */
     void stop()
-        throws IllegalStateException, ApplicationException;
+        throws IllegalStateException, LoomException;
 }

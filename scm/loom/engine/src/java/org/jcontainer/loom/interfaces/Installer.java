@@ -100,17 +100,17 @@ public interface Installer
      * Install the Sar designated by url.
      *
      * @param url the url of instalation
-     * @throws InstallationException if an error occurs
+     * @throws LoomException if an error occurs
      */
     Map install( String name, URL url )
-        throws InstallationException;
+        throws LoomException;
 
     /**
      * Uninstall the Sar designated installation.
      *
      * @param installation the installation
-     * @throws InstallationException if an error occurs
+     * @throws LoomException if an error occurs
      */
     void uninstall( Map installation )
-        throws InstallationException;
+        throws LoomException;
 }

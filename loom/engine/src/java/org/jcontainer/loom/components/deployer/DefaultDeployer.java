@@ -103,6 +103,7 @@ import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 import org.apache.avalon.phoenix.BlockContext;
+import org.jcomponent.loggerstore.LoggerStore;
 import org.jcontainer.loom.interfaces.ClassLoaderManager;
 import org.jcontainer.loom.interfaces.ClassLoaderSet;
 import org.jcontainer.loom.interfaces.ConfigurationRepository;
@@ -110,20 +111,19 @@ import org.jcontainer.loom.interfaces.ConfigurationValidator;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.Deployer;
 import org.jcontainer.loom.interfaces.DeployerMBean;
-import org.jcontainer.loom.interfaces.DeploymentException;
-import org.jcontainer.loom.interfaces.InstallationException;
+import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.interfaces.Installer;
 import org.jcontainer.loom.interfaces.Kernel;
 import org.jcontainer.loom.interfaces.LogManager;
-import org.jcontainer.loom.tools.configuration.ConfigurationBuilder;
-import org.jcontainer.loom.tools.verifier.SarVerifier;
+import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.tools.LoomToolConstants;
+import org.jcontainer.loom.tools.configuration.ConfigurationBuilder;
 import org.jcontainer.loom.tools.profile.ComponentProfile;
 import org.jcontainer.loom.tools.profile.PartitionProfile;
 import org.jcontainer.loom.tools.profile.ProfileBuilder;
-import org.jcomponent.loggerstore.LoggerStore;
-import org.realityforge.salt.i18n.Resources;
+import org.jcontainer.loom.tools.verifier.SarVerifier;
 import org.realityforge.salt.i18n.ResourceManager;
+import org.realityforge.salt.i18n.Resources;
 import org.xml.sax.InputSource;
 
 /**
@@ -190,7 +190,7 @@ public class DefaultDeployer
             {
                 undeploy( name );
             }
-            catch( final DeploymentException de )
+            catch( final LoomException de )
             {
                 final String message =
                     REZ.format( "deploy.undeploy-indispose.error",
@@ -205,10 +205,10 @@ public class DefaultDeployer
      * Redeploy an application.
      *
      * @param name the name of deployment
-     * @throws DeploymentException if an error occurs
+     * @throws LoomException if an error occurs
      */
     public void redeploy( final String name )
-        throws DeploymentException
+        throws LoomException
     {
         final Map installation =
             (Map)m_installations.get( name );
@@ -216,20 +216,20 @@ public class DefaultDeployer
         {
             final String message =
                 REZ.format( "deploy.no-deployment.error", name );
-            throw new DeploymentException( message );
+            throw new LoomException( message );
         }
         try
         {
             final File source = (File)installation.get( ContainerConstants.INSTALL_SOURCE );
             redeploy( name, source.toURL() );
         }
-        catch( final DeploymentException e )
+        catch( final LoomException e )
         {
             throw e;
         }
         catch( final Exception e )
         {
-            throw new DeploymentException( e.getMessage(), e );
+            throw new LoomException( e.getMessage(), e );
         }
     }
 
@@ -238,10 +238,10 @@ public class DefaultDeployer
      *
      * @param name the name of deployment
      * @param location the installation to redeploy
-     * @throws DeploymentException if an error occurs
+     * @throws LoomException if an error occurs
      */
     public void redeploy( String name, URL location )
-        throws DeploymentException
+        throws LoomException
     {
         m_kernel.lock();
         try
@@ -251,7 +251,7 @@ public class DefaultDeployer
         }
         catch( final Exception e )
         {
-            throw new DeploymentException( e.getMessage(), e );
+            throw new LoomException( e.getMessage(), e );
         }
         finally
         {
@@ -263,10 +263,10 @@ public class DefaultDeployer
      * Undeploy an application.
      *
      * @param name the name of deployment
-     * @throws DeploymentException if an error occurs
+     * @throws LoomException if an error occurs
      */
     public void undeploy( final String name )
-        throws DeploymentException
+        throws LoomException
     {
         final Map installation =
             (Map)m_installations.remove( name );
@@ -274,7 +274,7 @@ public class DefaultDeployer
         {
             final String message =
                 REZ.format( "deploy.no-deployment.error", name );
-            throw new DeploymentException( message );
+            throw new LoomException( message );
         }
         try
         {
@@ -283,7 +283,7 @@ public class DefaultDeployer
         }
         catch( final Exception e )
         {
-            throw new DeploymentException( e.getMessage(), e );
+            throw new LoomException( e.getMessage(), e );
         }
     }
 
@@ -292,10 +292,10 @@ public class DefaultDeployer
      *
      * @param name the name of application
      * @param sarURL the location to deploy from represented as String
-     * @throws DeploymentException if an error occurs
+     * @throws LoomException if an error occurs
      */
     public void deploy( final String name, final String sarURL )
-        throws DeploymentException
+        throws LoomException
     {
         try
         {
@@ -303,7 +303,7 @@ public class DefaultDeployer
         }
         catch( MalformedURLException mue )
         {
-            throw new DeploymentException( mue.getMessage(), mue );
+            throw new LoomException( mue.getMessage(), mue );
         }
     }
 
@@ -312,17 +312,17 @@ public class DefaultDeployer
      *
      * @param name the name of application
      * @param location the location to deploy from
-     * @throws DeploymentException if an error occurs
+     * @throws LoomException if an error occurs
      */
     public void deploy( final String name, final URL location )
-        throws DeploymentException
+        throws LoomException
     {
         if( m_installations.containsKey( name ) )
         {
             final String message =
                 REZ.format( "deploy.already-deployed.error",
                             name );
-            throw new DeploymentException( message );
+            throw new LoomException( message );
         }
 
         /*
@@ -406,14 +406,14 @@ public class DefaultDeployer
             getLogger().debug( message );
             success = true;
         }
-        catch( final DeploymentException de )
+        catch( final LoomException de )
         {
             throw de;
         }
         catch( final Exception e )
         {
             //From classloaderManager/kernel
-            throw new DeploymentException( e.getMessage(), e );
+            throw new LoomException( e.getMessage(), e );
         }
         finally
         {
@@ -423,7 +423,7 @@ public class DefaultDeployer
                 {
                     m_installer.uninstall( installation );
                 }
-                catch( final InstallationException ie )
+                catch( final LoomException ie )
                 {
                     getLogger().error( ie.getMessage(), ie );
                 }
@@ -437,10 +437,10 @@ public class DefaultDeployer
      * @param install the install data
      * @param key the key under which config data is stored in install data
      * @return the Configuration
-     * @throws DeploymentException if an error occurs
+     * @throws LoomException if an error occurs
      */
     private Configuration getConfigurationFor( final Map install, final String key, final String schema )
-        throws DeploymentException
+        throws LoomException
     {
         final String location = (String)install.get( key );
         try
@@ -451,7 +451,7 @@ public class DefaultDeployer
         {
             final String message = REZ.format( "deploy.error.config.create", location );
             getLogger().error( message, e );
-            throw new DeploymentException( message, e );
+            throw new LoomException( message, e );
         }
     }
 
@@ -461,11 +461,11 @@ public class DefaultDeployer
      * one form or another.
      *
      * @param configuration the block configurations.
-     * @throws DeploymentException if an error occurs
+     * @throws LoomException if an error occurs
      */
     private Configuration processConfiguration( final String application,
                                                 final Configuration configuration )
-        throws DeploymentException
+        throws LoomException
     {
         final DefaultConfiguration newConfiguration = new DefaultConfiguration( "config" );
         final Configuration[] configurations = configuration.getChildren();
@@ -482,7 +482,7 @@ public class DefaultDeployer
             }
             catch( final ConfigurationException ce )
             {
-                throw new DeploymentException( ce.getMessage(), ce );
+                throw new LoomException( ce.getMessage(), ce );
             }
         }
         return newConfiguration;
@@ -493,11 +493,11 @@ public class DefaultDeployer
      *
      * @param profile the PartitionProfile
      * @param config the block configurations.
-     * @throws DeploymentException if an error occurs
+     * @throws LoomException if an error occurs
      */
     private void verifyConfiguration( final PartitionProfile profile,
                                       final Configuration config )
-        throws DeploymentException
+        throws LoomException
     {
         final Configuration[] configurations = config.getChildren();
         final PartitionProfile listenerPartition =
@@ -518,7 +518,7 @@ public class DefaultDeployer
                 final String message =
                     REZ.format( "deploy.error.extra.config",
                                 name );
-                throw new DeploymentException( message );
+                throw new LoomException( message );
             }
         }
     }
@@ -528,11 +528,11 @@ public class DefaultDeployer
      *
      * @param profile the PartitionProfile
      * @param classLoader the classloader application is loaded in
-     * @throws DeploymentException if an error occurs
+     * @throws LoomException if an error occurs
      */
     private void validateConfiguration( final PartitionProfile profile,
                                         final ClassLoader classLoader )
-        throws DeploymentException
+        throws LoomException
     {
         final PartitionProfile[] partitions = profile.getPartitions();
         for( int i = 0; i < partitions.length; i++ )
@@ -558,9 +558,8 @@ public class DefaultDeployer
                     "Unable to validate configuration of component " +
                     component.getMetaData().getName() + " of type " +
                     component.getInfo().getDescriptor().getImplementationKey();
-                throw new DeploymentException( message );
+                throw new LoomException( message );
             }
         }
     }
-
 }
