@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<config>
+
+  <distributed-server>
+      <port>1234</port> 
+  </distributed-server>
+  
+</config>

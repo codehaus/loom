@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<assembly>
+
+  <block class="org.jcontainer.loom.demos.distributed.block.DefaultServer" 
+  		 name="distributed-server" >
+  </block>
+
+</assembly>
