@@ -98,17 +98,17 @@ public interface ContainerConstants
      * The name of the software. (Usually Loom but different
      * users may overide this).
      */
-    String SOFTWARE = "@@NAME@@";
+    String SOFTWARE = Version.SOFTWARE;
 
     /**
      * The version of the software.
      */
-    String VERSION = "@@VERSION@@";
+    String VERSION = Version.VERSION;
 
     /**
      * The date on which software was built.
      */
-    String DATE = "@@DATE@@";
+    String DATE = Version.DATE;
 
     /**
      * The name of the attribute used to determine whether
