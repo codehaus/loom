@@ -13,8 +13,6 @@ package org.jcontainer.loom.tools.lifecycle;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import org.apache.avalon.excalibur.i18n.ResourceManager;
-import org.apache.avalon.excalibur.i18n.Resources;
 import org.apache.avalon.framework.component.Component;
 import org.apache.avalon.framework.component.ComponentManager;
 import org.apache.avalon.framework.component.DefaultComponentManager;
@@ -33,6 +31,8 @@ import org.jcontainer.loom.tools.metadata.DependencyMetaData;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ContextDescriptor;
 import org.jcontainer.loom.tools.info.EntryDescriptor;
+import org.realityforge.salt.i18n.Resources;
+import org.realityforge.salt.i18n.ResourceManager;
 
 /**
  * This is a base object via which the
@@ -47,7 +47,7 @@ import org.jcontainer.loom.tools.info.EntryDescriptor;
  * {@link org.jcontainer.loom.tools.verifier.AssemblyVerifier}</p>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-29 01:06:23 $
+ * @version $Revision: 1.2 $ $Date: 2003-07-03 06:35:49 $
  */
 public abstract class AbstractResourceProvider
     extends AbstractLogEnabled
@@ -219,10 +219,10 @@ public abstract class AbstractResourceProvider
             if( null == value )
             {
                 final String message =
-                    REZ.getString( "resource.missing-context-value.error",
-                                   optional ? "1" : "2",
-                                   key,
-                                   componentName );
+                    REZ.format( "resource.missing-context-value.error",
+                                optional ? "1" : "2",
+                                key,
+                                componentName );
                 if( !optional )
                 {
                     throw new Exception( message );
@@ -238,12 +238,12 @@ public abstract class AbstractResourceProvider
             if( !typeValid )
             {
                 final String message =
-                    REZ.getString( "resource.bad-value-type.error",
-                                   optional ? "1" : "2",
-                                   key,
-                                   componentName,
-                                   type,
-                                   value.getClass().getName() );
+                    REZ.format( "resource.bad-value-type.error",
+                                optional ? "1" : "2",
+                                key,
+                                componentName,
+                                type,
+                                value.getClass().getName() );
                 if( !optional )
                 {
                     throw new Exception( message );
@@ -265,10 +265,10 @@ public abstract class AbstractResourceProvider
         if( !validContextClass )
         {
             final String message =
-                REZ.getString( "resource.bad-context-type.error",
-                               classname,
-                               context.getClass().getName(),
-                               componentName );
+                REZ.format( "resource.bad-context-type.error",
+                            classname,
+                            context.getClass().getName(),
+                            componentName );
             throw new Exception( message );
         }
 
@@ -297,9 +297,9 @@ public abstract class AbstractResourceProvider
             if( !Component.class.isInstance( service ) )
             {
                 final String message =
-                    REZ.getString( "resource.service-not-a-component.error",
-                                   key,
-                                   service.getClass().getName() );
+                    REZ.format( "resource.service-not-a-component.error",
+                                key,
+                                service.getClass().getName() );
                 throw new Exception( message );
             }
             componentManager.put( key, (Component)service );
@@ -376,10 +376,10 @@ public abstract class AbstractResourceProvider
             if( null == service )
             {
                 final String message =
-                    REZ.getString( "resource.missing-dependency.error",
-                                   optional ? "1" : "2",
-                                   key,
-                                   component.getName() );
+                    REZ.format( "resource.missing-dependency.error",
+                                optional ? "1" : "2",
+                                key,
+                                component.getName() );
                 if( !optional )
                 {
                     throw new Exception( message );
