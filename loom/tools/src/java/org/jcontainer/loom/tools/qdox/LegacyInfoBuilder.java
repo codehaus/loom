@@ -14,6 +14,7 @@ import com.thoughtworks.qdox.model.DocletTag;
 import com.thoughtworks.qdox.model.JavaClass;
 import com.thoughtworks.qdox.model.JavaMethod;
 import java.util.ArrayList;
+import org.apache.avalon.phoenix.framework.tools.infobuilder.LegacyUtil;
 import org.jcontainer.loom.tools.info.Attribute;
 import org.jcontainer.loom.tools.info.ComponentDescriptor;
 import org.jcontainer.loom.tools.info.ComponentInfo;
@@ -22,8 +23,6 @@ import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.tools.info.LoggerDescriptor;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
-import org.jcontainer.loom.tools.qdox.AbstractInfoBuilder;
-import org.apache.avalon.phoenix.framework.tools.infobuilder.LegacyUtil;
 
 /**
  * Build a ComponentInfo object by interpreting Phoenix style javadoc
@@ -31,7 +30,7 @@ import org.apache.avalon.phoenix.framework.tools.infobuilder.LegacyUtil;
  *
  * @author Paul Hammant
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-26 08:46:40 $
+ * @version $Revision: 1.3 $ $Date: 2003-06-26 08:52:32 $
  */
 public class LegacyInfoBuilder
     extends AbstractInfoBuilder

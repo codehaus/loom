@@ -7,9 +7,6 @@
  */
 package org.jcontainer.loom.tools.info;
 
-import org.jcontainer.loom.tools.info.FeatureDescriptor;
-import org.jcontainer.loom.tools.info.Attribute;
-
 /**
  * A descriptor describing the schema to validate the components
  * {@link org.apache.avalon.framework.parameters.Parameters} or
@@ -25,7 +22,7 @@ import org.jcontainer.loom.tools.info.Attribute;
  * about Schema requirements.</p>
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-26 08:37:43 $
+ * @version $Revision: 1.2 $ $Date: 2003-06-26 08:52:31 $
  */
 public class SchemaDescriptor
     extends FeatureDescriptor

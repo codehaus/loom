@@ -14,15 +14,14 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.apache.avalon.phoenix.framework.tools.infobuilder.InfoWriter;
 import org.apache.avalon.phoenix.framework.tools.infobuilder.LegacyBlockInfoWriter;
 import org.apache.avalon.phoenix.framework.tools.infobuilder.SerializedInfoWriter;
 import org.apache.avalon.phoenix.framework.tools.infobuilder.XMLInfoWriter;
+import org.apache.tools.ant.BuildException;
+import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.qdox.DefaultInfoBuilder;
 import org.jcontainer.loom.tools.qdox.LegacyInfoBuilder;
-import org.jcontainer.loom.tools.ant.FormatEnum;
-import org.apache.tools.ant.BuildException;
 
 /**
  * Generate MetaData for info package from the source files.
@@ -30,7 +29,7 @@ import org.apache.tools.ant.BuildException;
  *
  * @author Paul Hammant
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-26 08:49:15 $
+ * @version $Revision: 1.2 $ $Date: 2003-06-26 08:52:31 $
  */
 public class MetaGenerateTask
     extends AbstractQdoxTask

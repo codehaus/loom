@@ -11,28 +11,28 @@ import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import org.apache.avalon.framework.CascadingException;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.SAXConfigurationHandler;
 import org.apache.avalon.framework.logger.Logger;
-import org.apache.avalon.framework.CascadingException;
-import org.realityforge.configkit.ResolverFactory;
-import org.realityforge.configkit.ConfigValidatorFactory;
 import org.realityforge.configkit.ConfigValidator;
-import org.realityforge.configkit.ValidationResult;
-import org.realityforge.configkit.ValidationIssue;
+import org.realityforge.configkit.ConfigValidatorFactory;
+import org.realityforge.configkit.ResolverFactory;
 import org.realityforge.configkit.ValidateException;
+import org.realityforge.configkit.ValidationIssue;
+import org.realityforge.configkit.ValidationResult;
+import org.xml.sax.ContentHandler;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-import org.xml.sax.XMLReader;
-import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXParseException;
+import org.xml.sax.XMLReader;
 
 /**
  * Utility class used to load Configuration trees from XML files.
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-06-26 08:03:58 $
+ * @version $Revision: 1.4 $ $Date: 2003-06-26 08:52:31 $
  */
 public class ConfigurationBuilder
 {
