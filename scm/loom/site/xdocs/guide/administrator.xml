@@ -29,7 +29,7 @@ bin/run.[bat|sh]
                 </p>
                 <p>
                   On Windows versions other than NT, you'll need to set
-                  the PHOENIX_HOME environment variable first.
+                  the LOOM_HOME environment variable first.
                   To stop Loom running in the foreground simply used CTRL-C, which 
                   will cause a clean shutdown.
                 </p>
@@ -53,28 +53,25 @@ loom.sh [start|stop|run|restart|check]
               </p>
               <p>
                 The main benifit of using the Java Service Wrapper is that it can
-                install Loom as an NT service.  It can also detect if the JVM
+                install Loom as a Linux/Unix deamon or an NT service.  It can also detect if the JVM
                 freezes up or crashes and restart the application immediately.
               </p>
               <p>
                 To build Loom with the Java Service Wrapper, download and
-                extract the latest version.  Next, in the root of the source tree,
-                create or modify <code>ant.properties</code> so that it looks
-                similar to this:
+                extract the latest version.  Copy to <code>loom/distribution/deploy/ext</code> 
+                the wrapper binaries and libraries:
               </p>
 
 <source>
-# ${base.path} points to the root of the Loom source tree
-wrapper.home=${base.path}/wrapper_linux_3.0.0
-wrapper.jar=${wrapper.home}/lib/wrapper.jar
-
 # If you're using Linux/Solaris:
-wrapper.exe=${wrapper.home}/bin/wrapper
-wrapper.dll=${wrapper.home}/lib/libwrapper.so
+bin/wrapper
+lib/libwrapper.so
+lib/wrapper.jar
 
 # If you're using Windows:
-wrapper.exe=${wrapper.home}/bin/Wrapper.exe
-wrapper.dll=${wrapper.home}/lib/Wrapper.dll
+bin/Wrapper.exe
+lib/Wrapper.dll
+lib/wrapper.jar
 </source>
 
               <p>
