@@ -9,10 +9,10 @@
   <body>
     <section name="Introduction">
       <p>
-        This is very similar to <em>BlockListener</em> in that it is notified
-        during lifecycle of blocks and application.  In Java terms the
-        <em>ApplicationListener</em> interface extends <em>BlockListener</em>
-        so it is always informed of both types of events.
+        An ApplicationListener is a component that is created before any other
+        components in the application. It receives notifications at the start of BLock creation, 
+        after each Block is created, and when all blocks are created and the application is
+        running.
       </p>
     </section>
     <section name="Events notified">
