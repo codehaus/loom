@@ -7,7 +7,6 @@
  */
 package org.jcontainer.loom.tools.infobuilder;
 
-import org.apache.avalon.framework.Version;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
@@ -18,13 +17,12 @@ import org.realityforge.metaclass.model.Attribute;
  * to enablesupport of Legacy BlockInfo files.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.11 $ $Date: 2003-10-06 14:10:48 $
+ * @version $Revision: 1.12 $ $Date: 2003-10-11 09:03:15 $
  */
 public class LegacyUtil
 {
     public static final String MX_ATTRIBUTE_NAME = "phoenix:mx";
     public static final Attribute MX_ATTRIBUTE = new Attribute( MX_ATTRIBUTE_NAME );
-    public static final Version VERSION = new Version( 1, 0, 0 );
 
     private LegacyUtil()
     {
