@@ -38,11 +38,14 @@ import org.realityforge.salt.i18n.ResourceManager;
  * </ul>
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-06-27 03:43:29 $
+ * @version $Revision: 1.5 $ $Date: 2003-06-27 03:43:56 $
  */
 public class SimpleLoaderResolver
     implements LoaderResolver
 {
+    /**
+     * i18n utils for presenting messages.
+     */
     private static final Resources REZ =
         ResourceManager.getPackageResources( SimpleLoaderResolver.class );
 
