@@ -60,8 +60,8 @@
         <tr>
           <td>maven.sar.metagenerate</td>
           <td>Yes</td>
-          <td>Boolean to metagenerate xinfo from source. 
-              Defaults to <code>true</code>.
+          <td>Boolean to metagenerate descriptors from source. 
+              Defaults to <code>false</code>.
           </td>
         </tr>
         <tr>
