@@ -7,18 +7,24 @@
  */
 package org.jcontainer.loom.info;
 
-import junit.framework.TestCase;
-import com.thoughtworks.qdox.model.JavaClass;
-import com.thoughtworks.qdox.model.DocletTag;
-import com.thoughtworks.qdox.model.JavaMethod;
-import org.realityforge.metaclass.model.Attribute;
-import java.util.Properties;
 import java.util.ArrayList;
+import java.util.Properties;
+
+import junit.framework.TestCase;
+
+import org.realityforge.metaclass.model.Attribute;
+
+import com.thoughtworks.qdox.model.DefaultDocletTag;
+import com.thoughtworks.qdox.model.DefaultDocletTagFactory;
+import com.thoughtworks.qdox.model.DocletTagFactory;
+import com.thoughtworks.qdox.model.JavaClass;
+import com.thoughtworks.qdox.model.JavaMethod;
+import com.thoughtworks.qdox.model.JavaSource;
 
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-11-01 13:15:31 $
+ * @version $Revision: 1.2 $ $Date: 2003-11-29 00:55:57 $
  */
 public class PhoenixAttributeInterceptorTestCase
     extends TestCase
@@ -29,7 +35,7 @@ public class PhoenixAttributeInterceptorTestCase
         final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
         final Attribute attribute = new Attribute( "ignored" );
         final Attribute result =
-            interceptor.processClassAttribute( new JavaClass(), attribute );
+            interceptor.processClassAttribute(new JavaClass(new JavaSource()),attribute );
         assertNotNull( "attribute", result );
         assertEquals( "attribute.name", "ignored", result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );
@@ -42,7 +48,7 @@ public class PhoenixAttributeInterceptorTestCase
         final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
         final Attribute attribute = new Attribute( "phoenix:block" );
         final Attribute result =
-            interceptor.processClassAttribute( new JavaClass(), attribute );
+            interceptor.processClassAttribute(new JavaClass(new JavaSource()),attribute );
         assertNotNull( "attribute", result );
         assertEquals( "attribute.name", "dna.component", result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );
@@ -57,7 +63,7 @@ public class PhoenixAttributeInterceptorTestCase
         parameters.setProperty( "name", "MyTopic" );
         final Attribute attribute = new Attribute( "phoenix:mx-topic", parameters );
         final Attribute result =
-            interceptor.processClassAttribute( new JavaClass(), attribute );
+            interceptor.processClassAttribute(new JavaClass(new JavaSource()),attribute );
         assertNotNull( "attribute", result );
         assertEquals( "attribute.name", "mx.component", result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );
@@ -73,7 +79,7 @@ public class PhoenixAttributeInterceptorTestCase
         parameters.setProperty( "name", "X" );
         final Attribute attribute = new Attribute( "phoenix:service", parameters );
         final Attribute result =
-            interceptor.processClassAttribute( new JavaClass(), attribute );
+            interceptor.processClassAttribute(new JavaClass(new JavaSource()),attribute );
         assertNotNull( "attribute", result );
         assertEquals( "attribute.name", "dna.service", result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );
@@ -89,7 +95,7 @@ public class PhoenixAttributeInterceptorTestCase
         parameters.setProperty( "class", "X" );
         final Attribute attribute = new Attribute( "phoenix:mx-proxy", parameters );
         final Attribute result =
-            interceptor.processClassAttribute( new JavaClass(), attribute );
+            interceptor.processClassAttribute(new JavaClass(new JavaSource()),attribute );
         assertNotNull( "attribute", result );
         assertEquals( "attribute.name", "mx.proxy", result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );
@@ -141,7 +147,8 @@ public class PhoenixAttributeInterceptorTestCase
         final Attribute attribute = new Attribute( "phoenix:mx-attribute" );
         final JavaMethod method = new JavaMethod();
         final ArrayList tags = new ArrayList();
-        tags.add( new DocletTag( "phoenix:mx-description", description ) );
+        final DocletTagFactory factory = new DefaultDocletTagFactory();
+        tags.add( factory.createDocletTag( "phoenix:mx-description", description ) );
         method.setTags( tags );
         final Attribute result =
             interceptor.processMethodAttribute( method, attribute );
@@ -192,7 +199,8 @@ public class PhoenixAttributeInterceptorTestCase
         final Attribute attribute = new Attribute( "phoenix:mx-operation" );
         final JavaMethod field = new JavaMethod();
         final ArrayList tags = new ArrayList();
-        tags.add( new DocletTag( "phoenix:mx-description", description ) );
+        final DocletTagFactory factory = new DefaultDocletTagFactory();
+        tags.add( factory.createDocletTag( "phoenix:mx-description", description ) );
         field.setTags( tags );
         final Attribute result =
             interceptor.processMethodAttribute( field, attribute );
@@ -227,7 +235,7 @@ public class PhoenixAttributeInterceptorTestCase
     {
         final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
         final Attribute attribute = new Attribute( "phoenix:configuration-schema" );
-        final JavaClass javaClass = new JavaClass();
+        final JavaClass javaClass = new JavaClass(new JavaSource());
         javaClass.setName( "com.biz.MyClass" );
         final JavaMethod method = new JavaMethod();
         method.setParentClass( javaClass );
@@ -247,7 +255,7 @@ public class PhoenixAttributeInterceptorTestCase
         final String type = "BobbaFett";
         parameters.setProperty( "type", type );
         final Attribute attribute = new Attribute( "phoenix:configuration-schema", parameters );
-        final JavaClass javaClass = new JavaClass();
+        final JavaClass javaClass = new JavaClass(new JavaSource());
         javaClass.setName( "com.biz.MyClass" );
         final JavaMethod method = new JavaMethod();
         method.setParentClass( javaClass );
@@ -268,7 +276,7 @@ public class PhoenixAttributeInterceptorTestCase
         final Properties parameters = new Properties();
         parameters.setProperty( "type", "relax-ng" );
         final Attribute attribute = new Attribute( "phoenix:configuration-schema", parameters );
-        final JavaClass javaClass = new JavaClass();
+        final JavaClass javaClass = new JavaClass(new JavaSource());
         javaClass.setName( "com.biz.MyClass" );
         final JavaMethod method = new JavaMethod();
         method.setParentClass( javaClass );
@@ -329,7 +337,7 @@ public class PhoenixAttributeInterceptorTestCase
         final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
         final Attribute[] input = new Attribute[]{new Attribute( "RandomJAttribute" )};
         final Attribute[] attributes =
-            interceptor.processClassAttributes( new JavaClass(), input );
+            interceptor.processClassAttributes(new JavaClass(new JavaSource()),input );
         assertEquals( "attributes.length", 1, attributes.length );
         assertEquals( "attributes[0].name", "RandomJAttribute", attributes[ 0 ].getName() );
         assertEquals( "attributes[0].value", null, attributes[ 0 ].getValue() );
@@ -346,7 +354,7 @@ public class PhoenixAttributeInterceptorTestCase
         final Attribute attribute = new Attribute( "phoenix:mx", parameters );
         final Attribute[] input = new Attribute[]{attribute};
         final Attribute[] attributes =
-            interceptor.processClassAttributes( new JavaClass(), input );
+            interceptor.processClassAttributes(new JavaClass(new JavaSource()),input );
         assertEquals( "attributes.length", 2, attributes.length );
         assertEquals( "attributes[0].name", "dna.service", attributes[ 0 ].getName() );
         assertEquals( "attributes[0].value", null, attributes[ 0 ].getValue() );
