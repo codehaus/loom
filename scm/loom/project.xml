@@ -41,24 +41,24 @@
 
     <licenses>
         <license>
-            <name>The JContainer Software License, Version 1.1</name>
-            <url>http://jcontainer.cvs.codehaus.org/viewcvs.cgi/*checkout*/jcontainer/loom/LICENSE.txt</url>
+            <name>The Loom Software License, Version 1.1</name>
+            <url>http://cvs.loom.codehaus.org/loom/LICENSE.txt</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
 
     <mailingLists>
         <mailingList>
-            <name>JContainer Interest</name>
-            <subscribe>http://lists.codehaus.org/mailman/listinfo/jcontainer-interest</subscribe>
-            <unsubscribe>http://lists.codehaus.org/mailman/listinfo/jcontainer-interest</unsubscribe>
-            <archive>http://lists.codehaus.org/pipermail/jcontainer-interest</archive>
+            <name>Loom Dev</name>
+            <subscribe>dev-subscribe@loom.codehaus.org</subscribe>
+            <unsubscribe>dev-unsubscribe@loom.codehaus.org</unsubscribe>
+            <archive>http://archive.loom.codehaus.org/dev</archive>
         </mailingList>
         <mailingList>
-            <name>JContainer Commits</name>
-            <subscribe>http://lists.codehaus.org/mailman/listinfo/jcontainer-commits</subscribe>
-            <unsubscribe>http://lists.codehaus.org/mailman/listinfo/jcontainer-commits</unsubscribe>
-            <archive>http://lists.codehaus.org/pipermail/jcontainer-commits</archive>
+            <name>Loom SCM</name>
+            <subscribe>scm-subscribe@loom.codehaus.org</subscribe>
+            <unsubscribe>scm-unsubscribe@loom.codehaus.org</unsubscribe>
+            <archive>http://archive.loom.codehaus.org/scm</archive>
         </mailingList>
     </mailingLists>
 

@@ -3,8 +3,8 @@
     <extend>${basedir}/../project.xml</extend>
     <name>Loom Site</name>
     <id>loom-site</id>
-    <shortDescription>JContainer Loom web site</shortDescription>
-    <description>JContainer Loom web site</description>
+    <shortDescription>Loom web site</shortDescription>
+    <description>Loom web site</description>
     <package>org.codehaus.loom</package>
 
     <dependencies>
@@ -54,12 +54,12 @@
         <dependency>
             <groupId>spice</groupId>
             <artifactId>spice-alchemist</artifactId>
-            <version>20031120.105516</version>
+            <version>1.1-dev</version>
         </dependency>
         <dependency>
             <groupId>spice</groupId>
             <artifactId>spice-loggerstore</artifactId>
-            <version>1.0-b3</version>
+            <version>1.1-dev</version>
         </dependency>
         <dependency>
             <id>log4j</id>
