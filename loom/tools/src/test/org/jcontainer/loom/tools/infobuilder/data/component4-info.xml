@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE component-info
-      PUBLIC "-//AVALON/Component Info DTD Version 1.0//EN"
-             "http://avalon.apache.org/dtds/info/componentinfo_1_0.dtd" >
-
-<component-info>
-    <component type="org.realityforge.Component1"/>
-    <parameters-schema/>
-</component-info>
