@@ -29,7 +29,7 @@ import org.jcontainer.loom.tools.profile.ComponentProfile;
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-07-19 01:44:52 $
+ * @version $Revision: 1.4 $ $Date: 2003-07-19 01:46:20 $
  */
 public class PhoenixProfileBuilder
     extends AbstractLogEnabled
@@ -93,7 +93,7 @@ public class PhoenixProfileBuilder
     }
 
     private PartitionProfile assembleProfile( final PartitionMetaData metaData,
-                                                                                final ComponentFactory factory )
+                                              final ComponentFactory factory )
         throws Exception
     {
         final ArrayList partitionSet = new ArrayList();
