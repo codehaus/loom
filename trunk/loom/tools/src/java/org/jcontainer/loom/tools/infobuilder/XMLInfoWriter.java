@@ -16,7 +16,6 @@ import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ContextDescriptor;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.tools.info.EntryDescriptor;
-import org.jcontainer.loom.tools.info.LoggerDescriptor;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
 import org.realityforge.metaclass.model.Attribute;
@@ -25,7 +24,7 @@ import org.realityforge.metaclass.model.Attribute;
  * Write {@link org.jcontainer.loom.tools.info.ComponentInfo} objects to a stream as xml documents.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-10-05 01:06:31 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-05 01:13:14 $
  */
 public class XMLInfoWriter
     implements InfoWriter
@@ -48,7 +47,6 @@ public class XMLInfoWriter
         writeDoctype( writer, "component-info" );
         writer.write( "<component-info>" );
         writeComponent( writer, info.getDescriptor() );
-        writeLoggers( writer, info.getLoggers() );
         writeContext( writer, info.getContext() );
         writeServices( writer, info.getServices() );
         writeDependencies( writer, info.getDependencies() );
@@ -140,56 +138,6 @@ public class XMLInfoWriter
             writer.write( "\">" );
             writeAttributes( writer, attributes );
             writer.write( "</component>" );
-        }
-    }
-
-    /**
-     * Write out xml representation of a set of loggers.
-     *
-     * @param writer the writer
-     * @param loggers the loggers
-     * @throws java.io.IOException if unable to write xml
-     */
-    private void writeLoggers( final Writer writer,
-                               final LoggerDescriptor[] loggers )
-        throws IOException
-    {
-        if( 0 == loggers.length )
-        {
-            return;
-        }
-        writer.write( "<loggers>" );
-        for( int i = 0; i < loggers.length; i++ )
-        {
-            writeLogger( writer, loggers[ i ] );
-        }
-
-        writer.write( "</loggers>" );
-    }
-
-    /**
-     * Write out xml representation of a logger.
-     *
-     * @param writer the writer
-     * @param logger the logger
-     * @throws java.io.IOException if unable to write xml
-     */
-    private void writeLogger( final Writer writer,
-                              final LoggerDescriptor logger )
-        throws IOException
-    {
-        writer.write( "<logger name=\"" );
-        writer.write( logger.getName() );
-        final Attribute[] attributes = logger.getAttributes();
-        if( 0 == attributes.length )
-        {
-            writer.write( "\"/>" );
-        }
-        else
-        {
-            writer.write( "\">" );
-            writeAttributes( writer, attributes );
-            writer.write( "</logger>" );
         }
     }
 

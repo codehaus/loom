@@ -16,7 +16,6 @@ import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ContextDescriptor;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.tools.info.EntryDescriptor;
-import org.jcontainer.loom.tools.info.LoggerDescriptor;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
 import org.realityforge.metaclass.model.Attribute;
@@ -27,7 +26,7 @@ import org.realityforge.metaclass.model.Attribute;
  * all of the javadoc tags present in JavaClass object model.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-10-05 01:06:31 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-05 01:13:14 $
  */
 public class DefaultInfoBuilder
     extends AbstractInfoBuilder
@@ -43,13 +42,12 @@ public class DefaultInfoBuilder
         final ComponentDescriptor component = buildComponent( javaClass );
         final ServiceDescriptor[] services = buildServices( javaClass );
         final ContextDescriptor context = buildContext( javaClass );
-        final LoggerDescriptor[] loggers = buildLoggers( javaClass );
         final SchemaDescriptor configurationSchema = buildConfigurationSchema( javaClass );
         final SchemaDescriptor parametersSchema = buildParametersSchema( javaClass );
 
         final DependencyDescriptor[] dependencies = buildDependencies( javaClass );
 
-        return new ComponentInfo( component, services, loggers,
+        return new ComponentInfo( component, services,
                                   context, dependencies,
                                   configurationSchema,
                                   parametersSchema );
@@ -86,36 +84,6 @@ public class DefaultInfoBuilder
             services.add( service );
         }
         return (ServiceDescriptor[])services.toArray( new ServiceDescriptor[ services.size() ] );
-    }
-
-    /**
-     * Build the set of logger descriptors for specified class.
-     *
-     * @param javaClass the class
-     * @return the set of logger descriptors
-     */
-    private LoggerDescriptor[] buildLoggers( final JavaClass javaClass )
-    {
-        final JavaMethod method =
-            getLifecycleMethod( javaClass, "enableLogging", LOGGER_CLASS );
-        if( null == method )
-        {
-            return LoggerDescriptor.EMPTY_SET;
-        }
-        else
-        {
-            final ArrayList loggers = new ArrayList();
-            final DocletTag[] tags = method.getTagsByName( "phoenix.logger" );
-            for( int i = 0; i < tags.length; i++ )
-            {
-                final String name =
-                    getNamedParameter( tags[ i ], "name", "" );
-                final LoggerDescriptor logger =
-                    new LoggerDescriptor( name, Attribute.EMPTY_SET );
-                loggers.add( logger );
-            }
-            return (LoggerDescriptor[])loggers.toArray( new LoggerDescriptor[ loggers.size() ] );
-        }
     }
 
     /**

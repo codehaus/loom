@@ -23,7 +23,7 @@ import java.io.Serializable;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-29 01:07:35 $
+ * @version $Revision: 1.3 $ $Date: 2003-10-05 01:13:14 $
  */
 public class ComponentInfo
     implements Serializable
@@ -37,11 +37,6 @@ public class ComponentInfo
      * Descriptors for the services exported by component.
      */
     private final ServiceDescriptor[] m_services;
-
-    /**
-     * Descriptors for the loggers used by component.
-     */
-    private final LoggerDescriptor[] m_loggers;
 
     /**
      * Descriptor for the context (and entrys) used by component.
@@ -68,7 +63,6 @@ public class ComponentInfo
      */
     public ComponentInfo( final ComponentDescriptor descriptor,
                           final ServiceDescriptor[] services,
-                          final LoggerDescriptor[] loggers,
                           final ContextDescriptor context,
                           final DependencyDescriptor[] dependencies,
                           final SchemaDescriptor configurationSchema,
@@ -82,10 +76,6 @@ public class ComponentInfo
         {
             throw new NullPointerException( "services" );
         }
-        if( null == loggers )
-        {
-            throw new NullPointerException( "loggers" );
-        }
         if( null == context )
         {
             throw new NullPointerException( "context" );
@@ -96,7 +86,6 @@ public class ComponentInfo
         }
         m_descriptor = descriptor;
         m_services = services;
-        m_loggers = loggers;
         m_context = context;
         m_dependencies = dependencies;
         m_configurationSchema = configurationSchema;
@@ -121,16 +110,6 @@ public class ComponentInfo
     public ServiceDescriptor[] getServices()
     {
         return m_services;
-    }
-
-    /**
-     * Return the set of Logger that this Component will use.
-     *
-     * @return the set of Logger that this Component will use.
-     */
-    public LoggerDescriptor[] getLoggers()
-    {
-        return m_loggers;
     }
 
     /**
