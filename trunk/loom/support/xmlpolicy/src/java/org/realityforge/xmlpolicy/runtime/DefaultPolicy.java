@@ -26,7 +26,7 @@ public class DefaultPolicy
 {
     /**
      * Create a Policy that applies specified grants.
-     * Each entry in map maps a codeSOurce to an array
+     * Each entry in map maps a CodeSource to an array
      * of Permissions.
      *
      * @param grants the grant map
