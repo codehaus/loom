@@ -19,7 +19,7 @@
             <p>
                 <strong>Loom layer diagram</strong>
             </p>
-                <img src="../images/loom-layers.jpg" alt="Loom Layers"/>
+                <img src="../images/loom-layers.png" alt="Loom Layers"/>
             <p>
               Shown above are three hosted server applications.  A mail server that would implement
               multiple listeners for incoming and outgoing services (POP3, SMTP, IMAP etc).  Outlook,
