@@ -36,7 +36,7 @@ import org.realityforge.salt.i18n.ResourceManager;
  * </ul>
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-05 10:39:56 $
+ * @version $Revision: 1.3 $ $Date: 2003-06-13 01:06:06 $
  */
 public class ClassLoaderVerifier
 {
@@ -137,7 +137,7 @@ public class ClassLoaderVerifier
             if( !isLoaderDefined( parent, set ) )
             {
                 final String message =
-                    REZ.getString( "invalid-parent.error",
+                    REZ.format( "invalid-parent.error",
                                    classLoader.getName(),
                                    parent );
                 throw new Exception( message );
@@ -178,7 +178,7 @@ public class ClassLoaderVerifier
             if( !isLoaderDefined( classloader, set ) )
             {
                 final String message =
-                    REZ.getString( "bad-join-link.error",
+                    REZ.format( "bad-join-link.error",
                                    join.getName(),
                                    classloader );
                 throw new Exception( message );
@@ -198,7 +198,7 @@ public class ClassLoaderVerifier
         if( 0 == size )
         {
             final String message =
-                REZ.getString( "empty-name.error",
+                REZ.format( "empty-name.error",
                                name );
             throw new Exception( message );
         }
@@ -207,7 +207,7 @@ public class ClassLoaderVerifier
             '_' != ch )
         {
             final String message =
-                REZ.getString( "name-invalid-start.error",
+                REZ.format( "name-invalid-start.error",
                                name );
             throw new Exception( message );
         }
@@ -221,7 +221,7 @@ public class ClassLoaderVerifier
                 '.' != c )
             {
                 final String message =
-                    REZ.getString( "name-invalid-char.error",
+                    REZ.format( "name-invalid-char.error",
                                    name,
                                    String.valueOf( c ) );
                 throw new Exception( message );
@@ -263,7 +263,7 @@ public class ClassLoaderVerifier
                 if( location.equals( entrys[ j ] ) )
                 {
                     final String message =
-                        REZ.getString( "classloader-dup-entrys.error",
+                        REZ.format( "classloader-dup-entrys.error",
                                        classLoader.getName(),
                                        location );
                     throw new Exception( message );
@@ -305,7 +305,7 @@ public class ClassLoaderVerifier
                 if( other.equals( name ) )
                 {
                     final String message =
-                        REZ.getString( "join-dup-entrys.error",
+                        REZ.format( "join-dup-entrys.error",
                                        join.getName(),
                                        name );
                     throw new Exception( message );
@@ -332,7 +332,7 @@ public class ClassLoaderVerifier
                 if( other.equals( name ) )
                 {
                     final String message =
-                        REZ.getString( "duplicate-name.error",
+                        REZ.format( "duplicate-name.error",
                                        "predefined",
                                        "predefined",
                                        name );
@@ -383,7 +383,7 @@ public class ClassLoaderVerifier
         if( set.isPredefined( name ) )
         {
             final String message =
-                REZ.getString( "duplicate-name.error",
+                REZ.format( "duplicate-name.error",
                                type,
                                "predefined",
                                name );
@@ -402,7 +402,7 @@ public class ClassLoaderVerifier
             if( other.getName().equals( name ) )
             {
                 final String message =
-                    REZ.getString( "duplicate-name.error",
+                    REZ.format( "duplicate-name.error",
                                    type,
                                    "join",
                                    name );
@@ -421,7 +421,7 @@ public class ClassLoaderVerifier
             if( other.getName().equals( name ) )
             {
                 final String message =
-                    REZ.getString( "duplicate-name.error",
+                    REZ.format( "duplicate-name.error",
                                    type,
                                    "classloader",
                                    name );
@@ -463,7 +463,7 @@ public class ClassLoaderVerifier
         if( !isLoaderDefined( name, set ) )
         {
             final String message =
-                REZ.getString( "missing-default-loader.error",
+                REZ.format( "missing-default-loader.error",
                                name );
             throw new Exception( message );
         }

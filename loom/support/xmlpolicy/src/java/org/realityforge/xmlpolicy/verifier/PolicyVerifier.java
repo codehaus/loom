@@ -28,7 +28,7 @@ import org.realityforge.salt.i18n.ResourceManager;
  * </ul>
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-06-04 23:20:19 $
+ * @version $Revision: 1.4 $ $Date: 2003-06-13 01:06:09 $
  */
 public class PolicyVerifier
 {
@@ -138,7 +138,7 @@ public class PolicyVerifier
         }
 
         final String message =
-            REZ.getString( "bad-keystore-reference.error",
+            REZ.format( "bad-keystore-reference.error",
                            keyStoreName );
         throw new Exception( message );
     }
@@ -155,7 +155,7 @@ public class PolicyVerifier
         if( 0 == size )
         {
             final String message =
-                REZ.getString( "empty-name.error",
+                REZ.format( "empty-name.error",
                                name );
             throw new Exception( message );
         }
@@ -164,7 +164,7 @@ public class PolicyVerifier
             '_' != ch )
         {
             final String message =
-                REZ.getString( "name-invalid-start.error",
+                REZ.format( "name-invalid-start.error",
                                name );
             throw new Exception( message );
         }
@@ -178,7 +178,7 @@ public class PolicyVerifier
                 '.' != c )
             {
                 final String message =
-                    REZ.getString( "name-invalid-char.error",
+                    REZ.format( "name-invalid-char.error",
                                    name,
                                    String.valueOf( c ) );
                 throw new Exception( message );
@@ -207,7 +207,7 @@ public class PolicyVerifier
                 if( null == target && null != action )
                 {
                     final String message =
-                        REZ.getString( "permission-missing-action.error",
+                        REZ.format( "permission-missing-action.error",
                                        grant.getCodebase(),
                                        permission.getClassname() );
                     throw new Exception( message );

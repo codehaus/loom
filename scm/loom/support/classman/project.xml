@@ -33,7 +33,7 @@
         </dependency>
         <dependency>
             <id>spice-salt</id>
-            <version>0.8</version>
+            <version>0.8dev</version>
             <properties>
                 <category>runtime</category>
             </properties>
