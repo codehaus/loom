@@ -69,14 +69,6 @@
         </dependency>
         <dependency>
             <groupId>loom</groupId>
-            <artifactId>phoenix-client</artifactId>
-            <version>1.0dev</version>
-            <properties>
-                <category>shared</category>
-            </properties>
-        </dependency>
-        <dependency>
-            <groupId>loom</groupId>
             <artifactId>loom-engine</artifactId>
             <version>1.0dev</version>
             <properties>
@@ -162,6 +154,14 @@
             <groupId>avalon</groupId>
             <artifactId>avalon-framework</artifactId>
             <version>20030713</version>
+            <properties>
+                <category>shared</category>
+            </properties>
+        </dependency>
+        <dependency>
+        	<groupId>avalon</groupId>
+            <artifactId>avalon-phoenix-client</artifactId>
+            <version>20030819</version>
             <properties>
                 <category>shared</category>
             </properties>
