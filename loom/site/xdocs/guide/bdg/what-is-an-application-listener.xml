@@ -27,10 +27,8 @@
         Like normal blocks, an application listener can be <em>LogEnabled</em>
         and take configuration via <em>Configurable</em>.  The special feature
         is that it must implement <em>ApplicationListener</em> and implement
-        the four methods that are a consequence of that (as well as four from
-        <em>BlockListener</em>).  The following section in assembly.xml causes
-        instantiation of the application listener.  It is exactly the same as
-        that for <em>BlockListener</em>:
+        the eight methods that are a consequence of that.  The following section in assembly.xml causes
+        instantiation of the application listener:
       </p>
       <source>
         &lt;listener class="pkg.MyApplicationListener" name="a-suitable-name" />
