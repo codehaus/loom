@@ -25,11 +25,11 @@ rm -Rf target
 mkdir target
 
 # Delete compiled local copies to start fresh each time
-rm -Rf ~/.amven/repository/loom/jars
+rm -Rf ~/.maven/repository/loom/jars
 
 # Compile and test
 maven clean-all &> target/cleanbuild.log
-maven build &> ../target/cleanbuild.log
+maven build &> target/cleanbuild.log
 
 # See if the "compiling" file is there. If it is, compilation
 # failed.
