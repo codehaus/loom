@@ -10,8 +10,6 @@ package org.jcontainer.loom.tools.infobuilder;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Properties;
-import org.apache.avalon.excalibur.i18n.ResourceManager;
-import org.apache.avalon.excalibur.i18n.Resources;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
@@ -26,6 +24,8 @@ import org.jcontainer.loom.tools.info.LoggerDescriptor;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
 import org.xml.sax.InputSource;
+import org.realityforge.salt.i18n.Resources;
+import org.realityforge.salt.i18n.ResourceManager;
 
 /**
  * A XMLInfoReader is responsible for building {@link org.jcontainer.loom.tools.info.ComponentInfo}
@@ -33,7 +33,7 @@ import org.xml.sax.InputSource;
  * is specified in the <a href="package-summary.html#external">package summary</a>.
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-26 09:35:27 $
+ * @version $Revision: 1.3 $ $Date: 2003-06-26 09:36:30 $
  */
 public final class XMLInfoReader
     extends AbstractLogEnabled
@@ -85,9 +85,9 @@ public final class XMLInfoReader
         if( !topLevelName.equals( "component-info" ) )
         {
             final String message =
-                REZ.getString( "builder.bad-toplevel-element.error",
-                               classname,
-                               topLevelName );
+                REZ.format( "builder.bad-toplevel-element.error",
+                            classname,
+                            topLevelName );
             throw new ConfigurationException( message );
         }
 
@@ -118,12 +118,12 @@ public final class XMLInfoReader
         if( getLogger().isDebugEnabled() )
         {
             final String message =
-                REZ.getString( "builder.created-info.notice",
-                               implementationKey,
-                               new Integer( services.length ),
-                               new Integer( dependencies.length ),
-                               new Integer( context.getEntrys().length ),
-                               new Integer( loggers.length ) );
+                REZ.format( "builder.created-info.notice",
+                            implementationKey,
+                            new Integer( services.length ),
+                            new Integer( dependencies.length ),
+                            new Integer( context.getEntrys().length ),
+                            new Integer( loggers.length ) );
             getLogger().debug( message );
         }
 
@@ -252,9 +252,9 @@ public final class XMLInfoReader
             if( key.equals( implementationKey ) )
             {
                 final String message =
-                    REZ.getString( "builder.redundent-key.notice",
-                                   classname,
-                                   key );
+                    REZ.format( "builder.redundent-key.notice",
+                                classname,
+                                key );
                 getLogger().warn( message );
             }
         }
