@@ -87,7 +87,6 @@
 package org.jcontainer.loom.components.classloader;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.security.CodeSource;
@@ -126,10 +125,8 @@ class PolicyClassLoader
     PolicyClassLoader( final URL[] urls,
                        final ClassLoader parent,
                        final Policy policy )
-        throws MalformedURLException
     {
         super( urls, parent );
-
         if( null == policy )
         {
             throw new NullPointerException( "policy" );
@@ -140,16 +137,6 @@ class PolicyClassLoader
     public void enableLogging( final Logger logger )
     {
         m_logger = logger;
-    }
-
-    protected void addURL( final URL url )
-    {
-        super.addURL( url );
-    }
-
-    private Logger getLogger()
-    {
-        return m_logger;
     }
 
     /**
@@ -164,9 +151,9 @@ class PolicyClassLoader
     protected Class findClass( final String name )
         throws ClassNotFoundException
     {
-        if( getLogger().isDebugEnabled() )
+        if( m_logger.isDebugEnabled() )
         {
-            getLogger().debug( "findClass(" + name + ")" );
+            m_logger.debug( "findClass(" + name + ")" );
         }
         return super.findClass( name );
     }
@@ -180,9 +167,9 @@ class PolicyClassLoader
      */
     protected PermissionCollection getPermissions( final CodeSource codeSource )
     {
-        if( getLogger().isDebugEnabled() )
+        if( m_logger.isDebugEnabled() )
         {
-            getLogger().debug( "getPermissions(" + codeSource + ")" );
+            m_logger.debug( "getPermissions(" + codeSource + ")" );
         }
         return m_policy.getPermissions( codeSource );
     }
@@ -202,9 +189,9 @@ class PolicyClassLoader
     public Enumeration findResources( final String name )
         throws IOException
     {
-        if( getLogger().isDebugEnabled() )
+        if( m_logger.isDebugEnabled() )
         {
-            getLogger().debug( "findResources(" + name + ")" );
+            m_logger.debug( "findResources(" + name + ")" );
         }
 
         return super.findResources( name );
@@ -223,22 +210,22 @@ class PolicyClassLoader
      */
     public URL findResource( final String name )
     {
-        if( getLogger().isDebugEnabled() )
+        if( m_logger.isDebugEnabled() )
         {
-            getLogger().debug( "findResource(" + name + ")" );
+            m_logger.debug( "findResource(" + name + ")" );
         }
 
         final URL url = super.findResource( name );
 
-        if( getLogger().isDebugEnabled() )
+        if( m_logger.isDebugEnabled() )
         {
             if( null != url )
             {
-                getLogger().debug( "Resource " + name + " located (" + url + ")" );
+                m_logger.debug( "Resource " + name + " located (" + url + ")" );
             }
             else
             {
-                getLogger().debug( "Resource " + name + " not located" );
+                m_logger.debug( "Resource " + name + " not located" );
             }
         }
 
