@@ -1,6 +1,7 @@
 /*
  * Created on Jan 30, 2005
  */
+
 package org.codehaus.loom.apps.apacheds;
 
 import java.util.Properties;
@@ -14,6 +15,7 @@ import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.LogEnabled;
 import org.apache.avalon.framework.logger.Logger;
+import org.apache.ldap.server.jndi.EnvKeys;
 
 
 /**
@@ -21,7 +23,12 @@ import org.apache.avalon.framework.logger.Logger;
  * 
  * @author Laszlo Hornyak
  */
-public class ApacheDSService implements Configurable, Initializable, Startable, LogEnabled{
+public class ApacheDSService
+		implements
+			Configurable,
+			Initializable,
+			Startable,
+			LogEnabled {
 
 	private Properties properties = null;
 	private Logger logger = null;
@@ -33,7 +40,7 @@ public class ApacheDSService implements Configurable, Initializable, Startable, 
 		logger.info("Configuring direcory service...");
 		properties = new Properties();
 		Configuration[] confs = arg0.getChild("properties").getChildren();
-		for(int i=0; i<confs.length; i++){
+		for (int i = 0; i < confs.length; i++) {
 			properties.put(confs[i].getName(), confs[i].getValue());
 		}
 		logger.info("Direcory service configured.");
@@ -43,32 +50,33 @@ public class ApacheDSService implements Configurable, Initializable, Startable, 
 	 * @see org.apache.avalon.framework.activity.Initializable#initialize()
 	 */
 	public void initialize() throws Exception {
-		logger.info("Initializing directory service...");
-		new InitialDirContext(properties);
-		logger.info("Initialized directory service.");
 	}
 
 	/* (non-Javadoc)
 	 * @see org.apache.avalon.framework.activity.Startable#start()
 	 */
 	public void start() throws Exception {
-		// TODO Auto-generated method stub
-
+		logger.info("Initializing directory service...");
+		new InitialDirContext(properties);
+		logger.info("Initialized directory service.");
 	}
 
 	/* (non-Javadoc)
 	 * @see org.apache.avalon.framework.activity.Startable#stop()
 	 */
 	public void stop() throws Exception {
-		// TODO Auto-generated method stub
-
+		logger.info("Stopping directory service...");
+		Properties props = (Properties) properties.clone();
+		props.put(EnvKeys.SHUTDOWN, "true");
+		new InitialDirContext(props);
+		logger.info("Stopped directory service...");
 	}
 
 	/* (non-Javadoc)
 	 * @see org.apache.avalon.framework.logger.LogEnabled#enableLogging(org.apache.avalon.framework.logger.Logger)
 	 */
 	public void enableLogging(Logger arg0) {
-		logger =arg0;
+		logger = arg0;
 	}
 
 }
