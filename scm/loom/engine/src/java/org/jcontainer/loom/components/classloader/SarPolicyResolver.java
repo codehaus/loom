@@ -100,7 +100,7 @@ import org.realityforge.xmlpolicy.builder.PolicyResolver;
  * (like remapping URLs).
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-10-16 14:45:45 $
+ * @version $Revision: 1.7 $ $Date: 2003-11-11 11:29:51 $
  */
 class SarPolicyResolver
     extends AbstractLogEnabled
@@ -121,7 +121,7 @@ class SarPolicyResolver
     {
         final SarPolicy sarPolicy = new SarPolicy( grants );
         ContainerUtil.enableLogging( sarPolicy, getLogger() );
-        org.jcontainer.dna.impl.ContainerUtil.initialize( sarPolicy );
+        ContainerUtil.initialize( sarPolicy );
         return sarPolicy;
     }
 
