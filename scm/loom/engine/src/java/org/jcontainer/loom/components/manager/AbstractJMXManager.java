@@ -92,27 +92,29 @@ import java.util.Set;
 import javax.management.MBeanServer;
 import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
-import javax.management.modelmbean.ModelMBean;
 import javax.management.modelmbean.ModelMBeanInfo;
-
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.LoomException;
-import org.realityforge.salt.i18n.Resources;
+import org.realityforge.metaclass.jmx.MBeanInfoBuilder;
+import org.realityforge.metaclass.jmx.WrapperModelMBean;
 import org.realityforge.salt.i18n.ResourceManager;
+import org.realityforge.salt.i18n.Resources;
 
 /**
  * An abstract class via which JMX Managers can extend.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author <a href="mailto:Huw@mmlive.com">Huw Roberts</a>
- * @version $Revision: 1.5 $ $Date: 2003-10-05 00:15:39 $
+ * @version $Revision: 1.6 $ $Date: 2003-10-15 03:43:09 $
  */
 public abstract class AbstractJMXManager
     extends AbstractSystemManager
 {
     private static final Resources REZ =
         ResourceManager.getPackageResources( AbstractJMXManager.class );
-    private MBeanInfoBuilder topicBuilder;
+
+    private static final MBeanInfoBuilder INFO_BUILDER = new MBeanInfoBuilder();
+
     private MBeanServer m_mBeanServer;
     private String m_domain = ContainerConstants.SOFTWARE;
 
@@ -123,9 +125,6 @@ public abstract class AbstractJMXManager
 
         final MBeanServer mBeanServer = createMBeanServer();
         setMBeanServer( mBeanServer );
-
-        topicBuilder = new MBeanInfoBuilder();
-        setupLogger( topicBuilder );
     }
 
     public void dispose()
@@ -142,18 +141,16 @@ public abstract class AbstractJMXManager
      *
      * @param name the name of object
      * @param object the object
-     * @param interfaces the interfaces
      * @return the exported object
      * @throws LoomException if an error occurs
      */
     protected Object export( final String name,
-                             final Object object,
-                             final Class[] interfaces )
+                             final Object object )
         throws LoomException
     {
         try
         {
-            final Target target = createTarget( name, object, interfaces );
+            final Target target = createTarget( name, object );
             exportTarget( target );
             return target;
         }
@@ -199,20 +196,6 @@ public abstract class AbstractJMXManager
         }
     }
 
-    /**
-     * Verify that an interface conforms to the requirements of management medium.
-     *
-     * @param clazz the interface class
-     * @throws LoomException if verification fails
-     */
-    protected void verifyInterface( final Class clazz )
-        throws LoomException
-    {
-        //TODO: check it extends all right things and that it
-        //has all the right return types etc. Blocks must have
-        //interfaces extending Service (or Manageable)
-    }
-
     protected MBeanServer getMBeanServer()
     {
         return m_mBeanServer;
@@ -246,23 +229,19 @@ public abstract class AbstractJMXManager
      *
      * @param name name of the target
      * @param object managed object
-     * @param interfaces interfaces to be exported
      * @return  the management target
      */
     protected Target createTarget( final String name,
-                                   final Object object,
-                                   final Class[] interfaces )
+                                   final Object object )
+        throws Exception
     {
+        final Class type = object.getClass();
+        final ModelMBeanInfo[] infos = INFO_BUILDER.buildMBeanInfos( type );
         final Target target = new Target( name, object );
-        try
+        for( int i = 0; i < infos.length; i++ )
         {
-            topicBuilder.build( target, object.getClass(), interfaces );
+            target.addTopic( infos[ i ] );
         }
-        catch( final Exception e )
-        {
-            getLogger().debug( e.getMessage(), e );
-        }
-
         return target;
     }
 
@@ -310,96 +289,10 @@ public abstract class AbstractJMXManager
                                   final String targetName )
         throws Exception
     {
-        final Object mBean = createMBean( topic, target );
+        final Object mBean = new WrapperModelMBean( topic, target );
         final ObjectName objectName = createObjectName( targetName, topic );
         getMBeanServer().registerMBean( mBean, objectName );
-
-        // debugging stuff.
-        /*
-        ModelMBean modelMBean = (ModelMBean)mBean;
-        ModelMBeanInfo modelMBeanInfo = (ModelMBeanInfo)modelMBean.getMBeanInfo();
-        MBeanAttributeInfo[] attList = modelMBeanInfo.getAttributes();
-        for( int i = 0; i < attList.length; i++ )
-        {
-            ModelMBeanAttributeInfo mbai = (ModelMBeanAttributeInfo)attList[ i ];
-            Descriptor d = mbai.getDescriptor();
-            String[] fieldNames = d.getFieldNames();
-            for( int j = 0; j < fieldNames.length; j++ )
-            {
-                String fieldName = fieldNames[ j ];
-                System.out.println( "Field name = " + fieldName +
-                                    " / value = " + d.getFieldValue( fieldName ) +
-                                    "::" +mbai.getType() + " value " +
-                modelMBean.getAttribute( mbai.getName() ) + " for " + mbai.getName() );
-            }
-        }
-        */
-
         return mBean;
-    }
-
-    /**
-     * Create a MBean for specified object.
-     * The following policy is used top create the MBean...
-     *
-     * @param target the object to create MBean for
-     * @return the MBean to be exported
-     * @throws LoomException if an error occurs
-     */
-    private Object createMBean( final ModelMBeanInfo topic,
-                                final Object target )
-        throws LoomException
-    {
-        final String className = topic.getClassName();
-        // Load the ModelMBean implementation class
-        Class clazz;
-        try
-        {
-            clazz = Class.forName( className );
-        }
-        catch( Exception e )
-        {
-            final String message =
-                REZ.format( "jmxmanager.error.mbean.load.class",
-                            className );
-            getLogger().error( message, e );
-            throw new LoomException( message, e );
-        }
-
-        // Create a new ModelMBean instance
-        ModelMBean mbean;
-        try
-        {
-            mbean = (ModelMBean)clazz.newInstance();
-            mbean.setModelMBeanInfo( topic );
-        }
-        catch( final Exception e )
-        {
-            final String message =
-                REZ.format( "jmxmanager.error.mbean.instantiate",
-                            className );
-            getLogger().error( message, e );
-            throw new LoomException( message, e );
-        }
-
-        // Set the managed resource (if any)
-        try
-        {
-            if( null != target )
-            {
-                mbean.setManagedResource( target, "ObjectReference" );
-            }
-        }
-        catch( Exception e )
-        {
-            final String message =
-                REZ.format( "jmxmanager.error.mbean.set.resource",
-                            className );
-            getLogger().error( message, e );
-            throw new LoomException( message, e );
-        }
-
-        return mbean;
     }
 
     /**

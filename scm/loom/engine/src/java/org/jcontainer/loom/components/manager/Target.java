@@ -145,7 +145,9 @@ public class Target
      */
     public void addTopic( final ModelMBeanInfo topic )
     {
-        m_topics.put( topic.getDescription(), topic );
+        final String className = topic.getClassName();
+        final String name = className.substring( className.lastIndexOf( "." ) + 1 );
+        m_topics.put( name, topic );
     }
 
     /**

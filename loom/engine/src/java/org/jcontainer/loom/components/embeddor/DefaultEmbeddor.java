@@ -124,6 +124,8 @@ import org.realityforge.salt.i18n.Resources;
  * @author <a href="mail@leosimons.com">Leo Simons</a>
  * @author <a href="peter at realityforge.org">Peter Donald</a>
  * @author <a href="bauer@denic.de">Joerg Bauer</a>
+ * @phoenix:block
+ * @mx.interface type="org.jcontainer.loom.interfaces.EmbeddorMBean"
  */
 public class DefaultEmbeddor
     extends AbstractLogEnabled
@@ -687,28 +689,15 @@ public class DefaultEmbeddor
         final SystemManager systemManager =
             (SystemManager)getResourceLocator().lookup( SystemManager.class.getName() );
 
-        final SystemManager componentManager =
+        final SystemManager mxExporter =
             systemManager.getSubContext( null, "component" );
 
-        componentManager.register( ManagementRegistration.EMBEDDOR.getName(),
-                                   this,
-                                   ManagementRegistration.EMBEDDOR.getInterfaces() );
-
+        mxExporter.register( "Embeddor", this );
         for( int i = 0; i < m_entries.length; i++ )
         {
-            final String role = m_entries[ i ].getRole();
-            if( null == role )
-            {
-                continue;
-            }
-            final ManagementRegistration registration =
-                ManagementRegistration.getManagementInfoForRole( role );
-            if( null != registration )
-            {
-                componentManager.register( registration.getName(),
-                                           m_entries[ i ].getObject(),
-                                           registration.getInterfaces() );
-            }
+            final EmbeddorEntry entry = m_entries[ i ];
+            mxExporter.register( entry.getLoggerName(),
+                                 entry.getObject() );
         }
     }
 
@@ -722,9 +711,10 @@ public class DefaultEmbeddor
         final SystemManager systemManager =
             (SystemManager)getResourceLocator().lookup( SystemManager.class.getName() );
 
-        final SystemManager componentManager = systemManager.getSubContext( null, "component" );
+        final SystemManager mxExporter =
+            systemManager.getSubContext( null, "component" );
 
-        componentManager.unregister( ManagementRegistration.EMBEDDOR.getName() );
+        mxExporter.unregister( "Embeddor" );
 
         for( int i = 0; i < m_entries.length; i++ )
         {
@@ -737,7 +727,7 @@ public class DefaultEmbeddor
                 ManagementRegistration.getManagementInfoForRole( role );
             if( null != registration )
             {
-                componentManager.unregister( registration.getName() );
+                mxExporter.unregister( registration.getName() );
             }
         }
     }

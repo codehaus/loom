@@ -97,8 +97,8 @@ public class NoopSystemManager
     extends AbstractSystemManager
 {
     protected Object export( final String name,
-                             final Object object,
-                             final Class[] interfaces )
+                             final Object object
+                             )
         throws LoomException
     {
         return object;

@@ -10,8 +10,22 @@
 
     <dependencies>
         <dependency>
+            <groupId>spice</groupId>
+            <artifactId>spice-metaclass-jmx</artifactId>
+            <version>20031015.021238</version>
+        </dependency>
+        <dependency>
             <groupId>loom</groupId>
             <artifactId>loom-tools</artifactId>
+            <version>${pom.currentVersion}</version>
+        </dependency>
+        <dependency>
+            <id>qdox</id>
+            <version>1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>loom</groupId>
+            <artifactId>loom-info</artifactId>
             <version>${pom.currentVersion}</version>
         </dependency>
         <dependency>

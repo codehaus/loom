@@ -102,7 +102,6 @@ import org.jcontainer.loom.interfaces.ApplicationContext;
 import org.jcontainer.loom.interfaces.ApplicationMBean;
 import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.tools.LoomToolConstants;
-import org.jcontainer.loom.tools.lifecycle.LifecycleException;
 import org.jcontainer.loom.tools.lifecycle.LifecycleHelper;
 import org.jcontainer.loom.tools.profile.ComponentProfile;
 import org.jcontainer.loom.tools.profile.PartitionProfile;
@@ -116,6 +115,8 @@ import org.realityforge.salt.i18n.Resources;
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author Leo Simons
+ * @phoenix:block
+ * @mx.interface type="org.jcontainer.loom.interfaces.ApplicationMBean"
  */
 public final class DefaultApplication
     extends AbstractLogEnabled
@@ -149,11 +150,6 @@ public final class DefaultApplication
      */
     private final LifecycleHelper m_lifecycleHelper = new LifecycleHelper();
 
-    /**
-     * Object to help exporting object.
-     */
-    private final ExportHelper m_exportHelper = new ExportHelper();
-
     ///////////////////////
     // LifeCycle Methods //
     ///////////////////////
@@ -161,7 +157,6 @@ public final class DefaultApplication
     {
         super.enableLogging( logger );
         setupLogger( m_lifecycleHelper );
-        setupLogger( m_exportHelper );
     }
 
     public void initialize()
@@ -501,10 +496,7 @@ public final class DefaultApplication
                                        entry.getProfile(),
                                        m_blockAccessor );
 
-        m_exportHelper.exportBlock( m_context,
-                                    entry.getProfile(),
-                                    block );
-
+        m_context.exportObject( entry.getName(), block );
         entry.setObject( block );
 
         m_listenerSupport.fireBlockAddedEvent( entry );
@@ -520,7 +512,7 @@ public final class DefaultApplication
      * @param entry the entry containing Block
      */
     private void shutdown( final BlockEntry entry )
-        throws LifecycleException
+        throws Exception
     {
         m_listenerSupport.fireBlockRemovedEvent( entry );
 
@@ -528,12 +520,16 @@ public final class DefaultApplication
         try
         {
             //Remove block from Management system
-            m_exportHelper.unexportBlock( m_context,
-                                          entry.getProfile() );
-            entry.invalidate();
-
-            m_lifecycleHelper.shutdown( entry.getName(),
-                                        object );
+            try
+            {
+                m_context.unexportObject( entry.getName() );
+            }
+            finally
+            {
+                entry.invalidate();
+                m_lifecycleHelper.shutdown( entry.getName(),
+                                            object );
+            }
         }
         finally
         {

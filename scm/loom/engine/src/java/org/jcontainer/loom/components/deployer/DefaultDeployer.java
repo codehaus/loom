@@ -128,6 +128,8 @@ import org.xml.sax.InputSource;
  * Deploy .sar files into a kernel using this class.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @phoenix:block
+ * @mx.interface type="org.jcontainer.loom.interfaces.DeployerMBean"
  */
 public class DefaultDeployer
     extends AbstractLogEnabled

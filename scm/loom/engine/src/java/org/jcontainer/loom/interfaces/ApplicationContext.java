@@ -115,10 +115,9 @@ public interface ApplicationContext
      * and using the specified name.
      *
      * @param name the name of object to export
-     * @param interfaceClasses the interface of object with which to export
      * @param object the actual object to export
      */
-    void exportObject( String name, Class[] interfaceClasses, Object object )
+    void exportObject( String name, Object object )
         throws Exception;
 
     /**

@@ -9,7 +9,7 @@
             <item href="http://jcontainer.org" name="JContainer"/>
             <item href="http://codehaus.org" name="Codehaus"/>
         </links>
-    
+
         <search/>
         <menu name="Overview">
             <item href="/index.html" name="Introduction"/>
@@ -44,7 +44,6 @@
             <item href="/guide/mx/index.html" name="Management Guide" collapse="true">
                 <item href="/guide/mx/overview.html" name="Overview"/>
                 <item href="/guide/mx/structure.html" name="Structure"/>
-                <item href="/guide/mx/mxinfo.html" name="MXINFO Specification"/>
                 <item href="/guide/mx/doclet-tags.html" name="Doclet Tags"/>
             </item>
             <item href="/guide/example-configuration.html" name="Example configuration"/>
