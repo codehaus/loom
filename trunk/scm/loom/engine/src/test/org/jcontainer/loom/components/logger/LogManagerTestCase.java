@@ -13,17 +13,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import junit.framework.TestCase;
-import org.apache.avalon.framework.container.ContainerUtil;
-import org.apache.avalon.framework.logger.ConsoleLogger;
-import org.apache.avalon.framework.logger.Logger;
 import org.apache.avalon.phoenix.BlockContext;
 import org.apache.avalon.phoenix.metadata.BlockListenerMetaData;
 import org.apache.avalon.phoenix.metadata.BlockMetaData;
 import org.apache.avalon.phoenix.metadata.SarMetaData;
+import org.apache.avalon.framework.logger.Logger;
 import org.jcomponent.loggerstore.LoggerStore;
 import org.jcontainer.loom.interfaces.LogManager;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.impl.ConfigurationUtil;
+import org.jcontainer.dna.impl.ContainerUtil;
+import org.jcontainer.dna.impl.ConsoleLogger;
 import org.realityforge.salt.io.FileUtil;
 import org.xml.sax.InputSource;
 
@@ -31,7 +31,7 @@ import org.xml.sax.InputSource;
  *  An basic test case for the LogManager.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.8 $ $Date: 2003-10-05 03:25:11 $
+ * @version $Revision: 1.9 $ $Date: 2003-10-05 10:07:04 $
  */
 public class LogManagerTestCase
     extends TestCase

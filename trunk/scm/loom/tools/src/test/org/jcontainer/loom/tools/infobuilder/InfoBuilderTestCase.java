@@ -18,8 +18,6 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Properties;
 import junit.framework.TestCase;
-import org.apache.avalon.framework.container.ContainerUtil;
-import org.apache.avalon.framework.logger.ConsoleLogger;
 import org.jcontainer.loom.tools.info.ComponentDescriptor;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ContextDescriptor;
@@ -29,13 +27,15 @@ import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
 import org.jcontainer.loom.tools.qdox.DefaultInfoBuilder;
 import org.jcontainer.loom.tools.qdox.LegacyInfoBuilder;
+import org.jcontainer.dna.impl.ConsoleLogger;
+import org.jcontainer.dna.impl.ContainerUtil;
 import org.realityforge.metaclass.model.Attribute;
 
 /**
  * Abstract class which TestCases can extend.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.8 $ $Date: 2003-10-05 01:18:58 $
+ * @version $Revision: 1.9 $ $Date: 2003-10-05 10:07:05 $
  */
 public class InfoBuilderTestCase
     extends TestCase

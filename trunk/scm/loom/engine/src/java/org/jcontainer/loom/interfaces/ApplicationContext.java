@@ -88,8 +88,8 @@ package org.jcontainer.loom.interfaces;
 
 import java.io.File;
 import java.io.InputStream;
-import org.apache.avalon.framework.logger.Logger;
 import org.apache.excalibur.instrument.InstrumentManager;
+import org.apache.avalon.framework.logger.Logger;
 import org.jcontainer.loom.tools.profile.PartitionProfile;
 
 /**

@@ -9,20 +9,20 @@ package org.jcontainer.loom.tools.factory;
 
 import java.util.Map;
 import java.util.WeakHashMap;
-import org.apache.avalon.framework.logger.AbstractLogEnabled;
-import org.apache.avalon.framework.logger.Logger;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.infobuilder.InfoBuilder;
 import org.jcontainer.loom.tools.factory.ComponentBundle;
 import org.jcontainer.loom.tools.factory.ComponentFactory;
 import org.jcontainer.loom.tools.factory.DefaultComponentBundle;
+import org.jcontainer.dna.AbstractLogEnabled;
+import org.jcontainer.dna.Logger;
 
 /**
  * The default implementation of {@link org.jcontainer.loom.tools.factory.ComponentFactory}
  * that simply creates components from a {@link java.lang.ClassLoader}.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-29 01:07:35 $
+ * @version $Revision: 1.3 $ $Date: 2003-10-05 10:07:04 $
  */
 public class DefaultComponentFactory
     extends AbstractLogEnabled

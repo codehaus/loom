@@ -90,11 +90,11 @@ import java.io.File;
 import java.net.URL;
 import java.security.Policy;
 import java.util.Arrays;
-import org.apache.avalon.framework.container.ContainerUtil;
-import org.apache.avalon.framework.logger.LogEnabled;
-import org.apache.avalon.framework.logger.Logger;
 import org.jcontainer.loom.components.extensions.pkgmgr.PackageManager;
 import org.jcontainer.loom.components.util.ResourceUtil;
+import org.jcontainer.dna.LogEnabled;
+import org.jcontainer.dna.Logger;
+import org.jcontainer.dna.impl.ContainerUtil;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
 
@@ -103,7 +103,7 @@ import org.realityforge.salt.i18n.ResourceManager;
  * and the way it is split across multiple directories.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-08-17 18:27:32 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-05 10:07:03 $
  */
 class SarLoaderResolver
     extends DefaultLoaderResolver

@@ -95,8 +95,6 @@ import java.util.Set;
 import org.apache.avalon.excalibur.monitor.DirectoryResource;
 import org.apache.avalon.excalibur.monitor.impl.ActiveMonitor;
 import org.apache.avalon.framework.activity.Startable;
-import org.apache.avalon.framework.logger.AbstractLogEnabled;
-import org.apache.avalon.framework.logger.LogEnabled;
 import org.jcontainer.loom.interfaces.Deployer;
 import org.jcontainer.loom.components.ParameterConstants;
 import org.jcontainer.dna.Configurable;
@@ -108,6 +106,7 @@ import org.jcontainer.dna.MissingResourceException;
 import org.jcontainer.dna.Parameterizable;
 import org.jcontainer.dna.Parameters;
 import org.jcontainer.dna.ParameterException;
+import org.jcontainer.dna.AbstractLogEnabled;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.io.FileUtil;
@@ -118,11 +117,11 @@ import org.realityforge.salt.io.FileUtil;
  * application as necessary.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.9 $ $Date: 2003-10-05 08:47:14 $
+ * @version $Revision: 1.10 $ $Date: 2003-10-05 10:07:04 $
  */
 public class DefaultDeploymentMonitor
     extends AbstractLogEnabled
-    implements LogEnabled, Parameterizable, Configurable, Composable, Startable, PropertyChangeListener
+    implements Parameterizable, Configurable, Composable, Startable, PropertyChangeListener
 {
     private final static Resources REZ =
         ResourceManager.getPackageResources( DefaultDeploymentMonitor.class );

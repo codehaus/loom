@@ -97,11 +97,10 @@ import org.apache.avalon.framework.component.ComponentManager;
 import org.apache.avalon.framework.component.WrapperComponentManager;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.context.Context;
-import org.apache.avalon.framework.logger.AbstractLogEnabled;
-import org.apache.avalon.framework.logger.Logger;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.avalon.framework.service.DefaultServiceManager;
 import org.apache.avalon.framework.service.ServiceManager;
+import org.apache.avalon.framework.logger.Logger;
 import org.apache.excalibur.instrument.InstrumentManager;
 import org.jcontainer.loom.interfaces.Application;
 import org.jcontainer.loom.interfaces.ApplicationContext;
@@ -110,13 +109,14 @@ import org.jcontainer.loom.tools.lifecycle.ResourceProvider;
 import org.jcontainer.loom.tools.metadata.DependencyMetaData;
 import org.jcontainer.loom.tools.profile.ComponentProfile;
 import org.jcontainer.loom.tools.configuration.ConfigurationConverter;
+import org.jcontainer.dna.AbstractLogEnabled;
 
 /**
  * The accessor used to access resources for a particular
  * Block or Listener.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-10-05 03:25:07 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-05 10:07:03 $
  */
 class BlockResourceProvider
     extends AbstractLogEnabled

@@ -95,7 +95,6 @@ import org.apache.avalon.framework.component.DefaultComponentManager;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.context.Context;
 import org.apache.avalon.framework.context.DefaultContext;
-import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.avalon.framework.service.DefaultServiceManager;
 import org.apache.avalon.framework.service.ServiceManager;
@@ -108,6 +107,7 @@ import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ContextDescriptor;
 import org.jcontainer.loom.tools.info.EntryDescriptor;
 import org.jcontainer.loom.tools.configuration.ConfigurationConverter;
+import org.jcontainer.dna.AbstractLogEnabled;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
 
@@ -124,7 +124,7 @@ import org.realityforge.salt.i18n.ResourceManager;
  * {@link org.jcontainer.loom.tools.verifier.AssemblyVerifier}</p>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-10-05 03:25:12 $
+ * @version $Revision: 1.6 $ $Date: 2003-10-05 10:07:04 $
  */
 public abstract class AbstractResourceProvider
     extends AbstractLogEnabled

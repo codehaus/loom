@@ -10,7 +10,6 @@ package org.jcontainer.loom.components.validator;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.jcontainer.loom.interfaces.ConfigurationValidator;
 import org.jcontainer.loom.tools.configuration.ConfigurationBuilder;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
@@ -19,6 +18,7 @@ import org.jcontainer.loom.components.util.ConfigUtil;
 import org.jcontainer.dna.Configurable;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.ConfigurationException;
+import org.jcontainer.dna.AbstractLogEnabled;
 import org.jcontainer.dna.impl.ConfigurationUtil;
 import org.jcontainer.dna.impl.DefaultConfiguration;
 import org.realityforge.configkit.ConfigValidator;
@@ -45,7 +45,7 @@ import org.xml.sax.InputSource;
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author <a href="mailto:proyal at apache.org">Peter Royal</a>
- * @version $Revision: 1.4 $ $Date: 2003-10-05 03:25:09 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-05 10:07:04 $
  * @phoenix.component
  */
 public class DefaultConfigurationValidator

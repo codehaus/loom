@@ -89,10 +89,8 @@ package org.jcontainer.loom.components.kernel;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.avalon.framework.container.ContainerUtil;
-import org.apache.avalon.framework.logger.AbstractLogEnabled;
-import org.apache.avalon.framework.logger.Logger;
 import org.apache.excalibur.instrument.InstrumentManager;
+import org.apache.avalon.framework.container.ContainerUtil;
 import org.jcomponent.loggerstore.LoggerStore;
 import org.jcontainer.dna.Active;
 import org.jcontainer.dna.Configurable;
@@ -101,6 +99,8 @@ import org.jcontainer.dna.ConfigurationException;
 import org.jcontainer.dna.Composable;
 import org.jcontainer.dna.ResourceLocator;
 import org.jcontainer.dna.MissingResourceException;
+import org.jcontainer.dna.AbstractLogEnabled;
+import org.jcontainer.dna.Logger;
 import org.jcontainer.dna.impl.DefaultResourceLocator;
 import org.jcontainer.loom.components.application.DefaultApplication;
 import org.jcontainer.loom.interfaces.Application;
@@ -308,7 +308,7 @@ public class DefaultKernel
                     final Application newApp = new DefaultApplication();
                     final Logger childLogger =
                         getLogger().getChildLogger( name );
-                    ContainerUtil.enableLogging( newApp, childLogger );
+                    org.jcontainer.dna.impl.ContainerUtil.enableLogging( newApp, childLogger );
 
                     final ApplicationContext context =
                         createApplicationContext( entry );
@@ -437,7 +437,7 @@ public class DefaultKernel
                                            entry.getLoggerStore(),
                                            entry.getClassLoaders() );
 
-        ContainerUtil.enableLogging( context, createContextLogger( name ) );
+        org.jcontainer.dna.impl.ContainerUtil.enableLogging( context, createContextLogger( name ) );
         org.jcontainer.dna.impl.ContainerUtil.compose( context, createResourceLocator() );
         org.jcontainer.dna.impl.ContainerUtil.initialize( context );
         return context;

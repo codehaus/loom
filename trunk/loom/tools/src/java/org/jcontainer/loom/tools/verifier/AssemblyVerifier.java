@@ -9,11 +9,11 @@ package org.jcontainer.loom.tools.verifier;
 
 import java.util.ArrayList;
 import java.util.Stack;
-import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
 import org.jcontainer.loom.tools.metadata.DependencyMetaData;
+import org.jcontainer.dna.AbstractLogEnabled;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
 
@@ -42,7 +42,7 @@ import org.realityforge.salt.i18n.ResourceManager;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-07-07 13:13:00 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-05 10:07:05 $
  */
 public class AssemblyVerifier
     extends AbstractLogEnabled

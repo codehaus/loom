@@ -97,7 +97,6 @@ import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.container.ContainerUtil;
 import org.apache.avalon.framework.context.Context;
 import org.apache.avalon.framework.context.DefaultContext;
-import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.logger.Logger;
 import org.apache.avalon.phoenix.BlockContext;
 import org.jcomponent.loggerstore.DOMLog4JLoggerStoreFactory;
@@ -111,8 +110,10 @@ import org.jcomponent.loggerstore.SimpleLogKitLoggerStoreFactory;
 import org.jcontainer.dna.ParameterException;
 import org.jcontainer.dna.Parameterizable;
 import org.jcontainer.dna.Parameters;
+import org.jcontainer.dna.AbstractLogEnabled;
 import org.jcontainer.dna.impl.ConfigurationUtil;
 import org.jcontainer.loom.components.util.ResourceUtil;
+import org.jcontainer.loom.components.util.DNAAvalonLogger;
 import org.jcontainer.loom.components.ParameterConstants;
 import org.jcontainer.loom.interfaces.LogManager;
 import org.jcontainer.loom.tools.configuration.ConfigurationConverter;
@@ -273,12 +274,13 @@ public class DefaultLogManager
                 getLogger().debug( message );
             }
 
+            final DNAAvalonLogger logger = new DNAAvalonLogger( getLogger() );
             if( version.equals( "1.0" ) )
             {
                 final LoggerStoreFactory loggerManager = new SimpleLogKitLoggerStoreFactory();
-                ContainerUtil.enableLogging( loggerManager, getLogger() );
+                ContainerUtil.enableLogging( loggerManager, logger );
                 final HashMap config = new HashMap();
-                config.put( Logger.class.getName(), getLogger() );
+                config.put( Logger.class.getName(), logger );
                 // use the original context map as SimpleLogKitManager requires
                 // the File object in the context
                 config.put( Context.class.getName(), new DefaultContext( map ) );
@@ -289,9 +291,9 @@ public class DefaultLogManager
             else if( version.equals( "1.1" ) )
             {
                 final LoggerStoreFactory loggerManager = new LogKitLoggerStoreFactory();
-                ContainerUtil.enableLogging( loggerManager, getLogger() );
+                ContainerUtil.enableLogging( loggerManager, logger );
                 final HashMap config = new HashMap();
-                config.put( Logger.class.getName(), getLogger() );
+                config.put( Logger.class.getName(), logger );
                 config.put( Context.class.getName(), new DefaultContext( normalisedMap ) );
                 config.put( Configuration.class.getName(),
                             ConfigurationConverter.toConfiguration( logs ) );
@@ -300,7 +302,7 @@ public class DefaultLogManager
             else if( version.equals( "log4j" ) )
             {
                 final LoggerStoreFactory loggerManager = new DOMLog4JLoggerStoreFactory();
-                ContainerUtil.enableLogging( loggerManager, getLogger() );
+                ContainerUtil.enableLogging( loggerManager, logger );
                 final HashMap config = new HashMap();
                 final Element element = buildLog4JConfiguration( logs );
                 m_expander.expandValues( element, normalisedMap );

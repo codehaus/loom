@@ -94,8 +94,8 @@ import java.security.CodeSource;
 import java.security.PermissionCollection;
 import java.security.Policy;
 import java.util.Enumeration;
-import org.apache.avalon.framework.logger.LogEnabled;
-import org.apache.avalon.framework.logger.Logger;
+import org.jcontainer.dna.LogEnabled;
+import org.jcontainer.dna.Logger;
 
 /**
  * Classloader that uses a specified {@link Policy} object

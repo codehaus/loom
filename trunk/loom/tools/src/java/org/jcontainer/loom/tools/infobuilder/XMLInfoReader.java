@@ -10,7 +10,6 @@ package org.jcontainer.loom.tools.infobuilder;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Properties;
-import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.jcontainer.loom.tools.configuration.ConfigurationBuilder;
 import org.jcontainer.loom.tools.info.ComponentDescriptor;
 import org.jcontainer.loom.tools.info.ComponentInfo;
@@ -21,6 +20,7 @@ import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.ConfigurationException;
+import org.jcontainer.dna.AbstractLogEnabled;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.metaclass.model.Attribute;
@@ -32,7 +32,7 @@ import org.xml.sax.InputSource;
  * is specified in the <a href="package-summary.html#external">package summary</a>.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.10 $ $Date: 2003-10-05 03:25:12 $
+ * @version $Revision: 1.11 $ $Date: 2003-10-05 10:07:04 $
  */
 public final class XMLInfoReader
     extends AbstractLogEnabled

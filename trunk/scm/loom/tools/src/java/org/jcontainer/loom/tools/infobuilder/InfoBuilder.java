@@ -8,9 +8,9 @@
 package org.jcontainer.loom.tools.infobuilder;
 
 import java.io.InputStream;
-import org.apache.avalon.framework.logger.AbstractLogEnabled;
-import org.apache.avalon.framework.logger.Logger;
 import org.jcontainer.loom.tools.info.ComponentInfo;
+import org.jcontainer.dna.AbstractLogEnabled;
+import org.jcontainer.dna.Logger;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
@@ -20,7 +20,7 @@ import org.realityforge.salt.i18n.Resources;
  * is specified in the <a href="package-summary.html#external">package summary</a>.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-07-05 06:02:40 $
+ * @version $Revision: 1.6 $ $Date: 2003-10-05 10:07:04 $
  */
 public final class InfoBuilder
     extends AbstractLogEnabled

@@ -90,9 +90,9 @@ import java.io.File;
 import java.net.URL;
 import java.security.Policy;
 import java.util.Map;
-import org.apache.avalon.framework.container.ContainerUtil;
-import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.jcontainer.loom.components.util.ResourceUtil;
+import org.jcontainer.dna.AbstractLogEnabled;
+import org.jcontainer.dna.impl.ContainerUtil;
 import org.realityforge.xmlpolicy.builder.PolicyResolver;
 
 /**
@@ -100,7 +100,7 @@ import org.realityforge.xmlpolicy.builder.PolicyResolver;
  * (like remapping URLs).
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-10-05 03:41:36 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-05 10:07:03 $
  */
 class SarPolicyResolver
     extends AbstractLogEnabled
