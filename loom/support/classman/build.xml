@@ -29,6 +29,9 @@
             <fileset dir="src/java">
                 <exclude name="**/*.java"/>
             </fileset>
+            <fileset dir="src/testdata">
+                <exclude name="**/*.java"/>
+            </fileset>
         </copy>
 
         <jar jarfile="target/${final.name}.jar"
@@ -42,11 +45,12 @@
 
     <target name="test" description="o Run the test cases" depends="build,build-test-data">
         <mkdir dir="${target.reports}"/>
-        <property name="target.basedir" location="target/classes"/>
+        <property name="target.basedir" location="."/>
         <echo message="target.basedir=${target.basedir}"/>
         <junit dir="./" printSummary="yes"
-            haltonfailure="true" fork="true" haltonerror="true">
+            haltonfailure="true" haltonerror="true">
             <sysproperty key="basedir" value="${target.basedir}"/>
+            <sysproperty key="gump" value="true"/>
             <formatter usefile="true" type="plain"/>
             <formatter usefile="false" type="plain"/>
             <classpath>
