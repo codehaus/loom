@@ -7,8 +7,8 @@
         <section name="Downloading Loom">
             <p>
                 Both distributions and jars are downloadable from the 
-                <a href="http://dist.jcontainer.org/maven/loom">
-                JContainer Loom Maven repository</a>.
+                <a href="http://dist.codehaus.org">
+                Codehaus Distribution Server</a>.
             </p>
         </section>
     </body>
