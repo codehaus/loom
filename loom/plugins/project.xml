@@ -5,6 +5,20 @@
     <groupId>loom</groupId>
     <currentVersion>1.0-rc2</currentVersion>
 
+    <versions>
+        <version>
+            <id>${pom.currentVersion}</id>
+            <name>${pom.currentVersion}</name>
+            <tag>HEAD</tag>
+        </version>
+        <version>
+            <id>1.0-rc2</id>
+            <name>1.0-r2</name>
+            <tag>LOOM_PLUGINS_1_0-rc2-tag</tag>
+        </version>
+    </versions>
+
+
     <distributionDirectory>/home/projects/loom/dist</distributionDirectory>
     <distributionSite>dist.codehaus.org</distributionSite>
     <siteDirectory>/home/projects/loom/public_html/plugins</siteDirectory>

@@ -1,9 +1,0 @@
-<project default="build">
-
-    <goal name="build" prereqs="plugin:install">
-		<copy todir="${maven.repo.local}/${pom.artifactDirectory}/plugins"
-			  file="${maven.build.dir}/${pom.artifactId}-${pom.currentVersion}.jar" verbose="yes"/>
-    </goal>
-    <goal name="deploy" prereqs="plugin:deploy"/>
-
-</project>

@@ -1,11 +1,18 @@
-<project default="main"
-    xmlns:maven="jelly:maven">
+<project default="plugins:build"  xmlns:artifact="artifact" xmlns:maven="jelly:maven">
 
-    <goal name="main">
-        <attainGoal name="loom:build"/>
+    <goal name="build" prereqs="plugin:install">
+		<copy todir="${maven.repo.local}/${pom.artifactDirectory}/plugins"
+			  file="${maven.build.dir}/${pom.artifactId}-${pom.currentVersion}.jar" verbose="yes"/>
+    </goal>
+    
+    <goal name="deploy" prereqs="plugin:install">
+		 <artifact:deploy
+		 		artifact="${maven.build.dir}/${maven.final.name}.jar"
+      		  	type="plugin"
+      		  	project="${pom}"/>
     </goal>
 
-    <goal name="loom:build"
+    <goal name="plugins:build"
         description="Build all plugins">
         <maven:reactor
             basedir="${basedir}"
@@ -16,7 +23,7 @@
     </goal>
 
     <goal
-        name="loom:install"
+        name="plugins:install"
         description="Installs each plugin into plugins dir">
         <maven:reactor
             basedir="${basedir}"
@@ -26,7 +33,7 @@
             ignoreFailures="true"/>
     </goal>
 
-    <goal name="loom:deploy"
+    <goal name="plugins:deploy"
         description="Deploys each plugin">
         <maven:reactor
             basedir="${basedir}"
@@ -36,7 +43,7 @@
             ignoreFailures="true"/>
     </goal>
 
-    <goal name="loom:clean"
+    <goal name="plugins:clean"
         description="Cleans each plugin">
         <maven:reactor
             basedir="${basedir}"
@@ -46,7 +53,7 @@
             ignoreFailures="false"/>
     </goal>
 
-    <goal name="loom:docs"
+    <goal name="plugins:docs"
         description="Builds each plugin documentation">
         <maven:reactor
             basedir="${basedir}"
