@@ -2,13 +2,13 @@
 <document>
   <properties>
     <title>Project Structure</title>
-    
-      
+
+
   <author email="leosimons@apache.org">Leo Simons</author>
   </properties>
   <body>
       <section name="Introduction">
-<p>Avalon Phoenix has seen lots of refactoring to create an intuitive
+<p>Loom has seen lots of refactoring to create an intuitive
 code layout. It is usually quite easy to find what you need. This document
 provides an overview of the project structure. It is still under
 construction.</p>

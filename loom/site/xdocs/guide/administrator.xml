@@ -2,8 +2,8 @@
 <document>
     <properties>
     <title>Guide - for Administrators</title>
-        
-        
+
+
     <author email="daveweit@optonline.net">David W.</author>
   </properties>
     <body>
@@ -17,14 +17,14 @@
             <subsection name="Target Audience">
                 <p>
                   This documentation will describe the care and feeding of the Avalon
-                  Phoenix kernel from the point of view of the administrator.
+                    Loom kernel from the point of view of the administrator.
                 </p>
             </subsection>
         </section>
         <section name="Starting and Stopping">
             <subsection name="Using Scripts">
                 <p>
-                  You can start Phoenix with the following command:
+                  You can start Loom with the following command:
 
                     <source>
 
@@ -39,7 +39,7 @@
                 </p>
                 <p>
                   In UNIX environments, you can use the <source>phoenix.sh</source>
-                  script to stop Phoenix.
+                  script to stop Loom.
                 </p>
 
                     <source>
@@ -56,24 +56,24 @@
             </subsection>
             <subsection name="Using the Java Service Wrapper">
               <p>
-                Another option for starting and stopping Phoenix is to build
+                Another option for starting and stopping Loom is to build
                 it with support for the
                 <a href="http://wrapper.tanukisoftware.org/">Java Service Wrapper</a>.
               </p>
               <p>
                 The main benifit of using the Java Service Wrapper is that it can
-                install Phoenix as an NT service.  It can also detect if the JVM
+                install Loom as an NT service.  It can also detect if the JVM
                 freezes up or crashes and restart the application immediately.
               </p>
               <p>
-                To build Phoenix with the Java Service Wrapper, download and
+                To build Loom with the Java Service Wrapper, download and
                 extract the latest version.  Next, in the root of the source tree,
                 create or modify <source>ant.properties</source> so that it looks
                 similar to this:
               </p>
 
 <source>
-# ${base.path} points to the root of the Phoenix source tree
+# ${base.path} points to the root of the Loom source tree
 wrapper.home=${base.path}/wrapper_linux_3.0.0
 wrapper.jar=${wrapper.home}/lib/wrapper.jar
 
@@ -107,7 +107,7 @@ wrapper.dll=${wrapper.home}/lib/Wrapper.dll
         <section name="Using JMX">
             <subsection name="JMX Overview">
               <p>
-                Phoenix is tightly integrated with Java Management Extensions (JMX).
+                  Loom is tightly integrated with Java Management Extensions (JMX).
                 TODO: say something else.  Integrate this section with the other
                 <a href="mx/index.html">JMX info</a>.
               </p>
@@ -141,7 +141,7 @@ public interface WebServerMBean {
 package examplecomp.block;
 
 /**
- * TODO: describe PhoenixXDoclet setup.
+ * TODO: describe LoomXDoclet setup.
  * @phoenix:mx name="examplecomp.block.WebServerMBean"
  */
 public class WebServerBlock
@@ -155,7 +155,7 @@ public class WebServerBlock
             </subsection>
             <subsection name="Using Http Adaptor">
               <p>
-                The MX4J Http Adaptor allows access to a running Phoenix server
+                The MX4J Http Adaptor allows access to a running Loom server
                 with any web browser.
               </p>
               <p>
@@ -167,31 +167,31 @@ public class WebServerBlock
                 You should see a list of JMX MBeans you can control.
               </p>
               <p>
-                Under the section labled "Domain: Phoenix" you should see
+                Under the section labled "Domain: Loom" you should see
                 a familier looking name or two.  They depend on the .sar
                 file packaging and configuration, but the web server above
                 would have a name similar to
-  <source>Phoenix:application=webserver,block=webserver,topic=WebServerMBean</source>.
+  <source>Loom:application=webserver,block=webserver,topic=WebServerMBean</source>.
                 If you click on the name, you'll find a form that allows you
                 to mount and unmount .war files through the web!
               </p>
               <p>
-                If your aren't familiar with the guts of Phoenix, you may
+                If your aren't familiar with the guts of Loom, you may
                 want to browse the source to understand what some of the other
                 MBeans listed do. For example,
-                <source>Phoenix:component=Embeddor,topic=Embeddor</source> allows
-                you to restart and shutdown Phoenix.  It also provides information,
+                <source>Loom:component=Embeddor,topic=Embeddor</source> allows
+                you to restart and shutdown Loom.  It also provides information,
                 such as the server's start time and uptime, home directory, version,
                 and build information.
               </p>
             </subsection>
             <subsection name="Using RMI Adaptor">
               <p>
-                If you would like to write an agent that can administrate Phoenix
+                If you would like to write an agent that can administrate Loom
                 programatically, you can use the MX4J RMI Adaptor.  This section
                 is basically duplicating information available in the MX4J
                 <a href="http://mx4j.sourceforge.net/docs/bk01ch03s16.html">
-                documentation</a>.  Phoenix uses the JRMP RMI Adaptor.
+                documentation</a>.  Loom uses the JRMP RMI Adaptor.
               </p>
               <p>
                 Ensure that the MX4J RMI Adaptor is enabled in kernel.xml
@@ -207,7 +207,7 @@ public class WebServerBlock
 </source>
               <p>
                 Place mx4j-jmx.jar, mx4j-tools.jar, and jndi.properties (TODO: include it)
-                in your classpath.  Suppose you wanted to shut down Phoenix.  Create the
+                in your classpath.  Suppose you wanted to shut down Loom.  Create the
                 following class:
               </p>
 
@@ -231,7 +231,7 @@ public class JrmpShutdown {
         // And use it as if it is an MBeanServer
         RemoteMBeanServer server = connector.getRemoteMBeanServer();
 
-        ObjectName objName = new ObjectName("Phoenix:component=Embeddor,topic=Embeddor");
+        ObjectName objName = new ObjectName("Loom:component=Embeddor,topic=Embeddor");
         server.invoke(objName, "shutdown", new Object[0], new String[0]);
     }
 }
@@ -243,11 +243,11 @@ public class JrmpShutdown {
         </section>
         <section name="Troubleshooting">
           <p>
-            <strong>Phoenix stops immediatly after starting, with no error message</strong>
+            <strong>Loom stops immediatly after starting, with no error message</strong>
           </p>
           <p>
             Make sure you have a .sar file in the app/ directory.  If there isn't
-            a service running, Phoenix quits immediately.  You can actually
+            a service running, Loom quits immediately.  You can actually
             stop the server by undeploying all registered applications through
             JMX (although that would be a strange way of doing it).
             TODO: is this behavior a good thing?

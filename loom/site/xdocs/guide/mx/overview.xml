@@ -2,24 +2,24 @@
 <document>
     <properties>
     <title>Guide - Step by Step Overview</title>
-        
-        
+
+
     <author email="huw@apache.org">Huw Roberts</author>
   </properties>
     <body>
         <section name="Introduction">
             <p>
-              This section gives a quick overview of how to go from a block's source code, 
+              This section gives a quick overview of how to go from a block's source code,
               to a managed object accessible in a management interface.  It discusses
               the role of actors at three different points in the
               life cycle of the application:
-              during development, at start-up, and while running.  
+              during development, at start-up, and while running.
             </p>
 
             <subsection name="In Development">
                 <p>
                   For a block to be manageable, the developer must provide an
-                  MXINFO file along with the compiled code.  The easiest way 
+                  MXINFO file along with the compiled code.  The easiest way
                   to do that is to insert a series of XDoclet tags
                   into the source file.  An example of how to use these tags follows.
                 </p>
@@ -42,7 +42,7 @@ public class FtpServerImpl extends AbstractLogEnabled
 ...
                 </source>
                 <p>
-                  Then, for each attribute that should be exposed add the 
+                  Then, for each attribute that should be exposed add the
                   @phoenix:mx-attribute tag:
                 </p>
                 <source>
@@ -66,7 +66,7 @@ public class FtpServerImpl extends AbstractLogEnabled
     ...
                 </source>
                 <p>
-                    When this is compiled the PhoenixDoclet task extracts this and inserts it
+                    When this is compiled the LoomDoclet task extracts this and inserts it
                     into an mxinfo file.  If a method doesn't have a @pheonix:mx-attribute tag it is not exposed for
                     management.
                 </p>
@@ -119,13 +119,13 @@ public class FtpServerImpl extends AbstractLogEnabled
             </subsection>
             <subsection name="At Startup">
                 <p>
-                    At startup, Phoenix registers each block to a local SystemManager context.  This
+                    At startup, Loom registers each block to a local SystemManager context.  This
                     context determines where the block fits into the management hierarchy.
                 </p>
                 <p>
                     The following code snippet shows the code snippet that registers
                     the Embeddor component with the 'component' management context.  A
-                    similar process is followed for registering the blocks in 
+                    similar process is followed for registering the blocks in
                     the application.
                 </p>
                 <source>
@@ -136,7 +136,7 @@ final SystemManager componentManager =
 // register the component
 componentManager.register( ManagementRegistration.EMBEDDOR.getName(),
                            this,
-                           ManagementRegistration.EMBEDDOR.getInterfaces() );    
+                           ManagementRegistration.EMBEDDOR.getInterfaces() );
                 </source>
                 <p>
                     The system manager uses the mxinfo file in conjunction with introspection to
