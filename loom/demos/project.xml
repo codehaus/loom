@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<project>
+    <pomVersion>3</pomVersion>
+    <name>Loom Demo</name>
+    <groupId>loom</groupId>
+    <id>demo</id>
+    <inceptionYear>1999-2003</inceptionYear>
+    <package>org.jcontainer.loom.demos</package>
+
+    <shortDescription>Loom Demos</shortDescription>
+
+    <description>
+        Demo apps for deployment in Loom Application Server.
+    </description>
+</project>
