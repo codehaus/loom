@@ -10,13 +10,12 @@ package org.jcontainer.loom.tools.verifier;
 import org.apache.avalon.framework.logger.ConsoleLogger;
 import org.apache.avalon.phoenix.containerkit.profile.PartitionProfile;
 import org.apache.avalon.phoenix.test.AbstractContainerTestCase;
-import org.jcontainer.loom.tools.verifier.SarVerifier;
 
 /**
  *  An basic test case for the LogManager.
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-26 08:31:27 $
+ * @version $Revision: 1.2 $ $Date: 2003-06-26 09:45:38 $
  */
 public class VerifierTestCase
     extends AbstractContainerTestCase
