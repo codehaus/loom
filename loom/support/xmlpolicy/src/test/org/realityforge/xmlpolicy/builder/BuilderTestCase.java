@@ -15,6 +15,7 @@ import java.security.Policy;
 import java.security.UnresolvedPermission;
 import java.security.cert.Certificate;
 import java.util.Enumeration;
+import java.io.FilePermission;
 import junit.framework.TestCase;
 import org.realityforge.xmlpolicy.metadata.GrantMetaData;
 import org.realityforge.xmlpolicy.metadata.KeyStoreMetaData;
@@ -133,7 +134,7 @@ public class BuilderTestCase
     {
         final PolicyBuilder builder = new TestPolicyBuilder();
         final PermissionMetaData permission =
-            new PermissionMetaData( AllPermission.class.getName(), null, null,
+            new PermissionMetaData( FilePermission.class.getName(), "/", "read",
                                     null, null );
         final GrantMetaData grant =
             new GrantMetaData( "file:/", "jenny", "default",
@@ -151,7 +152,38 @@ public class BuilderTestCase
         while( enumeration.hasMoreElements() )
         {
             final Object perm = enumeration.nextElement();
-            if( perm instanceof AllPermission )
+            if( perm instanceof FilePermission )
+            {
+                return;
+            }
+        }
+        fail( "Expected to get permission set with ALlPermission contained" );
+    }
+
+    public void testMetaDataWithAPermissionAndMultipleCerts()
+        throws Exception
+    {
+        final PolicyBuilder builder = new TestPolicyBuilder();
+        final PermissionMetaData permission =
+            new PermissionMetaData( RuntimePermission.class.getName(), "getFactory", null,
+                                    null, null );
+        final GrantMetaData grant =
+            new GrantMetaData( "file:/", "jenny,mischelle,jenny", "default",
+                               new PermissionMetaData[]{permission} );
+        final KeyStoreMetaData keyStore =
+            new KeyStoreMetaData( "default", "http://spice.sourceforge.net", "DoDgY" );
+        final PolicyMetaData metaData =
+            new PolicyMetaData( new KeyStoreMetaData[]{keyStore}, new GrantMetaData[]{grant} );
+        final TestResolver resolver = new TestResolver();
+        final Policy policy = builder.buildPolicy( metaData, resolver );
+        final CodeSource codesource =
+            new CodeSource( new URL( "file:/" ), new Certificate[]{MockCertificate.JENNY_CERTIFICATE} );
+        final PermissionCollection permissions = policy.getPermissions( codesource );
+        final Enumeration enumeration = permissions.elements();
+        while( enumeration.hasMoreElements() )
+        {
+            final Object perm = enumeration.nextElement();
+            if( perm instanceof RuntimePermission )
             {
                 return;
             }
@@ -219,5 +251,103 @@ public class BuilderTestCase
             }
         }
         fail( "Expected to get permission set with UnresolvedPermission contained" );
+    }
+
+    public void testFailureWhenCreatingKeyStore()
+        throws Exception
+    {
+        final PolicyBuilder builder = new TestPolicyBuilder();
+        final PermissionMetaData permission =
+            new PermissionMetaData( AllPermission.class.getName() + "sss", null, null,
+                                    null, null );
+        final GrantMetaData grant =
+            new GrantMetaData( "file:/", "jenny", "default",
+                               new PermissionMetaData[]{permission} );
+        final KeyStoreMetaData keyStore =
+            new KeyStoreMetaData( "default", "http://spice.sourceforge.net/NoExist", "DoDgY" );
+        final PolicyMetaData metaData =
+            new PolicyMetaData( new KeyStoreMetaData[]{keyStore}, new GrantMetaData[]{grant} );
+        final TestResolver resolver = new TestResolver();
+        try
+        {
+            builder.buildPolicy( metaData, resolver );
+            fail( "Expected to fail when creating policy as unable to create store" );
+        }
+        catch( Exception e )
+        {
+        }
+    }
+
+    public void testFailureRetrievingCertForAlias()
+        throws Exception
+    {
+        final PolicyBuilder builder = new TestNoInitPolicyBuilder();
+        final PermissionMetaData permission =
+            new PermissionMetaData( AllPermission.class.getName() + "sss", null, null,
+                                    null, null );
+        final GrantMetaData grant =
+            new GrantMetaData( "file:/", "peter", "default",
+                               new PermissionMetaData[]{permission} );
+        final KeyStoreMetaData keyStore =
+            new KeyStoreMetaData( "default", "http://spice.sourceforge.net", "DoDgY" );
+        final PolicyMetaData metaData =
+            new PolicyMetaData( new KeyStoreMetaData[]{keyStore}, new GrantMetaData[]{grant} );
+        final TestResolver resolver = new TestResolver();
+        try
+        {
+            builder.buildPolicy( metaData, resolver );
+            fail( "Expected to fail when creating policy as unable to create store" );
+        }
+        catch( Exception e )
+        {
+        }
+    }
+
+    public void testAliasNoExist()
+        throws Exception
+    {
+        final PolicyBuilder builder = new TestPolicyBuilder();
+        final PermissionMetaData permission =
+            new PermissionMetaData( AllPermission.class.getName() + "sss", null, null,
+                                    null, null );
+        final GrantMetaData grant =
+            new GrantMetaData( "file:/", "peter", "default",
+                               new PermissionMetaData[]{permission} );
+        final KeyStoreMetaData keyStore =
+            new KeyStoreMetaData( "default", "http://spice.sourceforge.net", "DoDgY" );
+        final PolicyMetaData metaData =
+            new PolicyMetaData( new KeyStoreMetaData[]{keyStore}, new GrantMetaData[]{grant} );
+        final TestResolver resolver = new TestResolver();
+        try
+        {
+            builder.buildPolicy( metaData, resolver );
+            fail( "Expected to fail when creating policy as unable to load alias" );
+        }
+        catch( Exception e )
+        {
+        }
+    }
+
+    public void testNoKeyStore()
+        throws Exception
+    {
+        final PolicyBuilder builder = new TestPolicyBuilder();
+        final PermissionMetaData permission =
+            new PermissionMetaData( AllPermission.class.getName(), null, null,
+                                    null, null );
+        final GrantMetaData grant =
+            new GrantMetaData( "file:/", "peter", "default",
+                               new PermissionMetaData[]{permission} );
+        final PolicyMetaData metaData =
+            new PolicyMetaData( new KeyStoreMetaData[]{}, new GrantMetaData[]{grant} );
+        final TestResolver resolver = new TestResolver();
+        try
+        {
+            builder.buildPolicy( metaData, resolver );
+            fail( "Expected to fail when creating policy as missing keystore" );
+        }
+        catch( Exception e )
+        {
+        }
     }
 }
