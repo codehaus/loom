@@ -2,7 +2,6 @@
 
   <goal name="main">
     <attainGoal name="jar:jar"/>
-    <attainGoal name="sar:sar"/>
   </goal>
 
 </project>

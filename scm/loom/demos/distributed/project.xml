@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<project>
+    <pomVersion>3</pomVersion>
+    <name>Loom distributed Demo</name>
+    <groupId>loom</groupId>
+    <id>demo-distributed</id>
+    <currentVersion>1.0</currentVersion>
+    <inceptionYear>1999-2003</inceptionYear>
+    <package>org.jcontainer.loom.demos.distributed</package>
+
+    <shortDescription>Distribuited Demo</shortDescription>
+
+    <description>
+        Distribuited Demo app for deployment in Loom Application Server.
+    </description>
+
+    <dependencies>
+    </dependencies>
+
+    <build>
+        <sourceDirectory>src/java</sourceDirectory>
+        <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
+
+        <unitTest>
+            <includes>
+                <include>**/*TestCase.java</include>
+            </includes>
+            <excludes>
+                <exclude>**/Abstract*.java</exclude>
+            </excludes>
+            <resources>
+                <resource>
+                    <directory>${basedir}/src/test</directory>
+                    <includes>
+                        <include>**/*.xml</include>
+                        <include>**/*.xinfo</include>
+                    </includes>
+                </resource>
+            </resources>
+        </unitTest>
+
+        <resources>
+            <resource>
+                <directory>${basedir}/src/java</directory>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </resource>
+        </resources>
+    </build>
+
+</project>

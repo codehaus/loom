@@ -1,10 +1,8 @@
-<project default="main"
-  xmlns:sar="sar">
+<project default="main">
 
   <goal name="main">
     <attainGoal name="jar:jar"/>
     <attainGoal name="sar:sar"/>
   </goal>
-
 
 </project>
