@@ -5,7 +5,7 @@
  * Software License version 1.1, a copy of which has been included
  * with this distribution in the LICENSE.txt file.
  */
-package org.codehaus.spice.extension;
+package org.jcontainer.loom.extension;
 
 import junit.framework.TestCase;
 
@@ -13,7 +13,7 @@ import junit.framework.TestCase;
  * TestCases for DeweyDecimal.
  *
  * @author Peter Donald
- * @version $Revision: 1.3 $ $Date: 2003-12-02 08:09:24 $
+ * @version $Revision: 1.1 $ $Date: 2004-03-31 03:13:43 $
  */
 public class DeweyDecimalTestCase
     extends TestCase

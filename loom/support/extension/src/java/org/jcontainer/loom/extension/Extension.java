@@ -8,7 +8,7 @@
  * This product includes software developed by the
  * Apache Software Foundation (http://www.apache.org/).
  */
-package org.codehaus.spice.extension;
+package org.jcontainer.loom.extension;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -28,7 +28,7 @@ import java.util.jar.Manifest;
  *
  * @author <a href="mailto:craigmcc at apache.org">Craig R. McClanahan</a>
  * @author Peter Donald
- * @version $Revision: 1.2 $ $Date: 2003-12-02 08:08:09 $
+ * @version $Revision: 1.1 $ $Date: 2004-03-31 03:13:43 $
  */
 public final class Extension
 {

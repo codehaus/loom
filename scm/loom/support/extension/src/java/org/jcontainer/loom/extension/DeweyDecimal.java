@@ -5,7 +5,7 @@
  * Software License version 1.1, a copy of which has been included
  * with this distribution in the LICENSE.txt file.
  */
-package org.codehaus.spice.extension;
+package org.jcontainer.loom.extension;
 
 import java.util.StringTokenizer;
 
@@ -17,7 +17,7 @@ import java.util.StringTokenizer;
  * The version number must begin with a number.
  *
  * @author Peter Donald
- * @version $Revision: 1.2 $ $Date: 2003-12-02 08:08:09 $
+ * @version $Revision: 1.1 $ $Date: 2004-03-31 03:13:43 $
  */
 public final class DeweyDecimal
 {
