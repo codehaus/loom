@@ -200,25 +200,25 @@
 
             <source>
 
-                &lt;?xml version="1.0"?>
+&lt;?xml version="1.0"?>
 
-                &lt;assembly>
+&lt;assembly>
 
-                &lt;block name="myAuthorizer"
-           class="com.biz.cornerstone.blocks.MyAuthorizer">
-                &lt;/block>
+	&lt;block name="myAuthorizer"
+		class="com.biz.cornerstone.blocks.MyAuthorizer">
+	&lt;/block>
 
-                &lt;block name="myBlock"
-           class="com.biz.cornerstone.blocks.MyBlock">
-                &lt;provide name="myAuthorizer"
-                 role="com.biz.cornerstone.services.Authorizer"/>
-                &lt;/block>
+	&lt;block name="myBlock"
+		class="com.biz.cornerstone.blocks.MyBlock">
+		&lt;provide name="myAuthorizer"
+     		role="com.biz.cornerstone.services.Authorizer"/>
+	&lt;/block>
 
-                &lt;listener name="myListener"
-              class="com.biz.cornerstone.listeners.MyListener">
-                &lt;/listener>
+	&lt;listener name="myListener"
+		class="com.biz.cornerstone.listeners.MyListener">
+	&lt;/listener>
 
-                &lt;/assembly>
+&lt;/assembly>
             </source>
         </section>
     </body>

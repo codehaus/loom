@@ -46,8 +46,6 @@
                 <item href="/guide/mx/structure.html" name="Structure"/>
                 <item href="/guide/mx/doclet-tags.html" name="Doclet Tags"/>
             </item>
-            <item href="/guide/example-configuration.html" name="Example configuration"/>
-            <item href="/guide/punit.html" name="PUnit unit testing"/>
         </menu>
         <menu name="Specification Reference">
             <item href="/reference/config-xml-specification.html" name="config.xml"/>

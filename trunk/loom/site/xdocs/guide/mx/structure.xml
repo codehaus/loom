@@ -34,7 +34,7 @@
           organizing element for management data, and is the bridge between
           the management code embedded in Loom and the implementation of the
           management component.  It is represented by the
-                    <code>org.apache.avalon.phoenix.interfaces.SystemManager</code>
+                    <code>org.jcontainer.loom.interfaces.SystemManager</code>
           interface.
                 </p>
             </subsection>
@@ -65,12 +65,12 @@ Loom
  |   +-- etc.
  |
  +--Applications
-     +--Hello World
+     +-- Hello World
      |    +-- Blocks
      |          +-- Block 1
      |          +-- Block 2
      |
-     +-- Ftp Server
+     +-- Another App
           +-- Blocks
                 +-- Block 1
                 +-- Block 2

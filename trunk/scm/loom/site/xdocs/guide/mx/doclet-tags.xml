@@ -292,7 +292,7 @@
                 is the location of the source files.
             </p>
             <p>
-                The qdox jar and phoenix-client.jar need to be in the project.class.path.
+                The qdox and phoenix-client jars need to be in the project.class.path.
             </p>
         </section>
     </body>

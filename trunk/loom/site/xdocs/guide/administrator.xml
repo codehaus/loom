@@ -174,15 +174,15 @@ public class WebServerBlock
                 Ensure that the MX4J RMI Adaptor is enabled in kernel.xml
                 </p>
                 <source>
-                    &lt;component role="org.apache.avalon.phoenix.interfaces.SystemManager"
-    class="org.apache.avalon.phoenix.components.manager.MX4JSystemManager"
+                    &lt;component role="org.jcontainer.loom.interfaces.SystemManager"
+    class="org.jcontainer.loom.components.manager.MX4JSystemManager"
     logger="manager" >
                     &lt;enable-rmi-adaptor>true&lt;/enable-rmi-adaptor>
   [other enabled adaptors]
                     &lt;/component>
                 </source>
                 <p>
-                Place mx4j-jmx.jar, mx4j-tools.jar, and jndi.properties (TODO: include it)
+                Place mx4j-jmx.jar, mx4j-tools.jar, and jndi.properties
                 in your classpath.  Suppose you wanted to shut down Loom.  Create the
                 following class:
                 </p>
