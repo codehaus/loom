@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#mailto=jcontainer-interest@lists.codehaus.org
-mailto=osi@pobox.com
+mailto=jcontainer-interest@lists.codehaus.org
+#mailto=osi@pobox.com
 builddir=.
 
 #JAVA_HOME=/usr/local/j2sdk1.4.1
