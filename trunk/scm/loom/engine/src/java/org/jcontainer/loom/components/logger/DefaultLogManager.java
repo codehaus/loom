@@ -12,6 +12,7 @@ package org.jcontainer.loom.components.logger;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 import javax.xml.parsers.DocumentBuilder;
@@ -26,6 +27,7 @@ import org.apache.avalon.framework.context.DefaultContext;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.logger.Logger;
 import org.apache.avalon.phoenix.BlockContext;
+import org.apache.oro.text.perl.Perl5Util;
 import org.jcontainer.loom.components.util.ResourceUtil;
 import org.jcontainer.loom.interfaces.LogManager;
 import org.realityforge.configkit.PropertyExpander;
@@ -77,7 +79,34 @@ public class DefaultLogManager
         final HashMap data = new HashMap();
         data.putAll( appContext );
         data.put( "loom.home", m_loomHome );
+        replaceBackslash( data );
         return data;
+    }
+
+    /**
+     * Replaces backslack character '\' with '/' in <class>File</class> instance values
+     * 
+     * @param data the Map containing the context data
+     */
+    private void replaceBackslash( final Map data ){
+        final Perl5Util perl5 = new Perl5Util();
+        for ( Iterator i = data.keySet().iterator(); i.hasNext(); )
+        {
+            final Object key = i.next();
+            final Object value = data.get( key );
+            if ( value instanceof File )
+            {
+                File file = (File)value;
+                final String path = file.getPath();
+                final String newPath = perl5.substitute( "s/\\\\/\\//g", path );
+                // Note: in the String representation of a regex 
+                // you have to escape the backslash, and escape the backslash 
+                // that is escaping the backslash - so much for simplicity!
+                // Using JDK1.4 the statement becomes
+                // final String newPath = path.replaceAll("\\\\","/");
+                data.put( key, new File( newPath ) );
+            }
+        }
     }
 
     /**
