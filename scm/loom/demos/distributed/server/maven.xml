@@ -1,4 +1,5 @@
-<project default="main">
+<project default="main"
+    xmlns:ant="jelly:ant">
 
     <goal name="main">
         <attainGoal name="build"/>

@@ -12,7 +12,7 @@
         <dependency>
             <groupId>spice</groupId>
             <artifactId>spice-metaclass-jmx</artifactId>
-            <version>20031015.021238</version>
+            <version>20031017.081651</version>
         </dependency>
         <dependency>
             <groupId>loom</groupId>
