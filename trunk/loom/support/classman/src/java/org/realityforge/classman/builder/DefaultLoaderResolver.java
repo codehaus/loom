@@ -8,12 +8,11 @@
 package org.realityforge.classman.builder;
 
 import java.io.File;
-import java.net.MalformedURLException;
+import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import org.apache.avalon.excalibur.packagemanager.PackageManager;
-import org.realityforge.salt.io.PathMatcher;
 import org.realityforge.salt.io.FileUtil;
+import org.realityforge.salt.io.PathMatcher;
 
 /**
  * This resolver has all the same properties as the
@@ -22,7 +21,7 @@ import org.realityforge.salt.io.FileUtil;
  * {@link #m_baseDirectory} value.
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-06-05 00:22:23 $
+ * @version $Revision: 1.5 $ $Date: 2003-06-05 23:51:50 $
  */
 public class DefaultLoaderResolver
     extends SimpleLoaderResolver
@@ -79,65 +78,14 @@ public class DefaultLoaderResolver
         final String[] newIncludes = prefixPatterns( newBaseDirectory, includes );
         final String[] newExcludes = prefixPatterns( newBaseDirectory, excludes );
         final PathMatcher matcher = new PathMatcher( newIncludes, newExcludes );
-        final ArrayList urls = new ArrayList();
-
-        scanDir( base, matcher, "", urls );
-
-        return (URL[])urls.toArray( new URL[ urls.size() ] );
-    }
-
-    /**
-     * Scan a directory trying to match files with matcher
-     * and adding them to list of result urls if they match.
-     * Recurse into sub-directorys.
-     *
-     * @param dir the directory to scan
-     * @param matcher the matcher to use
-     * @param path the virtual path to the current directory
-     * @param urls the list of result URLs
-     */
-    private void scanDir( final File dir,
-                          final PathMatcher matcher,
-                          final String path,
-                          final ArrayList urls )
-    {
-        final File[] files = dir.listFiles();
-        if( null == files )
+        final File[] files = FileUtil.resolveFileSet( base, matcher );
+        try
         {
-            final String message = "Bad dir specified: " + dir;
-            throw new IllegalArgumentException( message );
+            return FileUtil.toURLs( files );
         }
-
-        String prefix = "";
-        if( 0 != path.length() )
+        catch( IOException ioe )
         {
-            prefix = path + "/";
-        }
-
-        for( int i = 0; i < files.length; i++ )
-        {
-            final File file = files[ i ];
-            final String newPath = prefix + file.getName();
-            if( file.isDirectory() )
-            {
-                scanDir( file, matcher, newPath, urls );
-            }
-            else
-            {
-                if( matcher.match( newPath ) )
-                {
-                    try
-                    {
-                        urls.add( file.toURL() );
-                    }
-                    catch( final MalformedURLException mue )
-                    {
-                        final String message = "Error converting " +
-                            file + " to url. Reason: " + mue;
-                        throw new IllegalArgumentException( message );
-                    }
-                }
-            }
+            throw new IllegalArgumentException( ioe.getMessage() );
         }
     }
 
