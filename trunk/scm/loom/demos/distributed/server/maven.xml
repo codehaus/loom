@@ -1,0 +1,10 @@
+<project default="main"
+  xmlns:sar="sar">
+
+  <goal name="main">
+    <attainGoal name="jar:jar"/>
+    <attainGoal name="sar:sar"/>
+  </goal>
+
+
+</project>
