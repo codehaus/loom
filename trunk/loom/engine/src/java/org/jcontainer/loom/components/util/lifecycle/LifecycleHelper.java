@@ -115,7 +115,7 @@ import org.realityforge.salt.i18n.Resources;
  * The implementation provides support for the processing of a component through
  * each lifecycle stage, and manage errors in a consistent way.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @author Peter Donald
  * @author <a href="mailto:mcconnell@apache.org">Stephen McConnell</a>
  */
 public class LifecycleHelper
@@ -140,16 +140,16 @@ public class LifecycleHelper
     private static final int STAGE_DESTROY = 12;
 
     /**
-     * Method to run a component through it's startup phase.
-     * Errors that occur during startup will be logged appropriately and
-     * cause exceptions with useful messages to be raised.
+     * Method to run a component through it's startup phase. Errors that occur
+     * during startup will be logged appropriately and cause exceptions with
+     * useful messages to be raised.
      *
      * @param name the name of the component
      * @param entry the entry representing object
      * @param provider the resource provider
      * @return the newly created component
      * @throws LoomException if an error occurs when the component passes
-     *     through a specific lifecycle stage
+     * through a specific lifecycle stage
      */
     public Object startup( final String name,
                            final Object entry,
@@ -163,7 +163,8 @@ public class LifecycleHelper
             stage = STAGE_CREATE;
             notice( name, stage );
             final Object object = provider.createObject( entry );
-            final InstrumentManager instrumentManager = provider.createInstrumentManager( entry );
+            final InstrumentManager instrumentManager = provider.createInstrumentManager(
+                entry );
 
             //LogEnabled stage
             stage = STAGE_LOGGER;
@@ -180,7 +181,8 @@ public class LifecycleHelper
             {
                 notice( name, stage );
 
-                ( (InstrumentManageable)object ).setInstrumentManager( instrumentManager );
+                ( (InstrumentManageable)object ).setInstrumentManager(
+                    instrumentManager );
             }
 
             //Contextualize stage
@@ -242,10 +244,12 @@ public class LifecycleHelper
             if( object instanceof Instrumentable )
             {
                 notice( name, stage );
-                final String instrumentableName = provider.createInstrumentableName( entry );
+                final String instrumentableName = provider.createInstrumentableName(
+                    entry );
                 final Instrumentable instrumentable = (Instrumentable)object;
                 instrumentable.setInstrumentableName( instrumentableName );
-                instrumentManager.registerInstrumentable( instrumentable, instrumentableName );
+                instrumentManager.registerInstrumentable( instrumentable,
+                                                          instrumentableName );
             }
 
             //Start stage
@@ -269,8 +273,8 @@ public class LifecycleHelper
     }
 
     /**
-     * Method to run a component through it's shutdown phase.
-     * Errors that occur during shutdown will be logged appropraitely.
+     * Method to run a component through it's shutdown phase. Errors that occur
+     * during shutdown will be logged appropraitely.
      *
      * @param name the name of the component
      * @param object the component to shutdown
@@ -327,7 +331,8 @@ public class LifecycleHelper
     }
 
     /**
-     * Utility method to report that a lifecycle stage is about to be processed.
+     * Utility method to report that a lifecycle stage is about to be
+     * processed.
      *
      * @param name the name of component that is the subject of the notice
      * @param stage the lifecycle processing stage
@@ -345,8 +350,8 @@ public class LifecycleHelper
     }
 
     /**
-     * Utility method to report that there was an error processing
-     * specified lifecycle stage.
+     * Utility method to report that there was an error processing specified
+     * lifecycle stage.
      *
      * @param name the name of component that caused failure
      * @param stage the lefecycle stage
@@ -367,9 +372,9 @@ public class LifecycleHelper
     }
 
     /**
-     * Utility method to report that there was an error processing
-     * specified lifecycle stage. It will also re-throw an exception
-     * with a better error message.
+     * Utility method to report that there was an error processing specified
+     * lifecycle stage. It will also re-throw an exception with a better error
+     * message.
      *
      * @param name the name of block that caused failure
      * @param stage the stage

@@ -101,13 +101,13 @@ import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
 import org.realityforge.extension.Extension;
 
 /**
- * <p>Interface used to contain "Optional Packages" (formerly known as
- * "Standard Extensions"). It is assumed that each "Optional Package" is
- * represented by a single file on the file system. This Repository searches
- * a path to find the Optional Packages.</p>
+ * <p>Interface used to contain "Optional Packages" (formerly known as "Standard
+ * Extensions"). It is assumed that each "Optional Package" is represented by a
+ * single file on the file system. This Repository searches a path to find the
+ * Optional Packages.</p>
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-10-16 14:45:45 $
+ * @author Peter Donald
+ * @version $Revision: 1.5 $ $Date: 2003-11-29 13:44:19 $
  * @see OptionalPackage
  * @see ExtensionManager
  */
@@ -116,24 +116,18 @@ public class DefaultExtensionManager
 {
     private static final boolean DEBUG = false;
 
-    /**
-     * separator used to separate path elements in a string.
-     */
+    /** separator used to separate path elements in a string. */
     private static final String SEPARATOR = "|";
 
-    /**
-     * Map between files and {@link OptionalPackage} objects.
-     */
+    /** Map between files and {@link OptionalPackage} objects. */
     private final Map m_packages = new HashMap();
 
-    /**
-     * The set of directories in which to look for Optional Packages
-     */
+    /** The set of directories in which to look for Optional Packages */
     private File[] m_path;
 
     /**
-     * Flag set when it is necessary to scan paths to
-     * build "Optional Package" list
+     * Flag set when it is necessary to scan paths to build "Optional Package"
+     * list
      */
     private boolean m_needToScan;
 
@@ -148,7 +142,8 @@ public class DefaultExtensionManager
     /**
      * Construct a package repository with path.
      *
-     * @param path The set of directories in which to look for Optional Packages
+     * @param path The set of directories in which to look for Optional
+     * Packages
      */
     public DefaultExtensionManager( final File[] path )
     {
@@ -156,10 +151,8 @@ public class DefaultExtensionManager
     }
 
     /**
-     * Return an array of path elements where each
-     * element in array represents a directory
-     * in which the ExtensionManager will look
-     * for Extensions.
+     * Return an array of path elements where each element in array represents a
+     * directory in which the ExtensionManager will look for Extensions.
      *
      * @return the list of paths to search in
      */
@@ -169,17 +162,17 @@ public class DefaultExtensionManager
     }
 
     /**
-     * Return all the {@link OptionalPackage}s that satisfy specified
-     * {@link Extension}. It is expected that this {@link Extension}
-     * object will be one retrieved via getLocalExtension() method. If the
-     * specified {@link Extension} is not local then <code>null</code>
-     * is returned.
+     * Return all the {@link OptionalPackage}s that satisfy specified {@link
+     * Extension}. It is expected that this {@link Extension} object will be one
+     * retrieved via getLocalExtension() method. If the specified {@link
+     * Extension} is not local then <code>null</code> is returned.
      *
      * @param extension the extension to search for
-     * @return an array of optional packages that satisfy the extension
-     *         (and the extensions dependencies)
+     * @return an array of optional packages that satisfy the extension (and the
+     *         extensions dependencies)
      */
-    public synchronized OptionalPackage[] getOptionalPackages( final Extension extension )
+    public synchronized OptionalPackage[] getOptionalPackages(
+        final Extension extension )
     {
         if( m_needToScan )
         {
@@ -187,13 +180,15 @@ public class DefaultExtensionManager
         }
 
         final ArrayList results = new ArrayList();
-        final ArrayList candidates = (ArrayList)m_packages.get( extension.getExtensionName() );
+        final ArrayList candidates = (ArrayList)m_packages.get(
+            extension.getExtensionName() );
         if( null != candidates )
         {
             final int size = candidates.size();
             for( int i = 0; i < size; i++ )
             {
-                final OptionalPackage optionalPackage = (OptionalPackage)candidates.get( i );
+                final OptionalPackage optionalPackage = (OptionalPackage)candidates.get(
+                    i );
                 final Extension[] extensions = optionalPackage.getAvailableExtensions();
 
                 for( int j = 0; j < extensions.length; j++ )
@@ -228,7 +223,8 @@ public class DefaultExtensionManager
             final int size = list.size();
             for( int i = 0; i < size; i++ )
             {
-                final OptionalPackage optionalPackage = (OptionalPackage)list.get( i );
+                final OptionalPackage optionalPackage = (OptionalPackage)list.get(
+                    i );
                 if( !packages.contains( optionalPackage ) )
                 {
                     packages.add( optionalPackage );
@@ -236,7 +232,8 @@ public class DefaultExtensionManager
             }
         }
 
-        return (OptionalPackage[])packages.toArray( new OptionalPackage[ packages.size() ] );
+        return (OptionalPackage[])packages.toArray(
+            new OptionalPackage[ packages.size() ] );
     }
 
     /**
@@ -264,8 +261,8 @@ public class DefaultExtensionManager
     }
 
     /**
-     * Add path elements to repository search path.
-     * Note that each path element is separated by a '|' character.
+     * Add path elements to repository search path. Note that each path element
+     * is separated by a '|' character.
      *
      * @param pathString the path elements to add to repository search path
      */
@@ -276,8 +273,8 @@ public class DefaultExtensionManager
     }
 
     /**
-     * Set the path for the Repository.
-     * Note thart each path element is separated by a '|' character.
+     * Set the path for the Repository. Note thart each path element is
+     * separated by a '|' character.
      *
      * @param pathString the list of directories in which to search
      */
@@ -311,10 +308,9 @@ public class DefaultExtensionManager
     }
 
     /**
-     * Scan the path for this repository and reload all
-     * the "Optional Packages" found in the path.
-     * All of the old Extensions/Optional Packages will
-     * be removed.
+     * Scan the path for this repository and reload all the "Optional Packages"
+     * found in the path. All of the old Extensions/Optional Packages will be
+     * removed.
      */
     protected final synchronized void scanPath()
     {
@@ -327,9 +323,8 @@ public class DefaultExtensionManager
     }
 
     /**
-     * Utility method to scan a directory for
-     * all jar fi;les in directory and add them as
-     * OptionalPackages.
+     * Utility method to scan a directory for all jar fi;les in directory and
+     * add them as OptionalPackages.
      *
      * @param directory the directory to scan
      */
@@ -367,13 +362,16 @@ public class DefaultExtensionManager
 
             try
             {
-                final OptionalPackage optionalPackage = getOptionalPackage( file );
+                final OptionalPackage optionalPackage = getOptionalPackage(
+                    file );
                 cacheOptionalPackage( optionalPackage );
             }
             catch( final IOException ioe )
             {
                 final String message =
-                    "Skipping " + file + " as it could not be loaded " +
+                    "Skipping " +
+                    file +
+                    " as it could not be loaded " +
                     "due to " + ioe;
                 debug( message );
             }
@@ -390,13 +388,14 @@ public class DefaultExtensionManager
     }
 
     /**
-     * Add OptionalPackage to internal cache of Optional Packages.
-     * Note that this method is only protected so that unit tests can sub-class
-     * and add entries to PackageRepository by calling this method.
+     * Add OptionalPackage to internal cache of Optional Packages. Note that
+     * this method is only protected so that unit tests can sub-class and add
+     * entries to PackageRepository by calling this method.
      *
      * @param optionalPackage the OptionalPackage to be added to repository
      */
-    protected final synchronized void cacheOptionalPackage( final OptionalPackage optionalPackage )
+    protected final synchronized void cacheOptionalPackage(
+        final OptionalPackage optionalPackage )
     {
         m_needToScan = false;
 
@@ -407,7 +406,8 @@ public class DefaultExtensionManager
         }
 
         final Extension extension = optionalPackage.getAvailableExtensions()[ 0 ];
-        ArrayList candidates = (ArrayList)m_packages.get( extension.getExtensionName() );
+        ArrayList candidates = (ArrayList)m_packages.get(
+            extension.getExtensionName() );
         if( null == candidates )
         {
             candidates = new ArrayList();
@@ -461,8 +461,8 @@ public class DefaultExtensionManager
     }
 
     /**
-     * Get Canonical or failing that the absolute file
-     * for every specified file.
+     * Get Canonical or failing that the absolute file for every specified
+     * file.
      *
      * @param path the files that make up path
      * @return the resolved path
@@ -478,8 +478,7 @@ public class DefaultExtensionManager
     }
 
     /**
-     * Get Canonical or failing that the absolute file
-     * for specified file.
+     * Get Canonical or failing that the absolute file for specified file.
      *
      * @param file the file
      * @return the resolved file
@@ -515,8 +514,8 @@ public class DefaultExtensionManager
     }
 
     /**
-     * Make sure specified path element is valid.
-     * The elements should exist and should be a directory.
+     * Make sure specified path element is valid. The elements should exist and
+     * should be a directory.
      *
      * @param file the path element
      */
@@ -524,7 +523,8 @@ public class DefaultExtensionManager
     {
         if( !file.exists() || !file.isDirectory() )
         {
-            final String message = "path element " + file +
+            final String message = "path element " +
+                file +
                 " must exist and must be a directory";
             throw new IllegalArgumentException( message );
         }
@@ -570,7 +570,8 @@ public class DefaultExtensionManager
      */
     private static String[] split( final String string, final String onToken )
     {
-        final StringTokenizer tokenizer = new StringTokenizer( string, onToken );
+        final StringTokenizer tokenizer = new StringTokenizer( string,
+                                                               onToken );
         final String[] result = new String[ tokenizer.countTokens() ];
 
         for( int i = 0; i < result.length; i++ )

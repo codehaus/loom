@@ -10,9 +10,8 @@ package org.jcontainer.loom.components.embeddor;
 import java.util.Observable;
 
 /**
- *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-10-05 08:10:20 $
+ * @author Peter Donald
+ * @version $Revision: 1.2 $ $Date: 2003-11-29 13:44:16 $
  */
 class EmbeddorObservable
     extends Observable

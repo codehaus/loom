@@ -89,34 +89,33 @@ package org.jcontainer.loom.components.extensions.pkgmgr;
 import org.realityforge.extension.Extension;
 
 /**
- * <p>Interface used to store a collection of "Optional Packages"
- * (formerly known as "Standard Extensions"). It is assumed that each
- * "Optional Package" is represented by a single file on the file system.</p>
+ * <p>Interface used to store a collection of "Optional Packages" (formerly
+ * known as "Standard Extensions"). It is assumed that each "Optional Package"
+ * is represented by a single file on the file system.</p>
  *
  * <p>This repository is responsible for storing the local repository of
- * packages. The method used to locate packages on local filesystem
- * and install packages is not specified.</p>
+ * packages. The method used to locate packages on local filesystem and install
+ * packages is not specified.</p>
  *
  * <p>For more information about optional packages, see the document
  * <em>Optional Package Versioning</em> in the documentation bundle for your
- * Java2 Standard Edition package, in file
- * <code>guide/extensions/versioning.html</code></p>.
+ * Java2 Standard Edition package, in file <code>guide/extensions/versioning.html</code></p>.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-09-02 04:36:58 $
+ * @author Peter Donald
+ * @version $Revision: 1.5 $ $Date: 2003-11-29 13:44:19 $
  */
 public interface ExtensionManager
 {
     /**
-     * Return all the {@link OptionalPackage}s that satisfy specified
-     * {@link Extension}. The array must be sorted with the packages that
-     * "best" satisfy the Extension earlier in the array. Note that the
-     * definition of "best" is implementation dependent.
+     * Return all the {@link OptionalPackage}s that satisfy specified {@link
+     * Extension}. The array must be sorted with the packages that "best"
+     * satisfy the Extension earlier in the array. Note that the definition of
+     * "best" is implementation dependent.
      *
-     * @param extension Description of the extension that needs to be provided by
-     *                  optional packages
-     * @return an array of optional packages that satisfy extension and
-     *         the extensions dependencies
+     * @param extension Description of the extension that needs to be provided
+     * by optional packages
+     * @return an array of optional packages that satisfy extension and the
+     *         extensions dependencies
      * @see OptionalPackage
      * @see Extension
      */

@@ -11,15 +11,16 @@ import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.DefaultConfiguration;
 
 /**
- * Utility class to convert DNA Configuration objects
- * into Avalon Configuraiton objects.
+ * Utility class to convert DNA Configuration objects into Avalon Configuraiton
+ * objects.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-10-16 05:48:07 $
+ * @author Peter Donald
+ * @version $Revision: 1.4 $ $Date: 2003-11-29 13:44:27 $
  */
 public class ConfigurationConverter
 {
-    public static Configuration toConfiguration( final org.jcontainer.dna.Configuration configuration )
+    public static Configuration toConfiguration(
+        final org.jcontainer.dna.Configuration configuration )
     {
         final DefaultConfiguration result =
             new DefaultConfiguration( configuration.getName(),

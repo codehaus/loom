@@ -114,16 +114,16 @@ import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
 /**
- * The ServerKernel is the core of the container system.
- * The kernel is responsible for orchestrating low level services
- * such as loading, configuring and destroying blocks. It also
- * gives access to basic facilities such as scheduling sub-systems,
- * protected execution contexts, naming and directory services etc.
+ * The ServerKernel is the core of the container system. The kernel is
+ * responsible for orchestrating low level services such as loading, configuring
+ * and destroying blocks. It also gives access to basic facilities such as
+ * scheduling sub-systems, protected execution contexts, naming and directory
+ * services etc.
  *
  * Note that no facilities are available until after the Kernel has been
  * configured and initialized.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @author Peter Donald
  * @author <a href="mailto:leosimons@apache.org">Leo Simons</a>
  * @dna.component
  * @mx.component
@@ -169,25 +169,30 @@ public class DefaultKernel
     public void compose( final ResourceLocator locator )
         throws MissingResourceException
     {
-        m_systemManager = (SystemManager)locator.lookup( SystemManager.class.getName() );
+        m_systemManager =
+        (SystemManager)locator.lookup( SystemManager.class.getName() );
         m_repository = (ConfigurationInterceptor)locator.
             lookup( ConfigurationInterceptor.class.getName() );
-        m_validator = (ConfigurationValidator)locator.lookup( ConfigurationValidator.class.getName() );
-        m_instrumentManager = (InstrumentManager)locator.lookup( InstrumentManager.class.getName() );
+        m_validator =
+        (ConfigurationValidator)locator.lookup(
+            ConfigurationValidator.class.getName() );
+        m_instrumentManager =
+        (InstrumentManager)locator.lookup( InstrumentManager.class.getName() );
     }
 
     public void configure( final Configuration configuration )
         throws ConfigurationException
     {
         m_addInvalidApplications =
-            configuration.getChild( "add-invalid-applications" ).getValueAsBoolean( false );
+        configuration.getChild( "add-invalid-applications" ).getValueAsBoolean(
+            false );
     }
 
     public void initialize()
         throws Exception
     {
         m_applicationManager =
-            m_systemManager.getSubContext( null, "application" );
+        m_systemManager.getSubContext( null, "application" );
     }
 
     public void dispose()
@@ -202,14 +207,16 @@ public class DefaultKernel
             }
             catch( final Exception e )
             {
-                final String message = REZ.format( "kernel.error.entry.dispose", names[ i ] );
+                final String message = REZ.format(
+                    "kernel.error.entry.dispose", names[ i ] );
                 getLogger().warn( message, e );
             }
         }
     }
 
     /**
-     * Lock the kernel, temporarily preserving the list of applications running in the container
+     * Lock the kernel, temporarily preserving the list of applications running
+     * in the container
      */
     public void lock()
     {
@@ -226,7 +233,8 @@ public class DefaultKernel
     }
 
     /**
-     * Unlock the kernel, restoring the list of applications to be the current active list
+     * Unlock the kernel, restoring the list of applications to be the current
+     * active list
      */
     public void unlock()
     {
@@ -236,18 +244,21 @@ public class DefaultKernel
 
             if( m_lockCount < 0 )
             {
-                throw new IllegalStateException( REZ.getString( "kernel.error.negativelock" ) );
+                throw new IllegalStateException(
+                    REZ.getString( "kernel.error.negativelock" ) );
             }
 
             if( getLogger().isDebugEnabled() )
             {
-                getLogger().debug( "Kernel unlocked [count:" + m_lockCount + "]" );
+                getLogger().debug(
+                    "Kernel unlocked [count:" + m_lockCount + "]" );
             }
         }
     }
 
     /**
-     * @mx.attribute description="the list of applications running in the container"
+     * @mx.attribute description="the list of applications running in the
+     * container"
      */
     public String[] getApplicationNames()
     {
@@ -280,7 +291,8 @@ public class DefaultKernel
     }
 
     /**
-     * Create and initialize the application instance if it is not already initialized.
+     * Create and initialize the application instance if it is not already
+     * initialized.
      *
      * @param entry the entry for application
      * @throws Exception if an error occurs
@@ -301,7 +313,8 @@ public class DefaultKernel
                     final Application newApp = new DefaultApplication();
                     final Logger childLogger =
                         getLogger().getChildLogger( name );
-                    org.jcontainer.dna.impl.ContainerUtil.enableLogging( newApp, childLogger );
+                    org.jcontainer.dna.impl.ContainerUtil.enableLogging(
+                        newApp, childLogger );
 
                     final ApplicationContext context =
                         createApplicationContext( entry );
@@ -387,12 +400,13 @@ public class DefaultKernel
         }
     }
 
-    public void addApplication( final org.jcontainer.loom.components.util.profile.PartitionProfile profile,
-                                final File homeDirectory,
-                                final File workDirectory,
-                                final ClassLoader classLoader,
-                                final LoggerStore store,
-                                final Map classloaders )
+    public void addApplication(
+        final org.jcontainer.loom.components.util.profile.PartitionProfile profile,
+        final File homeDirectory,
+        final File workDirectory,
+        final ClassLoader classLoader,
+        final LoggerStore store,
+        final Map classloaders )
         throws Exception
     {
 
@@ -409,7 +423,8 @@ public class DefaultKernel
         }
         catch( final Exception e )
         {
-            final String message = REZ.format( "kernel.error.entry.start", name );
+            final String message = REZ.format( "kernel.error.entry.start",
+                                               name );
             getLogger().warn( message, e );
             throw e;
         }
@@ -428,8 +443,11 @@ public class DefaultKernel
                                            entry.getLoggerStore(),
                                            entry.getClassLoaders() );
 
-        org.jcontainer.dna.impl.ContainerUtil.enableLogging( context, createContextLogger( name ) );
-        org.jcontainer.dna.impl.ContainerUtil.compose( context, createResourceLocator() );
+        org.jcontainer.dna.impl.ContainerUtil.enableLogging( context,
+                                                             createContextLogger(
+                                                                 name ) );
+        org.jcontainer.dna.impl.ContainerUtil.compose( context,
+                                                       createResourceLocator() );
         org.jcontainer.dna.impl.ContainerUtil.initialize( context );
         return context;
     }
@@ -452,9 +470,12 @@ public class DefaultKernel
     {
         final DefaultResourceLocator serviceManager = new DefaultResourceLocator();
         serviceManager.put( SystemManager.class.getName(), m_systemManager );
-        serviceManager.put( ConfigurationInterceptor.class.getName(), m_repository );
-        serviceManager.put( ConfigurationValidator.class.getName(), m_validator );
-        serviceManager.put( InstrumentManager.class.getName(), m_instrumentManager );
+        serviceManager.put( ConfigurationInterceptor.class.getName(),
+                            m_repository );
+        serviceManager.put( ConfigurationValidator.class.getName(),
+                            m_validator );
+        serviceManager.put( InstrumentManager.class.getName(),
+                            m_instrumentManager );
         serviceManager.put( Kernel.class.getName(), this );
         serviceManager.makeReadOnly();
         return serviceManager;
@@ -462,7 +483,8 @@ public class DefaultKernel
 
     /**
      * @mx.operation description="Removes the application from the container"
-     * @mx.parameter name="name" description="the name of application to remove"
+     * @mx.parameter name="name" description="the name of application to
+     * remove"
      */
     public void removeApplication( final String name )
         throws Exception

@@ -13,7 +13,7 @@ import org.jcontainer.dna.ConfigurationException;
 /**
  * Repository from which all configuration data is retrieved.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @author Peter Donald
  */
 public interface ConfigurationInterceptor
 {
@@ -23,7 +23,6 @@ public interface ConfigurationInterceptor
      * @param application Application name
      * @param block Block name to store configuration for
      * @param configuration information to store.
-     *
      * @throws ConfigurationException if configuration could not be stored
      */
     Configuration processConfiguration( String application,

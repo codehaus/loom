@@ -86,15 +86,15 @@
  */
 package org.jcontainer.loom.components.extension;
 
-import org.realityforge.extension.Extension;
 import org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager;
 import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
+import org.realityforge.extension.Extension;
 
 /**
  * a class to help test sorting of ExtensionManager.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-10-14 10:31:19 $
+ * @author Peter Donald
+ * @version $Revision: 1.5 $ $Date: 2003-11-29 13:44:30 $
  */
 class TestExtensionManager
     implements ExtensionManager

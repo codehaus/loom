@@ -8,59 +8,41 @@
 package org.jcontainer.loom.components.util.info;
 
 /**
- * A descriptor that describes dependency information for
- * a particular Component. This class contains information
- * about;
- * <ul>
- *   <li>key: the name component uses to look up dependency</li>
- *   <li>type: the class/interface that the dependency must provide</li>
- * </ul>
+ * A descriptor that describes dependency information for a particular
+ * Component. This class contains information about; <ul> <li>key: the name
+ * component uses to look up dependency</li> <li>type: the class/interface that
+ * the dependency must provide</li> </ul>
  *
- * <p>Also associated with each dependency is a set of arbitrary
- * Attributes that can be used to store extra information
- * about dependency.</p>
+ * <p>Also associated with each dependency is a set of arbitrary Attributes that
+ * can be used to store extra information about dependency.</p>
  *
- * <p>Possible uses for the Attributes are to declare container
- * specific constraints of component. For example a dependency on
- * a Corba ORB may also require that the Corba ORB contain the
- * TimeServer and PersistenceStateService at initialization. Or it
- * may require that the componenet be multi-thread safe or that
- * it is persistent etc. These are all container specific
- * demands.</p>
+ * <p>Possible uses for the Attributes are to declare container specific
+ * constraints of component. For example a dependency on a Corba ORB may also
+ * require that the Corba ORB contain the TimeServer and PersistenceStateService
+ * at initialization. Or it may require that the componenet be multi-thread safe
+ * or that it is persistent etc. These are all container specific demands.</p>
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-10-16 14:45:46 $
+ * @author Peter Donald
+ * @version $Revision: 1.2 $ $Date: 2003-11-29 13:44:23 $
  */
 public final class DependencyDescriptor
 {
-    /**
-     * Constant with empty set of dependencys.
-     */
+    /** Constant with empty set of dependencys. */
     public static final DependencyDescriptor[] EMPTY_SET = new DependencyDescriptor[ 0 ];
 
-    /**
-     * The postfix indicating an array type.
-     */
+    /** The postfix indicating an array type. */
     public static final String ARRAY_POSTFIX = "[]";
 
-    /**
-     * The postfix indicating a "Map" type.
-     */
+    /** The postfix indicating a "Map" type. */
     public static final String MAP_POSTFIX = "{}";
 
-    /**
-     * The name the component uses to lookup dependency.
-     */
+    /** The name the component uses to lookup dependency. */
     private final String m_key;
 
-    /**
-     * The service class/interface that the dependency must provide.
-     */
+    /** The service class/interface that the dependency must provide. */
     private final String m_type;
 
-    /**
-     * True if dependency is optional, false otherwise.
-     */
+    /** True if dependency is optional, false otherwise. */
     private final boolean m_optional;
 
     /**
@@ -95,11 +77,11 @@ public final class DependencyDescriptor
     }
 
     /**
-     * Return the service class/interface name that describes the
-     * dependency must fulfilled by a provider.
+     * Return the service class/interface name that describes the dependency
+     * must fulfilled by a provider.
      *
      * @return a reference to service descriptor that describes the fulfillment
-     *  obligations that must be met by a service provider.
+     *         obligations that must be met by a service provider.
      */
     public String getType()
     {
@@ -137,9 +119,8 @@ public final class DependencyDescriptor
     }
 
     /**
-     * Return the type of component type if the service
-     * is an array or Map Service. Otherwise just return the
-     * name of service.
+     * Return the type of component type if the service is an array or Map
+     * Service. Otherwise just return the name of service.
      *
      * @return the Service component type
      */

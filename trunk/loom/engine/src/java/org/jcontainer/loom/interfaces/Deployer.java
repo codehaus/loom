@@ -91,11 +91,11 @@ import java.net.URL;
 /**
  * A Deployer is responsible for taking a URL (ie a jar/war/ear) and deploying
  * it to a particular "location". "location" means different things for
- * different containers. For a servlet container it may mean the place to
- * mount servlet (ie /myapp --> /myapp/Cocoon.xml is mapping cocoon servlet to
- * /myapp context).
+ * different containers. For a servlet container it may mean the place to mount
+ * servlet (ie /myapp --> /myapp/Cocoon.xml is mapping cocoon servlet to /myapp
+ * context).
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @author Peter Donald
  */
 public interface Deployer
 {

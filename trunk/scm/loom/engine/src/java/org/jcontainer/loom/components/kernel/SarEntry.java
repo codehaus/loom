@@ -92,9 +92,10 @@ import org.jcomponent.loggerstore.LoggerStore;
 import org.jcontainer.loom.interfaces.Application;
 
 /**
- * This is the structure describing each server application before it is loaded.
+ * This is the structure describing each server application before it is
+ * loaded.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @author Peter Donald
  */
 final class SarEntry
 {
@@ -106,12 +107,13 @@ final class SarEntry
     private final Map m_classLoaders;
     private Application m_application;
 
-    protected SarEntry( final org.jcontainer.loom.components.util.profile.PartitionProfile profile,
-                        final File homeDirectory,
-                        final File workDirectory,
-                        final ClassLoader classLoader,
-                        final LoggerStore store,
-                        final Map classLoaders )
+    protected SarEntry(
+        final org.jcontainer.loom.components.util.profile.PartitionProfile profile,
+        final File homeDirectory,
+        final File workDirectory,
+        final ClassLoader classLoader,
+        final LoggerStore store,
+        final Map classLoaders )
     {
         if( null == profile )
         {

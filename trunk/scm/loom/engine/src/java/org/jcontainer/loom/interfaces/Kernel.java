@@ -92,7 +92,7 @@ import org.jcomponent.loggerstore.LoggerStore;
 import org.jcontainer.loom.components.util.profile.PartitionProfile;
 
 /**
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @author Peter Donald
  */
 public interface Kernel
 {
@@ -129,12 +129,14 @@ public interface Kernel
     String[] getApplicationNames();
 
     /**
-     * Lock the kernel, temporarily preserving the list of applications running in the container
+     * Lock the kernel, temporarily preserving the list of applications running
+     * in the container
      */
     void lock();
 
     /**
-     * Unlock the kernel, restoring the list of applications to be the current active list
+     * Unlock the kernel, restoring the list of applications to be the current
+     * active list
      */
     void unlock();
 }

@@ -108,11 +108,10 @@ import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
 /**
- * This is the basic container of blocks. A server application
- * represents an aggregation of blocks that act together to form
- * an application.
+ * This is the basic container of blocks. A server application represents an
+ * aggregation of blocks that act together to form an application.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @author Peter Donald
  * @author Leo Simons
  * @dna.component
  * @mx.component
@@ -134,19 +133,13 @@ public final class DefaultApplication
 
     private final HashMap m_entries = new HashMap();
 
-    /**
-     * ResourceProvider for blocks.
-     */
+    /** ResourceProvider for blocks. */
     private BlockResourceProvider m_blockAccessor;
 
-    /**
-     * Object to support notification of ApplicationListeners.
-     */
+    /** Object to support notification of ApplicationListeners. */
     private final ListenerSupport m_listenerSupport = new ListenerSupport();
 
-    /**
-     * Object to support running objects through lifecycle phases.
-     */
+    /** Object to support running objects through lifecycle phases. */
     private final LifecycleHelper m_lifecycleHelper = new LifecycleHelper();
 
     ///////////////////////
@@ -168,13 +161,15 @@ public final class DefaultApplication
         }
         catch( final Throwable t )
         {
-            getLogger().info( "Exception loading listeners:" + t.getMessage() + "\n", t );
+            getLogger().info(
+                "Exception loading listeners:" + t.getMessage() + "\n", t );
             throw new LoomException( t.getMessage(), t );
         }
         try
         {
             final PartitionProfile partition =
-                m_context.getPartitionProfile().getPartition( ContainerConstants.BLOCK_PARTITION );
+                m_context.getPartitionProfile().getPartition(
+                    ContainerConstants.BLOCK_PARTITION );
             final ComponentProfile[] blocks = partition.getComponents();
             for( int i = 0; i < blocks.length; i++ )
             {
@@ -188,7 +183,8 @@ public final class DefaultApplication
         }
         catch( final Throwable t )
         {
-            getLogger().info( "exception while starting:" + t.getMessage() + "\n" );
+            getLogger().info(
+                "exception while starting:" + t.getMessage() + "\n" );
             t.printStackTrace();
             throw new LoomException( t.getMessage(), t );
         }
@@ -204,7 +200,8 @@ public final class DefaultApplication
         }
         catch( final Throwable t )
         {
-            getLogger().info( "Exception stopping:" + t.getMessage() + "\n", t );
+            getLogger().info( "Exception stopping:" + t.getMessage() + "\n",
+                              t );
         }
 
         m_running = false;
@@ -222,7 +219,8 @@ public final class DefaultApplication
     }
 
     /**
-     * @mx.attribute description="the names of the blocks that compose this Application"
+     * @mx.attribute description="the names of the blocks that compose this
+     * Application"
      */
     public String[] getBlockNames()
     {
@@ -259,7 +257,8 @@ public final class DefaultApplication
     }
 
     /**
-     * @mx.attribute description="the string used to describe the application in the UI."
+     * @mx.attribute description="the string used to describe the application in
+     * the UI."
      */
     public String getDescription()
     {
@@ -275,7 +274,8 @@ public final class DefaultApplication
     }
 
     /**
-     * @mx.attribute description="True if the application is running or false otherwise."
+     * @mx.attribute description="True if the application is running or false
+     * otherwise."
      */
     public boolean isRunning()
     {
@@ -290,8 +290,10 @@ public final class DefaultApplication
         throws Exception
     {
         //Setup thread context for calling visitors
-        final ClassLoader loader = Thread.currentThread().getContextClassLoader();
-        Thread.currentThread().setContextClassLoader( m_context.getClassLoader() );
+        final ClassLoader loader = Thread.currentThread()
+            .getContextClassLoader();
+        Thread.currentThread().setContextClassLoader(
+            m_context.getClassLoader() );
 
         try
         {
@@ -304,9 +306,9 @@ public final class DefaultApplication
     }
 
     /**
-     * Actually perform loading of each individual Listener.
-     * Note that by this stage it is assumed that the Thread Context
-     * has already been setup correctly.
+     * Actually perform loading of each individual Listener. Note that by this
+     * stage it is assumed that the Thread Context has already been setup
+     * correctly.
      */
     private void doLoadBlockListeners()
         throws Exception
@@ -323,7 +325,10 @@ public final class DefaultApplication
             {
                 final String name = listeners[ i ].getTemplate().getName();
                 final String message =
-                    REZ.format( "bad-listener", "startup", name, e.getMessage() );
+                    REZ.format( "bad-listener",
+                                "startup",
+                                name,
+                                e.getMessage() );
                 getLogger().error( message, e );
                 throw e;
             }
@@ -338,10 +343,9 @@ public final class DefaultApplication
     }
 
     /**
-     * Run a phase for application.
-     * Each phase transitions application into new state and processes
-     * all the blocks to make sure they are in that state aswell.
-     * Exceptions leave the blocks in an indeterminate state.
+     * Run a phase for application. Each phase transitions application into new
+     * state and processes all the blocks to make sure they are in that state
+     * aswell. Exceptions leave the blocks in an indeterminate state.
      *
      * @param name the name of phase (for logging purposes)
      * @throws Exception if an error occurs
@@ -350,8 +354,10 @@ public final class DefaultApplication
         throws Exception
     {
         //Setup thread context for calling visitors
-        final ClassLoader loader = Thread.currentThread().getContextClassLoader();
-        Thread.currentThread().setContextClassLoader( m_context.getClassLoader() );
+        final ClassLoader loader = Thread.currentThread()
+            .getContextClassLoader();
+        Thread.currentThread().setContextClassLoader(
+            m_context.getClassLoader() );
 
         try
         {
@@ -364,9 +370,8 @@ public final class DefaultApplication
     }
 
     /**
-     * Actually run applications phas.
-     * By this methods calling it is assumed that Thread Context
-     * has already been setup.
+     * Actually run applications phas. By this methods calling it is assumed
+     * that Thread Context has already been setup.
      *
      * @param name the name of phase (for logging purposes)
      * @throws Exception if an error occurs
@@ -376,7 +381,8 @@ public final class DefaultApplication
     {
         final ComponentProfile[] blocks =
             getComponentsInPartition( ContainerConstants.BLOCK_PARTITION );
-        final String[] order = DependencyGraph.walkGraph( PHASE_STARTUP == name, blocks );
+        final String[] order = DependencyGraph.walkGraph(
+            PHASE_STARTUP == name, blocks );
 
         //Log message describing the number of blocks
         //the phase in and the order in which they will be
@@ -397,7 +403,8 @@ public final class DefaultApplication
             final PartitionProfile partition = m_context.getPartitionProfile();
             final File homeDirectory = m_context.getHomeDirectory();
             final SarMetaData sarMetaData =
-                ComponentMetaDataConverter.toSarMetaData( partition, homeDirectory );
+                ComponentMetaDataConverter.toSarMetaData( partition,
+                                                          homeDirectory );
             m_listenerSupport.fireApplicationStartingEvent( sarMetaData );
         }
         else
@@ -415,7 +422,9 @@ public final class DefaultApplication
             //Log message saying we are processing block
             if( getLogger().isDebugEnabled() )
             {
-                final String message = REZ.format( "process-block", block, name );
+                final String message = REZ.format( "process-block",
+                                                   block,
+                                                   name );
                 getLogger().debug( message );
             }
 
@@ -434,7 +443,10 @@ public final class DefaultApplication
             catch( final Exception e )
             {
                 final String message =
-                    REZ.format( "app.error.run-phase", name, block, e.getMessage() );
+                    REZ.format( "app.error.run-phase",
+                                name,
+                                block,
+                                e.getMessage() );
                 getLogger().error( message, e );
                 m_listenerSupport.applicationFailure( e );
                 throw e;
@@ -443,7 +455,9 @@ public final class DefaultApplication
             //Log message saying we have processed block
             if( getLogger().isDebugEnabled() )
             {
-                final String message = REZ.format( "processed-block", block, name );
+                final String message = REZ.format( "processed-block",
+                                                   block,
+                                                   name );
                 getLogger().debug( message );
             }
         }
@@ -462,16 +476,16 @@ public final class DefaultApplication
     }
 
     /**
-     * Method to run a Block through it's startup phase.
-     * This will involve notification of {@link ApplicationListener}
-     * objects, creation of the Block/Block Proxy object, calling the startup
-     * Avalon Lifecycle methods and updating State property of BlockEntry.
-     * Errors that occur during shutdown will be logged appropriately and
-     * cause exceptions with useful messages to be raised.
+     * Method to run a Block through it's startup phase. This will involve
+     * notification of {@link ApplicationListener} objects, creation of the
+     * Block/Block Proxy object, calling the startup Avalon Lifecycle methods
+     * and updating State property of BlockEntry. Errors that occur during
+     * shutdown will be logged appropriately and cause exceptions with useful
+     * messages to be raised.
      *
      * @param entry the entry containing Block
-     * @throws Exception if an error occurs when block passes
-     *            through a specific lifecycle stage
+     * @throws Exception if an error occurs when block passes through a specific
+     * lifecycle stage
      */
     private void startup( final BlockEntry entry )
         throws Exception
@@ -488,11 +502,11 @@ public final class DefaultApplication
     }
 
     /**
-     * Method to run a Block through it's shutdown phase.
-     * This will involve notification of {@link ApplicationListener}
-     * objects, invalidating the proxy object, calling the shutdown
-     * Avalon Lifecycle methods and updating State property of BlockEntry.
-     * Errors that occur during shutdown will be logged appropraitely.
+     * Method to run a Block through it's shutdown phase. This will involve
+     * notification of {@link ApplicationListener} objects, invalidating the
+     * proxy object, calling the shutdown Avalon Lifecycle methods and updating
+     * State property of BlockEntry. Errors that occur during shutdown will be
+     * logged appropraitely.
      *
      * @param entry the entry containing Block
      */
@@ -528,8 +542,8 @@ public final class DefaultApplication
      * object if appropriate.
      *
      * @param profile the BlockListenerMetaData
-     * @throws Exception if an error occurs when listener passes
-     *            through a specific lifecycle stage
+     * @throws Exception if an error occurs when listener passes through a
+     * specific lifecycle stage
      */
     private void startupListener( final ComponentProfile profile )
         throws Exception
@@ -543,7 +557,8 @@ public final class DefaultApplication
         // However onky ApplicationListners can avail of block events.
         if( listener instanceof ApplicationListener )
         {
-            m_listenerSupport.addApplicationListener( (ApplicationListener)listener );
+            m_listenerSupport.addApplicationListener(
+                (ApplicationListener)listener );
         }
         else
         {

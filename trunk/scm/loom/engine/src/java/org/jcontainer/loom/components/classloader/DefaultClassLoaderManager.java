@@ -120,18 +120,17 @@ import org.realityforge.xmlpolicy.reader.PolicyReader;
 import org.w3c.dom.Element;
 
 /**
- * Component that creates and manages the {@link ClassLoader}
- * for an application loaded out of a <tt>.sar</tt> deployment.
+ * Component that creates and manages the {@link ClassLoader} for an application
+ * loaded out of a <tt>.sar</tt> deployment.
  *
- * <p>Currently it creates a policy based on the policy declaration
- * in the configuration. It then just creates a URLClassLoader and
- * populates it with the specified codebase {@link URL}s.</p>
+ * <p>Currently it creates a policy based on the policy declaration in the
+ * configuration. It then just creates a URLClassLoader and populates it with
+ * the specified codebase {@link URL}s.</p>
  *
- * <p>In the future this class will scan the manifests for "Optional
- * Packages" formely called "Extensions" which it will add to the
- * {@link ClassLoader}</p>
+ * <p>In the future this class will scan the manifests for "Optional Packages"
+ * formely called "Extensions" which it will add to the {@link ClassLoader}</p>
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @author Peter Donald
  * @see ClassLoaderManager
  */
 public class DefaultClassLoaderManager
@@ -139,37 +138,31 @@ public class DefaultClassLoaderManager
     implements ClassLoaderManager, Composable, Active
 {
     /**
-     * Constant for name of element that indicates custom
-     * classloader tree to define.
+     * Constant for name of element that indicates custom classloader tree to
+     * define.
      */
     private static final String CLASSLOADERS_ELEMENT = "classloaders";
 
     /**
-     * Component to manage "Optional Packages" aka
-     * Extensions to allow programs to declare dependencies
-     * on such extensions.
+     * Component to manage "Optional Packages" aka Extensions to allow programs
+     * to declare dependencies on such extensions.
      */
     private PackageManager m_packageManager;
 
     /**
-     * Parent ClassLoader for all applications
-     * aka as the "common" classloader.
+     * Parent ClassLoader for all applications aka as the "common" classloader.
      */
     private ClassLoader m_commonClassLoader;
 
-    /**
-     * The utility class used to verify {@link ClassLoaderMetaData} objects.
-     */
+    /** The utility class used to verify {@link ClassLoaderMetaData} objects. */
     private final ClassLoaderVerifier m_verifier = new ClassLoaderVerifier();
 
-    /**
-     * Utility class to build map of {@link ClassLoader} objects.
-     */
+    /** Utility class to build map of {@link ClassLoader} objects. */
     private final LoaderBuilder m_builder = new LoaderBuilder();
 
     /**
-     * Utility class to read {@link ClassLoaderSetMetaData} objects
-     * from XML trees.
+     * Utility class to read {@link ClassLoaderSetMetaData} objects from XML
+     * trees.
      */
     private final ClassLoaderSetReader m_reader = new ClassLoaderSetReader();
 
@@ -179,14 +172,10 @@ public class DefaultClassLoaderManager
      */
     private Map m_predefinedLoaders;
 
-    /**
-     * The contextdata used in interpolation of the policy configuration file.
-     */
+    /** The contextdata used in interpolation of the policy configuration file. */
     private final Map m_data = new HashMap();
 
-    /**
-     * The property expander that will expand properties in the policy configuraiton file.
-     */
+    /** The property expander that will expand properties in the policy configuraiton file. */
     private final PropertyExpander m_expander = new PropertyExpander();
 
     /**
@@ -224,26 +213,30 @@ public class DefaultClassLoaderManager
     }
 
     /**
-     * Create a {@link ClassLoader} for a specific application.
-     * See Class Javadoc for description of technique for creating
-     * {@link ClassLoader}.
+     * Create a {@link ClassLoader} for a specific application. See Class
+     * Javadoc for description of technique for creating {@link ClassLoader}.
      *
-     * @param environment the configuration "environment.xml" for the application
+     * @param environment the configuration "environment.xml" for the
+     * application
      * @param homeDirectory the base directory of application
      * @param workDirectory the work directory of application
      * @return the ClassLoader created
      * @throws Exception if an error occurs
      */
-    public ClassLoaderSet createClassLoaderSet( final Configuration environment,
-                                                final Map data,
-                                                final File homeDirectory,
-                                                final File workDirectory )
+    public ClassLoaderSet createClassLoaderSet(
+        final Configuration environment,
+        final Map data,
+        final File homeDirectory,
+        final File workDirectory )
         throws Exception
     {
         //Configure policy
         final Configuration policyConfig = environment.getChild( "policy" );
         final Policy policy =
-            configurePolicy( policyConfig, data, homeDirectory, workDirectory );
+            configurePolicy( policyConfig,
+                             data,
+                             homeDirectory,
+                             workDirectory );
 
         final ClassLoaderSetMetaData metaData =
             getLoaderMetaData( environment );
@@ -255,7 +248,9 @@ public class DefaultClassLoaderManager
                                    homeDirectory, workDirectory );
         setupLogger( resolver );
         final Map map =
-            m_builder.buildClassLoaders( metaData, resolver, m_predefinedLoaders );
+            m_builder.buildClassLoaders( metaData,
+                                         resolver,
+                                         m_predefinedLoaders );
         final ClassLoader defaultClassLoader =
             (ClassLoader)map.get( metaData.getDefault() );
         return new ClassLoaderSet( defaultClassLoader, map );
@@ -263,13 +258,14 @@ public class DefaultClassLoaderManager
 
     /**
      * Extract the {@link ClassLoaderMetaData} from the environment
-     * configuration. If no &lt;classloader/&gt; section is defined
-     * in the config file then a default metadata will be created.
+     * configuration. If no &lt;classloader/&gt; section is defined in the
+     * config file then a default metadata will be created.
      *
      * @param environment the environment configuration
      * @return the {@link ClassLoaderMetaData} object
      */
-    private ClassLoaderSetMetaData getLoaderMetaData( final Configuration environment )
+    private ClassLoaderSetMetaData getLoaderMetaData(
+        final Configuration environment )
         throws Exception
     {
         final boolean loaderDefined = isClassLoaderDefined( environment );
@@ -279,16 +275,17 @@ public class DefaultClassLoaderManager
         }
         else
         {
-            final Configuration loaderConfig = environment.getChild( CLASSLOADERS_ELEMENT );
+            final Configuration loaderConfig = environment.getChild(
+                CLASSLOADERS_ELEMENT );
             final Element element = ConfigurationUtil.toElement( loaderConfig );
             return m_reader.build( element );
         }
     }
 
     /**
-     * Create the default {@link ClassLoaderSetMetaData}. The
-     * default metadata includes all jars in the /SAR-INF/lib/ directory
-     * in addition to the /SAR-INF/classes/ directory.
+     * Create the default {@link ClassLoaderSetMetaData}. The default metadata
+     * includes all jars in the /SAR-INF/lib/ directory in addition to the
+     * /SAR-INF/classes/ directory.
      *
      * @return the default {@link ClassLoaderSetMetaData} object
      */
@@ -306,9 +303,14 @@ public class DefaultClassLoaderManager
         final Extension[] extensions = new Extension[ 0 ];
         final FileSetMetaData[] filesets = new FileSetMetaData[]{fileSet};
         final ClassLoaderMetaData loader =
-            new ClassLoaderMetaData( name, parent, entrys, extensions, filesets );
+            new ClassLoaderMetaData( name,
+                                     parent,
+                                     entrys,
+                                     extensions,
+                                     filesets );
         final String[] predefined = new String[]{parent};
-        final ClassLoaderMetaData[] classLoaders = new ClassLoaderMetaData[]{loader};
+        final ClassLoaderMetaData[] classLoaders = new ClassLoaderMetaData[]{
+            loader};
         final JoinMetaData[] joins = new JoinMetaData[ 0 ];
         return
             new ClassLoaderSetMetaData( name,
@@ -318,10 +320,12 @@ public class DefaultClassLoaderManager
     }
 
     /**
-     * Return true if environment config defines "classloader" element, false otherwise.
+     * Return true if environment config defines "classloader" element, false
+     * otherwise.
      *
      * @param environment the environment config
-     * @return true if environment config defines "classloader" element, false otherwise.
+     * @return true if environment config defines "classloader" element, false
+     *         otherwise.
      */
     private boolean isClassLoaderDefined( final Configuration environment )
     {

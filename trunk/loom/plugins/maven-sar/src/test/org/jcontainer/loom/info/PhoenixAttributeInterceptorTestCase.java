@@ -19,8 +19,8 @@ import junit.framework.TestCase;
 import org.realityforge.metaclass.model.Attribute;
 
 /**
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-11-29 07:25:08 $
+ * @author Peter Donald
+ * @version $Revision: 1.4 $ $Date: 2003-11-29 13:44:31 $
  */
 public class PhoenixAttributeInterceptorTestCase
     extends TestCase
@@ -31,8 +31,9 @@ public class PhoenixAttributeInterceptorTestCase
         final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
         final Attribute attribute = new Attribute( "ignored" );
         final Attribute result =
-            interceptor.processClassAttribute( new JavaClass( new JavaSource() ),
-                                               attribute );
+            interceptor.processClassAttribute(
+                new JavaClass( new JavaSource() ),
+                attribute );
         assertNotNull( "attribute", result );
         assertEquals( "attribute.name", "ignored", result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );
@@ -47,8 +48,9 @@ public class PhoenixAttributeInterceptorTestCase
         final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
         final Attribute attribute = new Attribute( "phoenix:block" );
         final Attribute result =
-            interceptor.processClassAttribute( new JavaClass( new JavaSource() ),
-                                               attribute );
+            interceptor.processClassAttribute(
+                new JavaClass( new JavaSource() ),
+                attribute );
         assertNotNull( "attribute", result );
         assertEquals( "attribute.name", "dna.component", result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );
@@ -66,8 +68,9 @@ public class PhoenixAttributeInterceptorTestCase
         final Attribute attribute = new Attribute( "phoenix:mx-topic",
                                                    parameters );
         final Attribute result =
-            interceptor.processClassAttribute( new JavaClass( new JavaSource() ),
-                                               attribute );
+            interceptor.processClassAttribute(
+                new JavaClass( new JavaSource() ),
+                attribute );
         assertNotNull( "attribute", result );
         assertEquals( "attribute.name", "mx.component", result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );
@@ -88,8 +91,9 @@ public class PhoenixAttributeInterceptorTestCase
         final Attribute attribute = new Attribute( "phoenix:service",
                                                    parameters );
         final Attribute result =
-            interceptor.processClassAttribute( new JavaClass( new JavaSource() ),
-                                               attribute );
+            interceptor.processClassAttribute(
+                new JavaClass( new JavaSource() ),
+                attribute );
         assertNotNull( "attribute", result );
         assertEquals( "attribute.name", "dna.service", result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );
@@ -110,8 +114,9 @@ public class PhoenixAttributeInterceptorTestCase
         final Attribute attribute = new Attribute( "phoenix:mx-proxy",
                                                    parameters );
         final Attribute result =
-            interceptor.processClassAttribute( new JavaClass( new JavaSource() ),
-                                               attribute );
+            interceptor.processClassAttribute(
+                new JavaClass( new JavaSource() ),
+                attribute );
         assertNotNull( "attribute", result );
         assertEquals( "attribute.name", "mx.proxy", result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );

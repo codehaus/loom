@@ -8,32 +8,25 @@
 package org.jcontainer.loom.components.util.info;
 
 /**
- * A descriptor describing the schema to validate the components
- * {@link org.apache.avalon.framework.parameters.Parameters} or
- * {@link org.apache.avalon.framework.configuration.Configuration}
- * object. If a component is neither
- * {@link org.apache.avalon.framework.parameters.Parameterizable}
- * nor {@link org.apache.avalon.framework.configuration.Configurable}
- * then this descriptor will hold empty values for location, category
- * and type.
+ * A descriptor describing the schema to validate the components {@link
+ * org.apache.avalon.framework.parameters.Parameters} or {@link
+ * org.apache.avalon.framework.configuration.Configuration} object. If a
+ * component is neither {@link org.apache.avalon.framework.parameters.Parameterizable}
+ * nor {@link org.apache.avalon.framework.configuration.Configurable} then this
+ * descriptor will hold empty values for location, category and type.
  *
- * <p>Associated with each Schema is a set of arbitrary
- * Attributes that can be used to store extra information
- * about Schema requirements.</p>
+ * <p>Associated with each Schema is a set of arbitrary Attributes that can be
+ * used to store extra information about Schema requirements.</p>
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-10-16 14:45:46 $
+ * @author Peter Donald
+ * @version $Revision: 1.2 $ $Date: 2003-11-29 13:44:23 $
  */
 public class SchemaDescriptor
 {
-    /**
-     * The location of schema relative to component.
-     */
+    /** The location of schema relative to component. */
     private final String m_location;
 
-    /**
-     * The type of the schema.
-     */
+    /** The type of the schema. */
     private final String m_type;
 
     /**
@@ -69,9 +62,8 @@ public class SchemaDescriptor
     }
 
     /**
-     * Return the type of the schema.
-     * Usually represented as a URI referring to schema
-     * namespace declaration.
+     * Return the type of the schema. Usually represented as a URI referring to
+     * schema namespace declaration.
      *
      * @return the type of the schema
      */

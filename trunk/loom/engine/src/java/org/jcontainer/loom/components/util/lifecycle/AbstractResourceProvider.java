@@ -108,19 +108,16 @@ import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
 /**
- * This is a base object via which the
- * {@link org.jcontainer.loom.components.util.lifecycle.LifecycleHelper}
- * aquires resources for each component. This base implementation
- * will aquire components and make sure that all required
- * components are present. It will also make sure that the types
- * of values returned from context are valid.
+ * This is a base object via which the {@link org.jcontainer.loom.components.util.lifecycle.LifecycleHelper}
+ * aquires resources for each component. This base implementation will aquire
+ * components and make sure that all required components are present. It will
+ * also make sure that the types of values returned from context are valid.
  *
- * <p>Note that this class assumes that the dependency graph
- * has been validated (presumably via
- * {@link org.jcontainer.loom.components.util.verifier.AssemblyVerifier}</p>
+ * <p>Note that this class assumes that the dependency graph has been validated
+ * (presumably via {@link org.jcontainer.loom.components.util.verifier.AssemblyVerifier}</p>
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-11-03 06:43:15 $
+ * @author Peter Donald
+ * @version $Revision: 1.6 $ $Date: 2003-11-29 13:44:26 $
  */
 public abstract class AbstractResourceProvider
     extends AbstractLogEnabled
@@ -146,8 +143,8 @@ public abstract class AbstractResourceProvider
     }
 
     /**
-     * Utility method via which the provider aquires services to place
-     * in ServiceManager for a particular component.
+     * Utility method via which the provider aquires services to place in
+     * ServiceManager for a particular component.
      *
      * <p>Must be implemented in subclass.</p>
      *
@@ -158,8 +155,8 @@ public abstract class AbstractResourceProvider
     protected abstract Object getService( String name, Object entry );
 
     /**
-     * Utility method via which the provider aquires a context value
-     * to place in Context for a particular component.
+     * Utility method via which the provider aquires a context value to place in
+     * Context for a particular component.
      *
      * <p>Must be implemented in subclass.</p>
      *
@@ -170,10 +167,8 @@ public abstract class AbstractResourceProvider
     protected abstract Object getContextValue( String name, Object entry );
 
     /**
-     * Create a component for a particular entry.
-     * This implementation uses the associated
-     * ComponentFactory to create instance of
-     * component.
+     * Create a component for a particular entry. This implementation uses the
+     * associated ComponentFactory to create instance of component.
      *
      * @param entry the entry
      * @return the newly created component
@@ -188,7 +183,8 @@ public abstract class AbstractResourceProvider
     }
 
     /**
-     * Create a Parameters object by Creating configuration object and converting that.
+     * Create a Parameters object by Creating configuration object and
+     * converting that.
      *
      * @param entry the entry
      * @return a new Parameters object for component
@@ -222,7 +218,8 @@ public abstract class AbstractResourceProvider
     {
         final ComponentTemplate component = getMetaData( entry );
         final Configuration configuration =
-            ConfigurationConverter.toConfiguration( component.getConfiguration() );
+            ConfigurationConverter.toConfiguration(
+                component.getConfiguration() );
         if( null == configuration )
         {
             final String message =
@@ -234,9 +231,10 @@ public abstract class AbstractResourceProvider
     }
 
     /**
-     * Create a Context object that contains values specified in map.
-     * The default implementation creates a basic Context object but different
-     * containers may choose to overide this to provide their own subclass of context.
+     * Create a Context object that contains values specified in map. The
+     * default implementation creates a basic Context object but different
+     * containers may choose to overide this to provide their own subclass of
+     * context.
      *
      * @param contextData the data to place in context
      * @return the Context object
@@ -249,9 +247,10 @@ public abstract class AbstractResourceProvider
     }
 
     /**
-     * Return the ComponentTemplate for specified component entry.
-     * This implementation assumes that entry is instance of ComponentTemplate
-     * but subclasses should overide this method if this assumption does not hold true.
+     * Return the ComponentTemplate for specified component entry. This
+     * implementation assumes that entry is instance of ComponentTemplate but
+     * subclasses should overide this method if this assumption does not hold
+     * true.
      *
      * @param entry the component entry
      * @return the ComponentTemplate
@@ -266,7 +265,8 @@ public abstract class AbstractResourceProvider
      *
      * @param componentEntry the entry representing component
      * @return the created Context
-     * @throws java.lang.Exception if unable to create context or entrys in context
+     * @throws java.lang.Exception if unable to create context or entrys in
+     * context
      */
     public final Context createContext( final Object componentEntry )
         throws Exception
@@ -345,8 +345,8 @@ public abstract class AbstractResourceProvider
     }
 
     /**
-     * Create a Map of services for specified component.
-     * The map maps key name to service provider.
+     * Create a Map of services for specified component. The map maps key name
+     * to service provider.
      *
      * @param entry the component entry creating map for
      * @return the map

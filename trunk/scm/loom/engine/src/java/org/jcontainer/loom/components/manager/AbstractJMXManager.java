@@ -98,9 +98,9 @@ import org.realityforge.salt.i18n.Resources;
 /**
  * An abstract class via which JMX Managers can extend.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @author Peter Donald
  * @author <a href="mailto:Huw@mmlive.com">Huw Roberts</a>
- * @version $Revision: 1.9 $ $Date: 2003-10-18 08:11:11 $
+ * @version $Revision: 1.10 $ $Date: 2003-11-29 13:44:21 $
  */
 public abstract class AbstractJMXManager
     extends AbstractSystemManager
@@ -125,9 +125,8 @@ public abstract class AbstractJMXManager
     }
 
     /**
-     * Export the object to the particular management medium using
-     * the supplied object and interfaces.
-     * This needs to be implemented by subclasses.
+     * Export the object to the particular management medium using the supplied
+     * object and interfaces. This needs to be implemented by subclasses.
      *
      * @param name the name of object
      * @param object the object
@@ -140,12 +139,15 @@ public abstract class AbstractJMXManager
     {
         try
         {
-            BINDER.bindMBean( object, createObjectName( name ), getMBeanServer() );
+            BINDER.bindMBean( object,
+                              createObjectName( name ),
+                              getMBeanServer() );
             return object;
         }
         catch( final Exception e )
         {
-            final String message = REZ.format( "jmxmanager.error.export.fail", name );
+            final String message = REZ.format( "jmxmanager.error.export.fail",
+                                               name );
             getLogger().error( message, e );
             throw new LoomException( message, e );
         }
@@ -182,8 +184,8 @@ public abstract class AbstractJMXManager
     }
 
     /**
-     * Creates a new MBeanServer.
-     * The subclass should implement this to create specific MBeanServer.
+     * Creates a new MBeanServer. The subclass should implement this to create
+     * specific MBeanServer.
      */
     protected abstract MBeanServer createMBeanServer()
         throws Exception;

@@ -93,8 +93,8 @@ import org.realityforge.xmlpolicy.verifier.PolicyVerifier;
 /**
  * A simple adapter for verifier to support logging to container subsystems.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-10-16 14:45:45 $
+ * @author Peter Donald
+ * @version $Revision: 1.6 $ $Date: 2003-11-29 13:44:15 $
  */
 class SarPolicyVerifier
     extends PolicyVerifier

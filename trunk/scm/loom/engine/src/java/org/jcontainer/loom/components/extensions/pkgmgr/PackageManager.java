@@ -92,18 +92,16 @@ import java.util.Set;
 import org.realityforge.extension.Extension;
 
 /**
- * Basic Implementation Of PackageManager Interface used to manage
- * "Optional Packages" (formerly known as "Standard Extensions").
- * The "Optional Packages" are stored on file system in a number of
- * directories.
+ * Basic Implementation Of PackageManager Interface used to manage "Optional
+ * Packages" (formerly known as "Standard Extensions"). The "Optional Packages"
+ * are stored on file system in a number of directories.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-11-11 11:29:51 $
+ * @author Peter Donald
+ * @version $Revision: 1.5 $ $Date: 2003-11-29 13:44:19 $
+ * @todo Determine an appropriate interface to this service and an appropriate
+ * mechanism via which to do searching and expansion of a package set. At that
+ * point separate out implementation and interface for mechanism.
  * @see ExtensionManager
- * @todo Determine an appropriate interface to this service and
- *       an appropriate mechanism via which to do searching and
- *       expansion of a package set. At that point separate out
- *       implementation and interface for mechanism.
  */
 public class PackageManager
 {
@@ -126,26 +124,26 @@ public class PackageManager
     }
 
     /**
-     * Return the {@link OptionalPackage} that provides specified
-     * {@link Extension}. If the specified {@link Extension}
-     * can not be found then <code>null</code> is returned. If there is
-     * multiple implementations that satisfy {@link Extension},
-     * then an {@link OptionalPackage} returned is based on the
-     * following heristic;
+     * Return the {@link OptionalPackage} that provides specified {@link
+     * Extension}. If the specified {@link Extension} can not be found then
+     * <code>null</code> is returned. If there is multiple implementations that
+     * satisfy {@link Extension}, then an {@link OptionalPackage} returned is
+     * based on the following heristic;
      *
-     * <p>Return the first Optional Package. (This heuristic will
-     * be replaced in time).</p>
+     * <p>Return the first Optional Package. (This heuristic will be replaced in
+     * time).</p>
      *
-     * @param extension Description of the extension that needs to be provided by
-     *                  optional package
-     * @return an array of optional packages that satisfy extension and
-     *         the extensions dependencies
+     * @param extension Description of the extension that needs to be provided
+     * by optional package
+     * @return an array of optional packages that satisfy extension and the
+     *         extensions dependencies
      * @see OptionalPackage
      * @see Extension
      */
     public OptionalPackage getOptionalPackage( final Extension extension )
     {
-        final OptionalPackage[] packages = m_repository.getOptionalPackages( extension );
+        final OptionalPackage[] packages = m_repository.getOptionalPackages(
+            extension );
         if( null == packages || 0 == packages.length )
         {
             return null;
@@ -157,20 +155,21 @@ public class PackageManager
     }
 
     /**
-     * Build a list of dependencies based on specified {@link Extension}s.
-     * Each specified {@link Extension} is expected to be a required extension
-     * of another "Optional Package".
+     * Build a list of dependencies based on specified {@link Extension}s. Each
+     * specified {@link Extension} is expected to be a required extension of
+     * another "Optional Package".
      *
-     * <p>If the required {@link Extension} can not be found locally then
-     * an UnsatisfiedPackageException is thrown. if an {@link OptionalPackage}
-     * is found locally that satisfies specified required {@link Extension}
-     * then it is returned in the array of OptionalPackages. scanDependencies() is then recursively
-     * called on all of the candidates required extensions.</p>
+     * <p>If the required {@link Extension} can not be found locally then an
+     * UnsatisfiedPackageException is thrown. if an {@link OptionalPackage} is
+     * found locally that satisfies specified required {@link Extension} then it
+     * is returned in the array of OptionalPackages. scanDependencies() is then
+     * recursively called on all of the candidates required extensions.</p>
      *
      * @param required the array of required Extensions.
      * @param available the array of Extensions already available to caller.
      * @return the list of OptionalPackages that satisfy required Extensions
-     * @throws UnsatisfiedExtensionException if extensions could not be satisified
+     * @throws UnsatisfiedExtensionException if extensions could not be
+     * satisified
      * @see #scanDependencies
      */
     public OptionalPackage[] scanDependencies( final Extension required,
@@ -181,20 +180,21 @@ public class PackageManager
     }
 
     /**
-     * Build a list of dependencies based on specified {@link Extension}.
-     * The specified {@link Extension} is expected to be a required extension
-     * of another "Optional Package".
+     * Build a list of dependencies based on specified {@link Extension}. The
+     * specified {@link Extension} is expected to be a required extension of
+     * another "Optional Package".
      *
-     * <p>If the required {@link Extension} can not be found locally then
-     * an UnsatisfiedPackageException is thrown. if an {@link OptionalPackage}
-     * is found locally that satisfies specified required {@link Extension}
-     * then it is returned in the array of OptionalPackages. scanDependencies() is then recursively
-     * called on all of the candidates required extensions.</p>
+     * <p>If the required {@link Extension} can not be found locally then an
+     * UnsatisfiedPackageException is thrown. if an {@link OptionalPackage} is
+     * found locally that satisfies specified required {@link Extension} then it
+     * is returned in the array of OptionalPackages. scanDependencies() is then
+     * recursively called on all of the candidates required extensions.</p>
      *
      * @param required the array of required Extensions.
      * @param available the array of Extensions already available to caller.
      * @return the list of OptionalPackages that satisfy required Extensions
-     * @throws UnsatisfiedExtensionException if extensions could not be satisified
+     * @throws UnsatisfiedExtensionException if extensions could not be
+     * satisified
      * @see #scanDependencies
      */
     public OptionalPackage[] scanDependencies( final Extension[] required,
@@ -213,19 +213,21 @@ public class PackageManager
             throw new UnsatisfiedExtensionException( extension );
         }
 
-        return (OptionalPackage[])dependencies.toArray( new OptionalPackage[ 0 ] );
+        return (OptionalPackage[])dependencies.toArray(
+            new OptionalPackage[ 0 ] );
     }
 
     /**
-     * Build a list of dependencies based on specified {@link Extension}s.
-     * Each specified {@link Extension} is expected to be a required extension
-     * of another "Optional Package".
+     * Build a list of dependencies based on specified {@link Extension}s. Each
+     * specified {@link Extension} is expected to be a required extension of
+     * another "Optional Package".
      *
-     * <p>If the required {@link Extension} can not be found locally then
-     * it is placed in list of unsatisfied Extensions. If a candidate {@link Extension}
-     * is found locally that satisfies specified required {@link Extension}
-     * then it is added to list of dependencies. scanDependencies() is then recursively
-     * called on all of the candidates required extensions.</p>
+     * <p>If the required {@link Extension} can not be found locally then it is
+     * placed in list of unsatisfied Extensions. If a candidate {@link
+     * Extension} is found locally that satisfies specified required {@link
+     * Extension} then it is added to list of dependencies. scanDependencies()
+     * is then recursively called on all of the candidates required
+     * extensions.</p>
      *
      * @param required the array of required Extensions.
      * @param available the array of Extensions already available to caller.
@@ -240,24 +242,29 @@ public class PackageManager
     {
         for( int i = 0; i < required.length; i++ )
         {
-            scanDependencies( required[ i ], available, dependencies, unsatisfied );
+            scanDependencies( required[ i ],
+                              available,
+                              dependencies,
+                              unsatisfied );
         }
     }
 
     /**
-     * Build a list of dependencies based on specified {@link Extension}.
-     * The specified {@link Extension} is expected to be a required extension
-     * of another "Optional Package".
+     * Build a list of dependencies based on specified {@link Extension}. The
+     * specified {@link Extension} is expected to be a required extension of
+     * another "Optional Package".
      *
-     * <p>If the required {@link Extension} can not be found locally then
-     * it is placed in list of unsatisfied Extensions. If a candidate {@link OptionalPackage}
-     * is found locally that satisfies specified required {@link Extension}
-     * then it is added to list of dependencies. scanDependencies() is then recursively
-     * called on all of the candidates required extensions.</p>
+     * <p>If the required {@link Extension} can not be found locally then it is
+     * placed in list of unsatisfied Extensions. If a candidate {@link
+     * OptionalPackage} is found locally that satisfies specified required
+     * {@link Extension} then it is added to list of dependencies.
+     * scanDependencies() is then recursively called on all of the candidates
+     * required extensions.</p>
      *
      * @param required the required Extension.
      * @param available the array of Extensions already available to caller.
-     * @param dependencies the list of OptionalPackages required to satisfy extension.
+     * @param dependencies the list of OptionalPackages required to satisfy
+     * extension.
      * @param unsatisfied the list of unsatisfied (ie non-local) dependencies.
      * @see #scanDependencies
      */

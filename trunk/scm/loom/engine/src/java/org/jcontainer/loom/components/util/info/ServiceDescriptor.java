@@ -8,34 +8,29 @@
 package org.jcontainer.loom.components.util.info;
 
 /**
- * This descriptor defines the type of service offerend or required
- * by a component. The type corresponds to the class name of the
- * class/interface implemented by component.
+ * This descriptor defines the type of service offerend or required by a
+ * component. The type corresponds to the class name of the class/interface
+ * implemented by component.
  *
- * <p>Also associated with each service is a set of arbitrary
- * Attributes that can be used to store extra information
- * about service.</p>
+ * <p>Also associated with each service is a set of arbitrary Attributes that
+ * can be used to store extra information about service.</p>
  *
- * <p>Possible uses for the Attributes are to declare a service
- * as "stateless", "pass-by-value", "remotable" or even to attach
- * Attributes such as security or transaction constraints. These
- * Attributes are container specific and should not be relied
- * upon to work in all containers.</p>
+ * <p>Possible uses for the Attributes are to declare a service as "stateless",
+ * "pass-by-value", "remotable" or even to attach Attributes such as security or
+ * transaction constraints. These Attributes are container specific and should
+ * not be relied upon to work in all containers.</p>
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-10-16 14:45:46 $
+ * @author Peter Donald
+ * @version $Revision: 1.2 $ $Date: 2003-11-29 13:44:23 $
  */
 public final class ServiceDescriptor
 {
-    /**
-     * Constant set of 0 service descriptors.
-     */
+    /** Constant set of 0 service descriptors. */
     public static final ServiceDescriptor[] EMPTY_SET = new ServiceDescriptor[ 0 ];
 
     /**
-     * The implementationKey for the service.
-     * This usually indicates the name of the service
-     * class.
+     * The implementationKey for the service. This usually indicates the name of
+     * the service class.
      */
     private final String m_type;
 

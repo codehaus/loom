@@ -87,23 +87,24 @@
 package org.jcontainer.loom.interfaces;
 
 /**
- * This component is responsible for managing the system.
- * This includes managing the embeddor, deployer and kernel.
+ * This component is responsible for managing the system. This includes managing
+ * the embeddor, deployer and kernel.
  *
  * @author <a href="mail@leosimons.com">Leo Simons</a>
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @author Peter Donald
  */
 public interface SystemManager
 {
     /**
-     * Register an object for management.
-     * The object is exported through some management scheme
-     * (typically JMX). Note that the particular management scheme
-     * will most likely use reflection to extract manageable information.
+     * Register an object for management. The object is exported through some
+     * management scheme (typically JMX). Note that the particular management
+     * scheme will most likely use reflection to extract manageable
+     * information.
      *
      * @param name the name to register object under
      * @param object the object
-     * @throws LoomException if an error occurs such as name already registered.
+     * @throws LoomException if an error occurs such as name already
+     * registered.
      * @throws IllegalArgumentException if object is null
      */
     void register( String name, Object object )
@@ -113,19 +114,21 @@ public interface SystemManager
      * Unregister named object.
      *
      * @param name the name of object to unregister
-     * @throws LoomException if an error occurs such as when no such object registered.
+     * @throws LoomException if an error occurs such as when no such object
+     * registered.
      */
     void unregister( String name )
         throws LoomException;
 
     /**
-     * Returns the subcontext of the specified name.  If it does not exist it
-     * is created.
+     * Returns the subcontext of the specified name.  If it does not exist it is
+     * created.
      *
-     * @param name name of the object in the parent context that will own this one
+     * @param name name of the object in the parent context that will own this
+     * one
      * @param type of objects that will be managed in this context
+     * @return the subcontext with the specified name
      * @throws LoomException if context cannot be created or retrieved
-     * @return  the subcontext with the specified name
      */
     SystemManager getSubContext( String name, String type )
         throws LoomException;

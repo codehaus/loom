@@ -16,8 +16,8 @@ import org.apache.avalon.framework.service.Serviceable;
 /**
  * A test component.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-10-16 14:45:54 $
+ * @author Peter Donald
+ * @version $Revision: 1.2 $ $Date: 2003-11-29 13:44:30 $
  * @dna.component
  */
 public class Component4
@@ -37,7 +37,8 @@ public class Component4
         {
             final String message =
                 "Expected to get 3 services but got " + services.size();
-            throw new ServiceException( Service1.class.getName() + "{}", message );
+            throw new ServiceException( Service1.class.getName() + "{}",
+                                        message );
         }
 
         final Iterator iterator = services.keySet().iterator();
@@ -47,8 +48,10 @@ public class Component4
             final Service1 service1 = (Service1)services.get( key );
             if( null == service1 )
             {
-                final String message = "Expected non null service entry for " + key;
-                throw new ServiceException( Service1[].class.getName(), message );
+                final String message = "Expected non null service entry for " +
+                    key;
+                throw new ServiceException( Service1[].class.getName(),
+                                            message );
             }
         }
     }

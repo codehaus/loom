@@ -90,95 +90,78 @@ package org.jcontainer.loom.interfaces;
  * A set of constants that are used internally in the container to communicate
  * about different artefacts. They usually act as keys into maps.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @author Peter Donald
  */
 public interface ContainerConstants
 {
     /**
-     * The name of the software. (Usually Loom but different
-     * users may overide this).
+     * The name of the software. (Usually Loom but different users may overide
+     * this).
      */
     String SOFTWARE = Version.SOFTWARE;
 
-    /**
-     * The version of the software.
-     */
+    /** The version of the software. */
     String VERSION = Version.VERSION;
 
-    /**
-     * The date on which software was built.
-     */
+    /** The date on which software was built. */
     String DATE = Version.DATE;
 
     /**
-     * The name which the assembly is registered into Loom
-     * using.
+     * The name which the assembly is registered into Loom using.
      */
     String ASSEMBLY_NAME = "loom:assembly-name";
 
     /**
-     * The name of the config file which is used
-     * to load config data.
+     * The name of the config file which is used to load config data.
      */
     String CONFIG_DESCRIPTOR = "loom:config";
 
     /**
-     * The name of the config file which is used
-     * to load assembly data.
+     * The name of the config file which is used to load assembly data.
      */
     String ASSEMBLY_DESCRIPTOR = "loom:assembly";
 
-    /**
-     * The default classloader to use to load components.
-     */
+    /** The default classloader to use to load components. */
     String ASSEMBLY_CLASSLOADER = "loom:classloader";
 
-    /**
-     * The root instrumentation category for all applications.
-     */
+    /** The root instrumentation category for all applications. */
     String ROOT_INSTRUMENT_CATEGORY = "applications";
 
     /**
-     * The source of installation (usually a directory in .sar format or a .sar file).
-     * Type: {@link java.io.File}
+     * The source of installation (usually a directory in .sar format or a .sar
+     * file). Type: {@link java.io.File}
      */
     String INSTALL_SOURCE = "install:source";
 
     /**
-     * The Directory in which application is installed.
-     * Type: {@link java.io.File}
+     * The Directory in which application is installed. Type: {@link
+     * java.io.File}
      */
     String INSTALL_HOME = "install:home";
 
     /**
-     * The Directory in which application temporary/work data is stored.
-     * Type: {@link java.io.File}
+     * The Directory in which application temporary/work data is stored. Type:
+     * {@link java.io.File}
      */
     String INSTALL_WORK = "install:work";
 
     /**
-     * The URL to block configuration data.
-     * Type: {@link java.lang.String}
+     * The URL to block configuration data. Type: {@link java.lang.String}
      */
     String INSTALL_CONFIG = "install:config";
 
     /**
-     * The URL to assembly data.
-     * Type: {@link java.lang.String}
+     * The URL to assembly data. Type: {@link java.lang.String}
      */
     String INSTALL_ASSEMBLY = "install:assembly";
 
     /**
-     * The URL to application configuration data.
-     * Type: {@link java.lang.String}
+     * The URL to application configuration data. Type: {@link
+     * java.lang.String}
      */
     String INSTALL_ENVIRONMENT = "install:environment";
-    /**
-     * Name of partition containing blocks.
-     */
+    /** Name of partition containing blocks. */
     String BLOCK_PARTITION = "Loom:BlockPartition";
-    /**
-     * Name of partition containing listeners.
-     */
+    /** Name of partition containing listeners. */
     String LISTENER_PARTITION = "Loom:ListenerPartition";
 }

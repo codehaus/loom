@@ -93,8 +93,8 @@ import org.jcontainer.loom.interfaces.LoomException;
 /**
  * A utility class for working with resources in default sar layout.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-10-05 03:25:09 $
+ * @author Peter Donald
+ * @version $Revision: 1.4 $ $Date: 2003-11-29 13:44:27 $
  */
 public class ResourceUtil
 {
@@ -104,12 +104,11 @@ public class ResourceUtil
     private static final String LIB = SAR_INF + "lib";
 
     /**
-     * Expand any URLs with sar: protocol so that
-     * they accurately match the actual location
+     * Expand any URLs with sar: protocol so that they accurately match the
+     * actual location
      *
      * @param codeBase the input url
-     * @return the result url, modified to file url if it
-     *         is protocol "sar:"
+     * @return the result url, modified to file url if it is protocol "sar:"
      * @throws LoomException if invalidly specified URL
      */
     public static String expandSarURL( final String codeBase,

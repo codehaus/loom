@@ -98,7 +98,7 @@ import org.realityforge.salt.i18n.Resources;
 /**
  * The class prepare parameters based on input options.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @author Peter Donald
  * @author <a href="mail@leosimons.com">Leo Simons</a>
  */
 class CLISetup
@@ -129,7 +129,8 @@ class CLISetup
     private void usage( final CLOptionDescriptor[] options )
     {
         System.err.println( m_command );
-        System.err.println( "\t" + REZ.getString( "cli.desc.available.header" ) );
+        System.err.println(
+            "\t" + REZ.getString( "cli.desc.available.header" ) );
         System.err.println( CLUtil.describeOptions( options ) );
     }
 
@@ -140,30 +141,30 @@ class CLISetup
     {
         final CLOptionDescriptor options[] = new CLOptionDescriptor[ 5 ];
         options[ 0 ] =
-            new CLOptionDescriptor( "help",
-                                    CLOptionDescriptor.ARGUMENT_DISALLOWED,
-                                    HELP_OPT,
-                                    REZ.getString( "cli.opt.help.desc" ) );
+        new CLOptionDescriptor( "help",
+                                CLOptionDescriptor.ARGUMENT_DISALLOWED,
+                                HELP_OPT,
+                                REZ.getString( "cli.opt.help.desc" ) );
         options[ 1 ] =
-            new CLOptionDescriptor( "log-file",
-                                    CLOptionDescriptor.ARGUMENT_REQUIRED,
-                                    LOG_FILE_OPT,
-                                    REZ.getString( "cli.opt.log-file.desc" ) );
+        new CLOptionDescriptor( "log-file",
+                                CLOptionDescriptor.ARGUMENT_REQUIRED,
+                                LOG_FILE_OPT,
+                                REZ.getString( "cli.opt.log-file.desc" ) );
         options[ 2 ] =
-            new CLOptionDescriptor( "debug-init",
-                                    CLOptionDescriptor.ARGUMENT_DISALLOWED,
-                                    DEBUG_LOG_OPT,
-                                    REZ.getString( "cli.opt.debug-init.desc" ) );
+        new CLOptionDescriptor( "debug-init",
+                                CLOptionDescriptor.ARGUMENT_DISALLOWED,
+                                DEBUG_LOG_OPT,
+                                REZ.getString( "cli.opt.debug-init.desc" ) );
         options[ 3 ] =
-            new CLOptionDescriptor( "persistent",
-                                    CLOptionDescriptor.ARGUMENT_DISALLOWED,
-                                    PERSISTENT_OPT,
-                                    REZ.getString( "cli.opt.persistent.desc" ) );
+        new CLOptionDescriptor( "persistent",
+                                CLOptionDescriptor.ARGUMENT_DISALLOWED,
+                                PERSISTENT_OPT,
+                                REZ.getString( "cli.opt.persistent.desc" ) );
         options[ 4 ] =
-            new CLOptionDescriptor( "configfile",
-                                    CLOptionDescriptor.ARGUMENT_REQUIRED,
-                                    CONFIGFILE_OPT,
-                                    REZ.getString( "cli.opt.configfile.desc" ) );
+        new CLOptionDescriptor( "configfile",
+                                CLOptionDescriptor.ARGUMENT_REQUIRED,
+                                CONFIGFILE_OPT,
+                                REZ.getString( "cli.opt.configfile.desc" ) );
         return options;
     }
 
@@ -179,7 +180,8 @@ class CLISetup
 
         if( null != parser.getErrorString() )
         {
-            final String message = REZ.getString( "cli.error.parser", parser.getErrorString() );
+            final String message = REZ.getString( "cli.error.parser",
+                                                  parser.getErrorString() );
             System.err.println( message );
             return false;
         }
@@ -196,7 +198,8 @@ class CLISetup
                 case 0:
                     {
                         final String message =
-                            REZ.getString( "cli.error.unknown.arg", option.getArgument() );
+                            REZ.getString( "cli.error.unknown.arg",
+                                           option.getArgument() );
                         System.err.println( message );
                     }
                     return false;
@@ -210,7 +213,8 @@ class CLISetup
                     break;
 
                 case LOG_FILE_OPT:
-                    m_parameters.setProperty( "log-destination", option.getArgument() );
+                    m_parameters.setProperty( "log-destination",
+                                              option.getArgument() );
                     break;
 
                 case PERSISTENT_OPT:
@@ -218,7 +222,8 @@ class CLISetup
                     break;
 
                 case CONFIGFILE_OPT:
-                    m_parameters.setProperty( CLIMain.CONFIGFILE, option.getArgument() );
+                    m_parameters.setProperty( CLIMain.CONFIGFILE,
+                                              option.getArgument() );
                     break;
             }
         }

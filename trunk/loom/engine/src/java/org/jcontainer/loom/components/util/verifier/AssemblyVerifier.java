@@ -19,29 +19,22 @@ import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
 /**
- * This Class verifies that Sars are valid. It performs a number
- * of checks to make sure that the Sar represents a valid
- * application and excluding runtime errors will start up validly.
- * Some of the checks it performs include;
+ * This Class verifies that Sars are valid. It performs a number of checks to
+ * make sure that the Sar represents a valid application and excluding runtime
+ * errors will start up validly. Some of the checks it performs include;
  *
- * <ul>
- *   <li>Verify names of Components contain only
- *       letters, digits or the '_' character.</li>
- *   <li>Verify that the names of the Components are unique to the
- *       Assembly.</li>
- *   <li>Verify that the specified dependeny mapping correspond to
- *       dependencies specified in ComponentInfo files.</li>
- *   <li>Verify that the inter-Component dependendencies are valid.
- *       This essentially means that if Component A requires Service S
- *       from Component B then Component B must provide Service S.</li>
- *   <li>Verify that there are no circular dependendencies between
- *       components.</li>
- *   <li>Verify that the Class objects for component implement the
- *       service interfaces.</li>
- * </ul>
+ * <ul> <li>Verify names of Components contain only letters, digits or the '_'
+ * character.</li> <li>Verify that the names of the Components are unique to the
+ * Assembly.</li> <li>Verify that the specified dependeny mapping correspond to
+ * dependencies specified in ComponentInfo files.</li> <li>Verify that the
+ * inter-Component dependendencies are valid. This essentially means that if
+ * Component A requires Service S from Component B then Component B must provide
+ * Service S.</li> <li>Verify that there are no circular dependendencies between
+ * components.</li> <li>Verify that the Class objects for component implement
+ * the service interfaces.</li> </ul>
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-11-05 07:27:08 $
+ * @author Peter Donald
+ * @version $Revision: 1.5 $ $Date: 2003-11-29 13:44:27 $
  */
 public class AssemblyVerifier
     extends AbstractLogEnabled
@@ -50,9 +43,9 @@ public class AssemblyVerifier
         ResourceManager.getPackageResources( AssemblyVerifier.class );
 
     /**
-     * Validate and Verify the specified assembly (ie organization
-     * of components). See the Class Javadocs for the rules and
-     * regulations of assembly.
+     * Validate and Verify the specified assembly (ie organization of
+     * components). See the Class Javadocs for the rules and regulations of
+     * assembly.
      *
      * @param components the Components that make up assembly
      * @throws Exception if an error occurs
@@ -84,7 +77,8 @@ public class AssemblyVerifier
     }
 
     /**
-     * Verfiy that all Components have the needed dependencies specified correctly.
+     * Verfiy that all Components have the needed dependencies specified
+     * correctly.
      *
      * @param components the ComponentEntry objects for the components
      * @throws Exception if an error occurs
@@ -104,7 +98,8 @@ public class AssemblyVerifier
      * @param components the ComponentEntry objects for the components
      * @throws Exception if an circular dependency error occurs
      */
-    protected void verifyNoCircularDependencies( final ComponentProfile[] components )
+    protected void verifyNoCircularDependencies(
+        final ComponentProfile[] components )
         throws Exception
     {
         for( int i = 0; i < components.length; i++ )
@@ -126,12 +121,14 @@ public class AssemblyVerifier
      * @param stack the ???
      * @throws Exception if an error occurs
      */
-    protected void verifyNoCircularDependencies( final ComponentProfile component,
-                                                 final ComponentProfile[] components,
-                                                 final Stack stack )
+    protected void verifyNoCircularDependencies(
+        final ComponentProfile component,
+        final ComponentProfile[] components,
+        final Stack stack )
         throws Exception
     {
-        final ComponentProfile[] dependencies = getDependencies( component, components );
+        final ComponentProfile[] dependencies = getDependencies( component,
+                                                                 components );
         for( int i = 0; i < dependencies.length; i++ )
         {
             final ComponentProfile dependency = dependencies[ i ];
@@ -152,8 +149,8 @@ public class AssemblyVerifier
     }
 
     /**
-     * Get a string defining path from top of stack till
-     * it reaches specified component.
+     * Get a string defining path from top of stack till it reaches specified
+     * component.
      *
      * @param component the component
      * @param stack the Stack
@@ -198,8 +195,9 @@ public class AssemblyVerifier
      * @param components the total set of components in application
      * @return the dependencies of component
      */
-    protected ComponentProfile[] getDependencies( final ComponentProfile component,
-                                                                                    final ComponentProfile[] components )
+    protected ComponentProfile[] getDependencies(
+        final ComponentProfile component,
+        final ComponentProfile[] components )
     {
         final ArrayList dependencies = new ArrayList();
         final DependencyDirective[] deps =
@@ -208,11 +206,13 @@ public class AssemblyVerifier
         for( int i = 0; i < deps.length; i++ )
         {
             final String name = deps[ i ].getProviderName();
-            final ComponentProfile other = getComponentProfile( name, components );
+            final ComponentProfile other = getComponentProfile( name,
+                                                                components );
             dependencies.add( other );
         }
 
-        return (ComponentProfile[])dependencies.toArray( new ComponentProfile[ 0 ] );
+        return (ComponentProfile[])dependencies.toArray(
+            new ComponentProfile[ 0 ] );
     }
 
     /**
@@ -221,7 +221,8 @@ public class AssemblyVerifier
      * @param components the ComponentProfile objects for the components
      * @throws Exception if an error occurs
      */
-    protected void verifyDependencyReferences( final ComponentProfile[] components )
+    protected void verifyDependencyReferences(
+        final ComponentProfile[] components )
         throws Exception
     {
         for( int i = 0; i < components.length; i++ )
@@ -231,18 +232,21 @@ public class AssemblyVerifier
     }
 
     /**
-     * Verfiy that the inter-Component dependencies are valid for specified Component.
+     * Verfiy that the inter-Component dependencies are valid for specified
+     * Component.
      *
      * @param component the ComponentProfile object for the component
      * @param others the ComponentProfile objects for the other components
      * @throws Exception if an error occurs
      */
-    protected void verifyDependencyReferences( final ComponentProfile component,
-                                               final ComponentProfile[] others )
+    protected void verifyDependencyReferences(
+        final ComponentProfile component,
+        final ComponentProfile[] others )
         throws Exception
     {
         final ComponentInfo info = component.getInfo();
-        final DependencyDirective[] dependencies = component.getTemplate().getDependencies();
+        final DependencyDirective[] dependencies = component.getTemplate()
+            .getDependencies();
 
         for( int i = 0; i < dependencies.length; i++ )
         {
@@ -252,7 +256,8 @@ public class AssemblyVerifier
             final String type = info.getDependency( key ).getComponentType();
 
             //Get the other component that is providing service
-            final ComponentProfile provider = getComponentProfile( providerName, others );
+            final ComponentProfile provider = getComponentProfile(
+                providerName, others );
             if( null == provider )
             {
                 final String message =
@@ -287,7 +292,7 @@ public class AssemblyVerifier
      * @return the Component if found, else null
      */
     protected ComponentProfile getComponentProfile( final String name,
-                                                                                      final ComponentProfile[] components )
+                                                    final ComponentProfile[] components )
     {
         for( int i = 0; i < components.length; i++ )
         {
@@ -324,8 +329,8 @@ public class AssemblyVerifier
     }
 
     /**
-     * Return true if specified name is valid.
-     * Valid names consist of letters, digits or the '_' character.
+     * Return true if specified name is valid. Valid names consist of letters,
+     * digits or the '_' character.
      *
      * @param name the name to check
      * @return true if valid, false otherwise
@@ -347,8 +352,9 @@ public class AssemblyVerifier
     }
 
     /**
-     * Verify that the names of the specified components and listeners are unique.
-     * It is not valid for the same name to be used in multiple components.
+     * Verify that the names of the specified components and listeners are
+     * unique. It is not valid for the same name to be used in multiple
+     * components.
      *
      * @param components the Components
      * @throws Exception if an error occurs
@@ -392,9 +398,9 @@ public class AssemblyVerifier
     }
 
     /**
-     * Retrieve a list of DependencyDirective objects for ComponentProfile
-     * and verify that there is a 1 to 1 map with dependencies specified
-     * in ComponentInfo.
+     * Retrieve a list of DependencyDirective objects for ComponentProfile and
+     * verify that there is a 1 to 1 map with dependencies specified in
+     * ComponentInfo.
      *
      * @param component the ComponentProfile describing the component
      * @throws Exception if an error occurs
@@ -448,8 +454,8 @@ public class AssemblyVerifier
     }
 
     /**
-     * Return true if specified service reference matches any of the
-     * candidate services.
+     * Return true if specified service reference matches any of the candidate
+     * services.
      *
      * @param type the service type
      * @param candidates an array of candidate services

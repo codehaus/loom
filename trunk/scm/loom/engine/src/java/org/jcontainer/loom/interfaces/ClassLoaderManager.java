@@ -91,20 +91,20 @@ import java.util.Map;
 import org.jcontainer.dna.Configuration;
 
 /**
- * Interface for component that creates and manages the
- * {@link ClassLoader} for an Application. The specific
- * mechanism by which the {@link ClassLoader} is created
- * is dependent on the type of {@link Embeddor} and the
- * deployment format.
+ * Interface for component that creates and manages the {@link ClassLoader} for
+ * an Application. The specific mechanism by which the {@link ClassLoader} is
+ * created is dependent on the type of {@link Embeddor} and the deployment
+ * format.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @author Peter Donald
  */
 public interface ClassLoaderManager
 {
     /**
      * Create a {@link ClassLoaderSet} for a specific application.
      *
-     * @param environment the configuration "environment.xml" for the application
+     * @param environment the configuration "environment.xml" for the
+     * application
      * @param data the context data used when expanding config files
      * @param baseDirectory the base directory of application
      * @param workDirectory the work directory of application

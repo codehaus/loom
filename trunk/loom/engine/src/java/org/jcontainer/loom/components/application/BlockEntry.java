@@ -88,13 +88,13 @@ package org.jcontainer.loom.components.application;
 
 import org.jcontainer.loom.components.util.info.ComponentInfo;
 import org.jcontainer.loom.components.util.info.ServiceDescriptor;
-import org.jcontainer.loom.components.util.profile.ComponentProfile;
 import org.jcontainer.loom.components.util.metadata.ComponentTemplate;
+import org.jcontainer.loom.components.util.profile.ComponentProfile;
 
 /**
  * This is the structure describing each block before it is loaded.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @author Peter Donald
  */
 class BlockEntry
 {
@@ -134,11 +134,14 @@ class BlockEntry
     {
         invalidate();
 
-        if( null != object && !m_componentProfile.getTemplate().isDisableProxy() )
+        if( null != object &&
+            !m_componentProfile.getTemplate().isDisableProxy() )
         {
             final ComponentInfo blockInfo = m_componentProfile.getInfo();
-            final Class[] interfaces = getServiceClasses( object, blockInfo.getServices() );
-            m_invocationHandler = new BlockInvocationHandler( object, interfaces );
+            final Class[] interfaces = getServiceClasses( object,
+                                                          blockInfo.getServices() );
+            m_invocationHandler =
+            new BlockInvocationHandler( object, interfaces );
         }
         m_object = object;
     }
@@ -182,7 +185,8 @@ class BlockEntry
         {
             try
             {
-                classes[ i ] = classLoader.loadClass( services[ i ].getType() );
+                classes[ i ] =
+                classLoader.loadClass( services[ i ].getType() );
             }
             catch( final Throwable throwable )
             {

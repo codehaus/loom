@@ -23,9 +23,8 @@ import org.jcontainer.loom.components.util.profile.ProfileBuilder;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 
 /**
- *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.17 $ $Date: 2003-11-03 06:43:15 $
+ * @author Peter Donald
+ * @version $Revision: 1.18 $ $Date: 2003-11-29 13:44:16 $
  */
 public class PhoenixProfileBuilder
     implements ProfileBuilder
@@ -35,17 +34,21 @@ public class PhoenixProfileBuilder
     public PartitionProfile buildProfile( final Map parameters )
         throws Exception
     {
-        final PartitionTemplate metaData = m_assembler.buildAssembly( parameters );
+        final PartitionTemplate metaData = m_assembler.buildAssembly(
+            parameters );
         final ClassLoader classLoader =
-            (ClassLoader)parameters.get( ContainerConstants.ASSEMBLY_CLASSLOADER );
-        final ComponentFactory factory = new DefaultComponentFactory( classLoader );
+            (ClassLoader)parameters.get(
+                ContainerConstants.ASSEMBLY_CLASSLOADER );
+        final ComponentFactory factory = new DefaultComponentFactory(
+            classLoader );
 
         return assembleSarProfile( metaData, factory, classLoader );
     }
 
-    private PartitionProfile assembleSarProfile( final PartitionTemplate metaData,
-                                                 final ComponentFactory factory,
-                                                 final ClassLoader classLoader )
+    private PartitionProfile assembleSarProfile(
+        final PartitionTemplate metaData,
+        final ComponentFactory factory,
+        final ClassLoader classLoader )
         throws Exception
     {
         final PartitionTemplate blockPartition =
@@ -53,34 +56,42 @@ public class PhoenixProfileBuilder
         final PartitionTemplate listenerPartition =
             metaData.getPartition( ContainerConstants.LISTENER_PARTITION );
 
-        final PartitionProfile blockProfile = assembleProfile( blockPartition, factory );
+        final PartitionProfile blockProfile = assembleProfile( blockPartition,
+                                                               factory );
         final PartitionProfile listenerProfile =
             assembleListenerProfile( listenerPartition, classLoader );
 
-        final PartitionProfile[] profiles = new PartitionProfile[]{blockProfile, listenerProfile};
+        final PartitionProfile[] profiles = new PartitionProfile[]{
+            blockProfile, listenerProfile};
         return new PartitionProfile( metaData,
                                      profiles,
                                      ComponentProfile.EMPTY_SET );
     }
 
-    private PartitionProfile assembleListenerProfile( final PartitionTemplate metaData,
-                                                      final ClassLoader classLoader )
-    throws Exception
+    private PartitionProfile assembleListenerProfile(
+        final PartitionTemplate metaData,
+        final ClassLoader classLoader )
+        throws Exception
     {
         final ArrayList componentSet = new ArrayList();
         final ComponentTemplate[] components = metaData.getComponents();
         for( int i = 0; i < components.length; i++ )
         {
             final ComponentTemplate component = components[ i ];
-            final Class type = classLoader.loadClass( component.getImplementationKey() );
+            final Class type = classLoader.loadClass(
+                component.getImplementationKey() );
             final ComponentInfo info = createListenerInfo( type );
-            final ComponentProfile profile = new ComponentProfile( info, component );
+            final ComponentProfile profile = new ComponentProfile( info,
+                                                                   component );
             componentSet.add( profile );
         }
 
         final ComponentProfile[] profiles =
-            (ComponentProfile[])componentSet.toArray( new ComponentProfile[ componentSet.size() ] );
-        return new PartitionProfile( metaData, PartitionProfile.EMPTY_SET, profiles );
+            (ComponentProfile[])componentSet.toArray(
+                new ComponentProfile[ componentSet.size() ] );
+        return new PartitionProfile( metaData,
+                                     PartitionProfile.EMPTY_SET,
+                                     profiles );
     }
 
     private PartitionProfile assembleProfile( final PartitionTemplate metaData,
@@ -92,7 +103,8 @@ public class PhoenixProfileBuilder
         for( int i = 0; i < partitions.length; i++ )
         {
             final PartitionTemplate partition = partitions[ i ];
-            final PartitionProfile profile = assembleProfile( partition, factory );
+            final PartitionProfile profile = assembleProfile( partition,
+                                                              factory );
             partitionSet.add( profile );
         }
 
@@ -103,19 +115,25 @@ public class PhoenixProfileBuilder
             final ComponentTemplate component = components[ i ];
             final ComponentInfo info =
                 factory.createInfo( component.getImplementationKey() );
-            final ComponentProfile profile = new ComponentProfile( info, component );
+            final ComponentProfile profile = new ComponentProfile( info,
+                                                                   component );
             componentSet.add( profile );
         }
 
         final PartitionProfile[] partitionProfiles =
-            (PartitionProfile[])partitionSet.toArray( new PartitionProfile[ partitionSet.size() ] );
+            (PartitionProfile[])partitionSet.toArray(
+                new PartitionProfile[ partitionSet.size() ] );
         final ComponentProfile[] componentProfiles =
-            (ComponentProfile[])componentSet.toArray( new ComponentProfile[ componentSet.size() ] );
-        return new PartitionProfile( metaData, partitionProfiles, componentProfiles );
+            (ComponentProfile[])componentSet.toArray(
+                new ComponentProfile[ componentSet.size() ] );
+        return new PartitionProfile( metaData,
+                                     partitionProfiles,
+                                     componentProfiles );
     }
 
     /**
-     * Create a {@link org.jcontainer.loom.components.util.info.ComponentInfo} for a Listener with specified classname.
+     * Create a {@link org.jcontainer.loom.components.util.info.ComponentInfo}
+     * for a Listener with specified classname.
      *
      * @param type the listener type
      * @return the ComponentInfo for listener

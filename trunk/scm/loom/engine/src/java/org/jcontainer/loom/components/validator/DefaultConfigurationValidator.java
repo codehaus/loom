@@ -23,12 +23,12 @@ import org.realityforge.configkit.ValidationResult;
 import org.w3c.dom.Element;
 
 /**
- * This component validates the components configuration using
- * the ConfigKit toolkit.
+ * This component validates the components configuration using the ConfigKit
+ * toolkit.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @author Peter Donald
  * @author <a href="mailto:proyal at apache.org">Peter Royal</a>
- * @version $Revision: 1.13 $ $Date: 2003-11-03 06:43:16 $
+ * @version $Revision: 1.14 $ $Date: 2003-11-29 13:44:27 $
  * @dna.component
  */
 public class DefaultConfigurationValidator
@@ -47,7 +47,8 @@ public class DefaultConfigurationValidator
                             final ClassLoader classLoader )
         throws ConfigurationException
     {
-        final SchemaDescriptor schema = component.getInfo().getConfigurationSchema();
+        final SchemaDescriptor schema = component.getInfo()
+            .getConfigurationSchema();
         if( null == schema )
         {
             return true;
@@ -58,9 +59,14 @@ public class DefaultConfigurationValidator
         if( getLogger().isDebugEnabled() )
         {
             final String message =
-                "Validating component " + component.getTemplate().getName() +
-                " of type " + classname +
-                " with schema " + schema.getLocation() + " of type " + schema.getType();
+                "Validating component " +
+                component.getTemplate().getName() +
+                " of type " +
+                classname +
+                " with schema " +
+                schema.getLocation() +
+                " of type " +
+                schema.getType();
             getLogger().debug( message );
         }
 
@@ -75,26 +81,35 @@ public class DefaultConfigurationValidator
             if( null == validator )
             {
                 final String message =
-                    "Missing schema for component " + component.getTemplate().getName() +
-                    " of type " + classname +
-                    " with schema " + schema.getLocation() + " of type " + schema.getType();
+                    "Missing schema for component " +
+                    component.getTemplate().getName() +
+                    " of type " +
+                    classname +
+                    " with schema " +
+                    schema.getLocation() +
+                    " of type " +
+                    schema.getType();
                 getLogger().warn( message );
                 return false;
             }
-            final Configuration configuration = component.getTemplate().getConfiguration();
+            final Configuration configuration = component.getTemplate()
+                .getConfiguration();
             final DefaultConfiguration newConfiguration =
                 new DefaultConfiguration( "root",
                                           configuration.getPath(),
                                           configuration.getLocation() );
             ConfigUtil.copy( newConfiguration, configuration );
-            final Element element = ConfigurationUtil.toElement( newConfiguration );
+            final Element element = ConfigurationUtil.toElement(
+                newConfiguration );
             final ValidationResult result = validator.validate( element );
-            ConfigurationBuilder.processValidationResults( result, getLogger() );
+            ConfigurationBuilder.processValidationResults( result,
+                                                           getLogger() );
             return true;
         }
         catch( Exception e )
         {
-            final String msg = component.getTemplate().getName() + " failed validation due to: "
+            final String msg = component.getTemplate().getName() +
+                " failed validation due to: "
                 + e.getMessage();
             getLogger().warn( msg, e );
             return false;

@@ -91,8 +91,8 @@ import java.util.Map;
 /**
  * A dodgy class to hold all apps classloaders.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-08-17 18:27:33 $
+ * @author Peter Donald
+ * @version $Revision: 1.3 $ $Date: 2003-11-29 13:44:29 $
  * @todo Remove me when kernel is reworked!
  */
 public final class ClassLoaderSet

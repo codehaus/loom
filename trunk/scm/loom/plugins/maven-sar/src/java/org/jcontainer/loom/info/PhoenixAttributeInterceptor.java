@@ -17,19 +17,20 @@ import org.realityforge.metaclass.tools.qdox.DefaultQDoxAttributeInterceptor;
 import org.realityforge.metaclass.tools.qdox.QDoxAttributeInterceptor;
 
 /**
- * This is an Attribute interceptor that invoked during construction
- * of ClassDescriptors that will translate legacy Loom attributes
- * into modern DNA and MX attributes.
+ * This is an Attribute interceptor that invoked during construction of
+ * ClassDescriptors that will translate legacy Loom attributes into modern DNA
+ * and MX attributes.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-11-01 13:15:31 $
+ * @author Peter Donald
+ * @version $Revision: 1.2 $ $Date: 2003-11-29 13:44:31 $
  */
 public class PhoenixAttributeInterceptor
     extends DefaultQDoxAttributeInterceptor
     implements QDoxAttributeInterceptor
 {
     /**
-     * @see QDoxAttributeInterceptor#processClassAttribute(JavaClass, Attribute)
+     * @see QDoxAttributeInterceptor#processClassAttribute(JavaClass,
+        *      Attribute)
      */
     public Attribute processClassAttribute( final JavaClass clazz,
                                             final Attribute attribute )
@@ -67,7 +68,8 @@ public class PhoenixAttributeInterceptor
     }
 
     /**
-     * @see QDoxAttributeInterceptor#processMethodAttribute(JavaMethod, Attribute)
+     * @see QDoxAttributeInterceptor#processMethodAttribute(JavaMethod,
+        *      Attribute)
      */
     public Attribute processMethodAttribute( final JavaMethod method,
                                              final Attribute attribute )
@@ -144,7 +146,8 @@ public class PhoenixAttributeInterceptor
     }
 
     /**
-     * @see QDoxAttributeInterceptor#processClassAttributes(JavaClass, Attribute[])
+     * @see QDoxAttributeInterceptor#processClassAttributes(JavaClass,
+        *      Attribute[])
      */
     public Attribute[] processClassAttributes( final JavaClass clazz,
                                                final Attribute[] attributes )
@@ -167,7 +170,8 @@ public class PhoenixAttributeInterceptor
 
                 final Properties mxParameters = new Properties();
                 setParameter( mxParameters, "type", type );
-                final String topic = type.substring( type.lastIndexOf( '.' ) + 1 );
+                final String topic = type.substring(
+                    type.lastIndexOf( '.' ) + 1 );
                 setParameter( mxParameters, "topic", topic );
 
                 result.add( new Attribute( "mx.interface", mxParameters ) );
@@ -177,7 +181,8 @@ public class PhoenixAttributeInterceptor
     }
 
     /**
-     * @see QDoxAttributeInterceptor#processMethodAttributes(JavaMethod, Attribute[])
+     * @see QDoxAttributeInterceptor#processMethodAttributes(JavaMethod,
+        *      Attribute[])
      */
     public Attribute[] processMethodAttributes( final JavaMethod method,
                                                 final Attribute[] attributes )

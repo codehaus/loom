@@ -90,11 +90,10 @@ import java.io.File;
 import org.realityforge.extension.Extension;
 
 /**
- * This contains the required meta-data for an "Optional Package"
- * (formerly known as "Standard Extension") as described in the manifest
- * of a JAR file.
+ * This contains the required meta-data for an "Optional Package" (formerly
+ * known as "Standard Extension") as described in the manifest of a JAR file.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @author Peter Donald
  */
 public final class OptionalPackage
 {
@@ -121,8 +120,7 @@ public final class OptionalPackage
     }
 
     /**
-     * Constructor for OptionalPackage.
-     * No parameter is allowed to be null.
+     * Constructor for OptionalPackage. No parameter is allowed to be null.
      *
      * @param file absolute location of file
      * @param available the list of Extensions Optional Package provides
@@ -153,8 +151,7 @@ public final class OptionalPackage
     }
 
     /**
-     * Return <code>File</code> object in which OptionalPackage
-     * is contained.
+     * Return <code>File</code> object in which OptionalPackage is contained.
      *
      * @return the file object for OptionalPackage
      */
@@ -164,8 +161,8 @@ public final class OptionalPackage
     }
 
     /**
-     * Return <code>Extension</code>s which OptionalPackage
-     * requires to operate.
+     * Return <code>Extension</code>s which OptionalPackage requires to
+     * operate.
      *
      * @return the extensions required by OptionalPackage
      */
@@ -175,8 +172,7 @@ public final class OptionalPackage
     }
 
     /**
-     * Return <code>Extension</code>s which OptionalPackage
-     * makes available.
+     * Return <code>Extension</code>s which OptionalPackage makes available.
      *
      * @return the extensions made available by OptionalPackage
      */
@@ -187,7 +183,8 @@ public final class OptionalPackage
 
     /**
      * Return <code>true</code> if any of the available <code>Extension</code>s
-     * are compatible with specified extension. Otherwise return <code>false</code>.
+     * are compatible with specified extension. Otherwise return
+     * <code>false</code>.
      *
      * @param extension the extension
      * @return true if compatible, false otherwise

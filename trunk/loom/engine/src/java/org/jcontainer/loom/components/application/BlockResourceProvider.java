@@ -113,24 +113,21 @@ import org.jcontainer.loom.interfaces.Application;
 import org.jcontainer.loom.interfaces.ApplicationContext;
 
 /**
- * The accessor used to access resources for a particular
- * Block or Listener.
+ * The accessor used to access resources for a particular Block or Listener.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.11 $ $Date: 2003-11-03 06:43:15 $
+ * @author Peter Donald
+ * @version $Revision: 1.12 $ $Date: 2003-11-29 13:44:15 $
  */
 class BlockResourceProvider
     extends AbstractLogEnabled
     implements ResourceProvider
 {
-    /**
-     * Context in which Blocks/Listeners operate.
-     */
+    /** Context in which Blocks/Listeners operate. */
     private final ApplicationContext m_context;
 
     /**
-     * The Application which this phase is associated with.
-     * Required to build a ComponentManager.
+     * The Application which this phase is associated with. Required to build a
+     * ComponentManager.
      */
     private final Application m_application;
 
@@ -156,7 +153,6 @@ class BlockResourceProvider
      *
      * @param entry the entry
      * @return a new object
-     * @throws Exception
      */
     public Object createObject( final Object entry )
         throws Exception
@@ -220,11 +216,10 @@ class BlockResourceProvider
     }
 
     /**
-     * Create a ComponentManager object for a
-     * specific Block. This requires that for
-     * each dependency a reference to providing Block
-     * is aaqiured from the Application and placing it in
-     * {@link ComponentManager} under the correct name.
+     * Create a ComponentManager object for a specific Block. This requires that
+     * for each dependency a reference to providing Block is aaqiured from the
+     * Application and placing it in {@link ComponentManager} under the correct
+     * name.
      *
      * @param entry the entry representing block
      * @return the created ComponentManager
@@ -237,11 +232,10 @@ class BlockResourceProvider
     }
 
     /**
-     * Create a {@link ServiceManager} object for a
-     * specific Block. This requires that for
-     * each dependency a reference to providing Block
-     * is aaqiured from the Application and placing it in
-     * {@link ServiceManager} under the correct name.
+     * Create a {@link ServiceManager} object for a specific Block. This
+     * requires that for each dependency a reference to providing Block is
+     * aaqiured from the Application and placing it in {@link ServiceManager}
+     * under the correct name.
      *
      * @param entry the entry representing block
      * @return the created ServiceManager
@@ -266,17 +260,19 @@ class BlockResourceProvider
     private Map createServiceMap( final Object entry )
         throws Exception
     {
-        final BlockEntry blockEntry = getBlockEntry(entry );
+        final BlockEntry blockEntry = getBlockEntry( entry );
         final HashMap map = new HashMap();
         final HashMap sets = new HashMap();
 
         final ComponentInfo info = blockEntry.getInfo();
-        final DependencyDirective[] roles = blockEntry.getTemplate().getDependencies();
+        final DependencyDirective[] roles = blockEntry.getTemplate()
+            .getDependencies();
 
         for( int i = 0; i < roles.length; i++ )
         {
             final DependencyDirective role = roles[ i ];
-            final Object dependency = m_application.getBlock( role.getProviderName() );
+            final Object dependency = m_application.getBlock(
+                role.getProviderName() );
 
             final String key = role.getKey();
             final DependencyDescriptor candidate =
@@ -318,9 +314,11 @@ class BlockResourceProvider
             if( value instanceof List )
             {
                 final List list = (List)value;
-                final DependencyDescriptor dependency = info.getDependency( key );
+                final DependencyDescriptor dependency = info.getDependency(
+                    key );
 
-                final Object[] result = toArray( list, dependency.getComponentType() );
+                final Object[] result = toArray( list,
+                                                 dependency.getComponentType() );
                 map.put( key, result );
 
                 if( key.equals( dependency.getType() ) )
@@ -342,9 +340,9 @@ class BlockResourceProvider
     }
 
     /**
-     * Convert specified list into array of specified type.
-     * Note that the class for the type must be loaded from same
-     * classloader as the elements in the list are loaded from.
+     * Convert specified list into array of specified type. Note that the class
+     * for the type must be loaded from same classloader as the elements in the
+     * list are loaded from.
      *
      * @param list the list
      * @param type the classname of type
@@ -366,7 +364,8 @@ class BlockResourceProvider
         throws Exception
     {
         final ComponentTemplate template = getBlockEntry( entry ).getTemplate();
-        return ConfigurationConverter.toConfiguration( template.getConfiguration() );
+        return ConfigurationConverter.toConfiguration(
+            template.getConfiguration() );
     }
 
     public Parameters createParameters( final Object entry )

@@ -14,9 +14,13 @@ import junit.framework.TestCase;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.impl.ConsoleLogger;
 import org.jcontainer.dna.impl.DefaultConfiguration;
+import org.jcontainer.loom.components.assembler.data.Component1;
+import org.jcontainer.loom.components.assembler.data.Component2;
+import org.jcontainer.loom.components.assembler.data.Component3;
+import org.jcontainer.loom.components.assembler.data.Component4;
+import org.jcontainer.loom.components.assembler.data.Service1;
 import org.jcontainer.loom.components.deployer.PhoenixProfileBuilder;
 import org.jcontainer.loom.components.util.ConfigurationBuilder;
-import org.jcontainer.loom.components.assembler.data.Service1;
 import org.jcontainer.loom.components.util.info.ComponentInfo;
 import org.jcontainer.loom.components.util.info.DependencyDescriptor;
 import org.jcontainer.loom.components.util.info.ServiceDescriptor;
@@ -25,18 +29,14 @@ import org.jcontainer.loom.components.util.metadata.DependencyDirective;
 import org.jcontainer.loom.components.util.metadata.PartitionTemplate;
 import org.jcontainer.loom.components.util.profile.ComponentProfile;
 import org.jcontainer.loom.components.util.profile.PartitionProfile;
-import org.jcontainer.loom.components.assembler.data.Component1;
-import org.jcontainer.loom.components.assembler.data.Component2;
-import org.jcontainer.loom.components.assembler.data.Component3;
-import org.jcontainer.loom.components.assembler.data.Component4;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.xml.sax.InputSource;
 
 /**
- *  An basic test case for the Application.
+ * An basic test case for the Application.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.17 $ $Date: 2003-11-03 06:43:16 $
+ * @author Peter Donald
+ * @version $Revision: 1.18 $ $Date: 2003-11-29 13:44:29 $
  */
 public class ApplicationTestCase
     extends TestCase
@@ -53,37 +53,43 @@ public class ApplicationTestCase
     private static final String C3_NAME = C3_TYPE.getName();
     private static final String C4_NAME = C4_TYPE.getName();
 
-    private static final String S1_ARRAY_NAME = S1_NAME + DependencyDescriptor.ARRAY_POSTFIX;
-    private static final String S1_MAP_NAME = S1_NAME + DependencyDescriptor.MAP_POSTFIX;
+    private static final String S1_ARRAY_NAME = S1_NAME +
+        DependencyDescriptor.ARRAY_POSTFIX;
+    private static final String S1_MAP_NAME = S1_NAME +
+        DependencyDescriptor.MAP_POSTFIX;
 
     private static final ComponentInfo C1 =
         new ComponentInfo( C1_TYPE,
                            ServiceDescriptor.EMPTY_SET,
-                           new DependencyDescriptor[]{new DependencyDescriptor( S1_NAME,
-                                                                                S1_NAME,
-                                                                                false )},
+                           new DependencyDescriptor[]{
+                               new DependencyDescriptor( S1_NAME,
+                                                         S1_NAME,
+                                                         false )},
                            null );
 
     private static final ComponentInfo C2 =
         new ComponentInfo( C2_TYPE,
-                           new ServiceDescriptor[]{new ServiceDescriptor( S1_NAME )},
+                           new ServiceDescriptor[]{
+                               new ServiceDescriptor( S1_NAME )},
                            DependencyDescriptor.EMPTY_SET,
                            null );
 
     private static final ComponentInfo C3 =
         new ComponentInfo( C3_TYPE,
                            ServiceDescriptor.EMPTY_SET,
-                           new DependencyDescriptor[]{new DependencyDescriptor( S1_ARRAY_NAME,
-                                                                                S1_ARRAY_NAME,
-                                                                                false )},
+                           new DependencyDescriptor[]{
+                               new DependencyDescriptor( S1_ARRAY_NAME,
+                                                         S1_ARRAY_NAME,
+                                                         false )},
                            null );
 
     private static final ComponentInfo C4 =
         new ComponentInfo( C4_TYPE,
                            ServiceDescriptor.EMPTY_SET,
-                           new DependencyDescriptor[]{new DependencyDescriptor( S1_MAP_NAME,
-                                                                                S1_MAP_NAME,
-                                                                                false )},
+                           new DependencyDescriptor[]{
+                               new DependencyDescriptor( S1_MAP_NAME,
+                                                         S1_MAP_NAME,
+                                                         false )},
                            null );
 
     public void testBasic()
@@ -92,7 +98,10 @@ public class ApplicationTestCase
         final ComponentTemplate md1 =
             new ComponentTemplate( "c1",
                                    C1_NAME,
-                                   new DependencyDirective[]{new DependencyDirective( S1_NAME, "c2", "c2" )},
+                                   new DependencyDirective[]{
+                                       new DependencyDirective( S1_NAME,
+                                                                "c2",
+                                                                "c2" )},
                                    null,
                                    null,
                                    false );
@@ -107,7 +116,8 @@ public class ApplicationTestCase
         final ComponentProfile cp2 = new ComponentProfile( C2, md2 );
         final PartitionTemplate blockPartitionMD =
             new PartitionTemplate( ContainerConstants.BLOCK_PARTITION,
-                                   new String[]{ContainerConstants.LISTENER_PARTITION},
+                                   new String[]{
+                                       ContainerConstants.LISTENER_PARTITION},
                                    PartitionTemplate.EMPTY_SET,
                                    new ComponentTemplate[]{md1, md2} );
         final PartitionTemplate listenerPartitionMD =
@@ -118,7 +128,8 @@ public class ApplicationTestCase
         final PartitionTemplate partitionMD =
             new PartitionTemplate( "test",
                                    new String[ 0 ],
-                                   new PartitionTemplate[]{blockPartitionMD, listenerPartitionMD},
+                                   new PartitionTemplate[]{blockPartitionMD,
+                                                           listenerPartitionMD},
                                    ComponentTemplate.EMPTY_SET );
 
         final PartitionProfile blockPartitionProfile =
@@ -131,7 +142,8 @@ public class ApplicationTestCase
                                   ComponentProfile.EMPTY_SET );
         final PartitionProfile partitionProfile =
             new PartitionProfile( partitionMD,
-                                  new PartitionProfile[]{blockPartitionProfile, listenerPartitionProfile},
+                                  new PartitionProfile[]{blockPartitionProfile,
+                                                         listenerPartitionProfile},
                                   ComponentProfile.EMPTY_SET );
         runApplicationTest( partitionProfile );
     }
@@ -141,14 +153,14 @@ public class ApplicationTestCase
     {
         final DependencyDirective[] c3Deps =
             new DependencyDirective[]{new DependencyDirective( S1_ARRAY_NAME,
-                                                             "c2a",
-                                                             "c2a" ),
-                                     new DependencyDirective( S1_ARRAY_NAME,
-                                                             "c2b",
-                                                             "c2b" ),
-                                     new DependencyDirective( S1_ARRAY_NAME,
-                                                             "c2c",
-                                                             "c2c" )};
+                                                               "c2a",
+                                                               "c2a" ),
+                                      new DependencyDirective( S1_ARRAY_NAME,
+                                                               "c2b",
+                                                               "c2b" ),
+                                      new DependencyDirective( S1_ARRAY_NAME,
+                                                               "c2c",
+                                                               "c2c" )};
         final ComponentTemplate md3 =
             new ComponentTemplate( "c3",
                                    C3_NAME,
@@ -184,9 +196,13 @@ public class ApplicationTestCase
 
         final PartitionTemplate blockPartitionMD =
             new PartitionTemplate( ContainerConstants.BLOCK_PARTITION,
-                                   new String[]{ContainerConstants.LISTENER_PARTITION},
+                                   new String[]{
+                                       ContainerConstants.LISTENER_PARTITION},
                                    PartitionTemplate.EMPTY_SET,
-                                   new ComponentTemplate[]{md3, md2a, md2b, md2c} );
+                                   new ComponentTemplate[]{md3,
+                                                           md2a,
+                                                           md2b,
+                                                           md2c} );
         final PartitionTemplate listenerPartitionMD =
             new PartitionTemplate( ContainerConstants.LISTENER_PARTITION,
                                    new String[ 0 ],
@@ -195,20 +211,25 @@ public class ApplicationTestCase
         final PartitionTemplate partitionMD =
             new PartitionTemplate( "test",
                                    new String[ 0 ],
-                                   new PartitionTemplate[]{blockPartitionMD, listenerPartitionMD},
+                                   new PartitionTemplate[]{blockPartitionMD,
+                                                           listenerPartitionMD},
                                    ComponentTemplate.EMPTY_SET );
 
         final PartitionProfile blockPartitionProfile =
             new PartitionProfile( blockPartitionMD,
                                   PartitionProfile.EMPTY_SET,
-                                  new ComponentProfile[]{cp3, cp2a, cp2b, cp2c} );
+                                  new ComponentProfile[]{cp3,
+                                                         cp2a,
+                                                         cp2b,
+                                                         cp2c} );
         final PartitionProfile listenerPartitionProfile =
             new PartitionProfile( listenerPartitionMD,
                                   PartitionProfile.EMPTY_SET,
                                   ComponentProfile.EMPTY_SET );
         final PartitionProfile partitionProfile =
             new PartitionProfile( partitionMD,
-                                  new PartitionProfile[]{blockPartitionProfile, listenerPartitionProfile},
+                                  new PartitionProfile[]{blockPartitionProfile,
+                                                         listenerPartitionProfile},
                                   ComponentProfile.EMPTY_SET );
         runApplicationTest( partitionProfile );
     }
@@ -218,14 +239,14 @@ public class ApplicationTestCase
     {
         final DependencyDirective[] c4Deps =
             new DependencyDirective[]{new DependencyDirective( S1_MAP_NAME,
-                                                             "c2a",
-                                                             "c2a" ),
-                                     new DependencyDirective( S1_MAP_NAME,
-                                                             "c2b",
-                                                             "c2b" ),
-                                     new DependencyDirective( S1_MAP_NAME,
-                                                             "c2c",
-                                                             "anAlias" )};
+                                                               "c2a",
+                                                               "c2a" ),
+                                      new DependencyDirective( S1_MAP_NAME,
+                                                               "c2b",
+                                                               "c2b" ),
+                                      new DependencyDirective( S1_MAP_NAME,
+                                                               "c2c",
+                                                               "anAlias" )};
         final ComponentTemplate md4 =
             new ComponentTemplate( "c4",
                                    C4_NAME,
@@ -261,9 +282,13 @@ public class ApplicationTestCase
 
         final PartitionTemplate blockPartitionMD =
             new PartitionTemplate( ContainerConstants.BLOCK_PARTITION,
-                                   new String[]{ContainerConstants.LISTENER_PARTITION},
+                                   new String[]{
+                                       ContainerConstants.LISTENER_PARTITION},
                                    PartitionTemplate.EMPTY_SET,
-                                   new ComponentTemplate[]{md4, md2a, md2b, md2c} );
+                                   new ComponentTemplate[]{md4,
+                                                           md2a,
+                                                           md2b,
+                                                           md2c} );
         final PartitionTemplate listenerPartitionMD =
             new PartitionTemplate( ContainerConstants.LISTENER_PARTITION,
                                    new String[ 0 ],
@@ -272,20 +297,25 @@ public class ApplicationTestCase
         final PartitionTemplate partitionMD =
             new PartitionTemplate( "test",
                                    new String[ 0 ],
-                                   new PartitionTemplate[]{blockPartitionMD, listenerPartitionMD},
+                                   new PartitionTemplate[]{blockPartitionMD,
+                                                           listenerPartitionMD},
                                    ComponentTemplate.EMPTY_SET );
 
         final PartitionProfile blockPartitionProfile =
             new PartitionProfile( blockPartitionMD,
                                   PartitionProfile.EMPTY_SET,
-                                  new ComponentProfile[]{cp4, cp2a, cp2b, cp2c} );
+                                  new ComponentProfile[]{cp4,
+                                                         cp2a,
+                                                         cp2b,
+                                                         cp2c} );
         final PartitionProfile listenerPartitionProfile =
             new PartitionProfile( listenerPartitionMD,
                                   PartitionProfile.EMPTY_SET,
                                   ComponentProfile.EMPTY_SET );
         final PartitionProfile partitionProfile =
             new PartitionProfile( partitionMD,
-                                  new PartitionProfile[]{blockPartitionProfile, listenerPartitionProfile},
+                                  new PartitionProfile[]{blockPartitionProfile,
+                                                         listenerPartitionProfile},
                                   ComponentProfile.EMPTY_SET );
         runApplicationTest( partitionProfile );
     }
@@ -309,14 +339,17 @@ public class ApplicationTestCase
         final URL resource = getClass().getResource( config );
         assertNotNull( "Config resource: " + config, resource );
         final Configuration assembly =
-            ConfigurationBuilder.build( new InputSource( resource.toExternalForm() ),
-                                        ConfigurationBuilder.ASSEMBLY_SCHEMA,
-                                        new ConsoleLogger() );
+            ConfigurationBuilder.build(
+                new InputSource( resource.toExternalForm() ),
+                ConfigurationBuilder.ASSEMBLY_SCHEMA,
+                new ConsoleLogger() );
         final Map parameters = new HashMap();
         parameters.put( ContainerConstants.ASSEMBLY_NAME, "test" );
         parameters.put( ContainerConstants.ASSEMBLY_DESCRIPTOR, assembly );
-        parameters.put( ContainerConstants.CONFIG_DESCRIPTOR, new DefaultConfiguration( "config", "", "" ) );
-        parameters.put( ContainerConstants.ASSEMBLY_CLASSLOADER, getClass().getClassLoader() );
+        parameters.put( ContainerConstants.CONFIG_DESCRIPTOR,
+                        new DefaultConfiguration( "config", "", "" ) );
+        parameters.put( ContainerConstants.ASSEMBLY_CLASSLOADER,
+                        getClass().getClassLoader() );
         return assembler.buildProfile( parameters );
     }
 }

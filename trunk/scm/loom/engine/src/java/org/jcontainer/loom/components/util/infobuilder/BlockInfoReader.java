@@ -18,17 +18,17 @@ import org.realityforge.metaclass.Attributes;
 import org.realityforge.metaclass.model.Attribute;
 
 /**
- * A BlockInfoReader is responsible for building ComponentInfo
- * objects from DNA MetaClass descriptors.
+ * A BlockInfoReader is responsible for building ComponentInfo objects from DNA
+ * MetaClass descriptors.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-10-18 07:29:55 $
+ * @author Peter Donald
+ * @version $Revision: 1.3 $ $Date: 2003-11-29 13:44:26 $
  */
 public final class BlockInfoReader
 {
     /**
-     * Create a ComponentInfo object for specified
-     * classname, in specified ClassLoader.
+     * Create a ComponentInfo object for specified classname, in specified
+     * ClassLoader.
      *
      * @param type The Components type
      * @return the created ComponentInfo
@@ -41,7 +41,9 @@ public final class BlockInfoReader
         if( null == attribute )
         {
             final String message =
-                "Type " + type.getName() + " does not specify the " +
+                "Type " +
+                type.getName() +
+                " does not specify the " +
                 "required MetaClass attributes to be a Component";
             throw new Exception( message );
         }
@@ -67,7 +69,8 @@ public final class BlockInfoReader
     private SchemaDescriptor buildConfigurationSchema( final Class type )
     {
         final Class[] types =
-            new Class[]{org.apache.avalon.framework.configuration.Configuration.class};
+            new Class[]{
+                org.apache.avalon.framework.configuration.Configuration.class};
         try
         {
             final Method method = type.getMethod( "configure", types );
@@ -88,8 +91,8 @@ public final class BlockInfoReader
     }
 
     /**
-     * A utility method to build an array of DependencyDescriptor
-     * objects from specified configuration and classname.
+     * A utility method to build an array of DependencyDescriptor objects from
+     * specified configuration and classname.
      *
      * @param type the component type
      * @return the created DependencyDescriptor
@@ -115,7 +118,8 @@ public final class BlockInfoReader
             deps.add( new DependencyDescriptor( key, depType, optional ) );
         }
 
-        return (DependencyDescriptor[])deps.toArray( DependencyDescriptor.EMPTY_SET );
+        return (DependencyDescriptor[])deps.toArray(
+            DependencyDescriptor.EMPTY_SET );
     }
 
     /**
@@ -129,7 +133,8 @@ public final class BlockInfoReader
         try
         {
             final Class[] types1 =
-                new Class[]{org.apache.avalon.framework.component.ComponentManager.class};
+                new Class[]{
+                    org.apache.avalon.framework.component.ComponentManager.class};
             return type.getMethod( "compose", types1 );
         }
         catch( final NoSuchMethodException nsme )
@@ -138,7 +143,8 @@ public final class BlockInfoReader
         try
         {
             final Class[] types2 =
-                new Class[]{org.apache.avalon.framework.service.ServiceManager.class};
+                new Class[]{
+                    org.apache.avalon.framework.service.ServiceManager.class};
             return type.getMethod( "service", types2 );
         }
         catch( NoSuchMethodException e )
@@ -148,8 +154,8 @@ public final class BlockInfoReader
     }
 
     /**
-     * A utility method to build an array of ServiceDescriptor
-     * objects from specified configuraiton.
+     * A utility method to build an array of ServiceDescriptor objects from
+     * specified configuraiton.
      *
      * @param type the type
      * @return the created ServiceDescriptor
@@ -158,7 +164,8 @@ public final class BlockInfoReader
     {
         final List services = new ArrayList();
 
-        final Attribute[] attributes = Attributes.getAttributes( type, "dna.service" );
+        final Attribute[] attributes = Attributes.getAttributes( type,
+                                                                 "dna.service" );
         for( int i = 0; i < attributes.length; i++ )
         {
             final Attribute attribute = attributes[ i ];
@@ -166,6 +173,7 @@ public final class BlockInfoReader
             services.add( new ServiceDescriptor( serviceType ) );
         }
 
-        return (ServiceDescriptor[])services.toArray( ServiceDescriptor.EMPTY_SET );
+        return (ServiceDescriptor[])services.toArray(
+            ServiceDescriptor.EMPTY_SET );
     }
 }

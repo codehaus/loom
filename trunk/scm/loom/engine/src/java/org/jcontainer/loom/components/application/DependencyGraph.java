@@ -92,9 +92,7 @@ import org.jcontainer.loom.components.util.metadata.DependencyDirective;
 import org.jcontainer.loom.components.util.profile.ComponentProfile;
 
 /**
- *
- *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @author Peter Donald
  */
 class DependencyGraph
 {
@@ -104,11 +102,11 @@ class DependencyGraph
     }
 
     /**
-     * Method to generate an ordering of nodes to traverse.
-     * It is expected that the specified Blocks have passed
-     * verification tests and are well formed.
+     * Method to generate an ordering of nodes to traverse. It is expected that
+     * the specified Blocks have passed verification tests and are well formed.
      *
-     * @param forward true if forward dependencys traced, false if dependencies reversed
+     * @param forward true if forward dependencys traced, false if dependencies
+     * reversed
      * @param blocks the blocks to traverse
      * @return the ordered node names
      */
@@ -165,23 +163,26 @@ class DependencyGraph
                                            final ArrayList done,
                                            final ArrayList order )
     {
-        final DependencyDescriptor[] descriptors = block.getInfo().getDependencies();
+        final DependencyDescriptor[] descriptors = block.getInfo()
+            .getDependencies();
         for( int i = 0; i < descriptors.length; i++ )
         {
             final String key = descriptors[ i ].getKey();
-            final DependencyDirective[] dependencySet = block.getTemplate().getDependencies( key );
+            final DependencyDirective[] dependencySet = block.getTemplate()
+                .getDependencies( key );
             for( int j = 0; j < dependencySet.length; j++ )
             {
                 final DependencyDirective dependency = dependencySet[ j ];
-                final ComponentProfile other = getBlock( dependency.getProviderName(), blocks );
+                final ComponentProfile other = getBlock(
+                    dependency.getProviderName(), blocks );
                 visitBlock( other, blocks, true, done, order );
             }
         }
     }
 
     /**
-     * Traverse all reverse dependencies of specified block.
-     * A reverse dependency are those that dependend on block.
+     * Traverse all reverse dependencies of specified block. A reverse
+     * dependency are those that dependend on block.
      *
      * @param block the ComponentProfile
      */
@@ -195,7 +196,8 @@ class DependencyGraph
         for( int i = 0; i < blocks.length; i++ )
         {
             final ComponentProfile other = blocks[ i ];
-            final DependencyDirective[] roles = other.getTemplate().getDependencies();
+            final DependencyDirective[] roles = other.getTemplate()
+                .getDependencies();
 
             for( int j = 0; j < roles.length; j++ )
             {
