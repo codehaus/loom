@@ -3,7 +3,7 @@
     <extend>${basedir}/../project.xml</extend>
     <name>Loom Plugins</name>
     <groupId>loom</groupId>
-    <currentVersion>1.0-rc1</currentVersion>
+    <currentVersion>1.0-rc2</currentVersion>
 
     <distributionDirectory>/home/projects/loom/dist</distributionDirectory>
     <distributionSite>dist.codehaus.org</distributionSite>
