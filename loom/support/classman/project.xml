@@ -10,7 +10,7 @@
     <shortDescription>Toolkit to construct ClassLoader lattices from an XML descriptor.</shortDescription>
 
     <description>
-        The Loader toolkit is a set of utility classes that enable
+        The ClassMan toolkit is a set of utility classes that enable
         ClassLoader hierarchies to be constructed from xml
         configurations.
     </description>
