@@ -5,7 +5,7 @@
  * Software License version 1.1, a copy of which has been included
  * with this distribution in the LICENSE.txt file.
  */
-package org.jcontainer.loom.tools.configuration;
+package org.jcontainer.loom.components.util;
 
 import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
@@ -32,7 +32,7 @@ import org.jcontainer.dna.impl.SAXConfigurationHandler;
  * Utility class used to load Configuration trees from XML files.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.10 $ $Date: 2003-10-15 02:04:51 $
+ * @version $Revision: 1.1 $ $Date: 2003-10-16 05:23:54 $
  */
 public class ConfigurationBuilder
 {

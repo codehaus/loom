@@ -14,7 +14,7 @@ import org.jcontainer.dna.impl.ConfigurationUtil;
 import org.jcontainer.dna.impl.DefaultConfiguration;
 import org.jcontainer.loom.components.util.ConfigUtil;
 import org.jcontainer.loom.interfaces.ConfigurationValidator;
-import org.jcontainer.loom.tools.configuration.ConfigurationBuilder;
+import org.jcontainer.loom.components.util.ConfigurationBuilder;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.profile.ComponentProfile;
 import org.realityforge.configkit.ComponentConfigUtil;
@@ -28,7 +28,7 @@ import org.w3c.dom.Element;
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author <a href="mailto:proyal at apache.org">Peter Royal</a>
- * @version $Revision: 1.10 $ $Date: 2003-10-16 00:56:16 $
+ * @version $Revision: 1.11 $ $Date: 2003-10-16 05:23:54 $
  * @dna.component
  */
 public class DefaultConfigurationValidator
