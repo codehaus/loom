@@ -16,7 +16,9 @@ import org.apache.excalibur.instrument.manager.DefaultInstrumentManager;
  * from the <a href="http://excalibur.apache.org">Apache Excalibur</a> project.
  *
  * @author Johan Sjöberg
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
+ *
+ * @dna.component
  */
 public class LoomInstrumentManager extends DNAInstrumentManager
 {
