@@ -28,7 +28,7 @@ import org.w3c.dom.Element;
  *
  * @author Peter Donald
  * @author Peter Royal
- * @version $Revision: 1.2 $ $Date: 2004-05-01 12:48:35 $
+ * @version $Revision: 1.3 $ $Date: 2004-07-02 23:24:30 $
  * @dna.component
  */
 public class DefaultConfigurationValidator
@@ -37,6 +37,10 @@ public class DefaultConfigurationValidator
 {
     /**
      * Check to see if configuration is valid for specified component.
+     * <br/>
+     * Schema type declarations of type 'relax-ng' will be substituted with
+     * the full name space 'http://relaxng.org/ns/structure/1.0'. The 'relax-ng'
+     * schema-type is deprecated and shouldn't be used anymore.
      *
      * @param component the ComponentProfile
      * @param classLoader the ClassLoader (to load schema from if necessary)
@@ -48,7 +52,7 @@ public class DefaultConfigurationValidator
         throws ConfigurationException
     {
         final SchemaDescriptor schema = component.getInfo()
-            .getConfigurationSchema();
+          .getConfigurationSchema();
         if( null == schema )
         {
             return true;
@@ -73,11 +77,26 @@ public class DefaultConfigurationValidator
         //Get the uri of configuration schema type
         try
         {
-            final ConfigValidator validator =
-                ComponentConfigUtil.getComponentConfigValidator( classname,
-                                                                 classLoader,
-                                                                 schema.getLocation(),
-                                                                 schema.getType() );
+            String schemaType;
+            if( "relax-ng".equals( schema.getType() ) )
+            {
+                if( getLogger().isDebugEnabled() )
+                {
+                    final String message = "Schema declaration of type [relax-ng]"
+                      + " is deprecated. Use the full namespace instead.";
+                    getLogger().debug( message );
+                }
+                schemaType = "http://relaxng.org/ns/structure/1.0";
+            }
+            else
+            {
+                schemaType = schema.getType();
+            }
+            final ConfigValidator validator = ComponentConfigUtil
+              .getComponentConfigValidator( classname,
+                                                          classLoader,
+                                                          schema.getLocation(),
+                                                          schemaType );
             if( null == validator )
             {
                 final String message =
