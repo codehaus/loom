@@ -16,6 +16,7 @@
             <item href="/getting-started.html" name="Getting started"/>
             <item href="/downloads.html" name="Downloads"/>
             <item href="/install.html" name="Install"/>
+            <item href="/porting-guide.html" name="Porting Guide"/>
             <item href="/applications.html" name="Applications"/>
         </menu>
         <menu name="Guide">
