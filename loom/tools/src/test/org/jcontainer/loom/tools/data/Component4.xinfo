@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<!DOCTYPE blockinfo PUBLIC "-//PHOENIX/Block Info DTD Version 1.0//EN"
-                  "http://jakarta.apache.org/avalon/dtds/phoenix/blockinfo_1.0.dtd">
+<!DOCTYPE blockinfo PUBLIC "-//LOOM/Block Info DTD Version 1.0//EN"
+                  "http://jcontainer.codehaus.org/loom/blockinfo_1.0.dtd">
 
 <blockinfo>
 

@@ -14,4 +14,19 @@
     <entity
         publicId="-//PHOENIX/Assembly DTD Version 1.1//EN"
         resource="org/jcontainer/loom/tools/assembly.dtd"/>
+    <entity
+        publicId="-//LOOM/Block Info DTD Version 1.0//EN"
+        resource="org/jcontainer/loom/tools/blockinfo.dtd"/>
+    <entity
+        publicId="-//LOOM/Component Info DTD Version 1.0//EN"
+        resource="org/jcontainer/loom/tools/componentinfo.dtd"/>
+    <entity
+        publicId="-//LOOM/Assembly DTD Version 1.0//EN"
+        resource="org/jcontainer/loom/tools/assembly.dtd"/>
+    <entity
+        publicId="-//LOOM/Mx Info DTD Version 1.0//EN"
+        resource="org/jcontainer/loom/tools/mxinfo.dtd"/>
+    <entity
+        publicId="-//LOOM/Assembly DTD Version 1.1//EN"
+        resource="org/jcontainer/loom/tools/assembly.dtd"/>
 </catalog>
