@@ -89,7 +89,6 @@ package org.jcontainer.loom.components.assembler;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import org.jcontainer.dna.AbstractLogEnabled;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.ConfigurationException;
 import org.jcontainer.loom.interfaces.ContainerConstants;
@@ -108,10 +107,9 @@ import org.realityforge.salt.i18n.Resources;
  * and is in the format specified for <tt>assembly.xml</tt> files.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.9 $ $Date: 2003-10-15 04:20:42 $
+ * @version $Revision: 1.10 $ $Date: 2003-10-16 05:11:32 $
  */
 public class Assembler
-    extends AbstractLogEnabled
     implements MetaDataBuilder
 {
     private static final Resources REZ =

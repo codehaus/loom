@@ -31,7 +31,7 @@ import org.xml.sax.InputSource;
  *  An basic test case for the LogManager.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-10-15 04:20:42 $
+ * @version $Revision: 1.6 $ $Date: 2003-10-16 05:11:33 $
  */
 public class AssemblerTestCase
     extends TestCase
@@ -159,7 +159,6 @@ public class AssemblerTestCase
         throws Exception
     {
         final PhoenixProfileBuilder assembler = new PhoenixProfileBuilder();
-        assembler.enableLogging( new ConsoleLogger() );
         final URL resource = getClass().getResource( config );
         assertNotNull( "Config resource: " + config, resource );
         final Configuration assembly =

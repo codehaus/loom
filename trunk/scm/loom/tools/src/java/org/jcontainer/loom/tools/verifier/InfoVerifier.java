@@ -9,12 +9,10 @@ package org.jcontainer.loom.tools.verifier;
 
 import org.jcontainer.dna.LogEnabled;
 import org.jcontainer.dna.Logger;
-import org.jcontainer.loom.tools.info.ComponentInfo;
-import org.jcontainer.loom.tools.info.ServiceDescriptor;
+import org.realityforge.metaclass.Attributes;
+import org.realityforge.metaclass.model.Attribute;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
-import org.realityforge.metaclass.model.Attribute;
-import org.realityforge.metaclass.Attributes;
 
 /**
  * This Class verifies that an implementation is valid wrt the
@@ -36,7 +34,7 @@ import org.realityforge.metaclass.Attributes;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.12 $ $Date: 2003-10-16 04:35:58 $
+ * @version $Revision: 1.13 $ $Date: 2003-10-16 05:11:33 $
  */
 public class InfoVerifier
     implements LogEnabled
@@ -59,27 +57,24 @@ public class InfoVerifier
 
     /**
      * Verfiy that specified components designate classes that implement the
-     * advertised interfaces. And confrorm to expectations of {@link ComponentInfo}.
+     * advertised interfaces.
      *
      * @param name the name of component
      * @param type the component type
      * @throws VerifyException if an error occurs
      */
-    public void verifyType( final String name,
-                            final ComponentInfo info,
-                            final Class type )
+    public void verifyType( final String name, final Class type )
         throws VerifyException
     {
         final Attribute attribute =
             Attributes.getAttribute( type, "dna.component" );
         if( null == attribute )
         {
-
+            final String message =
+                "Component " + name + " does not specify correct metadata";
+            throw new VerifyException( message );
         }
-        final Class[] interfaces =
-            getServiceClasses( name,
-                               info.getServices(),
-                               type.getClassLoader() );
+        final Class[] interfaces = getServiceClasses( name, type );
 
         m_verifier.verifyComponent( name, type, interfaces, false );
     }
@@ -90,20 +85,21 @@ public class InfoVerifier
      * interfaces.
      *
      * @param name the name of component
-     * @param services the services the component offers
-     * @param classLoader the classLoader
+     * @param type the component type
      * @return an array of Classes for all the services
      * @throws VerifyException if an error occurs
      */
     protected Class[] getServiceClasses( final String name,
-                                         final ServiceDescriptor[] services,
-                                         final ClassLoader classLoader )
+                                         final Class type )
         throws VerifyException
     {
-        final Class[] classes = new Class[ services.length ];
-        for( int i = 0; i < services.length; i++ )
+        final ClassLoader classLoader = type.getClassLoader();
+        final Attribute[] attributes =
+            Attributes.getAttributes( type, "dna.service" );
+        final Class[] classes = new Class[ attributes.length ];
+        for( int i = 0; i < attributes.length; i++ )
         {
-            final String classname = services[ i ].getType();
+            final String classname = attributes[ i ].getParameter( "type" );
             try
             {
                 classes[ i ] = classLoader.loadClass( classname );

@@ -7,12 +7,12 @@
  */
 package org.jcontainer.loom.tools.data;
 
-import org.jcontainer.loom.tools.data.Service2;
-
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-07-07 10:34:51 $
+ * @version $Revision: 1.2 $ $Date: 2003-10-16 05:11:33 $
+ * @phoenix:block
+ * @dna.service type="org.jcontainer.loom.tools.data.Service2"
  */
 public class Component2
     implements Service2

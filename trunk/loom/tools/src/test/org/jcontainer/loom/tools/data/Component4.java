@@ -16,13 +16,19 @@ import org.apache.avalon.framework.service.Serviceable;
  * A test component.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-09-02 04:37:29 $
+ * @version $Revision: 1.3 $ $Date: 2003-10-16 05:11:33 $
+ * @phoenix:block
  */
 public class Component4
     implements Serviceable
 {
     private static final String KEY = Service2.class.getName() + "{}";
 
+    /**
+     * @dna.dependency key="org.jcontainer.loom.tools.data.Service2{}"
+     *                 type="org.jcontainer.loom.tools.data.Service2{}"
+     *                 optional="false"
+     */
     public void service( final ServiceManager manager )
         throws ServiceException
     {

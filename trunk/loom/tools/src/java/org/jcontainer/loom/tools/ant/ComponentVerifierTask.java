@@ -13,7 +13,6 @@ import org.apache.tools.ant.Task;
 import org.apache.tools.ant.types.Path;
 import org.jcontainer.dna.impl.ConsoleLogger;
 import org.jcontainer.loom.tools.info.ComponentInfo;
-import org.jcontainer.loom.tools.infobuilder.BlockInfoReader;
 import org.jcontainer.loom.tools.verifier.InfoVerifier;
 
 /**
@@ -22,7 +21,7 @@ import org.jcontainer.loom.tools.verifier.InfoVerifier;
  * is compatible with the {@link ComponentInfo}.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.10 $ $Date: 2003-10-16 04:32:55 $
+ * @version $Revision: 1.11 $ $Date: 2003-10-16 05:11:33 $
  */
 public class ComponentVerifierTask
     extends Task
@@ -60,7 +59,6 @@ public class ComponentVerifierTask
 
         final AntClassLoader classLoader = new AntClassLoader( getProject(), m_classpath );
 
-        final BlockInfoReader builder = new BlockInfoReader();
         final InfoVerifier verifier = new InfoVerifier();
         verifier.enableLogging( new ConsoleLogger( ConsoleLogger.LEVEL_INFO ) );
 
@@ -68,11 +66,7 @@ public class ComponentVerifierTask
         {
             final Class type =
                 classLoader.loadClass( m_classname );
-            final ComponentInfo componentInfo =
-                builder.buildComponentInfo( type );
-            verifier.verifyType( "test",
-                                 componentInfo,
-                                 type );
+            verifier.verifyType( "test", type );
         }
         catch( final Exception e )
         {
