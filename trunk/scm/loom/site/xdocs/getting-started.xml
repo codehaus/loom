@@ -1,153 +1,134 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <document>
 
- <properties>
-   <title>Getting Started</title>
+	<properties>
+	   <title>Getting Started</title>
+	   <author email="jcontainer-interest@codehaus.org ">Loom Documentation Team</author>
+	   <author email="leosimons@apache.org">Leo Simons</author>
+	   <author email="Paul_Hammant@yahoo.com">Paul Hammant</author>
+	   <author email="mauro.talevi at aquilonia.org">Mauro Talevi</author>
+	</properties>
 
-
-
- <author email="jcontainer-interest@codehaus.org ">Loom Documentation Team</author>
-    <author email="leosimons@apache.org">Leo Simons</author>
-    <author email="Paul_Hammant@yahoo.com">Paul Hammant</author>
-  </properties>
-
-<body>
-
-<section name="Introduction">
-
-<p>
-    This document provides developers with simple documentation for getting
-    started with Loom. For information about the overall structure of
-    Avalon Framework (on which Loom is based), please refer to the
-    <a href="http://avalon.apache.org/framework/index.html">Framework documentation</a>.
-</p>
-
-<p>
-    Instructions for downloading and installing Loom can be found on the
-    <a href="install.html">Install</a> document.
-</p>
-
-<p>
-    More detailed instructions will be added to this document in the future. Feel free
-    to send in patches ;)
-</p>
-
-</section>
-
-<section name="View Detailed API Documentation">
-
-<p>
-    To generate a full set of detailed API documentation for Avalon, go to the base
-    directory of source distribution and run the appropriate build script for your
-    platform with the parameter 'javadocs'.
-
+	<body>
+	
+	<section name="Introduction">
+		<p>
+		    This document aims to provides developers new to Loom with a few simple
+		    examples to help them getting started with Loom. 
+		</p>
+		<p>
+		    Instructions for installing Loom can be found on the
+		    <a href="install.html">Install</a> document.
+		</p>
+		
+	</section>
+	
+	<section name="The HelloWorld example">
+		
+		<p>
+		    Loom would not be a serious application if it did not have an HellWorld example!
+		    It will allow you to verify that you've successfully built Loom.
+		</p>
+		<p>
+		    Firstly you will need to build the helloworld.sar file.  A SAR file is an archive
+		    for Loom applications which conveniently holds all the libraries and deployment 
+		    information the the given application.  If you are familiar with J2EE EAR and WAR
+		    files you'll find it very similar.   
+		</p>
+		<p>
+			To build the helloworld.sar 
 <source>
-> build.[bat|sh] javadocs
+cd loom/examples/helloworld
+maven 
 </source>
-
-</p>
-
-</section>
-<section name="Run the HelloWorld example">
-
-<p>
-    After you have successfully built Loom, you can verify that it
-    has compiled correctly by running the HelloWorld demo Service Application.
-</p>
-<p>
-    Firstly you will need to get the demo-helloworld.sar file and drop it into
-    the apps directory of Loom.  Currently it needs to be built from CVS -
-    <i>TODO -- demo application</i>
-</p>
-<p>
-    Then fire up phoenix with the following command:
-
-    <source>
-> bin/run.[bat|sh]
-    </source>
-</p>
-
-<p>
-    Next, fire up your favorite webbrowser and point it to http://localhost:8999/,
-    where localhost is the network name of your machine ("localhost") should
-    work on all windows platforms.<br/>
-    If all goes well, you will see something like the following:
-
-    <source>
+			The resulting artifact will be found in the target/helloworld.sar. 
+			Copy it into apps/ directory of the Loom distribution.  
+		</p>
+		
+		<p>
+		    Then fire up Loom by simply executing the run script in the distribution bin/ directory:
+<source>
+cd [distribution]/bin
+run.[bat|sh]
+</source>
+		</p>
+		
+		<p>
+		    Next point your favorite web browser to http://localhost:8999/,
+		    where localhost is the network name alias of your machine ("localhost"). 
+		    It should be recognised on all platforms. In the unlikely case it doesn't replace
+		    localhost with 127.0.0.1<br/>
+		    If all goes well, you will see something like the following:
+		
+<source>
 Hello World!
 Requests so far = 1
 you are 127.0.0.1 at 127.0.0.1
-    </source>
-</p>
-<p>
-    This shows that Loom has unpacked and launched the server application contained
-    within the demo-helloworld.sar file.  If you close and relaunch Loom, it should
-    restart the application.
-</p>
-<p>
-    As examples go this is a fairly simple one.  You should ignore the altrmihelloworldserver,
-    rmihelloworldserver and soaphelloworldserver packages as they are retrofitting the
-    helloworld demo with remote capability using three technologies.  HelloWorld uses
-    connection management from the Avalon-Cornerstone project, which is good as it allows us to
-    share connection pooling across multiple servers.
-</p>
-</section>
-<section name="The Loom Developer Kit - A different example">
-<p>
-    This self contained kit could be considered a starter project for someone wanting to make a
-    Loom compatible application.  The idea is that you start with this skeleton including
-    Ant build script and then add in more and more as your se code to copy from elsewhere.
-</p>
-<p>
-    This  also demonstrates that it is possible to make a server application that is dual mode.
-    Dual mode to us is the ability for the server application to run inside Loom and to
-    stand-alone from the command line.  It is a little bit of a sleight of hand as the codebase
-    would be zipped into two forms - the sar file for phoenix and a jar file for standalone.
-</p>
-<p>
-    The Loom development kit originates in Loom's CVS.  When you have that file, unzip it
-    and immediately launch ant to make the jars and sars.  There are four:
-    </p>
-      <ol>
-      <li>phoenix-demo.sar - the server app in Loom form</li>
-      <li>phoenix-demo-block.sar - used inside the sar</li>
-      <li>phoenix-demo-client.sar - a client app to test the server</li>
-      <li>phoenix-demo-server.sar - the server app in standalone form</li>
-    </ol>
-      <p>
-
-    The Server app in standalone mode after being tested with the client app(see below):
-
-    <source>
-java -jar phoenix-demo-server.jar
-PDK Demo listening on port 7654
+</source>
+		</p>
+		<p>
+		    This shows that Loom has unpacked and launched the server application contained
+		    within the helloworld.sar file.  
+		    To stop Loom simply use CTRL-C on the console window.  You can stop and start
+		    as many times as you need.  Once the SAR file has been unpacked in the apps/helloworld
+		    directory it will not attempt to unpack it again. 
+		    So if you replace the helloworld.sar file with a new version, you must remove the 
+		    unpacked directory for it to be redeployed.
+		</p>
+		<p>
+		    As examples go this is a fairly simple one.  Next we will deal with more complex example.
+		</p>
+	</section>
+	
+	<section name="A demo application">
+	<p>
+	    This demo application could be considered a starter project for someone wanting to make a
+	    Loom compatible application.  You can start with this skeleton which has several
+	    important features of real applications and then add in your core business logic.
+	</p>
+	<p>
+	    This demo application also demonstrates that it is possible to make a server application that is dual mode.
+	    Dual mode to us is the ability for the server application to run inside Loom and to
+	    stand-alone from the command line.  The only difference is that the app
+	    needs to be zipped into two forms - the sar file for Loom and a jar file for standalone.
+	</p>
+	<p>
+	    To build the Loom demo application 
+<source>
+cd loom/examples/demo
+maven 
+</source>
+		The build artifacts will be found in the target/ directory:
+	    </p>
+	      <ol>
+	  	    <li>loom-demo.sar - the server app in Loom form</li>
+	   	   	<li>loom-demo-block.sar - used inside the sar</li>
+	    	<li>loom-demo-client.jar - a client app to test the server</li>
+	      	<li>loom-demo-server.jar - the server app in standalone form</li>
+	      </ol>
+	    <p>
+	
+	    The Server app in standalone mode after being tested with the client app (see below):
+<source>
+java -jar loom-demo-server.jar
+Loom Demo listening on port 7654
 Ctrl-C to exit
 String passed = Hello!!!!!
-    </source>
-
-    The Server app running inside Loom and after being tested with the client app (see below):
-
-    <source>
-        Loom 4.0a4
-
+</source>
+	
+	    The Server app running inside Loom and after being tested with the client app (see below):
+<source>
 Server started on port 1234
 String passed = Hello!!!!!
-    </source>
-
-    The client application being used to poke the server :
-
-    <source>
-java -jar phoenix-demo-client.jar localhost 7654 Hello!!!!!
-    </source>
-
-    (Change the port to 1234 from 7654 to poke the in-Loom server).
-
-</p>
-<p>
-    Note - because of the need to make this dual mode, the PDK does not use Cornerstone
-    components.  We normally recommend that people should reuse components from cornerstone as
-    the potential for sharing will be much higher.
-</p>
-</section>
-</body>
+</source>
+	
+	    The client application being used to poke the server :
+<source>
+java -jar loom-demo-client.jar localhost 7654 Hello!!!!!
+</source>
+	
+	(Change the port to 1234 from 7654 to poke the in-Loom server).
+	</p>
+	</section>
+	</body>
 </document>

@@ -2,19 +2,17 @@
 <document>
   <properties>
     <title>Specification of environment.xml</title>
-    
-    
-  <author email="peter at apache.org">Peter Donald</author>
+	<author email="peter at apache.org">Peter Donald</author>
   </properties>
   <body>
     <section name="Introduction">
       <p>
-        The purpose of the <source>environment.xml</source> file is to configure environmental
+        The purpose of the <code>environment.xml</code> file is to configure environmental
         or Server Application wide settings. Currently this means being able to set the
-        security policy and configure logging settings. A sample <source>environment.xml</source>
+        security policy and configure logging settings. A sample <code>environment.xml</code>
         follows. Previously thread pool settings were also configured in this
         section but this has been deprecated. Note that previously the information stored in
-        <source>environment.xml</source> was stored in a file named <source>server.xml</source>.
+        <code>environment.xml</code> was stored in a file named <code>server.xml</code>.
       </p>
     </section>
     <section name="Sample environment.xml file">
@@ -64,7 +62,7 @@
         policy section is given then the Server Application runs at full permissions.
         The evaluation of properties occurs in a similar manner to standard
         policy file property expansion. There are a number of extra properties that
-        will be evaluated. These include; <source>app.home</source> and <source>app.name</source>.
+        will be evaluated. These include; <code>app.home</code> and <code>app.name</code>.
       </p>
       <p>
         One special thing to not is that the user can use URLs of the form,

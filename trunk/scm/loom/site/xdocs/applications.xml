@@ -2,15 +2,10 @@
 <document>
     <properties>
         <title>Application</title>
-
-
-            <author email="Paul_Hammant@yahoo.com">Paul Hammant</author>
-
+        <author email="Paul_Hammant@yahoo.com">Paul Hammant</author>
     </properties>
     <body>
-
         <section name="Introduction">
-
             <p>
                 This page lists applications that run on top of the Loom application kernel.
                 Each of these applications applications are at different stages of development
@@ -30,12 +25,9 @@
                 standalone mode.  These can be said to be dual mode, even if the code for
                 phoenix compatability is in our CVS rather than their depot.
             </p>
-
         </section>
 
         <section name="Application list">
-
-
             <p>
                 <strong>James</strong>:
                 <a href="http://james.apache.org">http://james.apache.org</a>

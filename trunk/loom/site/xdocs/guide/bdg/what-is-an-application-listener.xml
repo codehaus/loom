@@ -2,9 +2,7 @@
 <document>
   <properties>
     <title>Guide - What is an Application Listener?</title>
-    
-    
-  <author email="Paul_Hammant@yahoo.com">Paul Hammant</author>
+    <author email="Paul_Hammant@yahoo.com">Paul Hammant</author>
   </properties>
   <body>
     <section name="Introduction">
@@ -24,15 +22,15 @@
     </section>
     <section name="How to make an application listener">
       <p>
-        Like normal blocks, an application listener can be <em>LogEnabled</em>
-        and take configuration via <em>Configurable</em>.  The special feature
-        is that it must implement <em>ApplicationListener</em> and implement
+        Like normal blocks, an application listener can be <code>LogEnabled</code>
+        and take configuration via <code>Configurable</code>.  The special feature
+        is that it must implement <code>ApplicationListener</code> and implement
         the eight methods that are a consequence of that.  The following section in assembly.xml causes
         instantiation of the application listener:
       </p>
-      <source>
-        &lt;listener class="pkg.MyApplicationListener" name="a-suitable-name" />
-      </source>
+<source>
+&lt;listener class="pkg.MyApplicationListener" name="a-suitable-name" />
+</source>
     </section>
 
   </body>

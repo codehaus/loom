@@ -2,15 +2,13 @@
 <document>
   <properties>
     <title>Guide - for Deployers</title>
-
-
-  <author email="jcontainer-interest@codehaus.org ">Loom Documentation Team</author>
+    <author email="jcontainer-interest@codehaus.org ">Loom Documentation Team</author>
   </properties>
   <body>
     <section name="Introduction">
       <p>
         Currently deploying a server application under Loom is simply a matter
-        of dropping the .sar file into the appropriate directory (<source>apps/</source>)
+        of dropping the .sar file into the appropriate directory (<code>apps/</code>)
         and restarting Loom. In the future there will be more advanced methods
         of deploying and undeploying Server Applications without restarting Loom.
       </p>

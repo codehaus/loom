@@ -2,10 +2,7 @@
 <document>
   <properties>
     <title>Guide - What is a Server Application?</title>
-
-
-
-  <author email="peter at apache.org">Peter Donald</author>
+    <author email="peter at apache.org">Peter Donald</author>
     <author email="bloritsch@apache.org">Berin Loritsch</author>
   </properties>
   <body>

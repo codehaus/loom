@@ -2,9 +2,7 @@
 <document>
   <properties>
     <title>Guide - Making components that are Loom compatible</title>
-
-
-  <author email="hammant@apache.org">Paul Hammant</author>
+    <author email="hammant@apache.org">Paul Hammant</author>
   </properties>
   <body>
     <section name="Introduction">
@@ -20,8 +18,6 @@
         adapting a Java component to be reusable in Loom as block.
       </p>
       <subsection name="Beanification">
-        <p>
-          </p>
         <ul>
             <li>Have a public empty constructor for your main class</li>
             <li>Have setters for its configuration.</li>
@@ -32,8 +28,6 @@
             <li>If the comp has start/stop functinality consider having start() and stop() methods.</li>
             <li>Try to avoid Singleton concepts.  There could be multiple blocks in one sar using differnt (by design) instances of your bean</li>
           </ul>
-        <p>
-        </p>
       </subsection>
       <subsection name="Inversion of Control Pattern">
          <p>The IoC pattern is described <a href="http://avalon.apache.org/framework/guide-patterns-ioc.html">

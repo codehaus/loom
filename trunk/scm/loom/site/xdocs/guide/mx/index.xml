@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <document>
     <properties>
-    <title>Management Guide</title>
-
-
-    <author email="huw@apache.org">Huw Roberts</author>
-  </properties>
+    	<title>Management Guide</title>
+    	<author email="huw@apache.org">Huw Roberts</author>
+    </properties>
     <body>
         <section name="Introduction">
             <p>
