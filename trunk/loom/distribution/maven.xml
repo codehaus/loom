@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<project
+    xmlns:doc="doc"
+    xmlns:j="jelly:core"
+    xmlns:maven="jelly:maven"
+    xmlns:define="jelly:define"
+    xmlns:util="jelly:util"
+    xmlns:ant="jelly:ant"
+    xmlns:archive="loom:archive"
+    default="jar:install">
+
+    <define:taglib uri="loom:archive">
+        <define:tag name="copy-deps">
+            <j:if test="${projectDescriptor != null}">
+                <maven:pom var="pom" projectDescriptor="${projectDescriptor}"/>
+            </j:if>
+
+            <j:set var="mavenRepoLocal" value='${context.getVariable("maven.repo.local")}'/>
+            <j:forEach var="dep" items="${pom.dependencies}">
+                <j:if test='${category.equals(dep.getProperty("category"))}'>
+                    <j:set var="addDeps" value='true'/>
+                </j:if>
+            </j:forEach>
+
+            <j:if test='${addDeps == "true" }'>
+                <ant:mkdir dir="${todir}"/>
+                <ant:copy todir="${todir}" flatten="true">
+                    <ant:fileset dir="${mavenRepoLocal}">
+                        <j:forEach var="dep" items="${pom.dependencies}">
+                            <j:if test='${category.equals(dep.getProperty("category"))}'>
+                                <ant:include name="${dep.artifactDirectory}/jars/${dep.artifact}"/>
+                                <ant:include name="${dep.artifactDirectory}/licenses/${dep.artifactId}.license"/>
+                            </j:if>
+                        </j:forEach>
+                    </ant:fileset>
+                </ant:copy>
+            </j:if>
+        </define:tag>
+    </define:taglib>
+
+    <goal name="buildDist">
+        <j:set var="distDir" value='target/${pom.artifactId}-${pom.currentVersion}'/>
+        <ant:mkdir dir="${distDir}/tools/lib"/>
+        <ant:mkdir dir="${distDir}/container/lib"/>
+        <ant:mkdir dir="${distDir}/lib"/>
+        <archive:copy-deps todir="${distDir}/tools/lib" category="tools"/>
+        <archive:copy-deps todir="${distDir}/container/lib" category="container"/>
+        <archive:copy-deps todir="${distDir}/lib" category="shared"/>
+
+        <ant:mkdir dir="${distDir}/conf"/>
+        <ant:copy file="src/conf/kernel.xml" todir="${distDir}/conf"/>
+        <ant:copy todir="${distDir}/conf">
+            <ant:fileset dir="deploy/conf">
+                <ant:include name="*.xml"/>
+            </ant:fileset>
+        </ant:copy>
+
+        <ant:mkdir dir="${distDir}/apps"/>
+        <ant:copy todir="${distDir}/apps">
+            <ant:fileset dir="deploy/apps">
+                <ant:include name="*.sar"/>
+            </ant:fileset>
+        </ant:copy>
+
+        <ant:mkdir dir="${distDir}/ext"/>
+        <ant:copy todir="${distDir}/ext">
+            <ant:fileset dir="deploy/ext">
+                <ant:include name="*.jar"/>
+            </ant:fileset>
+        </ant:copy>
+
+        <ant:mkdir dir="${distDir}/lib"/>
+        <ant:copy todir="${distDir}/lib">
+            <ant:fileset dir="deploy/lib">
+                <ant:include name="*.jar"/>
+            </ant:fileset>
+        </ant:copy>
+
+        <ant:mkdir dir="${distDir}/bin"/>
+        <ant:copy todir="${distDir}/bin">
+            <ant:fileset dir="src/script"/>
+        </ant:copy>
+        <chmod file="${distDir}/bin/*.sh" perm="u+x"/>
+
+        <ant:mkdir dir="${distDir}/work"/>
+
+        <ant:copy file="${pom.getDependencyPath('loom:loom-launcher')}"
+            tofile="${distDir}/bin/loom-launcher.jar"/>
+
+    </goal>
+
+</project>
