@@ -12,7 +12,6 @@ import com.thoughtworks.qdox.model.JavaClass;
 import com.thoughtworks.qdox.model.JavaMethod;
 import java.util.ArrayList;
 import org.jcontainer.loom.tools.info.ComponentInfo;
-import org.jcontainer.loom.tools.info.ContextDescriptor;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
@@ -24,7 +23,7 @@ import org.realityforge.metaclass.model.Attribute;
  * all of the javadoc tags present in JavaClass object model.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.9 $ $Date: 2003-10-06 13:32:45 $
+ * @version $Revision: 1.10 $ $Date: 2003-10-06 14:10:49 $
  */
 public class DefaultInfoBuilder
     extends AbstractInfoBuilder
@@ -38,7 +37,6 @@ public class DefaultInfoBuilder
     public ComponentInfo buildComponentInfo( final JavaClass javaClass )
     {
         final ServiceDescriptor[] services = buildServices( javaClass );
-        final ContextDescriptor context = buildContext( javaClass );
         final SchemaDescriptor configurationSchema = buildConfigurationSchema( javaClass );
 
         final DependencyDescriptor[] dependencies = buildDependencies( javaClass );
@@ -46,7 +44,6 @@ public class DefaultInfoBuilder
         return new ComponentInfo( javaClass.getFullyQualifiedName(),
                                   Attribute.EMPTY_SET,
                                   services,
-                                  context,
                                   dependencies,
                                   configurationSchema );
     }
@@ -70,49 +67,6 @@ public class DefaultInfoBuilder
             services.add( service );
         }
         return (ServiceDescriptor[])services.toArray( new ServiceDescriptor[ services.size() ] );
-    }
-
-    /**
-     * Build the context descriptor for specified class.
-     *
-     * @param javaClass the class
-     * @return the context descriptor
-     */
-    private ContextDescriptor buildContext( final JavaClass javaClass )
-    {
-        final JavaMethod method =
-            getLifecycleMethod( javaClass, "contextualize", CONTEXT_CLASS );
-        if( null == method )
-        {
-            return ContextDescriptor.EMPTY_CONTEXT;
-        }
-        else
-        {
-            String type = CONTEXT_CLASS;
-            final DocletTag tag = method.getTagByName( "phoenix.context" );
-            if( null != tag && null != tag.getNamedParameter( "type" ) )
-            {
-                final String value = getNamedParameter( tag, "type" );
-                type = resolveType( javaClass, value );
-            }
-
-            final ArrayList entrySet = new ArrayList();
-            final DocletTag[] tags = method.getTagsByName( "phoenix.entry" );
-            for( int i = 0; i < tags.length; i++ )
-            {
-                final String key = getNamedParameter( tags[ i ], "key" );
-                final String entryType = getNamedParameter( tags[ i ], "type" );
-                final String optional = getNamedParameter( tags[ i ], "optional", "false" );
-                final boolean isOptional = "true".equals( optional );
-                final DependencyDescriptor entry =
-                    new DependencyDescriptor( key, entryType, isOptional, Attribute.EMPTY_SET );
-                entrySet.add( entry );
-            }
-            final DependencyDescriptor[] entrys =
-                (DependencyDescriptor[])entrySet.toArray( new DependencyDescriptor[ entrySet.size() ] );
-
-            return new ContextDescriptor( type, entrys, Attribute.EMPTY_SET );
-        }
     }
 
     /**

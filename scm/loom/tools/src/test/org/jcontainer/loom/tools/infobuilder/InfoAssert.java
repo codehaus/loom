@@ -9,7 +9,6 @@ package org.jcontainer.loom.tools.infobuilder;
 
 import junit.framework.Assert;
 import org.jcontainer.loom.tools.info.ComponentInfo;
-import org.jcontainer.loom.tools.info.ContextDescriptor;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
@@ -19,7 +18,7 @@ import org.realityforge.metaclass.model.Attribute;
  * A set of utilities for asserting  facts about info objects.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.7 $ $Date: 2003-10-06 13:32:45 $
+ * @version $Revision: 1.8 $ $Date: 2003-10-06 14:10:49 $
  */
 public class InfoAssert
 {
@@ -51,10 +50,6 @@ public class InfoAssert
         final SchemaDescriptor expectedSchema = expected.getConfigurationSchema();
         final SchemaDescriptor actualSchema = actual.getConfigurationSchema();
         assertEqualSchema( message + "/Configuration", expectedSchema, actualSchema );
-
-        final ContextDescriptor expectedContext = expected.getContext();
-        final ContextDescriptor actualContext = actual.getContext();
-        assertEqualContext( message, expectedContext, actualContext );
 
         final ServiceDescriptor[] expectedServices = expected.getServices();
         final ServiceDescriptor[] actualServices = actual.getServices();
@@ -137,34 +132,6 @@ public class InfoAssert
         assertEqualAttributes( message + ".attributes",
                                expected.getAttributes(),
                                actual.getAttributes() );
-    }
-
-    public static void assertEqualContext( final String message,
-                                           final ContextDescriptor expected,
-                                           final ContextDescriptor actual )
-    {
-        Assert.assertEquals( message + ": Context.type", expected.getType(), actual.getType() );
-        assertEqualEntrys( message + ": Context.entrys", expected.getEntrys(), expected.getEntrys() );
-        assertEqualAttributes( message + ": Context.attribute",
-                               expected.getAttributes(),
-                               actual.getAttributes() );
-    }
-
-    public static void assertEqualEntrys( final String message,
-                                          final DependencyDescriptor[] expected,
-                                          final DependencyDescriptor[] actual )
-    {
-        Assert.assertEquals( message + " Length", expected.length, actual.length );
-        for( int i = 0; i < expected.length; i++ )
-        {
-            Assert.assertEquals( message + " [" + i + "].key",
-                                 expected[ i ].getKey(), actual[ i ].getKey() );
-            Assert.assertEquals( message + " [" + i + "].type",
-                                 expected[ i ].getType(), actual[ i ].getType() );
-            assertEqualAttributes( message + " [" + i + "].attribute",
-                                   expected[ i ].getAttributes(),
-                                   actual[ i ].getAttributes() );
-        }
     }
 
     public static void assertEqualParameters( final String message,

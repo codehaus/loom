@@ -91,7 +91,6 @@ import com.thoughtworks.qdox.model.JavaClass;
 import com.thoughtworks.qdox.model.JavaMethod;
 import java.util.ArrayList;
 import org.jcontainer.loom.tools.info.ComponentInfo;
-import org.jcontainer.loom.tools.info.ContextDescriptor;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
@@ -104,7 +103,7 @@ import org.realityforge.metaclass.model.Attribute;
  *
  * @author Paul Hammant
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.10 $ $Date: 2003-10-06 13:29:05 $
+ * @version $Revision: 1.11 $ $Date: 2003-10-06 14:10:49 $
  */
 public class LegacyInfoBuilder
     extends AbstractInfoBuilder
@@ -118,14 +117,12 @@ public class LegacyInfoBuilder
     public ComponentInfo buildComponentInfo( final JavaClass javaClass )
     {
         final ServiceDescriptor[] services = buildServices( javaClass );
-        final ContextDescriptor context = LegacyUtil.CONTEXT_DESCRIPTOR;
         final SchemaDescriptor schema = buildConfigurationSchema( javaClass );
         final DependencyDescriptor[] dependencies = buildDependencies( javaClass );
 
         return new ComponentInfo( javaClass.getFullyQualifiedName(),
                                   Attribute.EMPTY_SET,
                                   services,
-                                  context,
                                   dependencies,
                                   schema );
     }
