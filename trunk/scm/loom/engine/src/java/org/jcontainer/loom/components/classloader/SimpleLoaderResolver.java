@@ -118,7 +118,7 @@ import org.realityforge.salt.i18n.Resources;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-08-17 18:27:32 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-05 00:24:19 $
  * @deprecated Convert to ClassMan SimpleLoaderResolver when it updates
  *             dependecy to latest Excalibur-Extension
  */
@@ -141,7 +141,7 @@ class SimpleLoaderResolver
     /**
      * Create a resolver that resolves all files according to specied
      * baseDirectory and using specified {@link PackageManager} to aquire
-     * {@link org.realityforge.extension.Extension} objects.
+     * {@link Extension} objects.
      *
      * @param baseDirectory the base directory
      * @param manager the {@link PackageManager}
@@ -160,7 +160,7 @@ class SimpleLoaderResolver
      * @return the URL
      * @throws Exception if unable to locate URL for extension
      */
-    public URL resolveExtension( final org.realityforge.extension.Extension extension )
+    public URL resolveExtension( final Extension extension )
         throws Exception
     {
         if( null == getManager() )
@@ -347,8 +347,8 @@ class SimpleLoaderResolver
         throws Exception
     {
         final Manifest[] manifests = getManifests( classPath );
-        final org.realityforge.extension.Extension[] available = org.realityforge.extension.Extension.getAvailable( manifests );
-        final org.realityforge.extension.Extension[] required = org.realityforge.extension.Extension.getRequired( manifests );
+        final Extension[] available = Extension.getAvailable( manifests );
+        final Extension[] required = Extension.getRequired( manifests );
 
         if( isDebugEnabled() )
         {
@@ -387,7 +387,7 @@ class SimpleLoaderResolver
             final int size = unsatisfied.size();
             for( int i = 0; i < size; i++ )
             {
-                final org.realityforge.extension.Extension extension = (org.realityforge.extension.Extension)unsatisfied.get( i );
+                final Extension extension = (Extension)unsatisfied.get( i );
                 final Object[] params = new Object[]
                 {
                     extension.getExtensionName(),
