@@ -91,7 +91,11 @@
 
         <ant:copy todir="${distDir}/bin">
             <ant:fileset dir="deploy/ext">
-                <ant:include name="*rapper*"/>
+                <ant:include name="wrapper"/>
+                <ant:include name="*.exe"/>
+                <ant:include name="*.sh"/>
+                <ant:include name="*.bash"/>
+                <ant:include name="*.bat"/>
                 <ant:exclude name="*.jar"/>
                 <ant:exclude name="*.so"/>
                 <ant:exclude name="*.dll"/>
@@ -101,48 +105,54 @@
     </goal>
 
     <preGoal name="buildDist">
-        <j:set var="distName" value='wrapper_win32_3.0.3'/>
-        <ant:mkdir dir="target/wrapper"/>
+        <j:set var="wrapperDir" value='target/wrapper'/>
+        <ant:mkdir dir="${wrapperDir}"/>
+        <ant:setproxy proxyhost="${maven.proxy.host}" proxyport="${maven.proxy.port}"/>
+        <!-- win32 wrapper -->
+        <j:set var="distName" value='wrapper_win32_${wrapper.version}'/>
         <ant:get src="http://telia.dl.sourceforge.net/sourceforge/wrapper/${distName}.zip"
-            dest="target/wrapper/${distName}.zip"
-            verbose="true"
-            usetimestamp="true"/>
-        <ant:unzip src="target/wrapper/${distName}.zip" dest="target/wrapper"/>
-        <ant:copy file="target/wrapper/${distName}/bin/Wrapper.exe"
+            dest="${maven.repo.local}/wrapper/distributions/${distName}.zip"
+            usetimestamp="true"
+            verbose="true"/>
+        <ant:unzip src="${maven.repo.local}/wrapper/distributions/${distName}.zip" 
+        		  dest="${wrapperDir}"/>
+        <ant:copy file="${wrapperDir}/${distName}/bin/Wrapper.exe"
             todir="deploy/ext"/>
-        <ant:copy file="target/wrapper/${distName}/lib/Wrapper.dll"
+        <ant:copy file="${wrapperDir}/${distName}/lib/Wrapper.dll"
             todir="deploy/ext"/>
-        <ant:copy file="target/wrapper/${distName}/lib/wrapper.jar"
+        <ant:copy file="${wrapperDir}/${distName}/lib/wrapper.jar"
             todir="deploy/ext"/>
-        <ant:copy file="target/wrapper/${distName}/src/bin/App.bat.in"
+        <ant:copy file="${wrapperDir}/${distName}/src/bin/App.bat.in"
             tofile="deploy/ext/${pom.artifactId}.bat"/>
-        <ant:copy file="target/wrapper/${distName}/src/bin/InstallApp-NT.bat.in"
+        <ant:copy file="${wrapperDir}/${distName}/src/bin/InstallApp-NT.bat.in"
             tofile="deploy/ext/Install-${pom.artifactId}-NT.bat"/>
-        <ant:copy file="target/wrapper/${distName}/src/bin/UninstallApp-NT.bat.in"
+        <ant:copy file="${wrapperDir}/${distName}/src/bin/UninstallApp-NT.bat.in"
             tofile="deploy/ext/Uninstall-${pom.artifactId}-NT.bat"/>
-        <j:set var="distName" value='wrapper_linux_3.0.3'/>
+        <!-- linux wrapper -->
+        <j:set var="distName" value='wrapper_linux_${wrapper.version}'/>
         <ant:get src="http://telia.dl.sourceforge.net/sourceforge/wrapper/${distName}.tar.gz"
-            dest="target/wrapper/${distName}.tar.gz"
-            verbose="true"
-            usetimestamp="true"/>
-        <ant:gunzip src="target/wrapper/${distName}.tar.gz" dest="target/wrapper"/>
-        <ant:untar src="target/wrapper/${distName}.tar" dest="target/wrapper"/>
-        <ant:copy file="target/wrapper/${distName}/bin/wrapper"
+            dest="${maven.repo.local}/wrapper/distributions/${distName}.tar.gz"
+            usetimestamp="true"
+            verbose="true"/>
+        <ant:gunzip src="${maven.repo.local}/wrapper/distributions/${distName}.tar.gz" 
+        		  dest="${wrapperDir}"/>
+        <ant:untar src="${wrapperDir}/${distName}.tar" dest="${wrapperDir}"/>
+        <ant:copy file="${wrapperDir}/${distName}/bin/wrapper"
             todir="deploy/ext"/>
-        <ant:copy file="target/wrapper/${distName}/bin/realpath"
+        <ant:copy file="${wrapperDir}/${distName}/bin/realpath"
             todir="deploy/ext"/>
-        <ant:copy file="target/wrapper/${distName}/lib/libwrapper.so"
+        <ant:copy file="${wrapperDir}/${distName}/lib/libwrapper.so"
             todir="tdeploy/ext"/>
-        <ant:copy file="target/wrapper/${distName}/lib/wrapper.jar"
+        <ant:copy file="${wrapperDir}/${distName}/lib/wrapper.jar"
             todir="deploy/ext"/>
-        <ant:copy file="target/wrapper/${distName}/src/bin/sh.script.in"
+        <ant:copy file="${wrapperDir}/${distName}/src/bin/sh.script.in"
             tofile="deploy/ext/${pom.artifactId}-wrapper.sh">
             <ant:filterset>
                 <ant:filter token="app.name" value="${pom.artifactId}"/>
                 <ant:filter token="app.long.name" value="${pom.artifactId}"/>
             </ant:filterset>
         </ant:copy>
-        <ant:copy file="target/wrapper/${distName}/src/bin/bash.script.in"
+        <ant:copy file="${wrapperDir}/${distName}/src/bin/bash.script.in"
             tofile="deploy/ext/${pom.artifactId}-wrapper.bash">
             <ant:filterset>
                 <ant:filter token="app.name" value="${pom.artifactId}"/>
