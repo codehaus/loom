@@ -28,8 +28,8 @@ mkdir target
 rm -Rf ~/.maven/repository/loom/jars
 
 # Compile and test
-maven clean-all &> target/cleanbuild.log
-maven build &> target/cleanbuild.log
+maven clean-all | tee target/cleanbuild.log
+maven build | tee target/cleanbuild.log
 
 # See if the "compiling" file is there. If it is, compilation
 # failed.
