@@ -8,8 +8,13 @@
     <description>
         Distribuited Demo app for deployment in Loom Application Server.
     </description>
-    
+
     <dependencies>
+        <dependency>
+            <groupId>loom</groupId>
+            <artifactId>loom-info</artifactId>
+            <version>${pom.currentVersion}</version>
+        </dependency>
         <dependency>
         	<groupId>loom</groupId>
             <artifactId>loom-tools</artifactId>
@@ -17,7 +22,7 @@
         </dependency>
         <dependency>
             <groupId>loom</groupId>
-            <artifactId>loom-sar-plugin</artifactId>
+            <artifactId>maven-sar-plugin</artifactId>
             <version>1.0</version>
             <type>plugin</type>
         </dependency>
