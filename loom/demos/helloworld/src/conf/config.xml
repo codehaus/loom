@@ -41,5 +41,14 @@
       </helloworldhandler>
       <test></test>
   </helloworldserver>
+  
+
+  <rmification>
+    <port>1099</port>
+  </rmification>
+
+  <rmihelloworldserver>
+    <pub-name>rmi-helloworldserver</pub-name>
+  </rmihelloworldserver>
 
 </config>

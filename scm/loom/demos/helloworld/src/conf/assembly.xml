@@ -24,6 +24,10 @@
              role="org.apache.avalon.cornerstone.services.threads.ThreadManager" />
   </block>
 
+  <!-- The RMIfication block -->
+  <block class="org.apache.avalon.cornerstone.blocks.rmification.DefaultRMIfication"
+         name="rmification"/>
+
   <!--                                        -->
   <!-- Below this section are the demo blocks -->
   <!--                                        -->
@@ -34,5 +38,12 @@
     <provide name="connections" 
              role="org.apache.avalon.cornerstone.services.connection.ConnectionManager" />
   </block>
+
+  <block class="org.jcontainer.loom.demos.helloworld.RMIHelloWorldServerImpl" 
+         name="rmihelloworldserver">
+    <provide name="rmification" 
+    	 role="org.apache.avalon.cornerstone.services.rmification.RMIfication"/>
+  </block>
+
 
 </assembly>
