@@ -5,11 +5,11 @@
     default="main">
 
     <preGoal name="java:compile">
-        <ant:mkdir dir="${basedir}/target/src/java/org/jcontainer/loom/interfaces"/>
+        <ant:mkdir dir="${basedir}/target/src/java/org/codehaus/loom/interfaces"/>
         <ant:tstamp/>
-        <j:file name="${basedir}/target/src/java/org/jcontainer/loom/interfaces/Version.java"
+        <j:file name="${basedir}/target/src/java/org/codehaus/loom/interfaces/Version.java"
             omitXmlDeclaration="true" escapeText="false">
-            package org.jcontainer.loom.interfaces;
+            package org.codehaus.loom.interfaces;
             interface Version
             {
             String SOFTWARE = "${pom.name}";

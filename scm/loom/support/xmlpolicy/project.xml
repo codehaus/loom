@@ -4,7 +4,7 @@
     <name>XMLPolicy</name>
     <id>loom-xmlpolicy</id>
     <inceptionYear>2002</inceptionYear>
-    <package>org.jcontainer.loom.xmlpolicy</package>
+    <package>org.codehaus.loom.xmlpolicy</package>
 
     <shortDescription>Toolkit to construct Policy object from an XML descriptor.</shortDescription>
 
