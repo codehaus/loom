@@ -108,43 +108,27 @@
         <j:set var="wrapperDir" value='target/wrapper'/>
         <ant:mkdir dir="${wrapperDir}"/>
         <ant:setproxy proxyhost="${maven.proxy.host}" proxyport="${maven.proxy.port}"/>
-        <!-- win32 wrapper -->
-        <j:set var="distName" value='wrapper_win32_${wrapper.version}'/>
-        <ant:get src="http://telia.dl.sourceforge.net/sourceforge/wrapper/${distName}.zip"
-            dest="${maven.repo.local}/wrapper/distributions/${distName}.zip"
-            usetimestamp="true"
-            verbose="true"/>
-        <ant:unzip src="${maven.repo.local}/wrapper/distributions/${distName}.zip" 
-        		  dest="${wrapperDir}"/>
-        <ant:copy file="${wrapperDir}/${distName}/bin/Wrapper.exe"
-            todir="deploy/ext"/>
-        <ant:copy file="${wrapperDir}/${distName}/lib/Wrapper.dll"
-            todir="deploy/ext"/>
-        <ant:copy file="${wrapperDir}/${distName}/lib/wrapper.jar"
-            todir="deploy/ext"/>
-        <ant:copy file="${wrapperDir}/${distName}/src/bin/App.bat.in"
-            tofile="deploy/ext/${pom.artifactId}.bat"/>
-        <ant:copy file="${wrapperDir}/${distName}/src/bin/InstallApp-NT.bat.in"
-            tofile="deploy/ext/Install-${pom.artifactId}-NT.bat"/>
-        <ant:copy file="${wrapperDir}/${distName}/src/bin/UninstallApp-NT.bat.in"
-            tofile="deploy/ext/Uninstall-${pom.artifactId}-NT.bat"/>
-        <!-- linux wrapper -->
-        <j:set var="distName" value='wrapper_linux_${wrapper.version}'/>
-        <ant:get src="http://telia.dl.sourceforge.net/sourceforge/wrapper/${distName}.tar.gz"
+        <j:set var="distURL" value='${wrapper.url}'/>
+        <!-- *nix wrapper -->
+        <j:set var="distName" value='wrapper_${wrapper.nix}_${wrapper.version}'/>
+        <ant:get src="${distURL}/${distName}.tar.gz"
             dest="${maven.repo.local}/wrapper/distributions/${distName}.tar.gz"
             usetimestamp="true"
             verbose="true"/>
         <ant:gunzip src="${maven.repo.local}/wrapper/distributions/${distName}.tar.gz" 
         		  dest="${wrapperDir}"/>
         <ant:untar src="${wrapperDir}/${distName}.tar" dest="${wrapperDir}"/>
-        <ant:copy file="${wrapperDir}/${distName}/bin/wrapper"
-            todir="deploy/ext"/>
-        <ant:copy file="${wrapperDir}/${distName}/bin/realpath"
-            todir="deploy/ext"/>
-        <ant:copy file="${wrapperDir}/${distName}/lib/libwrapper.so"
-            todir="tdeploy/ext"/>
-        <ant:copy file="${wrapperDir}/${distName}/lib/wrapper.jar"
-            todir="deploy/ext"/>
+        <ant:copy todir="deploy/ext">
+			<ant:fileset dir="${wrapperDir}/${distName}/bin">
+                <ant:include name="wrapper"/>
+                <ant:include name="realpath"/>
+			</ant:fileset>        
+			<ant:fileset dir="${wrapperDir}/${distName}/lib">
+                <ant:include name="*.so"/>
+                <ant:include name="*.jar"/>
+                <ant:exclude name="*test.jar"/>
+			</ant:fileset>        
+        </ant:copy>
         <ant:copy file="${wrapperDir}/${distName}/src/bin/sh.script.in"
             tofile="deploy/ext/${pom.artifactId}-wrapper.sh">
             <ant:filterset>
@@ -159,6 +143,30 @@
                 <ant:filter token="app.long.name" value="${pom.artifactId}"/>
             </ant:filterset>
         </ant:copy>
+        <!-- win32 wrapper -->
+        <j:set var="distName" value='wrapper_win32_${wrapper.version}'/>
+        <ant:get src="${distURL}/${distName}.zip"
+            dest="${maven.repo.local}/wrapper/distributions/${distName}.zip"
+            usetimestamp="true"
+            verbose="true"/>
+        <ant:unzip src="${maven.repo.local}/wrapper/distributions/${distName}.zip" 
+        		  dest="${wrapperDir}"/>
+        <ant:copy todir="deploy/ext">
+			<ant:fileset dir="${wrapperDir}/${distName}/bin">
+                <ant:include name="*.exe"/>
+			</ant:fileset>        
+			<ant:fileset dir="${wrapperDir}/${distName}/lib">
+                <ant:include name="*.dll"/>
+                <ant:include name="*.jar"/>
+                <ant:exclude name="*test.jar"/>
+			</ant:fileset>        
+        </ant:copy>
+        <ant:copy file="${wrapperDir}/${distName}/src/bin/App.bat.in"
+            tofile="deploy/ext/${pom.artifactId}.bat"/>
+        <ant:copy file="${wrapperDir}/${distName}/src/bin/InstallApp-NT.bat.in"
+            tofile="deploy/ext/Install-${pom.artifactId}-NT.bat"/>
+        <ant:copy file="${wrapperDir}/${distName}/src/bin/UninstallApp-NT.bat.in"
+            tofile="deploy/ext/Uninstall-${pom.artifactId}-NT.bat"/>
     	
     </preGoal>
 
