@@ -15,12 +15,12 @@ import org.apache.avalon.framework.CascadingException;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.Logger;
 import org.jcontainer.dna.impl.SAXConfigurationHandler;
-import org.realityforge.configkit.ConfigValidator;
-import org.realityforge.configkit.ConfigValidatorFactory;
-import org.realityforge.configkit.ResolverFactory;
-import org.realityforge.configkit.ValidateException;
-import org.realityforge.configkit.ValidationIssue;
-import org.realityforge.configkit.ValidationResult;
+import org.codehaus.spice.configkit.ConfigValidator;
+import org.codehaus.spice.configkit.ConfigValidatorFactory;
+import org.codehaus.spice.configkit.ResolverFactory;
+import org.codehaus.spice.configkit.ValidateException;
+import org.codehaus.spice.configkit.ValidationIssue;
+import org.codehaus.spice.configkit.ValidationResult;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
@@ -32,7 +32,7 @@ import org.xml.sax.XMLReader;
  * Utility class used to load Configuration trees from XML files.
  *
  * @author Peter Donald
- * @version $Revision: 1.3 $ $Date: 2003-11-29 13:44:27 $
+ * @version $Revision: 1.4 $ $Date: 2003-12-03 03:37:57 $
  */
 public class ConfigurationBuilder
 {

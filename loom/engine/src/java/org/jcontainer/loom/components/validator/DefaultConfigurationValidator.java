@@ -17,9 +17,9 @@ import org.jcontainer.loom.components.util.ConfigurationBuilder;
 import org.jcontainer.loom.components.util.info.SchemaDescriptor;
 import org.jcontainer.loom.components.util.profile.ComponentProfile;
 import org.jcontainer.loom.interfaces.ConfigurationValidator;
-import org.realityforge.configkit.ComponentConfigUtil;
-import org.realityforge.configkit.ConfigValidator;
-import org.realityforge.configkit.ValidationResult;
+import org.codehaus.spice.configkit.ComponentConfigUtil;
+import org.codehaus.spice.configkit.ConfigValidator;
+import org.codehaus.spice.configkit.ValidationResult;
 import org.w3c.dom.Element;
 
 /**
@@ -27,8 +27,8 @@ import org.w3c.dom.Element;
  * toolkit.
  *
  * @author Peter Donald
- * @author <a href="mailto:proyal at apache.org">Peter Royal</a>
- * @version $Revision: 1.14 $ $Date: 2003-11-29 13:44:27 $
+ * @author Peter Royal
+ * @version $Revision: 1.15 $ $Date: 2003-12-03 03:37:57 $
  * @dna.component
  */
 public class DefaultConfigurationValidator
