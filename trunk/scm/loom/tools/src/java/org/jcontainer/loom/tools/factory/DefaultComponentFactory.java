@@ -22,7 +22,7 @@ import org.jcontainer.dna.Logger;
  * that simply creates components from a {@link ClassLoader}.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-10-16 00:20:17 $
+ * @version $Revision: 1.6 $ $Date: 2003-10-16 00:40:51 $
  */
 public class DefaultComponentFactory
     extends AbstractLogEnabled
@@ -121,7 +121,8 @@ public class DefaultComponentFactory
     protected ComponentInfo createComponentInfo( final String implementationKey )
         throws Exception
     {
-        return m_infoBuilder.buildComponentInfo( implementationKey, getClassLoader() );
+        final Class type = getClassLoader().loadClass( implementationKey );
+        return m_infoBuilder.buildComponentInfo( type );
     }
 
     /**

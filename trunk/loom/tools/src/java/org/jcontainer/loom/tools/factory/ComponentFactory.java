@@ -27,12 +27,12 @@ import org.jcontainer.loom.tools.factory.ComponentBundle;
  * objects via different mechanisms.</p>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-09-02 04:36:59 $
+ * @version $Revision: 1.4 $ $Date: 2003-10-16 00:40:51 $
  */
 public interface ComponentFactory
 {
     /**
-     * Create a {@link org.jcontainer.loom.tools.factory.ComponentBundle} for component
+     * Create a {@link ComponentBundle} for component
      * specified by implementationKey.
      *
      * @param implementationKey the key indicating type of component (usually classname)

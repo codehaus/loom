@@ -23,11 +23,16 @@ import java.io.Serializable;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.7 $ $Date: 2003-10-14 08:42:16 $
+ * @version $Revision: 1.8 $ $Date: 2003-10-16 00:40:51 $
  */
 public class ComponentInfo
     implements Serializable
 {
+    /**
+     * The type of the component.
+     */
+    private final Class m_type;
+
     /**
      * The implementation key for component (usually classname).
      */
@@ -51,7 +56,8 @@ public class ComponentInfo
     /**
      * Basic constructor that takes as parameters all parts.
      */
-    public ComponentInfo( final String implementationKey,
+    public ComponentInfo( final Class type,
+                          final String implementationKey,
                           final ServiceDescriptor[] services,
                           final DependencyDescriptor[] dependencies,
                           final SchemaDescriptor configurationSchema )
@@ -68,10 +74,21 @@ public class ComponentInfo
         {
             throw new NullPointerException( "dependencies" );
         }
+        m_type = type;
         m_implementationKey = implementationKey;
         m_services = services;
         m_dependencies = dependencies;
         m_configurationSchema = configurationSchema;
+    }
+
+    /**
+     * Return the components type.
+     *
+     * @return the components type.
+     */
+    public Class getType()
+    {
+        return m_type;
     }
 
     /**
@@ -130,25 +147,6 @@ public class ComponentInfo
             }
         }
 
-        return null;
-    }
-
-    /**
-     * Retrieve a service matching the supplied classname.
-     *
-     * @param classname the service classname
-     * @return the service descriptor or null if it does not exist
-     */
-    public ServiceDescriptor getService( final String classname )
-    {
-        for( int i = 0; i < m_services.length; i++ )
-        {
-            final String otherClassname = m_services[ i ].getType();
-            if( otherClassname.equals( classname ) )
-            {
-                return m_services[ i ];
-            }
-        }
         return null;
     }
 }

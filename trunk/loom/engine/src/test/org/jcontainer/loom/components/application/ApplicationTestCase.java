@@ -32,7 +32,7 @@ import org.xml.sax.InputSource;
  *  An basic test case for the Application.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.11 $ $Date: 2003-10-15 04:20:42 $
+ * @version $Revision: 1.12 $ $Date: 2003-10-16 00:40:51 $
  */
 public class ApplicationTestCase
     extends TestCase
@@ -48,7 +48,7 @@ public class ApplicationTestCase
     private static final String C4_NAME = PKG_NAME + "Component4";
 
     private static final ComponentInfo C1 =
-        new ComponentInfo( C1_NAME,
+        new ComponentInfo( null, C1_NAME,
                            ServiceDescriptor.EMPTY_SET,
                            new DependencyDescriptor[]{new DependencyDescriptor( S1_NAME,
                                                                                 S1_NAME,
@@ -57,14 +57,14 @@ public class ApplicationTestCase
         );
 
     private static final ComponentInfo C2 =
-        new ComponentInfo( C2_NAME,
+        new ComponentInfo( null, C2_NAME,
                            new ServiceDescriptor[]{new ServiceDescriptor( S1_NAME )},
                            DependencyDescriptor.EMPTY_SET,
                            null
         );
 
     private static final ComponentInfo C3 =
-        new ComponentInfo( C3_NAME,
+        new ComponentInfo( null, C3_NAME,
                            ServiceDescriptor.EMPTY_SET,
                            new DependencyDescriptor[]{new DependencyDescriptor( S1_ARRAY_NAME,
                                                                                 S1_ARRAY_NAME,
@@ -73,7 +73,7 @@ public class ApplicationTestCase
         );
 
     private static final ComponentInfo C4 =
-        new ComponentInfo( C4_NAME,
+        new ComponentInfo( null, C4_NAME,
                            ServiceDescriptor.EMPTY_SET,
                            new DependencyDescriptor[]{new DependencyDescriptor( S1_MAP_NAME,
                                                                                 S1_MAP_NAME,
