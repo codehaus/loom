@@ -92,20 +92,16 @@ import java.net.URL;
  * MBean Interface for the Deployer to use the deploy
  * feature in the HmtlAdaptor
  *
- * @phoenix:mx-topic name="Deployer"
- *
+ * @mx.component
  * @author <a href="mailto:bauer@denic.de">Joerg Bauer</a>
  * @see Deployer
  */
 public interface DeployerMBean
 {
     /**
-     * Deploy an installation.
-     *
-     * @phoenix:mx-operation
-     *
-     * @param name the name of deployment
-     * @param sarURL the installation to deploy
+     * @mx.operation description="Deploy an installation."
+     * @mx.parameter name="name" description="the name of deployment"
+     * @mx.parameter name="sarURL" description="the installation to deploy"
      * @throws LoomException if an error occurs
      * @see #deploy(String,String)
      * @see #undeploy(String)
@@ -115,12 +111,9 @@ public interface DeployerMBean
         throws LoomException;
 
     /**
-     * Deploy an installation.
-     *
-     * @phoenix:mx-operation
-     *
-     * @param name the name of deployment
-     * @param location the installation to deploy
+     * @mx.operation description="Deploy an installation."
+     * @mx.parameter name="name" description="the name of deployment"
+     * @mx.parameter name="location" description="the installation to deploy"
      * @throws LoomException if an error occurs
      * @see #deploy(String,String)
      * @see #undeploy(String)
@@ -130,11 +123,8 @@ public interface DeployerMBean
         throws LoomException;
 
     /**
-     * Undeploy an installation.
-     *
-     * @phoenix:mx-operation
-     *
-     * @param name the name of deployment
+     * @mx.operation description="Undeploy an installation."
+     * @mx.parameter name="name" description="the name of deployment"
      * @throws LoomException if an error occurs
      * @see #deploy(String,String)
      * @see #deploy(String,URL)
@@ -144,11 +134,8 @@ public interface DeployerMBean
         throws LoomException;
 
     /**
-     * Redeploy an installation.
-     *
-     * @phoenix:mx-operation
-     *
-     * @param name the name of deployment
+     * @mx.operation description="Redeploy an installation."
+     * @mx.parameter name="name" description="the name of deployment"
      * @throws LoomException if an error occurs
      * @see #deploy(String,String)
      * @see #deploy(String,URL)

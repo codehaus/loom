@@ -109,9 +109,9 @@ import org.jcomponent.netserve.connection.ConnectionHandler;
 import org.jcomponent.netserve.sockets.ServerSocketFactory;
 
 /**
- * @phoenix:block
- * @phoenix:service name="org.jcontainer.loom.demos.helloworld.HelloWorldServer"
- * @phoenix:mx name="org.jcontainer.loom.demos.helloworld.HelloWorldServerMBean"
+ * @dna.component
+ * @dna.service type="HelloWorldServer"
+ * @mx.interface name="org.jcontainer.loom.demos.helloworld.HelloWorldServerMBean"
  *
  * @author  Paul Hammant <Paul_Hammant@yahoo.com>
  * @author  Federico Barbieri <scoobie@pop.systemy.it>
@@ -161,14 +161,11 @@ public final class HelloWorldServerImpl
         {
             throw new ConfigurationException( "Malformed bind parameter", unhe );
         }
-        //String test = configuration.getChild("test").getValue();
     }
 
     /**
-     *
-     * @phoenix:dependency name="org.jcomponent.netserve.sockets.ServerSocketFactory"
-     * @phoenix:dependency name="org.jcomponent.netserve.connection.ConnectionManager"
-     *
+     * @dna.dependency type="ServerSocketFactory"
+     * @dna.dependency type="ConnectionManager"
      */
     public void service( final ServiceManager serviceManager )
         throws ServiceException

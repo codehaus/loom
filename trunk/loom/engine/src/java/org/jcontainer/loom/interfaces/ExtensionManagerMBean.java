@@ -91,10 +91,9 @@ import java.io.File;
 /**
  * Management interface to ExtensionManager.
  *
- * @phoenix:mx-topic name="ExtensionManager"
- *
+ * @mx.component
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-09-02 04:36:58 $
+ * @version $Revision: 1.4 $ $Date: 2003-10-16 09:23:58 $
  */
 public interface ExtensionManagerMBean
 {
@@ -104,7 +103,7 @@ public interface ExtensionManagerMBean
      * in which the ExtensionManager will look
      * for Extensions.
      *
-     * @phoenix:mx-attribute
+     * @mx.attribute description="The list of paths to search in"
      *
      * @return the list of paths to search in
      */
@@ -115,9 +114,9 @@ public interface ExtensionManagerMBean
      * to discover new Extensions that have been added
      * or remove old Extensions that have been removed.
      *
-     * @phoenix:mx-operation
+     * @mx.operation description="Force the ExtensionManager to rescan the paths
+     * to discover new Extensions that have been added
+     * or remove old Extensions that have been removed."
      */
     void rescanPath();
-
-    //Extension[] getExtension();
 }

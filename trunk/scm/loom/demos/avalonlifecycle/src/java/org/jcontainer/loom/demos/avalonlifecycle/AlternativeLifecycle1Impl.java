@@ -92,8 +92,8 @@ package org.jcontainer.loom.demos.avalonlifecycle;
  *   http://localhost:8082/mbean?objectname=Loom%3Aapplication%3Ddemo-avalonlifecycle%2Ctopic%3DApplication
  * .. and try stopt/starting the blocks.
  *
- * @phoenix:block
- * @dna.service name="org.jcontainer.loom.demos.avalonlifecycle.Lifecycle1"
+ * @dna.component
+ * @dna.service type="Lifecycle1"
  * @author  Paul Hammant <Paul_Hammant@yahoo.com>
  */
 public class AlternativeLifecycle1Impl

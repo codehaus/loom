@@ -90,27 +90,19 @@ package org.jcontainer.loom.interfaces;
  * This is the interface via which you can manager
  * the root container of Applications.
  *
- * @phoenix:mx-topic name="Kernel"
- *
+ * @mx.component
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  */
 public interface KernelMBean
 {
     /**
-     * Gets the list of applications running in the container
-     *
-     * @phoenix:mx-attribute
-     *
-     * @return applicationNames The array of application names
+     * @mx.attribute description="the list of applications running in the container"
      */
     String[] getApplicationNames();
 
     /**
-     * Removes the application from the container
-     *
-     * @phoenix:mx-operation
-     *
-     * @param name the name of application to remove
+     * @mx.operation description="Removes the application from the container"
+     * @mx.parameter name="name" description="the name of application to remove"
      */
     void removeApplication( String name )
         throws Exception;

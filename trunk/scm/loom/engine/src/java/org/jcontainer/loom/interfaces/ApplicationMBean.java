@@ -90,65 +90,39 @@ package org.jcontainer.loom.interfaces;
  * This is the interface via which you can manager
  * the root container of Applications.
  *
- * @phoenix:mx-topic name="Application"
- *
+ * @mx.component
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author <a href="mailto:leosimons@apache.org">Leo Simons</a>
  */
 public interface ApplicationMBean
 {
     /**
-     * Get the name of the application.
-     *
-     * @phoenix:mx-attribute
-     *
-     * @return the name of the application
+     * @mx.attribute description="the name of the application."
      */
     String getName();
 
     /**
-     * Get the name to display in Management UI.
-     *
-     * @phoenix:mx-attribute
-     *
-     * @return the name of the application to display in UI
+     * @mx.attribute description="the name to display in Management UI."
      */
     String getDisplayName();
 
     /**
-     * Get the string used to describe the application in the UI.
-     *
-     * @phoenix:mx-attribute
-     *
-     * @return a short description of the application
+     * @mx.attribute description="the string used to describe the application in the UI."
      */
     String getDescription();
 
     /**
-     * Get location of Application installation
-     *
-     * @phoenix:mx-attribute
-     *
-     * @return the home directory of application
+     * @mx.attribute description="the location of Application installation"
      */
     String getHomeDirectory();
 
     /**
-     * Get the names of the blocks that compose this Application
-     *
-     * @phoenix:mx-attribute
-     *
-     * @return list of block names
+     * @mx.attribute description="the names of the blocks that compose this Application"
      */
     String[] getBlockNames();
 
     /**
-     * Return true if the application is
-     * running or false otherwise.
-     *
-     * @phoenix:mx-attribute
-     *
-     * @return true if application is running, false otherwise
+     * @mx.attribute description="True if the application is running or false otherwise."
      */
     boolean isRunning();
 }

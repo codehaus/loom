@@ -106,7 +106,7 @@ import org.apache.avalon.framework.service.Serviceable;
  * to the JMX console ..
  *   http://localhost:8082/mbean?objectname=Loom%3Aapplication%3Ddemo-avalonlifecycle%2Ctopic%3DApplication
  * .. and try stopt/starting the blocks.
- * @phoenix:block
+ * @dna.component
  * @dna.service type="org.jcontainer.loom.demos.avalonlifecycle.Lifecycle1"
  * @author  Paul Hammant <Paul_Hammant@yahoo.com>
  */

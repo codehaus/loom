@@ -115,7 +115,7 @@ import org.realityforge.salt.i18n.Resources;
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author Leo Simons
- * @phoenix:block
+ * @dna.component
  * @mx.interface type="org.jcontainer.loom.interfaces.ApplicationMBean"
  */
 public final class DefaultApplication

@@ -92,20 +92,18 @@ import java.util.Date;
  * This is the interface via which the Management interface interacts
  * with the Embeddor.
  *
- * @phoenix:mx-topic name="Embeddor"
- *
+ * @mx.component
  * @author <a href="peter at realityforge.org">Peter Donald</a>
  */
 public interface EmbeddorMBean
 {
     /**
      * Get name by which the server is known.
-     * Usually this defaults to {@link ContainerConstants.SOFTWARE} but the admin
+     * Usually this defaults to {@link ContainerConstants#SOFTWARE} but the admin
      * may assign another name. This is useful when you
      * are managing a cluster of servers.
      *
-     * @phoenix:mx-attribute
-     * @phoenix:mx-description Name by which this server is known.
+     * @mx.attribute description="The name by which the server is known."
      *
      * @return the name of server
      */
@@ -114,7 +112,7 @@ public interface EmbeddorMBean
     /**
      * Get location of container installation
      *
-     * @phoenix:mx-attribute
+     * @mx.attribute description="The location of container installation."
      *
      * @return the home directory of container
      */
@@ -123,7 +121,7 @@ public interface EmbeddorMBean
     /**
      * Get the date at which this server started.
      *
-     * @phoenix:mx-attribute
+     * @mx.attribute description="the date at which this server started."
      *
      * @return the date at which this server started
      */
@@ -133,7 +131,7 @@ public interface EmbeddorMBean
      * Retrieve the number of millisecond
      * the server has been up.
      *
-     * @phoenix:mx-attribute
+     * @mx.attribute description="the number of millisecond the server has been up."
      *
      * @return the the number of millisecond the server has been up
      */
@@ -143,9 +141,7 @@ public interface EmbeddorMBean
      * Retrieve a string identifying version of server.
      * Usually looks like "x.y.z".
      *
-     * @phoenix:mx-attribute
-     * @phoenix:mx-description Retrieve a string identifying version of server.
-     *
+     * @mx.attribute description="Retrieve a string identifying version of server."
      * @return version string of server.
      */
     String getVersion();
@@ -155,23 +151,18 @@ public interface EmbeddorMBean
      * Possibly the date on which it was built, where it was built,
      * with what features it was built and so forth.
      *
-     * @phoenix:mx-attribute
-     *
+     * @mx.attribute description="a string defining the build."
      * @return the string describing build
      */
     String getBuild();
 
     /**
-     * Request the Embeddor shutsdown.
-     *
-     * @phoenix:mx-operation
+     * @mx.operation description="Request the Embeddor shutsdown."
      */
     void shutdown();
 
     /**
-     * Request the embeddor to restart.
-     *
-     * @phoenix:mx-operation
+     * @mx.operation description="Request the Embeddor restart."
      *
      * @throws UnsupportedOperationException if restart not a supported operation
      */
