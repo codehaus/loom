@@ -41,6 +41,10 @@ import org.jcontainer.loom.interfaces.Kernel;
 import org.jcontainer.loom.interfaces.LogManager;
 import org.jcontainer.loom.tools.configuration.ConfigurationBuilder;
 import org.jcontainer.loom.tools.verifier.SarVerifier;
+import org.jcontainer.loom.tools.LoomToolConstants;
+import org.jcontainer.loom.tools.profile.ComponentProfile;
+import org.jcontainer.loom.tools.profile.PartitionProfile;
+import org.jcontainer.loom.tools.profile.ProfileBuilder;
 import org.realityforge.loggerstore.LoggerStore;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
@@ -59,7 +63,7 @@ public class DefaultDeployer
         ResourceManager.getPackageResources( DefaultDeployer.class );
 
     private final SarVerifier m_verifier = new SarVerifier();
-    private final org.jcontainer.loom.tools.profile.ProfileBuilder m_builder = new PhoenixProfileBuilder();
+    private final ProfileBuilder m_builder = new PhoenixProfileBuilder();
     private final Map m_installations = new Hashtable();
     private LogManager m_logManager;
     private Kernel m_kernel;
@@ -301,7 +305,7 @@ public class DefaultDeployer
             parameters.put( ContainerConstants.ASSEMBLY_CLASSLOADER, classLoader );
 
             //assemble all the blocks for application
-            final org.jcontainer.loom.tools.profile.PartitionProfile profile = m_builder.buildProfile( parameters );
+            final PartitionProfile profile = m_builder.buildProfile( parameters );
 
             m_verifier.verifySar( profile, classLoader );
 
@@ -415,20 +419,20 @@ public class DefaultDeployer
      * @param config the block configurations.
      * @throws DeploymentException if an error occurs
      */
-    private void verifyConfiguration( final org.jcontainer.loom.tools.profile.PartitionProfile profile,
+    private void verifyConfiguration( final PartitionProfile profile,
                                       final Configuration config )
         throws DeploymentException
     {
         final Configuration[] configurations = config.getChildren();
-        final org.jcontainer.loom.tools.profile.PartitionProfile listenerPartition =
-            profile.getPartition( ContainerConstants.LISTENER_PARTITION );
-        final org.jcontainer.loom.tools.profile.PartitionProfile blockPartition =
-            profile.getPartition( ContainerConstants.BLOCK_PARTITION );
+        final PartitionProfile listenerPartition =
+            profile.getPartition( LoomToolConstants.LISTENER_PARTITION );
+        final PartitionProfile blockPartition =
+            profile.getPartition( LoomToolConstants.BLOCK_PARTITION );
         for( int i = 0; i < configurations.length; i++ )
         {
             final Configuration configuration = configurations[ i ];
             final String name = configuration.getName();
-            org.jcontainer.loom.tools.profile.ComponentProfile component = listenerPartition.getComponent( name );
+            ComponentProfile component = listenerPartition.getComponent( name );
             if( null == component )
             {
                 component = blockPartition.getComponent( name );
@@ -450,19 +454,19 @@ public class DefaultDeployer
      * @param classLoader the classloader application is loaded in
      * @throws DeploymentException if an error occurs
      */
-    private void validateConfiguration( final org.jcontainer.loom.tools.profile.PartitionProfile profile,
+    private void validateConfiguration( final PartitionProfile profile,
                                         final ClassLoader classLoader )
         throws DeploymentException
     {
-        final org.jcontainer.loom.tools.profile.PartitionProfile[] partitions = profile.getPartitions();
+        final PartitionProfile[] partitions = profile.getPartitions();
         for( int i = 0; i < partitions.length; i++ )
         {
             validateConfiguration( partitions[ i ], classLoader );
         }
-        final org.jcontainer.loom.tools.profile.ComponentProfile[] components = profile.getComponents();
+        final ComponentProfile[] components = profile.getComponents();
         for( int i = 0; i < components.length; i++ )
         {
-            final org.jcontainer.loom.tools.profile.ComponentProfile component = components[ i ];
+            final ComponentProfile component = components[ i ];
             boolean isValid = false;
             try
             {

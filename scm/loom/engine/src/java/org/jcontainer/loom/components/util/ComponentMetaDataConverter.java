@@ -21,12 +21,13 @@ import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.tools.info.Attribute;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.metadata.ComponentMetaData;
+import org.jcontainer.loom.tools.LoomToolConstants;
 
 /**
  * Convert a {@link org.jcontainer.loom.tools.metadata.ComponentMetaData} into a {@link BlockMetaData}.
  *
  * @author <a href="mailto:peter@apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-29 04:38:22 $
+ * @version $Revision: 1.2 $ $Date: 2003-07-19 01:51:33 $
  */
 public class ComponentMetaDataConverter
 {
@@ -38,9 +39,9 @@ public class ComponentMetaDataConverter
                                              final File homeDirectory )
     {
         final org.jcontainer.loom.tools.profile.PartitionProfile blockPartition =
-            partition.getPartition( ContainerConstants.BLOCK_PARTITION );
+            partition.getPartition( LoomToolConstants.BLOCK_PARTITION );
         final org.jcontainer.loom.tools.profile.PartitionProfile listenerPartition =
-            partition.getPartition( ContainerConstants.LISTENER_PARTITION );
+            partition.getPartition( LoomToolConstants.LISTENER_PARTITION );
         final BlockListenerMetaData[] listeners =
             toBlockListeners( listenerPartition.getMetaData().getComponents() );
         final BlockMetaData[] blocks =
