@@ -28,7 +28,7 @@
 
 	<postGoal name="xdoc:copy-user-resources">
 		<ant:copy todir="${maven.build.dir}/docs/dtds" filtering="no">
-        	<ant:fileset dir="${basedir}/../tools/src/java/org/jcontainer/loom/tools">
+        	<ant:fileset dir="${basedir}/../engine/src/java/org/jcontainer/loom/components/util">
 	          	<ant:include name="*.dtd"/>
         	</ant:fileset>
       	</ant:copy>
