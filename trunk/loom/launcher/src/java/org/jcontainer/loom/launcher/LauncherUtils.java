@@ -92,10 +92,9 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 /**
- * A set of utilities that help when writing
- * Launchers.
+ * A set of utilities that help when writing Launchers.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
+ * @author Peter Donald
  */
 public class LauncherUtils
 {
@@ -135,19 +134,20 @@ public class LauncherUtils
                             final String libDirectory )
         throws Exception
     {
-        final String engineLibDir = libDirectory.replace( '/', File.separatorChar );
+        final String engineLibDir = libDirectory.replace( '/',
+                                                          File.separatorChar );
         final File dir = new File( homeDir, engineLibDir ).getCanonicalFile();
         if( !dir.exists() )
         {
-            throw new Exception( "Unable to locate library directory at " + engineLibDir );
+            throw new Exception(
+                "Unable to locate library directory at " + engineLibDir );
         }
         return dir;
     }
 
     /**
-     * Utility method to find the home directory
-     * of Loom and make sure system property is
-     * set to it.
+     * Utility method to find the home directory of Loom and make sure system
+     * property is set to it.
      *
      * @return the location of loom directory
      * @throws Exception if unable to locate directory
@@ -170,7 +170,7 @@ public class LauncherUtils
     }
 
     /**
-     *  Finds the loaderJar file in the classpath.
+     * Finds the loaderJar file in the classpath.
      */
     private static final File findLoaderDir( final String systemProperty,
                                              final String loaderJar )
@@ -178,7 +178,8 @@ public class LauncherUtils
     {
         final String classpath = System.getProperty( "java.class.path" );
         final String pathSeparator = System.getProperty( "path.separator" );
-        final StringTokenizer tokenizer = new StringTokenizer( classpath, pathSeparator );
+        final StringTokenizer tokenizer = new StringTokenizer( classpath,
+                                                               pathSeparator );
 
         while( tokenizer.hasMoreTokens() )
         {
@@ -192,7 +193,8 @@ public class LauncherUtils
             }
         }
 
-        throw new Exception( "Unable to locate " + loaderJar +
+        throw new Exception( "Unable to locate " +
+                             loaderJar +
                              " in classpath. User must specify " +
                              systemProperty + " system property." );
     }

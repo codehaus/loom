@@ -95,10 +95,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * LoomLoader is the class that bootstraps and sets up engine ClassLoader.
- * It also sets up a default policy that gives full permissions to engine code.
+ * LoomLoader is the class that bootstraps and sets up engine ClassLoader. It
+ * also sets up a default policy that gives full permissions to engine code.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
+ * @author Peter Donald
  */
 public final class Main
 {
@@ -120,14 +120,12 @@ public final class Main
     }
 
     /**
-     * Method to call to startup Loom from an
-     * external (calling) application. Protected to allow
-     * access from DaemonLauncher.
+     * Method to call to startup Loom from an external (calling) application.
+     * Protected to allow access from DaemonLauncher.
      *
      * @param options the command line arg array
      * @param data a set of extra parameters to pass to embeddor
      * @param blocking false if the current thread is expected to return.
-     *
      * @return the exit code which should be used to exit the JVM
      */
     protected static final int startup( final String[] options,
@@ -148,8 +146,10 @@ public final class Main
                 LauncherUtils.generateClassPath( homeDir, "container/lib" );
             final URLClassLoader classLoader = new URLClassLoader( urls );
 
-            data.put( ClassLoader.class.getName() + "/common", ClassLoader.getSystemClassLoader() );
-            data.put( ClassLoader.class.getName() + "/container", classLoader );
+            data.put( ClassLoader.class.getName() + "/common",
+                      ClassLoader.getSystemClassLoader() );
+            data.put( ClassLoader.class.getName() + "/container",
+                      classLoader );
             data.put( File.class.getName() + "/home", homeDir );
 
             //Setup context classloader
@@ -195,9 +195,8 @@ public final class Main
     }
 
     /**
-     * Method to call to shutdown Loom from an
-     * external (calling) application. Protected to allow
-     * access from DaemonLauncher.
+     * Method to call to shutdown Loom from an external (calling) application.
+     * Protected to allow access from DaemonLauncher.
      */
     protected static final void shutdown()
     {
@@ -224,7 +223,8 @@ public final class Main
         try
         {
             final Class clazz = frontend.getClass();
-            final Method method = clazz.getMethod( "shutdown", new Class[ 0 ] );
+            final Method method = clazz.getMethod( "shutdown",
+                                                   new Class[ 0 ] );
 
             //Lets put this sucker to sleep
             method.invoke( frontend, new Object[ 0 ] );
