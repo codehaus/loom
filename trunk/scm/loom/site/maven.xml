@@ -18,7 +18,7 @@
         <attainGoal name="site:deploy"/>
     </goal>
 
-	<preGoal name="java:compile">
+	<preGoal name="xdoc:init">
 		<attainGoal name="aggregate-components-source"/>
 		<attainGoal name="aggregate-plugins-xdocs"/>
 		<ant:copy todir="${maven.docs.aggregated.src}" overwrite="true">
@@ -27,11 +27,23 @@
 	</preGoal>
 
 	<postGoal name="xdoc:copy-user-resources">
-		<copy todir="${maven.build.dir}/docs/dtds" filtering="no">
-        	<fileset dir="${basedir}/../tools/src/java/org/jcontainer/loom/tools">
-	          	<include name="*.dtd"/>
-        	</fileset>
-      	</copy>
+		<ant:copy todir="${maven.build.dir}/docs/dtds" filtering="no">
+        	<ant:fileset dir="${basedir}/../tools/src/java/org/jcontainer/loom/tools">
+	          	<ant:include name="*.dtd"/>
+        	</ant:fileset>
+      	</ant:copy>
+	</postGoal>
+
+	<!-- Required since unitTest resources from POM are not copied,
+		 presumably because unitTestSourcesPresent is set to false somewhere -->
+	<postGoal name="test:test-resources">
+		<ant:copy todir="${maven.test.dest}" filtering="no">
+        	<ant:fileset dir="${maven.aggregated.src}/test">
+	          	<ant:include name="**/*.xml"/>
+	          	<ant:include name="**/*.xinfo"/>
+	          	<ant:include name="**/*.java"/>
+        	</ant:fileset>
+      	</ant:copy>
 	</postGoal>
 
 	<goal name="aggregate-plugins-xdocs">
@@ -88,7 +100,7 @@
         </j:forEach>
     </goal>
 
-    <postGoal name="aggregate-components-source">
+    <preGoal name="java:compile">
         <ant:mkdir dir="${maven.aggregated.src}/java/org/jcontainer/loom/interfaces"/>
         <ant:tstamp/>
         <j:file name="${maven.aggregated.src}/java/org/jcontainer/loom/interfaces/Version.java"
@@ -100,7 +112,7 @@
             String VERSION = "${pom.currentVersion}";
             String DATE = "${TODAY}";
             }
-        </j:file>
-    </postGoal>
+        </j:file>       
+    </preGoal>
 
 </project>
