@@ -89,24 +89,23 @@ package org.jcontainer.loom.components.embeddor;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.Observable;
 import java.util.Observer;
 import org.apache.avalon.framework.container.ContainerUtil;
-import org.apache.avalon.framework.context.Context;
-import org.apache.avalon.framework.context.ContextException;
-import org.apache.avalon.framework.context.Contextualizable;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.logger.Logger;
 import org.apache.avalon.framework.parameters.ParameterException;
 import org.apache.avalon.framework.parameters.Parameterizable;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.jcontainer.dna.Active;
+import org.jcontainer.dna.Composable;
 import org.jcontainer.dna.Configurable;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.ConfigurationException;
+import org.jcontainer.dna.MissingResourceException;
 import org.jcontainer.dna.ResourceLocator;
 import org.jcontainer.dna.impl.DefaultResourceLocator;
 import org.jcontainer.loom.components.util.ExtensionFileFilter;
+import org.jcontainer.loom.components.ParameterConstants;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.Deployer;
 import org.jcontainer.loom.interfaces.Embeddor;
@@ -127,8 +126,7 @@ import org.realityforge.salt.i18n.Resources;
  */
 public class DefaultEmbeddor
     extends AbstractLogEnabled
-    implements Embeddor, EmbeddorMBean, Contextualizable,
-    Parameterizable, Configurable, Active
+    implements Embeddor, EmbeddorMBean, Parameterizable, Composable, Configurable, Active
 {
     private static final Resources REZ =
         ResourceManager.getPackageResources( DefaultEmbeddor.class );
@@ -136,16 +134,6 @@ public class DefaultEmbeddor
     private static final String DEFAULT_APPS_PATH = "/apps";
 
     private final EmbeddorObservable m_observable = new EmbeddorObservable();
-
-    private Parameters m_parameters;
-
-    /**
-     * Context passed to embeddor. See the contextualize() method
-     * for details on what is stored in context.
-     *
-     * @see DefaultEmbeddor#contextualize(Context)
-     */
-    private Context m_context;
 
     private String m_loomHome;
 
@@ -176,34 +164,33 @@ public class DefaultEmbeddor
      * The default directory in which applications are deployed from.
      */
     private String m_appDir;
+    private ClassLoader m_commonClassLoader;
+    private ClassLoader m_containerClassLoader;
+    private String m_application;
+    private Parameters m_parameters;
 
     /**
-     * Pass the Context to the embeddor.
-     * It is expected that the following will be entries in context;
-     * <ul>
-     *   <li><b>common.classloader</b>: ClassLoader shared betweeen
-     *      container and applications</li>
-     *   <li><b>container.classloader</b>: ClassLoader used to load
-     *      container</li>
-     * </ul>
-     *
-     * @param context
-     * @throws ContextException
+     * @dna.dependency type="Observer" optional="true"
+     * @dna.dependency type="ClassLoader/common"
+     * @dna.dependency type="ClassLoader/container"
      */
-    public void contextualize( final Context context )
-        throws ContextException
+    public void compose( final ResourceLocator locator )
+        throws MissingResourceException
     {
-        m_context = context;
-        try
+        if( locator.contains( Observer.class.getName() ) )
         {
-            final Observer observer = (Observer)context.get( Observer.class.getName() );
+            final Observer observer = (Observer)locator.lookup( Observer.class.getName() );
             m_observable.addObserver( observer );
         }
-        catch( final ContextException ce )
+        else
         {
             final String message = REZ.getString( "embeddor.notice.no-restart" );
             getLogger().warn( message );
         }
+        m_commonClassLoader = (ClassLoader)
+            locator.lookup( ClassLoader.class.getName() + "/common" );
+        m_containerClassLoader = (ClassLoader)
+            locator.lookup( ClassLoader.class.getName() + "/container" );
     }
 
     /**
@@ -243,10 +230,14 @@ public class DefaultEmbeddor
         throws ParameterException
     {
         m_parameters = parameters;
-        m_loomHome = m_parameters.getParameter( "loom.home", ".." );
-        m_persistent = m_parameters.getParameterAsBoolean( "persistent", false );
-        m_appDir = m_parameters.getParameter( "loom.apps.dir",
-                                              m_loomHome + DEFAULT_APPS_PATH );
+        m_loomHome = parameters.getParameter( ParameterConstants.HOME_DIR, ".." );
+        m_persistent =
+            parameters.getParameterAsBoolean( ParameterConstants.PERSISTENT, false );
+        m_appDir = parameters.getParameter( ParameterConstants.APPS_DIR,
+                                            m_loomHome + DEFAULT_APPS_PATH );
+        //Application specified on CLI
+        m_application =
+            parameters.getParameter( ParameterConstants.APPLICATION_LOCATION, null );
     }
 
     public void configure( final Configuration configuration )
@@ -336,7 +327,7 @@ public class DefaultEmbeddor
 
     private boolean emptyKernel()
     {
-        final Kernel kernel = getKernel();
+        final Kernel kernel = (Kernel)getEmbeddorComponent( Kernel.class.getName() );
         if( null != kernel )
         {
             final String[] names = kernel.getApplicationNames();
@@ -527,11 +518,9 @@ public class DefaultEmbeddor
         throws Exception
     {
         //Name of optional application specified on CLI
-        final String application =
-            m_parameters.getParameter( "application-location", null );
-        if( null != application )
+        if( null != m_application )
         {
-            final File file = new File( application );
+            final File file = new File( m_application );
             deployFile( file );
         }
         if( null != m_appDir )
@@ -603,7 +592,6 @@ public class DefaultEmbeddor
     {
         final Logger childLogger = getLogger().getChildLogger( loggerName );
         ContainerUtil.enableLogging( object, childLogger );
-        ContainerUtil.contextualize( object, m_context );
         org.jcontainer.dna.impl.ContainerUtil.compose( object, getResourceLocator() );
         ContainerUtil.parameterize( object, createChildParameters() );
         org.jcontainer.dna.impl.ContainerUtil.configure( object, config );
@@ -757,37 +745,16 @@ public class DefaultEmbeddor
                 continue;
             }
             final Object component = getEmbeddorComponent( role );
-            locator.put( role, component );
+            if( null != component )
+            {
+                locator.put( role, component );
+            }
         }
 
-        final ClassLoader commonClassLoader =
-            (ClassLoader)m_context.get( "common.classloader" );
-        locator.put( ClassLoader.class.getName() + "/common", commonClassLoader );
-        final ClassLoader containerClassLoader =
-            (ClassLoader)m_context.get( "container.classloader" );
-        locator.put( ClassLoader.class.getName() + "/container", containerClassLoader );
+        locator.put( ClassLoader.class.getName() + "/common", m_commonClassLoader );
+        locator.put( ClassLoader.class.getName() + "/container", m_containerClassLoader );
 
         return locator;
-    }
-
-    /**
-     * Allow subclasses to get access to kernel.
-     *
-     * @return the Kernel
-     */
-    protected final Kernel getKernel()
-    {
-        return (Kernel)getEmbeddorComponent( Kernel.class.getName() );
-    }
-
-    /**
-     * Allow subclasses to get access to parameters.
-     *
-     * @return the Parameters
-     */
-    protected final Parameters getParameters()
-    {
-        return m_parameters;
     }
 
     private Object getEmbeddorComponent( final String role )
@@ -811,11 +778,4 @@ public class DefaultEmbeddor
     }
 }
 
-class EmbeddorObservable
-    extends Observable
-{
-    public void change()
-    {
-        super.setChanged();
-    }
-}
+

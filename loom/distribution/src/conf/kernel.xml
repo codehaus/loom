@@ -63,7 +63,7 @@
             The Http Adaptor will use the $PHOENIX_HOME/conf/xsl directory
             by default to retrieve it's stylesheets.
             -->
-            <!-- <stylesheets-dir>conf/xsl</stylesheets-dir> -->
+            <stylesheets-dir>${loom.home}/conf/xsl</stylesheets-dir>
 
             <!--
             If you want the HTTPAdaptor to require authentication then you need to specify
@@ -165,11 +165,13 @@
             class="org.jcontainer.loom.components.configuration.NoopConfigurationInterceptor"
             logger="config"/>
 
-        <!--
+<!--
         <component role="org.jcontainer.loom.interfaces.ConfigurationInterceptor"
-        class="org.jcontainer.loom.components.configuration.FileSystemPersistentConfigurationInterceptor"
-        logger="config"/>
-            -->
+            class="org.jcontainer.loom.components.configuration.FileSystemPersistentConfigurationInterceptor"
+            logger="config">
+            <storage-directory>${loom.home}/conf/apps</storage-directory>
+        </component>
+-->
 
         <component role="org.jcontainer.loom.interfaces.ConfigurationValidator"
             class="org.jcontainer.loom.components.validator.DefaultConfigurationValidator"

@@ -99,13 +99,10 @@ import javax.management.ReflectionException;
 import mx4j.adaptor.rmi.jrmp.JRMPAdaptorMBean;
 import mx4j.log.Log;
 import mx4j.util.StandardMBeanProxy;
-import org.apache.avalon.framework.context.Context;
-import org.apache.avalon.framework.context.ContextException;
-import org.apache.avalon.framework.context.Contextualizable;
-import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.dna.Configurable;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.ConfigurationException;
+import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
@@ -118,7 +115,7 @@ import org.realityforge.salt.i18n.Resources;
  */
 public class MX4JSystemManager
     extends AbstractJMXManager
-    implements Contextualizable, Configurable
+    implements Configurable
 {
     private static final Resources REZ =
         ResourceManager.getPackageResources( MX4JSystemManager.class );
@@ -135,18 +132,11 @@ public class MX4JSystemManager
     private int m_port;
     private boolean m_rmi;
     private int m_rmi_registry_port;
-    private File m_homeDir;
     private String m_stylesheetDir;
     private String m_namingFactory;
     private String m_password;
     private String m_username;
     private boolean m_http;
-
-    public void contextualize( final Context context )
-        throws ContextException
-    {
-        m_homeDir = (File)context.get( "loom.home" );
-    }
 
     public void configure( final Configuration configuration )
         throws ConfigurationException
@@ -175,7 +165,8 @@ public class MX4JSystemManager
             configuration.getChild( "stylesheets-dir" ).getValue( null );
         if( null != stylesheets )
         {
-            m_stylesheetDir = new File( m_homeDir, stylesheets ).getAbsolutePath();
+            m_stylesheetDir = new File( stylesheets ).getAbsolutePath();
+            getLogger().debug( "MX4J XSL Stylesheet Dir: " + m_stylesheetDir );
         }
 
         /*<user>

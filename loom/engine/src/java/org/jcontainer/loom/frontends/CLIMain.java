@@ -87,11 +87,12 @@
 package org.jcontainer.loom.frontends;
 
 import java.io.File;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Properties;
 import org.apache.avalon.framework.container.ContainerUtil;
-import org.apache.avalon.framework.context.DefaultContext;
 import org.apache.avalon.framework.logger.AvalonFormatter;
 import org.apache.avalon.framework.logger.LogKitLogger;
 import org.apache.avalon.framework.logger.Logger;
@@ -100,12 +101,15 @@ import org.apache.log.Hierarchy;
 import org.apache.log.LogTarget;
 import org.apache.log.Priority;
 import org.apache.log.output.io.FileTarget;
-import org.jcontainer.loom.interfaces.ContainerConstants;
-import org.jcontainer.loom.interfaces.Embeddor;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.impl.ConfigurationUtil;
-import org.realityforge.salt.i18n.Resources;
+import org.jcontainer.dna.impl.DefaultResourceLocator;
+import org.jcontainer.loom.components.ParameterConstants;
+import org.jcontainer.loom.components.util.ConfigUtil;
+import org.jcontainer.loom.interfaces.ContainerConstants;
+import org.jcontainer.loom.interfaces.Embeddor;
 import org.realityforge.salt.i18n.ResourceManager;
+import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.lang.ExceptionUtil;
 import org.xml.sax.InputSource;
 
@@ -165,21 +169,21 @@ public final class CLIMain
             System.out.println( ContainerConstants.SOFTWARE + " " + ContainerConstants.VERSION );
             System.out.println();
 
-            final Parameters parameters = setup.getParameters();
-            final String loomHome = System.getProperty( "loom.home", ".." );
-            parameters.setParameter( "loom.home", loomHome );
-            if( !parameters.isParameter( "loom.configfile" ) )
+            final Properties properties = setup.getParameters();
+            final String loomHome = System.getProperty( ParameterConstants.HOME_DIR, ".." );
+            properties.setProperty( ParameterConstants.HOME_DIR, loomHome );
+            if( !properties.containsKey( "loom.configfile" ) )
             {
                 final String filename = loomHome + DEFAULT_CONF_FILE;
                 final File configFile =
                     new File( filename ).getCanonicalFile();
 
                 // setting default
-                parameters.setParameter( "loom.configfile",
-                                         configFile.toString() );
+                properties.setProperty( "loom.configfile",
+                                        configFile.toString() );
             }
 
-            execute( parameters, data, blocking );
+            execute( properties, data, blocking );
         }
         catch( final Throwable throwable )
         {
@@ -192,16 +196,17 @@ public final class CLIMain
     /**
      * Actually create and execute the main component of embeddor.
      */
-    private void execute( final Parameters parameters,
+    private void execute( final Properties properties,
                           final Map data,
                           final boolean blocking )
     {
-        if( !startup( parameters, data ) )
+        if( !startup( properties, data ) )
         {
             return;
         }
 
-        final boolean disableHook = parameters.getParameterAsBoolean( "disable-hook", false );
+        final boolean disableHook =
+            properties.getProperty( "disable-hook", "false" ).equals( "true" );
         if( false == disableHook )
         {
             m_hook = new ShutdownHook( this );
@@ -251,22 +256,30 @@ public final class CLIMain
     /**
      * Startup the embeddor.
      */
-    private synchronized boolean startup( final Parameters parameters,
+    private synchronized boolean startup( final Properties properties,
                                           final Map data )
     {
         try
         {
-            final String configFilename = parameters.getParameter( "loom.configfile" );
-            final Configuration root = ConfigurationUtil.buildFromXML( new InputSource( configFilename ) );
+            final String configFilename = properties.getProperty( "loom.configfile" );
+            final Configuration original = ConfigurationUtil.buildFromXML( new InputSource( configFilename ) );
+            final Configuration root = ConfigUtil.expandValues( original, properties );
             final Configuration configuration = root.getChild( "embeddor" );
             final String embeddorClassname = configuration.getAttribute( "class" );
             m_embeddor = (Embeddor)Class.forName( embeddorClassname ).newInstance();
 
             ContainerUtil.enableLogging( m_embeddor,
-                                         createLogger( parameters ) );
-            ContainerUtil.contextualize( m_embeddor,
-                                         new DefaultContext( data ) );
-            ContainerUtil.parameterize( m_embeddor, parameters );
+                                         createLogger( properties ) );
+            ContainerUtil.parameterize( m_embeddor, Parameters.fromProperties( properties ) );
+            final DefaultResourceLocator locator = new DefaultResourceLocator();
+            final Iterator iterator = data.keySet().iterator();
+            while( iterator.hasNext() )
+            {
+                final String key = (String)iterator.next();
+                final Object value = data.get( key );
+                locator.put( key, value );
+            }
+            org.jcontainer.dna.impl.ContainerUtil.compose( m_embeddor, locator );
             org.jcontainer.dna.impl.ContainerUtil.configure( m_embeddor, configuration );
             org.jcontainer.dna.impl.ContainerUtil.initialize( m_embeddor );
         }
@@ -287,14 +300,14 @@ public final class CLIMain
      * TODO: allow configurable priorities and multiple
      * logtargets.
      */
-    private Logger createLogger( final Parameters parameters )
+    private Logger createLogger( final Properties properties )
         throws Exception
     {
-        final String loomHome = parameters.getParameter( "loom.home" );
+        final String loomHome = properties.getProperty( "loom.home" );
         final String logDestination =
-            parameters.getParameter( "log-destination", loomHome + DEFAULT_LOG_FILE );
+            properties.getProperty( "log-destination", loomHome + DEFAULT_LOG_FILE );
         final String logPriority =
-            parameters.getParameter( "log-priority", "INFO" );
+            properties.getProperty( "log-priority", "INFO" );
         final AvalonFormatter formatter = new AvalonFormatter( DEFAULT_FORMAT );
         final File file = new File( logDestination );
         final FileTarget logTarget = new FileTarget( file, false, formatter );
