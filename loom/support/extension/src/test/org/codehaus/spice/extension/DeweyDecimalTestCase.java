@@ -13,7 +13,7 @@ import junit.framework.TestCase;
  * TestCases for DeweyDecimal.
  *
  * @author Peter Donald
- * @version $Revision: 1.2 $ $Date: 2003-12-02 08:08:09 $
+ * @version $Revision: 1.3 $ $Date: 2003-12-02 08:09:24 $
  */
 public class DeweyDecimalTestCase
     extends TestCase
@@ -26,11 +26,6 @@ public class DeweyDecimalTestCase
     private static final String DD6 = "2..9";
     private static final String DD7 = ".9";
     private static final String DD8 = "9.";
-
-    public DeweyDecimalTestCase( String name )
-    {
-        super( name );
-    }
 
     public void testParse()
         throws Exception

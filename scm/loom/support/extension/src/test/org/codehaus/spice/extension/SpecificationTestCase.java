@@ -9,26 +9,20 @@ package org.codehaus.spice.extension;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.jar.Manifest;
-import java.util.HashSet;
 import java.util.Arrays;
-
+import java.util.HashSet;
+import java.util.jar.Manifest;
 import junit.framework.TestCase;
 
 /**
  * TestCases for Specification.
  *
  * @author Peter Donald
- * @version $Revision: 1.2 $ $Date: 2003-12-02 08:08:36 $
+ * @version $Revision: 1.3 $ $Date: 2003-12-02 08:09:24 $
  */
 public class SpecificationTestCase
     extends TestCase
 {
-    public SpecificationTestCase( final String name )
-    {
-        super( name );
-    }
-
     public void testSingleSpecification()
         throws Exception
     {
@@ -49,13 +43,15 @@ public class SpecificationTestCase
                       specifications[ 0 ].getSpecificationTitle() );
         assertEquals( "SpecVendor", "Peter Donald",
                       specifications[ 0 ].getSpecificationVendor() );
-        assertEquals( "SpecVersion", "1.0.2",
+        assertEquals( "SpecVersion",
+                      "1.0.2",
                       specifications[ 0 ].getSpecificationVersion().toString() );
         assertEquals( "ImpVendor", "Peter Donald",
                       specifications[ 0 ].getImplementationVendor() );
         assertEquals( "ImpTitle", "DVE vi OS3P",
                       specifications[ 0 ].getImplementationTitle() );
-        assertEquals( "ImpVersion", "1.0.2Alpha",
+        assertEquals( "ImpVersion",
+                      "1.0.2Alpha",
                       specifications[ 0 ].getImplementationVersion().toString() );
     }
 
@@ -79,13 +75,15 @@ public class SpecificationTestCase
                       specifications[ 0 ].getSpecificationTitle() );
         assertEquals( "SpecVendor", "Peter Donald",
                       specifications[ 0 ].getSpecificationVendor() );
-        assertEquals( "SpecVersion", "1.0.2",
+        assertEquals( "SpecVersion",
+                      "1.0.2",
                       specifications[ 0 ].getSpecificationVersion().toString() );
         assertEquals( "ImpVendor", "Peter Donald",
                       specifications[ 0 ].getImplementationVendor() );
         assertEquals( "ImpTitle", "DVE vi OS3P",
                       specifications[ 0 ].getImplementationTitle() );
-        assertEquals( "ImpVersion", "1.0.2Alpha",
+        assertEquals( "ImpVersion",
+                      "1.0.2Alpha",
                       specifications[ 0 ].getImplementationVersion().toString() );
     }
 
@@ -238,27 +236,33 @@ public class SpecificationTestCase
             "Implementation-Title: DVE vi OS3P\n" +
             "Implementation-Vendor: Peter Donald\n" +
             "Implementation-Version: 1.0.2Alpha\n";
-        final Specification[] specifications = getSpecifications( manifestString );
+        final Specification[] specifications = getSpecifications(
+            manifestString );
 
         assertEquals( "Count", 1, specifications.length );
         final String[] sections = specifications[ 0 ].getSections();
         assertEquals( "sections.length", 3, sections.length );
         final HashSet set = new HashSet();
         set.addAll( Arrays.asList( sections ) );
-        assertTrue( "sections.contains(org/realityforge/dve)", set.contains( "org/realityforge/dve" ) );
-        assertTrue( "sections.contains(org/realityforge/dve/input)", set.contains( "org/realityforge/dve/input" ) );
-        assertTrue( "sections.contains(org/realityforge/dve/sim)", set.contains( "org/realityforge/dve/sim" ) );
+        assertTrue( "sections.contains(org/realityforge/dve)",
+                    set.contains( "org/realityforge/dve" ) );
+        assertTrue( "sections.contains(org/realityforge/dve/input)",
+                    set.contains( "org/realityforge/dve/input" ) );
+        assertTrue( "sections.contains(org/realityforge/dve/sim)",
+                    set.contains( "org/realityforge/dve/sim" ) );
         assertEquals( "Name", "org.realityforge.dve",
                       specifications[ 0 ].getSpecificationTitle() );
         assertEquals( "SpecVendor", "Peter Donald",
                       specifications[ 0 ].getSpecificationVendor() );
-        assertEquals( "SpecVersion", "1.0.2",
+        assertEquals( "SpecVersion",
+                      "1.0.2",
                       specifications[ 0 ].getSpecificationVersion().toString() );
         assertEquals( "ImpVendor", "Peter Donald",
                       specifications[ 0 ].getImplementationVendor() );
         assertEquals( "ImpTitle", "DVE vi OS3P",
                       specifications[ 0 ].getImplementationTitle() );
-        assertEquals( "ImpVersion", "1.0.2Alpha",
+        assertEquals( "ImpVersion",
+                      "1.0.2Alpha",
                       specifications[ 0 ].getImplementationVersion().toString() );
     }
 
@@ -299,7 +303,8 @@ public class SpecificationTestCase
             "Implementation-Title: DVE vi OS3P\n" +
             "Implementation-Vendor: Peter Donald\n" +
             "Implementation-Version: 1.0.2Alpha\n";
-        final Specification[] specifications = getSpecifications( manifestString );
+        final Specification[] specifications = getSpecifications(
+            manifestString );
 
         assertEquals( "Count", 2, specifications.length );
         Specification dveSpecification;
@@ -320,9 +325,12 @@ public class SpecificationTestCase
         assertEquals( "sections.length", 3, sections.length );
         final HashSet set = new HashSet();
         set.addAll( Arrays.asList( sections ) );
-        assertTrue( "sections.contains(org/realityforge/dve)", set.contains( "org/realityforge/dve" ) );
-        assertTrue( "sections.contains(org/realityforge/dve/input)", set.contains( "org/realityforge/dve/input" ) );
-        assertTrue( "sections.contains(org/realityforge/dve/sim)", set.contains( "org/realityforge/dve/sim" ) );
+        assertTrue( "sections.contains(org/realityforge/dve)",
+                    set.contains( "org/realityforge/dve" ) );
+        assertTrue( "sections.contains(org/realityforge/dve/input)",
+                    set.contains( "org/realityforge/dve/input" ) );
+        assertTrue( "sections.contains(org/realityforge/dve/sim)",
+                    set.contains( "org/realityforge/dve/sim" ) );
         assertEquals( "Name", "org.realityforge.dve",
                       dveSpecification.getSpecificationTitle() );
         assertEquals( "SpecVendor", "Peter Donald",
@@ -336,8 +344,12 @@ public class SpecificationTestCase
         assertEquals( "ImpVersion", "1.0.2Alpha",
                       dveSpecification.getImplementationVersion().toString() );
 
-        assertEquals( "sections.length", 1, fooSpecification.getSections().length );
-        assertEquals( "sections[0]", "com/biz/foo", fooSpecification.getSections()[ 0 ] );
+        assertEquals( "sections.length",
+                      1,
+                      fooSpecification.getSections().length );
+        assertEquals( "sections[0]",
+                      "com/biz/foo",
+                      fooSpecification.getSections()[ 0 ] );
         assertEquals( "Name", "com.biz.foo",
                       fooSpecification.getSpecificationTitle() );
         assertEquals( "SpecVendor", "Peter Donald",
@@ -388,23 +400,38 @@ public class SpecificationTestCase
             new Specification( title, version, vendor,
                                implTitle, implVersion, "another vendor" );
 
-        assertTrue( "avail1.isCompatibleWith( req1 )", avail1.isCompatibleWith( req1 ) );
-        assertTrue( "avail1.isCompatibleWith( req2 )", avail1.isCompatibleWith( req2 ) );
-        assertTrue( "avail1.isCompatibleWith( req3 )", avail1.isCompatibleWith( req3 ) );
-        assertTrue( "avail1.isCompatibleWith( req4 )", avail1.isCompatibleWith( req4 ) );
-        assertTrue( "!avail1.isCompatibleWith( req5 )", !avail1.isCompatibleWith( req5 ) );
+        assertTrue( "avail1.isCompatibleWith( req1 )",
+                    avail1.isCompatibleWith( req1 ) );
+        assertTrue( "avail1.isCompatibleWith( req2 )",
+                    avail1.isCompatibleWith( req2 ) );
+        assertTrue( "avail1.isCompatibleWith( req3 )",
+                    avail1.isCompatibleWith( req3 ) );
+        assertTrue( "avail1.isCompatibleWith( req4 )",
+                    avail1.isCompatibleWith( req4 ) );
+        assertTrue( "!avail1.isCompatibleWith( req5 )",
+                    !avail1.isCompatibleWith( req5 ) );
 
-        assertTrue( "!avail2.isCompatibleWith( req1 )", !avail2.isCompatibleWith( req1 ) );
-        assertTrue( "avail2.isCompatibleWith( req2 )", avail2.isCompatibleWith( req2 ) );
-        assertTrue( "avail2.isCompatibleWith( req3 )", avail2.isCompatibleWith( req3 ) );
-        assertTrue( "avail2.isCompatibleWith( req4 )", avail2.isCompatibleWith( req4 ) );
-        assertTrue( "!avail2.isCompatibleWith( req5 )", !avail2.isCompatibleWith( req5 ) );
+        assertTrue( "!avail2.isCompatibleWith( req1 )",
+                    !avail2.isCompatibleWith( req1 ) );
+        assertTrue( "avail2.isCompatibleWith( req2 )",
+                    avail2.isCompatibleWith( req2 ) );
+        assertTrue( "avail2.isCompatibleWith( req3 )",
+                    avail2.isCompatibleWith( req3 ) );
+        assertTrue( "avail2.isCompatibleWith( req4 )",
+                    avail2.isCompatibleWith( req4 ) );
+        assertTrue( "!avail2.isCompatibleWith( req5 )",
+                    !avail2.isCompatibleWith( req5 ) );
 
-        assertTrue( "!avail3.isCompatibleWith( req1 )", !avail3.isCompatibleWith( req1 ) );
-        assertTrue( "avail3.isCompatibleWith( req2 )", avail3.isCompatibleWith( req2 ) );
-        assertTrue( "avail3.isCompatibleWith( req3 )", avail3.isCompatibleWith( req3 ) );
-        assertTrue( "avail3.isCompatibleWith( req4 )", avail3.isCompatibleWith( req4 ) );
-        assertTrue( "!avail3.isCompatibleWith( req5 )", !avail3.isCompatibleWith( req5 ) );
+        assertTrue( "!avail3.isCompatibleWith( req1 )",
+                    !avail3.isCompatibleWith( req1 ) );
+        assertTrue( "avail3.isCompatibleWith( req2 )",
+                    avail3.isCompatibleWith( req2 ) );
+        assertTrue( "avail3.isCompatibleWith( req3 )",
+                    avail3.isCompatibleWith( req3 ) );
+        assertTrue( "avail3.isCompatibleWith( req4 )",
+                    avail3.isCompatibleWith( req4 ) );
+        assertTrue( "!avail3.isCompatibleWith( req5 )",
+                    !avail3.isCompatibleWith( req5 ) );
     }
 
     private Specification[] getSpecifications( final String input )
