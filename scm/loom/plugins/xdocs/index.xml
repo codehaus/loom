@@ -9,7 +9,7 @@
             <table>
                 <tr>
                     <td>
-                        <a href="/plugins/maven-sar/">Maven Sar Plugin</a>
+                        <a href="/plugins/maven-loom/">Maven Loom Plugin</a>
                     </td>
                     <td>Generates Loom/Phoenix Sar files using Maven</td>
                 </tr>
@@ -19,17 +19,16 @@
             <p>The Loom plugins are downloadable from
                 <a href="http://dist.codehaus.org/loom/plugins">
 			Codehaus Distribution Server</a>.
-            </p>
-            <p>To install in your local Maven plugin repository, ensure that
-                <code>http://dist.codehaus.org/</code>
-		   is part of the
-                <code>maven.repo.remote</code> list and simply
-			specify the plugin name as a dependency with type
+            </p> 
+            <p>The Codehaus Distribution artifacts are synched with the 
+            <a href="http://ibiblio.org/maven/loom">IBiblio</a> 
+            Maven repository. 
+            Simply specify the plugin name as a dependency with type
                 <code>plugin</code>:
                 <source><![CDATA[
   <dependency>
     <groupId>loom</groupId>
-    <artifactId>maven-sar-plugin</artifactId>
+    <artifactId>maven-loom-plugin</artifactId>
     <version>[plugin-version]</version>
     <type>plugin</type>
   </dependency>
