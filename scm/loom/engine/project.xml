@@ -139,7 +139,7 @@
 
     <build>
         <sourceDirectory>src/java</sourceDirectory>
-        <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
+        <unitTestSourceDirectory>${basedir}/src/test</unitTestSourceDirectory>
 
         <unitTest>
             <includes>
