@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<apacheds>
+		<properties>
+			<server.net.ldap.port>2005</server.net.ldap.port>
+			<java.naming.provider.url>ou=system</java.naming.provider.url>
+			<java.naming.factory.initial>org.apache.ldap.server.jndi.ServerContextFactory</java.naming.factory.initial>
+		</properties>
+	</apacheds>
+</config>
