@@ -12,7 +12,6 @@ package org.jcontainer.loom.frontends;
 
 import java.util.List;
 import org.apache.avalon.framework.parameters.Parameters;
-import org.jcontainer.loom.interfaces.SystemManager;
 import org.realityforge.cli.CLArgsParser;
 import org.realityforge.cli.CLOption;
 import org.realityforge.cli.CLOptionDescriptor;
@@ -31,25 +30,13 @@ class CLISetup
     private static final Resources REZ =
         ResourceManager.getPackageResources( CLISetup.class );
 
-    private static final String MANAGER_IMPL =
-        "org.apache.avalon.phoenix.components.manager.DefaultManager";
-
     private static final int DEBUG_LOG_OPT = 'd';
-
     private static final int HELP_OPT = 'h';
-
     private static final int LOG_FILE_OPT = 'l';
-
     private static final int APPS_PATH_OPT = 'a';
-
     private static final int PERSISTENT_OPT = 'p';
-
     private static final int CONFIGFILE_OPT = 'f';
-
-    private static final int REMOTE_MANAGER_OPT = 1;
-
     private static final int DISABLE_HOOK_OPT = 2;
-
     private static final int APPLICATION_OPT = 3;
 
     ///Parameters created by parsing CLI options
@@ -78,7 +65,7 @@ class CLISetup
      */
     private CLOptionDescriptor[] createCLOptions()
     {
-        final CLOptionDescriptor options[] = new CLOptionDescriptor[ 9 ];
+        final CLOptionDescriptor options[] = new CLOptionDescriptor[ 8 ];
         options[ 0 ] =
             new CLOptionDescriptor( "help",
                                     CLOptionDescriptor.ARGUMENT_DISALLOWED,
@@ -89,49 +76,36 @@ class CLISetup
                                     CLOptionDescriptor.ARGUMENT_REQUIRED,
                                     LOG_FILE_OPT,
                                     REZ.getString( "cli.opt.log-file.desc" ) );
-
         options[ 2 ] =
             new CLOptionDescriptor( "apps-path",
                                     CLOptionDescriptor.ARGUMENT_REQUIRED,
                                     APPS_PATH_OPT,
                                     REZ.getString( "cli.opt.apps-path.desc" ) );
-
         options[ 3 ] =
             new CLOptionDescriptor( "debug-init",
                                     CLOptionDescriptor.ARGUMENT_DISALLOWED,
                                     DEBUG_LOG_OPT,
                                     REZ.getString( "cli.opt.debug-init.desc" ) );
-
         options[ 4 ] =
-            new CLOptionDescriptor( "remote-manager",
-                                    CLOptionDescriptor.ARGUMENT_DISALLOWED,
-                                    REMOTE_MANAGER_OPT,
-                                    REZ.getString( "cli.opt.remote-manager.desc" ) );
-
-        options[ 5 ] =
             new CLOptionDescriptor( "disable-hook",
                                     CLOptionDescriptor.ARGUMENT_DISALLOWED,
                                     DISABLE_HOOK_OPT,
                                     REZ.getString( "cli.opt.disable-hook.desc" ) );
-
-        options[ 6 ] =
+        options[ 5 ] =
             new CLOptionDescriptor( "application",
                                     CLOptionDescriptor.ARGUMENT_REQUIRED,
                                     APPLICATION_OPT,
                                     REZ.getString( "cli.opt.application.desc" ) );
-
-        options[ 7 ] =
+        options[ 6 ] =
             new CLOptionDescriptor( "persistent",
                                     CLOptionDescriptor.ARGUMENT_DISALLOWED,
                                     PERSISTENT_OPT,
                                     REZ.getString( "cli.opt.persistent.desc" ) );
-
-        options[ 8 ] =
+        options[ 7 ] =
             new CLOptionDescriptor( "configfile",
                                     CLOptionDescriptor.ARGUMENT_REQUIRED,
                                     CONFIGFILE_OPT,
                                     REZ.getString( "cli.opt.configfile.desc" ) );
-
         return options;
     }
 
@@ -182,11 +156,7 @@ class CLISetup
                     break;
 
                 case APPS_PATH_OPT:
-                    m_parameters.setParameter( "phoenix.apps.dir", option.getArgument() );
-                    break;
-
-                case REMOTE_MANAGER_OPT:
-                    m_parameters.setParameter( SystemManager.ROLE, MANAGER_IMPL );
+                    m_parameters.setParameter( "loom.apps.dir", option.getArgument() );
                     break;
 
                 case APPLICATION_OPT:
@@ -202,7 +172,7 @@ class CLISetup
                     break;
 
                 case CONFIGFILE_OPT:
-                    m_parameters.setParameter( "phoenix.configfile", option.getArgument() );
+                    m_parameters.setParameter( "loom.configfile", option.getArgument() );
                     break;
             }
         }
