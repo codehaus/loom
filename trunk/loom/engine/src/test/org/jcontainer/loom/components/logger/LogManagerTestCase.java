@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import junit.framework.TestCase;
-import org.apache.avalon.excalibur.io.FileUtil;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.DefaultConfigurationBuilder;
 import org.apache.avalon.framework.container.ContainerUtil;
@@ -26,6 +25,7 @@ import org.apache.avalon.phoenix.metadata.BlockListenerMetaData;
 import org.apache.avalon.phoenix.metadata.BlockMetaData;
 import org.apache.avalon.phoenix.metadata.SarMetaData;
 import org.realityforge.loggerstore.LoggerStore;
+import org.realityforge.salt.io.FileUtil;
 import org.jcontainer.loom.components.logger.DefaultLogManager;
 import org.jcontainer.loom.interfaces.LogManager;
 
@@ -33,7 +33,7 @@ import org.jcontainer.loom.interfaces.LogManager;
  *  An basic test case for the LogManager.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-07-18 01:04:54 $
+ * @version $Revision: 1.2 $ $Date: 2003-07-18 03:50:24 $
  */
 public class LogManagerTestCase
     extends TestCase
@@ -50,7 +50,7 @@ public class LogManagerTestCase
 
     protected void setUp() throws Exception
     {
-        m_baseDirectory = new File( "test" );
+        m_baseDirectory = new File( "target" + File.separator + "testdata" );
         m_baseDirectory.mkdirs();
 
         //Because log4j does not guarentee dir creation ;(
