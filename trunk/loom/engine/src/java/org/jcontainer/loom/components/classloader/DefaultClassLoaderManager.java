@@ -112,7 +112,7 @@ import org.codehaus.spice.classman.metadata.FileSetMetaData;
 import org.codehaus.spice.classman.metadata.JoinMetaData;
 import org.codehaus.spice.classman.reader.ClassLoaderSetReader;
 import org.codehaus.spice.classman.verifier.ClassLoaderVerifier;
-import org.realityforge.configkit.PropertyExpander;
+import org.codehaus.spice.configkit.PropertyExpander;
 import org.codehaus.spice.extension.Extension;
 import org.codehaus.spice.xmlpolicy.builder.PolicyBuilder;
 import org.codehaus.spice.xmlpolicy.metadata.PolicyMetaData;

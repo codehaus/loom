@@ -11,11 +11,11 @@ import java.util.Map;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.ConfigurationException;
 import org.jcontainer.dna.impl.DefaultConfiguration;
-import org.realityforge.configkit.PropertyExpander;
+import org.codehaus.spice.configkit.PropertyExpander;
 
 /**
  * @author Peter Donald
- * @version $Revision: 1.4 $ $Date: 2003-11-29 13:44:27 $
+ * @version $Revision: 1.5 $ $Date: 2003-12-03 03:37:57 $
  */
 public class ConfigUtil
 {

@@ -94,7 +94,7 @@ import org.jcontainer.loom.components.util.ConfigUtil;
 import org.jcontainer.dna.impl.DefaultConfiguration;
 
 /**
- * @author <a href="mailto:proyal at apache.org">Peter Royal</a>
+ * @author Peter Royal
  */
 public class ConfigurationMergerTestCase
     extends TestCase
