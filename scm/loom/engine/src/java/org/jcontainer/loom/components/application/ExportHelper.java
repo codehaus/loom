@@ -91,6 +91,7 @@ import org.jcontainer.loom.interfaces.ApplicationContext;
 import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
 import org.jcontainer.loom.tools.infobuilder.LegacyUtil;
+import org.jcontainer.loom.tools.profile.ComponentProfile;
 import org.jcontainer.dna.AbstractLogEnabled;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
@@ -99,7 +100,7 @@ import org.realityforge.salt.i18n.Resources;
  * Utility class to help with exporting Blocks to management subsystem.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-10-05 10:07:03 $
+ * @version $Revision: 1.7 $ $Date: 2003-10-11 09:08:25 $
  */
 class ExportHelper
     extends AbstractLogEnabled
@@ -112,7 +113,7 @@ class ExportHelper
      * services, into management system.
      */
     void exportBlock( final ApplicationContext context,
-                      final org.jcontainer.loom.tools.profile.ComponentProfile profile,
+                      final ComponentProfile profile,
                       final Object block )
         throws LoomException
     {
@@ -159,7 +160,7 @@ class ExportHelper
      * @param profile the component profile
      * @return the management services.
      */
-    private ServiceDescriptor[] getMxServices( final org.jcontainer.loom.tools.profile.ComponentProfile profile )
+    private ServiceDescriptor[] getMxServices( final ComponentProfile profile )
     {
         final ArrayList mxServices = new ArrayList();
         final ServiceDescriptor[] services = profile.getInfo().getServices();
@@ -180,7 +181,7 @@ class ExportHelper
      * services, into management system.
      */
     void unexportBlock( final ApplicationContext context,
-                        final org.jcontainer.loom.tools.profile.ComponentProfile profile )
+                        final ComponentProfile profile )
     {
         final String name = profile.getMetaData().getName();
         try
