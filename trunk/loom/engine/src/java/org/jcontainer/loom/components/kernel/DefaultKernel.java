@@ -92,16 +92,16 @@ import java.util.Map;
 import org.apache.avalon.framework.container.ContainerUtil;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.logger.Logger;
-import org.apache.avalon.framework.service.DefaultServiceManager;
-import org.apache.avalon.framework.service.ServiceException;
-import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.avalon.framework.service.Serviceable;
 import org.apache.excalibur.instrument.InstrumentManager;
 import org.jcomponent.loggerstore.LoggerStore;
 import org.jcontainer.dna.Active;
 import org.jcontainer.dna.Configurable;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.ConfigurationException;
+import org.jcontainer.dna.Composable;
+import org.jcontainer.dna.ResourceLocator;
+import org.jcontainer.dna.MissingResourceException;
+import org.jcontainer.dna.impl.DefaultResourceLocator;
 import org.jcontainer.loom.components.application.DefaultApplication;
 import org.jcontainer.loom.interfaces.Application;
 import org.jcontainer.loom.interfaces.ApplicationContext;
@@ -130,7 +130,7 @@ import org.realityforge.salt.i18n.Resources;
  */
 public class DefaultKernel
     extends AbstractLogEnabled
-    implements Kernel, KernelMBean, Active, Serviceable, Configurable
+    implements Kernel, KernelMBean, Active, Composable, Configurable
 {
     private static final Resources REZ =
         ResourceManager.getPackageResources( DefaultKernel.class );
@@ -170,14 +170,20 @@ public class DefaultKernel
     //List of applications to return when the kernel is locked
     private String[] m_lockedApplications;
 
-    public void service( final ServiceManager serviceManager )
-        throws ServiceException
+    /**
+     * @dna.dependency type="InstrumentManager"
+     * @dna.dependency type="SystemManager"
+     * @dna.dependency type="ConfigurationInterceptor"
+     * @dna.dependency type="ConfigurationValidator"
+     */
+    public void compose( final ResourceLocator locator )
+        throws MissingResourceException
     {
-        m_systemManager = (SystemManager)serviceManager.lookup( SystemManager.class.getName() );
-        m_repository = (ConfigurationInterceptor)serviceManager.
+        m_systemManager = (SystemManager)locator.lookup( SystemManager.class.getName() );
+        m_repository = (ConfigurationInterceptor)locator.
             lookup( ConfigurationInterceptor.class.getName() );
-        m_validator = (ConfigurationValidator)serviceManager.lookup( ConfigurationValidator.class.getName() );
-        m_instrumentManager = (InstrumentManager)serviceManager.lookup( InstrumentManager.class.getName() );
+        m_validator = (ConfigurationValidator)locator.lookup( ConfigurationValidator.class.getName() );
+        m_instrumentManager = (InstrumentManager)locator.lookup( InstrumentManager.class.getName() );
     }
 
     public void configure( final Configuration configuration )
@@ -431,7 +437,7 @@ public class DefaultKernel
                                            entry.getClassLoaders() );
 
         ContainerUtil.enableLogging( context, createContextLogger( name ) );
-        ContainerUtil.service( context, createServiceManager() );
+        org.jcontainer.dna.impl.ContainerUtil.compose( context, createResourceLocator() );
         org.jcontainer.dna.impl.ContainerUtil.initialize( context );
         return context;
     }
@@ -450,9 +456,9 @@ public class DefaultKernel
         return childLogger;
     }
 
-    private ServiceManager createServiceManager()
+    private ResourceLocator createResourceLocator()
     {
-        final DefaultServiceManager serviceManager = new DefaultServiceManager();
+        final DefaultResourceLocator serviceManager = new DefaultResourceLocator();
         serviceManager.put( SystemManager.class.getName(), m_systemManager );
         serviceManager.put( ConfigurationInterceptor.class.getName(), m_repository );
         serviceManager.put( ConfigurationValidator.class.getName(), m_validator );

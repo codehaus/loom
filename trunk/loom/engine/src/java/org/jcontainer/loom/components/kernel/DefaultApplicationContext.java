@@ -93,12 +93,12 @@ import java.io.InputStream;
 import java.util.Map;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.logger.Logger;
-import org.apache.avalon.framework.service.ServiceException;
-import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.avalon.framework.service.Serviceable;
 import org.apache.excalibur.instrument.InstrumentManager;
 import org.jcomponent.loggerstore.LoggerStore;
 import org.jcontainer.dna.Active;
+import org.jcontainer.dna.Composable;
+import org.jcontainer.dna.ResourceLocator;
+import org.jcontainer.dna.MissingResourceException;
 import org.jcontainer.loom.components.util.ResourceUtil;
 import org.jcontainer.loom.interfaces.ApplicationContext;
 import org.jcontainer.loom.interfaces.ContainerConstants;
@@ -116,7 +116,7 @@ import org.realityforge.salt.i18n.Resources;
  */
 class DefaultApplicationContext
     extends AbstractLogEnabled
-    implements ApplicationContext, Serviceable, Active
+    implements ApplicationContext, Composable, Active
 {
     private static final Resources REZ =
         ResourceManager.getPackageResources( DefaultApplicationContext.class );
@@ -184,13 +184,18 @@ class DefaultApplicationContext
         m_loaders = loaders;
     }
 
-    public void service( final ServiceManager serviceManager )
-        throws ServiceException
+    /**
+     * @dna.dependency type="Kernel"
+     * @dna.dependency type="InstrumentManager"
+     * @dna.dependency type="SystemManager"
+     */
+    public void compose( final ResourceLocator locator )
+        throws MissingResourceException
     {
-        m_systemManager = (SystemManager)serviceManager.
+        m_systemManager = (SystemManager)locator.
             lookup( SystemManager.class.getName() );
-        m_kernel = (Kernel)serviceManager.lookup( Kernel.class.getName() );
-        m_instrumentManager = (InstrumentManager)serviceManager.lookup( InstrumentManager.class.getName() );
+        m_kernel = (Kernel)locator.lookup( Kernel.class.getName() );
+        m_instrumentManager = (InstrumentManager)locator.lookup( InstrumentManager.class.getName() );
     }
 
     public void initialize()

@@ -94,14 +94,14 @@ import java.util.Hashtable;
 import java.util.Map;
 import java.util.Set;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
-import org.apache.avalon.framework.service.ServiceException;
-import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.avalon.framework.service.Serviceable;
 import org.apache.avalon.phoenix.BlockContext;
 import org.jcomponent.loggerstore.LoggerStore;
 import org.jcontainer.dna.Active;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.ConfigurationException;
+import org.jcontainer.dna.Composable;
+import org.jcontainer.dna.ResourceLocator;
+import org.jcontainer.dna.MissingResourceException;
 import org.jcontainer.dna.impl.DefaultConfiguration;
 import org.jcontainer.loom.interfaces.ClassLoaderManager;
 import org.jcontainer.loom.interfaces.ClassLoaderSet;
@@ -131,7 +131,7 @@ import org.xml.sax.InputSource;
  */
 public class DefaultDeployer
     extends AbstractLogEnabled
-    implements Deployer, Serviceable, Active, DeployerMBean
+    implements Deployer, Composable, Active, DeployerMBean
 {
     private static final Resources REZ =
         ResourceManager.getPackageResources( DefaultDeployer.class );
@@ -147,22 +147,24 @@ public class DefaultDeployer
     private ConfigurationValidator m_validator;
 
     /**
-     * Retrieve relevant services needed to deploy.
-     *
-     * @param serviceManager the ComponentManager
-     * @throws ServiceException if an error occurs
+     * @dna.dependency type="Kernel"
+     * @dna.dependency type="ConfigurationInterceptor"
+     * @dna.dependency type="ClassLoaderManager"
+     * @dna.dependency type="LogManager"
+     * @dna.dependency type="ConfigurationValidator"
+     * @dna.dependency type="Installer"
      */
-    public void service( final ServiceManager serviceManager )
-        throws ServiceException
+    public void compose( final ResourceLocator locator )
+        throws MissingResourceException
     {
-        m_kernel = (Kernel)serviceManager.lookup( Kernel.class.getName() );
-        m_repository = (ConfigurationInterceptor)serviceManager.
+        m_kernel = (Kernel)locator.lookup( Kernel.class.getName() );
+        m_repository = (ConfigurationInterceptor)locator.
             lookup( ConfigurationInterceptor.class.getName() );
-        m_classLoaderManager = (ClassLoaderManager)serviceManager.
+        m_classLoaderManager = (ClassLoaderManager)locator.
             lookup( ClassLoaderManager.class.getName() );
-        m_logManager = (LogManager)serviceManager.lookup( LogManager.class.getName() );
-        m_validator = (ConfigurationValidator)serviceManager.lookup( ConfigurationValidator.class.getName() );
-        m_installer = (Installer)serviceManager.lookup( Installer.class.getName() );
+        m_logManager = (LogManager)locator.lookup( LogManager.class.getName() );
+        m_validator = (ConfigurationValidator)locator.lookup( ConfigurationValidator.class.getName() );
+        m_installer = (Installer)locator.lookup( Installer.class.getName() );
     }
 
     public void initialize()

@@ -100,12 +100,12 @@ import org.apache.avalon.framework.logger.Logger;
 import org.apache.avalon.framework.parameters.ParameterException;
 import org.apache.avalon.framework.parameters.Parameterizable;
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.avalon.framework.service.DefaultServiceManager;
-import org.apache.avalon.framework.service.ServiceManager;
 import org.jcontainer.dna.Active;
 import org.jcontainer.dna.Configurable;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.ConfigurationException;
+import org.jcontainer.dna.ResourceLocator;
+import org.jcontainer.dna.impl.DefaultResourceLocator;
 import org.jcontainer.loom.components.util.ExtensionFileFilter;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.Deployer;
@@ -604,7 +604,7 @@ public class DefaultEmbeddor
         final Logger childLogger = getLogger().getChildLogger( loggerName );
         ContainerUtil.enableLogging( object, childLogger );
         ContainerUtil.contextualize( object, m_context );
-        ContainerUtil.service( object, getServiceManager() );
+        org.jcontainer.dna.impl.ContainerUtil.compose( object, getResourceLocator() );
         ContainerUtil.parameterize( object, createChildParameters() );
         org.jcontainer.dna.impl.ContainerUtil.configure( object, config );
         org.jcontainer.dna.impl.ContainerUtil.initialize( object );
@@ -687,7 +687,7 @@ public class DefaultEmbeddor
         throws Exception
     {
         final SystemManager systemManager =
-            (SystemManager)getServiceManager().lookup( SystemManager.class.getName() );
+            (SystemManager)getResourceLocator().lookup( SystemManager.class.getName() );
 
         final SystemManager componentManager =
             systemManager.getSubContext( null, "component" );
@@ -722,7 +722,7 @@ public class DefaultEmbeddor
         throws Exception
     {
         final SystemManager systemManager =
-            (SystemManager)getServiceManager().lookup( SystemManager.class.getName() );
+            (SystemManager)getResourceLocator().lookup( SystemManager.class.getName() );
 
         final SystemManager componentManager = systemManager.getSubContext( null, "component" );
 
@@ -744,10 +744,10 @@ public class DefaultEmbeddor
         }
     }
 
-    private ServiceManager getServiceManager()
+    private ResourceLocator getResourceLocator()
     {
-        final DefaultServiceManager serviceManager = new DefaultServiceManager();
-        serviceManager.put( Embeddor.class.getName(), this );
+        final DefaultResourceLocator locator = new DefaultResourceLocator();
+        locator.put( Embeddor.class.getName(), this );
         for( int i = 0; i < m_entries.length; i++ )
         {
             final String role = m_entries[ i ].getRole();
@@ -756,9 +756,9 @@ public class DefaultEmbeddor
                 continue;
             }
             final Object component = getEmbeddorComponent( role );
-            serviceManager.put( role, component );
+            locator.put( role, component );
         }
-        return serviceManager;
+        return locator;
     }
 
     /**
