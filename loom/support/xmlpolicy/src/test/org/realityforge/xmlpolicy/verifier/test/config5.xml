@@ -1,5 +1,0 @@
-<policy version="1.0">
-    <grant code-base="sar:/SAR-INF/lib/*">
-        <permission class="java.io.FilePermission"/>
-    </grant>
-</policy>

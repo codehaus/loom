@@ -1,4 +1,0 @@
-<classloaders default="*system*" version="1.2">
-    <predefined name="*system*"/>
-
-</classloaders>

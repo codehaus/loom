@@ -1,6 +1,0 @@
-<policy version="1.0">
-    <!-- testing bad character in center of name -->
-    <keystore name="a$a"
-        location="sar:/conf/keystore"
-        type="JKS"/>
-</policy>
