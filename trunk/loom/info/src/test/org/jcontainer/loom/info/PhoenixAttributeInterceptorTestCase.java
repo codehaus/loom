@@ -18,7 +18,7 @@ import java.util.ArrayList;
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-10-16 08:43:28 $
+ * @version $Revision: 1.7 $ $Date: 2003-10-17 08:06:35 $
  */
 public class PhoenixAttributeInterceptorTestCase
     extends TestCase
@@ -355,9 +355,11 @@ public class PhoenixAttributeInterceptorTestCase
                       type, attributes[ 0 ].getParameter( "type" ) );
         assertEquals( "attributes[1].name", "mx.interface", attributes[ 1 ].getName() );
         assertEquals( "attributes[1].value", null, attributes[ 1 ].getValue() );
-        assertEquals( "attributes[1].parameterCount", 1, attributes[ 1 ].getParameterCount() );
+        assertEquals( "attributes[1].parameterCount", 2, attributes[ 1 ].getParameterCount() );
         assertEquals( "attributes[1].parameter(type)",
                       type, attributes[ 1 ].getParameter( "type" ) );
+        assertEquals( "attributes[1].parameter(topic)",
+                      "PerformMagicService", attributes[ 1 ].getParameter( "type" ) );
     }
 
     public void testProcessMethodAttributesWithoutMXOperation()

@@ -22,7 +22,7 @@ import org.realityforge.metaclass.tools.qdox.QDoxAttributeInterceptor;
  * into modern DNA and MX attributes.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.7 $ $Date: 2003-10-16 08:43:28 $
+ * @version $Revision: 1.8 $ $Date: 2003-10-17 08:06:35 $
  */
 public class PhoenixAttributeInterceptor
     extends DefaultQDoxAttributeInterceptor
@@ -164,7 +164,13 @@ public class PhoenixAttributeInterceptor
                 final String type = attribute.getParameter( "name", "" );
                 setParameter( parameters, "type", type );
                 result.add( new Attribute( "dna.service", parameters ) );
-                result.add( new Attribute( "mx.interface", parameters ) );
+
+                final Properties mxParameters = new Properties();
+                setParameter( mxParameters, "type", type );
+                final String topic = type.substring( type.lastIndexOf( '.' ) + 1 );
+                setParameter( mxParameters, "topic", topic );
+
+                result.add( new Attribute( "mx.interface", mxParameters ) );
             }
         }
         return (Attribute[])result.toArray( new Attribute[ result.size() ] );
