@@ -17,7 +17,7 @@ import org.realityforge.metaclass.tools.tasks.PluginElement;
  * information into MetaClass descriptors.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-11-01 13:15:31 $
+ * @version $Revision: 1.2 $ $Date: 2003-11-27 04:19:03 $
  */
 public class GenerateLoomDescriptorsTask
     extends GenerateClassDescriptorsTask
@@ -28,9 +28,6 @@ public class GenerateLoomDescriptorsTask
      */
     public void execute()
     {
-        final PluginElement filter = new PluginElement();
-        filter.setName( PhoenixJavaClassFilter.class.getName() );
-        addFilter( filter );
         final PluginElement phoenixInterceptor = new PluginElement();
         phoenixInterceptor.setName( PhoenixAttributeInterceptor.class.getName() );
         addInterceptor( phoenixInterceptor );
