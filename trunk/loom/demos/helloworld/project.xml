@@ -28,7 +28,7 @@
         <dependency>
             <groupId>spice</groupId>
             <artifactId>spice-netserve</artifactId>
-            <version>1.0-b1</version>
+            <version>1.1-dev</version>
             <properties>
                 <sar.bundle>true</sar.bundle>
             </properties>
@@ -36,7 +36,7 @@
         <dependency>
             <groupId>spice</groupId>
             <artifactId>spice-threadpool</artifactId>
-            <version>1.0-b1</version>
+            <version>1.1-dev</version>
             <properties>
                 <sar.bundle>true</sar.bundle>
             </properties>
