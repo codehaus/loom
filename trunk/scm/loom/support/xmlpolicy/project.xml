@@ -3,9 +3,9 @@
     <extend>${basedir}/../../tools/maven/project.xml</extend>
     <name>XMLPolicy</name>
     <id>spice-xmlpolicy</id>
-    <gumpRepositoryId>components</gumpRepositoryId>
-    <currentVersion>1.0</currentVersion>
+    <currentVersion>1.1</currentVersion>
     <inceptionYear>2002</inceptionYear>
+    <package>org.codehaus.spice.xmlpolicy</package>
 
     <shortDescription>Toolkit to construct Policy object from an XML descriptor.</shortDescription>
 
@@ -20,13 +20,18 @@
             <name>1.0</name>
             <tag>XMLPOLICY_1_0-tag</tag>
         </version>
+        <version>
+            <id>1.1</id>
+            <name>1.1</name>
+            <tag>XMLPOLICY_1_1-tag</tag>
+        </version>
     </versions>
 
     <dependencies>
         <dependency>
         	<groupId>spice</groupId>
             <artifactId>spice-salt</artifactId>
-            <version>0.8dev</version>
+            <version>1.0</version>
             <properties>
                 <category>runtime</category>
             </properties>
