@@ -108,7 +108,7 @@ import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.components.util.lifecycle.ResourceProvider;
 import org.jcontainer.loom.tools.metadata.DependencyMetaData;
 import org.jcontainer.loom.tools.profile.ComponentProfile;
-import org.jcontainer.loom.tools.configuration.ConfigurationConverter;
+import org.jcontainer.loom.components.util.ConfigurationConverter;
 import org.jcontainer.dna.AbstractLogEnabled;
 
 /**
@@ -116,7 +116,7 @@ import org.jcontainer.dna.AbstractLogEnabled;
  * Block or Listener.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.8 $ $Date: 2003-10-16 05:40:46 $
+ * @version $Revision: 1.9 $ $Date: 2003-10-16 05:48:07 $
  */
 class BlockResourceProvider
     extends AbstractLogEnabled
