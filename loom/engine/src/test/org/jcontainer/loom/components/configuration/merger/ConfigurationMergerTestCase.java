@@ -92,6 +92,7 @@ import org.jcontainer.loom.components.configuration.merger.ConfigurationMerger;
 import org.jcontainer.loom.components.configuration.merger.ConfigurationSplitter;
 import org.jcontainer.loom.components.util.ConfigUtil;
 import org.jcontainer.dna.impl.DefaultConfiguration;
+import org.jcontainer.dna.impl.ConfigurationUtil;
 
 /**
  * @author Peter Royal
@@ -120,8 +121,8 @@ public class ConfigurationMergerTestCase
         DefaultConfiguration layer = new DefaultConfiguration( "a", "", "" );
         layer.setAttribute( "a", "1" );
 
-        assertTrue( ConfigUtil.equals( result, ConfigurationMerger.merge( layer, base ) ) );
-        assertTrue( ConfigUtil.equals( layer, ConfigurationSplitter.split( result, base ) ));
+        assertTrue( ConfigurationUtil.equals( result, ConfigurationMerger.merge( layer, base ) ) );
+        assertTrue( ConfigurationUtil.equals( layer, ConfigurationSplitter.split( result, base ) ));
     }
 
     public void testAddChild() throws Exception
@@ -136,8 +137,8 @@ public class ConfigurationMergerTestCase
         DefaultConfiguration layer = new DefaultConfiguration( "a", "", "" );
         layer.addChild( new DefaultConfiguration( "kid2", "", "" ) );
 
-        assertTrue( ConfigUtil.equals( result, ConfigurationMerger.merge( layer, base ) ) );
-        assertTrue( ConfigUtil.equals( layer, ConfigurationSplitter.split( result, base ) ));
+        assertTrue( ConfigurationUtil.equals( result, ConfigurationMerger.merge( layer, base ) ) );
+        assertTrue( ConfigurationUtil.equals( layer, ConfigurationSplitter.split( result, base ) ));
     }
 
     public void testOverrideChild() throws Exception
@@ -157,11 +158,11 @@ public class ConfigurationMergerTestCase
         lkid1.setAttribute( "test", "1" );
         layer.addChild( lkid1 );
 
-        assertTrue( !ConfigUtil.equals( result, ConfigurationMerger.merge( layer, base ) ) );
+        assertTrue( !ConfigurationUtil.equals( result, ConfigurationMerger.merge( layer, base ) ) );
 
         lkid1.setAttribute( "excalibur-configuration:merge", "true" );
 
-        assertTrue( ConfigUtil.equals( result, ConfigurationMerger.merge( layer, base ) ) );
-        assertTrue( ConfigUtil.equals( layer, ConfigurationSplitter.split( result, base ) ) );
+        assertTrue( ConfigurationUtil.equals( result, ConfigurationMerger.merge( layer, base ) ) );
+        assertTrue( ConfigurationUtil.equals( layer, ConfigurationSplitter.split( result, base ) ) );
     }
 }

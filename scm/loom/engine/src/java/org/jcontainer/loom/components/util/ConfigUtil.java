@@ -15,7 +15,7 @@ import org.codehaus.spice.configkit.PropertyExpander;
 
 /**
  * @author Peter Donald
- * @version $Revision: 1.5 $ $Date: 2003-12-03 03:37:57 $
+ * @version $Revision: 1.6 $ $Date: 2003-12-03 09:11:21 $
  */
 public class ConfigUtil
 {
@@ -62,66 +62,6 @@ public class ConfigUtil
         }
 
         return output;
-    }
-
-    /**
-     * @deprecated Use ConfigurationUtil on next DNA release
-     */
-    public static boolean equals( final Configuration configuration1,
-                                  final Configuration configuration2 )
-    {
-        final Configuration[] children1 = configuration1.getChildren();
-        final Configuration[] children2 = configuration2.getChildren();
-        if( children1.length != children2.length )
-        {
-            return false;
-        }
-        else
-        {
-            for( int i = 0; i < children1.length; i++ )
-            {
-                if( !equals( children1[ i ], children2[ i ] ) )
-                {
-                    return false;
-                }
-            }
-        }
-
-        final String[] names1 = configuration1.getAttributeNames();
-        final String[] names2 = configuration2.getAttributeNames();
-        if( names1.length != names2.length )
-        {
-            return false;
-        }
-        else
-        {
-            for( int i = 0; i < names1.length; i++ )
-            {
-                final String value1 =
-                    configuration1.getAttribute( names1[ i ], null );
-                final String value2 =
-                    configuration2.getAttribute( names1[ i ], null );
-                if( !value1.equals( value2 ) )
-                {
-                    return false;
-                }
-            }
-        }
-
-        final String value1 = configuration1.getValue( null );
-        final String value2 = configuration2.getValue( null );
-        if( null == value1 && null == value2 )
-        {
-            return true;
-        }
-        else if( null != value1 && null != value2 )
-        {
-            return value1.equals( value2 );
-        }
-        else
-        {
-            return false;
-        }
     }
 
     public static void copy( final DefaultConfiguration newConfiguration,
