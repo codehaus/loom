@@ -32,13 +32,14 @@ import org.jcontainer.loom.interfaces.ApplicationContext;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.tools.lifecycle.ResourceProvider;
 import org.jcontainer.loom.tools.metadata.DependencyMetaData;
+import org.jcontainer.loom.tools.profile.ComponentProfile;
 
 /**
  * The accessor used to access resources for a particular
  * Block or Listener.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-29 04:38:21 $
+ * @version $Revision: 1.2 $ $Date: 2003-07-19 03:05:34 $
  */
 class BlockResourceProvider
     extends AbstractLogEnabled
@@ -82,7 +83,7 @@ class BlockResourceProvider
     public Object createObject( final Object entry )
         throws Exception
     {
-        final org.jcontainer.loom.tools.profile.ComponentProfile profile = getProfileFor( entry );
+        final ComponentProfile profile = getProfileFor( entry );
         final ClassLoader classLoader = m_context.getClassLoader();
         final String classname = profile.getInfo().getDescriptor().getImplementationKey();
         final Class clazz = classLoader.loadClass( classname );
@@ -99,7 +100,7 @@ class BlockResourceProvider
     public Logger createLogger( final Object entry )
         throws Exception
     {
-        final org.jcontainer.loom.tools.profile.ComponentProfile profile = getProfileFor( entry );
+        final ComponentProfile profile = getProfileFor( entry );
         final String name = profile.getMetaData().getName();
         return m_context.getLogger( name );
     }
@@ -127,7 +128,7 @@ class BlockResourceProvider
     public String createInstrumentableName( Object entry )
         throws Exception
     {
-        final org.jcontainer.loom.tools.profile.ComponentProfile profile = getProfileFor( entry );
+        final ComponentProfile profile = getProfileFor( entry );
         final String name = profile.getMetaData().getName();
         return m_context.getInstrumentableName( name );
     }
@@ -141,7 +142,7 @@ class BlockResourceProvider
     public Context createContext( final Object entry )
         throws Exception
     {
-        final org.jcontainer.loom.tools.profile.ComponentProfile profile = getProfileFor( entry );
+        final ComponentProfile profile = getProfileFor( entry );
         return new DefaultBlockContext( profile.getMetaData().getName(),
                                         m_context );
     }
@@ -193,7 +194,7 @@ class BlockResourceProvider
     private Map createServiceMap( final Object entry )
         throws Exception
     {
-        final org.jcontainer.loom.tools.profile.ComponentProfile metaData = getProfileFor( entry );
+        final ComponentProfile metaData = getProfileFor( entry );
         final HashMap map = new HashMap();
         final HashMap sets = new HashMap();
 
@@ -204,10 +205,9 @@ class BlockResourceProvider
             final DependencyMetaData role = roles[ i ];
             final Object dependency = m_application.getBlock( role.getProviderName() );
 
-            final DependencyDescriptor candidate =
-                metaData.getInfo().getDependency( role.getKey() );
-
             final String key = role.getKey();
+            final DependencyDescriptor candidate =
+                metaData.getInfo().getDependency( key );
 
             if( candidate.isArray() )
             {
@@ -292,7 +292,7 @@ class BlockResourceProvider
     public Configuration createConfiguration( final Object entry )
         throws Exception
     {
-        final org.jcontainer.loom.tools.profile.ComponentProfile metaData = getProfileFor( entry );
+        final ComponentProfile metaData = getProfileFor( entry );
         return metaData.getMetaData().getConfiguration();
     }
 
@@ -313,8 +313,8 @@ class BlockResourceProvider
      * @param entry the entry
      * @return the MetaData for entry
      */
-    private org.jcontainer.loom.tools.profile.ComponentProfile getProfileFor( final Object entry )
+    private ComponentProfile getProfileFor( final Object entry )
     {
-        return (org.jcontainer.loom.tools.profile.ComponentProfile)entry;
+        return (ComponentProfile)entry;
     }
 }
