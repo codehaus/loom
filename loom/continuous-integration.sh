@@ -3,6 +3,7 @@
 PATH=$HOME/bin:$JAVA_HOME/bin:$MAVEN_HOME/bin:$ANT_HOME/bin:$PATH
 
 #damn you DC!
+#go dc go!
 export JAVA_HOME
 export MAVEN_HOME
 export ANT_HOME
