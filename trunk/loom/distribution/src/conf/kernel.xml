@@ -19,7 +19,7 @@
             logger="logs"/>
 
         <!-- There is one JMX MBeanServer infrastructure currently
-        supported by Avalon, namely MX4J. Previously the JMX RI
+        supported by Loom, namely MX4J. Previously the JMX RI
         was supported but due to severe bugs and lack of implementation
         of certain features (such as ModelMBeans), support has been
         dropped for the JMX RI implementation.
@@ -29,7 +29,7 @@
 
         org.codehaus.loom.components.manager.MX4JSystemManager
 
-        There is an impl of system manager that does nothing and it is....
+        There is an impl of system manager that does nothing and it is:
 
         org.codehaus.loom.components.manager.NoopSystemManager
 
