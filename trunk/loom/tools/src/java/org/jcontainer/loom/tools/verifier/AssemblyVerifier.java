@@ -9,13 +9,13 @@ package org.jcontainer.loom.tools.verifier;
 
 import java.util.ArrayList;
 import java.util.Stack;
-import org.apache.avalon.excalibur.i18n.ResourceManager;
-import org.apache.avalon.excalibur.i18n.Resources;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
 import org.jcontainer.loom.tools.metadata.DependencyMetaData;
+import org.realityforge.salt.i18n.Resources;
+import org.realityforge.salt.i18n.ResourceManager;
 
 /**
  * This Class verifies that Sars are valid. It performs a number
@@ -42,7 +42,7 @@ import org.jcontainer.loom.tools.metadata.DependencyMetaData;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-29 01:07:36 $
+ * @version $Revision: 1.3 $ $Date: 2003-07-03 06:35:49 $
  */
 public class AssemblyVerifier
     extends AbstractLogEnabled
@@ -140,9 +140,9 @@ public class AssemblyVerifier
             {
                 final String trace = getDependencyTrace( dependency, stack );
                 final String message =
-                    REZ.getString( "assembly.circular-dependency.error",
-                                   component.getMetaData().getName(),
-                                   trace );
+                    REZ.format( "assembly.circular-dependency.error",
+                                component.getMetaData().getName(),
+                                trace );
                 throw new VerifyException( message );
             }
 
@@ -257,10 +257,10 @@ public class AssemblyVerifier
             if( null == provider )
             {
                 final String message =
-                    REZ.getString( "assembly.missing-dependency.error",
-                                   key,
-                                   providerName,
-                                   component.getMetaData().getName() );
+                    REZ.format( "assembly.missing-dependency.error",
+                                key,
+                                providerName,
+                                component.getMetaData().getName() );
                 throw new VerifyException( message );
             }
 
@@ -271,10 +271,10 @@ public class AssemblyVerifier
             if( !hasMatchingService( type, services ) )
             {
                 final String message =
-                    REZ.getString( "assembly.dependency-missing-service.error",
-                                   providerName,
-                                   type,
-                                   component.getMetaData().getName() );
+                    REZ.format( "assembly.dependency-missing-service.error",
+                                providerName,
+                                type,
+                                component.getMetaData().getName() );
                 throw new VerifyException( message );
             }
         }
@@ -418,10 +418,10 @@ public class AssemblyVerifier
             if( null == descriptor )
             {
                 final String message =
-                    REZ.getString( "assembly.unknown-dependency.error",
-                                   key,
-                                   key,
-                                   component.getMetaData().getName() );
+                    REZ.format( "assembly.unknown-dependency.error",
+                                key,
+                                key,
+                                component.getMetaData().getName() );
                 throw new VerifyException( message );
             }
         }
@@ -440,9 +440,9 @@ public class AssemblyVerifier
             if( null == dependencyMetaData && !dependency.isOptional() )
             {
                 final String message =
-                    REZ.getString( "assembly.unspecified-dependency.error",
-                                   dependency.getKey(),
-                                   component.getMetaData().getName() );
+                    REZ.format( "assembly.unspecified-dependency.error",
+                                dependency.getKey(),
+                                component.getMetaData().getName() );
                 throw new VerifyException( message );
             }
         }
