@@ -2,10 +2,8 @@
 <document>
 
  <properties>
-  <title>Installation</title>
-
- <author email="jcontainer-interest@codehaus.org ">Loom Documentation Team</author>
-    <title>Installation</title>
+	<title>Installation</title>
+ 	<author email="jcontainer-interest@codehaus.org ">Loom Documentation Team</author>
   </properties>
 
 <body>
@@ -25,18 +23,24 @@
 
 </section>
 
-<section name="Compiling">
-      <title>Compiling</title>
+<section name="Building from source">
+      <title>Building from source</title>
 
 <p>
-    Execute the relevant platform specific script (build.[sh|bat]) in the base phoenix
-    directory.
+	Loom uses <a href="http://maven.apache.org">Maven</a> as the build tool.
+	Please consult the online Mavan documentation if you are not familiar with it.
 </p>
 
+<p>	
+    To build Loom 
+</p>
+<source>
+cd loom 
+maven 
+</source>
 <p>
-    Executing this script will create a <em>dist</em> directory within the Loom
-    directory. The <em>dist</em> directory will contain the
-    compiled class files packaged into jars.
+    The <code>distribution/target/loom-[version]</code> directory will contain the 
+    distribution as it comes in the binary build.
 </p>
 
 </section>

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <document>
     <properties>
-    <title>BlockInfo Specification</title>
-
-        <author email="peter at apache.org">Peter Donald</author>
-  </properties>
+    	<title>BlockInfo Specification</title>
+    	<author email="peter at apache.org">Peter Donald</author>
+    </properties>
 
     <body>
         <section name="The BlockInfo File">
@@ -17,10 +16,10 @@
             <p>
                 The BlockInfo file is an XML file.  It must be located in the same jar
                 file as the block's implementing class.  It must have the same name
-                as the block's class, with the extention <source>.xinfo</source>.  Thus,
+                as the block's class, with the extention <code>.xinfo</code>.  Thus,
                 if you were looking up the BlockInfo for a block of class
-                <source>com.biz.cornerstone.blocks.MyBlock</source>, you would look up the
-                resource <source>com/biz/cornerstone/blocks/MyBlock.xinfo</source> in the
+                <code>com.biz.cornerstone.blocks.MyBlock</code>, you would look up the
+                resource <code>com/biz/cornerstone/blocks/MyBlock.xinfo</code> in the
                 jar file containing the block.
             </p>
 
@@ -64,32 +63,32 @@
                 into three main sections:
             </p>
             <ul>
-                <li>The <source>&lt;block></source> element, which defines the name and version of the block.</li>
-                <li>The <source>&lt;services></source> element, which defines the services the block provides.</li>
-                <li>The <source>&lt;dependencies></source> element, which defines the services the block uses.</li>
+                <li>The <code>&lt;block></code> element, which defines the name and version of the block.</li>
+                <li>The <code>&lt;services></code> element, which defines the services the block provides.</li>
+                <li>The <code>&lt;dependencies></code> element, which defines the services the block uses.</li>
             </ul>
         </section>
 
-        <section name="The &lt;block> Element">
+        <section name="The block Element">
             <p>
-                The <source>&lt;block></source> element specifies the name and version
-                of the block.  The <source>&lt;block></source> element includes
+                The <code>&lt;block></code> element specifies the name and version
+                of the block.  The <code>&lt;block></code> element includes
                 the following nested elements:
             </p>
             <table>
                 <tr>
-          <th>Element</th>
-          <th>Description</th>
-        </tr>
+          			<th>Element</th>
+          			<th>Description</th>
+		        </tr>
                 <tr>
                     <td>
-            <source>&lt;name></source>
-          </td>
+            <code>&lt;name></code>
+        		    </td>
                     <td>A descriptive name for the block.  Optional.</td>
                 </tr>
                 <tr>
                     <td>
-            <source>&lt;version></source>
+            <code>&lt;version></code>
           </td>
                     <td>
                         The version of the block.  Must be of the format
@@ -98,7 +97,7 @@
                 </tr>
                 <tr>
                     <td>
-            <source>&lt;schema-type></source>
+            <code>&lt;schema-type></code>
           </td>
                     <td>
                         The type of configuration schema provided with the block.
@@ -110,16 +109,16 @@
             </table>
         </section>
 
-        <section name="The &lt;services> Element">
+        <section name="The services Element">
             <p>
-                The <source>&lt;services></source> element defines the services
+                The <code>&lt;services></code> element defines the services
                 that the block can offer to other blocks.  This element is optional;
                 A block can choose to not offer any services to other blocks.
             </p>
             <p>
-                The <source>&lt;services></source> element should contain a
-                nested <source>&lt;service></source> element for each service
-                that the block provides.  The <source>&lt;service></source>
+                The <code>&lt;services></code> element should contain a
+                nested <code>&lt;service></code> element for each service
+                that the block provides.  The <code>&lt;service></code>
                 element takes the following attributes:
             </p>
             <table>
@@ -148,23 +147,23 @@
             </table>
         </section>
 
-        <section name="The &lt;dependencies> Element">
+        <section name="The dependencies Element">
             <p>
-                The <source>&lt;dependencies></source> element defines the services
+                The <code>&lt;dependencies></code> element defines the services
                 that the block requires to operate.  Loom provides these
-                services to the block using the <source>ServiceManager</source>
-                passed to the block's <source>Serviceable.service()</source> method.
+                services to the block using the <code>ServiceManager</code>
+                passed to the block's <code>Serviceable.service()</code> method.
             </p>
             <p>
-                The <source>&lt;dependencies></source> element should contain
-                a nested <source>&lt;dependency></source> element for each
-                service that the block uses.  The <source>&lt;dependency></source>
+                The <code>&lt;dependencies></code> element should contain
+                a nested <code>&lt;dependency></code> element for each
+                service that the block uses.  The <code>&lt;dependency></code>
                 element takes the following nested elements:
             </p>
 
-            <subsection name="The &lt;service> Element">
+            <subsection name="The service Element">
                 <p>
-                    The <source>&lt;service></source> element
+                    The <code>&lt;service></code> element
                     defines the expected service.  The service element takes the following
                     attributes:
                 </p>
@@ -178,7 +177,7 @@
                         <td>
                             The service name.  This must be the fully qualified
                             name of the service interface.  The object returned
-                            by the <source>ServiceManager</source> is guaranteed to
+                            by the <code>ServiceManager</code> is guaranteed to
                             be castable to this interface.  The service name is
                             also used to identify the service in the BlockInfo
                             file of blocks that provide the service (see above).
@@ -195,31 +194,31 @@
                 </table>
             </subsection>
 
-            <subsection name="The &lt;role> Element"/>
+            <subsection name="The role Element"/>
             <p>
-                The <source>&lt;role></source> element specifies the role that
+                The <code>&lt;role></code> element specifies the role that
                 the service plays.  This must match the role name that the block
                 supplies when it locates the service using
-                <source>ServiceManager.lookup( role )</source>.
+                <code>ServiceManager.lookup( role )</code>.
                 The role name is also used in the
                 <a href="assembly-xml-specification.html">Assembly File</a>,
                 to identify the dependency when connecting the block to the
-                services it requires.  The <source>&lt;role></source> element
+                services it requires.  The <code>&lt;role></code> element
                 is optional, and the role name defaults to the service name.
             </p>
         </section>
 
-        <section name="The &lt;management-access-points> Element">
+        <section name="The management-access-points Element">
             <p>
-                The <source>&lt;management-access-points></source> element
+                The <code>&lt;management-access-points></code> element
                 defines the management interfaces that the block provides.
                 These interfaces are exported by Loom's management system
                 to allow the block to be managed.
             </p>
             <p>
-                The <source>&lt;management-access-points></source> element must
-                contain a <source>&lt;service></source> element for each of the
-                block's management interfaces.  The <source>&lt;service></source>
+                The <code>&lt;management-access-points></code> element must
+                contain a <code>&lt;service></code> element for each of the
+                block's management interfaces.  The <code>&lt;service></code>
                 element takes the following attributes:
             </p>
             <table>

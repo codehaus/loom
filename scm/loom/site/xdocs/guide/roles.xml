@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <document>
     <properties>
-    <title>Development Roles</title>
-        
-        
-    <author email="leosimons@apache.org">Leo Simons</author>
-  </properties>
+  	  <title>Development Roles</title>
+      <author email="leosimons@apache.org">Leo Simons</author>
+    </properties>
     <body>
         <section name="Introduction">
             <p>

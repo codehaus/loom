@@ -2,21 +2,19 @@
 <document>
   <properties>
     <title>Using Doclet Tags to Generate .xinfo files</title>
-    
-    
-  <author email="huw@apache.org">Huw Roberts</author>
+    <author email="huw@apache.org">Huw Roberts</author>
   </properties>
   <body>
     <section name="Introduction">
       <p>
-        Each block requires a corresponding .xinfo file that is read by the
+        Each block requires a corresponding <code>.xinfo</code> file that is read by the
         container at startup.  As the developer, you have the option of using
-        custom java doc tags to generate the .xinfo file.  This has a number of
+        custom java doc tags to generate the <code>.xinfo</code> file.  This has a number of
         advantages over generating the file by hand:
       </p>
       <ul>
         <li>
-          its a lot faster than writing the xinfo file by hand
+          its a lot faster than writing the <code>.xinfo</code> file by hand
         </li>
         <li>
           its harder to make mistakes, since much of the data required for the 
@@ -26,7 +24,7 @@
       <p>
         Using this feature requires that you markup the source code with the 
         appropriate tags and then have the build script include the
-        <source>MetaGenerateTask</source> task.  Both these steps are described
+        <code>MetaGenerateTask</code> task.  Both these steps are described
         below.
        </p>
     </section>
@@ -66,9 +64,8 @@
         </p>
         <source>
 /**
- * Ftp server starting point. Avalon framework will load this
- * from the jar file. This is also the starting point of remote
- * admin.
+ * Ftp server starting point. Loom will load this from the jar file. 
+ * This is also the starting point of remote admin.
  *
  * @phoenix:block
  * @phoenix:service name="org.apache.avalon.ftpserver.interfaces.FtpServerInterface"

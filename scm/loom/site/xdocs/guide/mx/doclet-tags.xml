@@ -2,9 +2,7 @@
 <document>
   <properties>
     <title>Management Guide - XDoclet Tagging</title>
-    
-    
-  <author email="huw@apache.org">Huw Roberts</author>
+    <author email="huw@apache.org">Huw Roberts</author>
   </properties>
   <body>
     <section name="Introduction">
@@ -196,7 +194,7 @@ void removeApplication( String name )
         <source>
 /**
  * Retrieve a string identifying version of server.
- * Usually looks like "v4.0.1a".
+ * Usually looks like "vX.Y.Z".
  *
  * @phoenix:mx-attribute
  * @phoenix:mx-description Retrieve a string identifying version of server.

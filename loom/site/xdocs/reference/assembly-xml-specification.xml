@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <document>
-    <properties>
-    <title>Specification of assembly.xml </title>
-
-
-
-            <author email="peter at apache.org">Peter Donald</author>
-
+   	<properties>
+	    <title>Specification of assembly.xml </title>
+        <author email="peter at apache.org">Peter Donald</author>
     </properties>
     <body>
         <section name="The Assembly File">
             <p>
-                The <source>assembly.xml</source> file defines how to assemble the
+                The <code>assembly.xml</code> file defines how to assemble the
                 application.  It defines the blocks that make up the application,
                 and how to connect them together.  It also defines the
                 application listeners to include in the application.
@@ -26,26 +22,26 @@
 
             <p>
                 The root element of the assembly file must be an
-                <source>&lt;assembly></source> element.  The root element
+                <code>&lt;assembly></code> element.  The root element
                 must contain a child element for each block and application
                 listener which is part of the application.  These elements
                 are described below.
             </p>
         </section>
 
-        <section name="The &lt;block> Element">
+        <section name="The block Element">
             <p>
-                The <source>&lt;block></source> element defines a block, and
+                The <code>&lt;block></code> element defines a block, and
                 how to provide services to the block.  The
-                <source>&lt;block></source> element takes the following
+                <code>&lt;block></code> element takes the following
                 attributes:
             </p>
 
             <table>
                 <tr>
-          <th>Attribute</th>
-          <th>Description</th>
-        </tr>
+        			<th>Attribute</th>
+          		  	<th>Description</th>
+        		</tr>
                 <tr>
                     <td>class</td>
                     <td>
@@ -67,30 +63,30 @@
                 </tr>
             </table>
 
-            <subsection name="The &lt;provide> Element">
+            <subsection name="The provide Element">
                 <p>
-                    The <source>&lt;provide></source> element defines how to
+                    The <code>&lt;provide></code> element defines how to
                     provide a particular service to the block.  It connects
                     the block to another block that provides the required service.
-                    There must be at least one <source>&lt;provide></source>
+                    There must be at least one <code>&lt;provide></code>
                     element for each dependency listed in the block's
                     <a href="blockinfo-specification.html">BlockInfo</a>
                     file.  For array and mapped services, there may be more than
-                    one <source>&lt;provide></source> element for each
-                    dependency.  The <source>&lt;provide></source> element takes
+                    one <code>&lt;provide></code> element for each
+                    dependency.  The <code>&lt;provide></code> element takes
                     the following attributes:
                 </p>
 
                 <table>
                     <tr>
-            <th>Attribute</th>
-            <th>Description</th>
-          </tr>
+			            <th>Attribute</th>
+            			<th>Description</th>
+		           </tr>
                     <tr>
                         <td>alias</td>
                         <td>
                             The key to use for the service, for mapped services.
-                            Defaults to the value of the <source>name</source>
+                            Defaults to the value of the <code>name</code>
                             attribute.
                         </td>
                     </tr>
@@ -116,18 +112,18 @@
                 </table>
             </subsection>
 
-            <subsection name="The &lt;proxy> Element">
+            <subsection name="The proxy Element">
                 <p>
-                    The <source>&lt;proxy></source> element controls whether
+                    The <code>&lt;proxy></code> element controls whether
                     Loom will wrap the block with a proxy object before
-                    supplying it to other blocks.  The <source>&lt;proxy></source>
+                    supplying it to other blocks.  The <code>&lt;proxy></code>
                     element takes the following attributes:
                 </p>
                 <table>
                     <tr>
-            <th>Attribute</th>
-            <th>Description</th>
-          </tr>
+         			   <th>Attribute</th>
+	          		   <th>Description</th>
+    		       </tr>
                     <tr>
                         <td>disable</td>
                         <td>Disables the use of a proxy object.  Default is false.</td>
@@ -136,10 +132,10 @@
             </subsection>
         </section>
 
-        <section name="The &lt;listener> Element">
+        <section name="The listener Element">
             <p>
-                The <source>&lt;listener></source> element defines an application
-                listener.  The <source>&lt;listener></source> element takes the
+                The <code>&lt;listener></code> element defines an application
+                listener.  The <code>&lt;listener></code>  element takes the
                 following attributes:
             </p>
             <table>
@@ -153,7 +149,7 @@
                         The fully qualified name of the listener class.
                         This class must be public and provide a public
                         no-args constructor.  It must implement the
-                        <source>org.apache.avalon.phoenix.ApplicationListener</source>
+                        <code>org.apache.avalon.phoenix.ApplicationListener</code>
                         interface.
                     </td>
                 </tr>
@@ -168,12 +164,12 @@
             </table>
         </section>
 
-        <section name="The &lt;block-listener> Element (Deprecated)">
+        <section name="The block-listener Element (Deprecated)">
             <p>
-                The <source>&lt;block-listener></source> element defines
+                The <code>&lt;block-listener></code> element defines
                 a block listener.  Note that the use of block listeners
-                is deprecated.  The <source>&lt;block-listener></source> element
-                takes the same attributes as the <source>&lt;listener></source>
+                is deprecated.  The <code>&lt;block-listener></code> element
+                takes the same attributes as the <code>&lt;listener></code>
                 element.
             </p>
         </section>
@@ -182,10 +178,10 @@
 
             <p>
                 Below is an example assembly file.  It defines 2 blocks, called
-                <source>myAuthorizer</source> and <source>myBlock</source>, and a
-                listener.  Block <source>myBlock</source> uses the
-                <source>Authorizer</source> service provided by block
-                <source>myAuthorizer</source>.
+                <code>myAuthorizer</code> and <code>myBlock</code>, and a
+                listener.  Block <code>myBlock</code> uses the
+                <code>Authorizer</code> service provided by block
+                <code>myAuthorizer</code>.
             </p>
 
             <source>

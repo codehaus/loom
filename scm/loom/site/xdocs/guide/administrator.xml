@@ -2,9 +2,7 @@
 <document>
     <properties>
     <title>Guide - for Administrators</title>
-
-
-    <author email="daveweit@optonline.net">David W.</author>
+    <author email="daveweit@optonline.net">David Weit</author>
   </properties>
     <body>
         <section name="Introduction">
@@ -23,34 +21,28 @@
         <section name="Starting and Stopping">
             <subsection name="Using Scripts">
                 <p>
-                  You can start Loom with the following command:
+                  You can start Loom in the foreground with the following command:
 
-                    <source>
-
-                    > bin/run.[bat|sh]
-
-                    </source>
-
+<source>
+bin/run.[bat|sh]
+</source>
                 </p>
                 <p>
-                  In Windows versions other than NT, you'll need to set
+                  On Windows versions other than NT, you'll need to set
                   the PHOENIX_HOME environment variable first.
+                  To stop Loom running in the foreground simply used CTRL-C, which 
+                  will cause a clean shutdown.
                 </p>
                 <p>
-                  In UNIX environments, you can use the <source>phoenix.sh</source>
-                  script to stop Loom.
+                  In UNIX environments, you can also use the <code>loom.sh</code>
+                  script to start, stop and restart Loom.  It accepts the following 
+                  (mutually exclusive) arguments
                 </p>
-
-                    <source>
-                      > phoenix.sh stop
-                    </source>
-
+<source>
+loom.sh [start|stop|run|restart|check]
+</source>
                 <p>
-                  phoenix.sh accepts these commands:
-                  start, stop, run, restart, check.
-                </p>
-                <p>
-                  In Windows, typing CONTROL-C will cause a clean shutdown.
+                The <code>run</code> arg is equivalent to using the <code>run.sh</code> script.
                 </p>
             </subsection>
             <subsection name="Using the Java Service Wrapper">
@@ -67,7 +59,7 @@
               <p>
                 To build Loom with the Java Service Wrapper, download and
                 extract the latest version.  Next, in the root of the source tree,
-                create or modify <source>ant.properties</source> so that it looks
+                create or modify <code>ant.properties</code> so that it looks
                 similar to this:
               </p>
 
@@ -89,17 +81,14 @@ wrapper.dll=${wrapper.home}/lib/Wrapper.dll
                 Then just build as usual.
               </p>
               <p>
-                For usage instructions, move to the <source>bin</source> directory and type
+                For usage instructions
               </p>
-
-                    <source>
-
-                      > wrapper
-
-                    </source>
-
+<source>
+cd bin/
+wrapper
+</source>
               <p>
-                The Wrapper configuration file is named <source>conf/wrapper.conf</source>.
+                The Wrapper configuration file is named <code>conf/wrapper.conf</code>.
               </p>
             </subsection>
         </section>
@@ -170,7 +159,7 @@ public class WebServerBlock
                 a familier looking name or two.  They depend on the .sar
                 file packaging and configuration, but the web server above
                 would have a name similar to
-  <source>Loom:application=webserver,block=webserver,topic=WebServerMBean</source>.
+  <code>Loom:application=webserver,block=webserver,topic=WebServerMBean</code>.
                 If you click on the name, you'll find a form that allows you
                 to mount and unmount .war files through the web!
               </p>
@@ -178,7 +167,7 @@ public class WebServerBlock
                 If your aren't familiar with the guts of Loom, you may
                 want to browse the source to understand what some of the other
                 MBeans listed do. For example,
-                <source>Loom:component=Embeddor,topic=Embeddor</source> allows
+                <code>Loom:component=Embeddor,topic=Embeddor</code> allows
                 you to restart and shutdown Loom.  It also provides information,
                 such as the server's start time and uptime, home directory, version,
                 and build information.
@@ -196,13 +185,12 @@ public class WebServerBlock
                 Ensure that the MX4J RMI Adaptor is enabled in kernel.xml
               </p>
 <source>
-        &lt;component role="org.apache.avalon.phoenix.interfaces.SystemManager"
-            class="org.apache.avalon.phoenix.components.manager.MX4JSystemManager"
-            logger="manager" >
-          &lt;enable-rmi-adaptor>true&lt;/enable-rmi-adaptor>
-          [other enabled adaptors]
-        &lt;/component>
-
+&lt;component role="org.apache.avalon.phoenix.interfaces.SystemManager"
+    class="org.apache.avalon.phoenix.components.manager.MX4JSystemManager"
+    logger="manager" >
+  &lt;enable-rmi-adaptor>true&lt;/enable-rmi-adaptor>
+  [other enabled adaptors]
+&lt;/component>
 </source>
               <p>
                 Place mx4j-jmx.jar, mx4j-tools.jar, and jndi.properties (TODO: include it)

@@ -2,10 +2,7 @@
 <document>
   <properties>
     <title>Guide - Example Configuration</title>
-
-
-
-  <author email="mcconnell@osm.net">Stephen McConnell</author>
+	<author email="mcconnell@osm.net">Stephen McConnell</author>
     <author email="g-froehlich@gmx.de">Gerhard Froehlich</author>
   </properties>
   <body>
@@ -20,7 +17,7 @@
     </section>
     <section name="The example">
       <p>Each Block has an associated xinfo file and the xinfo file
-      is stored alongside the block in a jar file. The <source>.xinfo</source>
+      is stored alongside the block in a jar file. The <code>.xinfo</code>
       file contains a description of a reasonably simple block that serves
       as a factory for business processes that handle PKI certification
       requests:</p>
@@ -121,15 +118,15 @@
 
 
       </source>
-      <p>Next is the block declaration (an extract from an <source>assembly.xml</source>
+      <p>Next is the block declaration (an extract from an <code>assembly.xml</code>
       file). This enables the declaration of WHERE the services are coming from.
       I.e. you may have a system with many blocks and even the potential for matching
       services available from more that one block. The class attribute provides the
-      link to the <source>.xinfo</source> file and the implementation class. The name
-      is used a key within the <source>assembly.xml</source> file when wiring things together.
+      link to the <code>.xinfo</code> file and the implementation class. The name
+      is used a key within the <code>assembly.xml</code> file when wiring things together.
       E.g. the provide element references a block by its name - and declares that the
       named block will serve as the provider of the service. The role attribute matches
-      the role element in the <source>.xinfo</source> dependency declaration.</p>
+      the role element in the <code>.xinfo</code> dependency declaration.</p>
       <p>The name attribute also serves a the key to lookup a configuration element in
       the application configuration.xml file.</p>
       <source>

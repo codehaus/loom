@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <document>
   <properties>
-    <title>Management Guide - Organizing Structure</title>
-
-
-  <author email="huw@apache.org">Huw Roberts</author>
+  	<title>Management Guide - Organizing Structure</title>
+    <author email="huw@apache.org">Huw Roberts</author>
   </properties>
   <body>
     <section name="Introduction">
@@ -36,7 +34,7 @@
           organizing element for management data, and is the bridge between
           the management code embedded in Loom and the implementation of the
           management component.  It is represented by the
-          <source>org.apache.avalon.phoenix.interfaces.SystemManager</source>
+          <code>org.apache.avalon.phoenix.interfaces.SystemManager</code>
           interface.
         </p>
       </subsection>

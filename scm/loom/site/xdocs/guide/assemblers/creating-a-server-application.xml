@@ -2,9 +2,7 @@
 <document>
   <properties>
     <title>Guide - Creating a Server Application</title>
-
-
-  <author email="peter at apache.org">Peter Donald</author>
+    <author email="peter at apache.org">Peter Donald</author>
   </properties>
   <body>
     <section name="Introduction">
@@ -34,7 +32,7 @@
       <p>
         Configuration data for blocks is stored in the config.xml file.
         For more detail on the format of config.xml see the
-        <a href="../..//reference/config-xml-specification.html">specification</a>.
+        <a href="../../reference/config-xml-specification.html">specification</a>.
       </p>
     </section>
     <section name="Write the assembly.xml file">
@@ -45,7 +43,7 @@
         satisfied and this can be done via the 'provide' sub-elements. The
         provide element maps block instances from the Server Application namespace
         to the Block role namespace specified in BlockInfo files. For more detail
-        on the format of assembly.xml see the <a href="../..//reference/assembly-xml-specification.html">
+        on the format of assembly.xml see the <a href="../../reference/assembly-xml-specification.html">
         specification</a>.
       </p>
     </section>
@@ -54,7 +52,7 @@
         The next stage is to write the environment.xml file. The environment.xml is used to
         configure the code-based security policy, log management and thread pooling.
         For more detail on the format of environment.xml see the
-        <a href="../..//reference/environment-xml-specification.html">specification</a>.
+        <a href="../../reference/environment-xml-specification.html">specification</a>.
       </p>
     </section>
     <section name="Create the sar file">
@@ -62,9 +60,9 @@
         The sar file format is the standard distribution format of Loom Server
         Applications. It is a standard Jar file with a specific directory layout.
         The config.xml, environment.xml and assembly.xml file must be stored in
-        <source>SAR-INF/</source> directory of the archive. All jar files, including
+        <code>SAR-INF/</code> directory of the archive. All jar files, including
         both those that contain blocks and those that contain support classes
-        should be stored in the <source>SAR-INF/lib/</source> directory.
+        should be stored in the <code>SAR-INF/lib/</code> directory.
       </p>
     </section>
 

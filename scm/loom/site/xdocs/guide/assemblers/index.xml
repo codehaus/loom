@@ -5,7 +5,7 @@
     <author email="jcontainer-interest@codehaus.org ">Loom Documentation Team</author>
   </properties>
     <body>
-        <section name="Who Should Read This Book?">
+        <section name="Who Should Read This Guide?">
             <p>
               The Server Assemblers Guide is written for assemblers who want to assemble a
               Server Application for Loom. It is assumed that you are familiar with
