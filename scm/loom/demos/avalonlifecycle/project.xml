@@ -21,15 +21,9 @@
             <version>20031016.083103</version>
         </dependency>
         <dependency>
-        	<groupId>loom</groupId>
-            <artifactId>loom-tools</artifactId>
-            <version>${pom.currentVersion}</version>
-        </dependency>
-        <dependency>
             <groupId>loom</groupId>
             <artifactId>maven-sar-plugin</artifactId>
-            <version>1.0</version>
-            <type>plugin</type>
+            <version>20031028.090136</version>
         </dependency>
         <dependency>
             <groupId>avalon</groupId>
