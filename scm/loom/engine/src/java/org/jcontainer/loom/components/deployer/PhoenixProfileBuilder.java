@@ -1,112 +1,35 @@
-/* ====================================================================
- * JContainer Software License, version 1.1
+/*
+ * Copyright (C) The JContainer Group. All rights reserved.
  *
- * Copyright (c) 2003, JContainer Group. All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
- *
- * 3. Neither the name of the JContainer Group nor the name "Loom" nor
- *    the names of its contributors may be used to endorse or promote
- *    products derived from this software without specific prior
- *    written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
- * FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE
- * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
- * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
- * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
- * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
- *
- * ====================================================================
- *
- * JContainer Loom includes code from the Apache Software Foundation
- *
- * ====================================================================
- * The Apache Software License, Version 1.1
- *
- * Copyright (c) 1997-2003 The Apache Software Foundation. All rights
- * reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
- *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *    "This product includes software developed by the
- *    Apache Software Foundation (http://www.apache.org/)."
- *    Alternately, this acknowledgment may appear in the software
- *    itself, if and wherever such third-party acknowledgments
- *    normally appear.
- *
- * 4. The names "Jakarta", "Avalon", and "Apache Software Foundation"
- *    must not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact apache@apache.org.
- *
- * 5. Products derived from this software may not be called "Apache",
- *    nor may "Apache" appear in their name, without prior written
- *    permission of the Apache Software Foundation.
- *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE APACHE SOFTWARE FOUNDATION OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
+ * This software is published under the terms of the JContainer
+ * Software License version 1.1, a copy of which has been included
+ * with this distribution in the LICENSE.txt file.
  */
 package org.jcontainer.loom.components.deployer;
 
 import java.util.ArrayList;
 import java.util.Map;
+import org.jcontainer.dna.AbstractLogEnabled;
+import org.jcontainer.dna.Logger;
 import org.jcontainer.loom.components.assembler.Assembler;
 import org.jcontainer.loom.interfaces.ContainerConstants;
+import org.jcontainer.loom.tools.LoomToolConstants;
 import org.jcontainer.loom.tools.factory.ComponentBundle;
 import org.jcontainer.loom.tools.factory.ComponentFactory;
 import org.jcontainer.loom.tools.info.ComponentInfo;
-import org.jcontainer.loom.tools.infobuilder.LegacyUtil;
+import org.jcontainer.loom.tools.info.DependencyDescriptor;
+import org.jcontainer.loom.tools.info.ServiceDescriptor;
 import org.jcontainer.loom.tools.metadata.ComponentMetaData;
 import org.jcontainer.loom.tools.metadata.PartitionMetaData;
-import org.jcontainer.loom.tools.profile.ProfileBuilder;
-import org.jcontainer.loom.tools.profile.PartitionProfile;
 import org.jcontainer.loom.tools.profile.ComponentProfile;
-import org.jcontainer.loom.tools.LoomToolConstants;
-import org.jcontainer.dna.AbstractLogEnabled;
-import org.jcontainer.dna.Logger;
+import org.jcontainer.loom.tools.profile.PartitionProfile;
+import org.jcontainer.loom.tools.profile.ProfileBuilder;
+import org.realityforge.metaclass.model.Attribute;
 
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.7 $ $Date: 2003-10-05 10:07:03 $
+ * @version $Revision: 1.8 $ $Date: 2003-10-11 09:05:17 $
  */
 public class PhoenixProfileBuilder
     extends AbstractLogEnabled
@@ -159,7 +82,7 @@ public class PhoenixProfileBuilder
         {
             final ComponentMetaData component = components[ i ];
             final ComponentInfo info =
-                LegacyUtil.createListenerInfo( component.getImplementationKey() );
+                createListenerInfo( component.getImplementationKey() );
             final ComponentProfile profile = new ComponentProfile( info, component );
             componentSet.add( profile );
         }
@@ -199,5 +122,20 @@ public class PhoenixProfileBuilder
         final ComponentProfile[] componentProfiles =
             (ComponentProfile[])componentSet.toArray( new ComponentProfile[ componentSet.size() ] );
         return new PartitionProfile( metaData, partitionProfiles, componentProfiles );
+    }
+
+    /**
+     * Create a {@link ComponentInfo} for a Listener with specified classname.
+     *
+     * @param implementationKey the classname of listener
+     * @return the ComponentInfo for listener
+     */
+    private static ComponentInfo createListenerInfo( final String implementationKey )
+    {
+        return new ComponentInfo( implementationKey,
+                                  Attribute.EMPTY_SET,
+                                  ServiceDescriptor.EMPTY_SET,
+                                  DependencyDescriptor.EMPTY_SET,
+                                  null );
     }
 }
