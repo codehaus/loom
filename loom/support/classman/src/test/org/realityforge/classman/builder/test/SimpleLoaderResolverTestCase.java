@@ -7,16 +7,16 @@
  */
 package org.realityforge.classman.builder.test;
 
+import java.net.URL;
 import org.realityforge.classman.builder.SimpleLoaderResolver;
 import org.realityforge.classman.test.AbstractLoaderTestCase;
-import org.realityforge.classman.test.DummyExtensionManager;
-import java.net.URL;
+import org.realityforge.classman.test.DataConstants;
 
 /**
  * Unit test for join classloader.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-27 03:45:09 $
+ * @version $Revision: 1.3 $ $Date: 2003-08-01 02:51:54 $
  */
 public class SimpleLoaderResolverTestCase
     extends AbstractLoaderTestCase
@@ -29,7 +29,7 @@ public class SimpleLoaderResolverTestCase
     public void testNullBaseDirectory()
         throws Exception
     {
-        final SimpleLoaderResolver resolver = new SimpleLoaderResolver( null, null );
+        final SimpleLoaderResolver resolver = new SimpleLoaderResolver( null );
         final URL url = resolver.resolveURL( "." );
         assertTrue( "URL is a dir", url.toString().endsWith( "/" ) );
     }
@@ -37,25 +37,11 @@ public class SimpleLoaderResolverTestCase
     public void testNullManager()
         throws Exception
     {
-        final SimpleLoaderResolver resolver = new SimpleLoaderResolver( null, null );
+        final SimpleLoaderResolver resolver = new SimpleLoaderResolver( null );
         try
         {
-            resolver.resolveExtension( DummyExtensionManager.EXTENSION );
-            fail( "Expected resolve extension to fail as no manager set" );
-        }
-        catch( IllegalStateException e )
-        {
-        }
-    }
-
-    public void testFilesetNotSupported()
-        throws Exception
-    {
-        final SimpleLoaderResolver resolver = new SimpleLoaderResolver( null, null );
-        try
-        {
-            resolver.resolveFileSet( null, null, null );
-            fail( "Expected resolve fileset to be an unsupported operation" );
+            resolver.resolveExtension( DataConstants.EXTENSION );
+            fail( "Expected resolve extension as resolver unable to implement" );
         }
         catch( UnsupportedOperationException e )
         {

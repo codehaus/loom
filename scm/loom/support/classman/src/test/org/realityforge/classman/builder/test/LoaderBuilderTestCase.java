@@ -9,9 +9,6 @@ package org.realityforge.classman.builder.test;
 
 import java.io.File;
 import java.util.HashMap;
-import org.apache.avalon.excalibur.extension.Extension;
-import org.apache.avalon.excalibur.packagemanager.ExtensionManager;
-import org.apache.avalon.excalibur.packagemanager.PackageManager;
 import org.realityforge.classman.builder.LoaderBuilder;
 import org.realityforge.classman.builder.SimpleLoaderResolver;
 import org.realityforge.classman.metadata.ClassLoaderMetaData;
@@ -19,13 +16,14 @@ import org.realityforge.classman.metadata.ClassLoaderSetMetaData;
 import org.realityforge.classman.metadata.FileSetMetaData;
 import org.realityforge.classman.metadata.JoinMetaData;
 import org.realityforge.classman.test.AbstractLoaderTestCase;
-import org.realityforge.classman.test.DummyExtensionManager;
+import org.realityforge.classman.test.DataConstants;
+import org.realityforge.extension.Extension;
 
 /**
  * Unit test for join classloader.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-27 03:45:09 $
+ * @version $Revision: 1.3 $ $Date: 2003-08-01 02:51:54 $
  */
 public class LoaderBuilderTestCase
     extends AbstractLoaderTestCase
@@ -50,7 +48,7 @@ public class LoaderBuilderTestCase
                                         new String[ 0 ],
                                         new ClassLoaderMetaData[]{classLoader},
                                         new JoinMetaData[ 0 ] );
-        final SimpleLoaderResolver resolver = new SimpleLoaderResolver( null, null );
+        final SimpleLoaderResolver resolver = new SimpleLoaderResolver( null );
         final HashMap predefined = new HashMap();
         try
         {
@@ -73,7 +71,7 @@ public class LoaderBuilderTestCase
                                         new String[]{"*system*"},
                                         new ClassLoaderMetaData[ 0 ],
                                         new JoinMetaData[ 0 ] );
-        final SimpleLoaderResolver resolver = new SimpleLoaderResolver( null, null );
+        final SimpleLoaderResolver resolver = new SimpleLoaderResolver( null );
         final HashMap predefined = new HashMap();
         try
         {
@@ -96,15 +94,14 @@ public class LoaderBuilderTestCase
             new ClassLoaderMetaData( "ext",
                                      "*system*",
                                      new String[ 0 ],
-                                     new Extension[]{DummyExtensionManager.EXTENSION},
+                                     new Extension[]{DataConstants.EXTENSION},
                                      new FileSetMetaData[ 0 ] );
         final ClassLoaderSetMetaData metadata =
             new ClassLoaderSetMetaData( "ext",
                                         new String[]{"*system*"},
                                         new ClassLoaderMetaData[]{classLoader},
                                         new JoinMetaData[ 0 ] );
-        final ExtensionManager repository = new DummyExtensionManager();
-        final SimpleLoaderResolver resolver = new SimpleLoaderResolver( new File( "." ), new PackageManager( repository ) );
+        final SimpleLoaderResolver resolver = new TestLoaderResolver( new File( "." ) );
         final HashMap predefined = new HashMap();
         predefined.put( "*system*", ClassLoader.getSystemClassLoader() );
         try
