@@ -8,14 +8,13 @@
 package org.jcontainer.loom.tools.profile;
 
 import java.util.Map;
-import org.jcontainer.loom.tools.profile.PartitionProfile;
 
 /**
  * Load metadata for an Assembly from some source.
  * The source is usually one or more xml config files.
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-29 00:44:44 $
+ * @version $Revision: 1.2 $ $Date: 2003-06-29 00:45:53 $
  */
 public interface ProfileBuilder
 {
