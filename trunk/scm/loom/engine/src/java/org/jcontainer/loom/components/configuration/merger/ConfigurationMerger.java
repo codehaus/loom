@@ -88,6 +88,7 @@ package org.jcontainer.loom.components.configuration.merger;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.ConfigurationException;
@@ -154,21 +155,20 @@ public class ConfigurationMerger
         final Configuration[] lc = layer.getChildren();
         final Configuration[] bc = base.getChildren();
         final Set baseUsed = new HashSet();
+        final List toMergeUsed = new ArrayList();
 
         for( int i = 0; i < lc.length; i++ )
         {
-            final Configuration mergeWith = getMergePartner( lc[ i ],
-                                                             layer,
-                                                             base );
+            final Configuration mergeWith =
+                getMergePartner( lc[ i ], layer, base );
 
             if( null == mergeWith )
             {
-                merged.addChild( lc[ i ] );
+                toMergeUsed.add( lc[ i ] );
             }
             else
             {
-                merged.addChild( merge( lc[ i ], mergeWith ) );
-
+                toMergeUsed.add( merge( lc[ i ], mergeWith ) );
                 baseUsed.add( mergeWith );
             }
         }
@@ -179,6 +179,12 @@ public class ConfigurationMerger
             {
                 merged.addChild( bc[ i ] );
             }
+        }
+
+        final int count = toMergeUsed.size();
+        for( int i = 0; i < count; i++ )
+        {
+            merged.addChild( (Configuration)toMergeUsed.get( i ) );
         }
     }
 
@@ -300,11 +306,12 @@ public class ConfigurationMerger
             }
             else
             {
-                String v = children[ i ].getAttribute( attribute, null );
+                final String v =
+                    children[ i ].getAttribute( attribute, null );
 
                 if( v != null )
                 {
-                    if( ( value == null ) || v.equals( value ) )
+                    if( (value == null) || v.equals( value ) )
                     {
                         // it's a match
                         list.add( children[ i ] );
