@@ -2,7 +2,7 @@
 rem
 rem Loom start script.
 rem
-rem Author: Peter Donald [peter at realityforge.org]
+rem Author: Peter Donald
 rem
 rem Environment Variable Prequisites
 rem
