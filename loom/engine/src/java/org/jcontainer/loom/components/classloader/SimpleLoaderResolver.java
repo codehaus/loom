@@ -94,11 +94,11 @@ import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.jar.Manifest;
-import org.realityforge.extension.Extension;
 import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
 import org.jcontainer.loom.components.extensions.pkgmgr.PackageManager;
 import org.realityforge.classman.builder.LoaderResolver;
 import org.realityforge.classman.runtime.JoinClassLoader;
+import org.realityforge.extension.Extension;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
@@ -118,7 +118,7 @@ import org.realityforge.salt.i18n.Resources;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-10-05 00:24:19 $
+ * @version $Revision: 1.6 $ $Date: 2003-10-16 14:45:45 $
  * @deprecated Convert to ClassMan SimpleLoaderResolver when it updates
  *             dependecy to latest Excalibur-Extension
  */

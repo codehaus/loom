@@ -11,27 +11,26 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import junit.framework.TestCase;
-import org.jcontainer.loom.components.deployer.PhoenixProfileBuilder;
+import org.jcontainer.dna.Configuration;
+import org.jcontainer.dna.impl.ConsoleLogger;
+import org.jcontainer.dna.impl.DefaultConfiguration;
 import org.jcontainer.loom.components.assembler.data.Component1;
-import org.jcontainer.loom.components.assembler.data.Service2;
 import org.jcontainer.loom.components.assembler.data.Component2;
 import org.jcontainer.loom.components.assembler.data.Component3;
-import org.jcontainer.loom.interfaces.ContainerConstants;
-import org.jcontainer.loom.tools.LoomToolConstants;
+import org.jcontainer.loom.components.deployer.PhoenixProfileBuilder;
 import org.jcontainer.loom.components.util.ConfigurationBuilder;
-import org.jcontainer.loom.tools.metadata.DependencyMetaData;
-import org.jcontainer.loom.tools.profile.ComponentProfile;
-import org.jcontainer.loom.tools.profile.PartitionProfile;
-import org.jcontainer.dna.Configuration;
-import org.jcontainer.dna.impl.DefaultConfiguration;
-import org.jcontainer.dna.impl.ConsoleLogger;
+import org.jcontainer.loom.components.assembler.data.Service1;
+import org.jcontainer.loom.components.util.metadata.DependencyMetaData;
+import org.jcontainer.loom.components.util.profile.ComponentProfile;
+import org.jcontainer.loom.components.util.profile.PartitionProfile;
+import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.xml.sax.InputSource;
 
 /**
  *  An basic test case for the LogManager.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.7 $ $Date: 2003-10-16 05:23:54 $
+ * @version $Revision: 1.8 $ $Date: 2003-10-16 14:45:51 $
  */
 public class AssemblerTestCase
     extends TestCase
@@ -47,7 +46,7 @@ public class AssemblerTestCase
     {
         final PartitionProfile partitionProfile = assembleSar( "assembly1.xml" );
         final ComponentProfile[] blocks =
-            partitionProfile.getPartition( LoomToolConstants.BLOCK_PARTITION ).
+            partitionProfile.getPartition( ContainerConstants.BLOCK_PARTITION ).
             getComponents();
         assertEquals( "Block Count", 2, blocks.length );
 
@@ -64,7 +63,7 @@ public class AssemblerTestCase
                       1, dependencies1.length );
         assertEquals( "Block1 dep1 name", "c2", dependencies1[ 0 ].getProviderName() );
         assertEquals( "Block1 dep1 role",
-                      Service2.class.getName(), dependencies1[ 0 ].getKey() );
+                      Service1.class.getName(), dependencies1[ 0 ].getKey() );
         assertTrue( "Block1 getBlockInfo non null",
                     null != block1.getInfo() );
         assertEquals( "Block1 isDisableProxy", false, isProxyDisabled( block1 ) );
@@ -90,7 +89,7 @@ public class AssemblerTestCase
     {
         final PartitionProfile partitionProfile = assembleSar( "assembly2.xml" );
         final ComponentProfile[] blocks =
-            partitionProfile.getPartition( LoomToolConstants.BLOCK_PARTITION ).getComponents();
+            partitionProfile.getPartition( ContainerConstants.BLOCK_PARTITION ).getComponents();
         assertEquals( "Block Count", 4, blocks.length );
 
         final ComponentProfile block1 = blocks[ 0 ];
@@ -143,13 +142,13 @@ public class AssemblerTestCase
         final DependencyMetaData dependency3 = dependencies4[ 2 ];
         assertEquals( "Block4 dep1 name", "c2a", dependency1.getProviderName() );
         assertEquals( "Block4 dep1 role",
-                      Service2.class.getName(), dependency1.getKey() );
+                      Service1.class.getName(), dependency1.getKey() );
         assertEquals( "Block4 dep1 name", "c2b", dependency2.getProviderName() );
         assertEquals( "Block4 dep1 role",
-                      Service2.class.getName(), dependency2.getKey() );
+                      Service1.class.getName(), dependency2.getKey() );
         assertEquals( "Block4 dep1 name", "c2c", dependency3.getProviderName() );
         assertEquals( "Block4 dep1 role",
-                      Service2.class.getName(), dependency3.getKey() );
+                      Service1.class.getName(), dependency3.getKey() );
         assertTrue( "Block4 getBlockInfo non null",
                     null != block4.getInfo() );
         assertEquals( "Block4 isDisableProxy", false, isProxyDisabled( block4 ) );

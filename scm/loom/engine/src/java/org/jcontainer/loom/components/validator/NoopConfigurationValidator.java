@@ -7,9 +7,9 @@
  */
 package org.jcontainer.loom.components.validator;
 
-import org.jcontainer.loom.interfaces.ConfigurationValidator;
-import org.jcontainer.loom.tools.profile.ComponentProfile;
 import org.jcontainer.dna.ConfigurationException;
+import org.jcontainer.loom.components.util.profile.ComponentProfile;
+import org.jcontainer.loom.interfaces.ConfigurationValidator;
 
 /**
  * A ConfigurationValidator that always says everything is okay

@@ -89,21 +89,21 @@ package org.jcontainer.loom.components.extensions;
 import java.io.File;
 import java.util.ArrayList;
 import org.jcontainer.dna.Active;
-import org.jcontainer.dna.Parameterizable;
-import org.jcontainer.dna.Parameters;
-import org.jcontainer.dna.ParameterException;
 import org.jcontainer.dna.LogEnabled;
 import org.jcontainer.dna.Logger;
+import org.jcontainer.dna.ParameterException;
+import org.jcontainer.dna.Parameterizable;
+import org.jcontainer.dna.Parameters;
+import org.jcontainer.loom.components.ParameterConstants;
 import org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager;
 import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
-import org.jcontainer.loom.components.ParameterConstants;
 import org.jcontainer.loom.interfaces.ExtensionManagerMBean;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
 /**
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.10 $ $Date: 2003-10-16 09:23:58 $
+ * @version $Revision: 1.11 $ $Date: 2003-10-16 14:45:45 $
  * @dna.component
  * @mx.interface type="org.jcontainer.loom.interfaces.ExtensionManagerMBean"
  */

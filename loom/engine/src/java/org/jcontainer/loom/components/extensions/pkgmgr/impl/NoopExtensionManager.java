@@ -86,9 +86,9 @@
  */
 package org.jcontainer.loom.components.extensions.pkgmgr.impl;
 
-import org.realityforge.extension.Extension;
 import org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager;
 import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
+import org.realityforge.extension.Extension;
 
 /**
  * A Noop ExtensionManager that can't provide any extensions.
@@ -96,7 +96,7 @@ import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
  * require apps to be be self-contained.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-08-17 18:27:32 $
+ * @version $Revision: 1.4 $ $Date: 2003-10-16 14:45:45 $
  */
 public class NoopExtensionManager
     implements ExtensionManager

@@ -91,23 +91,22 @@ import java.util.List;
 import java.util.Map;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.ConfigurationException;
+import org.jcontainer.loom.components.util.metadata.ComponentMetaData;
+import org.jcontainer.loom.components.util.metadata.DependencyMetaData;
+import org.jcontainer.loom.components.util.metadata.MetaDataBuilder;
+import org.jcontainer.loom.components.util.metadata.PartitionMetaData;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.LoomException;
-import org.jcontainer.loom.tools.LoomToolConstants;
-import org.jcontainer.loom.tools.metadata.ComponentMetaData;
-import org.jcontainer.loom.tools.metadata.DependencyMetaData;
-import org.jcontainer.loom.tools.metadata.MetaDataBuilder;
-import org.jcontainer.loom.tools.metadata.PartitionMetaData;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
 /**
- * Assemble a {@link PartitionMetaData} object from a Configuration
+ * Assemble a {@link org.jcontainer.loom.components.util.metadata.PartitionMetaData} object from a Configuration
  * object. The Configuration object represents the assembly descriptor
  * and is in the format specified for <tt>assembly.xml</tt> files.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.10 $ $Date: 2003-10-16 05:11:32 $
+ * @version $Revision: 1.11 $ $Date: 2003-10-16 14:45:44 $
  */
 public class Assembler
     implements MetaDataBuilder
@@ -116,7 +115,7 @@ public class Assembler
         ResourceManager.getPackageResources( Assembler.class );
 
     /**
-     * Create a {@link PartitionMetaData} object based on specified
+     * Create a {@link org.jcontainer.loom.components.util.metadata.PartitionMetaData} object based on specified
      * name and assembly configuration. This implementation takes two
      * parameters. {@link ContainerConstants#ASSEMBLY_NAME} specifies
      * the name of the assembly and
@@ -140,7 +139,7 @@ public class Assembler
     }
 
     /**
-     * Create a {@link PartitionMetaData} object based on specified
+     * Create a {@link org.jcontainer.loom.components.util.metadata.PartitionMetaData} object based on specified
      * name and assembly configuration.
      *
      * @param name the name of Sar
@@ -156,15 +155,15 @@ public class Assembler
         final Configuration[] blockConfig = assembly.getChildren( "block" );
         final ComponentMetaData[] blocks = buildBlocks( blockConfig, config );
         final PartitionMetaData blockPartition =
-            new PartitionMetaData( LoomToolConstants.BLOCK_PARTITION,
-                                   new String[]{LoomToolConstants.LISTENER_PARTITION},
+            new PartitionMetaData( ContainerConstants.BLOCK_PARTITION,
+                                   new String[]{ContainerConstants.LISTENER_PARTITION},
                                    PartitionMetaData.EMPTY_SET,
                                    blocks );
 
         final Configuration[] listenerConfig = assembly.getChildren( "listener" );
         final ComponentMetaData[] listeners = buildBlockListeners( listenerConfig, config );
         final PartitionMetaData listenerPartition =
-            new PartitionMetaData( LoomToolConstants.LISTENER_PARTITION,
+            new PartitionMetaData( ContainerConstants.LISTENER_PARTITION,
                                    new String[ 0 ],
                                    PartitionMetaData.EMPTY_SET,
                                    listeners );
@@ -179,7 +178,7 @@ public class Assembler
     }
 
     /**
-     * Create an array of {@link ComponentMetaData} objects to represent
+     * Create an array of {@link org.jcontainer.loom.components.util.metadata.ComponentMetaData} objects to represent
      * the &lt;block .../&gt; sections in <tt>assembly.xml</tt>.
      *
      * @param blocks the list of Configuration objects for blocks
@@ -200,7 +199,7 @@ public class Assembler
     }
 
     /**
-     * Create a single {@link ComponentMetaData} object to represent
+     * Create a single {@link org.jcontainer.loom.components.util.metadata.ComponentMetaData} object to represent
      * specified &lt;block .../&gt; section.
      *
      * @param block the Configuration object for block
@@ -239,7 +238,7 @@ public class Assembler
     }
 
     /**
-     * Create an array of {@link ComponentMetaData} objects to represent
+     * Create an array of {@link org.jcontainer.loom.components.util.metadata.ComponentMetaData} objects to represent
      * the &lt;listener .../&gt; sections in <tt>assembly.xml</tt>.
      *
      * @param listenerConfigs the list of Configuration objects for listenerConfigs
@@ -261,7 +260,7 @@ public class Assembler
     }
 
     /**
-     * Create a {@link ComponentMetaData} object to represent
+     * Create a {@link org.jcontainer.loom.components.util.metadata.ComponentMetaData} object to represent
      * the specified &lt;listener .../&gt; section.
      *
      * @param listener the Configuration object for listener

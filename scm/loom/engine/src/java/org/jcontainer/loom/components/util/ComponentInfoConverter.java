@@ -13,14 +13,14 @@ import org.apache.avalon.phoenix.metainfo.BlockDescriptor;
 import org.apache.avalon.phoenix.metainfo.BlockInfo;
 import org.apache.avalon.phoenix.metainfo.DependencyDescriptor;
 import org.apache.avalon.phoenix.metainfo.ServiceDescriptor;
-import org.jcontainer.loom.tools.info.ComponentInfo;
-import org.jcontainer.loom.tools.info.SchemaDescriptor;
+import org.jcontainer.loom.components.util.info.ComponentInfo;
+import org.jcontainer.loom.components.util.info.SchemaDescriptor;
 
 /**
- * Convert a {@link org.jcontainer.loom.tools.info.ComponentInfo} into a {@link BlockInfo}.
+ * Convert a {@link org.jcontainer.loom.components.util.info.ComponentInfo} into a {@link BlockInfo}.
  *
  * @author <a href="mailto:peter@apache.org">Peter Donald</a>
- * @version $Revision: 1.8 $ $Date: 2003-10-16 00:56:16 $
+ * @version $Revision: 1.9 $ $Date: 2003-10-16 14:45:46 $
  */
 public class ComponentInfoConverter
 {
@@ -57,7 +57,7 @@ public class ComponentInfoConverter
      * @return the Phoenix services
      */
     private static ServiceDescriptor[] toPhoenixServices(
-        final org.jcontainer.loom.tools.info.ServiceDescriptor[] services )
+        final org.jcontainer.loom.components.util.info.ServiceDescriptor[] services )
     {
         final ArrayList serviceSet = new ArrayList();
         for( int i = 0; i < services.length; i++ )
@@ -74,7 +74,7 @@ public class ComponentInfoConverter
      * @return the Phoenix service
      */
     private static ServiceDescriptor toPhoenixService(
-        final org.jcontainer.loom.tools.info.ServiceDescriptor service )
+        final org.jcontainer.loom.components.util.info.ServiceDescriptor service )
     {
         return new ServiceDescriptor( service.getType(), VERSION );
     }
@@ -86,7 +86,7 @@ public class ComponentInfoConverter
      * @return the Phoenix dependencys
      */
     private static DependencyDescriptor[] toPhoenixDependencys(
-        final org.jcontainer.loom.tools.info.DependencyDescriptor[] dependencies )
+        final org.jcontainer.loom.components.util.info.DependencyDescriptor[] dependencies )
     {
         final ArrayList depends = new ArrayList();
         for( int i = 0; i < dependencies.length; i++ )
@@ -103,7 +103,7 @@ public class ComponentInfoConverter
      * @return the Phoenix dependency
      */
     private static DependencyDescriptor toPhoenixDependency(
-        final org.jcontainer.loom.tools.info.DependencyDescriptor dependency )
+        final org.jcontainer.loom.components.util.info.DependencyDescriptor dependency )
     {
         final ServiceDescriptor service =
             new ServiceDescriptor( dependency.getType(), VERSION );

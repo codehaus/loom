@@ -31,7 +31,7 @@ import org.xml.sax.InputSource;
  *  An basic test case for the LogManager.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.10 $ $Date: 2003-10-16 14:14:51 $
+ * @version $Revision: 1.11 $ $Date: 2003-10-16 14:45:55 $
  */
 public class LogManagerTestCase
     extends TestCase
@@ -46,18 +46,6 @@ public class LogManagerTestCase
         //Because log4j does not guarentee dir creation ;(
         final File logDir = new File( generateDirectory(), "logs" );
         logDir.mkdirs();
-    }
-
-    private SarMetaData createSarMetaData( final String subdir )
-    {
-        final BlockMetaData[] blocks = new BlockMetaData[ 0 ];
-        final BlockListenerMetaData[] listeners = new BlockListenerMetaData[ 0 ];
-        final File homeDirectory = new File( m_baseDirectory, subdir ).getAbsoluteFile();
-        System.out.println( "homeDirectory = " + homeDirectory );
-        return new SarMetaData( "test",
-                                homeDirectory,
-                                blocks,
-                                listeners );
     }
 
     private LogManager createLogManager()
@@ -136,8 +124,11 @@ public class LogManagerTestCase
     {
         final Configuration logs = loadConfig( "config" + index + ".xml" );
         final LogManager logManager = createLogManager();
-        final SarMetaData sarMetaData = createSarMetaData( getBaseDirName( index ) );
-
+        final SarMetaData sarMetaData =
+            new SarMetaData( "test",
+                             m_baseDirectory,
+                             new BlockMetaData[ 0 ],
+                             new BlockListenerMetaData[ 0 ] );
         cleanHomeDirectory( sarMetaData );
 
         //make sure directory is created else log4j will fail.
@@ -159,11 +150,6 @@ public class LogManagerTestCase
                                         sarMetaData.getHomeDirectory(),
                                         context );
         return store.getLogger();
-    }
-
-    private String getBaseDirName( final int index )
-    {
-        return "test" + index;
     }
 
     private void cleanHomeDirectory( final SarMetaData sarMetaData )

@@ -86,9 +86,9 @@
  */
 package org.jcontainer.loom.components.application;
 
-import org.jcontainer.loom.tools.info.ComponentInfo;
-import org.jcontainer.loom.tools.info.ServiceDescriptor;
-import org.jcontainer.loom.tools.profile.ComponentProfile;
+import org.jcontainer.loom.components.util.info.ComponentInfo;
+import org.jcontainer.loom.components.util.info.ServiceDescriptor;
+import org.jcontainer.loom.components.util.profile.ComponentProfile;
 
 /**
  * This is the structure describing each block before it is loaded.

@@ -88,16 +88,16 @@ package org.jcontainer.loom.components.extensions.pkgmgr.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import org.realityforge.extension.Extension;
 import org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager;
 import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
+import org.realityforge.extension.Extension;
 
 /**
  * A {@link ExtensionManager} that can delegate to multiple
  * different package repositories.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-08-17 18:27:32 $
+ * @version $Revision: 1.4 $ $Date: 2003-10-16 14:45:45 $
  */
 public class DelegatingExtensionManager
     implements ExtensionManager

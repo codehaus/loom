@@ -97,14 +97,14 @@ import org.jcontainer.dna.AbstractLogEnabled;
 import org.jcontainer.dna.Active;
 import org.jcontainer.dna.Logger;
 import org.jcontainer.loom.components.util.ComponentMetaDataConverter;
+import org.jcontainer.loom.components.util.lifecycle.LifecycleHelper;
+import org.jcontainer.loom.components.util.profile.ComponentProfile;
+import org.jcontainer.loom.components.util.profile.PartitionProfile;
 import org.jcontainer.loom.interfaces.Application;
 import org.jcontainer.loom.interfaces.ApplicationContext;
 import org.jcontainer.loom.interfaces.ApplicationMBean;
+import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.LoomException;
-import org.jcontainer.loom.tools.LoomToolConstants;
-import org.jcontainer.loom.components.util.lifecycle.LifecycleHelper;
-import org.jcontainer.loom.tools.profile.ComponentProfile;
-import org.jcontainer.loom.tools.profile.PartitionProfile;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
@@ -175,7 +175,7 @@ public final class DefaultApplication
         try
         {
             final PartitionProfile partition =
-                m_context.getPartitionProfile().getPartition( LoomToolConstants.BLOCK_PARTITION );
+                m_context.getPartitionProfile().getPartition( ContainerConstants.BLOCK_PARTITION );
             final ComponentProfile[] blocks = partition.getComponents();
             for( int i = 0; i < blocks.length; i++ )
             {
@@ -327,7 +327,7 @@ public final class DefaultApplication
         throws Exception
     {
         final ComponentProfile[] listeners =
-            getComponentsInPartition( LoomToolConstants.LISTENER_PARTITION );
+            getComponentsInPartition( ContainerConstants.LISTENER_PARTITION );
         for( int i = 0; i < listeners.length; i++ )
         {
             try
@@ -390,7 +390,7 @@ public final class DefaultApplication
         throws Exception
     {
         final ComponentProfile[] blocks =
-            getComponentsInPartition( LoomToolConstants.BLOCK_PARTITION );
+            getComponentsInPartition( ContainerConstants.BLOCK_PARTITION );
         final String[] order = DependencyGraph.walkGraph( PHASE_STARTUP == name, blocks );
 
         //Log message describing the number of blocks

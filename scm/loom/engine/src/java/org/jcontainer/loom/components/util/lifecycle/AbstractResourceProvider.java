@@ -100,11 +100,11 @@ import org.apache.avalon.framework.service.DefaultServiceManager;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.jcontainer.dna.AbstractLogEnabled;
 import org.jcontainer.loom.components.util.ConfigurationConverter;
-import org.jcontainer.loom.tools.factory.ComponentBundle;
-import org.jcontainer.loom.tools.factory.ComponentFactory;
-import org.jcontainer.loom.tools.info.ComponentInfo;
-import org.jcontainer.loom.tools.metadata.ComponentMetaData;
-import org.jcontainer.loom.tools.metadata.DependencyMetaData;
+import org.jcontainer.loom.components.util.factory.ComponentBundle;
+import org.jcontainer.loom.components.util.factory.ComponentFactory;
+import org.jcontainer.loom.components.util.info.ComponentInfo;
+import org.jcontainer.loom.components.util.metadata.ComponentMetaData;
+import org.jcontainer.loom.components.util.metadata.DependencyMetaData;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
@@ -118,10 +118,10 @@ import org.realityforge.salt.i18n.Resources;
  *
  * <p>Note that this class assumes that the dependency graph
  * has been validated (presumably via
- * {@link org.jcontainer.loom.tools.verifier.AssemblyVerifier}</p>
+ * {@link org.jcontainer.loom.components.util.verifier.AssemblyVerifier}</p>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-10-16 05:48:07 $
+ * @version $Revision: 1.3 $ $Date: 2003-10-16 14:45:46 $
  */
 public abstract class AbstractResourceProvider
     extends AbstractLogEnabled
@@ -173,7 +173,7 @@ public abstract class AbstractResourceProvider
     /**
      * Create a component for a particular entry.
      * This implementation uses the associated
-     * {@link org.jcontainer.loom.tools.factory.ComponentFactory} to create instance of
+     * {@link org.jcontainer.loom.components.util.factory.ComponentFactory} to create instance of
      * component.
      *
      * @param entry the entry
@@ -250,8 +250,8 @@ public abstract class AbstractResourceProvider
     }
 
     /**
-     * Return the {@link org.jcontainer.loom.tools.metadata.ComponentMetaData} for specified component entry.
-     * This implementation assumes that entry is instance of {@link org.jcontainer.loom.tools.metadata.ComponentMetaData}
+     * Return the {@link org.jcontainer.loom.components.util.metadata.ComponentMetaData} for specified component entry.
+     * This implementation assumes that entry is instance of {@link org.jcontainer.loom.components.util.metadata.ComponentMetaData}
      * but subclasses should overide this method if this assumption does not hold true.
      *
      * @param entry the component entry

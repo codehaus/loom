@@ -7,9 +7,9 @@
  */
 package org.jcontainer.loom.components.configuration;
 
-import org.jcontainer.loom.interfaces.ConfigurationInterceptor;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.ConfigurationException;
+import org.jcontainer.loom.interfaces.ConfigurationInterceptor;
 
 /**
  * Interceptor that does not make any changes to configuration.

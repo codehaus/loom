@@ -90,20 +90,20 @@ import java.io.File;
 import java.net.URL;
 import java.security.Policy;
 import java.util.Arrays;
-import org.jcontainer.loom.components.extensions.pkgmgr.PackageManager;
-import org.jcontainer.loom.components.util.ResourceUtil;
 import org.jcontainer.dna.LogEnabled;
 import org.jcontainer.dna.Logger;
 import org.jcontainer.dna.impl.ContainerUtil;
-import org.realityforge.salt.i18n.Resources;
+import org.jcontainer.loom.components.extensions.pkgmgr.PackageManager;
+import org.jcontainer.loom.components.util.ResourceUtil;
 import org.realityforge.salt.i18n.ResourceManager;
+import org.realityforge.salt.i18n.Resources;
 
 /**
  * a LoaderResolver that knows about container environment,
  * and the way it is split across multiple directories.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-10-05 10:07:03 $
+ * @version $Revision: 1.6 $ $Date: 2003-10-16 14:45:45 $
  */
 class SarLoaderResolver
     extends DefaultLoaderResolver

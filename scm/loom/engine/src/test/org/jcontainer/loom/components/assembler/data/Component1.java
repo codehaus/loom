@@ -12,17 +12,17 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 
 /**
- * A test component.
- *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-09-02 04:36:59 $
+ * @dna.component
  */
 public class Component1
     implements Serviceable
 {
+    /**
+     * @dna.dependency type="Service1"
+     */
     public void service( final ServiceManager manager )
         throws ServiceException
     {
-        manager.lookup( Service2.class.getName() );
+        manager.lookup( Service1.class.getName() );
     }
 }

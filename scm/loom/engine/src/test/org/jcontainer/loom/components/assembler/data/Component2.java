@@ -10,9 +10,11 @@ package org.jcontainer.loom.components.assembler.data;
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-07-19 01:51:02 $
+ * @version $Revision: 1.2 $ $Date: 2003-10-16 14:45:54 $
+ * @dna.component
+ * @dna.service type="Service1"
  */
 public class Component2
-    implements Service2
+    implements Service1
 {
 }

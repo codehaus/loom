@@ -179,4 +179,12 @@ public interface ContainerConstants
      * Type: {@link java.lang.String}
      */
     String INSTALL_ENVIRONMENT = "install:environment";
+    /**
+     * Name of partition containing blocks.
+     */
+    String BLOCK_PARTITION = "Loom:BlockPartition";
+    /**
+     * Name of partition containing listeners.
+     */
+    String LISTENER_PARTITION = "Loom:ListenerPartition";
 }

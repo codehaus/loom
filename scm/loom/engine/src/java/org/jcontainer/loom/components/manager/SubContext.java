@@ -89,8 +89,8 @@ package org.jcontainer.loom.components.manager;
 import java.util.HashMap;
 import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.interfaces.SystemManager;
-import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
+import org.realityforge.salt.i18n.Resources;
 
 /**
  * Implements a management context local to a particular process with which
