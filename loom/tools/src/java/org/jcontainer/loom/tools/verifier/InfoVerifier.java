@@ -7,8 +7,6 @@
  */
 package org.jcontainer.loom.tools.verifier;
 
-import org.apache.avalon.excalibur.i18n.ResourceManager;
-import org.apache.avalon.excalibur.i18n.Resources;
 import org.apache.avalon.framework.component.Composable;
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.context.Contextualizable;
@@ -20,6 +18,8 @@ import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ContextDescriptor;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
+import org.realityforge.salt.i18n.Resources;
+import org.realityforge.salt.i18n.ResourceManager;
 
 /**
  * This Class verifies that an implementation is valid wrt the
@@ -43,7 +43,7 @@ import org.jcontainer.loom.tools.info.ServiceDescriptor;
  * </ul>
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-26 09:42:03 $
+ * @version $Revision: 1.3 $ $Date: 2003-06-26 09:42:45 $
  */
 public class InfoVerifier
     extends AbstractLogEnabled
@@ -157,9 +157,9 @@ public class InfoVerifier
             if( !Configurable.class.isAssignableFrom( implementation ) )
             {
                 final String message =
-                    REZ.getString( "metadata.declare-uneeded-configuration-schema.error",
-                                   name,
-                                   implementationKey );
+                    REZ.format( "metadata.declare-uneeded-configuration-schema.error",
+                                name,
+                                implementationKey );
                 throw new VerifyException( message );
             }
         }
@@ -190,9 +190,9 @@ public class InfoVerifier
             if( !Parameterizable.class.isAssignableFrom( implementation ) )
             {
                 final String message =
-                    REZ.getString( "metadata.declare-uneeded-parameter-schema.error",
-                                   name,
-                                   implementationKey );
+                    REZ.format( "metadata.declare-uneeded-parameter-schema.error",
+                                name,
+                                implementationKey );
                 throw new VerifyException( message );
             }
         }
@@ -221,9 +221,9 @@ public class InfoVerifier
             if( 0 != count )
             {
                 final String message =
-                    REZ.getString( "metadata.declare-uneeded-entrys.error",
-                                   name,
-                                   implementationKey );
+                    REZ.format( "metadata.declare-uneeded-entrys.error",
+                                name,
+                                implementationKey );
                 throw new VerifyException( message );
             }
         }
@@ -256,9 +256,9 @@ public class InfoVerifier
             if( 0 != count )
             {
                 final String message =
-                    REZ.getString( "metadata.declare-uneeded-deps.error",
-                                   name,
-                                   implementationKey );
+                    REZ.format( "metadata.declare-uneeded-deps.error",
+                                name,
+                                implementationKey );
                 throw new VerifyException( message );
             }
         }
@@ -291,10 +291,10 @@ public class InfoVerifier
             catch( final Throwable t )
             {
                 final String message =
-                    REZ.getString( "metadata.bad-service-class.error",
-                                   name,
-                                   classname,
-                                   t.toString() );
+                    REZ.format( "metadata.bad-service-class.error",
+                                name,
+                                classname,
+                                t.toString() );
                 throw new VerifyException( message, t );
             }
         }
@@ -324,10 +324,10 @@ public class InfoVerifier
         catch( final Exception e )
         {
             final String message =
-                REZ.getString( "assembly.bad-class.error",
-                               name,
-                               implementationKey,
-                               e.toString() );
+                REZ.format( "assembly.bad-class.error",
+                            name,
+                            implementationKey,
+                            e.toString() );
             throw new VerifyException( message );
         }
         return clazz;
