@@ -27,7 +27,7 @@
     <ul>
         <li>Command-line stand-alone program</li>
         <li>Unix daemon</li>
-        <li>Embedded in other programs (including servlet engines)</li>
+<!--        <li>Embedded in other programs (including servlet engines)</li> -->
     </ul>
 </section>
 
