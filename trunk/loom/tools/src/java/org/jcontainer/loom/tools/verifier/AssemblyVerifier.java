@@ -9,13 +9,14 @@ package org.jcontainer.loom.tools.verifier;
 
 import java.util.ArrayList;
 import java.util.Stack;
+import org.jcontainer.dna.AbstractLogEnabled;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
 import org.jcontainer.loom.tools.metadata.DependencyMetaData;
-import org.jcontainer.dna.AbstractLogEnabled;
-import org.realityforge.salt.i18n.Resources;
+import org.jcontainer.loom.tools.profile.ComponentProfile;
 import org.realityforge.salt.i18n.ResourceManager;
+import org.realityforge.salt.i18n.Resources;
 
 /**
  * This Class verifies that Sars are valid. It performs a number
@@ -38,11 +39,11 @@ import org.realityforge.salt.i18n.ResourceManager;
  *   <li>Verify that the Class objects for component implement the
  *       service interfaces.</li>
  *   <li>Verify that the Class is a valid Avalon Component as per the
- *       rules in {@link org.jcontainer.loom.tools.verifier.ComponentVerifier} object.</li>
+ *       rules in {@link ComponentVerifier} object.</li>
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-10-05 10:07:05 $
+ * @version $Revision: 1.6 $ $Date: 2003-10-16 00:25:37 $
  */
 public class AssemblyVerifier
     extends AbstractLogEnabled
@@ -56,9 +57,9 @@ public class AssemblyVerifier
      * regulations of assembly.
      *
      * @param components the Components that make up assembly
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if an error occurs
+     * @throws VerifyException if an error occurs
      */
-    public void verifyAssembly( final org.jcontainer.loom.tools.profile.ComponentProfile[] components )
+    public void verifyAssembly( final ComponentProfile[] components )
         throws VerifyException
     {
         String message;
@@ -88,9 +89,9 @@ public class AssemblyVerifier
      * Verfiy that all Components have the needed dependencies specified correctly.
      *
      * @param components the ComponentEntry objects for the components
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if an error occurs
+     * @throws VerifyException if an error occurs
      */
-    public void verifyValidDependencies( final org.jcontainer.loom.tools.profile.ComponentProfile[] components )
+    public void verifyValidDependencies( final ComponentProfile[] components )
         throws VerifyException
     {
         for( int i = 0; i < components.length; i++ )
@@ -103,14 +104,14 @@ public class AssemblyVerifier
      * Verfiy that there are no circular references between Components.
      *
      * @param components the ComponentEntry objects for the components
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if an circular dependency error occurs
+     * @throws VerifyException if an circular dependency error occurs
      */
-    protected void verifyNoCircularDependencies( final org.jcontainer.loom.tools.profile.ComponentProfile[] components )
+    protected void verifyNoCircularDependencies( final ComponentProfile[] components )
         throws VerifyException
     {
         for( int i = 0; i < components.length; i++ )
         {
-            final org.jcontainer.loom.tools.profile.ComponentProfile component = components[ i ];
+            final ComponentProfile component = components[ i ];
 
             final Stack stack = new Stack();
             stack.push( component );
@@ -125,17 +126,17 @@ public class AssemblyVerifier
      * @param component ???
      * @param components the ComponentEntry objects for the components
      * @param stack the ???
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if an error occurs
+     * @throws VerifyException if an error occurs
      */
-    protected void verifyNoCircularDependencies( final org.jcontainer.loom.tools.profile.ComponentProfile component,
-                                                 final org.jcontainer.loom.tools.profile.ComponentProfile[] components,
+    protected void verifyNoCircularDependencies( final ComponentProfile component,
+                                                 final ComponentProfile[] components,
                                                  final Stack stack )
         throws VerifyException
     {
-        final org.jcontainer.loom.tools.profile.ComponentProfile[] dependencies = getDependencies( component, components );
+        final ComponentProfile[] dependencies = getDependencies( component, components );
         for( int i = 0; i < dependencies.length; i++ )
         {
-            final org.jcontainer.loom.tools.profile.ComponentProfile dependency = dependencies[ i ];
+            final ComponentProfile dependency = dependencies[ i ];
             if( stack.contains( dependency ) )
             {
                 final String trace = getDependencyTrace( dependency, stack );
@@ -160,7 +161,7 @@ public class AssemblyVerifier
      * @param stack the Stack
      * @return the path of dependency
      */
-    protected String getDependencyTrace( final org.jcontainer.loom.tools.profile.ComponentProfile component,
+    protected String getDependencyTrace( final ComponentProfile component,
                                          final Stack stack )
     {
         final StringBuffer sb = new StringBuffer();
@@ -171,7 +172,7 @@ public class AssemblyVerifier
         final int top = size - 1;
         for( int i = top; i >= 0; i-- )
         {
-            final org.jcontainer.loom.tools.profile.ComponentProfile other = (org.jcontainer.loom.tools.profile.ComponentProfile)stack.get( i );
+            final ComponentProfile other = (ComponentProfile)stack.get( i );
             if( top != i )
             {
                 sb.append( ", " );
@@ -199,8 +200,8 @@ public class AssemblyVerifier
      * @param components the total set of components in application
      * @return the dependencies of component
      */
-    protected org.jcontainer.loom.tools.profile.ComponentProfile[] getDependencies( final org.jcontainer.loom.tools.profile.ComponentProfile component,
-                                                                                    final org.jcontainer.loom.tools.profile.ComponentProfile[] components )
+    protected ComponentProfile[] getDependencies( final ComponentProfile component,
+                                                                                    final ComponentProfile[] components )
     {
         final ArrayList dependencies = new ArrayList();
         final DependencyMetaData[] deps =
@@ -209,20 +210,20 @@ public class AssemblyVerifier
         for( int i = 0; i < deps.length; i++ )
         {
             final String name = deps[ i ].getProviderName();
-            final org.jcontainer.loom.tools.profile.ComponentProfile other = getComponentProfile( name, components );
+            final ComponentProfile other = getComponentProfile( name, components );
             dependencies.add( other );
         }
 
-        return (org.jcontainer.loom.tools.profile.ComponentProfile[])dependencies.toArray( new org.jcontainer.loom.tools.profile.ComponentProfile[ 0 ] );
+        return (ComponentProfile[])dependencies.toArray( new ComponentProfile[ 0 ] );
     }
 
     /**
      * Verfiy that the inter-Component dependencies are valid.
      *
      * @param components the ComponentProfile objects for the components
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if an error occurs
+     * @throws VerifyException if an error occurs
      */
-    protected void verifyDependencyReferences( final org.jcontainer.loom.tools.profile.ComponentProfile[] components )
+    protected void verifyDependencyReferences( final ComponentProfile[] components )
         throws VerifyException
     {
         for( int i = 0; i < components.length; i++ )
@@ -236,10 +237,10 @@ public class AssemblyVerifier
      *
      * @param component the ComponentProfile object for the component
      * @param others the ComponentProfile objects for the other components
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if an error occurs
+     * @throws VerifyException if an error occurs
      */
-    protected void verifyDependencyReferences( final org.jcontainer.loom.tools.profile.ComponentProfile component,
-                                               final org.jcontainer.loom.tools.profile.ComponentProfile[] others )
+    protected void verifyDependencyReferences( final ComponentProfile component,
+                                               final ComponentProfile[] others )
         throws VerifyException
     {
         final ComponentInfo info = component.getInfo();
@@ -253,7 +254,7 @@ public class AssemblyVerifier
             final String type = info.getDependency( key ).getComponentType();
 
             //Get the other component that is providing service
-            final org.jcontainer.loom.tools.profile.ComponentProfile provider = getComponentProfile( providerName, others );
+            final ComponentProfile provider = getComponentProfile( providerName, others );
             if( null == provider )
             {
                 final String message =
@@ -287,12 +288,12 @@ public class AssemblyVerifier
      * @param components the array of components to search
      * @return the Component if found, else null
      */
-    protected org.jcontainer.loom.tools.profile.ComponentProfile getComponentProfile( final String name,
-                                                                                      final org.jcontainer.loom.tools.profile.ComponentProfile[] components )
+    protected ComponentProfile getComponentProfile( final String name,
+                                                                                      final ComponentProfile[] components )
     {
         for( int i = 0; i < components.length; i++ )
         {
-            org.jcontainer.loom.tools.profile.ComponentProfile ComponentProfile = components[ i ];
+            ComponentProfile ComponentProfile = components[ i ];
             if( ComponentProfile.getMetaData().getName().equals( name ) )
             {
                 return components[ i ];
@@ -306,14 +307,14 @@ public class AssemblyVerifier
      * Verify that the names of the specified Components are valid.
      *
      * @param components the Components Profile
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if an error occurs
+     * @throws VerifyException if an error occurs
      */
-    protected void verifyValidNames( final org.jcontainer.loom.tools.profile.ComponentProfile[] components )
+    protected void verifyValidNames( final ComponentProfile[] components )
         throws VerifyException
     {
         for( int i = 0; i < components.length; i++ )
         {
-            org.jcontainer.loom.tools.profile.ComponentProfile ComponentProfile = components[ i ];
+            ComponentProfile ComponentProfile = components[ i ];
             final String name = ComponentProfile.getMetaData().getName();
             if( !isValidName( name ) )
             {
@@ -352,14 +353,14 @@ public class AssemblyVerifier
      * It is not valid for the same name to be used in multiple components.
      *
      * @param components the Components
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if an error occurs
+     * @throws VerifyException if an error occurs
      */
-    protected void checkNamesUnique( final org.jcontainer.loom.tools.profile.ComponentProfile[] components )
+    protected void checkNamesUnique( final ComponentProfile[] components )
         throws VerifyException
     {
         for( int i = 0; i < components.length; i++ )
         {
-            org.jcontainer.loom.tools.profile.ComponentProfile ComponentProfile = components[ i ];
+            ComponentProfile ComponentProfile = components[ i ];
             final String name = ComponentProfile.getMetaData().getName();
             verifyUniqueName( components, name, i );
         }
@@ -371,16 +372,16 @@ public class AssemblyVerifier
      * @param components the array of components to check
      * @param name the name of component
      * @param index the index of component in array (so we can skip it)
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if names are not unique
+     * @throws VerifyException if names are not unique
      */
-    private void verifyUniqueName( final org.jcontainer.loom.tools.profile.ComponentProfile[] components,
+    private void verifyUniqueName( final ComponentProfile[] components,
                                    final String name,
                                    final int index )
         throws VerifyException
     {
         for( int i = 0; i < components.length; i++ )
         {
-            org.jcontainer.loom.tools.profile.ComponentProfile ComponentProfile = components[ i ];
+            ComponentProfile ComponentProfile = components[ i ];
             final String other =
                 ComponentProfile.getMetaData().getName();
             if( index != i && other.equals( name ) )
@@ -398,9 +399,9 @@ public class AssemblyVerifier
      * in ComponentInfo.
      *
      * @param component the ComponentProfile describing the component
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if an error occurs
+     * @throws VerifyException if an error occurs
      */
-    protected void verifyDependenciesMap( final org.jcontainer.loom.tools.profile.ComponentProfile component )
+    protected void verifyDependenciesMap( final ComponentProfile component )
         throws VerifyException
     {
         //Make sure all dependency entries specified in config file are valid
