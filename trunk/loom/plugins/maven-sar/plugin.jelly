@@ -36,13 +36,13 @@
             <ant:taskdef name="metagenerate"
                 classname="org.jcontainer.loom.info.GenerateLoomDescriptorsTask">
                 <ant:classpath>
-	                <ant:pathelement path="${plugin.dir}"/>
-	                <ant:pathelement path="${plugin.getDependencyPath('dna:dna-tools')}"/>
-	                <ant:pathelement path="${plugin.getDependencyPath('qdox')}"/>
-	                <ant:pathelement path="${plugin.getDependencyPath('spice:spice-metaclass')}"/>
+                    <ant:pathelement path="${plugin.dir}"/>
+                    <ant:pathelement path="${plugin.getDependencyPath('dna:dna-tools')}"/>
+                    <ant:pathelement path="${plugin.getDependencyPath('qdox')}"/>
+                    <ant:pathelement path="${plugin.getDependencyPath('spice:spice-metaclass')}"/>
                 </ant:classpath>
             </ant:taskdef>
-		</j:if>
+        </j:if>
 
     </goal>
 
@@ -64,14 +64,14 @@
         </j:if>
     </goal>
 
-    <postGoal name="sar:metagenerate">
-        <attainGoal name="jar:jar"/>
+    <postGoal name="java:compile">
+        <attainGoal name="sar:metagenerate"/>
     </postGoal>
 
     <!--==================================================================-->
     <!-- Builds a sar file                                                -->
     <!--==================================================================-->
-    <goal name="sar:sar" prereqs="sar:metagenerate" description="Build a sar file">
+    <goal name="sar:sar" prereqs="jar:jar" description="Build a sar file">
 
         <ant:echo message="Building sar ${maven.sar.final.name}"/>
         <ant:mkdir dir="${maven.sar.build.dir}"/>
