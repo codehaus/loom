@@ -8,7 +8,6 @@
 package org.jcontainer.loom.components.util;
 
 import java.util.ArrayList;
-import org.apache.avalon.framework.Version;
 import org.apache.avalon.phoenix.metainfo.BlockDescriptor;
 import org.apache.avalon.phoenix.metainfo.BlockInfo;
 import org.apache.avalon.phoenix.metainfo.DependencyDescriptor;
@@ -22,7 +21,7 @@ import org.jcontainer.loom.tools.infobuilder.LegacyUtil;
  * Convert a {@link org.jcontainer.loom.tools.info.ComponentInfo} into a {@link BlockInfo}.
  *
  * @author <a href="mailto:peter@apache.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-10-05 00:32:21 $
+ * @version $Revision: 1.4 $ $Date: 2003-10-06 13:10:02 $
  */
 public class ComponentInfoConverter
 {
@@ -99,8 +98,7 @@ public class ComponentInfoConverter
     private static ServiceDescriptor toPhoenixService(
         final org.jcontainer.loom.tools.info.ServiceDescriptor service )
     {
-        final Version version = LegacyUtil.toVersion( service );
-        return new ServiceDescriptor( service.getType(), version );
+        return new ServiceDescriptor( service.getType(), LegacyUtil.VERSION );
     }
 
     /**
@@ -129,9 +127,8 @@ public class ComponentInfoConverter
     private static DependencyDescriptor toPhoenixDependency(
         final org.jcontainer.loom.tools.info.DependencyDescriptor dependency )
     {
-        final Version version = LegacyUtil.toVersion( dependency );
         final ServiceDescriptor service =
-            new ServiceDescriptor( dependency.getType(), version );
+            new ServiceDescriptor( dependency.getType(), LegacyUtil.VERSION );
         return new DependencyDescriptor( dependency.getKey(), service );
     }
 
@@ -144,7 +141,6 @@ public class ComponentInfoConverter
     private static BlockDescriptor toBlockDescriptor( final ComponentInfo component )
     {
         final ComponentDescriptor descriptor = component.getDescriptor();
-        final Version version = LegacyUtil.toVersion( descriptor );
 
         final SchemaDescriptor schema = component.getConfigurationSchema();
         String schemaType = null;
@@ -156,6 +152,6 @@ public class ComponentInfoConverter
         return new BlockDescriptor( null,
                                     descriptor.getImplementationKey(),
                                     schemaType,
-                                    version );
+                                    LegacyUtil.VERSION );
     }
 }
