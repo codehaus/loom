@@ -7,19 +7,15 @@
  */
 package org.jcontainer.loom.tools.infobuilder;
 
-import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
-import org.jcontainer.dna.AbstractLogEnabled;
-import org.jcontainer.dna.Configuration;
-import org.jcontainer.dna.ConfigurationException;
-import org.jcontainer.loom.tools.configuration.ConfigurationBuilder;
+import java.util.List;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
-import org.realityforge.salt.i18n.ResourceManager;
-import org.realityforge.salt.i18n.Resources;
-import org.xml.sax.InputSource;
+import org.realityforge.metaclass.Attributes;
+import org.realityforge.metaclass.model.Attribute;
 
 /**
  * A BlockInfoReader is responsible for building {@link org.jcontainer.loom.tools.info.ComponentInfo}
@@ -28,109 +24,35 @@ import org.xml.sax.InputSource;
  * <a href="package-summary.html#external">package summary</a>.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.10 $ $Date: 2003-10-16 00:56:16 $
+ * @version $Revision: 1.11 $ $Date: 2003-10-16 04:29:26 $
  */
 public final class BlockInfoReader
-    extends AbstractLogEnabled
 {
-    /**
-     * I18n resources.
-     */
-    private static final Resources REZ =
-        ResourceManager.getPackageResources( BlockInfoReader.class );
-
     /**
      * Create a {@link ComponentInfo} object for specified
      * classname, in specified ClassLoader.
      *
      * @param type The Components type
      * @return the created ComponentInfo
-     * @throws Exception if an error occurs
      */
     public ComponentInfo buildComponentInfo( final Class type )
         throws Exception
     {
-        final String xinfo = type.getName().replace( '.', '/' ) + ".xinfo";
-        final InputStream inputStream =
-            type.getClassLoader().getResourceAsStream( xinfo );
-        if( null == inputStream )
-        {
-            return null;
-        }
-        return createComponentInfo( type, inputStream );
-    }
-
-    /**
-     * Create a {@link ComponentInfo} object for specified
-     * classname, loaded from specified {@link InputStream}.
-     *
-     * @param type The Component type
-     * @param inputStream the InputStream to load ComponentInfo from
-     * @return the created ComponentInfo
-     * @throws Exception if an error occurs
-     */
-    private ComponentInfo createComponentInfo( final Class type,
-                                              final InputStream inputStream )
-        throws Exception
-    {
-        final InputSource input = new InputSource( inputStream );
-        final Configuration configuration =
-            ConfigurationBuilder.build( input, null, getLogger() );
-        return build( type, configuration );
-    }
-
-    /**
-     * Create a {@link ComponentInfo} object for specified classname from
-     * specified configuration data.
-     *
-     * @param type The Component type
-     * @param info the ComponentInfo configuration
-     * @return the created ComponentInfo
-     * @throws Exception if an error occurs
-     */
-    private ComponentInfo build( final Class type,
-                                 final Configuration info )
-        throws Exception
-    {
-        final String classname = type.getName();
-        if( getLogger().isDebugEnabled() )
+        final Attribute attribute =
+            Attributes.getAttribute( type, "dna.component" );
+        if( null == attribute )
         {
             final String message =
-                REZ.format( "builder.creating-info.notice",
-                            classname );
-            getLogger().debug( message );
+                "Type " + type.getName() + " does not specify the" +
+                "required MetaClass attributes to be a Component";
+            throw new Exception( message );
         }
+        final ServiceDescriptor[] services = buildServices( type );
 
-        final String topLevelName = info.getName();
-        if( !topLevelName.equals( "blockinfo" ) )
-        {
-            final String message =
-                REZ.format( "legacy.bad-toplevel-element.error",
-                            classname,
-                            topLevelName );
-            throw new ConfigurationException( message, info.getPath(), info.getLocation() );
-        }
-
-        Configuration configuration = null;
-
-        final ServiceDescriptor[] services = buildServices( info );
-
-        configuration = info.getChild( "dependencies" );
         final DependencyDescriptor[] dependencies =
-            buildDependencies( classname, configuration );
+            buildDependencies( type );
 
-        if( getLogger().isDebugEnabled() )
-        {
-            final String message =
-                REZ.format( "legacy.created-info.notice",
-                            classname,
-                            new Integer( services.length ),
-                            new Integer( dependencies.length ) );
-            getLogger().debug( message );
-        }
-
-        configuration = info.getChild( "block" );
-        final SchemaDescriptor schema = buildConfigurationSchema( classname, configuration );
+        final SchemaDescriptor schema = buildConfigurationSchema( type );
 
         return new ComponentInfo( type,
                                   services,
@@ -141,21 +63,29 @@ public final class BlockInfoReader
     /**
      * A utility method to build a descriptor for SchemaDescriptor,
      *
+     * @param type the component type
      * @return the a descriptor for the SchemaDescriptor,
      */
-    private SchemaDescriptor buildConfigurationSchema( final String classname,
-                                                       final Configuration configuration )
+    private SchemaDescriptor buildConfigurationSchema( final Class type )
     {
-        final String schemaType =
-            configuration.getChild( "schema-type" ).getValue( "" );
-        if( "".equals( schemaType ) )
+        final Class[] types =
+            new Class[]{org.apache.avalon.framework.configuration.Configuration.class};
+        try
+        {
+            final Method method = type.getMethod( "configure", types );
+            final Attribute attribute =
+                Attributes.getAttribute( method, "dna.configuration" );
+            if( null == attribute )
+            {
+                return null;
+            }
+            final String location = attribute.getParameter( "location" );
+            final String schemaType = attribute.getParameter( "type" );
+            return new SchemaDescriptor( location, schemaType );
+        }
+        catch( NoSuchMethodException e )
         {
             return null;
-        }
-        else
-        {
-            final String location = LegacyUtil.getSchemaLocationFor( classname );
-            return new SchemaDescriptor( location, schemaType );
         }
     }
 
@@ -163,110 +93,81 @@ public final class BlockInfoReader
      * A utility method to build an array of {@link DependencyDescriptor}
      * objects from specified configuration and classname.
      *
-     * @param classname The classname of Component (used for logging purposes)
-     * @param configuration the dependencies configuration
+     * @param type the component type
      * @return the created DependencyDescriptor
-     * @throws ConfigurationException if an error occurs
      */
-    private DependencyDescriptor[] buildDependencies( final String classname,
-                                                      final Configuration configuration )
-        throws ConfigurationException
+    private DependencyDescriptor[] buildDependencies( final Class type )
     {
-        final Configuration[] elements = configuration.getChildren( "dependency" );
-        final ArrayList dependencies = new ArrayList();
-
-        for( int i = 0; i < elements.length; i++ )
+        final Method method = getDependencyMethod( type );
+        if( null == method )
         {
-            final DependencyDescriptor dependency =
-                buildDependency( classname, elements[ i ] );
-            dependencies.add( dependency );
+            return DependencyDescriptor.EMPTY_SET;
+        }
+        final List deps = new ArrayList();
+
+        final Attribute[] attributes =
+            Attributes.getAttributes( method, "dna.dependency" );
+        for( int i = 0; i < attributes.length; i++ )
+        {
+            final Attribute attribute = attributes[ i ];
+            final String key = attribute.getParameter( "key" );
+            final String depType = attribute.getParameter( "type" );
+            final boolean optional =
+                attribute.getParameter( "optional" ).equals( "true" );
+            deps.add( new DependencyDescriptor( key, depType, optional ) );
         }
 
-        return (DependencyDescriptor[])dependencies.toArray( DependencyDescriptor.EMPTY_SET );
+        return (DependencyDescriptor[])deps.toArray( DependencyDescriptor.EMPTY_SET );
     }
 
     /**
-     * A utility method to build a {@link DependencyDescriptor}
-     * object from specified configuraiton.
+     * Return the method that dependency information attached to.
      *
-     * @param classname The classname of Component (used for logging purposes)
-     * @param dependency the dependency configuration
-     * @return the created DependencyDescriptor
-     * @throws ConfigurationException if an error occurs
+     * @param type the component type
+     * @return the method that dependency information attached to.
      */
-    private DependencyDescriptor buildDependency( final String classname,
-                                                  final Configuration dependency )
-        throws ConfigurationException
+    private Method getDependencyMethod( final Class type )
     {
-        final String implementationKey =
-            dependency.getChild( "service" ).getAttribute( "name" );
-        String key = dependency.getChild( "role" ).getValue( null );
-
-        //default to name of service if key unspecified
-        if( null == key )
+        try
         {
-            key = implementationKey;
+            final Class[] types1 =
+                new Class[]{org.apache.avalon.framework.component.ComponentManager.class};
+            return type.getMethod( "compose", types1 );
         }
-        else
+        catch( final NoSuchMethodException nsme )
         {
-            //If key is specified and it is the same as
-            //service name then warn that it is redundent.
-            if( key.equals( implementationKey ) )
-            {
-                final String message =
-                    REZ.format( "builder.redundent-key.notice",
-                                classname,
-                                key );
-                getLogger().warn( message );
-            }
         }
-
-        return new DependencyDescriptor( key,
-                                         implementationKey,
-                                         false );
+        try
+        {
+            final Class[] types2 =
+                new Class[]{org.apache.avalon.framework.service.ServiceManager.class};
+            return type.getMethod( "service", types2 );
+        }
+        catch( NoSuchMethodException e )
+        {
+        }
+        return null;
     }
 
     /**
      * A utility method to build an array of {@link ServiceDescriptor}
      * objects from specified configuraiton.
      *
-     * @param info the services configuration
+     * @param type the type
      * @return the created ServiceDescriptor
-     * @throws ConfigurationException if an error occurs
      */
-    private ServiceDescriptor[] buildServices( final Configuration info )
-        throws ConfigurationException
+    private ServiceDescriptor[] buildServices( final Class type )
     {
-        final ArrayList services = new ArrayList();
+        final List services = new ArrayList();
 
-        Configuration[] elements = info.getChild( "services" ).getChildren( "service" );
-        for( int i = 0; i < elements.length; i++ )
+        final Attribute[] attributes = Attributes.getAttributes( type, "dna.service" );
+        for( int i = 0; i < attributes.length; i++ )
         {
-            final ServiceDescriptor service = buildService( elements[ i ] );
-            services.add( service );
-        }
-        elements = info.getChild( "management-access-points" ).getChildren( "service" );
-        for( int i = 0; i < elements.length; i++ )
-        {
-            final ServiceDescriptor service = buildService( elements[ i ] );
-            services.add( service );
+            final Attribute attribute = attributes[ i ];
+            final String serviceType = attribute.getParameter( "type" );
+            services.add( new ServiceDescriptor( serviceType ) );
         }
 
         return (ServiceDescriptor[])services.toArray( ServiceDescriptor.EMPTY_SET );
-    }
-
-    /**
-     * A utility method to build a {@link ServiceDescriptor}
-     * object from specified configuraiton data.
-     *
-     * @param service the service Configuration
-     * @return the created ServiceDescriptor
-     * @throws ConfigurationException if an error occurs
-     */
-    private ServiceDescriptor buildService( final Configuration service )
-        throws ConfigurationException
-    {
-        final String type = service.getAttribute( "name" );
-        return new ServiceDescriptor( type );
     }
 }
