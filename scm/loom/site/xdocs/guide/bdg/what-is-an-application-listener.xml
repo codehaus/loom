@@ -10,7 +10,7 @@
     <section name="Introduction">
       <p>
         An ApplicationListener is a component that is created before any other
-        components in the application. It receives notifications at the start of BLock creation, 
+        components in the application. It receives notifications at the start of Block creation, 
         after each Block is created, and when all blocks are created and the application is
         running.
       </p>
