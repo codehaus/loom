@@ -101,10 +101,8 @@ import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.Logger;
 import org.jcontainer.dna.impl.ConfigurationUtil;
 import org.jcontainer.dna.impl.ContainerUtil;
-import org.jcontainer.dna.impl.DefaultParameters;
 import org.jcontainer.dna.impl.DefaultResourceLocator;
 import org.jcontainer.dna.impl.LogkitLogger;
-import org.jcontainer.loom.components.ParameterConstants;
 import org.jcontainer.loom.components.util.ConfigUtil;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.Embeddor;
@@ -126,8 +124,17 @@ public final class CLIMain
     private static final Resources REZ =
         ResourceManager.getPackageResources( CLIMain.class );
 
+    static final String APPS_DIR = File.class.getName() + "/apps";
+    static final String HOME_DIR = File.class.getName() + "/home";
+    static final String PERSISTENT = Boolean.class.getName() + "/persistent";
+    static final String DISABLE_HOOK = "disable-hook";
+    static final String CONFIGFILE = "loom.configfile";
+
     private static final String DEFAULT_LOG_FILE =
         File.separator + "logs" + File.separator + "loom.log";
+
+    private static final String DEFAULT_APPS_DIR =
+        File.separator + "apps";
 
     private static final String DEFAULT_CONF_FILE =
         File.separator + "conf" + File.separator + "kernel.xml";
@@ -146,6 +153,8 @@ public final class CLIMain
 
     private boolean m_shuttingDown;
     private Logger m_logger;
+
+    private File m_home;
 
     /**
      * Main entry point.
@@ -171,18 +180,44 @@ public final class CLIMain
             System.out.println();
 
             final Properties properties = setup.getParameters();
-            final String loomHome = System.getProperty( ParameterConstants.HOME_DIR, ".." );
-            properties.setProperty( ParameterConstants.HOME_DIR, loomHome );
-            if( !properties.containsKey( "loom.configfile" ) )
+            final String loomHome = System.getProperty( "loom.home", ".." );
+            m_home = new File( loomHome ).getCanonicalFile();
+            data.put( HOME_DIR, m_home );
+            if( !properties.containsKey( CONFIGFILE ) )
             {
-                final String filename = loomHome + DEFAULT_CONF_FILE;
+                final String filename = m_home + DEFAULT_CONF_FILE;
                 final File configFile =
                     new File( filename ).getCanonicalFile();
 
                 // setting default
-                properties.setProperty( "loom.configfile",
+                properties.setProperty( CONFIGFILE,
                                         configFile.toString() );
             }
+            final String appsPath;
+            if( !properties.containsKey( APPS_DIR ) )
+            {
+                appsPath = m_home + DEFAULT_APPS_DIR;
+            }
+            else
+            {
+                appsPath = properties.getProperty( APPS_DIR );
+            }
+            final File appsDirFile =
+                new File( appsPath ).getCanonicalFile();
+            data.put( APPS_DIR, appsDirFile );
+
+            final Boolean persistent;
+            if( !properties.containsKey( PERSISTENT ) )
+            {
+                persistent = Boolean.FALSE;
+            }
+            else
+            {
+                final String property =
+                    properties.getProperty( PERSISTENT );
+                persistent = Boolean.valueOf( property );
+            }
+            data.put( PERSISTENT, persistent );
 
             execute( properties, data, blocking );
         }
@@ -207,7 +242,7 @@ public final class CLIMain
         }
 
         final boolean disableHook =
-            properties.getProperty( "disable-hook", "false" ).equals( "true" );
+            properties.getProperty( DISABLE_HOOK, "false" ).equals( "true" );
         if( false == disableHook )
         {
             m_hook = new ShutdownHook( this );
@@ -262,16 +297,18 @@ public final class CLIMain
     {
         try
         {
-            final String configFilename = properties.getProperty( "loom.configfile" );
+            final String configFilename = properties.getProperty( CONFIGFILE );
             final Configuration original = ConfigurationUtil.buildFromXML( new InputSource( configFilename ) );
-            final Configuration root = ConfigUtil.expandValues( original, properties );
+            final File home = (File)data.get( HOME_DIR );
+            final Properties params = new Properties();
+            params.setProperty( "loom.home", home.getAbsolutePath() );
+            final Configuration root = ConfigUtil.expandValues( original, params );
             final Configuration configuration = root.getChild( "embeddor" );
             final String embeddorClassname = configuration.getAttribute( "class" );
             m_embeddor = (Embeddor)Class.forName( embeddorClassname ).newInstance();
 
             m_logger = createLogger( properties );
             ContainerUtil.enableLogging( m_embeddor, m_logger );
-            ContainerUtil.parameterize( m_embeddor, createParameters( properties ) );
             ContainerUtil.compose( m_embeddor, createLocator( data ) );
             ContainerUtil.configure( m_embeddor, configuration );
             ContainerUtil.initialize( m_embeddor );
@@ -283,19 +320,6 @@ public final class CLIMain
         }
 
         return true;
-    }
-
-    private DefaultParameters createParameters( final Properties properties )
-    {
-        final DefaultParameters parameters = new DefaultParameters();
-        final Iterator iterator = properties.keySet().iterator();
-        while( iterator.hasNext() )
-        {
-            final String name = (String)iterator.next();
-            final String value = properties.getProperty( name );
-            parameters.setParameter( name, value );
-        }
-        return parameters;
     }
 
     private DefaultResourceLocator createLocator( final Map data )
@@ -322,9 +346,8 @@ public final class CLIMain
     private Logger createLogger( final Properties properties )
         throws Exception
     {
-        final String loomHome = properties.getProperty( "loom.home" );
         final String logDestination =
-            properties.getProperty( "log-destination", loomHome + DEFAULT_LOG_FILE );
+            properties.getProperty( "log-destination", m_home + DEFAULT_LOG_FILE );
         final String logPriority =
             properties.getProperty( "log-priority", "INFO" );
         final ExtendedPatternFormatter formatter = new ExtendedPatternFormatter( DEFAULT_FORMAT );

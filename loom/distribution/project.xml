@@ -203,7 +203,7 @@
         <dependency>
             <groupId>spice</groupId>
             <artifactId>spice-salt</artifactId>
-            <version>20031018.073218</version>
+            <version>20031029.210119</version>
             <properties>
                 <category>tools</category>
             </properties>

@@ -89,12 +89,11 @@ package org.jcontainer.loom.components.extensions;
 import java.io.File;
 import java.util.ArrayList;
 import org.jcontainer.dna.Active;
+import org.jcontainer.dna.Composable;
 import org.jcontainer.dna.LogEnabled;
 import org.jcontainer.dna.Logger;
-import org.jcontainer.dna.ParameterException;
-import org.jcontainer.dna.Parameterizable;
-import org.jcontainer.dna.Parameters;
-import org.jcontainer.loom.components.ParameterConstants;
+import org.jcontainer.dna.MissingResourceException;
+import org.jcontainer.dna.ResourceLocator;
 import org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager;
 import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
 import org.realityforge.salt.i18n.ResourceManager;
@@ -102,37 +101,39 @@ import org.realityforge.salt.i18n.Resources;
 
 /**
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.13 $ $Date: 2003-10-26 08:11:32 $
+ * @version $Revision: 1.14 $ $Date: 2003-10-29 21:55:26 $
  * @dna.component
  * @mx.component
  */
 public class DefaultExtensionManager
     extends org.jcontainer.loom.components.extensions.pkgmgr.impl.DefaultExtensionManager
-    implements LogEnabled, Parameterizable, Active, ExtensionManager
+    implements LogEnabled, Composable, Active, ExtensionManager
 {
     private final static Resources REZ =
         ResourceManager.getPackageResources( DefaultExtensionManager.class );
 
     private Logger m_logger;
-    private String m_rawPath;
+    private File m_rawPath;
 
     public void enableLogging( final Logger logger )
     {
         m_logger = logger;
     }
 
-    public void parameterize( final Parameters parameters )
-        throws ParameterException
+    /**
+     * @dna.dependency type="File" qualifier="home"
+     */
+    public void compose( ResourceLocator locator )
+        throws MissingResourceException
     {
-        final String loomHome = parameters.getParameter( ParameterConstants.HOME_DIR );
-        final String defaultExtPath = loomHome + File.separator + "ext";
-        m_rawPath = parameters.getParameter( ParameterConstants.EXT_PATH, defaultExtPath );
+        final File home = (File)locator.lookup( File.class.getName() + "/home" );
+        m_rawPath = new File( home, "ext" );
     }
 
     public void initialize()
         throws Exception
     {
-        setPath( m_rawPath );
+        setPath( new File[]{m_rawPath} );
         rescanPath();
     }
 

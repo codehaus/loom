@@ -100,10 +100,9 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import org.jcontainer.dna.AbstractLogEnabled;
 import org.jcontainer.dna.Active;
-import org.jcontainer.dna.ParameterException;
-import org.jcontainer.dna.Parameterizable;
-import org.jcontainer.dna.Parameters;
-import org.jcontainer.loom.components.ParameterConstants;
+import org.jcontainer.dna.Composable;
+import org.jcontainer.dna.MissingResourceException;
+import org.jcontainer.dna.ResourceLocator;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.Installer;
 import org.jcontainer.loom.interfaces.LoomException;
@@ -117,11 +116,11 @@ import org.realityforge.salt.io.IOUtil;
  * and installing it as appropriate.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.10 $ $Date: 2003-10-16 14:45:45 $
+ * @version $Revision: 1.11 $ $Date: 2003-10-29 21:55:26 $
  */
 public class DefaultInstaller
     extends AbstractLogEnabled
-    implements Installer, Parameterizable, Active
+    implements Installer, Composable, Active
 {
     private static final Resources REZ =
         ResourceManager.getPackageResources( DefaultInstaller.class );
@@ -152,41 +151,15 @@ public class DefaultInstaller
     private File m_baseDirectory;
 
     /**
-     * Retrieve parameter that specifies work directory.
-     *
-     * @param parameters the parameters to read
-     * @throws ParameterException if invlaid work directory
+     * @dna.dependency type="File" qualifier="home"
+     * @dna.dependency type="File" qualifier="apps"
      */
-    public void parameterize( final Parameters parameters )
-        throws ParameterException
+    public void compose( ResourceLocator locator )
+        throws MissingResourceException
     {
-        final String loomHome = parameters.getParameter( ParameterConstants.HOME_DIR );
-        final String defaultWorkDir = loomHome + File.separator + "work";
-        final String defaultAppsDir = loomHome + File.separator + "apps";
-        final String rawWorkDir =
-            parameters.getParameter( ParameterConstants.WORK_DIR, defaultWorkDir );
-        final String rawAppsDir =
-            parameters.getParameter( ParameterConstants.APPS_DIR, defaultAppsDir );
-
-        final File workDir = new File( rawWorkDir );
-        try
-        {
-            m_baseWorkDirectory = workDir.getCanonicalFile();
-        }
-        catch( final IOException ioe )
-        {
-            m_baseWorkDirectory = workDir.getAbsoluteFile();
-        }
-
-        final File appsDir = new File( rawAppsDir );
-        try
-        {
-            m_baseDirectory = appsDir.getCanonicalFile();
-        }
-        catch( final IOException ioe )
-        {
-            m_baseDirectory = appsDir.getAbsoluteFile();
-        }
+        final File home = (File)locator.lookup( File.class.getName() + "/home" );
+        m_baseWorkDirectory = new File( home, "work" );
+        m_baseDirectory = (File)locator.lookup( File.class.getName() + "/apps" );
     }
 
     public void initialize()

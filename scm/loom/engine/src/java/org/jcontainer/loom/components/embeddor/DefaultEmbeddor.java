@@ -98,14 +98,9 @@ import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.ConfigurationException;
 import org.jcontainer.dna.Logger;
 import org.jcontainer.dna.MissingResourceException;
-import org.jcontainer.dna.ParameterException;
-import org.jcontainer.dna.Parameterizable;
-import org.jcontainer.dna.Parameters;
 import org.jcontainer.dna.ResourceLocator;
 import org.jcontainer.dna.impl.ContainerUtil;
-import org.jcontainer.dna.impl.DefaultParameters;
 import org.jcontainer.dna.impl.DefaultResourceLocator;
-import org.jcontainer.loom.components.ParameterConstants;
 import org.jcontainer.loom.components.util.ExtensionFileFilter;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.Deployer;
@@ -128,16 +123,14 @@ import org.realityforge.salt.i18n.Resources;
  */
 public class DefaultEmbeddor
     extends AbstractLogEnabled
-    implements Embeddor, Parameterizable, Composable, Configurable, Active
+    implements Embeddor, Composable, Configurable, Active
 {
     private static final Resources REZ =
         ResourceManager.getPackageResources( DefaultEmbeddor.class );
 
-    private static final String DEFAULT_APPS_PATH = "/apps";
-
     private final EmbeddorObservable m_observable = new EmbeddorObservable();
 
-    private String m_loomHome;
+    private File m_loomHome;
 
     private EmbeddorEntry[] m_entries;
 
@@ -165,16 +158,17 @@ public class DefaultEmbeddor
     /**
      * The default directory in which applications are deployed from.
      */
-    private String m_appDir;
+    private File m_appDir;
     private ClassLoader m_commonClassLoader;
     private ClassLoader m_containerClassLoader;
-    private String m_application;
-    private Parameters m_parameters;
 
     /**
      * @dna.dependency type="Observer" optional="true"
-     * @dna.dependency type="ClassLoader/common"
-     * @dna.dependency type="ClassLoader/container"
+     * @dna.dependency type="ClassLoader"  qualifier="common"
+     * @dna.dependency type="ClassLoader" qualifier="container"
+     * @dna.dependency type="File" qualifier="home"
+     * @dna.dependency type="File" qualifier="apps"
+     * @dna.dependency type="Boolean" qualifier="persistent"
      */
     public void compose( final ResourceLocator locator )
         throws MissingResourceException
@@ -193,53 +187,11 @@ public class DefaultEmbeddor
             locator.lookup( ClassLoader.class.getName() + "/common" );
         m_containerClassLoader = (ClassLoader)
             locator.lookup( ClassLoader.class.getName() + "/container" );
-    }
-
-    /**
-     * Set parameters for this component.
-     * This must be called after contextualize() and before initialize()
-     *
-     * Make sure to provide all the neccessary information through
-     * these parameters. All information it needs consists of strings.
-     * There are two types of strings included in parameters. The first
-     * type include parameters used to setup proeprties of the embeddor.
-     * The second type include the implementation names of the components
-     * that the Embeddor manages. For instance if you want to replace the
-     * {@link org.jcontainer.loom.interfaces.ConfigurationInterceptor}
-     * with your own repository you would pass in a parameter such as;</p>
-     * <p>org.jcontainer.loom.interfaces.ConfigurationInterceptor =
-     * com.biz.MyCustomConfigurationRepository</p>
-     *
-     * <p>Of the other type of parameters, the following are supported by
-     * the DefaultEmbeddor implementation of Embeddor. Note that some of
-     * the embedded components may support other parameters.</p>
-     * <ul>
-     * <li><b>loom.home</b>, the home directory of loom. Defaults
-     * to "..".</li>
-     * <li><b>log-destination</b>, the file to save log
-     * messages in. If omitted, ${loom.home}/logs/loom.log is used.</li>
-     * <li><b>log-priority</b>, the priority at which log messages are filteres.
-     * If omitted, then INFO will be default level used.</li>
-     * <li><b>applications-directory</b>, the directory in which
-     * the default applications to be loaded by the kernel are stored
-     * (in .sar format). Defaults to ${loom.home}/apps</li>
-     * </ul>
-     *
-     * @param parameters the Parameters for embeddor
-     * @throws ParameterException if an error occurs
-     */
-    public synchronized void parameterize( final Parameters parameters )
-        throws ParameterException
-    {
-        m_parameters = parameters;
-        m_loomHome = parameters.getParameter( ParameterConstants.HOME_DIR, ".." );
-        m_persistent =
-            parameters.getParameterAsBoolean( ParameterConstants.PERSISTENT, false );
-        m_appDir = parameters.getParameter( ParameterConstants.APPS_DIR,
-                                            m_loomHome + DEFAULT_APPS_PATH );
-        //Application specified on CLI
-        m_application =
-            parameters.getParameter( ParameterConstants.APPLICATION_LOCATION, null );
+        m_loomHome = (File)locator.lookup( File.class.getName() + "/home" );
+        m_appDir = (File)locator.lookup( File.class.getName() + "/apps" );
+        final Boolean persistent =
+            (Boolean)locator.lookup( Boolean.class.getName() + "/persistent" );
+        m_persistent = persistent.booleanValue();
     }
 
     public void configure( final Configuration configuration )
@@ -437,7 +389,7 @@ public class DefaultEmbeddor
      */
     public String getHomeDirectory()
     {
-        return m_loomHome;
+        return m_loomHome.getPath();
     }
 
     /**
@@ -529,17 +481,10 @@ public class DefaultEmbeddor
     protected void deployDefaultApplications()
         throws Exception
     {
-        //Name of optional application specified on CLI
-        if( null != m_application )
-        {
-            final File file = new File( m_application );
-            deployFile( file );
-        }
         if( null != m_appDir )
         {
-            final File directory = new File( m_appDir );
             final ExtensionFileFilter filter = new ExtensionFileFilter( ".sar" );
-            final File[] files = directory.listFiles( filter );
+            final File[] files = m_appDir.listFiles( filter );
             if( null != files )
             {
                 deployFiles( files );
@@ -605,28 +550,8 @@ public class DefaultEmbeddor
         final Logger childLogger = getLogger().getChildLogger( loggerName );
         ContainerUtil.enableLogging( object, childLogger );
         ContainerUtil.compose( object, getResourceLocator() );
-        ContainerUtil.parameterize( object, createChildParameters() );
         ContainerUtil.configure( object, config );
         ContainerUtil.initialize( object );
-    }
-
-    private Parameters createChildParameters()
-    {
-        final DefaultParameters parameters = new DefaultParameters();
-        copyValue( ParameterConstants.EXT_PATH, parameters );
-        copyValue( ParameterConstants.HOME_DIR, parameters );
-        copyValue( ParameterConstants.WORK_DIR, parameters );
-        parameters.setParameter( ParameterConstants.APPS_DIR, m_appDir );
-        return parameters;
-    }
-
-    private void copyValue( final String name, final DefaultParameters parameters )
-    {
-        final String value = m_parameters.getParameter( name, null );
-        if( null != value )
-        {
-            parameters.setParameter( name, value );
-        }
     }
 
     private void shutdownComponents()
@@ -751,6 +676,8 @@ public class DefaultEmbeddor
             }
         }
 
+        locator.put( File.class.getName() + "/home", m_loomHome );
+        locator.put( File.class.getName() + "/apps", m_appDir );
         locator.put( ClassLoader.class.getName() + "/common", m_commonClassLoader );
         locator.put( ClassLoader.class.getName() + "/container", m_containerClassLoader );
 

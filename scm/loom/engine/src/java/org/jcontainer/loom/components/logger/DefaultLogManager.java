@@ -91,10 +91,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.container.ContainerUtil;
 import org.apache.avalon.framework.context.Context;
@@ -111,11 +109,10 @@ import org.jcomponent.loggerstore.factories.LogKitLoggerStoreFactory;
 import org.jcomponent.loggerstore.factories.PropertyLog4JLoggerStoreFactory;
 import org.jcomponent.loggerstore.factories.SimpleLogKitLoggerStoreFactory;
 import org.jcontainer.dna.AbstractLogEnabled;
-import org.jcontainer.dna.ParameterException;
-import org.jcontainer.dna.Parameterizable;
-import org.jcontainer.dna.Parameters;
+import org.jcontainer.dna.Composable;
+import org.jcontainer.dna.MissingResourceException;
+import org.jcontainer.dna.ResourceLocator;
 import org.jcontainer.dna.impl.ConfigurationUtil;
-import org.jcontainer.loom.components.ParameterConstants;
 import org.jcontainer.loom.components.util.ConfigurationConverter;
 import org.jcontainer.loom.components.util.ResourceUtil;
 import org.jcontainer.loom.interfaces.LogManager;
@@ -136,7 +133,7 @@ import org.xml.sax.EntityResolver;
  */
 public class DefaultLogManager
     extends AbstractLogEnabled
-    implements LogManager, Parameterizable
+    implements LogManager, Composable
 {
     private static final Resources REZ =
         ResourceManager.getPackageResources( DefaultLogManager.class );
@@ -150,11 +147,13 @@ public class DefaultLogManager
      */
     private File m_loomHome;
 
-    public void parameterize( final Parameters parameters )
-        throws ParameterException
+    /**
+     * @dna.dependency type="File" qualifier="home"
+     */
+    public void compose( ResourceLocator locator )
+        throws MissingResourceException
     {
-        final String homePath = parameters.getParameter( ParameterConstants.HOME_DIR );
-        m_loomHome = new File( homePath ).getAbsoluteFile();
+        m_loomHome = (File)locator.lookup( File.class.getName() + "/home" );
     }
 
     private Map createLoggerManagerContext( final Map appContext )
