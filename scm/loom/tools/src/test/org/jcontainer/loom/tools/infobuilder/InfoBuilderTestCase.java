@@ -29,24 +29,14 @@ import org.jcontainer.loom.tools.info.EntryDescriptor;
 import org.jcontainer.loom.tools.info.LoggerDescriptor;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
-import org.apache.avalon.phoenix.framework.tools.infobuilder.InfoBuilder;
-import org.apache.avalon.phoenix.framework.tools.infobuilder.InfoReader;
-import org.apache.avalon.phoenix.framework.tools.infobuilder.InfoWriter;
-import org.apache.avalon.phoenix.framework.tools.infobuilder.LegacyBlockInfoReader;
-import org.apache.avalon.phoenix.framework.tools.infobuilder.LegacyBlockInfoWriter;
-import org.apache.avalon.phoenix.framework.tools.infobuilder.SerializedInfoReader;
-import org.apache.avalon.phoenix.framework.tools.infobuilder.SerializedInfoWriter;
-import org.apache.avalon.phoenix.framework.tools.infobuilder.XMLInfoReader;
-import org.apache.avalon.phoenix.framework.tools.infobuilder.XMLInfoWriter;
 import org.jcontainer.loom.tools.qdox.DefaultInfoBuilder;
 import org.jcontainer.loom.tools.qdox.LegacyInfoBuilder;
-import org.jcontainer.loom.tools.infobuilder.InfoAssert;
 
 /**
  * Abstract class which TestCases can extend.
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-26 09:01:27 $
+ * @version $Revision: 1.2 $ $Date: 2003-06-26 09:45:38 $
  */
 public class InfoBuilderTestCase
     extends TestCase
