@@ -8,11 +8,9 @@
 package org.realityforge.xmlpolicy.builder;
 
 import junit.framework.TestCase;
-import org.realityforge.xmlpolicy.metadata.PolicyMetaData;
-import org.realityforge.xmlpolicy.metadata.KeyStoreMetaData;
 import org.realityforge.xmlpolicy.metadata.GrantMetaData;
-import org.realityforge.xmlpolicy.runtime.PolicyEntry;
-import java.security.Permissions;
+import org.realityforge.xmlpolicy.metadata.KeyStoreMetaData;
+import org.realityforge.xmlpolicy.metadata.PolicyMetaData;
 
 /**
  * TestCase for Builder package.
