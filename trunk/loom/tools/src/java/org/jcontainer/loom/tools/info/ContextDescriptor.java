@@ -24,7 +24,7 @@ import org.realityforge.metaclass.model.Attribute;
  * about Context requirements.</p>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-10-05 01:06:31 $
+ * @version $Revision: 1.6 $ $Date: 2003-10-06 13:32:44 $
  */
 public class ContextDescriptor
     extends FeatureDescriptor
@@ -39,7 +39,7 @@ public class ContextDescriptor
      * A constant for an empty context with standard type.
      */
     public static final ContextDescriptor EMPTY_CONTEXT =
-        new ContextDescriptor( DEFAULT_TYPE, EntryDescriptor.EMPTY_SET, Attribute.EMPTY_SET );
+        new ContextDescriptor( DEFAULT_TYPE, DependencyDescriptor.EMPTY_SET, Attribute.EMPTY_SET );
 
     /**
      * The type of the context. (ie a name of the context
@@ -51,7 +51,7 @@ public class ContextDescriptor
      * The set of entrys to populate the context with
      * for this component.
      */
-    private final EntryDescriptor[] m_entrys;
+    private final DependencyDescriptor[] m_entrys;
 
     /**
      * Create a descriptor.
@@ -60,7 +60,7 @@ public class ContextDescriptor
      * @throws java.lang.IllegalArgumentException if the classname format is invalid
      */
     public ContextDescriptor( final String type,
-                              final EntryDescriptor[] entrys,
+                              final DependencyDescriptor[] entrys,
                               final Attribute[] attribute )
     {
         super( attribute );
@@ -93,7 +93,7 @@ public class ContextDescriptor
      *
      * @return the entrys contained in the context.
      */
-    public EntryDescriptor[] getEntrys()
+    public DependencyDescriptor[] getEntrys()
     {
         return m_entrys;
     }
@@ -103,11 +103,11 @@ public class ContextDescriptor
      *
      * @return the entry with specified key.
      */
-    public EntryDescriptor getEntry( final String key )
+    public DependencyDescriptor getEntry( final String key )
     {
         for( int i = 0; i < m_entrys.length; i++ )
         {
-            final EntryDescriptor entry = m_entrys[ i ];
+            final DependencyDescriptor entry = m_entrys[ i ];
             if( entry.getKey().equals( key ) )
             {
                 return entry;

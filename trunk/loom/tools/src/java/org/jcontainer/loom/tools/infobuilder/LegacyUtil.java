@@ -11,7 +11,6 @@ import org.apache.avalon.framework.Version;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ContextDescriptor;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
-import org.jcontainer.loom.tools.info.EntryDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
 import org.realityforge.metaclass.model.Attribute;
 
@@ -20,7 +19,7 @@ import org.realityforge.metaclass.model.Attribute;
  * to enablesupport of Legacy BlockInfo files.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.9 $ $Date: 2003-10-06 13:29:04 $
+ * @version $Revision: 1.10 $ $Date: 2003-10-06 13:32:45 $
  */
 public class LegacyUtil
 {
@@ -28,7 +27,7 @@ public class LegacyUtil
     public static final Attribute MX_ATTRIBUTE = new Attribute( MX_ATTRIBUTE_NAME );
     public static final ContextDescriptor CONTEXT_DESCRIPTOR =
         new ContextDescriptor( "org.apache.avalon.phoenix.BlockContext",
-                               EntryDescriptor.EMPTY_SET,
+                               DependencyDescriptor.EMPTY_SET,
                                Attribute.EMPTY_SET );
     public static final Version VERSION = new Version( 1, 0, 0 );
 

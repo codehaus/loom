@@ -14,7 +14,6 @@ import org.jcontainer.loom.tools.LoomToolConstants;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ContextDescriptor;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
-import org.jcontainer.loom.tools.info.EntryDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
 import org.jcontainer.loom.tools.metadata.ComponentMetaData;
 import org.jcontainer.loom.tools.metadata.DependencyMetaData;
@@ -27,7 +26,7 @@ import org.realityforge.metaclass.model.Attribute;
  *  An basic test case for the LogManager.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.11 $ $Date: 2003-10-06 13:29:05 $
+ * @version $Revision: 1.12 $ $Date: 2003-10-06 13:32:45 $
  */
 public class VerifierTestCase
     extends TestCase
@@ -89,14 +88,14 @@ public class VerifierTestCase
             new ComponentInfo( C1_IMPLEMENTATION_KEY,
                                Attribute.EMPTY_SET,
                                ServiceDescriptor.EMPTY_SET,
-                               new ContextDescriptor( Context.class.getName(), EntryDescriptor.EMPTY_SET, Attribute.EMPTY_SET ),
+                               new ContextDescriptor( Context.class.getName(), DependencyDescriptor.EMPTY_SET, Attribute.EMPTY_SET ),
                                new DependencyDescriptor[]{new DependencyDescriptor( C2_SERVICE, C2_SERVICE, false, Attribute.EMPTY_SET )},
                                null );
         final ComponentInfo c2Info =
             new ComponentInfo( C2_IMPLEMENTATION_KEY,
                                Attribute.EMPTY_SET,
                                new ServiceDescriptor[]{new ServiceDescriptor( C2_SERVICE, Attribute.EMPTY_SET )},
-                               new ContextDescriptor( Context.class.getName(), EntryDescriptor.EMPTY_SET, Attribute.EMPTY_SET ),
+                               new ContextDescriptor( Context.class.getName(), DependencyDescriptor.EMPTY_SET, Attribute.EMPTY_SET ),
                                DependencyDescriptor.EMPTY_SET,
                                null );
         final ComponentProfile c1Profile =
@@ -187,7 +186,7 @@ public class VerifierTestCase
             new ComponentInfo( C3_IMPLEMENTATION_KEY,
                                Attribute.EMPTY_SET,
                                ServiceDescriptor.EMPTY_SET,
-                               new ContextDescriptor( Context.class.getName(), EntryDescriptor.EMPTY_SET, Attribute.EMPTY_SET ),
+                               new ContextDescriptor( Context.class.getName(), DependencyDescriptor.EMPTY_SET, Attribute.EMPTY_SET ),
                                new DependencyDescriptor[]{new DependencyDescriptor( C2_SERVICE + DependencyDescriptor.ARRAY_POSTFIX,
                                                                                     C2_SERVICE + DependencyDescriptor.ARRAY_POSTFIX,
                                                                                     false,
@@ -197,7 +196,7 @@ public class VerifierTestCase
             new ComponentInfo( C2_IMPLEMENTATION_KEY,
                                Attribute.EMPTY_SET,
                                new ServiceDescriptor[]{new ServiceDescriptor( C2_SERVICE, Attribute.EMPTY_SET )},
-                               new ContextDescriptor( Context.class.getName(), EntryDescriptor.EMPTY_SET, Attribute.EMPTY_SET ),
+                               new ContextDescriptor( Context.class.getName(), DependencyDescriptor.EMPTY_SET, Attribute.EMPTY_SET ),
                                DependencyDescriptor.EMPTY_SET,
                                null );
         final ComponentProfile c3Profile =
