@@ -5,9 +5,7 @@
     <id>phoenix-client</id>
     <currentVersion>1.0dev</currentVersion>
     <inceptionYear>1999-2003</inceptionYear>
-
     <package>org.apache.avalon.phoenix</package>
-
     <shortDescription>API Layer for Legacy Phoenix components.</shortDescription>
 
     <description>
@@ -21,7 +19,7 @@
             <version>4.0</version>
         </dependency>
     </dependencies>
-    
+
     <build>
         <sourceDirectory>src/java</sourceDirectory>
     </build>
