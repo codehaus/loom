@@ -35,8 +35,8 @@ import org.jcontainer.loom.tools.qdox.LegacyInfoBuilder;
 /**
  * Abstract class which TestCases can extend.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-06-27 04:09:07 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.4 $ $Date: 2003-06-29 01:24:48 $
  */
 public class InfoBuilderTestCase
     extends TestCase

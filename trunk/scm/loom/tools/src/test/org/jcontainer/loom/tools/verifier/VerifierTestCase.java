@@ -13,8 +13,8 @@ import org.apache.avalon.phoenix.test.AbstractContainerTestCase;
 /**
  *  An basic test case for the LogManager.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-06-29 00:46:24 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.4 $ $Date: 2003-06-29 01:26:15 $
  */
 public class VerifierTestCase
     extends AbstractContainerTestCase

@@ -13,8 +13,8 @@ package org.jcontainer.loom.tools.infobuilder.data.otherpkg;
 /**
  * Some random service
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-26 09:00:53 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.2 $ $Date: 2003-06-29 01:25:55 $
  */
 public interface ServiceMBean
 {

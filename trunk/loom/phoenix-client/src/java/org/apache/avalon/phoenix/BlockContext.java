@@ -15,7 +15,7 @@ import org.apache.avalon.framework.logger.Logger;
 /**
  * Context via which Blocks communicate with container.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  */
 public interface BlockContext
     extends Context

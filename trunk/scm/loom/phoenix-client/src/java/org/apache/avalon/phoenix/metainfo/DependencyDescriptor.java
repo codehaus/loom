@@ -10,7 +10,7 @@ package org.apache.avalon.phoenix.metainfo;
 /**
  * A descriptor that describes dependency information for Block.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  */
 public final class DependencyDescriptor
 {
