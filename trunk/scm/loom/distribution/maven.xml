@@ -59,19 +59,19 @@
 	            dest="${maven.repo.local}/wrapper/distributions/${distName}.tar.gz"
 	            usetimestamp="true"
 	            verbose="true"/>
-	        <ant:gunzip src="${maven.repo.local}/wrapper/distributions/${distName}.tar.gz" 
+	        <ant:gunzip src="${maven.repo.local}/wrapper/distributions/${distName}.tar.gz"
 	        		  dest="${wrapper.install.dir}"/>
 	        <ant:untar src="${wrapper.install.dir}/${distName}.tar" dest="${wrapper.install.dir}"/>
 	        <ant:copy todir="${wrapper.install.dir}">
 				<ant:fileset dir="${wrapper.install.dir}/${distName}/bin">
 	                <ant:include name="wrapper"/>
 	                <ant:include name="realpath"/>
-				</ant:fileset>        
+				</ant:fileset>
 				<ant:fileset dir="${wrapper.install.dir}/${distName}/lib">
 	                <ant:include name="*.so"/>
 	                <ant:include name="*.jar"/>
 	                <ant:exclude name="*test.jar"/>
-				</ant:fileset>        
+				</ant:fileset>
 	        </ant:copy>
 	        <ant:copy file="${wrapper.install.dir}/${distName}/src/bin/sh.script.in"
 	            tofile="${wrapper.install.dir}/${pom.artifactId}-wrapper.sh">
@@ -93,17 +93,17 @@
 	            dest="${maven.repo.local}/wrapper/distributions/${distName}.zip"
 	            usetimestamp="true"
 	            verbose="true"/>
-	        <ant:unzip src="${maven.repo.local}/wrapper/distributions/${distName}.zip" 
+	        <ant:unzip src="${maven.repo.local}/wrapper/distributions/${distName}.zip"
 	        		  dest="${wrapper.install.dir}"/>
 	        <ant:copy todir="${wrapper.install.dir}">
 				<ant:fileset dir="${wrapper.install.dir}/${distName}/bin">
 	                <ant:include name="*.exe"/>
-				</ant:fileset>        
+				</ant:fileset>
 				<ant:fileset dir="${wrapper.install.dir}/${distName}/lib">
 	                <ant:include name="*.dll"/>
 	                <ant:include name="*.jar"/>
 	                <ant:exclude name="*test.jar"/>
-				</ant:fileset>        
+				</ant:fileset>
 	        </ant:copy>
 	        <ant:copy file="${wrapper.install.dir}/${distName}/src/bin/App.bat.in"
 	            tofile="${wrapper.install.dir}/${pom.artifactId}.bat"/>
@@ -117,7 +117,7 @@
     <goal name="main">
     	<attainGoal name="build"/>
     </goal>
-    
+
     <goal name="build">
     	<attainGoal name="build:bin"/>
     	<attainGoal name="build:src"/>
@@ -135,21 +135,21 @@
         <ant:mkdir dir="${distDir}/conf"/>
         <ant:copy file="src/conf/kernel.xml" todir="${distDir}/conf"/>
         <ant:copy file="src/conf/wrapper.conf" todir="${distDir}/conf"/>
-        <ant:copy todir="${distDir}/conf">
+        <ant:copy todir="${distDir}/conf" overwrite="true" >
             <ant:fileset dir="deploy/conf">
                 <ant:include name="**/*.xml"/>
             </ant:fileset>
         </ant:copy>
 
         <ant:mkdir dir="${distDir}/apps"/>
-        <ant:copy todir="${distDir}/apps">
+        <ant:copy todir="${distDir}/apps" overwrite="true">
             <ant:fileset dir="deploy/apps">
                 <ant:include name="*.sar"/>
             </ant:fileset>
         </ant:copy>
 
         <ant:mkdir dir="${distDir}/ext"/>
-        <ant:copy todir="${distDir}/ext">
+        <ant:copy todir="${distDir}/ext" overwrite="true">
             <ant:fileset dir="deploy/ext">
                 <ant:include name="*.jar"/>
             </ant:fileset>
@@ -161,7 +161,7 @@
         </ant:copy>
 
         <ant:mkdir dir="${distDir}/lib"/>
-        <ant:copy todir="${distDir}/lib">
+        <ant:copy todir="${distDir}/lib" overwrite="true">
             <ant:fileset dir="deploy/lib">
                 <ant:include name="**/*.jar"/>
             </ant:fileset>
@@ -195,7 +195,7 @@
     </goal>
 
     <preGoal name="build:bin">
-        <wrapper:install/>    	
+        <wrapper:install/>
     </preGoal>
 
     <goal name="build:bin">
@@ -205,11 +205,11 @@
 	    <ant:tar longfile="gnu" tarfile="${maven.build.dir}/${maven.final.name}.tar">
 	      <ant:tarfileset dir="${distDir}" prefix="${maven.final.name}"/>
 	    </ant:tar>
-	
+
 	    <ant:gzip zipfile="${maven.build.dir}/${maven.final.name}.tar.gz"
 	    	src="${maven.build.dir}/${maven.final.name}.tar" />
 	    <ant:delete file="${maven.build.dir}/${maven.final.name}.tar"/>
-	
+
 	    <!-- Create a zip file -->
 	    <ant:zip destfile="${maven.build.dir}/${maven.final.name}.zip">
 	      <ant:zipfileset dir="${distDir}" prefix="${maven.final.name}"/>
