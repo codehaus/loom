@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<project>
+
+    <pomVersion>3</pomVersion>
+
+    <currentVersion>1.0</currentVersion>
+    <inceptionYear>2000</inceptionYear>
+
+    <organization>
+        <name>The JContainer Group</name>
+        <url>http://jcontainer.org/loom</url>
+    </organization>
+
+	<groupId>loom</groupId>
+    <package>org.jcontainer.loom.${pom.artifactId.substring(5)}</package>
+    <url>http://jcontainer.org/loom/${pom.artifactId.substring(5)}</url>
+    <distributionDirectory>/home/groups/s/sp/spice/htdocs/maven/${groupId}</distributionDirectory>
+    <distributionSite>spice.sourceforge.net</distributionSite>
+
+</project>

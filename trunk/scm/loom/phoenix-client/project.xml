@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <project>
+    <extend>${basedir}/../project.xml</extend>
     <pomVersion>3</pomVersion>
     <name>Phoenix Client API</name>
     <id>phoenix-client</id>
