@@ -28,6 +28,7 @@ import org.jcontainer.loom.interfaces.ApplicationContext;
 import org.jcontainer.loom.interfaces.ApplicationException;
 import org.jcontainer.loom.interfaces.ApplicationMBean;
 import org.jcontainer.loom.interfaces.ContainerConstants;
+import org.jcontainer.loom.tools.LoomToolConstants;
 import org.jcontainer.loom.tools.lifecycle.LifecycleException;
 import org.jcontainer.loom.tools.lifecycle.LifecycleHelper;
 import org.realityforge.salt.i18n.ResourceManager;
@@ -126,7 +127,7 @@ public final class DefaultApplication
             try
             {
                 final org.jcontainer.loom.tools.profile.PartitionProfile partition =
-                    m_context.getPartitionProfile().getPartition( ContainerConstants.BLOCK_PARTITION );
+                    m_context.getPartitionProfile().getPartition( LoomToolConstants.BLOCK_PARTITION );
                 final org.jcontainer.loom.tools.profile.ComponentProfile[] blocks = partition.getComponents();
                 for( int i = 0; i < blocks.length; i++ )
                 {
@@ -322,7 +323,7 @@ public final class DefaultApplication
         throws Exception
     {
         final org.jcontainer.loom.tools.profile.ComponentProfile[] listeners =
-            getComponentsInPartition( ContainerConstants.LISTENER_PARTITION );
+            getComponentsInPartition( LoomToolConstants.LISTENER_PARTITION );
         for( int i = 0; i < listeners.length; i++ )
         {
             try
@@ -385,7 +386,7 @@ public final class DefaultApplication
         throws Exception
     {
         final org.jcontainer.loom.tools.profile.ComponentProfile[] blocks =
-            getComponentsInPartition( ContainerConstants.BLOCK_PARTITION );
+            getComponentsInPartition( LoomToolConstants.BLOCK_PARTITION );
         final String[] order = DependencyGraph.walkGraph( PHASE_STARTUP == name, blocks );
 
         //Log message describing the number of blocks

@@ -64,16 +64,6 @@ public interface ContainerConstants
     String ASSEMBLY_CLASSLOADER = "loom:classloader";
 
     /**
-     * The name of the partition in which blocks are contained.
-     */
-    String BLOCK_PARTITION = "block";
-
-    /**
-     * The name of the partition in which listeners are contained.
-     */
-    String LISTENER_PARTITION = "listener";
-
-    /**
      * The root instrumentation category for all applications.
      */
     String ROOT_INSTRUMENT_CATEGORY = "applications";

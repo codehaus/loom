@@ -25,11 +25,12 @@ import org.jcontainer.loom.tools.metadata.PartitionMetaData;
 import org.jcontainer.loom.tools.profile.ProfileBuilder;
 import org.jcontainer.loom.tools.profile.PartitionProfile;
 import org.jcontainer.loom.tools.profile.ComponentProfile;
+import org.jcontainer.loom.tools.LoomToolConstants;
 
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-07-19 01:46:20 $
+ * @version $Revision: 1.5 $ $Date: 2003-07-19 01:51:33 $
  */
 public class PhoenixProfileBuilder
     extends AbstractLogEnabled
@@ -60,9 +61,9 @@ public class PhoenixProfileBuilder
         throws Exception
     {
         final PartitionMetaData blockPartition =
-            metaData.getPartition( ContainerConstants.BLOCK_PARTITION );
+            metaData.getPartition( LoomToolConstants.BLOCK_PARTITION );
         final PartitionMetaData listenerPartition =
-            metaData.getPartition( ContainerConstants.LISTENER_PARTITION );
+            metaData.getPartition( LoomToolConstants.LISTENER_PARTITION );
 
         final PartitionProfile blockProfile = assembleProfile( blockPartition, factory );
         final PartitionProfile listenerProfile =
