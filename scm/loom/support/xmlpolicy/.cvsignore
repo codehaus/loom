@@ -1,7 +1,0 @@
-dist
-target
-build.properties
-*.log
-*.el
-*.ipr
-*.iws

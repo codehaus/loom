@@ -1,6 +1,0 @@
-<logs version="1.0">
-    <category name="" target="default-target" priority="DEBUG"/>
-    <category name="myBlock" target="myBlock-target" priority="DEBUG"/>
-    <log-target name="default-target" location="/logs/default.log"/>
-    <log-target name="myBlock-target" location="/logs/myBlock.log"/>
-</logs>
