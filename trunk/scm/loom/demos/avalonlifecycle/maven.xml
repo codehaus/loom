@@ -1,16 +1,20 @@
-<project default="main">
+<project
+    default="main"
+    xmlns:ant="jelly:ant">
 
-  <goal name="main">
-    <attainGoal name="build"/>
-  </goal>
+    <goal name="main">
+        <attainGoal name="build"/>
+    </goal>
 
-  <goal name="build">
-    <attainGoal name="jar:jar"/>
-    <attainGoal name="sar:sar"/>
-  </goal>
+    <goal name="build">
+        <attainGoal name="jar:jar"/>
+        <attainGoal name="sar:sar"/>
+        <ant:copy file="target/${maven.sar.final.name}"
+            todir="${basedir}../../distribution/deploy/apps"/>
+    </goal>
 
-  <goal name="deploy">
-    <attainGoal name="sar:deploy"/>
-  </goal>
+    <goal name="deploy">
+        <attainGoal name="sar:deploy"/>
+    </goal>
 
 </project>
