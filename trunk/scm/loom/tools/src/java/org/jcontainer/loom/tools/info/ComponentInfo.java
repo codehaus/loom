@@ -24,7 +24,7 @@ import org.realityforge.metaclass.model.Attribute;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-10-06 13:29:04 $
+ * @version $Revision: 1.6 $ $Date: 2003-10-06 14:10:48 $
  */
 public class ComponentInfo
     extends FeatureDescriptor
@@ -39,11 +39,6 @@ public class ComponentInfo
      * Descriptors for the services exported by component.
      */
     private final ServiceDescriptor[] m_services;
-
-    /**
-     * Descriptor for the context (and entrys) used by component.
-     */
-    private final ContextDescriptor m_context;
 
     /**
      * Descriptor for the schema of components parameters.
@@ -61,7 +56,6 @@ public class ComponentInfo
     public ComponentInfo( final String implementationKey,
                           final Attribute[] atttributes,
                           final ServiceDescriptor[] services,
-                          final ContextDescriptor context,
                           final DependencyDescriptor[] dependencies,
                           final SchemaDescriptor configurationSchema )
     {
@@ -74,17 +68,12 @@ public class ComponentInfo
         {
             throw new NullPointerException( "services" );
         }
-        if( null == context )
-        {
-            throw new NullPointerException( "context" );
-        }
         if( null == dependencies )
         {
             throw new NullPointerException( "dependencies" );
         }
         m_implementationKey = implementationKey;
         m_services = services;
-        m_context = context;
         m_dependencies = dependencies;
         m_configurationSchema = configurationSchema;
     }
@@ -107,17 +96,6 @@ public class ComponentInfo
     public ServiceDescriptor[] getServices()
     {
         return m_services;
-    }
-
-    /**
-     * Return the ContextDescriptor for Component, may be null.
-     * If null then this component does not implement Contextualizable.
-     *
-     * @return the ContextDescriptor for Component, may be null.
-     */
-    public ContextDescriptor getContext()
-    {
-        return m_context;
     }
 
     /**

@@ -103,8 +103,6 @@ import org.jcontainer.loom.tools.configuration.ConfigurationConverter;
 import org.jcontainer.loom.tools.factory.ComponentBundle;
 import org.jcontainer.loom.tools.factory.ComponentFactory;
 import org.jcontainer.loom.tools.info.ComponentInfo;
-import org.jcontainer.loom.tools.info.ContextDescriptor;
-import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.tools.metadata.ComponentMetaData;
 import org.jcontainer.loom.tools.metadata.DependencyMetaData;
 import org.realityforge.salt.i18n.ResourceManager;
@@ -123,7 +121,7 @@ import org.realityforge.salt.i18n.Resources;
  * {@link org.jcontainer.loom.tools.verifier.AssemblyVerifier}</p>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.7 $ $Date: 2003-10-06 13:32:45 $
+ * @version $Revision: 1.8 $ $Date: 2003-10-06 14:10:48 $
  */
 public abstract class AbstractResourceProvider
     extends AbstractLogEnabled
@@ -274,82 +272,7 @@ public abstract class AbstractResourceProvider
     public final Context createContext( final Object componentEntry )
         throws Exception
     {
-        final ComponentMetaData component = getMetaData( componentEntry );
-        final String componentName = component.getName();
-        final String impl = component.getImplementationKey();
-        final ComponentBundle bundle = m_factory.createBundle( impl );
-        final ComponentInfo info = bundle.getComponentInfo();
-        final ContextDescriptor descriptor = info.getContext();
-
-        final Map contextData = new HashMap();
-
-        final DependencyDescriptor[] entrys = descriptor.getEntrys();
-        for( int i = 0; i < entrys.length; i++ )
-        {
-            final DependencyDescriptor entry = entrys[ i ];
-            final String key = entry.getKey();
-            final String type = entry.getType();
-            final boolean optional = entry.isOptional();
-            final Object value =
-                getContextValue( key, componentEntry );
-
-            if( null == value )
-            {
-                final String message =
-                    REZ.format( "resource.missing-context-value.error",
-                                optional ? "1" : "2",
-                                key,
-                                componentName );
-                if( !optional )
-                {
-                    throw new Exception( message );
-                }
-                else
-                {
-                    getLogger().warn( message );
-                    continue;
-                }
-            }
-
-            final boolean typeValid = objectImplementsType( value, type );
-            if( !typeValid )
-            {
-                final String message =
-                    REZ.format( "resource.bad-value-type.error",
-                                optional ? "1" : "2",
-                                key,
-                                componentName,
-                                type,
-                                value.getClass().getName() );
-                if( !optional )
-                {
-                    throw new Exception( message );
-                }
-                else
-                {
-                    getLogger().warn( message );
-                    continue;
-                }
-            }
-
-            contextData.put( key, value );
-        }
-
-        final Context context = createContextImpl( contextData );
-        final String classname = descriptor.getType();
-
-        final boolean validContextClass = objectImplementsType( context, classname );
-        if( !validContextClass )
-        {
-            final String message =
-                REZ.format( "resource.bad-context-type.error",
-                            classname,
-                            context.getClass().getName(),
-                            componentName );
-            throw new Exception( message );
-        }
-
-        return context;
+        return createContextImpl( new HashMap() );
     }
 
     /**
@@ -472,30 +395,5 @@ public abstract class AbstractResourceProvider
         }
 
         return services;
-    }
-
-    /**
-     * Check whether the specified value is compatible with specified type.
-     *
-     * @param value the value
-     * @param type the desired type
-     * @return true if value is compatible with type, false otherwise
-     */
-    private boolean objectImplementsType( final Object value, final String type )
-    {
-        try
-        {
-            final Class clazz = value.getClass();
-            final ClassLoader classLoader = clazz.getClassLoader();
-            final Class typeClass = classLoader.loadClass( type );
-            if( typeClass.isAssignableFrom( clazz ) )
-            {
-                return true;
-            }
-        }
-        catch( final ClassNotFoundException cnfe )
-        {
-        }
-        return false;
     }
 }

@@ -20,7 +20,6 @@ import junit.framework.TestCase;
 import org.jcontainer.dna.impl.ConsoleLogger;
 import org.jcontainer.dna.impl.ContainerUtil;
 import org.jcontainer.loom.tools.info.ComponentInfo;
-import org.jcontainer.loom.tools.info.ContextDescriptor;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
@@ -32,7 +31,7 @@ import org.realityforge.metaclass.model.Attribute;
  * Abstract class which TestCases can extend.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.16 $ $Date: 2003-10-06 13:42:07 $
+ * @version $Revision: 1.17 $ $Date: 2003-10-06 14:10:49 $
  */
 public class InfoBuilderTestCase
     extends TestCase
@@ -136,12 +135,6 @@ public class InfoBuilderTestCase
 
     private ComponentInfo createDummyComponentInfo()
     {
-        final DependencyDescriptor[] entrys = new DependencyDescriptor[]{};
-        final ContextDescriptor context =
-            new ContextDescriptor( "org.apache.avalon.phoenix.BlockContext",
-                                   entrys,
-                                   Attribute.EMPTY_SET );
-
         final ServiceDescriptor service1 =
             new ServiceDescriptor( "org.apache.avalon.cornerstone.services.scheduler.TimeScheduler",
                                    Attribute.EMPTY_SET );
@@ -166,7 +159,6 @@ public class InfoBuilderTestCase
         return new ComponentInfo( "org.jcontainer.loom.tools.infobuilder.data.component2",
                                      Attribute.EMPTY_SET,
                                   services,
-                                  context,
                                   deps,
                                   schema );
     }

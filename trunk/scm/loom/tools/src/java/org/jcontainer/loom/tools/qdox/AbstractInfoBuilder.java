@@ -11,7 +11,6 @@ import com.thoughtworks.qdox.model.DocletTag;
 import com.thoughtworks.qdox.model.JavaClass;
 import com.thoughtworks.qdox.model.JavaMethod;
 import com.thoughtworks.qdox.model.Type;
-import org.jcontainer.loom.tools.info.ContextDescriptor;
 
 /**
  * This is an abstract base class that is used to build a ComponentInfo object
@@ -19,13 +18,12 @@ import org.jcontainer.loom.tools.info.ContextDescriptor;
  * of javadocs markup.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-29 01:07:36 $
+ * @version $Revision: 1.3 $ $Date: 2003-10-06 14:10:49 $
  */
 class AbstractInfoBuilder
 {
     protected static final String LOGGER_CLASS =
         "org.apache.avalon.framework.logger.Logger";
-    protected static final String CONTEXT_CLASS = ContextDescriptor.DEFAULT_TYPE;
     protected static final String COMPONENT_MANAGER_CLASS =
         "org.apache.avalon.framework.component.ComponentManager";
     protected static final String SERVICE_MANAGER_CLASS =

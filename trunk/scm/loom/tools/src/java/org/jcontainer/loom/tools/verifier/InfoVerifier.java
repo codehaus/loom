@@ -9,14 +9,12 @@ package org.jcontainer.loom.tools.verifier;
 
 import org.apache.avalon.framework.component.Composable;
 import org.apache.avalon.framework.configuration.Configurable;
-import org.apache.avalon.framework.context.Contextualizable;
 import org.apache.avalon.framework.service.Serviceable;
-import org.jcontainer.loom.tools.info.ComponentInfo;
-import org.jcontainer.loom.tools.info.ContextDescriptor;
-import org.jcontainer.loom.tools.info.SchemaDescriptor;
-import org.jcontainer.loom.tools.info.ServiceDescriptor;
 import org.jcontainer.dna.AbstractLogEnabled;
 import org.jcontainer.dna.Logger;
+import org.jcontainer.loom.tools.info.ComponentInfo;
+import org.jcontainer.loom.tools.info.SchemaDescriptor;
+import org.jcontainer.loom.tools.info.ServiceDescriptor;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
@@ -42,7 +40,7 @@ import org.realityforge.salt.i18n.Resources;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.7 $ $Date: 2003-10-05 10:07:05 $
+ * @version $Revision: 1.8 $ $Date: 2003-10-06 14:10:49 $
  */
 public class InfoVerifier
     extends AbstractLogEnabled
@@ -126,7 +124,6 @@ public class InfoVerifier
         m_verifier.verifyComponent( name, implementation, interfaces, false );
 
         verifyDependencyPresence( name, implementationKey, info, implementation );
-        verifyContextPresence( name, implementationKey, info, implementation );
         verifyConfigurationSchemaPresence( name, implementationKey, info, implementation );
         //verifyParametersSchemaPresence( name, implementationKey, info, implementation );
     }
@@ -198,37 +195,6 @@ public class InfoVerifier
         }
     }
 */
-
-    /**
-     * Verify that the if  the component is not Contextualizable that it
-     * does not declare Context Entrys.
-     *
-     * @param name the name of component
-     * @param implementationKey the implementationKey of component
-     * @param implementation the class implementing component
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if fails verification check
-     */
-    protected void verifyContextPresence( final String name,
-                                          final String implementationKey,
-                                          final ComponentInfo info,
-                                          final Class implementation )
-        throws VerifyException
-    {
-        final ContextDescriptor context = info.getContext();
-        final int count = context.getEntrys().length;
-
-        if( !Contextualizable.class.isAssignableFrom( implementation ) )
-        {
-            if( 0 != count )
-            {
-                final String message =
-                    REZ.format( "metadata.declare-uneeded-entrys.error",
-                                name,
-                                implementationKey );
-                throw new VerifyException( message );
-            }
-        }
-    }
 
     /**
      * Verify the component assembly logic.

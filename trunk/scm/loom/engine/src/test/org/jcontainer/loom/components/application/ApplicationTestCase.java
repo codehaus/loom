@@ -34,7 +34,7 @@ import org.xml.sax.InputSource;
  *  An basic test case for the Application.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.8 $ $Date: 2003-10-06 13:29:04 $
+ * @version $Revision: 1.9 $ $Date: 2003-10-06 14:10:48 $
  */
 public class ApplicationTestCase
     extends TestCase
@@ -53,7 +53,6 @@ public class ApplicationTestCase
         new ComponentInfo( C1_NAME,
                            Attribute.EMPTY_SET,
                            ServiceDescriptor.EMPTY_SET,
-                           LegacyUtil.CONTEXT_DESCRIPTOR,
                            new DependencyDescriptor[]{new DependencyDescriptor( S1_NAME,
                                                                                 S1_NAME,
                                                                                 false,
@@ -65,7 +64,6 @@ public class ApplicationTestCase
         new ComponentInfo( C2_NAME,
                            Attribute.EMPTY_SET,
                            new ServiceDescriptor[]{new ServiceDescriptor( S1_NAME, Attribute.EMPTY_SET )},
-                           LegacyUtil.CONTEXT_DESCRIPTOR,
                            DependencyDescriptor.EMPTY_SET,
                            null
         );
@@ -74,7 +72,6 @@ public class ApplicationTestCase
         new ComponentInfo( C3_NAME,
                            Attribute.EMPTY_SET,
                            ServiceDescriptor.EMPTY_SET,
-                           LegacyUtil.CONTEXT_DESCRIPTOR,
                            new DependencyDescriptor[]{new DependencyDescriptor( S1_ARRAY_NAME,
                                                                                 S1_ARRAY_NAME,
                                                                                 false,
@@ -86,7 +83,6 @@ public class ApplicationTestCase
         new ComponentInfo( C4_NAME,
                            Attribute.EMPTY_SET,
                            ServiceDescriptor.EMPTY_SET,
-                           LegacyUtil.CONTEXT_DESCRIPTOR,
                            new DependencyDescriptor[]{new DependencyDescriptor( S1_MAP_NAME,
                                                                                 S1_MAP_NAME,
                                                                                 false,
