@@ -1,14 +1,7 @@
-<project
-    default="main"
+<project default="build"
     xmlns:ant="jelly:ant">
 
-    <goal name="main">
-        <attainGoal name="build"/>
-    </goal>
-
-    <goal name="build">
-        <attainGoal name="jar:jar"/>
-        <attainGoal name="loom:sar"/>
+    <goal name="build" prereqs="loom:sar">
         <ant:copy todir="${basedir}/../../distribution/deploy/apps"
             overwrite="true">
             <ant:fileset dir="${maven.build.dir}">
@@ -17,12 +10,6 @@
         </ant:copy>
     </goal>
 
-    <goal name="deploy">
-        <attainGoal name="loom:deploy"/>
-    </goal>
-
-    <postGoal name="java:compile">
-        <attainGoal name="loom:metagenerate"/>
-    </postGoal>
+    <goal name="deploy" prereqs="loom:deploy"/>
 
 </project>

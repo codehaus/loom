@@ -42,7 +42,7 @@
     <!--==================================================================-->
     <!-- Builds a sar file                                                -->
     <!--==================================================================-->
-    <goal name="loom:sar" prereqs="jar:jar" description="Build a Loom sar file">
+    <goal name="loom:sar" prereqs="loom:metagenerate,jar:jar" description="Build a Loom sar file">
 
         <ant:echo message="Building sar ${loom.sar.final.name}"/>
         <!-- Ensure maven.loom.build.dir exists -->
@@ -136,7 +136,7 @@
     <!--==================================================================-->
     <!-- Deploy the sar to the remote repository                          -->
     <!--==================================================================-->
-    <goal name="loom:deploy" prereqs="sar" description="Deploy the sar to the remote repository">
+    <goal name="loom:deploy" prereqs="loom:sar" description="Deploy the sar to the remote repository">
 
         <artifact:deploy artifact="${maven.loom.build.dir}/${loom.sar.final.name}" type="sar" project="${pom}"/>
 
