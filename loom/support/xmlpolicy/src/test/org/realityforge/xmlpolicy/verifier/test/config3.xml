@@ -1,0 +1,6 @@
+<policy version="1.0">
+    <grant signed-by="Bob" key-store="nonExistentKeystore"
+        code-base="sar:/SAR-INF/lib/*">
+        <permission class="java.io.FilePermission"/>
+    </grant>
+</policy>
