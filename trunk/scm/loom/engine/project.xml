@@ -10,6 +10,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>loom</groupId>
+            <artifactId>loom-tools</artifactId>
+            <version>${pom.currentVersion}</version>
+        </dependency>
+        <dependency>
             <groupId>spice</groupId>
             <artifactId>spice-metaclass</artifactId>
             <version>20031005.002435</version>
@@ -59,11 +64,6 @@
             <groupId>jcomponent</groupId>
             <artifactId>jcomponent-loggerstore</artifactId>
             <version>1.0-b1</version>
-        </dependency>
-        <dependency>
-            <groupId>loom</groupId>
-            <artifactId>loom-tools</artifactId>
-            <version>1.0-beta</version>
         </dependency>
         <dependency>
             <groupId>mx4j</groupId>
@@ -147,7 +147,7 @@
     </dependencies>
 
     <build>
-        <sourceDirectory>src/java</sourceDirectory>
+        <sourceDirectory>${basedir}/src/java</sourceDirectory>
         <unitTestSourceDirectory>${basedir}/src/test</unitTestSourceDirectory>
 
         <unitTest>
