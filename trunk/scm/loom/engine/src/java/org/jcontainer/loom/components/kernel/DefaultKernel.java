@@ -127,7 +127,7 @@ import org.realityforge.salt.i18n.Resources;
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author <a href="mailto:leosimons@apache.org">Leo Simons</a>
  * @dna.component
- * @mx.interface type="org.jcontainer.loom.interfaces.KernelMBean"
+ * @mx.interface topic="Kernel" type="org.jcontainer.loom.interfaces.KernelMBean"
  */
 public class DefaultKernel
     extends AbstractLogEnabled

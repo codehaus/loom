@@ -128,7 +128,7 @@ import org.xml.sax.InputSource;
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @dna.component
- * @mx.interface type="org.jcontainer.loom.interfaces.DeployerMBean"
+ * @mx.interface topic="Deployer" type="org.jcontainer.loom.interfaces.DeployerMBean"
  */
 public class DefaultDeployer
     extends AbstractLogEnabled
