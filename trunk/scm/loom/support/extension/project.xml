@@ -4,7 +4,7 @@
     <name>Extension</name>
     <id>spice-extension</id>
     <gumpRepositoryId>components</gumpRepositoryId>
-    <currentVersion>0.9.1</currentVersion>
+    <currentVersion>1.0dev</currentVersion>
     <inceptionYear>2000</inceptionYear>
 
     <shortDescription>Parse and represent "Extension" and Specification information</shortDescription>
