@@ -30,13 +30,13 @@ import org.jcontainer.loom.interfaces.LogManager;
  *  An basic test case for the LogManager.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-07-20 13:09:53 $
+ * @version $Revision: 1.5 $ $Date: 2003-07-24 23:37:02 $
  */
 public class LogManagerTestCase
     extends TestCase
 {
-    public static final String DEFAULT_LOGFILE = "logs/default.log";
-    public static final String BLOCK_LOGFILE = "logs/myBlock.log";
+    private static final String DEFAULT_LOGFILE = "logs" + File.separator + "default.log";
+    private static final String BLOCK_LOGFILE = "logs" + File.separator + "myBlock.log";
 
     private File m_baseDirectory;
 
@@ -143,7 +143,7 @@ public class LogManagerTestCase
         if( 3 == index )
         {
             final File file =
-                new File( getBaseDir( index ).getAbsolutePath() + "/logs" );
+                new File( getBaseDir( index ).getAbsolutePath() + File.separator + "logs" );
             file.mkdirs();
         }
 
