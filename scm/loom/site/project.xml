@@ -112,7 +112,7 @@
         <dependency>
             <groupId>spice</groupId>
             <artifactId>spice-salt</artifactId>
-            <version>0.8dev</version>
+            <version>20031018.073218</version>
         </dependency>
         <dependency>
             <groupId>spice</groupId>

@@ -421,50 +421,17 @@ public final class CLIMain
      */
     private void handleException( final Throwable throwable )
     {
-        final StringBuffer sb = new StringBuffer();
-        sb.append( REZ.getString( "main.exception.header" ) );
-        sb.append( "\n" );
-        sb.append( "---------------------------------------------------------\n" );
-        sb.append( "--- Message ---\n" );
-        sb.append( throwable.getMessage() );
-        sb.append( "\n--- Stack Trace ---\n" );
-
-        boolean outputTrace = false;
-        final Throwable root = ExceptionUtil.getRootCause( throwable );
-        Throwable element = ExceptionUtil.getCause( throwable );
-        while( root != element )
-        {
-            sb.append( "--- Rethrown From ---\n" );
-            sb.append( element.toString() );
-            sb.append( "\n" );
-            outputTrace = true;
-            element = ExceptionUtil.getCause( element );
-        }
-        if( outputTrace )
-        {
-            sb.append( "---------------------------------------------------------\n" );
-        }
-        final String[] stackTrace = ExceptionUtil.captureStackTrace( root );
-        sb.append( stackTrace[ 0 ] );
-        sb.append( "\n" );
-        for( int i = 1; i < stackTrace.length; i++ )
-        {
-            final String message = stackTrace[ i ];
-            if( -1 != message.indexOf( "org.jcontainer.loom" ) )
-            {
-                break;
-            }
-            sb.append( message );
-            sb.append( "\n" );
-        }
-        sb.append( "---------------------------------------------------------\n" );
-        sb.append( REZ.getString( "main.exception.footer" ) );
+        System.out.println( REZ.getString( "main.exception.header" ) );
+        final String trace =
+            ExceptionUtil.prettyPrintStackTrace( throwable,
+                                                 "org.jcontainer.loom.components" );
+        System.out.println( trace );
+        System.out.println( REZ.getString( "main.exception.footer" ) );
 
         if( null != m_logger )
         {
             m_logger.error( throwable.getMessage(), throwable );
         }
-        System.out.println( sb );
         m_exitCode = 1;
     }
 }
