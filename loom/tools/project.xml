@@ -12,6 +12,16 @@
 
     <dependencies>
         <dependency>
+            <groupId>dna</groupId>
+            <artifactId>dna-api</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>dna</groupId>
+            <artifactId>dna-impl</artifactId>
+            <version>20031005.014103</version>
+        </dependency>
+        <dependency>
             <groupId>spice</groupId>
             <artifactId>spice-metaclass</artifactId>
             <version>20031005.002435</version>
