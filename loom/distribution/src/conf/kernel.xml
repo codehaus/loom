@@ -158,7 +158,7 @@
         - One with a beanshell view at the application level.
         -->
         <component role="org.jcontainer.loom.interfaces.Kernel"
-            class="@KERNEL-CLASS@"
+            class="org.jcontainer.loom.components.kernel.DefaultKernel"
             logger="kernel"/>
 
         <component role="org.jcontainer.loom.interfaces.ConfigurationRepository"
@@ -201,7 +201,7 @@
         </component>
 
         <component role="org.apache.excalibur.instrument.InstrumentManager"
-            class="org.apache.excalibur.instrument.manager.NoopInstrumentManager"
+            class="org.jcontainer.loom.components.instrument.NoopInstrumentManager"
             logger="instrument"/>
 
         <!--
