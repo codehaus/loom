@@ -98,7 +98,58 @@
             </ant:fileset>
         </ant:copy>
 
-
     </goal>
+
+    <preGoal name="buildDist">
+        <j:set var="distName" value='wrapper_win32_3.0.3'/>
+        <ant:mkdir dir="target/wrapper"/>
+        <ant:get src="http://telia.dl.sourceforge.net/sourceforge/wrapper/${distName}.zip"
+            dest="target/wrapper/${distName}.zip"
+            verbose="true"
+            usetimestamp="true"/>
+        <ant:unzip src="target/wrapper/${distName}.zip" dest="target/wrapper"/>
+        <ant:copy file="target/wrapper/${distName}/bin/Wrapper.exe"
+            todir="deploy/ext"/>
+        <ant:copy file="target/wrapper/${distName}/lib/Wrapper.dll"
+            todir="deploy/ext"/>
+        <ant:copy file="target/wrapper/${distName}/lib/wrapper.jar"
+            todir="deploy/ext"/>
+        <ant:copy file="target/wrapper/${distName}/src/bin/App.bat.in"
+            tofile="deploy/ext/${pom.artifactId}.bat"/>
+        <ant:copy file="target/wrapper/${distName}/src/bin/InstallApp-NT.bat.in"
+            tofile="deploy/ext/Install-${pom.artifactId}-NT.bat"/>
+        <ant:copy file="target/wrapper/${distName}/src/bin/UninstallApp-NT.bat.in"
+            tofile="deploy/ext/Uninstall-${pom.artifactId}-NT.bat"/>
+        <j:set var="distName" value='wrapper_linux_3.0.3'/>
+        <ant:get src="http://telia.dl.sourceforge.net/sourceforge/wrapper/${distName}.tar.gz"
+            dest="target/wrapper/${distName}.tar.gz"
+            verbose="true"
+            usetimestamp="true"/>
+        <ant:gunzip src="target/wrapper/${distName}.tar.gz" dest="target/wrapper"/>
+        <ant:untar src="target/wrapper/${distName}.tar" dest="target/wrapper"/>
+        <ant:copy file="target/wrapper/${distName}/bin/wrapper"
+            todir="deploy/ext"/>
+        <ant:copy file="target/wrapper/${distName}/bin/realpath"
+            todir="deploy/ext"/>
+        <ant:copy file="target/wrapper/${distName}/lib/libwrapper.so"
+            todir="tdeploy/ext"/>
+        <ant:copy file="target/wrapper/${distName}/lib/wrapper.jar"
+            todir="deploy/ext"/>
+        <ant:copy file="target/wrapper/${distName}/src/bin/sh.script.in"
+            tofile="deploy/ext/${pom.artifactId}-wrapper.sh">
+            <ant:filterset>
+                <ant:filter token="app.name" value="${pom.artifactId}"/>
+                <ant:filter token="app.long.name" value="${pom.artifactId}"/>
+            </ant:filterset>
+        </ant:copy>
+        <ant:copy file="target/wrapper/${distName}/src/bin/bash.script.in"
+            tofile="deploy/ext/${pom.artifactId}-wrapper.bash">
+            <ant:filterset>
+                <ant:filter token="app.name" value="${pom.artifactId}"/>
+                <ant:filter token="app.long.name" value="${pom.artifactId}"/>
+            </ant:filterset>
+        </ant:copy>
+    	
+    </preGoal>
 
 </project>
