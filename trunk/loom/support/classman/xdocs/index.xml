@@ -12,9 +12,9 @@
             configurations.</p>
             <p>Each ClassLoader can be defined in terms of;</p>
             <ul>
-                <li><a href="api/org/apache/excalibur/loader/metadata/EntryDef.html">
+                <li><a href="apidocs/org/apache/excalibur/loader/metadata/EntryDef.html">
                 Entrys</a>: URLs designating either a directory or a file</li>
-                <li><a href="api/org/apache/excalibur/loader/metadata/FileSetDef.html">
+                <li><a href="apidocs/org/apache/excalibur/loader/metadata/FileSetDef.html">
                 FileSets</a>: Sets of files defined in a manner similar
                 to Ants Filests.</li>
                 <li><a href="http://jakarta.apache.org/avalon/excalibur/extension/api/org/apache/avalon/excalibur/extension/Extension.html">
