@@ -12,9 +12,9 @@ import org.jcontainer.dna.impl.ConsoleLogger;
 import org.jcontainer.loom.components.util.info.ComponentInfo;
 import org.jcontainer.loom.components.util.info.DependencyDescriptor;
 import org.jcontainer.loom.components.util.info.ServiceDescriptor;
-import org.jcontainer.loom.components.util.metadata.ComponentMetaData;
-import org.jcontainer.loom.components.util.metadata.DependencyMetaData;
-import org.jcontainer.loom.components.util.metadata.PartitionMetaData;
+import org.jcontainer.loom.components.util.metadata.ComponentTemplate;
+import org.jcontainer.loom.components.util.metadata.DependencyDirective;
+import org.jcontainer.loom.components.util.metadata.PartitionTemplate;
 import org.jcontainer.loom.components.util.profile.ComponentProfile;
 import org.jcontainer.loom.components.util.profile.PartitionProfile;
 import org.jcontainer.loom.components.util.verifier.SarVerifier;
@@ -28,7 +28,7 @@ import org.jcontainer.loom.components.assembler.data.Component3;
  *  An basic test case for the LogManager.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-10-16 14:45:55 $
+ * @version $Revision: 1.2 $ $Date: 2003-11-03 06:43:16 $
  */
 public class VerifierTestCase
     extends TestCase
@@ -36,39 +36,39 @@ public class VerifierTestCase
     public void testBasic()
         throws Exception
     {
-        final DependencyMetaData dependency =
-            new DependencyMetaData( Service1.class.getName(),
+        final DependencyDirective dependency =
+            new DependencyDirective( Service1.class.getName(),
                                     "c2",
                                     Service1.class.getName() );
-        final ComponentMetaData c1MetaData =
-            new ComponentMetaData( "c1",
+        final ComponentTemplate c1MetaData =
+            new ComponentTemplate( "c1",
                                    Component1.class.getName(),
-                                   new DependencyMetaData[]{dependency},
+                                   new DependencyDirective[]{dependency},
                                    null,
                                    null,
                                    false );
-        final ComponentMetaData c2MetaData =
-            new ComponentMetaData( "c2",
+        final ComponentTemplate c2MetaData =
+            new ComponentTemplate( "c2",
                                    Component2.class.getName(),
-                                   DependencyMetaData.EMPTY_SET,
+                                   DependencyDirective.EMPTY_SET,
                                    null,
                                    null,
                                    false );
-        final PartitionMetaData listenerMetaData =
-            new PartitionMetaData( ContainerConstants.LISTENER_PARTITION,
+        final PartitionTemplate listenerMetaData =
+            new PartitionTemplate( ContainerConstants.LISTENER_PARTITION,
                                    new String[ 0 ],
-                                   PartitionMetaData.EMPTY_SET,
-                                   ComponentMetaData.EMPTY_SET );
-        final PartitionMetaData blockMetaData =
-            new PartitionMetaData( ContainerConstants.BLOCK_PARTITION,
+                                   PartitionTemplate.EMPTY_SET,
+                                   ComponentTemplate.EMPTY_SET );
+        final PartitionTemplate blockMetaData =
+            new PartitionTemplate( ContainerConstants.BLOCK_PARTITION,
                                    new String[]{ContainerConstants.LISTENER_PARTITION},
-                                   PartitionMetaData.EMPTY_SET,
-                                   new ComponentMetaData[]{c1MetaData, c2MetaData} );
-        final PartitionMetaData metaData =
-            new PartitionMetaData( "assembly1",
+                                   PartitionTemplate.EMPTY_SET,
+                                   new ComponentTemplate[]{c1MetaData, c2MetaData} );
+        final PartitionTemplate metaData =
+            new PartitionTemplate( "assembly1",
                                    new String[ 0 ],
-                                   new PartitionMetaData[]{blockMetaData, listenerMetaData},
-                                   ComponentMetaData.EMPTY_SET );
+                                   new PartitionTemplate[]{blockMetaData, listenerMetaData},
+                                   ComponentTemplate.EMPTY_SET );
         final ComponentInfo c1Info =
             new ComponentInfo( Component1.class,
                                ServiceDescriptor.EMPTY_SET,
@@ -101,61 +101,61 @@ public class VerifierTestCase
     public void testComplex()
         throws Exception
     {
-        final DependencyMetaData dependency1 =
-            new DependencyMetaData( Service1.class.getName() + DependencyDescriptor.ARRAY_POSTFIX,
+        final DependencyDirective dependency1 =
+            new DependencyDirective( Service1.class.getName() + DependencyDescriptor.ARRAY_POSTFIX,
                                     "c2a",
                                     Service1.class.getName() );
-        final DependencyMetaData dependency2 =
-            new DependencyMetaData( Service1.class.getName() + DependencyDescriptor.ARRAY_POSTFIX,
+        final DependencyDirective dependency2 =
+            new DependencyDirective( Service1.class.getName() + DependencyDescriptor.ARRAY_POSTFIX,
                                     "c2b",
                                     Service1.class.getName() );
-        final DependencyMetaData dependency3 =
-            new DependencyMetaData( Service1.class.getName() + DependencyDescriptor.ARRAY_POSTFIX,
+        final DependencyDirective dependency3 =
+            new DependencyDirective( Service1.class.getName() + DependencyDescriptor.ARRAY_POSTFIX,
                                     "c2c",
                                     Service1.class.getName() );
-        final ComponentMetaData c3MetaData =
-            new ComponentMetaData( "c3",
+        final ComponentTemplate c3MetaData =
+            new ComponentTemplate( "c3",
                                    Component3.class.getName(),
-                                   new DependencyMetaData[]{dependency1, dependency2, dependency3},
+                                   new DependencyDirective[]{dependency1, dependency2, dependency3},
                                    null,
                                    null,
                                    false );
-        final ComponentMetaData c2aMetaData =
-            new ComponentMetaData( "c2a",
+        final ComponentTemplate c2aMetaData =
+            new ComponentTemplate( "c2a",
                                    Component2.class.getName(),
-                                   DependencyMetaData.EMPTY_SET,
+                                   DependencyDirective.EMPTY_SET,
                                    null,
                                    null,
                                    false );
-        final ComponentMetaData c2bMetaData =
-            new ComponentMetaData( "c2b",
+        final ComponentTemplate c2bMetaData =
+            new ComponentTemplate( "c2b",
                                    Component2.class.getName(),
-                                   DependencyMetaData.EMPTY_SET,
+                                   DependencyDirective.EMPTY_SET,
                                    null,
                                    null,
                                    false );
-        final ComponentMetaData c2cMetaData =
-            new ComponentMetaData( "c2c",
+        final ComponentTemplate c2cMetaData =
+            new ComponentTemplate( "c2c",
                                    Component2.class.getName(),
-                                   DependencyMetaData.EMPTY_SET,
+                                   DependencyDirective.EMPTY_SET,
                                    null,
                                    null,
                                    false );
-        final PartitionMetaData listenerMetaData =
-            new PartitionMetaData( ContainerConstants.LISTENER_PARTITION,
+        final PartitionTemplate listenerMetaData =
+            new PartitionTemplate( ContainerConstants.LISTENER_PARTITION,
                                    new String[ 0 ],
-                                   PartitionMetaData.EMPTY_SET,
-                                   ComponentMetaData.EMPTY_SET );
-        final PartitionMetaData blockMetaData =
-            new PartitionMetaData( ContainerConstants.BLOCK_PARTITION,
+                                   PartitionTemplate.EMPTY_SET,
+                                   ComponentTemplate.EMPTY_SET );
+        final PartitionTemplate blockMetaData =
+            new PartitionTemplate( ContainerConstants.BLOCK_PARTITION,
                                    new String[]{ContainerConstants.LISTENER_PARTITION},
-                                   PartitionMetaData.EMPTY_SET,
-                                   new ComponentMetaData[]{c2aMetaData, c2bMetaData, c2cMetaData, c3MetaData} );
-        final PartitionMetaData metaData =
-            new PartitionMetaData( "assembly1",
+                                   PartitionTemplate.EMPTY_SET,
+                                   new ComponentTemplate[]{c2aMetaData, c2bMetaData, c2cMetaData, c3MetaData} );
+        final PartitionTemplate metaData =
+            new PartitionTemplate( "assembly1",
                                    new String[ 0 ],
-                                   new PartitionMetaData[]{blockMetaData, listenerMetaData},
-                                   ComponentMetaData.EMPTY_SET );
+                                   new PartitionTemplate[]{blockMetaData, listenerMetaData},
+                                   ComponentTemplate.EMPTY_SET );
 
         final ComponentInfo c3Info =
             new ComponentInfo( Component3.class,

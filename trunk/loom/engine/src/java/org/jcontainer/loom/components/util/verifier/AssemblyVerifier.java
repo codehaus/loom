@@ -13,7 +13,7 @@ import org.jcontainer.dna.AbstractLogEnabled;
 import org.jcontainer.loom.components.util.info.ComponentInfo;
 import org.jcontainer.loom.components.util.info.DependencyDescriptor;
 import org.jcontainer.loom.components.util.info.ServiceDescriptor;
-import org.jcontainer.loom.components.util.metadata.DependencyMetaData;
+import org.jcontainer.loom.components.util.metadata.DependencyDirective;
 import org.jcontainer.loom.components.util.profile.ComponentProfile;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
@@ -43,7 +43,7 @@ import org.realityforge.salt.i18n.Resources;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-10-26 03:39:39 $
+ * @version $Revision: 1.3 $ $Date: 2003-11-03 06:43:15 $
  */
 public class AssemblyVerifier
     extends AbstractLogEnabled
@@ -142,7 +142,7 @@ public class AssemblyVerifier
                 final String trace = getDependencyTrace( dependency, stack );
                 final String message =
                     REZ.format( "assembly.circular-dependency.error",
-                                component.getMetaData().getName(),
+                                component.getTemplate().getName(),
                                 trace );
                 throw new Exception( message );
             }
@@ -167,7 +167,7 @@ public class AssemblyVerifier
         final StringBuffer sb = new StringBuffer();
         sb.append( "[ " );
 
-        final String name = component.getMetaData().getName();
+        final String name = component.getTemplate().getName();
         final int size = stack.size();
         final int top = size - 1;
         for( int i = top; i >= 0; i-- )
@@ -177,9 +177,9 @@ public class AssemblyVerifier
             {
                 sb.append( ", " );
             }
-            sb.append( other.getMetaData().getName() );
+            sb.append( other.getTemplate().getName() );
 
-            if( other.getMetaData().getName().equals( name ) )
+            if( other.getTemplate().getName().equals( name ) )
             {
                 break;
             }
@@ -204,8 +204,8 @@ public class AssemblyVerifier
                                                                                     final ComponentProfile[] components )
     {
         final ArrayList dependencies = new ArrayList();
-        final DependencyMetaData[] deps =
-            component.getMetaData().getDependencies();
+        final DependencyDirective[] deps =
+            component.getTemplate().getDependencies();
 
         for( int i = 0; i < deps.length; i++ )
         {
@@ -244,11 +244,11 @@ public class AssemblyVerifier
         throws Exception
     {
         final ComponentInfo info = component.getInfo();
-        final DependencyMetaData[] dependencies = component.getMetaData().getDependencies();
+        final DependencyDirective[] dependencies = component.getTemplate().getDependencies();
 
         for( int i = 0; i < dependencies.length; i++ )
         {
-            final DependencyMetaData dependency = dependencies[ i ];
+            final DependencyDirective dependency = dependencies[ i ];
             final String providerName = dependency.getProviderName();
             final String key = dependency.getKey();
             final String type = info.getDependency( key ).getComponentType();
@@ -261,7 +261,7 @@ public class AssemblyVerifier
                     REZ.format( "assembly.missing-dependency.error",
                                 key,
                                 providerName,
-                                component.getMetaData().getName() );
+                                component.getTemplate().getName() );
                 throw new Exception( message );
             }
 
@@ -275,7 +275,7 @@ public class AssemblyVerifier
                     REZ.format( "assembly.dependency-missing-service.error",
                                 providerName,
                                 type,
-                                component.getMetaData().getName() );
+                                component.getTemplate().getName() );
                 throw new Exception( message );
             }
         }
@@ -294,7 +294,7 @@ public class AssemblyVerifier
         for( int i = 0; i < components.length; i++ )
         {
             ComponentProfile ComponentProfile = components[ i ];
-            if( ComponentProfile.getMetaData().getName().equals( name ) )
+            if( ComponentProfile.getTemplate().getName().equals( name ) )
             {
                 return components[ i ];
             }
@@ -315,7 +315,7 @@ public class AssemblyVerifier
         for( int i = 0; i < components.length; i++ )
         {
             ComponentProfile ComponentProfile = components[ i ];
-            final String name = ComponentProfile.getMetaData().getName();
+            final String name = ComponentProfile.getTemplate().getName();
             if( !isValidName( name ) )
             {
                 final String message =
@@ -361,7 +361,7 @@ public class AssemblyVerifier
         for( int i = 0; i < components.length; i++ )
         {
             ComponentProfile ComponentProfile = components[ i ];
-            final String name = ComponentProfile.getMetaData().getName();
+            final String name = ComponentProfile.getTemplate().getName();
             verifyUniqueName( components, name, i );
         }
     }
@@ -383,7 +383,7 @@ public class AssemblyVerifier
         {
             ComponentProfile ComponentProfile = components[ i ];
             final String other =
-                ComponentProfile.getMetaData().getName();
+                ComponentProfile.getTemplate().getName();
             if( index != i && other.equals( name ) )
             {
                 final String message =
@@ -394,7 +394,7 @@ public class AssemblyVerifier
     }
 
     /**
-     * Retrieve a list of DependencyMetaData objects for ComponentProfile
+     * Retrieve a list of DependencyDirective objects for ComponentProfile
      * and verify that there is a 1 to 1 map with dependencies specified
      * in ComponentInfo.
      *
@@ -405,8 +405,8 @@ public class AssemblyVerifier
         throws Exception
     {
         //Make sure all dependency entries specified in config file are valid
-        final DependencyMetaData[] dependencySet =
-            component.getMetaData().getDependencies();
+        final DependencyDirective[] dependencySet =
+            component.getTemplate().getDependencies();
 
         for( int i = 0; i < dependencySet.length; i++ )
         {
@@ -422,7 +422,7 @@ public class AssemblyVerifier
                     REZ.format( "assembly.unknown-dependency.error",
                                 key,
                                 key,
-                                component.getMetaData().getName() );
+                                component.getTemplate().getName() );
                 throw new Exception( message );
             }
         }
@@ -433,8 +433,8 @@ public class AssemblyVerifier
         for( int i = 0; i < dependencies.length; i++ )
         {
             final DependencyDescriptor dependency = dependencies[ i ];
-            final DependencyMetaData dependencyMetaData =
-                component.getMetaData().getDependency( dependency.getKey() );
+            final DependencyDirective dependencyMetaData =
+                component.getTemplate().getDependency( dependency.getKey() );
 
             //If there is no metaData then the user has failed
             //to specify a needed dependency.
@@ -443,7 +443,7 @@ public class AssemblyVerifier
                 final String message =
                     REZ.format( "assembly.unspecified-dependency.error",
                                 dependency.getKey(),
-                                component.getMetaData().getName() );
+                                component.getTemplate().getName() );
                 throw new Exception( message );
             }
         }

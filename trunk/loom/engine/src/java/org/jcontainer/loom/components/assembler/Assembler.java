@@ -91,22 +91,22 @@ import java.util.List;
 import java.util.Map;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.ConfigurationException;
-import org.jcontainer.loom.components.util.metadata.ComponentMetaData;
-import org.jcontainer.loom.components.util.metadata.DependencyMetaData;
+import org.jcontainer.loom.components.util.metadata.ComponentTemplate;
+import org.jcontainer.loom.components.util.metadata.DependencyDirective;
 import org.jcontainer.loom.components.util.metadata.MetaDataBuilder;
-import org.jcontainer.loom.components.util.metadata.PartitionMetaData;
+import org.jcontainer.loom.components.util.metadata.PartitionTemplate;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.LoomException;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
 /**
- * Assemble a {@link PartitionMetaData} object from a Configuration
+ * Assemble a {@link PartitionTemplate} object from a Configuration
  * object. The Configuration object represents the assembly descriptor
  * and is in the format specified for <tt>assembly.xml</tt> files.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.12 $ $Date: 2003-11-03 05:56:07 $
+ * @version $Revision: 1.13 $ $Date: 2003-11-03 06:43:15 $
  */
 public class Assembler
     implements MetaDataBuilder
@@ -115,7 +115,7 @@ public class Assembler
         ResourceManager.getPackageResources( Assembler.class );
 
     /**
-     * Create a {@link PartitionMetaData} object based on specified
+     * Create a {@link PartitionTemplate} object based on specified
      * name and assembly configuration. This implementation takes two
      * parameters. {@link ContainerConstants#ASSEMBLY_NAME} specifies
      * the name of the assembly and
@@ -123,10 +123,10 @@ public class Assembler
      * tree to use when assembling Partition.
      *
      * @param parameters the parameters for constructing assembly
-     * @return the new PartitionMetaData
+     * @return the new PartitionTemplate
      * @throws LoomException if an error occurs
      */
-    public PartitionMetaData buildAssembly( final Map parameters )
+    public PartitionTemplate buildAssembly( final Map parameters )
         throws Exception
     {
         final String name =
@@ -139,53 +139,53 @@ public class Assembler
     }
 
     /**
-     * Create a {@link PartitionMetaData} object based on specified
+     * Create a {@link PartitionTemplate} object based on specified
      * name and assembly configuration.
      *
      * @param name the name of Sar
      * @param assembly the assembly configuration object
-     * @return the new PartitionMetaData
+     * @return the new PartitionTemplate
      * @throws LoomException if an error occurs
      */
-    private PartitionMetaData assembleSar( final String name,
+    private PartitionTemplate assembleSar( final String name,
                                            final Configuration config,
                                            final Configuration assembly )
         throws LoomException
     {
         final Configuration[] blockConfig = assembly.getChildren( "block" );
-        final ComponentMetaData[] blocks = buildBlocks( blockConfig, config );
-        final PartitionMetaData blockPartition =
-            new PartitionMetaData( ContainerConstants.BLOCK_PARTITION,
+        final ComponentTemplate[] blocks = buildBlocks( blockConfig, config );
+        final PartitionTemplate blockPartition =
+            new PartitionTemplate( ContainerConstants.BLOCK_PARTITION,
                                    new String[]{ContainerConstants.LISTENER_PARTITION},
-                                   PartitionMetaData.EMPTY_SET,
+                                   PartitionTemplate.EMPTY_SET,
                                    blocks );
 
         final Configuration[] listenerConfig = assembly.getChildren( "listener" );
-        final ComponentMetaData[] listeners = buildBlockListeners( listenerConfig, config );
-        final PartitionMetaData listenerPartition =
-            new PartitionMetaData( ContainerConstants.LISTENER_PARTITION,
+        final ComponentTemplate[] listeners = buildBlockListeners( listenerConfig, config );
+        final PartitionTemplate listenerPartition =
+            new PartitionTemplate( ContainerConstants.LISTENER_PARTITION,
                                    new String[ 0 ],
-                                   PartitionMetaData.EMPTY_SET,
+                                   PartitionTemplate.EMPTY_SET,
                                    listeners );
 
-        final PartitionMetaData[] partitions =
-            new PartitionMetaData[]{blockPartition, listenerPartition};
+        final PartitionTemplate[] partitions =
+            new PartitionTemplate[]{blockPartition, listenerPartition};
 
-        return new PartitionMetaData( name,
+        return new PartitionTemplate( name,
                                       new String[ 0 ],
                                       partitions,
-                                      ComponentMetaData.EMPTY_SET );
+                                      ComponentTemplate.EMPTY_SET );
     }
 
     /**
-     * Create an array of {@link ComponentMetaData} objects to represent
+     * Create an array of {@link ComponentTemplate} objects to represent
      * the &lt;block .../&gt; sections in <tt>assembly.xml</tt>.
      *
      * @param blocks the list of Configuration objects for blocks
      * @return the BlockMetaData array
      * @throws LoomException if an error occurs
      */
-    private ComponentMetaData[] buildBlocks( final Configuration[] blocks,
+    private ComponentTemplate[] buildBlocks( final Configuration[] blocks,
                                              final Configuration config )
         throws LoomException
     {
@@ -195,18 +195,18 @@ public class Assembler
             blockSet.add( buildBlock( blocks[ i ], config ) );
         }
 
-        return (ComponentMetaData[])blockSet.toArray( new ComponentMetaData[ blockSet.size() ] );
+        return (ComponentTemplate[])blockSet.toArray( new ComponentTemplate[ blockSet.size() ] );
     }
 
     /**
-     * Create a single {@link ComponentMetaData} object to represent
+     * Create a single {@link ComponentTemplate} object to represent
      * specified &lt;block .../&gt; section.
      *
      * @param block the Configuration object for block
      * @return the BlockMetaData object
      * @throws LoomException if an error occurs
      */
-    private ComponentMetaData buildBlock( final Configuration block,
+    private ComponentTemplate buildBlock( final Configuration block,
                                           final Configuration config )
         throws LoomException
     {
@@ -220,11 +220,11 @@ public class Assembler
                 proxy.getAttributeAsBoolean( "disable", false );
 
             final Configuration[] provides = block.getChildren( "provide" );
-            final DependencyMetaData[] dependencys = buildDependencies( provides );
+            final DependencyDirective[] dependencys = buildDependencies( provides );
 
             final Configuration configuration = config.getChild( name );
 
-            return new ComponentMetaData( name, classname,
+            return new ComponentTemplate( name, classname,
                                           dependencys, null,
                                           configuration,
                                           disableProxy );
@@ -238,36 +238,36 @@ public class Assembler
     }
 
     /**
-     * Create an array of {@link ComponentMetaData} objects to represent
+     * Create an array of {@link ComponentTemplate} objects to represent
      * the &lt;listener .../&gt; sections in <tt>assembly.xml</tt>.
      *
      * @param listenerConfigs the list of Configuration objects for listenerConfigs
      * @return the array of listeners
      * @throws LoomException if an error occurs
      */
-    private ComponentMetaData[] buildBlockListeners( final Configuration[] listenerConfigs,
+    private ComponentTemplate[] buildBlockListeners( final Configuration[] listenerConfigs,
                                                      final Configuration config )
         throws LoomException
     {
         final List listeners = new ArrayList();
         for( int i = 0; i < listenerConfigs.length; i++ )
         {
-            final ComponentMetaData listener = buildBlockListener( listenerConfigs[ i ], config );
+            final ComponentTemplate listener = buildBlockListener( listenerConfigs[ i ], config );
             listeners.add( listener );
         }
-        return (ComponentMetaData[])listeners.
-            toArray( new ComponentMetaData[ listeners.size() ] );
+        return (ComponentTemplate[])listeners.
+            toArray( new ComponentTemplate[ listeners.size() ] );
     }
 
     /**
-     * Create a {@link ComponentMetaData} object to represent
+     * Create a {@link ComponentTemplate} object to represent
      * the specified &lt;listener .../&gt; section.
      *
      * @param listener the Configuration object for listener
      * @return the BlockListenerMetaData object
      * @throws LoomException if an error occurs
      */
-    private ComponentMetaData buildBlockListener( final Configuration listener,
+    private ComponentTemplate buildBlockListener( final Configuration listener,
                                                   final Configuration config )
         throws LoomException
     {
@@ -276,8 +276,8 @@ public class Assembler
             final String name = listener.getAttribute( "name" );
             final String classname = listener.getAttribute( "class" );
             final Configuration configuration = config.getChild( name );
-            return new ComponentMetaData( name, classname,
-                                          DependencyMetaData.EMPTY_SET,
+            return new ComponentTemplate( name, classname,
+                                          DependencyDirective.EMPTY_SET,
                                           null,
                                           configuration,
                                           false );
@@ -296,10 +296,10 @@ public class Assembler
      * Helper method to build an array of DependencyMetaDatas from input config data.
      *
      * @param provides the set of provides elements for block
-     * @return the created DependencyMetaData array
+     * @return the created DependencyDirective array
      * @throws ConfigurationException if config data is malformed
      */
-    private DependencyMetaData[] buildDependencies( final Configuration[] provides )
+    private DependencyDirective[] buildDependencies( final Configuration[] provides )
         throws ConfigurationException
     {
         final ArrayList dependencies = new ArrayList();
@@ -310,9 +310,9 @@ public class Assembler
             final String alias = provide.getAttribute( "alias", requiredName );
             final String key = provide.getAttribute( "role" );
 
-            dependencies.add( new DependencyMetaData( key, requiredName, alias ) );
+            dependencies.add( new DependencyDirective( key, requiredName, alias ) );
         }
 
-        return (DependencyMetaData[])dependencies.toArray( new DependencyMetaData[ dependencies.size() ] );
+        return (DependencyDirective[])dependencies.toArray( new DependencyDirective[ dependencies.size() ] );
     }
 }

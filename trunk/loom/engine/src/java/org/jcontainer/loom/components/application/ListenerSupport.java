@@ -156,13 +156,11 @@ final class ListenerSupport
      */
     private BlockEvent createEvent( final BlockEntry entry )
     {
-        final ComponentProfile profile = entry.getProfile();
-        final BlockInfo blockInfo = ComponentInfoConverter.toBlockInfo( profile.getInfo() );
-        final BlockEvent event =
-            new BlockEvent( profile.getMetaData().getName(),
+        final BlockInfo blockInfo = 
+            ComponentInfoConverter.toBlockInfo( entry.getInfo() );
+        return new BlockEvent( entry.getName(),
                             entry.getProxy(),
                             blockInfo );
-        return event;
     }
 
     /**

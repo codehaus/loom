@@ -88,7 +88,7 @@ package org.jcontainer.loom.components.application;
 
 import java.util.ArrayList;
 import org.jcontainer.loom.components.util.info.DependencyDescriptor;
-import org.jcontainer.loom.components.util.metadata.DependencyMetaData;
+import org.jcontainer.loom.components.util.metadata.DependencyDirective;
 import org.jcontainer.loom.components.util.profile.ComponentProfile;
 
 /**
@@ -136,7 +136,7 @@ class DependencyGraph
                                     final ArrayList order )
     {
         //If already visited this block then bug out early
-        final String name = block.getMetaData().getName();
+        final String name = block.getTemplate().getName();
         if( done.contains( name ) )
         {
             return;
@@ -169,10 +169,10 @@ class DependencyGraph
         for( int i = 0; i < descriptors.length; i++ )
         {
             final String key = descriptors[ i ].getKey();
-            final DependencyMetaData[] dependencySet = block.getMetaData().getDependencies( key );
+            final DependencyDirective[] dependencySet = block.getTemplate().getDependencies( key );
             for( int j = 0; j < dependencySet.length; j++ )
             {
-                final DependencyMetaData dependency = dependencySet[ j ];
+                final DependencyDirective dependency = dependencySet[ j ];
                 final ComponentProfile other = getBlock( dependency.getProviderName(), blocks );
                 visitBlock( other, blocks, true, done, order );
             }
@@ -190,12 +190,12 @@ class DependencyGraph
                                                   final ArrayList done,
                                                   final ArrayList order )
     {
-        final String name = block.getMetaData().getName();
+        final String name = block.getTemplate().getName();
 
         for( int i = 0; i < blocks.length; i++ )
         {
             final ComponentProfile other = blocks[ i ];
-            final DependencyMetaData[] roles = other.getMetaData().getDependencies();
+            final DependencyDirective[] roles = other.getTemplate().getDependencies();
 
             for( int j = 0; j < roles.length; j++ )
             {
@@ -220,7 +220,7 @@ class DependencyGraph
     {
         for( int i = 0; i < blocks.length; i++ )
         {
-            if( blocks[ i ].getMetaData().getName().equals( name ) )
+            if( blocks[ i ].getTemplate().getName().equals( name ) )
             {
                 return blocks[ i ];
             }

@@ -89,6 +89,7 @@ package org.jcontainer.loom.components.application;
 import org.jcontainer.loom.components.util.info.ComponentInfo;
 import org.jcontainer.loom.components.util.info.ServiceDescriptor;
 import org.jcontainer.loom.components.util.profile.ComponentProfile;
+import org.jcontainer.loom.components.util.metadata.ComponentTemplate;
 
 /**
  * This is the structure describing each block before it is loaded.
@@ -109,14 +110,19 @@ class BlockEntry
         m_componentProfile = componentProfile;
     }
 
-    public String getName()
+    public ComponentInfo getInfo()
     {
-        return getProfile().getMetaData().getName();
+        return m_componentProfile.getInfo();
     }
 
-    public ComponentProfile getProfile()
+    public ComponentTemplate getTemplate()
     {
-        return m_componentProfile;
+        return m_componentProfile.getTemplate();
+    }
+
+    public String getName()
+    {
+        return m_componentProfile.getTemplate().getName();
     }
 
     public synchronized Object getObject()
@@ -128,7 +134,7 @@ class BlockEntry
     {
         invalidate();
 
-        if( null != object && !getProfile().getMetaData().isDisableProxy() )
+        if( null != object && !m_componentProfile.getTemplate().isDisableProxy() )
         {
             final ComponentInfo blockInfo = m_componentProfile.getInfo();
             final Class[] interfaces = getServiceClasses( object, blockInfo.getServices() );
@@ -139,7 +145,7 @@ class BlockEntry
 
     public synchronized Object getProxy()
     {
-        if( getProfile().getMetaData().isDisableProxy() )
+        if( m_componentProfile.getTemplate().isDisableProxy() )
         {
             return m_object;
         }

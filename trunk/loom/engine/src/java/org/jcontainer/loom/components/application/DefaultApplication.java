@@ -178,7 +178,7 @@ public final class DefaultApplication
             final ComponentProfile[] blocks = partition.getComponents();
             for( int i = 0; i < blocks.length; i++ )
             {
-                final String blockName = blocks[ i ].getMetaData().getName();
+                final String blockName = blocks[ i ].getTemplate().getName();
                 final BlockEntry blockEntry = new BlockEntry( blocks[ i ] );
                 m_entries.put( blockName, blockEntry );
             }
@@ -321,7 +321,7 @@ public final class DefaultApplication
             }
             catch( final Exception e )
             {
-                final String name = listeners[ i ].getMetaData().getName();
+                final String name = listeners[ i ].getTemplate().getName();
                 final String message =
                     REZ.format( "bad-listener", "startup", name, e.getMessage() );
                 getLogger().error( message, e );
@@ -478,7 +478,7 @@ public final class DefaultApplication
     {
         final Object block =
             m_lifecycleHelper.startup( entry.getName(),
-                                       entry.getProfile(),
+                                       entry,
                                        m_blockAccessor );
 
         m_context.exportObject( entry.getName(), block );
@@ -534,7 +534,7 @@ public final class DefaultApplication
     private void startupListener( final ComponentProfile profile )
         throws Exception
     {
-        final String name = profile.getMetaData().getName();
+        final String name = profile.getTemplate().getName();
         final Object listener =
             m_lifecycleHelper.startup( name,
                                        profile,
@@ -554,7 +554,7 @@ public final class DefaultApplication
             final String message =
                 REZ.format( "helper.isa-blocklistener.error",
                             name,
-                            profile.getMetaData().getImplementationKey() );
+                            profile.getTemplate().getImplementationKey() );
             getLogger().error( message );
             System.err.println( message );
         }

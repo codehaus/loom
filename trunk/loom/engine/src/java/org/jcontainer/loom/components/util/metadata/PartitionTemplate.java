@@ -18,14 +18,14 @@ package org.jcontainer.loom.components.util.metadata;
  * each other.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-10-16 14:45:46 $
+ * @version $Revision: 1.1 $ $Date: 2003-11-03 06:43:15 $
  */
-public class PartitionMetaData
+public class PartitionTemplate
 {
     /**
      * Constant for an empty set of partitions.
      */
-    public static final PartitionMetaData[] EMPTY_SET = new PartitionMetaData[ 0 ];
+    public static final PartitionTemplate[] EMPTY_SET = new PartitionTemplate[ 0 ];
 
     /**
      * The name of the partition. This is an
@@ -45,26 +45,26 @@ public class PartitionMetaData
      * AN array of partitions that are contained by this
      * object.
      */
-    private final PartitionMetaData[] m_partitions;
+    private final PartitionTemplate[] m_partitions;
 
     /**
      * AN array of components that are contained by this
      * object.
      */
-    private final ComponentMetaData[] m_components;
+    private final ComponentTemplate[] m_components;
 
     /**
-     * Create a PartitionMetaData.
+     * Create a PartitionTemplate.
      *
      * @param name the abstract name of component meta data instance
      * @param depends the partitions depended upon by this parition
      * @param partitions the partitions contained by this partition
      * @param components the components contained by this partition
      */
-    public PartitionMetaData( final String name,
+    public PartitionTemplate( final String name,
                               final String[] depends,
-                              final PartitionMetaData[] partitions,
-                              final ComponentMetaData[] components )
+                              final PartitionTemplate[] partitions,
+                              final ComponentTemplate[] components )
     {
         if( null == name )
         {
@@ -114,7 +114,7 @@ public class PartitionMetaData
      *
      * @return the set of partitions contained in this partition.
      */
-    public PartitionMetaData[] getPartitions()
+    public PartitionTemplate[] getPartitions()
     {
         return m_partitions;
     }
@@ -124,7 +124,7 @@ public class PartitionMetaData
      *
      * @return the set of components contained in this partition.
      */
-    public ComponentMetaData[] getComponents()
+    public ComponentTemplate[] getComponents()
     {
         return m_components;
     }
@@ -134,11 +134,11 @@ public class PartitionMetaData
      *
      * @return the partition with specified name.
      */
-    public PartitionMetaData getPartition( final String name )
+    public PartitionTemplate getPartition( final String name )
     {
         for( int i = 0; i < m_partitions.length; i++ )
         {
-            final PartitionMetaData partition = m_partitions[ i ];
+            final PartitionTemplate partition = m_partitions[ i ];
             if( partition.getName().equals( name ) )
             {
                 return partition;
@@ -153,11 +153,11 @@ public class PartitionMetaData
      *
      * @return the component with specified name.
      */
-    public ComponentMetaData getComponent( final String name )
+    public ComponentTemplate getComponent( final String name )
     {
         for( int i = 0; i < m_components.length; i++ )
         {
-            final ComponentMetaData component = m_components[ i ];
+            final ComponentTemplate component = m_components[ i ];
             if( component.getName().equals( name ) )
             {
                 return component;

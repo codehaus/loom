@@ -14,7 +14,7 @@ import java.util.Map;
  * The source is usually one or more xml config files.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-10-16 14:45:46 $
+ * @version $Revision: 1.2 $ $Date: 2003-11-03 06:43:15 $
  */
 public interface MetaDataBuilder
 {
@@ -28,6 +28,6 @@ public interface MetaDataBuilder
      * @throws java.lang.Exception if unable to load or resolve
      *         meta data for any reason
      */
-    PartitionMetaData buildAssembly( Map parameters )
+    PartitionTemplate buildAssembly( Map parameters )
         throws Exception;
 }

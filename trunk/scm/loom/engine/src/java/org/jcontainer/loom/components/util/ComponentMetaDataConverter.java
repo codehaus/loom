@@ -15,16 +15,16 @@ import org.apache.avalon.phoenix.metadata.DependencyMetaData;
 import org.apache.avalon.phoenix.metadata.SarMetaData;
 import org.apache.avalon.phoenix.metainfo.BlockInfo;
 import org.jcontainer.loom.components.util.info.ComponentInfo;
-import org.jcontainer.loom.components.util.metadata.ComponentMetaData;
+import org.jcontainer.loom.components.util.metadata.ComponentTemplate;
 import org.jcontainer.loom.components.util.profile.ComponentProfile;
 import org.jcontainer.loom.components.util.profile.PartitionProfile;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 
 /**
- * Convert a {@link org.jcontainer.loom.components.util.metadata.ComponentMetaData} into a {@link BlockMetaData}.
+ * Convert a ComponentTemplate into a BlockMetaData.
  *
  * @author <a href="mailto:peter@apache.org">Peter Donald</a>
- * @version $Revision: 1.7 $ $Date: 2003-10-16 14:45:46 $
+ * @version $Revision: 1.8 $ $Date: 2003-11-03 06:43:15 $
  */
 public class ComponentMetaDataConverter
 {
@@ -51,10 +51,10 @@ public class ComponentMetaDataConverter
 
     /**
      * Convert a set of {@link org.jcontainer.loom.components.util.profile.ComponentProfile} object
-     * into a set of {@link BlockMetaData} objects.
+     * into a set of BlockMetaData objects.
      *
      * @param components the {@link org.jcontainer.loom.components.util.profile.ComponentProfile} objects
-     * @return the {@link BlockMetaData} objects
+     * @return the BlockMetaData objects
      */
     private static BlockMetaData[] toBlocks( final ComponentProfile[] components )
     {
@@ -63,19 +63,19 @@ public class ComponentMetaDataConverter
         {
             final ComponentProfile component = components[ i ];
             final BlockMetaData block =
-                toBlockMetaData( component.getMetaData(), component.getInfo() );
+                toBlockMetaData( component.getTemplate(), component.getInfo() );
             listenerSet.add( block );
         }
         return (BlockMetaData[])listenerSet.toArray( new BlockMetaData[ listenerSet.size() ] );
     }
 
     /**
-     * Convert a {@link org.jcontainer.loom.components.util.metadata.ComponentMetaData} object into a {@link BlockListenerMetaData} object.
+     * Convert a ComponentTemplate object into a {@link BlockListenerMetaData} object.
      *
-     * @param listeners the {@link org.jcontainer.loom.components.util.metadata.ComponentMetaData} object
+     * @param listeners the ComponentTemplate object
      * @return the {@link BlockListenerMetaData} object
      */
-    public static BlockListenerMetaData[] toBlockListeners( final ComponentMetaData[] listeners )
+    public static BlockListenerMetaData[] toBlockListeners( final ComponentTemplate[] listeners )
     {
         final ArrayList listenerSet = new ArrayList();
         for( int i = 0; i < listeners.length; i++ )
@@ -89,12 +89,12 @@ public class ComponentMetaDataConverter
     }
 
     /**
-     * Convert a {@link org.jcontainer.loom.components.util.metadata.ComponentMetaData} object into a {@link BlockMetaData} object.
+     * Convert a ComponentTemplate object into a BlockMetaData object.
      *
-     * @param component the {@link org.jcontainer.loom.components.util.metadata.ComponentMetaData} object
-     * @return the {@link BlockMetaData} object
+     * @param component the ComponentTemplate object
+     * @return the BlockMetaData object
      */
-    public static BlockMetaData toBlockMetaData( final ComponentMetaData component,
+    public static BlockMetaData toBlockMetaData( final ComponentTemplate component,
                                                  final ComponentInfo info )
     {
         final boolean disableProxy = component.isDisableProxy();
@@ -115,7 +115,7 @@ public class ComponentMetaDataConverter
      * @return the Phoenix dependencys
      */
     private static DependencyMetaData[] toPhoenixDependencys(
-        final org.jcontainer.loom.components.util.metadata.DependencyMetaData[] dependencies )
+        final org.jcontainer.loom.components.util.metadata.DependencyDirective[] dependencies )
     {
         final ArrayList depends = new ArrayList();
         for( int i = 0; i < dependencies.length; i++ )

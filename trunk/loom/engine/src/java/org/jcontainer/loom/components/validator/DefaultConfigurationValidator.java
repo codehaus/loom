@@ -28,7 +28,7 @@ import org.w3c.dom.Element;
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author <a href="mailto:proyal at apache.org">Peter Royal</a>
- * @version $Revision: 1.12 $ $Date: 2003-10-16 14:45:47 $
+ * @version $Revision: 1.13 $ $Date: 2003-11-03 06:43:16 $
  * @dna.component
  */
 public class DefaultConfigurationValidator
@@ -58,7 +58,7 @@ public class DefaultConfigurationValidator
         if( getLogger().isDebugEnabled() )
         {
             final String message =
-                "Validating component " + component.getMetaData().getName() +
+                "Validating component " + component.getTemplate().getName() +
                 " of type " + classname +
                 " with schema " + schema.getLocation() + " of type " + schema.getType();
             getLogger().debug( message );
@@ -75,13 +75,13 @@ public class DefaultConfigurationValidator
             if( null == validator )
             {
                 final String message =
-                    "Missing schema for component " + component.getMetaData().getName() +
+                    "Missing schema for component " + component.getTemplate().getName() +
                     " of type " + classname +
                     " with schema " + schema.getLocation() + " of type " + schema.getType();
                 getLogger().warn( message );
                 return false;
             }
-            final Configuration configuration = component.getMetaData().getConfiguration();
+            final Configuration configuration = component.getTemplate().getConfiguration();
             final DefaultConfiguration newConfiguration =
                 new DefaultConfiguration( "root",
                                           configuration.getPath(),
@@ -94,7 +94,7 @@ public class DefaultConfigurationValidator
         }
         catch( Exception e )
         {
-            final String msg = component.getMetaData().getName() + " failed validation due to: "
+            final String msg = component.getTemplate().getName() + " failed validation due to: "
                 + e.getMessage();
             getLogger().warn( msg, e );
             return false;

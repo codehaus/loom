@@ -15,8 +15,8 @@ import org.jcontainer.loom.components.util.factory.DefaultComponentFactory;
 import org.jcontainer.loom.components.util.info.ComponentInfo;
 import org.jcontainer.loom.components.util.info.DependencyDescriptor;
 import org.jcontainer.loom.components.util.info.ServiceDescriptor;
-import org.jcontainer.loom.components.util.metadata.ComponentMetaData;
-import org.jcontainer.loom.components.util.metadata.PartitionMetaData;
+import org.jcontainer.loom.components.util.metadata.ComponentTemplate;
+import org.jcontainer.loom.components.util.metadata.PartitionTemplate;
 import org.jcontainer.loom.components.util.profile.ComponentProfile;
 import org.jcontainer.loom.components.util.profile.PartitionProfile;
 import org.jcontainer.loom.components.util.profile.ProfileBuilder;
@@ -25,7 +25,7 @@ import org.jcontainer.loom.interfaces.ContainerConstants;
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.16 $ $Date: 2003-11-03 06:17:58 $
+ * @version $Revision: 1.17 $ $Date: 2003-11-03 06:43:15 $
  */
 public class PhoenixProfileBuilder
     implements ProfileBuilder
@@ -35,7 +35,7 @@ public class PhoenixProfileBuilder
     public PartitionProfile buildProfile( final Map parameters )
         throws Exception
     {
-        final PartitionMetaData metaData = m_assembler.buildAssembly( parameters );
+        final PartitionTemplate metaData = m_assembler.buildAssembly( parameters );
         final ClassLoader classLoader =
             (ClassLoader)parameters.get( ContainerConstants.ASSEMBLY_CLASSLOADER );
         final ComponentFactory factory = new DefaultComponentFactory( classLoader );
@@ -43,14 +43,14 @@ public class PhoenixProfileBuilder
         return assembleSarProfile( metaData, factory, classLoader );
     }
 
-    private PartitionProfile assembleSarProfile( final PartitionMetaData metaData,
+    private PartitionProfile assembleSarProfile( final PartitionTemplate metaData,
                                                  final ComponentFactory factory,
                                                  final ClassLoader classLoader )
         throws Exception
     {
-        final PartitionMetaData blockPartition =
+        final PartitionTemplate blockPartition =
             metaData.getPartition( ContainerConstants.BLOCK_PARTITION );
-        final PartitionMetaData listenerPartition =
+        final PartitionTemplate listenerPartition =
             metaData.getPartition( ContainerConstants.LISTENER_PARTITION );
 
         final PartitionProfile blockProfile = assembleProfile( blockPartition, factory );
@@ -63,15 +63,15 @@ public class PhoenixProfileBuilder
                                      ComponentProfile.EMPTY_SET );
     }
 
-    private PartitionProfile assembleListenerProfile( final PartitionMetaData metaData,
+    private PartitionProfile assembleListenerProfile( final PartitionTemplate metaData,
                                                       final ClassLoader classLoader )
     throws Exception
     {
         final ArrayList componentSet = new ArrayList();
-        final ComponentMetaData[] components = metaData.getComponents();
+        final ComponentTemplate[] components = metaData.getComponents();
         for( int i = 0; i < components.length; i++ )
         {
-            final ComponentMetaData component = components[ i ];
+            final ComponentTemplate component = components[ i ];
             final Class type = classLoader.loadClass( component.getImplementationKey() );
             final ComponentInfo info = createListenerInfo( type );
             final ComponentProfile profile = new ComponentProfile( info, component );
@@ -83,24 +83,24 @@ public class PhoenixProfileBuilder
         return new PartitionProfile( metaData, PartitionProfile.EMPTY_SET, profiles );
     }
 
-    private PartitionProfile assembleProfile( final PartitionMetaData metaData,
+    private PartitionProfile assembleProfile( final PartitionTemplate metaData,
                                               final ComponentFactory factory )
         throws Exception
     {
         final ArrayList partitionSet = new ArrayList();
-        final PartitionMetaData[] partitions = metaData.getPartitions();
+        final PartitionTemplate[] partitions = metaData.getPartitions();
         for( int i = 0; i < partitions.length; i++ )
         {
-            final PartitionMetaData partition = partitions[ i ];
+            final PartitionTemplate partition = partitions[ i ];
             final PartitionProfile profile = assembleProfile( partition, factory );
             partitionSet.add( profile );
         }
 
         final ArrayList componentSet = new ArrayList();
-        final ComponentMetaData[] components = metaData.getComponents();
+        final ComponentTemplate[] components = metaData.getComponents();
         for( int i = 0; i < components.length; i++ )
         {
-            final ComponentMetaData component = components[ i ];
+            final ComponentTemplate component = components[ i ];
             final ComponentInfo info =
                 factory.createInfo( component.getImplementationKey() );
             final ComponentProfile profile = new ComponentProfile( info, component );
