@@ -120,11 +120,11 @@ final class DefaultBlockContext
         }
         else if( BlockContext.APP_HOME_DIR.equals( key ) )
         {
-            return m_applicationContext.getHomeDirectory();
+            return getBaseDirectory();
         }
         else if( BlockContext.NAME.equals( key ) )
         {
-            return m_name;
+            return getName();
         }
         else
         {
