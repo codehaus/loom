@@ -84,7 +84,7 @@ public class RuntimeTestCase
         }
     }
 
-    public void testPolicyWithNull()
+    public void testPolicyAccessPermission()
         throws Exception
     {
         final URL url = new URL( "file:/-" );
@@ -106,5 +106,21 @@ public class RuntimeTestCase
             return;
         }
         fail( "Expected to find AllPermission in set" );
+    }
+
+    public void testPolicyAccessPermissionForNonSpecifiedCodeBase()
+        throws Exception
+    {
+        final Policy policy = new DefaultPolicy();
+        policy.refresh();
+
+        final URL url = new URL( "http://spice.sourceforge.net/-" );
+        final CodeSource codeSource = new CodeSource( url, new Certificate[ 0 ] );
+        final PermissionCollection permissions = policy.getPermissions( codeSource );
+        assertEquals( "Expect no permissions for http://...", false, permissions.elements().hasMoreElements() );
+
+        final CodeSource otherCodeSource = new CodeSource( null, new Certificate[ 0 ] );
+        final PermissionCollection otherPermissions = policy.getPermissions( otherCodeSource );
+        assertEquals( "Expect no permissions for null location", false, otherPermissions.elements().hasMoreElements() );
     }
 }
