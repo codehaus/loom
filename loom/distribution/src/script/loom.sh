@@ -126,7 +126,8 @@ JVM_EXT_DIRS="$LOOM_HOME/lib:$LOOM_HOME/tools/lib"
 if $cygwin; then
   JVM_EXT_DIRS=`cygpath --path --windows "$JVM_EXT_DIRS"`
 fi
-JVM_OPTS="-Djava.ext.dirs=$JVM_EXT_DIRS"
+JVM_OPTS="-Djava.ext.dirs=$JVM_EXT_DIRS -Djava.endorsed.dirs=$LOOM_HOME/lib/endorsed"
+
 
 if [ "$LOOM_SECURE" != "false" ] ; then
   # Make loom run with security manager enabled
