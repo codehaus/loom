@@ -7,53 +7,54 @@
  */
 package org.realityforge.xmlpolicy.builder;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.security.Certificate;
-import java.security.KeyException;
-import java.security.Principal;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.security.PublicKey;
+import java.security.SignatureException;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateEncodingException;
+import java.security.cert.CertificateException;
 
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-05 09:43:28 $
+ * @version $Revision: 1.3 $ $Date: 2003-06-05 09:51:41 $
  */
 class MockCertificate
-    implements Certificate
+    extends Certificate
 {
-    public Principal getGuarantor()
+    public MockCertificate()
     {
-        return null;
+        super( "" );
     }
 
-    public Principal getPrincipal()
+    public byte[] getEncoded()
+        throws CertificateEncodingException
+    {
+        return new byte[ 0 ];
+    }
+
+    public void verify( PublicKey key )
+        throws CertificateException, NoSuchAlgorithmException,
+        InvalidKeyException, NoSuchProviderException,
+        SignatureException
+    {
+    }
+
+    public void verify( PublicKey key, String sigProvider )
+        throws CertificateException, NoSuchAlgorithmException,
+        InvalidKeyException, NoSuchProviderException,
+        SignatureException
+    {
+    }
+
+    public String toString()
     {
         return null;
     }
 
     public PublicKey getPublicKey()
-    {
-        return null;
-    }
-
-    public void encode( OutputStream stream )
-        throws KeyException, IOException
-    {
-    }
-
-    public void decode( InputStream stream )
-        throws KeyException, IOException
-    {
-    }
-
-    public String getFormat()
-    {
-        return null;
-    }
-
-    public String toString( boolean detailed )
     {
         return null;
     }
