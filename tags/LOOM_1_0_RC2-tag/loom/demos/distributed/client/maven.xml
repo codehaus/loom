@@ -1,0 +1,7 @@
+<project default="build">
+
+    <goal name="build" prereqs="jar:jar"/>
+
+    <goal name="deploy"/>
+
+</project>

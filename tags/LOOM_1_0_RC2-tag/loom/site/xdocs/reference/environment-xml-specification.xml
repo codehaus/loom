@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<document>
+    <properties>
+        <title>Specification of environment.xml</title>
+    </properties>
+    <body>
+        <section name="Introduction">
+            <p>
+        The purpose of the
+                <code>environment.xml</code> file is to configure
+        environmental or Server Application wide settings. Currently this means
+        being able to set the security policy and configure logging settings.
+        A sample <code>environment.xml</code> follows. Note that the example
+        does not include defining custom classloaders which is possible by
+        adding a &lt;classloaders&gt; element in environment.xml file. This
+        feature is more fully described in <a href="classman.html">ClassMan
+        Overview</a>.</p>
+        </section>
+        <section name="Sample environment.xml file">
+            <source>
+                <![CDATA[
+<?xml version="1.0"?>
+
+<environment>
+
+    <logs>
+		<category name="" target="default" priority="DEBUG" />
+		<category name="myAuthorizer" target="myAuthorizer-target"
+    				priority="DEBUG" />
+
+		<log-target name="default"
+    	  	location="/logs/default.log" />
+		<log-target name="myAuthorizer-target"
+      		location="/logs/authorizer.log" />
+    </logs>
+
+    <policy>
+      <!-- define the keystore that is used to load signers from -->
+      <keystore name="myKeystore"
+                location="sar:/conf/keystore"
+                type="JKS"/>
+
+      <!-- grant the java classes defined in
+           /SAR-INF/classes/ directory the permission
+           to read and write files to temp directory. -->
+      <grant code-base="sar:/SAR-INF/classes/">
+        <permission class="java.io.FilePermission"
+                    target="${/}tmp${/}*"
+                    action="read,write"/>
+      </grant>
+
+      <!-- grant the secure.jar the permission to connect
+           a socket to localhost ports 1024 and above,
+           as long as code has been signed by "Fred". -->
+      <grant code-base="sar:/SAR-INF/lib/secure.jar"
+             signed-by="Fred"
+             key-store="myKeystore" >
+        <permission class="java.io.FilePermission"
+                    target="localhost:1024-"
+                    action="accept,connect,listen"/>
+      </grant>
+    </policy>
+
+</environment>
+
+                ]]></source>
+            <subsection name="Policy Descriptor Section">
+                <p>
+        The format of the policy section should be largely self evident if the assembler
+        has experience with standard policy files. If no policy section is
+        specified then the Server Application runs with full access. The
+        evaluation of properties occurs in a similar manner to standard
+        policy file property expansion. There are a number of extra properties that
+        will be evaluated. These include;
+                    <code>app.home</code> and
+                    <code>app.name</code>.
+                </p>
+                <p>
+        One special thing to not is that the user can use URLs of the form,
+        "sar:/SAR-INF/lib/*". This will apply the permissions to the jars
+        contained in the .SAR file. Note that these urls must start with
+        "sar:/" and must use the "/" character as file separator, regardless
+        of the host operating system.
+                </p>
+            </subsection>
+            <subsection name="Log Descriptor Section">
+                <p>
+        The logs section can currently have two types of elements;
+                    <em>log-target</em>s
+        which represent destinations for logging and
+                    <em>category</em>s. There must be a
+        log-target with the name "default". Categories are hierarchial in nature, have a
+        priority and are associated with one or more log-targets. See the logging
+        documentation for a further description of this section.
+                </p>
+                <p>
+        There is another type of log configuration. It is more configurable.
+        Specify version attribute with logs elements. See javadoc of
+        org.apache.avalon.excalibur.logger package for detailed description.
+        Below is example configuration.
+                </p>
+                <source>
+                    <![CDATA[
+<?xml version="1.0"?>
+<environment>
+    <logs version="1.1">
+	    <factories>
+    		<factory type="file" class="org.apache.avalon.excalibur.logger.factory.FileTargetFactory"/>
+   		</factories>
+
+	    <categories>
+    		<category name="" log-level="INFO">
+    			<log-target id-ref="default"/>
+    		</category>
+    	</categories>
+
+	    <targets>
+		    <file id="default">
+	    		<filename>${app.home}/logs/default-</filename>
+	    		<append>true</append>
+	   			<rotation type="unique" pattern="yyyyMMdd" suffix=".log">
+	    			<date>yyyyMMdd</date>
+	    		</rotation>
+		    </file>
+	    </targets>
+    </logs>
+</environment>
+    ]]></source>
+            </subsection>
+        </section>
+    </body>
+</document>

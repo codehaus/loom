@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<document>
+
+    <properties>
+        <title>Maven Loom Plugin Tips</title>
+        <author>Mauro Talevi</author>
+    </properties>
+
+    <body>
+        <section name="Maven Loom Plugin Tips">
+            <section name="Filtering xml files">
+                <p>
+          If you need to copy the [assembly|config|environment].xml files in order to replace some
+          filter tokens or simply perform some custom modification to it,
+          simply write a pre-goal to the
+                    <code>loom:sar</code> goal in which
+          you perform the manipulation. Then set the
+                    <code>maven.loom.[assembly|config|environment]</code> property to point to your modified
+                    <code>[assembly|config|environment].xml</code>.
+                </p>
+            </section>
+        </section>
+    </body>
+</document>

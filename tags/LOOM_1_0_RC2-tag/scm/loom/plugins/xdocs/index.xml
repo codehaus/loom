@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document>
+    <properties>
+        <title>Loom Plugins</title>
+    </properties>
+
+    <body>
+        <section name="Plugins">
+            <table>
+                <tr>
+                    <td>
+                        <a href="/plugins/maven-loom/">Maven Loom Plugin</a>
+                    </td>
+                    <td>Generates Loom/Phoenix Sar files using Maven</td>
+                </tr>
+            </table>
+        </section>
+        <section name="Downloads">
+            <p>The Loom plugins are downloadable from
+                <a href="http://dist.codehaus.org/loom/plugins">
+			Codehaus Distribution Server</a>.
+            </p> 
+            <p>The Codehaus Distribution artifacts are synched with the 
+            <a href="http://ibiblio.org/maven/loom">IBiblio</a> 
+            Maven repository. 
+            Simply specify the plugin name as a dependency with type
+                <code>plugin</code>:
+                <source><![CDATA[
+  <dependency>
+    <groupId>loom</groupId>
+    <artifactId>maven-loom-plugin</artifactId>
+    <version>[plugin-version]</version>
+    <type>plugin</type>
+  </dependency>
+                ]]></source>
+            </p>
+        </section>
+
+    </body>
+</document>

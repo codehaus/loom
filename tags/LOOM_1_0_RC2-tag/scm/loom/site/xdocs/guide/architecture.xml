@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<document>
+    <properties>
+        <title>Guide - Architectural overview</title>
+        <author email="leosimons@apache.org">Leo Simons</author>
+    </properties>
+    <body>
+        <section name="Introduction">
+            <p>
+              This document briefly describes the Loom server architecture.
+            </p>
+        </section>
+        <section name="Multiple Server Application hosting">
+            <p>
+                Loom hosts one or more server applications at the same time in the same Virtual machine.
+            </p>
+            <p>
+                <strong>Loom layer diagram</strong>
+            </p>
+            <img src="../images/loom-layers.png" alt="Loom Layers"/>
+            <p>
+              Shown above are three hosted server applications.  
+              <ul>
+				<li>A Mail server - such as Apache James - that would implement multiple listeners for incoming and outgoing services (POP3, SMTP, IMAP etc).  Outlook,
+              Eudora and other mail clients would be able to connect to the server.</li>
+				<li>A Web server - such as Tomcat or Jetty - that would respond to HTTP/HTTPS requests from similar standards
+              based clients and be able to host it's own applications (web-apps and virtual websites).</li>
+                <li>A Beans server - in which we can include EJB servers - which communicate to remote clients
+              via RMI/AltRMI. </li>
+              </ul>
+            </p>
+        </section>
+        <section name="Packaging of a Server Application">
+            <p>
+                Loom applications are distributed in a single Server Archive (SAR) file,
+                which is a jar file with a special SAR-INF directory, containing the libraries
+                and the XML configuration files.  The key features of a sar file are:
+              <ul>
+				<li> The server application is entirely contained within one sar file.  
+				</li>
+				<li> Blocks may be packaged in one or more jar files. 
+				</li>
+				<li> The jar files - along with any other libraries upon which the application
+              depends - are placed within the SAR-INF/lib directory.
+				</li>
+				<li>The assembly.xml, config.xml and environment.xml configuration files
+              contained in the root SAR-INF directory.
+				</li>
+              </ul>
+            </p>
+            <p>
+              Loom provides an Ant task and a Maven plugin for creating sar files. 
+            </p>
+        </section>
+    </body>
+</document>
