@@ -86,17 +86,12 @@
  */
 package org.jcontainer.loom.components.manager;
 
-import java.lang.reflect.Constructor;
-import java.util.Iterator;
-import java.util.Set;
 import javax.management.MBeanServer;
 import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
-import javax.management.modelmbean.ModelMBeanInfo;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.LoomException;
-import org.realityforge.metaclass.jmx.MBeanInfoBuilder;
-import org.realityforge.metaclass.jmx.WrapperModelMBean;
+import org.realityforge.metaclass.jmx.MBeanBinder;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
@@ -105,7 +100,7 @@ import org.realityforge.salt.i18n.Resources;
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author <a href="mailto:Huw@mmlive.com">Huw Roberts</a>
- * @version $Revision: 1.7 $ $Date: 2003-10-16 09:22:06 $
+ * @version $Revision: 1.8 $ $Date: 2003-10-17 08:51:32 $
  */
 public abstract class AbstractJMXManager
     extends AbstractSystemManager
@@ -113,24 +108,19 @@ public abstract class AbstractJMXManager
     private static final Resources REZ =
         ResourceManager.getPackageResources( AbstractJMXManager.class );
 
-    private static final MBeanInfoBuilder INFO_BUILDER = new MBeanInfoBuilder();
-
+    private static final MBeanBinder BINDER = new MBeanBinder();
     private MBeanServer m_mBeanServer;
-    private String m_domain = ContainerConstants.SOFTWARE;
 
     public void initialize()
         throws Exception
     {
         super.initialize();
-
-        final MBeanServer mBeanServer = createMBeanServer();
-        setMBeanServer( mBeanServer );
+        m_mBeanServer = createMBeanServer();
     }
 
     public void dispose()
     {
-        setMBeanServer( null );
-
+        m_mBeanServer = null;
         super.dispose();
     }
 
@@ -150,9 +140,8 @@ public abstract class AbstractJMXManager
     {
         try
         {
-            final Target target = createTarget( name, object );
-            exportTarget( target );
-            return target;
+            BINDER.bindMBean( object, createObjectName( name ), getMBeanServer() );
+            return object;
         }
         catch( final Exception e )
         {
@@ -175,22 +164,14 @@ public abstract class AbstractJMXManager
     {
         try
         {
-            final Target target = (Target)exportedObject;
-            final Set topicNames = target.getTopicNames();
-            final Iterator i = topicNames.iterator();
-
-            while( i.hasNext() )
-            {
-                final String topicName = (String)i.next();
-                final ObjectName objectName = createObjectName( name, topicName );
-                getMBeanServer().unregisterMBean( objectName );
-            }
+            BINDER.bindMBean( exportedObject,
+                              createObjectName( name ),
+                              getMBeanServer() );
         }
         catch( final Exception e )
         {
             final String message =
                 REZ.format( "jmxmanager.error.unexport.fail", name );
-            getLogger().error( message, e );
             throw new LoomException( message, e );
         }
     }
@@ -198,21 +179,6 @@ public abstract class AbstractJMXManager
     protected MBeanServer getMBeanServer()
     {
         return m_mBeanServer;
-    }
-
-    protected void setMBeanServer( final MBeanServer mBeanServer )
-    {
-        m_mBeanServer = mBeanServer;
-    }
-
-    protected String getDomain()
-    {
-        return m_domain;
-    }
-
-    protected void setDomain( final String domain )
-    {
-        m_domain = domain;
     }
 
     /**
@@ -223,105 +189,15 @@ public abstract class AbstractJMXManager
         throws Exception;
 
     /**
-     * Creates a target that can then be exported for management. A topic is created
-     * for each interface and for topics specified in the mxinfo file, if present
-     *
-     * @param name name of the target
-     * @param object managed object
-     * @return  the management target
-     */
-    protected Target createTarget( final String name,
-                                   final Object object )
-        throws Exception
-    {
-        final Class type = object.getClass();
-        final ModelMBeanInfo[] infos = INFO_BUILDER.buildMBeanInfos( type );
-        final Target target = new Target( name, object );
-        for( int i = 0; i < infos.length; i++ )
-        {
-            target.addTopic( infos[ i ] );
-        }
-        return target;
-    }
-
-    /**
-     * Exports the target to the management repository.  This is done by exporting
-     * each topic in the target.
-     *
-     * @param target the management target
-     */
-    protected void exportTarget( final Target target )
-        throws Exception
-    {
-        // loop through each topic and export it
-        final Set topicNames = target.getTopicNames();
-        final Iterator i = topicNames.iterator();
-        while( i.hasNext() )
-        {
-            final String topicName = (String)i.next();
-            final ModelMBeanInfo topic = target.getTopic( topicName );
-            final String targetName = target.getName();
-            final Object managedResource = target.getManagedResource();
-            Object targetObject = managedResource;
-            if( topic.getMBeanDescriptor().getFieldValue( "proxyClassName" ) != null )
-            {
-                targetObject = createManagementProxy( topic, managedResource );
-            }
-
-            // use a proxy adapter class to manage object
-            exportTopic( topic, targetObject, targetName, topicName );
-        }
-    }
-
-    /**
-     * Exports the topic to the management repository. The name of the topic in the
-     * management repository will be the target name + the topic name
-     *
-     * @param topic the descriptor for the topic
-     * @param target to be managed
-     * @param targetName the target's name
-     */
-    protected Object exportTopic( final ModelMBeanInfo topic,
-                                  final Object target,
-                                  final String targetName,
-                                  final String topicName )
-        throws Exception
-    {
-        final Object mBean = new WrapperModelMBean( topic, target );
-        final ObjectName objectName = createObjectName( targetName, topicName );
-        getMBeanServer().registerMBean( mBean, objectName );
-        return mBean;
-    }
-
-    /**
      * Create JMX name for object.
      *
      * @param name the name of object
      * @return the {@link ObjectName} representing object
      * @throws MalformedObjectNameException if malformed name
      */
-    private ObjectName createObjectName( final String name,
-                                         final String topicName )
+    private ObjectName createObjectName( final String name )
         throws MalformedObjectNameException
     {
-        return new ObjectName( getDomain() + ":" + name + ",topic=" + topicName );
-    }
-
-    /**
-     * Instantiates a proxy management object for the target object
-     *
-     * this should move out of bridge and into Registry, it isn't specifically for jmx
-     */
-    private Object createManagementProxy( final ModelMBeanInfo topic,
-                                          final Object managedObject )
-        throws Exception
-    {
-        final String proxyClassname = (String)topic.getMBeanDescriptor().getFieldValue( "proxyClassName" );
-        final ClassLoader classLoader = managedObject.getClass().getClassLoader();
-        final Class proxyClass = classLoader.loadClass( proxyClassname );
-        final Class[] argTypes = new Class[]{Object.class};
-        final Object[] argValues = new Object[]{managedObject};
-        final Constructor constructor = proxyClass.getConstructor( argTypes );
-        return constructor.newInstance( argValues );
+        return new ObjectName( ContainerConstants.SOFTWARE + ":" + name );
     }
 }

@@ -97,8 +97,7 @@ public class NoopSystemManager
     extends AbstractSystemManager
 {
     protected Object export( final String name,
-                             final Object object
-                             )
+                             final Object object )
         throws LoomException
     {
         return object;
@@ -106,11 +105,6 @@ public class NoopSystemManager
 
     protected void unexport( final String name,
                              final Object exportedObject )
-        throws LoomException
-    {
-    }
-
-    protected void verifyInterface( final Class clazz )
         throws LoomException
     {
     }
