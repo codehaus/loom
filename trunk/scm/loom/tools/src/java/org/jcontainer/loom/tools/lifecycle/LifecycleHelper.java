@@ -10,8 +10,6 @@
  */
 package org.jcontainer.loom.tools.lifecycle;
 
-import org.apache.avalon.excalibur.i18n.ResourceManager;
-import org.apache.avalon.excalibur.i18n.Resources;
 import org.apache.avalon.framework.activity.Disposable;
 import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.activity.Startable;
@@ -33,6 +31,8 @@ import org.apache.excalibur.instrument.InstrumentManageable;
 import org.apache.excalibur.instrument.InstrumentManager;
 import org.apache.excalibur.instrument.Instrumentable;
 import org.jcontainer.loom.tools.lifecycle.LifecycleException;
+import org.realityforge.salt.i18n.Resources;
+import org.realityforge.salt.i18n.ResourceManager;
 
 /**
  * This is a class to help an Application manage the lifecycle of a component.
@@ -72,7 +72,7 @@ public class LifecycleHelper
      * @param entry the entry representing object
      * @param provider the resource provider
      * @return the newly created component
-     * @throws org.jcontainer.loom.tools.lifecycle.LifecycleException if an error occurs when the component passes
+     * @throws LifecycleException if an error occurs when the component passes
      *     through a specific lifecycle stage
      */
     public Object startup( final String name,
@@ -198,7 +198,7 @@ public class LifecycleHelper
      *
      * @param name the name of the component
      * @param object the component to shutdown
-     * @throws org.jcontainer.loom.tools.lifecycle.LifecycleException if unable to process component
+     * @throws LifecycleException if unable to process component
      */
     public void shutdown( final String name,
                           final Object object )
@@ -261,9 +261,9 @@ public class LifecycleHelper
         if( getLogger().isDebugEnabled() )
         {
             final String message =
-                REZ.getString( "lifecycle.stage.notice",
-                               name,
-                               new Integer( stage ) );
+                REZ.format( "lifecycle.stage.notice",
+                            name,
+                            new Integer( stage ) );
             getLogger().debug( message );
         }
     }
@@ -283,10 +283,10 @@ public class LifecycleHelper
         //final String reason = t.getMessage();
         final String reason = t.toString();
         final String message =
-            REZ.getString( "lifecycle.fail.error",
-                           name,
-                           new Integer( stage ),
-                           reason );
+            REZ.format( "lifecycle.fail.error",
+                        name,
+                        new Integer( stage ),
+                        reason );
         getLogger().error( message );
     }
 
@@ -298,7 +298,7 @@ public class LifecycleHelper
      * @param name the name of block that caused failure
      * @param stage the stage
      * @param t the exception thrown
-     * @throws org.jcontainer.loom.tools.lifecycle.LifecycleException containing error
+     * @throws LifecycleException containing error
      */
     private void fail( final String name,
                        final int stage,
@@ -308,9 +308,9 @@ public class LifecycleHelper
         //final String reason = t.getMessage();
         final String reason = t.toString();
         final String message =
-            REZ.getString( "lifecycle.fail.error",
-                           name,
-                           new Integer( stage ), reason );
+            REZ.format( "lifecycle.fail.error",
+                        name,
+                        new Integer( stage ), reason );
         getLogger().error( message );
         throw new LifecycleException( message, t );
     }
