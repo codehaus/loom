@@ -6,14 +6,14 @@
  * with this distribution in the LICENSE.txt file.
  *
  * This product includes software developed by the
- * Apache Software Foundation (http://www.apache.org/).
+ï¿½*ï¿½Apache Software Foundation (http://www.apache.org/).
  */
 package org.jcontainer.loom.components.kernel;
 
 import java.io.File;
 import java.util.Map;
 import org.jcontainer.loom.interfaces.Application;
-import org.realityforge.loggerstore.LoggerStore;
+import org.jcomponent.loggerstore.LoggerStore;
 
 /**
  * This is the structure describing each server application before it is loaded.
