@@ -29,7 +29,7 @@ import java.util.jar.Manifest;
  *
  * @author <a href="mailto:craigmcc at apache.org">Craig R. McClanahan</a>
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-07-28 13:30:46 $
+ * @version $Revision: 1.2 $ $Date: 2003-07-31 08:30:36 $
  */
 public final class Extension
 {
@@ -389,6 +389,10 @@ public final class Extension
                       final String implementationVendorId,
                       final String implementationURL )
     {
+        if( null == extensionName )
+        {
+            throw new NullPointerException( "extensionName" );
+        }
         m_extensionName = extensionName;
         m_specificationVendor = specificationVendor;
 
@@ -410,11 +414,6 @@ public final class Extension
         m_implementationVendor = implementationVendor;
         m_implementationVendorID = implementationVendorId;
         m_implementationVersion = implementationVersion;
-
-        if( null == m_extensionName )
-        {
-            throw new NullPointerException( "extensionName property is null" );
-        }
     }
 
     /**
