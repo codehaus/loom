@@ -23,14 +23,14 @@
         <dependency>
             <groupId>loom</groupId>
             <artifactId>loom-tools</artifactId>
-            <version>1.0</version>
+            <version>1.0-beta</version>
         </dependency>
         <dependency>
             <groupId>jcomponent</groupId>
             <artifactId>jcomponent-netserve</artifactId>
             <version>20030831.040601</version>
             <properties>
-                <sar.bundle.jar>true</sar.bundle.jar>
+                <sar.bundle>true</sar.bundle>
             </properties>
         </dependency>
         <dependency>
@@ -38,21 +38,21 @@
             <artifactId>jcomponent-threadpool</artifactId>
             <version>20030831.040503</version>
             <properties>
-                <sar.bundle.jar>true</sar.bundle.jar>
+                <sar.bundle>true</sar.bundle>
             </properties>
         </dependency>
         <dependency> <!-- for jcomponent-threadpool -->
             <id>commons-pool</id>
             <version>20030623.172700</version>
             <properties>
-                <sar.bundle.jar>true</sar.bundle.jar>
+                <sar.bundle>true</sar.bundle>
             </properties>
         </dependency>
         <dependency><!-- for commons-pool -->
             <id>commons-collections</id>
             <version>2.0</version>
             <properties>
-                <sar.bundle.jar>true</sar.bundle.jar>
+                <sar.bundle>true</sar.bundle>
             </properties>
         </dependency>
         <dependency>        <!-- for metagenerating xinfo -->
