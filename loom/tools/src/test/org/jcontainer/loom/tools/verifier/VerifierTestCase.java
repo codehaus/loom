@@ -7,18 +7,40 @@
  */
 package org.jcontainer.loom.tools.verifier;
 
+import junit.framework.TestCase;
+import org.apache.avalon.framework.context.Context;
 import org.apache.avalon.framework.logger.ConsoleLogger;
-import org.apache.avalon.phoenix.test.AbstractContainerTestCase;
+import org.jcontainer.loom.tools.LoomToolConstants;
+import org.jcontainer.loom.tools.info.Attribute;
+import org.jcontainer.loom.tools.info.ComponentDescriptor;
+import org.jcontainer.loom.tools.info.ComponentInfo;
+import org.jcontainer.loom.tools.info.ContextDescriptor;
+import org.jcontainer.loom.tools.info.DependencyDescriptor;
+import org.jcontainer.loom.tools.info.EntryDescriptor;
+import org.jcontainer.loom.tools.info.LoggerDescriptor;
+import org.jcontainer.loom.tools.info.ServiceDescriptor;
+import org.jcontainer.loom.tools.metadata.ComponentMetaData;
+import org.jcontainer.loom.tools.metadata.DependencyMetaData;
+import org.jcontainer.loom.tools.metadata.PartitionMetaData;
+import org.jcontainer.loom.tools.profile.ComponentProfile;
+import org.jcontainer.loom.tools.profile.PartitionProfile;
 
 /**
  *  An basic test case for the LogManager.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-06-29 01:26:15 $
+ * @version $Revision: 1.5 $ $Date: 2003-07-07 10:24:54 $
  */
 public class VerifierTestCase
-    extends AbstractContainerTestCase
+    extends TestCase
 {
+    private static final String C1_IMPLEMENTATION_KEY = "org.jcontainer.loom.test.data.Component1";
+    private static final String C2_IMPLEMENTATION_KEY = "org.jcontainer.loom.test.data.Component2";
+    private static final String C3_IMPLEMENTATION_KEY = "org.jcontainer.loom.test.data.Component3";
+    private static final String C2_SERVICE = "org.jcontainer.loom.test.data.Service2";
+    private static final String C1_NAME = "c1";
+    private static final String C3_NAME = "c3";
+
     public VerifierTestCase( final String name )
     {
         super( name );
@@ -27,21 +49,190 @@ public class VerifierTestCase
     public void testBasic()
         throws Exception
     {
-        verify( "assembly1.xml" );
+        final DependencyMetaData dependency =
+            new DependencyMetaData( C2_SERVICE,
+                                    "c2",
+                                    C2_SERVICE,
+                                    Attribute.EMPTY_SET );
+        final ComponentMetaData c1MetaData =
+            new ComponentMetaData( C1_NAME,
+                                   C1_IMPLEMENTATION_KEY,
+                                   new DependencyMetaData[]{dependency},
+                                   null,
+                                   null,
+                                   Attribute.EMPTY_SET );
+        final ComponentMetaData c2MetaData =
+            new ComponentMetaData( "c2",
+                                   C2_IMPLEMENTATION_KEY,
+                                   DependencyMetaData.EMPTY_SET,
+                                   null,
+                                   null,
+                                   Attribute.EMPTY_SET );
+        final PartitionMetaData listenerMetaData =
+            new PartitionMetaData( LoomToolConstants.LISTENER_PARTITION,
+                                   new String[ 0 ],
+                                   PartitionMetaData.EMPTY_SET,
+                                   ComponentMetaData.EMPTY_SET,
+                                   Attribute.EMPTY_SET );
+        final PartitionMetaData blockMetaData =
+            new PartitionMetaData( LoomToolConstants.BLOCK_PARTITION,
+                                   new String[]{LoomToolConstants.LISTENER_PARTITION},
+                                   PartitionMetaData.EMPTY_SET,
+                                   new ComponentMetaData[]{c1MetaData, c2MetaData},
+                                   Attribute.EMPTY_SET );
+        final PartitionMetaData metaData =
+            new PartitionMetaData( "assembly1",
+                                   new String[ 0 ],
+                                   new PartitionMetaData[]{blockMetaData, listenerMetaData},
+                                   ComponentMetaData.EMPTY_SET,
+                                   Attribute.EMPTY_SET );
+        final ComponentInfo c1Info =
+            new ComponentInfo( new ComponentDescriptor( C1_IMPLEMENTATION_KEY, Attribute.EMPTY_SET ),
+                               ServiceDescriptor.EMPTY_SET,
+                               LoggerDescriptor.EMPTY_SET,
+                               new ContextDescriptor( Context.class.getName(), EntryDescriptor.EMPTY_SET, Attribute.EMPTY_SET ),
+                               new DependencyDescriptor[]{new DependencyDescriptor( C2_SERVICE, C2_SERVICE, false, Attribute.EMPTY_SET )},
+                               null,
+                               null );
+        final ComponentInfo c2Info =
+            new ComponentInfo( new ComponentDescriptor( C2_IMPLEMENTATION_KEY, Attribute.EMPTY_SET ),
+                               new ServiceDescriptor[]{new ServiceDescriptor( C2_SERVICE, Attribute.EMPTY_SET )},
+                               LoggerDescriptor.EMPTY_SET,
+                               new ContextDescriptor( Context.class.getName(), EntryDescriptor.EMPTY_SET, Attribute.EMPTY_SET ),
+                               DependencyDescriptor.EMPTY_SET,
+                               null,
+                               null );
+        final ComponentProfile c1Profile =
+            new ComponentProfile( c1Info, c1MetaData );
+        final ComponentProfile c2Profile =
+            new ComponentProfile( c2Info, c2MetaData );
+        final PartitionProfile blockProfile =
+            new PartitionProfile( blockMetaData,
+                                  PartitionProfile.EMPTY_SET,
+                                  new ComponentProfile[]{c1Profile, c2Profile} );
+        final PartitionProfile listenerProfile =
+            new PartitionProfile( listenerMetaData,
+                                  PartitionProfile.EMPTY_SET,
+                                  ComponentProfile.EMPTY_SET );
+        final PartitionProfile profile =
+            new PartitionProfile( metaData,
+                                  new PartitionProfile[]{blockProfile, listenerProfile},
+                                  ComponentProfile.EMPTY_SET );
+        verify( profile );
     }
 
     public void testComplex()
         throws Exception
     {
-        verify( "assembly2.xml" );
+        final DependencyMetaData dependency1 =
+            new DependencyMetaData( C2_SERVICE + DependencyDescriptor.ARRAY_POSTFIX,
+                                    "c2a",
+                                    C2_SERVICE,
+                                    Attribute.EMPTY_SET );
+        final DependencyMetaData dependency2 =
+            new DependencyMetaData( C2_SERVICE + DependencyDescriptor.ARRAY_POSTFIX,
+                                    "c2b",
+                                    C2_SERVICE,
+                                    Attribute.EMPTY_SET );
+        final DependencyMetaData dependency3 =
+            new DependencyMetaData( C2_SERVICE + DependencyDescriptor.ARRAY_POSTFIX,
+                                    "c2c",
+                                    C2_SERVICE,
+                                    Attribute.EMPTY_SET );
+        final ComponentMetaData c3MetaData =
+            new ComponentMetaData( C3_NAME,
+                                   C3_IMPLEMENTATION_KEY,
+                                   new DependencyMetaData[]{dependency1, dependency2, dependency3},
+                                   null,
+                                   null,
+                                   Attribute.EMPTY_SET );
+        final ComponentMetaData c2aMetaData =
+            new ComponentMetaData( "c2a",
+                                   C2_IMPLEMENTATION_KEY,
+                                   DependencyMetaData.EMPTY_SET,
+                                   null,
+                                   null,
+                                   Attribute.EMPTY_SET );
+        final ComponentMetaData c2bMetaData =
+            new ComponentMetaData( "c2b",
+                                   C2_IMPLEMENTATION_KEY,
+                                   DependencyMetaData.EMPTY_SET,
+                                   null,
+                                   null,
+                                   Attribute.EMPTY_SET );
+        final ComponentMetaData c2cMetaData =
+            new ComponentMetaData( "c2c",
+                                   C2_IMPLEMENTATION_KEY,
+                                   DependencyMetaData.EMPTY_SET,
+                                   null,
+                                   null,
+                                   Attribute.EMPTY_SET );
+        final PartitionMetaData listenerMetaData =
+            new PartitionMetaData( LoomToolConstants.LISTENER_PARTITION,
+                                   new String[ 0 ],
+                                   PartitionMetaData.EMPTY_SET,
+                                   ComponentMetaData.EMPTY_SET,
+                                   Attribute.EMPTY_SET );
+        final PartitionMetaData blockMetaData =
+            new PartitionMetaData( LoomToolConstants.BLOCK_PARTITION,
+                                   new String[]{LoomToolConstants.LISTENER_PARTITION},
+                                   PartitionMetaData.EMPTY_SET,
+                                   new ComponentMetaData[]{c2aMetaData, c2bMetaData, c2cMetaData, c3MetaData},
+                                   Attribute.EMPTY_SET );
+        final PartitionMetaData metaData =
+            new PartitionMetaData( "assembly1",
+                                   new String[ 0 ],
+                                   new PartitionMetaData[]{blockMetaData, listenerMetaData},
+                                   ComponentMetaData.EMPTY_SET,
+                                   Attribute.EMPTY_SET );
+
+        final ComponentInfo c3Info =
+            new ComponentInfo( new ComponentDescriptor( C3_IMPLEMENTATION_KEY, Attribute.EMPTY_SET ),
+                               ServiceDescriptor.EMPTY_SET,
+                               LoggerDescriptor.EMPTY_SET,
+                               new ContextDescriptor( Context.class.getName(), EntryDescriptor.EMPTY_SET, Attribute.EMPTY_SET ),
+                               new DependencyDescriptor[]{new DependencyDescriptor( C2_SERVICE + DependencyDescriptor.ARRAY_POSTFIX,
+                                                                                    C2_SERVICE + DependencyDescriptor.ARRAY_POSTFIX,
+                                                                                    false,
+                                                                                    Attribute.EMPTY_SET )},
+                               null,
+                               null );
+        final ComponentInfo c2Info =
+            new ComponentInfo( new ComponentDescriptor( C2_IMPLEMENTATION_KEY, Attribute.EMPTY_SET ),
+                               new ServiceDescriptor[]{new ServiceDescriptor( C2_SERVICE, Attribute.EMPTY_SET )},
+                               LoggerDescriptor.EMPTY_SET,
+                               new ContextDescriptor( Context.class.getName(), EntryDescriptor.EMPTY_SET, Attribute.EMPTY_SET ),
+                               DependencyDescriptor.EMPTY_SET,
+                               null,
+                               null );
+        final ComponentProfile c3Profile =
+            new ComponentProfile( c3Info, c3MetaData );
+        final ComponentProfile c2aProfile =
+            new ComponentProfile( c2Info, c2aMetaData );
+        final ComponentProfile c2bProfile =
+            new ComponentProfile( c2Info, c2bMetaData );
+        final ComponentProfile c2cProfile =
+            new ComponentProfile( c2Info, c2cMetaData );
+        final PartitionProfile blockProfile =
+            new PartitionProfile( blockMetaData,
+                                  PartitionProfile.EMPTY_SET,
+                                  new ComponentProfile[]{c3Profile, c2aProfile, c2bProfile, c2cProfile} );
+        final PartitionProfile listenerProfile =
+            new PartitionProfile( blockMetaData,
+                                  PartitionProfile.EMPTY_SET,
+                                  ComponentProfile.EMPTY_SET );
+        final PartitionProfile profile =
+            new PartitionProfile( metaData,
+                                  new PartitionProfile[]{blockProfile, listenerProfile},
+                                  ComponentProfile.EMPTY_SET );
+        verify( profile );
     }
 
-    protected void verify( final String config ) throws Exception
+    private void verify( final PartitionProfile profile ) throws VerifyException
     {
-        final org.jcontainer.loom.tools.profile.PartitionProfile sarMetaData = assembleSar( config );
         final ClassLoader classLoader = getClass().getClassLoader();
         final SarVerifier verifier = new SarVerifier();
         verifier.enableLogging( new ConsoleLogger() );
-        verifier.verifySar( sarMetaData, classLoader );
+        verifier.verifySar( profile, classLoader );
     }
 }
