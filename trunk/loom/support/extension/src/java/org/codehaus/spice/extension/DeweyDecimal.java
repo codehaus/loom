@@ -5,7 +5,7 @@
  * Software License version 1.1, a copy of which has been included
  * with this distribution in the LICENSE.txt file.
  */
-package org.realityforge.extension;
+package org.codehaus.spice.extension;
 import java.util.StringTokenizer;
 /**
  * Utility class to contain version numbers in "Dewey Decimal"
@@ -16,7 +16,7 @@ import java.util.StringTokenizer;
  * must begin with a number.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-08-04 01:52:53 $
+ * @version $Revision: 1.1 $ $Date: 2003-12-02 07:56:59 $
  */
 public final class DeweyDecimal
 {

@@ -8,7 +8,7 @@
  * This product includes software developed by the
  * Apache Software Foundation (http://www.apache.org/).
  */
-package org.realityforge.extension;
+package org.codehaus.spice.extension;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
@@ -27,7 +27,7 @@ import java.util.jar.Manifest;
  *
  * @author <a href="mailto:craigmcc at apache.org">Craig R. McClanahan</a>
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-08-04 01:52:53 $
+ * @version $Revision: 1.1 $ $Date: 2003-12-02 07:56:59 $
  */
 public final class Extension
 {

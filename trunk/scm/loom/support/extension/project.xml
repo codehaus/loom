@@ -3,9 +3,9 @@
     <extend>${basedir}/../../tools/maven/project.xml</extend>
     <name>Extension</name>
     <id>spice-extension</id>
-    <gumpRepositoryId>components</gumpRepositoryId>
-    <currentVersion>1.0</currentVersion>
+    <currentVersion>1.1</currentVersion>
     <inceptionYear>2000</inceptionYear>
+    <package>org.codehaus.spice.extension</package>
 
     <shortDescription>Parse and represent "Extension" and Specification information</shortDescription>
 
@@ -20,6 +20,11 @@
             <id>1.0</id>
             <name>1.0</name>
             <tag>EXTENSION_1_0-tag</tag>
+        </version>
+        <version>
+            <id>1.1</id>
+            <name>1.1</name>
+            <tag>EXTENSION_1_1-tag</tag>
         </version>
     </versions>
 
