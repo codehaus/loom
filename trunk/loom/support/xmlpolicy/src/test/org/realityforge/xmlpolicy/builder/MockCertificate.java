@@ -7,18 +7,18 @@
  */
 package org.realityforge.xmlpolicy.builder;
 
-import java.security.Certificate;
-import java.security.Principal;
-import java.security.PublicKey;
-import java.security.KeyException;
-import java.io.OutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.security.Certificate;
+import java.security.KeyException;
+import java.security.Principal;
+import java.security.PublicKey;
 
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-05 09:40:31 $
+ * @version $Revision: 1.2 $ $Date: 2003-06-05 09:43:28 $
  */
 class MockCertificate
     implements Certificate
