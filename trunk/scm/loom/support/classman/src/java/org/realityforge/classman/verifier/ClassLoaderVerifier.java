@@ -7,11 +7,11 @@
  */
 package org.realityforge.classman.verifier;
 
-import org.apache.avalon.excalibur.i18n.ResourceManager;
-import org.apache.avalon.excalibur.i18n.Resources;
 import org.realityforge.classman.metadata.ClassLoaderMetaData;
 import org.realityforge.classman.metadata.ClassLoaderSetMetaData;
 import org.realityforge.classman.metadata.JoinMetaData;
+import org.realityforge.salt.i18n.Resources;
+import org.realityforge.salt.i18n.ResourceManager;
 
 /**
  * Verify ClassLoader set is valid. Validity is defined as
@@ -36,7 +36,7 @@ import org.realityforge.classman.metadata.JoinMetaData;
  * </ul>
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-04-04 13:52:13 $
+ * @version $Revision: 1.2 $ $Date: 2003-06-05 10:39:56 $
  */
 public class ClassLoaderVerifier
 {
