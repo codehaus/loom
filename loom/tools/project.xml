@@ -26,7 +26,8 @@
             <version>1.0dev</version>
         </dependency>
         <dependency>
-            <id>spice+salt</id>
+            <groupId>spice</groupId>
+            <artifactId>spice-salt</artifactId>
             <version>0.8dev</version>
         </dependency>
         <dependency>
@@ -46,7 +47,8 @@
             <version>0.1</version>
         </dependency>
         <dependency> <!-- for unit testing the schema validation -->
-            <id>spice+configkit</id>
+            <groupId>spice</groupId>
+            <artifactId>spice-configkit</artifactId>
             <version>1.1.2</version>
         </dependency>
         <dependency><!-- for spice-configkit -->

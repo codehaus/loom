@@ -16,16 +16,34 @@
 
     <dependencies>
         <dependency>
-            <id>jcomponent+loggerstore</id>
+            <groupId>jcomponent</groupId>
+            <artifactId>jcomponent-loggerstore</artifactId>
             <version>1.0-b1</version>
         </dependency>
         <dependency>
-            <id>spice+salt</id>
-            <version>0.8dev</version>
+            <groupId>spice</groupId>
+            <artifactId>spice-classman</artifactId>
+            <version>1.1dev</version>
         </dependency>
         <dependency>
-            <id>loom+tools</id>
-            <version>1.0dev</version>
+            <groupId>spice</groupId>
+            <artifactId>spice-cli</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>spice</groupId>
+            <artifactId>spice-configkit</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>spice</groupId>
+            <artifactId>spice-xmlpolicy</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>spice</groupId>
+            <artifactId>spice-salt</artifactId>
+            <version>0.8dev</version>
         </dependency>
         <dependency>
         	<groupId>loom</groupId>
@@ -33,11 +51,18 @@
             <version>1.0dev</version>
         </dependency>
         <dependency>
-            <id>mx4j+jmx</id>
+            <groupId>loom</groupId>
+            <artifactId>loom-tools</artifactId>
+            <version>1.0dev</version>
+        </dependency>
+        <dependency>
+            <groupId>mx4j</groupId>
+            <artifactId>mx4j-jmx</artifactId>
             <version>1.1</version>
         </dependency>
         <dependency>
-            <id>mx4j+tools</id>
+            <groupId>mx4j</groupId>
+            <artifactId>mx4j-tools</artifactId>
             <version>1.1</version>
         </dependency>
         <dependency>
@@ -73,10 +98,6 @@
             <version>2.3</version>
         </dependency>
         <dependency>
-            <id>spice+cli</id>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
             <groupId>avalon</groupId>
             <artifactId>avalon-logkit</artifactId>
             <version>20030527</version>
@@ -87,20 +108,8 @@
             <version>20030713</version>
         </dependency>
         <dependency>
-            <id>spice+configkit</id>
-            <version>1.1.2</version>
-        </dependency>
-        <dependency>
-            <id>spice+classman</id>
-            <version>1.1dev</version>
-        </dependency>
-        <dependency>
             <id>oro</id>
             <version>2.0.7</version>
-        </dependency>
-        <dependency>
-            <id>spice+xmlpolicy</id>
-            <version>1.0</version>
         </dependency>
         <dependency><!-- for spice-configkit -->
             <id>isorelax</id>
