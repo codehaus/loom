@@ -24,7 +24,7 @@ import org.jcontainer.loom.tools.info.ServiceDescriptor;
  * to enablesupport of Legacy BlockInfo files.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-29 01:07:35 $
+ * @version $Revision: 1.3 $ $Date: 2003-07-19 02:10:55 $
  */
 public class LegacyUtil
 {
@@ -114,7 +114,7 @@ public class LegacyUtil
     }
 
     /**
-     * Create a {@link org.jcontainer.loom.tools.info.ComponentInfo} for a Listener with specified classname.
+     * Create a {@link ComponentInfo} for a Listener with specified classname.
      *
      * @param implementationKey the classname of listener
      * @return the ComponentInfo for listener
