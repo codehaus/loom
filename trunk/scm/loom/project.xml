@@ -8,7 +8,7 @@
 
     <organization>
         <name>The JContainer Group</name>
-        <url>http://jcontainer.org/loom</url>
+        <url>http://jcontainer.org/loom/</url>
     </organization>
 
 	<groupId>loom</groupId>
