@@ -14,6 +14,7 @@ import javax.xml.parsers.SAXParserFactory;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.SAXConfigurationHandler;
 import org.apache.avalon.framework.logger.Logger;
+import org.apache.avalon.framework.CascadingException;
 import org.realityforge.configkit.ResolverFactory;
 import org.realityforge.configkit.ConfigValidatorFactory;
 import org.realityforge.configkit.ConfigValidator;
@@ -30,7 +31,7 @@ import org.xml.sax.ContentHandler;
  * Utility class used to load Configuration trees from XML files.
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-26 08:01:42 $
+ * @version $Revision: 1.2 $ $Date: 2003-06-26 08:02:47 $
  */
 public class ConfigurationBuilder
 {
@@ -116,7 +117,7 @@ public class ConfigurationBuilder
                 }
             }
             final ValidateException exception = result.getException();
-            throw new Exception( exception.getMessage(), exception );
+            throw new CascadingException( exception.getMessage(), exception );
         }
     }
 
