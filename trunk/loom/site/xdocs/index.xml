@@ -8,7 +8,7 @@
         <section name="Introduction">
             <p>
   		Loom  is a micro-kernel designed and implemented on top of the
-                <a href="http://dna.jcontainer.org">DNA</a> framework and supports components developed
+                <a href="http://dna.codehaus.org">DNA</a> framework and supports components developed
   		using the
                 <a href="http://avalon.apache.org/framework/">Avalon</a>.
 		In the future Loom will support DNA and

@@ -32,7 +32,7 @@
         <section name="Associate MetaData with the Component">
             <p>
                 Loom uses the same mechanism as is described in the
-                <a href="http://dna.jcontainer.org/metadata">DNA MetaData
+                <a href="http://dna.codehaus.org/metadata">DNA MetaData
                 documentation</a>. The developer should be aware that the DNA
                 documentation describes the metadata associated with DNA
                 components. The only difference that must be taken into account

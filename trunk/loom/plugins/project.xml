@@ -5,10 +5,10 @@
     <currentVersion>1.0-beta1-dev</currentVersion>
     <groupId>loom</groupId>
 
-    <distributionDirectory>/www/dist.codehaus.org</distributionDirectory>
-    <distributionSite>codehaus.org</distributionSite>
-    <siteDirectory>/www/jcontainer.codehaus.org/loom/plugins</siteDirectory>
-    <siteAddress>loom.jcontainer.org</siteAddress>
+    <distributionDirectory>/home/projects/loom/dist</distributionDirectory>
+    <distributionSite>dist.codehaus.org</distributionSite>
+    <siteDirectory>/home/projects/loom/public_html/plugins</siteDirectory>
+    <siteAddress>loom.codehays.org</siteAddress>
 
     <build>
         <sourceDirectory>${basedir}/src/java</sourceDirectory>
