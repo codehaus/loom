@@ -111,7 +111,7 @@ import org.jcomponent.netserve.sockets.ServerSocketFactory;
 /**
  * @dna.component
  * @dna.service type="HelloWorldServer"
- * @mx.interface name="org.jcontainer.loom.demos.helloworld.HelloWorldServerMBean"
+ * @mx.interface topic="HelloWorldServer" name="org.jcontainer.loom.demos.helloworld.HelloWorldServerMBean"
  *
  * @author  Paul Hammant <Paul_Hammant@yahoo.com>
  * @author  Federico Barbieri <scoobie@pop.systemy.it>

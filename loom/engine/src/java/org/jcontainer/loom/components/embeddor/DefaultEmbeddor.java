@@ -125,7 +125,7 @@ import org.realityforge.salt.i18n.Resources;
  * @author <a href="peter at realityforge.org">Peter Donald</a>
  * @author <a href="bauer@denic.de">Joerg Bauer</a>
  * @dna.component
- * @mx.interface type="org.jcontainer.loom.interfaces.EmbeddorMBean"
+ * @mx.interface topic="Embeddor" type="org.jcontainer.loom.interfaces.EmbeddorMBean"
  */
 public class DefaultEmbeddor
     extends AbstractLogEnabled

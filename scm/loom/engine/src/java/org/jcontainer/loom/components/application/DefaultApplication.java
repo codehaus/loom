@@ -116,7 +116,7 @@ import org.realityforge.salt.i18n.Resources;
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author Leo Simons
  * @dna.component
- * @mx.interface type="org.jcontainer.loom.interfaces.ApplicationMBean"
+ * @mx.interface topic="Application" type="org.jcontainer.loom.interfaces.ApplicationMBean"
  */
 public final class DefaultApplication
     extends AbstractLogEnabled
