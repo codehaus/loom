@@ -106,6 +106,7 @@ public final class Main
         "org.jcontainer.loom.frontends.CLIMain";
 
     private static Object c_frontend;
+    static final String LOADER_JAR = "loom-launcher.jar";
 
     /**
      * Main entry point for Loom.
@@ -143,12 +144,16 @@ public final class Main
             Policy.setPolicy( new FreeNEasyPolicy() );
 
             //Create engine ClassLoader
-            final URL[] urls = LauncherUtils.getEngineClassPath();
+            final File homeDir =
+                LauncherUtils.findLoomHome( "loom.home", "loom-launcher.jar" );
+
+            final URL[] urls =
+                LauncherUtils.generateClassPath( homeDir, "container/lib" );
             final URLClassLoader classLoader = new URLClassLoader( urls );
 
             data.put( ClassLoader.class.getName() + "/common", ClassLoader.getSystemClassLoader() );
             data.put( ClassLoader.class.getName() + "/container", classLoader );
-            data.put( "loom.home", new File( LauncherUtils.findLoomHome() ) );
+            data.put( File.class.getName() + "/home", homeDir );
 
             //Setup context classloader
             Thread.currentThread().setContextClassLoader( classLoader );
