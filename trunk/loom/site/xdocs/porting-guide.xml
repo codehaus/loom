@@ -14,20 +14,40 @@
 		    <a href="/plugins/maven-sar/">Maven Sar Plugin</a>
 		    provided by Loom and the appropriate libraries are bundles in the sar.
 		</p>
+	<subsection name="Creating a Loom Sar">
 		<p>
 			Since the generation of metaclass descriptors is more generic in 
 			Loom compared with Phoenix, but still fully compatible with it,
 			users can deploy applications running in Phoenix 4.0.x by simply
-			regenerating the descriptors using the Maven Sar Plugin.
+			regenerating from the Java source the descriptors using the Maven Sar Plugin.
 		</p>		
+		<p> 
+			To create a sar, using the <a href="/plugins/maven-sar/">Maven Sar Plugin</a>
+			simply add the dependency to your Maven project
+<source>
+<![CDATA[
+<dependency>
+    <groupId>loom</groupId>
+    <artifactId>maven-sar-plugin</artifactId>
+    <version>[plugin-version]</version>
+    <type>plugin</type>
+</dependency>			
+]]>
+</source>
+			and execute
+<source>
+maven sar
+</source>
+		</p>
+	</subsection>
+	<subsection name="Comparison of libraries bundled">
 		<p>
-			Also, compared to the Phoenix 4.0.x distribution, in the Loom 1.0 distribution 
+			Compared to the Phoenix 4.0.x distribution, in the Loom 1.0 distribution 
 			some of the libraries in the <code>lib/</code> directory 
 			have been removed as they are not used by the container. 
 			If your app uses any of the excluded libraries, 
 			you simply need to bundle them with the sar.  
 		</p>		
-	<subsection name="Comparison of libraries bundled">
 		<p>
 			Loom 1.0 comes with a lean set of libraries:
 <source>
