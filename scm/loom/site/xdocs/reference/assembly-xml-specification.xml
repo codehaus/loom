@@ -45,11 +45,10 @@
                 <tr>
                     <td>class</td>
                     <td>
-                        The fully-qualified name of the block's implementing class.
-                        This class must be public, with a public no-args
-                        constructor.  There must be a corresponding
-                        <a href="blockinfo-specification.html">BlockInfo</a>
-                        file for the class.
+                        The fully-qualified name of the components's
+                        implementing class. This class must be public, with
+                        a public no-args constructor. The components must
+                        have associated metadata.
                     </td>
                 </tr>
                 <tr>
@@ -65,16 +64,16 @@
 
             <subsection name="The provide Element">
                 <p>
-                    The <code>&lt;provide></code> element defines how to
-                    provide a particular service to the block.  It connects
+                    The <code>&lt;provide&gt;</code> element defines how to
+                    provide a particular service to the block. It connects
                     the block to another block that provides the required service.
-                    There must be at least one <code>&lt;provide></code>
+                    There must be at least one <code>&lt;provide&gt;</code>
                     element for each dependency listed in the block's
-                    <a href="blockinfo-specification.html">BlockInfo</a>
-                    file.  For array and mapped services, there may be more than
-                    one <code>&lt;provide></code> element for each
-                    dependency.  The <code>&lt;provide></code> element takes
-                    the following attributes:
+                    metadata descriptor. For array and mapped services,
+                    there may be more than one <code>&lt;provide&gt;</code>
+                    element for each dependency. The
+                    <code>&lt;provide&gt;</code> element takes the following
+                    attributes:
                 </p>
 
                 <table>

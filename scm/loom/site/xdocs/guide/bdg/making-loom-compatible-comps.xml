@@ -187,7 +187,8 @@ public class EJBBlock
         The following are worth stating:
         </p>
       <ul>
-          <li>You do not have to implement any Avalon interfaces to be reusable (wrap strategy) inside Avalon.</li>
+          <li>You do not have to implement any Avalon interfaces to be
+              reusable (wrap strategy) inside Avalon.</li>
           <li>Being Loom compatible is just as useful for whole servers as it is for small components.</li>
           <li>Being Loom compatible can be for tools that are intended for client-side as well as server use.</li>
         </ul>

@@ -53,7 +53,6 @@
             <item href="/reference/config-xml-specification.html" name="config.xml"/>
             <item href="/reference/assembly-xml-specification.html" name="assembly.xml"/>
             <item href="/reference/environment-xml-specification.html" name="environment.xml"/>
-            <item href="/reference/blockinfo-specification.html" name="BlockInfo"/>
         </menu>
     </body>
 </project>
