@@ -1,0 +1,28 @@
+<logs version="1.1">
+    <!-- see http://jakarta.apache.org/avalon/excalibur/logger/index.html -->
+    <factories>
+        <factory type="file" class="org.apache.avalon.excalibur.logger.factory.FileTargetFactory"/>
+    </factories>
+
+    <categories>
+        <category name="" log-level="DEBUG">
+            <log-target id-ref="default"/>
+        </category>
+        <category name="myBlock" log-level="DEBUG">
+            <log-target id-ref="myBlock"/>
+        </category>
+    </categories>
+
+    <targets>
+        <file id="default">
+            <filename>${app.home}/logs/default.log</filename>
+            <format>%{time:dd/MM/yy hh:mm:ss} %5.5{priority} %{category}: %{message}\n%{throwable}</format>
+            <append>true</append>
+        </file>
+        <file id="myBlock">
+            <filename>${app.home}/logs/myBlock.log</filename>
+            <format>%{time:dd/MM/yy hh:mm:ss} %5.5{priority} %{category}: %{message}\n%{throwable}</format>
+            <append>true</append>
+        </file>
+    </targets>
+</logs>
