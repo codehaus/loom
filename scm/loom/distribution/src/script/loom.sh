@@ -1,4 +1,4 @@
-#! /bin/sh
+P#! /bin/sh
 #
 # -----------------------------------------------------------------------------
 # Loom start script.
@@ -96,7 +96,7 @@ if $cygwin; then
 fi
 
 if [ -z "$LOOM_TMPDIR" ] ; then
-  # Define the java.io.tmpdir to use for Phoenix
+  # Define the java.io.tmpdir to use for Loom
   LOOM_TMPDIR="$LOOM_HOME"/temp
   mkdir -p "$LOOM_TMPDIR"
 fi
@@ -120,7 +120,7 @@ echo "Using JAVA_HOME:      $JAVA_HOME"
 #
 # This is needed as some JVM vendors do foolish things
 # like placing jaxp/jaas/xml-parser jars in ext dir
-# thus breaking Phoenix
+# thus breaking Loom
 #
 JVM_EXT_DIRS="$LOOM_HOME/lib:$LOOM_HOME/tools/lib"
 if $cygwin; then
@@ -173,7 +173,7 @@ fi
 
 case "$ACTION" in
   start)
-        echo "Starting Phoenix: "
+        echo "Starting Loom: "
 
         if [ -f $LOOM_PID ]
         then
@@ -181,16 +181,16 @@ case "$ACTION" in
             exit 1
         fi
 
-        echo "STARTED Phoenix `date`" >> $LOOM_CONSOLE
+        echo "STARTED Loom `date`" >> $LOOM_CONSOLE
 
         nohup sh -c "exec $RUN_CMD >>$LOOM_CONSOLE 2>&1" >/dev/null &
         echo $! > $LOOM_PID
-        echo "Phoenix running pid="`cat $LOOM_PID`
+        echo "Loom running pid="`cat $LOOM_PID`
         ;;
 
   stop)
         PID=`cat $LOOM_PID 2>/dev/null`
-        echo "Shutting down Phoenix: $PID"
+        echo "Shutting down Loom: $PID"
         kill $PID 2>/dev/null
         sleep $LOOM_KILLDELAY
         kill -9 $PID 2>/dev/null
@@ -213,7 +213,7 @@ case "$ACTION" in
          ;;
 
   run|demo)
-        echo "Running Phoenix: "
+        echo "Running Loom: "
 
         if [ -f $LOOM_PID ]
         then
@@ -225,11 +225,11 @@ case "$ACTION" in
         ;;
 
   check)
-        echo "Checking arguments to Phoenix: "
-	echo "LOOM_HOME:     $LOOM_HOME"
-	echo "LOOM_TMPDIR:   $LOOM_TMPDIR"
-	echo "LOOM_JVM_OPTS: $LOOM_JVM_OPTS"
-	echo "JAVA_HOME:        $JAVA_HOME"
+        echo "Checking arguments to Loom: "
+		echo "LOOM_HOME:     $LOOM_HOME"
+		echo "LOOM_TMPDIR:   $LOOM_TMPDIR"
+		echo "LOOM_JVM_OPTS: $LOOM_JVM_OPTS"
+		echo "JAVA_HOME:        $JAVA_HOME"
         echo "JVM_OPTS:         $JVM_OPTS"
         echo "CLASSPATH:        $CLASSPATH"
         echo "RUN_CMD:          $RUN_CMD"
@@ -237,7 +237,7 @@ case "$ACTION" in
 
         if [ -f $LOOM_PID ]
         then
-            echo "Phoenix running pid="`cat $LOOM_PID`
+            echo "Loom running pid="`cat $LOOM_PID`
             exit 0
         fi
         exit 1
