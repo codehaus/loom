@@ -35,7 +35,7 @@ import org.codehaus.loom.xmlpolicy.metadata.PolicyMetaData;
  * PolicyMetaData.
  *
  * @author Peter Donald
- * @version $Revision: 1.1 $ $Date: 2004-04-19 22:20:25 $
+ * @version $Revision: 1.2 $ $Date: 2005-02-22 17:52:37 $
  */
 public class PolicyBuilder
 {
@@ -401,7 +401,7 @@ public class PolicyBuilder
             //will never happen
             throw new IllegalStateException( mue.getMessage() );
         }
-        final CodeSource codeSource = new CodeSource( url, null );
+        final CodeSource codeSource = new CodeSource( url, (Certificate[])null );
         return codeSource;
     }
 
