@@ -9,16 +9,16 @@
     <goal name="main">
         <attainGoal name="build"/>
     </goal>
-    
+
     <goal name="build">
-        <attainGoal name="site:generate"/>    	
-    </goal>
-	
-    <goal name="deploy">
-        <attainGoal name="site:deploy"/>    	
+        <attainGoal name="site:generate"/>
     </goal>
 
-	<preGoal name="xdoc:init">
+    <goal name="deploy">
+        <attainGoal name="site:deploy"/>
+    </goal>
+
+	<preGoal name="java:compile">
 		<attainGoal name="aggregate-components-source"/>
 		<attainGoal name="aggregate-plugins-xdocs"/>
 		<ant:copy todir="${maven.docs.aggregated.src}" overwrite="true">
@@ -56,8 +56,8 @@
       			<ant:fileset dir="${pluginsDir}/${name}/xdocs"/>
       		</ant:copy>
 			<!-- Generate navigation with correct relative path -->
-        	<j:file name="${maven.build.dir}/templates/navigation.menu" 
-        		omitXmlDeclaration="true" 
+        	<j:file name="${maven.build.dir}/templates/navigation.menu"
+        		omitXmlDeclaration="true"
         		prettyPrint="true">
 			    <menu name="Overview">
 			      <item name="Goals"              href="/plugins/${name}/goals.html" />
@@ -65,12 +65,12 @@
 			      <item name="Tips"               href="/plugins/${name}/tips.html"/>
 			    </menu>
 	       	</j:file>
-	        <velocity:merge 
+	        <velocity:merge
 	          name="${aggregatedDir}/${name}/navigation.xml"
 	          basedir="${maven.build.dir}/templates"
 	          template="navigation.xml"/>
    		</j:forEach>
-	</goal>  
+	</goal>
 
     <goal name="aggregate-components-source">
         <echo message="Aggregate components by source"/>
