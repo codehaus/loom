@@ -10,16 +10,16 @@
  */
 package org.jcontainer.loom.interfaces;
 
-import org.apache.avalon.framework.CascadingException;
-
 /**
  * The ManagerException used to indicate problems with managers.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  */
 public class ManagerException
-    extends CascadingException
+    extends Exception
 {
+    private final Throwable m_cause;
+
     public ManagerException( final String message )
     {
         this( message, null );
@@ -27,6 +27,12 @@ public class ManagerException
 
     public ManagerException( final String message, final Throwable throwable )
     {
-        super( message, throwable );
+        super( message );
+        m_cause = throwable;
+    }
+
+    public Throwable getCause()
+    {
+        return m_cause;
     }
 }
