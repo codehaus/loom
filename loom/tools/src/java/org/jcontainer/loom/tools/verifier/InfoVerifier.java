@@ -11,8 +11,6 @@ import org.jcontainer.dna.LogEnabled;
 import org.jcontainer.dna.Logger;
 import org.realityforge.metaclass.Attributes;
 import org.realityforge.metaclass.model.Attribute;
-import org.realityforge.salt.i18n.ResourceManager;
-import org.realityforge.salt.i18n.Resources;
 
 /**
  * This Class verifies that an implementation is valid wrt the
@@ -34,17 +32,11 @@ import org.realityforge.salt.i18n.Resources;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.13 $ $Date: 2003-10-16 05:11:33 $
+ * @version $Revision: 1.14 $ $Date: 2003-10-16 05:21:50 $
  */
 public class InfoVerifier
     implements LogEnabled
 {
-    /**
-     * I18n utils.
-     */
-    private static final Resources REZ =
-        ResourceManager.getPackageResources( InfoVerifier.class );
-
     /**
      * The verifier for components in assembly.
      */
@@ -107,10 +99,9 @@ public class InfoVerifier
             catch( final Throwable t )
             {
                 final String message =
-                    REZ.format( "metadata.bad-service-class.error",
-                                name,
-                                classname,
-                                t.toString() );
+                    "Unable to load service class \"" +
+                    classname + "\" for Component named \"" +
+                    name + "\". (Reason: " + t + ").";
                 throw new VerifyException( message, t );
             }
         }
