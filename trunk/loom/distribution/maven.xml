@@ -7,7 +7,8 @@
     xmlns:util="jelly:util"
     xmlns:ant="jelly:ant"
     xmlns:deploy="deploy"
-    xmlns:archive="loom:archive">
+    xmlns:archive="loom:archive"
+    xmlns:wrapper="loom:wrapper">
 
     <define:taglib uri="loom:archive">
         <define:tag name="copy-deps">
@@ -46,6 +47,73 @@
         </define:tag>
     </define:taglib>
 
+    <define:taglib uri="loom:wrapper">
+        <define:tag name="install">
+	        <ant:mkdir dir="${wrapper.install.dir}"/>
+	        <ant:mkdir dir="${maven.repo.local}/wrapper/distributions/"/>
+	        <ant:setproxy proxyhost="${maven.proxy.host}" proxyport="${maven.proxy.port}"/>
+	        <j:set var="distURL" value='${wrapper.url}'/>
+	        <!-- *nix wrapper -->
+	        <j:set var="distName" value='wrapper_${wrapper.nix}_${wrapper.version}'/>
+	        <ant:get src="${distURL}/${distName}.tar.gz"
+	            dest="${maven.repo.local}/wrapper/distributions/${distName}.tar.gz"
+	            usetimestamp="true"
+	            verbose="true"/>
+	        <ant:gunzip src="${maven.repo.local}/wrapper/distributions/${distName}.tar.gz" 
+	        		  dest="${wrapper.install.dir}"/>
+	        <ant:untar src="${wrapper.install.dir}/${distName}.tar" dest="${wrapper.install.dir}"/>
+	        <ant:copy todir="${wrapper.install.dir}">
+				<ant:fileset dir="${wrapper.install.dir}/${distName}/bin">
+	                <ant:include name="wrapper"/>
+	                <ant:include name="realpath"/>
+				</ant:fileset>        
+				<ant:fileset dir="${wrapper.install.dir}/${distName}/lib">
+	                <ant:include name="*.so"/>
+	                <ant:include name="*.jar"/>
+	                <ant:exclude name="*test.jar"/>
+				</ant:fileset>        
+	        </ant:copy>
+	        <ant:copy file="${wrapper.install.dir}/${distName}/src/bin/sh.script.in"
+	            tofile="${wrapper.install.dir}/${pom.artifactId}-wrapper.sh">
+	            <ant:filterset>
+	                <ant:filter token="app.name" value="${pom.artifactId}"/>
+	                <ant:filter token="app.long.name" value="${pom.artifactId}"/>
+	            </ant:filterset>
+	        </ant:copy>
+	        <ant:copy file="${wrapper.install.dir}/${distName}/src/bin/bash.script.in"
+	            tofile="${wrapper.install.dir}/${pom.artifactId}-wrapper.bash">
+	            <ant:filterset>
+	                <ant:filter token="app.name" value="${pom.artifactId}"/>
+	                <ant:filter token="app.long.name" value="${pom.artifactId}"/>
+	            </ant:filterset>
+	        </ant:copy>
+	        <!-- win32 wrapper -->
+	        <j:set var="distName" value='wrapper_win32_${wrapper.version}'/>
+	        <ant:get src="${distURL}/${distName}.zip"
+	            dest="${maven.repo.local}/wrapper/distributions/${distName}.zip"
+	            usetimestamp="true"
+	            verbose="true"/>
+	        <ant:unzip src="${maven.repo.local}/wrapper/distributions/${distName}.zip" 
+	        		  dest="${wrapper.install.dir}"/>
+	        <ant:copy todir="${wrapper.install.dir}">
+				<ant:fileset dir="${wrapper.install.dir}/${distName}/bin">
+	                <ant:include name="*.exe"/>
+				</ant:fileset>        
+				<ant:fileset dir="${wrapper.install.dir}/${distName}/lib">
+	                <ant:include name="*.dll"/>
+	                <ant:include name="*.jar"/>
+	                <ant:exclude name="*test.jar"/>
+				</ant:fileset>        
+	        </ant:copy>
+	        <ant:copy file="${wrapper.install.dir}/${distName}/src/bin/App.bat.in"
+	            tofile="${wrapper.install.dir}/${pom.artifactId}.bat"/>
+	        <ant:copy file="${wrapper.install.dir}/${distName}/src/bin/InstallApp-NT.bat.in"
+	            tofile="${wrapper.install.dir}/Install-${pom.artifactId}-NT.bat"/>
+	        <ant:copy file="${wrapper.install.dir}/${distName}/src/bin/UninstallApp-NT.bat.in"
+	            tofile="${wrapper.install.dir}/Uninstall-${pom.artifactId}-NT.bat"/>
+        </define:tag>
+    </define:taglib>
+
     <goal name="main">
     	<attainGoal name="build"/>
     </goal>
@@ -79,6 +147,9 @@
         <ant:copy todir="${distDir}/ext">
             <ant:fileset dir="deploy/ext">
                 <ant:include name="*.jar"/>
+            </ant:fileset>
+            <ant:fileset dir="${wrapper.install.dir}">
+                <ant:include name="*.jar"/>
                 <ant:include name="*.so"/>
                 <ant:include name="*.dll"/>
             </ant:fileset>
@@ -103,7 +174,7 @@
             tofile="${distDir}/bin/loom-launcher.jar"/>
 
         <ant:copy todir="${distDir}/bin">
-            <ant:fileset dir="deploy/ext">
+            <ant:fileset dir="${wrapper.install.dir}">
                 <ant:include name="wrapper"/>
                 <ant:include name="*.exe"/>
                 <ant:include name="*.sh"/>
@@ -133,70 +204,7 @@
 
 	
     <preGoal name="build">
-        <j:set var="wrapperDir" value='${maven.build.dir}/wrapper'/>
-        <ant:mkdir dir="${wrapperDir}"/>
-        <ant:mkdir dir="${maven.repo.local}/wrapper/distributions/"/>
-        <ant:setproxy proxyhost="${maven.proxy.host}" proxyport="${maven.proxy.port}"/>
-        <j:set var="distURL" value='${wrapper.url}'/>
-        <!-- *nix wrapper -->
-        <j:set var="distName" value='wrapper_${wrapper.nix}_${wrapper.version}'/>
-        <ant:get src="${distURL}/${distName}.tar.gz"
-            dest="${maven.repo.local}/wrapper/distributions/${distName}.tar.gz"
-            usetimestamp="true"
-            verbose="true"/>
-        <ant:gunzip src="${maven.repo.local}/wrapper/distributions/${distName}.tar.gz" 
-        		  dest="${wrapperDir}"/>
-        <ant:untar src="${wrapperDir}/${distName}.tar" dest="${wrapperDir}"/>
-        <ant:copy todir="deploy/ext">
-			<ant:fileset dir="${wrapperDir}/${distName}/bin">
-                <ant:include name="wrapper"/>
-                <ant:include name="realpath"/>
-			</ant:fileset>        
-			<ant:fileset dir="${wrapperDir}/${distName}/lib">
-                <ant:include name="*.so"/>
-                <ant:include name="*.jar"/>
-                <ant:exclude name="*test.jar"/>
-			</ant:fileset>        
-        </ant:copy>
-        <ant:copy file="${wrapperDir}/${distName}/src/bin/sh.script.in"
-            tofile="deploy/ext/${pom.artifactId}-wrapper.sh">
-            <ant:filterset>
-                <ant:filter token="app.name" value="${pom.artifactId}"/>
-                <ant:filter token="app.long.name" value="${pom.artifactId}"/>
-            </ant:filterset>
-        </ant:copy>
-        <ant:copy file="${wrapperDir}/${distName}/src/bin/bash.script.in"
-            tofile="deploy/ext/${pom.artifactId}-wrapper.bash">
-            <ant:filterset>
-                <ant:filter token="app.name" value="${pom.artifactId}"/>
-                <ant:filter token="app.long.name" value="${pom.artifactId}"/>
-            </ant:filterset>
-        </ant:copy>
-        <!-- win32 wrapper -->
-        <j:set var="distName" value='wrapper_win32_${wrapper.version}'/>
-        <ant:get src="${distURL}/${distName}.zip"
-            dest="${maven.repo.local}/wrapper/distributions/${distName}.zip"
-            usetimestamp="true"
-            verbose="true"/>
-        <ant:unzip src="${maven.repo.local}/wrapper/distributions/${distName}.zip" 
-        		  dest="${wrapperDir}"/>
-        <ant:copy todir="deploy/ext">
-			<ant:fileset dir="${wrapperDir}/${distName}/bin">
-                <ant:include name="*.exe"/>
-			</ant:fileset>        
-			<ant:fileset dir="${wrapperDir}/${distName}/lib">
-                <ant:include name="*.dll"/>
-                <ant:include name="*.jar"/>
-                <ant:exclude name="*test.jar"/>
-			</ant:fileset>        
-        </ant:copy>
-        <ant:copy file="${wrapperDir}/${distName}/src/bin/App.bat.in"
-            tofile="deploy/ext/${pom.artifactId}.bat"/>
-        <ant:copy file="${wrapperDir}/${distName}/src/bin/InstallApp-NT.bat.in"
-            tofile="deploy/ext/Install-${pom.artifactId}-NT.bat"/>
-        <ant:copy file="${wrapperDir}/${distName}/src/bin/UninstallApp-NT.bat.in"
-            tofile="deploy/ext/Uninstall-${pom.artifactId}-NT.bat"/>
-    	
+        <wrapper:install/>    	
     </preGoal>
 
     <goal name="deploy">
