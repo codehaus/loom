@@ -15,6 +15,14 @@
         configurations.
     </description>
 
+    <versions>
+        <version>
+            <id>1.0</id>
+            <name>1.0</name>
+            <tag>CCLASSMAN_1_0-tag</tag>
+        </version>
+    </versions>
+
     <dependencies>
         <dependency>
             <id>oro</id>
