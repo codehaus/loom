@@ -16,8 +16,8 @@
 
     <dependencies>
         <dependency>
-            <id>excalibur-i18n</id>
-            <version>1.0</version>
+            <id>spice-salt</id>
+            <version>0.8</version>
             <properties>
                 <category>runtime</category>
             </properties>
