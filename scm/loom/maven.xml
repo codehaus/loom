@@ -18,7 +18,7 @@
 
     <goal name="deploy:components">
         <echo message="Deploying all components"/>
-        <maven:reactor basedir="${basedir}" includes="plugins/*/project.xml,engine/project.xml,distribution/project.xml,support/*/project.xml,launcher/project.xml" goals="clean:clean,deploy" banner="Deploying" ignoreFailures="false"/>
+        <maven:reactor basedir="${basedir}" includes="plugins/project.xml,engine/project.xml,distribution/project.xml,support/*/project.xml,launcher/project.xml" goals="clean:clean,deploy" banner="Deploying" ignoreFailures="false"/>
     </goal>
 
     <goal name="deploy:demos">
