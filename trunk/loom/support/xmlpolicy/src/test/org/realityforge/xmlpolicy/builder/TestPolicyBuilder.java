@@ -14,11 +14,15 @@ import java.util.HashMap;
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-05 09:45:37 $
+ * @version $Revision: 1.3 $ $Date: 2003-06-05 09:53:43 $
  */
 class TestPolicyBuilder
     extends PolicyBuilder
 {
+    public static final MockCertificate JENNY_CERTIFICATE = new MockCertificate();
+    public static final MockCertificate MISCHELLE_CERTIFICATE = new MockCertificate();
+    public static final MockCertificate GEORGE_CERTIFICATE = new MockCertificate();
+
     protected KeyStore createKeyStore( String type,
                                        URL url )
         throws Exception
@@ -26,9 +30,9 @@ class TestPolicyBuilder
         if( url.equals( new URL( "http://spice.sourceforge.net" ) ) )
         {
             final HashMap certs = new HashMap();
-            certs.put( "jenny", new MockCertificate() );
-            certs.put( "mischelle", new MockCertificate() );
-            certs.put( "george", new MockCertificate() );
+            certs.put( "jenny", JENNY_CERTIFICATE );
+            certs.put( "mischelle", MISCHELLE_CERTIFICATE );
+            certs.put( "george", GEORGE_CERTIFICATE );
             return new MockKeyStore( certs );
         }
         else
