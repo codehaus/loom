@@ -131,7 +131,7 @@ class CLISetup
         options.addOption( STDOUT_OPT,
                            "std-out",
                            false,
-                           REZ.getString( "cli.opt.configfile.desc" ) );
+                           REZ.getString( "cli.opt.configfile.stdout" ) );
         options.addOption( HELP_OPT,
                            "help",
                            false,
