@@ -15,6 +15,12 @@
             <artifactId>loom-tools</artifactId>
             <version>1.0-beta</version>
         </dependency>
+        <dependency>
+            <groupId>loom</groupId>
+            <artifactId>loom-sar-plugin</artifactId>
+            <version>1.0</version>
+            <type>plugin</type>
+        </dependency>
         <dependency> <!-- for metagenerating xinfo -->
             <groupId>spice</groupId>
             <artifactId>spice-metaclass</artifactId>

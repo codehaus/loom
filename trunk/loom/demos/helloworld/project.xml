@@ -26,6 +26,12 @@
             <version>1.0-beta</version>
         </dependency>
         <dependency>
+            <groupId>loom</groupId>
+            <artifactId>loom-sar-plugin</artifactId>
+            <version>1.0</version>
+            <type>plugin</type>
+        </dependency>
+        <dependency>
             <groupId>jcomponent</groupId>
             <artifactId>jcomponent-netserve</artifactId>
             <version>20030831.040601</version>
