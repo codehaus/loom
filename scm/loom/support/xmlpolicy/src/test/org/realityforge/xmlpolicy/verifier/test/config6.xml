@@ -1,6 +1,0 @@
-<policy version="1.0">
-    <!-- testing empty name -->
-    <keystore name=""
-        location="sar:/conf/keystore"
-        type="JKS"/>
-</policy>
