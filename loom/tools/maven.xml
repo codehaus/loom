@@ -14,20 +14,4 @@
         <attainGoal name="jar:deploy"/>
     </goal>
 
-    <postGoal name="test:compile">
-        <ant:taskdef name="metagenerate"
-            classname="org.jcontainer.loom.info.GenerateLoomDescriptorsTask">
-            <ant:classpath>
-                <ant:path refid="maven.dependency.classpath"/>
-            </ant:classpath>
-        </ant:taskdef>
-        <ant:echo message="Generating Component Descriptors For Unit Tests"/>
-        <ant:mkdir dir="${basedir}/target/test-classes"/>
-        <metagenerate destDir="${basedir}/target/test-classes">
-            <ant:fileset dir="src/test">
-                <include name="**/data/*"/>
-            </ant:fileset>
-        </metagenerate>
-    </postGoal>
-
 </project>
