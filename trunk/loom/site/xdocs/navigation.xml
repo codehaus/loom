@@ -47,10 +47,12 @@
                 <item href="/guide/mx/doclet-tags.html" name="Doclet Tags"/>
             </item>
         </menu>
-        <menu name="Specification Reference">
+        <menu name="Reference">
             <item href="/reference/config-xml-specification.html" name="config.xml"/>
             <item href="/reference/assembly-xml-specification.html" name="assembly.xml"/>
             <item href="/reference/environment-xml-specification.html" name="environment.xml"/>
+            <item href="/reference/classman.html" name="ClassMan"/>
+            <item href="/reference/lifecycle.html" name="Lifecycle"/>
         </menu>
     </body>
 </project>

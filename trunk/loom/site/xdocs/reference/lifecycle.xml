@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+
+<document>
+    <properties>
+        <title>Lifecycle of Loom component</title>
+    </properties>
+    <body>
+        <section name="Avalon Lifecycle">
+        	<p>The Avalon lifecycle follows a well defined order:
+        		<ol>
+        			<li>Constructor:  The Avalon IoC frameworks do not
+        							  require you to do much in the constructor
+        			</li>
+        			<li><code>LogEnabled.enableLogging(Logger)</code>:  
+        							  the Logger is passed to the component 
+        			</li>
+        		 	<li><code>Contextualizable.context(Context)</code>:
+        							  the Context is passed to the component         		 					  
+        		 	</li>
+        		 	<li><code>Serviceable.service(ServiceManager)</code>:
+        							  the ServiceManager is passed to the component
+        							  that enables the lookup of the dependencies.
+        		 	</li>
+        		 	<li><code>Configurable.configure(Configuration)</code>:
+        							  the Configuration is passed to the component
+        		 	</li>
+        		 	<li><code>Initializable.initialize()</code>:
+        							  the component is initialized
+        		 	</li>
+        		 	<li><code>Startable.start()</code>:
+        							  the component is started
+        		 	</li>
+				</ol>        	
+        	</p>
+		</section>  
+	
+        <section name="Loom multi-component management">
+        	<p>While the lifecycle of a component is well defined as above, 
+        	the order in which multi-component lifecycles are managed 
+        	is specific to the kernel.
+        	</p>
+        	<p>
+        	Loom goes through the whole lifecycle process to the start phase
+        	for each component before proceeding to the next one:
+        		<source>
+Component1 created.
+Component1 LogEnabled.
+Component1 Contextualized.
+...
+Component1 Started.
+
+Component2 created.
+Component2 LogEnabled.
+Component2 Contextualized.
+...
+Component2 Started.
+				</source>
+        	</p>			      
+		</section>  
+    </body>
+</document>
