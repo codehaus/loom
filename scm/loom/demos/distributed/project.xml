@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <project>
-    <extend>${basedir}/../project.xml</extend>
-    <name>Loom distributed Demo</name>
+    <extend>${basedir}/../../project.xml</extend>
+    <name>Loom Distributed Demo</name>
     <id>demo-distributed</id>
     <package>org.jcontainer.loom.demos.distributed</package>
-    <shortDescription>Distribuited Demo</shortDescription>
+    <shortDescription>Distributed Demo</shortDescription>
     <description>
         Distribuited Demo app for deployment in Loom Application Server.
     </description>
@@ -13,7 +13,7 @@
         <dependency>
         	<groupId>loom</groupId>
             <artifactId>loom-tools</artifactId>
-            <version>1.0-beta</version>
+            <version>${pom.currentVersion}</version>
         </dependency>
         <dependency>
             <groupId>loom</groupId>
