@@ -71,7 +71,7 @@
             <roles>
                 <role>Founder</role>
             </roles>
-            <timezone>GMT</timezone>
+            <timezone>0</timezone>
         </developer>
     </developers>
 
