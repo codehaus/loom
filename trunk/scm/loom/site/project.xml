@@ -1,18 +1,12 @@
 <?xml version="1.0"?>
 <project>
     <extend>${basedir}/../project.xml</extend>
-    <pomVersion>3</pomVersion>
-
     <name>JContainer Loom</name>
     <id>loom-site</id>
-
-    <currentVersion>1.0</currentVersion>
-
     <organization>
         <name>JContainer Group. Portions &#169; 1997-2003, Apache Software Foundation</name>
         <url>http://jcontainer.org</url>
     </organization>
-
     <shortDescription>JContainer Loom web site</shortDescription>
     <description>JContainer Loom web site</description>
 
