@@ -33,15 +33,14 @@ maven clean-all | tee target/cleanbuild.log
 
 # See if the "compiling" file is there. If it is, compilation
 # failed.
-if grep -v "BUILD SUCCESSFUL" target/cleanbuild.log ; then
+if grep "BUILD SUCCESSFUL" target/cleanbuild.log ; then
     echo "Clean passed.."
-
 
     maven build | tee target/cleanbuild.log
     
     # See if the "compiling" file is there. If it is, compilation
     # failed.
-    if grep -v "BUILD SUCCESSFUL" target/cleanbuild.log ; then
+    if grep "BUILD SUCCESSFUL" target/cleanbuild.log ; then
       echo "Build passed, emailing list"
       tail target/cleanbuild.log | mutt -s "[PASS] Clean build passed" $mailto
     else
