@@ -16,11 +16,11 @@ import com.thoughtworks.qdox.model.JavaSource;
 import java.util.ArrayList;
 import java.util.Properties;
 import junit.framework.TestCase;
-import org.realityforge.metaclass.model.Attribute;
+import org.codehaus.metaclass.model.Attribute;
 
 /**
  * @author Peter Donald
- * @version $Revision: 1.1 $ $Date: 2004-03-25 00:46:55 $
+ * @version $Revision: 1.2 $ $Date: 2004-04-18 18:53:01 $
  */
 public class PhoenixAttributeInterceptorTestCase
     extends TestCase

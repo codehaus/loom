@@ -42,7 +42,7 @@
         <dependency>
             <groupId>dna</groupId>
             <artifactId>dna-api</artifactId>
-            <version>1.1-rc2</version>
+            <version>1.1-rc3-dev</version>
             <properties>
                 <category>shared</category>
             </properties>
@@ -50,7 +50,7 @@
         <dependency>
             <groupId>dna</groupId>
             <artifactId>dna-impl</artifactId>
-            <version>1.1-rc2</version>
+            <version>1.1-rc3-dev</version>
             <properties>
                 <category>container</category>
             </properties>
@@ -175,14 +175,14 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>spice</groupId>
-            <artifactId>spice-metaclass</artifactId>
+            <groupId>metaclass</groupId>
+            <artifactId>metaclass-runtime</artifactId>
             <version>1.0-rc3-dev</version>
             <properties>
                 <category>shared</category>
             </properties>
         </dependency>
-        <dependency> <!-- for spice-metaclass -->
+        <dependency> <!-- for metaclass-runtime -->
             <groupId>asm</groupId>
             <artifactId>asm</artifactId>
             <version>1.4</version>

@@ -12,9 +12,9 @@ import com.thoughtworks.qdox.model.JavaClass;
 import com.thoughtworks.qdox.model.JavaMethod;
 import java.util.ArrayList;
 import java.util.Properties;
-import org.realityforge.metaclass.model.Attribute;
-import org.realityforge.metaclass.tools.qdox.DefaultQDoxAttributeInterceptor;
-import org.realityforge.metaclass.tools.qdox.QDoxAttributeInterceptor;
+import org.codehaus.metaclass.model.Attribute;
+import org.codehaus.metaclass.tools.qdox.DefaultQDoxAttributeInterceptor;
+import org.codehaus.metaclass.tools.qdox.QDoxAttributeInterceptor;
 
 /**
  * This is an Attribute interceptor that invoked during construction of
@@ -22,7 +22,7 @@ import org.realityforge.metaclass.tools.qdox.QDoxAttributeInterceptor;
  * and MX attributes.
  *
  * @author Peter Donald
- * @version $Revision: 1.1 $ $Date: 2004-03-25 00:46:57 $
+ * @version $Revision: 1.2 $ $Date: 2004-04-18 18:53:01 $
  */
 public class PhoenixAttributeInterceptor
     extends DefaultQDoxAttributeInterceptor

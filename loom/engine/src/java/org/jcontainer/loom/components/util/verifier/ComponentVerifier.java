@@ -28,14 +28,14 @@ import org.apache.avalon.framework.service.Serviceable;
 import org.codehaus.spice.salt.i18n.ResourceManager;
 import org.codehaus.spice.salt.i18n.Resources;
 import org.jcontainer.dna.AbstractLogEnabled;
-import org.realityforge.metaclass.Attributes;
-import org.realityforge.metaclass.model.Attribute;
+import org.codehaus.metaclass.Attributes;
+import org.codehaus.metaclass.model.Attribute;
 
 /**
  * Utility class to help verify that component respects the rules of an Avalon component.
  *
  * @author Peter Donald
- * @version $Revision: 1.5 $ $Date: 2004-02-20 03:49:49 $
+ * @version $Revision: 1.6 $ $Date: 2004-04-18 18:53:01 $
  */
 public class ComponentVerifier extends AbstractLogEnabled
 {

@@ -99,11 +99,11 @@
             <version>1.2</version>
         </dependency>
         <dependency>
-            <groupId>spice</groupId>
-            <artifactId>spice-metaclass</artifactId>
+            <groupId>metaclass</groupId>
+            <artifactId>metaclass-runtime</artifactId>
             <version>1.0-rc3-dev</version>
         </dependency>
-        <dependency>
+        <dependency> <!-- not yet ported to metaclass -->
             <groupId>spice</groupId>
             <artifactId>spice-metaclass-jmx</artifactId>
             <version>20031017.081651</version>
