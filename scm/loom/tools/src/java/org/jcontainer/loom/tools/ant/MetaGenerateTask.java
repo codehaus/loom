@@ -17,7 +17,7 @@ import java.io.OutputStream;
 import org.apache.tools.ant.BuildException;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.infobuilder.BlockInfoWriter;
-import org.jcontainer.loom.tools.qdox.LegacyInfoBuilder;
+import org.jcontainer.loom.tools.qdox.BlockInfoBuilder;
 
 /**
  * Generate MetaData for info package from the source files.
@@ -25,7 +25,7 @@ import org.jcontainer.loom.tools.qdox.LegacyInfoBuilder;
  *
  * @author Paul Hammant
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.10 $ $Date: 2003-10-11 08:41:56 $
+ * @version $Revision: 1.11 $ $Date: 2003-10-11 08:44:59 $
  */
 public class MetaGenerateTask
     extends AbstractQdoxTask
@@ -133,7 +133,7 @@ public class MetaGenerateTask
             final DocletTag tag = javaClass.getTagByName( "phoenix:block" );
             if( null != tag )
             {
-                final LegacyInfoBuilder infoBuilder = new LegacyInfoBuilder();
+                final BlockInfoBuilder infoBuilder = new BlockInfoBuilder();
                 info = infoBuilder.buildComponentInfo( javaClass );
             }
 

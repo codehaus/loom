@@ -103,9 +103,9 @@ import org.realityforge.metaclass.model.Attribute;
  *
  * @author Paul Hammant
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.11 $ $Date: 2003-10-06 14:10:49 $
+ * @version $Revision: 1.1 $ $Date: 2003-10-11 08:44:59 $
  */
-public class LegacyInfoBuilder
+public class BlockInfoBuilder
     extends AbstractInfoBuilder
 {
     /**
