@@ -5,7 +5,10 @@
 
         <component role="org.jcontainer.loom.interfaces.Installer"
             class="org.jcontainer.loom.components.installer.DefaultInstaller"
-            logger="installer"/>
+            logger="installer">
+            <base-work-dir>${loom.home}/work</base-work-dir>
+            <base-application-dir>${loom.home}/apps</base-application-dir>
+        </component>
 
         <component role="org.jcontainer.loom.interfaces.Deployer"
             class="org.jcontainer.loom.components.deployer.DefaultDeployer"
@@ -113,9 +116,12 @@
         <component role="org.jcontainer.loom.interfaces.ClassLoaderManager"
             class="org.jcontainer.loom.components.classloader.DefaultClassLoaderManager"
             logger="classes"/>
+
         <component role="org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager"
             class="org.jcontainer.loom.components.extensions.DefaultExtensionManager"
-            logger="packages"/>
+            logger="packages">
+            <extensions-dir>${loom.home}/ext</extensions-dir>
+        </component>
         <!--
         <component role="org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager"
         class="org.jcontainer.loom.components.extensions.pkgmgr.impl.NoopPackageRepository"
@@ -131,6 +137,7 @@
             <!-- the amount of time in milliseconds between checks
             of deployment dir -->
             <monitor-frequency>1000</monitor-frequency>
+            <base-application-directory>${loom.home}/apps</base-application-directory>
         </component>
 
         <component role="org.apache.excalibur.instrument.InstrumentManager"

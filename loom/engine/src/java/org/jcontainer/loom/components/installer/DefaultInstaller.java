@@ -100,9 +100,9 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import org.jcontainer.dna.AbstractLogEnabled;
 import org.jcontainer.dna.Active;
-import org.jcontainer.dna.Composable;
-import org.jcontainer.dna.MissingResourceException;
-import org.jcontainer.dna.ResourceLocator;
+import org.jcontainer.dna.Configurable;
+import org.jcontainer.dna.Configuration;
+import org.jcontainer.dna.ConfigurationException;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.Installer;
 import org.jcontainer.loom.interfaces.LoomException;
@@ -116,11 +116,11 @@ import org.realityforge.salt.io.IOUtil;
  * and installing it as appropriate.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.11 $ $Date: 2003-10-29 21:55:26 $
+ * @version $Revision: 1.12 $ $Date: 2003-10-29 22:20:42 $
  */
 public class DefaultInstaller
     extends AbstractLogEnabled
-    implements Installer, Composable, Active
+    implements Installer, Configurable, Active
 {
     private static final Resources REZ =
         ResourceManager.getPackageResources( DefaultInstaller.class );
@@ -150,16 +150,15 @@ public class DefaultInstaller
      */
     private File m_baseDirectory;
 
-    /**
-     * @dna.dependency type="File" qualifier="home"
-     * @dna.dependency type="File" qualifier="apps"
-     */
-    public void compose( ResourceLocator locator )
-        throws MissingResourceException
+    public void configure( final Configuration configuration )
+        throws ConfigurationException
     {
-        final File home = (File)locator.lookup( File.class.getName() + "/home" );
-        m_baseWorkDirectory = new File( home, "work" );
-        m_baseDirectory = (File)locator.lookup( File.class.getName() + "/apps" );
+        final String workDir =
+            configuration.getChild( "base-work-dir" ).getValue();
+        final String appDir =
+            configuration.getChild( "base-application-dir" ).getValue();
+        m_baseWorkDirectory = new File( workDir );
+        m_baseDirectory = new File( appDir );
     }
 
     public void initialize()

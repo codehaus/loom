@@ -89,11 +89,11 @@ package org.jcontainer.loom.components.extensions;
 import java.io.File;
 import java.util.ArrayList;
 import org.jcontainer.dna.Active;
-import org.jcontainer.dna.Composable;
+import org.jcontainer.dna.Configurable;
+import org.jcontainer.dna.Configuration;
+import org.jcontainer.dna.ConfigurationException;
 import org.jcontainer.dna.LogEnabled;
 import org.jcontainer.dna.Logger;
-import org.jcontainer.dna.MissingResourceException;
-import org.jcontainer.dna.ResourceLocator;
 import org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager;
 import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
 import org.realityforge.salt.i18n.ResourceManager;
@@ -101,39 +101,37 @@ import org.realityforge.salt.i18n.Resources;
 
 /**
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.14 $ $Date: 2003-10-29 21:55:26 $
+ * @version $Revision: 1.15 $ $Date: 2003-10-29 22:20:41 $
  * @dna.component
  * @mx.component
  */
 public class DefaultExtensionManager
     extends org.jcontainer.loom.components.extensions.pkgmgr.impl.DefaultExtensionManager
-    implements LogEnabled, Composable, Active, ExtensionManager
+    implements LogEnabled, Configurable, Active, ExtensionManager
 {
     private final static Resources REZ =
         ResourceManager.getPackageResources( DefaultExtensionManager.class );
 
     private Logger m_logger;
-    private File m_rawPath;
+    private File m_extDir;
 
     public void enableLogging( final Logger logger )
     {
         m_logger = logger;
     }
 
-    /**
-     * @dna.dependency type="File" qualifier="home"
-     */
-    public void compose( ResourceLocator locator )
-        throws MissingResourceException
+    public void configure( Configuration configuration )
+        throws ConfigurationException
     {
-        final File home = (File)locator.lookup( File.class.getName() + "/home" );
-        m_rawPath = new File( home, "ext" );
+        final String extDir =
+            configuration.getChild( "extensions-dir" ).getValue();
+        m_extDir = new File( extDir );
     }
 
     public void initialize()
         throws Exception
     {
-        setPath( new File[]{m_rawPath} );
+        setPath( new File[]{m_extDir} );
         rescanPath();
     }
 
