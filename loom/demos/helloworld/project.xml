@@ -29,7 +29,7 @@
         <dependency>
             <groupId>jcomponent</groupId>
             <artifactId>jcomponent-netserve</artifactId>
-            <version>20030831.040601</version>
+            <version>20031107.190306</version>
             <properties>
                 <sar.bundle>true</sar.bundle>
             </properties>

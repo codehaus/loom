@@ -103,9 +103,8 @@ import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 import org.apache.avalon.phoenix.BlockContext;
-import org.jcomponent.netserve.connection.ConnectionManager;
-import org.jcomponent.netserve.connection.ConnectionHandlerManager;
-import org.jcomponent.netserve.connection.ConnectionHandler;
+import org.jcomponent.netserve.connection.RequestHandler;
+import org.jcomponent.netserve.connection.SocketAcceptorManager;
 import org.jcomponent.netserve.sockets.ServerSocketFactory;
 
 /**
@@ -120,11 +119,10 @@ import org.jcomponent.netserve.sockets.ServerSocketFactory;
 public final class HelloWorldServerImpl
     extends AbstractLogEnabled
     implements HelloWorldServer, HelloWorldServerMBean, Contextualizable,
-    Serviceable, Configurable, Initializable, Disposable,
-    ConnectionHandlerManager
+    Serviceable, Configurable, Initializable, Disposable
 {
     private ServerSocketFactory m_socketManager;
-    private ConnectionManager m_connectionManager;
+    private SocketAcceptorManager m_socketAcceptorManager;
     private BlockContext m_context;
     private String m_greeting = "Hello World";
     private InetAddress m_bindTo;
@@ -173,7 +171,7 @@ public final class HelloWorldServerImpl
         getLogger().info( "HelloWorldServer.compose()" );
 
         m_socketManager = (ServerSocketFactory)serviceManager.lookup( ServerSocketFactory.class.getName() );
-        m_connectionManager = (ConnectionManager)serviceManager.lookup( ConnectionManager.class.getName() );
+        m_socketAcceptorManager = (SocketAcceptorManager)serviceManager.lookup( SocketAcceptorManager.class.getName() );
     }
 
     public void initialize()
@@ -181,7 +179,7 @@ public final class HelloWorldServerImpl
     {
         m_serverSocket = m_socketManager.createServerSocket( m_port, 5, m_bindTo );
 
-        m_connectionManager.connect( m_connectionName, m_serverSocket, this );
+        m_socketAcceptorManager.connect( m_connectionName, m_serverSocket, createHandler() );
 
         // This is only to help newbies.....
         System.out.println( "HelloWorld server running with a greeting of '" + m_greeting + "'.  Point your browser to http://localhost:" + m_port + " to see its page" );
@@ -191,7 +189,7 @@ public final class HelloWorldServerImpl
     {
         try
         {
-            m_connectionManager.disconnect( m_connectionName, true );
+            m_socketAcceptorManager.disconnect( m_connectionName );
         }
         catch( final Exception e )
         {
@@ -208,7 +206,7 @@ public final class HelloWorldServerImpl
         }
     }
 
-    public ConnectionHandler aquireHandler()
+    public RequestHandler createHandler()
         throws Exception
     {
         final HelloWorldHandler handler =
@@ -217,10 +215,4 @@ public final class HelloWorldServerImpl
         return handler;
     }
 
-    /**
-     * Release a previously created ConnectionHandler e.g. for spooling.
-     */
-    public void releaseHandler( ConnectionHandler handler )
-    {
-    }
 }

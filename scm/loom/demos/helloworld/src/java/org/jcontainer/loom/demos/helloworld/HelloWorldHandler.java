@@ -94,7 +94,8 @@ import java.net.SocketException;
 
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.phoenix.BlockContext;
-import org.jcomponent.netserve.connection.ConnectionHandler;
+import org.jcomponent.netserve.connection.RequestHandler;
+
 
 /**
  * This handles an individual incoming request.  It outputs a greeting as html.
@@ -104,7 +105,7 @@ import org.jcomponent.netserve.connection.ConnectionHandler;
  */
 final class HelloWorldHandler
     extends AbstractLogEnabled
-    implements ConnectionHandler
+    implements RequestHandler
 {
     private static int c_counter;
     private String m_greeting;
@@ -125,14 +126,13 @@ final class HelloWorldHandler
      * @exception IOException if an error reading from socket occurs
      */
     public void handleConnection( final Socket socket )
-        throws IOException
     {
         final String remoteHost = socket.getInetAddress().getHostName();
         final String remoteIP = socket.getInetAddress().getHostAddress();
-        final PrintWriter out = new PrintWriter( socket.getOutputStream(), true );
 
         try
         {
+			final PrintWriter out = new PrintWriter( socket.getOutputStream(), true );
             out.println( "<html><body><b>" + m_greeting + "!</b><br> Requests so far = " +
                          ++c_counter + "<br>" );
             out.println( "you are " + remoteHost + " at " + remoteIP + "<br>" );
@@ -180,4 +180,10 @@ final class HelloWorldHandler
             m_context.requestShutdown();
         }
     }
+
+	/**
+     * Shutdown the handler and any requests currently being handled. 
+	 */
+	public void shutdown(long timeout) {
+	}
 }
