@@ -112,37 +112,59 @@ import org.codehaus.spice.netserve.sockets.ServerSocketFactory;
  * @version 1.0
  * @dna.component
  * @dna.service type="HelloWorldServer"
- * @mx.interface topic="HelloWorldServer" name="org.codehaus.loom.demos.helloworld.HelloWorldServerMBean"
+ * @mx.component
  */
 public final class HelloWorldServerImpl
     extends AbstractLogEnabled
     implements HelloWorldServer, HelloWorldServerMBean, Contextualizable,
-               Serviceable, Configurable, Initializable, Disposable
+     Serviceable, Configurable, Initializable, Disposable
 {
+
     private ServerSocketFactory m_socketManager;
     private SocketAcceptorManager m_socketAcceptorManager;
     private BlockContext m_context;
-    private String m_greeting = "Hello World";
+    private String m_greeting = "Hello World!";
     private InetAddress m_bindTo;
     private int m_port;
     private String m_connectionName = "HelloWorldListener";
     private ServerSocket m_serverSocket;
+    private HelloWorldHandler m_helloWorldHandler;
 
+    /**
+     * Set the greeting message
+     *
+     * @mx.operation description="Set the greeting."
+     * @mx.parameter name="greeting" description="The new greeting message"
+     * @param greeting The new greeting message
+     */
     public void setGreeting( final String greeting )
     {
         m_greeting = greeting;
+        m_helloWorldHandler.setGreeting( greeting );
     }
 
+    /**
+     * Fetch the greeting message
+     *
+     * @mx.attribute description="The current greeting"
+     * @return The current greeting message.
+     */
     public String getGreeting()
     {
         return m_greeting;
     }
 
+    /**
+     * Give the component its context
+     */
     public void contextualize( final Context context )
     {
         m_context = (BlockContext)context;
     }
 
+    /**
+     * Configure the component
+     */
     public void configure( final Configuration configuration )
         throws ConfigurationException
     {
@@ -150,20 +172,22 @@ public final class HelloWorldServerImpl
 
         try
         {
-            final String bindAddress = configuration.getChild( "bind" )
-                .getValue();
+            final String bindAddress =
+              configuration.getChild( "bind" ).getValue();
             m_bindTo = InetAddress.getByName( bindAddress );
         }
         catch( final UnknownHostException unhe )
         {
-            throw new ConfigurationException( "Malformed bind parameter",
-                                              unhe );
+            throw new ConfigurationException(
+              "Malformed bind parameter", unhe );
         }
     }
 
     /**
-     * @dna.dependency type="ServerSocketFactory"
-     * @dna.dependency type="ConnectionManager"
+     * Give the component its <code>ServiceManager</code>.
+     *
+     * @dna.dependency type="org.codehaus.spice.netserve.connection.SocketAcceptorManager"
+     * @dna.dependency type="org.codehaus.spice.netserve.sockets.ServerSocketFactory"
      */
     public void service( final ServiceManager serviceManager )
         throws ServiceException
@@ -171,32 +195,36 @@ public final class HelloWorldServerImpl
         getLogger().info( "HelloWorldServer.compose()" );
 
         m_socketManager =
-        (ServerSocketFactory)serviceManager.lookup(
+          (ServerSocketFactory)serviceManager.lookup(
             ServerSocketFactory.class.getName() );
         m_socketAcceptorManager =
-        (SocketAcceptorManager)serviceManager.lookup(
+          (SocketAcceptorManager)serviceManager.lookup(
             SocketAcceptorManager.class.getName() );
     }
 
+    /**
+     * Initialize the component
+     */
     public void initialize()
         throws Exception
     {
-        m_serverSocket =
-        m_socketManager.createServerSocket( m_port, 5, m_bindTo );
-
+        m_serverSocket =  m_socketManager.createServerSocket( m_port,
+                                                              5,
+                                                              m_bindTo );
+        m_helloWorldHandler = createHandler();
         m_socketAcceptorManager.connect( m_connectionName,
                                          m_serverSocket,
-                                         createHandler() );
-
-        // This is only to help newbies.....
+                                         (RequestHandler)m_helloWorldHandler );
+        // This is only to help newbies...
         System.out.println(
-            "HelloWorld server running with a greeting of '" +
-            m_greeting +
-            "'.  Point your browser to http://localhost:" +
-            m_port +
-            " to see its page" );
+          "HelloWorld server running with a greeting of '" + m_greeting
+          + "'.  Point your browser to http://localhost:" + m_port
+          + " to see its page" );
     }
 
+    /**
+     * Dispose off the component
+     */
     public void dispose()
     {
         try
@@ -218,11 +246,16 @@ public final class HelloWorldServerImpl
         }
     }
 
-    public RequestHandler createHandler()
+    /**
+     * Create a request handler
+     *
+     * @return A new request handler
+     */
+    public HelloWorldHandler createHandler()
         throws Exception
     {
         final HelloWorldHandler handler =
-            new HelloWorldHandler( m_greeting, m_context );
+          new HelloWorldHandler( m_greeting, m_context );
         setupLogger( handler );
         return handler;
     }
