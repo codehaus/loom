@@ -42,7 +42,7 @@
         <dependency>
             <groupId>dna</groupId>
             <artifactId>dna-api</artifactId>
-            <version>1.1-rc4-dev</version>
+            <version>1.1</version>
             <properties>
                 <category>shared</category>
             </properties>
@@ -50,7 +50,7 @@
         <dependency>
             <groupId>dna</groupId>
             <artifactId>dna-impl</artifactId>
-            <version>1.1-rc4-dev</version>
+            <version>1.1</version>
             <properties>
                 <category>container</category>
             </properties>
@@ -177,7 +177,7 @@
         <dependency>
             <groupId>metaclass</groupId>
             <artifactId>metaclass-runtime</artifactId>
-            <version>1.1-rc4-dev</version>
+            <version>1.1</version>
             <properties>
                 <category>shared</category>
             </properties>
@@ -193,7 +193,7 @@
         <dependency>
             <groupId>metaclass</groupId>
             <artifactId>metaclass-jmx</artifactId>
-            <version>1.1-rc4-dev</version>
+            <version>1.1</version>
             <properties>
                 <category>container</category>
             </properties>
