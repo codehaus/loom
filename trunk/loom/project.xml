@@ -17,7 +17,7 @@
     <logo>/images/loom-logo.png</logo>
     <distributionDirectory>/dist/</distributionDirectory>
     <distributionSite>dist.codehaus.org</distributionSite>
-    <siteDirectory>/home/projects/loom/public_html</siteDirectory>
+    <siteDirectory>/home/projects/loom/public_html/releases/${pom.currentVersion}</siteDirectory>
     <siteAddress>loom.codehaus.org</siteAddress>
     <issueTrackingUrl>http://jira.codehaus.org/secure/BrowseProject.jspa?id=10210</issueTrackingUrl>
 
@@ -166,7 +166,7 @@
         <report>maven-javadoc-plugin</report>
         <report>maven-jxr-plugin</report>
         <report>maven-junit-report-plugin</report>
-        <report>maven-clover-plugin</report>
+        <!--<report>maven-clover-plugin</report>-->
         <report>maven-license-plugin</report>
     </reports>
 </project>
