@@ -28,7 +28,7 @@ import org.realityforge.xmlpolicy.metadata.PolicyMetaData;
  * </ul>
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-04-16 11:46:01 $
+ * @version $Revision: 1.2 $ $Date: 2003-06-04 22:50:46 $
  */
 public class PolicyVerifier
 {
@@ -43,10 +43,6 @@ public class PolicyVerifier
         message = REZ.getString( "valid-names.notice" );
         info( message );
         verifyNames( policy );
-
-        message = REZ.getString( "valid-signedBy.notice" );
-        info( message );
-        verifySignedBy( policy );
 
         message = REZ.getString( "valid-keyStoreReferences.notice" );
         info( message );
@@ -81,83 +77,6 @@ public class PolicyVerifier
         {
             final String name = keyStores[ i ].getName();
             verifyName( name );
-        }
-    }
-
-    /**
-     * Verify that all the signedBy are accompanied by keystores.
-     *
-     * @throws Exception if validity check fails
-     */
-    private void verifySignedBy( final PolicyMetaData policy )
-        throws Exception
-    {
-        final GrantMetaData[] grants = policy.getGrants();
-        for( int i = 0; i < grants.length; i++ )
-        {
-            verifySignedBy( grants[ i ] );
-        }
-    }
-
-    /**
-     * Verify that all the signedBy are accompanied by keystores.
-     *
-     * @throws Exception if validity check fails
-     */
-    private void verifySignedBy( final GrantMetaData grant ) throws Exception
-    {
-        final String signedBy = grant.getSignedBy();
-        final String keyStore = grant.getKeyStore();
-        if( null != signedBy && null == keyStore )
-        {
-            final String message =
-                REZ.getString( "grant-missing-keystore.error",
-                               grant.getCodebase() );
-            throw new Exception( message );
-
-        }
-        else if( null == signedBy && null != keyStore )
-        {
-            final String message =
-                REZ.getString( "grant-extra-keystore.error",
-                               grant.getCodebase() );
-            throw new Exception( message );
-        }
-        final PermissionMetaData[] permissions = grant.getPermissions();
-        for( int i = 0; i < permissions.length; i++ )
-        {
-            final PermissionMetaData permission = permissions[ i ];
-            verifySignedBy( grant, permission );
-        }
-    }
-
-    /**
-     * Verify that all the signedBy are accompanied by keystores.
-     *
-     * @throws Exception if validity check fails
-     */
-    private void verifySignedBy( final GrantMetaData grant,
-                                 final PermissionMetaData permission )
-        throws Exception
-    {
-        final String signedBy = permission.getSignedBy();
-        final String keyStore = permission.getKeyStore();
-        if( null != signedBy && null == keyStore )
-        {
-            final String message =
-                REZ.getString( "permission-missing-keystore.error",
-                               grant.getCodebase(),
-                               permission.getClassname() );
-            throw new Exception( message );
-
-        }
-        else if( null == signedBy && null != keyStore )
-        {
-            final String message =
-                REZ.getString( "permission-extra-keystore.error",
-                               grant.getCodebase(),
-                               permission.getClassname() );
-            throw new Exception( message );
         }
     }
 
