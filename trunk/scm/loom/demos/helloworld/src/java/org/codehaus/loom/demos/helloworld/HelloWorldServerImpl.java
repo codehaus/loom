@@ -139,6 +139,7 @@ public final class HelloWorldServerImpl
      */
     public void setGreeting( final String greeting )
     {
+        getLogger().debug( "Setting greeting to [" + greeting + "].");
         m_greeting = greeting;
     }
 
@@ -154,7 +155,9 @@ public final class HelloWorldServerImpl
     }
 
     /**
-     * Give the component its context
+     * Give the component its <code>Context</code>
+     *
+     * @param context The context
      */
     public void contextualize( final Context context )
     {
@@ -163,6 +166,8 @@ public final class HelloWorldServerImpl
 
     /**
      * Configure the component
+     *
+     * @param configuration The configuration
      */
     public void configure( final Configuration configuration )
         throws ConfigurationException
@@ -204,7 +209,7 @@ public final class HelloWorldServerImpl
     public void initialize()
         throws Exception
     {
-        getLogger().debug( "Initializing..." );
+        getLogger().info( "Initializing..." );
         m_serverSocket =  m_socketManager.createServerSocket( m_port,
                                                               5,
                                                               m_bindTo );
@@ -215,7 +220,7 @@ public final class HelloWorldServerImpl
         // This is only to help newbies...
         System.out.println(
           "HelloWorld server running with a greeting of '" + m_greeting
-          + "'.  Point your browser to http://localhost:" + m_port
+          + "'.  Point your browser to http://" + m_bindTo + ":" + m_port
           + " to see its page" );
     }
 
@@ -224,7 +229,7 @@ public final class HelloWorldServerImpl
      */
     public void dispose()
     {
-        getLogger().debug( "Shutting down..." );
+        getLogger().info( "Shutting down..." );
         try
         {
             m_socketAcceptorManager.disconnect( m_connectionName );
