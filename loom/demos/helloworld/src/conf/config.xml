@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<config>
-
-    <helloworldserver>
-        <port>8999</port>
-        <bind>127.0.0.1</bind>
-    </helloworldserver>
-
-</config>
