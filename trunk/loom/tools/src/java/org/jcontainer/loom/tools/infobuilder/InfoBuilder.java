@@ -15,12 +15,12 @@ import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
 /**
- * A InfoBuilder is responsible for building {@link org.jcontainer.loom.tools.info.ComponentInfo}
+ * A InfoBuilder is responsible for building {@link ComponentInfo}
  * objects from Configuration objects. The format for Configuration object
  * is specified in the <a href="package-summary.html#external">package summary</a>.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-07-05 06:01:24 $
+ * @version $Revision: 1.5 $ $Date: 2003-07-05 06:02:40 $
  */
 public final class InfoBuilder
     extends AbstractLogEnabled
@@ -54,7 +54,7 @@ public final class InfoBuilder
     }
 
     /**
-     * Create a {@link org.jcontainer.loom.tools.info.ComponentInfo} object for specified Class.
+     * Create a {@link ComponentInfo} object for specified Class.
      *
      * @param clazz The class of Component
      * @return the created ComponentInfo
@@ -67,7 +67,7 @@ public final class InfoBuilder
     }
 
     /**
-     * Create a {@link org.jcontainer.loom.tools.info.ComponentInfo} object for specified
+     * Create a {@link ComponentInfo} object for specified
      * classname, in specified ClassLoader.
      *
      * @param classname The classname of Component
@@ -97,11 +97,11 @@ public final class InfoBuilder
     }
 
     /**
-     * Build {@link org.jcontainer.loom.tools.info.ComponentInfo} from the XML descriptor format.
+     * Build {@link ComponentInfo} from the XML descriptor format.
      *
      * @param classname The classname of Component
      * @param classLoader the ClassLoader to load info from
-     * @return the created {@link org.jcontainer.loom.tools.info.ComponentInfo}
+     * @return the created {@link ComponentInfo}
      * @throws java.lang.Exception if an error occurs
      */
     private ComponentInfo buildComponentFromSer( final String classname,
@@ -119,11 +119,11 @@ public final class InfoBuilder
     }
 
     /**
-     * Build {@link org.jcontainer.loom.tools.info.ComponentInfo} from the legacy XML descriptor format.
+     * Build {@link ComponentInfo} from the legacy XML descriptor format.
      *
      * @param classname The classname of Component
      * @param classLoader the ClassLoader to load info from
-     * @return the created {@link org.jcontainer.loom.tools.info.ComponentInfo}
+     * @return the created {@link ComponentInfo}
      * @throws java.lang.Exception if an error occurs
      */
     private ComponentInfo buildComponentFromLegacy( final String classname,
@@ -153,7 +153,7 @@ public final class InfoBuilder
      * @param classname The classname of Component
      * @param classLoader the ClassLoader to load info from
      * @return the created ComponentInfo
-     * @throws java.lang.Exception if an error occurs
+     * @throws Exception if an error occurs
      */
     private ComponentInfo buildComponentFromXML( final String classname,
                                                  final ClassLoader classLoader )
@@ -196,10 +196,10 @@ public final class InfoBuilder
     }
 
     /**
-     * Utility to get {@link org.jcontainer.loom.tools.infobuilder.XMLInfoReader} if XML files are on
+     * Utility to get {@link XMLInfoReader} if XML files are on
      * ClassPath.
      *
-     * @return the XML {@link org.jcontainer.loom.tools.infobuilder.InfoReader}
+     * @return the XML {@link InfoReader}
      */
     private static InfoReader createXMLInfoCreator()
     {
@@ -216,10 +216,10 @@ public final class InfoBuilder
     }
 
     /**
-     * Utility to get {@link org.jcontainer.loom.tools.infobuilder.LegacyBlockInfoReader} if XML files are on
+     * Utility to get {@link LegacyBlockInfoReader} if XML files are on
      * ClassPath.
      *
-     * @return the Legacy {@link org.jcontainer.loom.tools.infobuilder.InfoReader}
+     * @return the Legacy {@link InfoReader}
      */
     private static InfoReader createLegacyInfoCreator()
     {
