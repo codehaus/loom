@@ -10,10 +10,18 @@
 	<section name="Porting Phoenix 4.0.x applications">
 		<p>
 		    Loom 1.0 supports applications running in Phoenix 4.0.x releases,
-		    provided that the appropriate libraries are bundles in the sar.
+		    provided that the sar is built using the 
+		    <a href="/plugins/maven-sar/">Maven Sar Plugin</a>
+		    provided by Loom and the appropriate libraries are bundles in the sar.
 		</p>
 		<p>
-			Compared to the Phoenix 4.0.x distribution, in Loom 1.0 distribution 
+			Since the generation of metaclass descriptors is more generic in 
+			Loom compared with Phoenix, but still fully compatible with it,
+			users can deploy applications running in Phoenix 4.0.x by simply
+			regenerating the descriptors using the Maven Sar Plugin.
+		</p>		
+		<p>
+			Also, compared to the Phoenix 4.0.x distribution, in the Loom 1.0 distribution 
 			some of the libraries in the <code>lib/</code> directory 
 			have been removed as they are not used by the container. 
 			If your app uses any of the excluded libraries, 
