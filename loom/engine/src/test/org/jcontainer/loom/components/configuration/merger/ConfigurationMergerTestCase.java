@@ -88,10 +88,10 @@ package org.jcontainer.loom.components.configuration.merger;
 
 import junit.framework.TestCase;
 
-import org.apache.avalon.framework.configuration.DefaultConfiguration;
-import org.apache.avalon.framework.configuration.ConfigurationUtil;
 import org.jcontainer.loom.components.configuration.merger.ConfigurationMerger;
 import org.jcontainer.loom.components.configuration.merger.ConfigurationSplitter;
+import org.jcontainer.loom.components.util.ConfigUtil;
+import org.jcontainer.dna.impl.DefaultConfiguration;
 
 /**
  * @author <a href="mailto:proyal at apache.org">Peter Royal</a>
@@ -111,57 +111,57 @@ public class ConfigurationMergerTestCase
 
     public void testAttributeOnlyMerge() throws Exception
     {
-        DefaultConfiguration result = new DefaultConfiguration( "a", "b" );
+        DefaultConfiguration result = new DefaultConfiguration( "a", "", "" );
         result.setAttribute( "a", "1" );
 
-        DefaultConfiguration base = new DefaultConfiguration( "a", "b" );
+        DefaultConfiguration base = new DefaultConfiguration( "a", "", "" );
         base.setAttribute( "a", "2" );
 
-        DefaultConfiguration layer = new DefaultConfiguration( "a", "b" );
+        DefaultConfiguration layer = new DefaultConfiguration( "a", "", "" );
         layer.setAttribute( "a", "1" );
 
-        assertTrue( ConfigurationUtil.equals( result, ConfigurationMerger.merge( layer, base ) ) );
-        assertTrue( ConfigurationUtil.equals( layer, ConfigurationSplitter.split( result, base ) ));
+        assertTrue( ConfigUtil.equals( result, ConfigurationMerger.merge( layer, base ) ) );
+        assertTrue( ConfigUtil.equals( layer, ConfigurationSplitter.split( result, base ) ));
     }
 
     public void testAddChild() throws Exception
     {
-        DefaultConfiguration result = new DefaultConfiguration( "a", "b" );
-        result.addChild( new DefaultConfiguration( "kid1", "b" ) );
-        result.addChild( new DefaultConfiguration( "kid2", "b" ) );
+        DefaultConfiguration result = new DefaultConfiguration( "a", "", "" );
+        result.addChild( new DefaultConfiguration( "kid1", "", "" ) );
+        result.addChild( new DefaultConfiguration( "kid2", "", "" ) );
 
-        DefaultConfiguration base = new DefaultConfiguration( "a", "b" );
-        base.addChild( new DefaultConfiguration( "kid1", "b" ) );
+        DefaultConfiguration base = new DefaultConfiguration( "a", "", "" );
+        base.addChild( new DefaultConfiguration( "kid1", "", "" ) );
 
-        DefaultConfiguration layer = new DefaultConfiguration( "a", "b" );
-        layer.addChild( new DefaultConfiguration( "kid2", "b" ) );
+        DefaultConfiguration layer = new DefaultConfiguration( "a", "", "" );
+        layer.addChild( new DefaultConfiguration( "kid2", "", "" ) );
 
-        assertTrue( ConfigurationUtil.equals( result, ConfigurationMerger.merge( layer, base ) ) );
-        assertTrue( ConfigurationUtil.equals( layer, ConfigurationSplitter.split( result, base ) ));
+        assertTrue( ConfigUtil.equals( result, ConfigurationMerger.merge( layer, base ) ) );
+        assertTrue( ConfigUtil.equals( layer, ConfigurationSplitter.split( result, base ) ));
     }
 
     public void testOverrideChild() throws Exception
     {
-        DefaultConfiguration result = new DefaultConfiguration( "a", "b" );
-        DefaultConfiguration rkid1 = new DefaultConfiguration( "kid1", "b" );
+        DefaultConfiguration result = new DefaultConfiguration( "a", "", "" );
+        DefaultConfiguration rkid1 = new DefaultConfiguration( "kid1", "", "" );
         rkid1.setAttribute( "test", "1" );
         result.addChild( rkid1 );
 
-        DefaultConfiguration base = new DefaultConfiguration( "a", "b" );
-        DefaultConfiguration bkid1 = new DefaultConfiguration( "kid1", "b" );
+        DefaultConfiguration base = new DefaultConfiguration( "a", "", "" );
+        DefaultConfiguration bkid1 = new DefaultConfiguration( "kid1", "", "" );
         bkid1.setAttribute( "test", "0" );
         base.addChild( bkid1 );
 
-        DefaultConfiguration layer = new DefaultConfiguration( "a", "b" );
-        DefaultConfiguration lkid1 = new DefaultConfiguration( "kid1", "b" );
+        DefaultConfiguration layer = new DefaultConfiguration( "a", "", "" );
+        DefaultConfiguration lkid1 = new DefaultConfiguration( "kid1", "", "" );
         lkid1.setAttribute( "test", "1" );
         layer.addChild( lkid1 );
 
-        assertTrue( !ConfigurationUtil.equals( result, ConfigurationMerger.merge( layer, base ) ) );
+        assertTrue( !ConfigUtil.equals( result, ConfigurationMerger.merge( layer, base ) ) );
 
         lkid1.setAttribute( "excalibur-configuration:merge", "true" );
 
-        assertTrue( ConfigurationUtil.equals( result, ConfigurationMerger.merge( layer, base ) ) );
-        assertTrue( ConfigurationUtil.equals( layer, ConfigurationSplitter.split( result, base ) ) );
+        assertTrue( ConfigUtil.equals( result, ConfigurationMerger.merge( layer, base ) ) );
+        assertTrue( ConfigUtil.equals( layer, ConfigurationSplitter.split( result, base ) ) );
     }
 }

@@ -7,8 +7,9 @@
  */
 package org.jcontainer.loom.components.validator;
 
-import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.jcontainer.loom.interfaces.ConfigurationValidator;
+import org.jcontainer.loom.tools.profile.ComponentProfile;
+import org.jcontainer.dna.ConfigurationException;
 
 /**
  * A ConfigurationValidator that always says everything is okay
@@ -18,7 +19,7 @@ import org.jcontainer.loom.interfaces.ConfigurationValidator;
 public class NoopConfigurationValidator
     implements ConfigurationValidator
 {
-    public boolean isValid( org.jcontainer.loom.tools.profile.ComponentProfile component, ClassLoader classLoader )
+    public boolean isValid( ComponentProfile component, ClassLoader classLoader )
         throws ConfigurationException
     {
         return true;

@@ -90,8 +90,8 @@ import javax.management.Attribute;
 import javax.management.MBeanServer;
 import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
-import org.apache.avalon.framework.configuration.Configuration;
-import org.apache.avalon.framework.configuration.ConfigurationException;
+import org.jcontainer.dna.Configuration;
+import org.jcontainer.dna.ConfigurationException;
 
 /**
  * Support JMX MBean lifecycle.

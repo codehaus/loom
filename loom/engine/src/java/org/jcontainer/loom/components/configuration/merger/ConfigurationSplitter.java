@@ -87,10 +87,10 @@
 package org.jcontainer.loom.components.configuration.merger;
 
 import java.util.HashSet;
-import org.apache.avalon.framework.configuration.Configuration;
-import org.apache.avalon.framework.configuration.ConfigurationException;
-import org.apache.avalon.framework.configuration.ConfigurationUtil;
-import org.apache.avalon.framework.configuration.DefaultConfiguration;
+import org.jcontainer.dna.Configuration;
+import org.jcontainer.dna.ConfigurationException;
+import org.jcontainer.dna.impl.DefaultConfiguration;
+import org.jcontainer.loom.components.util.ConfigUtil;
 
 /**
  * The ConfigurationSplitter will take two Configuration objects and calculate the
@@ -135,6 +135,7 @@ public class ConfigurationSplitter
     {
         final DefaultConfiguration layer =
             new DefaultConfiguration( base.getName(),
+                                      merged.getPath(),
                                       "Merged [merged: " + merged.getLocation()
                                       + ", base: " + base.getLocation() + "]" );
 
@@ -211,7 +212,9 @@ public class ConfigurationSplitter
                 {
                     throw new ConfigurationException( "Multiple children in base with name '"
                                                       + name + "' and attr '" + keyAttr
-                                                      + " = " + keyValue + "'" );
+                                                      + " = " + keyValue + "'",
+                                                      merged.getPath(),
+                                                      merged.getLocation() );
                 }
             }
 
@@ -219,7 +222,7 @@ public class ConfigurationSplitter
             {
                 layer.addChild( kids[ i ] );
             }
-            else if( !ConfigurationUtil.equals( kids[ i ], mergedWith ) )
+            else if( !ConfigUtil.equals( kids[ i ], mergedWith ) )
             {
                 final DefaultConfiguration layerChild = doSplit( kids[ i ], mergedWith, keyAttr );
 
@@ -256,7 +259,9 @@ public class ConfigurationSplitter
                         throw new ConfigurationException( "Multiple unique attributes for child "
                                                           + "[name: " + c[ 0 ].getName()
                                                           + ", unique1: " + uniqueAttr
-                                                          + ", unique2: " + attr + "]" );
+                                                          + ", unique2: " + attr + "]",
+                                                          "",
+                                                          "");
                     }
                 }
                 else
@@ -269,7 +274,9 @@ public class ConfigurationSplitter
         if( null == uniqueAttr )
         {
             throw new ConfigurationException( "Unable to find unique attribute for "
-                                              + "children of name: " + c[ 0 ].getName() );
+                                              + "children of name: " + c[ 0 ].getName(),
+                                              c[ 0 ].getPath(),
+                                              c[ 0 ].getLocation() );
         }
 
         return uniqueAttr;

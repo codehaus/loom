@@ -89,9 +89,9 @@ package org.jcontainer.loom.components.classloader;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.avalon.framework.configuration.Configuration;
 import org.jcontainer.loom.interfaces.ClassLoaderManager;
 import org.jcontainer.loom.interfaces.ClassLoaderSet;
+import org.jcontainer.dna.Configuration;
 
 /**
  * Basic ClassLoaderManager that just returns current

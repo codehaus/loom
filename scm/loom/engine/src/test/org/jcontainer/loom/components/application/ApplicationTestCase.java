@@ -11,8 +11,6 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import junit.framework.TestCase;
-import org.apache.avalon.framework.configuration.Configuration;
-import org.apache.avalon.framework.configuration.DefaultConfiguration;
 import org.apache.avalon.framework.logger.ConsoleLogger;
 import org.jcontainer.loom.components.deployer.PhoenixProfileBuilder;
 import org.jcontainer.loom.interfaces.ContainerConstants;
@@ -28,6 +26,8 @@ import org.jcontainer.loom.tools.metadata.DependencyMetaData;
 import org.jcontainer.loom.tools.metadata.PartitionMetaData;
 import org.jcontainer.loom.tools.profile.ComponentProfile;
 import org.jcontainer.loom.tools.profile.PartitionProfile;
+import org.jcontainer.dna.Configuration;
+import org.jcontainer.dna.impl.DefaultConfiguration;
 import org.realityforge.metaclass.model.Attribute;
 import org.xml.sax.InputSource;
 
@@ -35,7 +35,7 @@ import org.xml.sax.InputSource;
  *  An basic test case for the Application.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-10-05 01:18:58 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-05 03:25:09 $
  */
 public class ApplicationTestCase
     extends TestCase
@@ -343,7 +343,7 @@ public class ApplicationTestCase
         final Map parameters = new HashMap();
         parameters.put( ContainerConstants.ASSEMBLY_NAME, "test" );
         parameters.put( ContainerConstants.ASSEMBLY_DESCRIPTOR, assembly );
-        parameters.put( ContainerConstants.CONFIG_DESCRIPTOR, new DefaultConfiguration( "config" ) );
+        parameters.put( ContainerConstants.CONFIG_DESCRIPTOR, new DefaultConfiguration( "config", "", "" ) );
         parameters.put( ContainerConstants.ASSEMBLY_CLASSLOADER, getClass().getClassLoader() );
         return assembler.buildProfile( parameters );
     }

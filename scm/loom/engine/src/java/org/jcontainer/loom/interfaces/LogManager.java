@@ -88,8 +88,8 @@ package org.jcontainer.loom.interfaces;
 
 import java.io.File;
 import java.util.Map;
-import org.apache.avalon.framework.configuration.Configuration;
 import org.jcomponent.loggerstore.LoggerStore;
+import org.jcontainer.dna.Configuration;
 
 /**
  * Interface that is used to manage Log objects for a Sar.

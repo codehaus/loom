@@ -101,10 +101,10 @@ import javax.management.modelmbean.ModelMBeanInfoSupport;
 import javax.management.modelmbean.ModelMBeanNotificationInfo;
 import javax.management.modelmbean.ModelMBeanOperationInfo;
 import javax.management.modelmbean.RequiredModelMBean;
-import org.apache.avalon.framework.configuration.Configuration;
-import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.jcontainer.loom.tools.configuration.ConfigurationBuilder;
+import org.jcontainer.dna.ConfigurationException;
+import org.jcontainer.dna.Configuration;
 import org.xml.sax.InputSource;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
@@ -117,7 +117,7 @@ import org.realityforge.salt.i18n.ResourceManager;
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author <a href="mailto:huw@mmlive.com">Huw Roberts</a>
- * @version $Revision: 1.3 $ $Date: 2003-08-17 18:27:33 $
+ * @version $Revision: 1.4 $ $Date: 2003-10-05 03:25:08 $
  */
 public final class MBeanInfoBuilder
     extends AbstractLogEnabled
@@ -169,7 +169,7 @@ public final class MBeanInfoBuilder
                 final String message =
                     REZ.format( "mxinfo.error.target", target.getName() );
                 getLogger().error( message, e );
-                throw new ConfigurationException( message );
+                throw new ConfigurationException( message, null );
             }
         }
     }
@@ -358,7 +358,7 @@ public final class MBeanInfoBuilder
             else
             {
                 final String message = REZ.format( "mxinfo.error.proxy", managedClass.getName() );
-                throw new ConfigurationException( message );
+                throw new ConfigurationException( message, null );
             }
         }
     }
@@ -464,7 +464,7 @@ public final class MBeanInfoBuilder
 
         final String message =
             REZ.format( "mxinfo.error.missing.property", name );
-        throw new ConfigurationException( message );
+        throw new ConfigurationException( message, null );
     }
 
     /**
@@ -567,7 +567,7 @@ public final class MBeanInfoBuilder
             }
         }
         final String message = REZ.format( "mxinfo.error.missing.method", name );
-        throw new ConfigurationException( message );
+        throw new ConfigurationException( message, null );
     }
 
     /**
@@ -617,7 +617,7 @@ public final class MBeanInfoBuilder
             final String message =
                 REZ.format( "mxinfo.error.file", mxinfoName );
             getLogger().error( message, e );
-            throw new ConfigurationException( message );
+            throw new ConfigurationException( message, null );
         }
     }
 

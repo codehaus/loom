@@ -7,8 +7,8 @@
  */
 package org.jcontainer.loom.interfaces;
 
-import org.apache.avalon.framework.configuration.Configuration;
-import org.apache.avalon.framework.configuration.ConfigurationException;
+import org.jcontainer.dna.Configuration;
+import org.jcontainer.dna.ConfigurationException;
 
 /**
  * Repository from which all configuration data is retrieved.

@@ -89,9 +89,9 @@ package org.jcontainer.loom.components.configuration.merger;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-import org.apache.avalon.framework.configuration.Configuration;
-import org.apache.avalon.framework.configuration.ConfigurationException;
-import org.apache.avalon.framework.configuration.DefaultConfiguration;
+import org.jcontainer.dna.Configuration;
+import org.jcontainer.dna.ConfigurationException;
+import org.jcontainer.dna.impl.DefaultConfiguration;
 
 /**
  * The ConfigurationMerger will take a Configuration object and layer it over another.
@@ -124,13 +124,14 @@ public class ConfigurationMerger
      *
      * @return Result of merge
      *
-     * @exception org.apache.avalon.framework.configuration.ConfigurationException if unable to merge
+     * @exception ConfigurationException if unable to merge
      */
     public static Configuration merge( final Configuration layer, final Configuration base )
         throws ConfigurationException
     {
         final DefaultConfiguration merged =
             new DefaultConfiguration( base.getName(),
+                                      base.getPath(),
                                       "Merged [layer: " + layer.getLocation()
                                       + ", base: " + base.getLocation() + "]" );
 
@@ -139,8 +140,11 @@ public class ConfigurationMerger
 
         mergeChildren( layer, base, merged );
 
-        merged.setValue( getValue( layer, base ) );
-        merged.makeReadOnly();
+        final String value = getValue( layer, base );
+        if( null != value )
+        {
+            merged.setValue( value );
+        }
 
         return merged;
     }
@@ -208,7 +212,9 @@ public class ConfigurationMerger
             {
                 throw new ConfigurationException( "Unable to merge configuration item, "
                                                   + "multiple matches on child or base [name: "
-                                                  + toMerge.getName() + "]" );
+                                                  + toMerge.getName() + "]",
+                                                  toMerge.getPath(),
+                                                  toMerge.getLocation() );
             }
         }
 

@@ -93,9 +93,6 @@ import java.util.Observable;
 import java.util.Observer;
 import org.apache.avalon.framework.activity.Disposable;
 import org.apache.avalon.framework.activity.Initializable;
-import org.apache.avalon.framework.configuration.Configurable;
-import org.apache.avalon.framework.configuration.Configuration;
-import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.container.ContainerUtil;
 import org.apache.avalon.framework.context.Context;
 import org.apache.avalon.framework.context.ContextException;
@@ -115,6 +112,9 @@ import org.jcontainer.loom.interfaces.Kernel;
 import org.jcontainer.loom.interfaces.SystemManager;
 import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.components.util.ExtensionFileFilter;
+import org.jcontainer.dna.Configurable;
+import org.jcontainer.dna.Configuration;
+import org.jcontainer.dna.ConfigurationException;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
 
@@ -607,7 +607,7 @@ public class DefaultEmbeddor
         ContainerUtil.contextualize( object, m_context );
         ContainerUtil.service( object, getServiceManager() );
         ContainerUtil.parameterize( object, createChildParameters() );
-        ContainerUtil.configure( object, config );
+        org.jcontainer.dna.impl.ContainerUtil.configure( object, config );
         ContainerUtil.initialize( object );
         ContainerUtil.start( object );
     }

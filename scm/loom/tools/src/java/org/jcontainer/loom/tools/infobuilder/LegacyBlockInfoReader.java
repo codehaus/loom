@@ -9,8 +9,6 @@ package org.jcontainer.loom.tools.infobuilder;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import org.apache.avalon.framework.configuration.Configuration;
-import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.jcontainer.loom.tools.configuration.ConfigurationBuilder;
 import org.jcontainer.loom.tools.info.ComponentDescriptor;
@@ -18,6 +16,8 @@ import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
+import org.jcontainer.dna.Configuration;
+import org.jcontainer.dna.ConfigurationException;
 import org.realityforge.metaclass.model.Attribute;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
@@ -30,7 +30,7 @@ import org.xml.sax.InputSource;
  * <a href="package-summary.html#external">package summary</a>.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.9 $ $Date: 2003-10-05 01:18:58 $
+ * @version $Revision: 1.10 $ $Date: 2003-10-05 03:25:12 $
  */
 public final class LegacyBlockInfoReader
     extends AbstractLogEnabled
@@ -88,7 +88,7 @@ public final class LegacyBlockInfoReader
                 REZ.format( "legacy.bad-toplevel-element.error",
                             classname,
                             topLevelName );
-            throw new ConfigurationException( message );
+            throw new ConfigurationException( message, info.getPath(), info.getLocation() );
         }
 
         Configuration configuration = null;
@@ -152,7 +152,7 @@ public final class LegacyBlockInfoReader
      * @param classname The classname of Component (used for logging purposes)
      * @param configuration the dependencies configuration
      * @return the created DependencyDescriptor
-     * @throws org.apache.avalon.framework.configuration.ConfigurationException if an error occurs
+     * @throws ConfigurationException if an error occurs
      */
     private DependencyDescriptor[] buildDependencies( final String classname,
                                                       final Configuration configuration )
@@ -178,7 +178,7 @@ public final class LegacyBlockInfoReader
      * @param classname The classname of Component (used for logging purposes)
      * @param dependency the dependency configuration
      * @return the created DependencyDescriptor
-     * @throws org.apache.avalon.framework.configuration.ConfigurationException if an error occurs
+     * @throws ConfigurationException if an error occurs
      */
     private DependencyDescriptor buildDependency( final String classname,
                                                   final Configuration dependency )
@@ -219,7 +219,7 @@ public final class LegacyBlockInfoReader
      *
      * @param info the services configuration
      * @return the created ServiceDescriptor
-     * @throws org.apache.avalon.framework.configuration.ConfigurationException if an error occurs
+     * @throws ConfigurationException if an error occurs
      */
     private ServiceDescriptor[] buildServices( final Configuration info )
         throws ConfigurationException
@@ -248,7 +248,7 @@ public final class LegacyBlockInfoReader
      *
      * @param service the service Configuration
      * @return the created ServiceDescriptor
-     * @throws org.apache.avalon.framework.configuration.ConfigurationException if an error occurs
+     * @throws ConfigurationException if an error occurs
      */
     private ServiceDescriptor buildService( final Configuration service,
                                             final boolean isManagement )

@@ -107,6 +107,7 @@ import org.jcontainer.loom.tools.metadata.DependencyMetaData;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ContextDescriptor;
 import org.jcontainer.loom.tools.info.EntryDescriptor;
+import org.jcontainer.loom.tools.configuration.ConfigurationConverter;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
 
@@ -123,7 +124,7 @@ import org.realityforge.salt.i18n.ResourceManager;
  * {@link org.jcontainer.loom.tools.verifier.AssemblyVerifier}</p>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-08-17 18:27:34 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-05 03:25:12 $
  */
 public abstract class AbstractResourceProvider
     extends AbstractLogEnabled
@@ -224,7 +225,8 @@ public abstract class AbstractResourceProvider
         throws Exception
     {
         final ComponentMetaData component = getMetaData( entry );
-        final Configuration configuration = component.getConfiguration();
+        final Configuration configuration =
+            ConfigurationConverter.toConfiguration( component.getConfiguration() );
         if( null == configuration )
         {
             final String message =

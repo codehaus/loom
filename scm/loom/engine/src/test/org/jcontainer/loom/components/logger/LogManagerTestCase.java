@@ -12,11 +12,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
-
 import junit.framework.TestCase;
-
-import org.apache.avalon.framework.configuration.Configuration;
-import org.apache.avalon.framework.configuration.DefaultConfigurationBuilder;
 import org.apache.avalon.framework.container.ContainerUtil;
 import org.apache.avalon.framework.logger.ConsoleLogger;
 import org.apache.avalon.framework.logger.Logger;
@@ -26,13 +22,16 @@ import org.apache.avalon.phoenix.metadata.BlockMetaData;
 import org.apache.avalon.phoenix.metadata.SarMetaData;
 import org.jcomponent.loggerstore.LoggerStore;
 import org.jcontainer.loom.interfaces.LogManager;
+import org.jcontainer.dna.Configuration;
+import org.jcontainer.dna.impl.ConfigurationUtil;
 import org.realityforge.salt.io.FileUtil;
+import org.xml.sax.InputSource;
 
 /**
  *  An basic test case for the LogManager.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.7 $ $Date: 2003-07-28 20:13:59 $
+ * @version $Revision: 1.8 $ $Date: 2003-10-05 03:25:11 $
  */
 public class LogManagerTestCase
     extends TestCase
@@ -124,17 +123,21 @@ public class LogManagerTestCase
     {
         final File base = getBaseDir( index );
         final File file = new File( base, filename );
-		StringBuffer sb = new StringBuffer();
-		try {
-			FileReader fr = new FileReader( file );
-			int c = 0;
-			while ( c != -1 ){
-				c = fr.read();
-				sb.append(Character.forDigit(c,10));
-			}
-		} catch ( Exception e) {
-			e.printStackTrace();
-		}
+        StringBuffer sb = new StringBuffer();
+        try
+        {
+            FileReader fr = new FileReader( file );
+            int c = 0;
+            while( c != -1 )
+            {
+                c = fr.read();
+                sb.append( Character.forDigit( c, 10 ) );
+            }
+        }
+        catch( Exception e )
+        {
+            e.printStackTrace();
+        }
         return sb.length();
     }
 
@@ -190,9 +193,8 @@ public class LogManagerTestCase
     private Configuration loadConfig( final String config )
         throws Exception
     {
-        final DefaultConfigurationBuilder builder = new DefaultConfigurationBuilder();
         final InputStream resource =
             getClass().getResourceAsStream( config );
-        return builder.build( resource );
+        return ConfigurationUtil.buildFromXML( new InputSource( resource ) );
     }
 }

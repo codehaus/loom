@@ -87,27 +87,28 @@
 package org.jcontainer.loom.components.configuration;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import javax.xml.transform.stream.StreamResult;
 import org.apache.avalon.framework.activity.Initializable;
-import org.apache.avalon.framework.configuration.Configurable;
-import org.apache.avalon.framework.configuration.Configuration;
-import org.apache.avalon.framework.configuration.ConfigurationException;
-import org.apache.avalon.framework.configuration.DefaultConfigurationBuilder;
-import org.apache.avalon.framework.configuration.DefaultConfigurationSerializer;
 import org.apache.avalon.framework.context.Context;
 import org.apache.avalon.framework.context.ContextException;
 import org.apache.avalon.framework.context.Contextualizable;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
+import org.jcontainer.dna.Configurable;
+import org.jcontainer.dna.Configuration;
+import org.jcontainer.dna.ConfigurationException;
+import org.jcontainer.dna.impl.ConfigurationUtil;
 import org.jcontainer.loom.components.configuration.merger.ConfigurationMerger;
-import org.jcontainer.loom.components.util.PropertyUtil;
 import org.jcontainer.loom.components.util.ExtensionFileFilter;
+import org.jcontainer.loom.components.util.PropertyUtil;
 import org.jcontainer.loom.interfaces.ConfigurationInterceptor;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.io.FileUtil;
-import org.xml.sax.SAXException;
+import org.xml.sax.InputSource;
 
 /**
  * <p>
@@ -133,7 +134,6 @@ public class FileSystemPersistentConfigurationInterceptor
 
     private File m_storageDirectory;
     private String m_debugPath;
-    private DefaultConfigurationSerializer m_serializer;
 
     public void contextualize( final Context context )
         throws ContextException
@@ -212,7 +212,9 @@ public class FileSystemPersistentConfigurationInterceptor
                 final String message = REZ.format( "config.error.nonstring",
                                                    opath.getClass().getName() );
 
-                throw new ConfigurationException( message );
+                throw new ConfigurationException( message,
+                                                  configuration.getPath(),
+                                                  configuration.getLocation() );
             }
         }
         catch( Exception e )
@@ -232,14 +234,11 @@ public class FileSystemPersistentConfigurationInterceptor
         if( null != m_debugPath )
         {
             FileUtil.forceMkdir( new File( m_debugPath ) );
-
-            m_serializer = new DefaultConfigurationSerializer();
-            m_serializer.setIndent( true );
         }
     }
 
     private void loadConfigurations()
-        throws IOException, SAXException, ConfigurationException
+        throws Exception
     {
         final File[] apps = m_storageDirectory.listFiles( new ConfigurationDirectoryFilter() );
         for( int i = 0; i < apps.length; i++ )
@@ -249,9 +248,8 @@ public class FileSystemPersistentConfigurationInterceptor
     }
 
     private void loadConfigurations( final File appPath )
-        throws IOException, SAXException, ConfigurationException
+        throws Exception
     {
-        final DefaultConfigurationBuilder builder = new DefaultConfigurationBuilder();
         final String app = appPath.getName();
         final File[] blocks = appPath.listFiles( new ExtensionFileFilter( ".xml" ) );
 
@@ -260,8 +258,10 @@ public class FileSystemPersistentConfigurationInterceptor
             final String block =
                 blocks[ i ].getName().substring( 0, blocks[ i ].getName().indexOf( ".xml" ) );
 
-            m_persistedConfigurations.put( genKey( app, block ),
-                                           builder.buildFromFile( blocks[ i ] ) );
+            final InputSource input = new InputSource( blocks[ i ].getAbsolutePath() );
+            final Configuration configuration =
+                ConfigurationUtil.buildFromXML( input );
+            m_persistedConfigurations.put( genKey( app, block ), configuration );
 
             if( getLogger().isDebugEnabled() )
             {
@@ -285,8 +285,9 @@ public class FileSystemPersistentConfigurationInterceptor
             final File temp = File.createTempFile( application + "-" + block + "-",
                                                    ".xml",
                                                    new File( m_debugPath ) );
-
-            m_serializer.serializeToFile( temp, configuration );
+            final StreamResult result =
+                new StreamResult( new FileOutputStream( temp ) );
+            ConfigurationUtil.serializeToResult( result, configuration );
 
             if( getLogger().isDebugEnabled() )
             {

@@ -99,13 +99,13 @@ import javax.management.ReflectionException;
 import mx4j.adaptor.rmi.jrmp.JRMPAdaptorMBean;
 import mx4j.log.Log;
 import mx4j.util.StandardMBeanProxy;
-import org.apache.avalon.framework.configuration.Configurable;
-import org.apache.avalon.framework.configuration.Configuration;
-import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.context.Context;
 import org.apache.avalon.framework.context.ContextException;
 import org.apache.avalon.framework.context.Contextualizable;
 import org.jcontainer.loom.interfaces.ContainerConstants;
+import org.jcontainer.dna.Configurable;
+import org.jcontainer.dna.Configuration;
+import org.jcontainer.dna.ConfigurationException;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
