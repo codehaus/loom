@@ -106,9 +106,9 @@ import org.jcontainer.dna.impl.LogkitLogger;
 import org.jcontainer.loom.components.util.ConfigUtil;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.Embeddor;
-import org.realityforge.salt.i18n.ResourceManager;
-import org.realityforge.salt.i18n.Resources;
-import org.realityforge.salt.lang.ExceptionUtil;
+import org.codehaus.spice.salt.i18n.ResourceManager;
+import org.codehaus.spice.salt.i18n.Resources;
+import org.codehaus.spice.salt.lang.ExceptionUtil;
 import org.xml.sax.InputSource;
 
 /**

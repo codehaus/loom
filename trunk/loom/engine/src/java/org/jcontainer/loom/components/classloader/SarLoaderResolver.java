@@ -97,17 +97,17 @@ import org.jcontainer.dna.impl.ContainerUtil;
 import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
 import org.jcontainer.loom.components.extensions.pkgmgr.PackageManager;
 import org.jcontainer.loom.components.util.ResourceUtil;
-import org.realityforge.classman.builder.SimpleLoaderResolver;
-import org.realityforge.extension.Extension;
-import org.realityforge.salt.i18n.ResourceManager;
-import org.realityforge.salt.i18n.Resources;
+import org.codehaus.spice.classman.builder.SimpleLoaderResolver;
+import org.codehaus.spice.extension.Extension;
+import org.codehaus.spice.salt.i18n.ResourceManager;
+import org.codehaus.spice.salt.i18n.Resources;
 
 /**
  * a LoaderResolver that knows about container environment, and the way it is
  * split across multiple directories.
  *
  * @author Peter Donald
- * @version $Revision: 1.8 $ $Date: 2003-11-29 13:44:15 $
+ * @version $Revision: 1.9 $ $Date: 2003-12-03 02:54:39 $
  */
 class SarLoaderResolver
     extends SimpleLoaderResolver

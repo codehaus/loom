@@ -105,16 +105,16 @@ import org.jcontainer.dna.MissingResourceException;
 import org.jcontainer.dna.ResourceLocator;
 import org.jcontainer.loom.components.util.ExtensionFileFilter;
 import org.jcontainer.loom.interfaces.Deployer;
-import org.realityforge.salt.i18n.ResourceManager;
-import org.realityforge.salt.i18n.Resources;
-import org.realityforge.salt.io.FileUtil;
+import org.codehaus.spice.salt.i18n.ResourceManager;
+import org.codehaus.spice.salt.i18n.Resources;
+import org.codehaus.spice.salt.io.FileUtil;
 
 /**
  * This class is responsible for monitoring the deployment directory and
  * deploying, undelploying or redeploying an application as necessary.
  *
  * @author Peter Donald
- * @version $Revision: 1.15 $ $Date: 2003-11-29 13:44:21 $
+ * @version $Revision: 1.16 $ $Date: 2003-12-03 02:54:43 $
  */
 public class DefaultDeploymentMonitor
     extends AbstractLogEnabled
@@ -222,7 +222,7 @@ public class DefaultDeploymentMonitor
         try
         {
             final String message =
-                REZ.format( "scanner.deploy.notice",
+                REZ.format( "monitor.deploy.notice",
                             name,
                             file );
             getLogger().info( message );
@@ -232,7 +232,7 @@ public class DefaultDeploymentMonitor
         catch( final Exception e )
         {
             final String message =
-                REZ.format( "scanner.no-deploy.error", file, e );
+                REZ.format( "monitor.no-deploy.error", file, e );
             getLogger().warn( message, e );
         }
     }
@@ -249,7 +249,7 @@ public class DefaultDeploymentMonitor
         try
         {
             final String message =
-                REZ.format( "scanner.undeploy.notice",
+                REZ.format( "monitor.undeploy.notice",
                             name );
             getLogger().info( message );
             m_deployer.undeploy( name );
@@ -257,7 +257,7 @@ public class DefaultDeploymentMonitor
         catch( final Exception e )
         {
             final String message =
-                REZ.format( "scanner.no-undeploy.error", file, e );
+                REZ.format( "monitor.no-undeploy.error", file, e );
             getLogger().warn( message, e );
         }
     }
@@ -274,7 +274,7 @@ public class DefaultDeploymentMonitor
         try
         {
             final String message =
-                REZ.format( "scanner.redeploy.notice",
+                REZ.format( "monitor.redeploy.notice",
                             name,
                             file );
             getLogger().info( message );
@@ -283,7 +283,7 @@ public class DefaultDeploymentMonitor
         catch( final Exception e )
         {
             final String message =
-                REZ.format( "scanner.no-redeploy.error", file, e );
+                REZ.format( "monitor.no-redeploy.error", file, e );
             getLogger().warn( message, e );
         }
     }
@@ -305,7 +305,7 @@ public class DefaultDeploymentMonitor
             else
             {
                 final String message =
-                    REZ.format( "scanner.skipping-file.notice", file );
+                    REZ.format( "monitor.skipping-file.notice", file );
                 getLogger().info( message );
             }
         }

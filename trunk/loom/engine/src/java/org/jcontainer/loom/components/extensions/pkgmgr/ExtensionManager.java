@@ -86,7 +86,7 @@
  */
 package org.jcontainer.loom.components.extensions.pkgmgr;
 
-import org.realityforge.extension.Extension;
+import org.codehaus.spice.extension.Extension;
 
 /**
  * <p>Interface used to store a collection of "Optional Packages" (formerly
@@ -102,7 +102,7 @@ import org.realityforge.extension.Extension;
  * Java2 Standard Edition package, in file <code>guide/extensions/versioning.html</code></p>.
  *
  * @author Peter Donald
- * @version $Revision: 1.5 $ $Date: 2003-11-29 13:44:19 $
+ * @version $Revision: 1.6 $ $Date: 2003-12-03 02:54:41 $
  */
 public interface ExtensionManager
 {

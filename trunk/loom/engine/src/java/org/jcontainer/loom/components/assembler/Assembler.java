@@ -97,8 +97,8 @@ import org.jcontainer.loom.components.util.metadata.MetaDataBuilder;
 import org.jcontainer.loom.components.util.metadata.PartitionTemplate;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.LoomException;
-import org.realityforge.salt.i18n.ResourceManager;
-import org.realityforge.salt.i18n.Resources;
+import org.codehaus.spice.salt.i18n.ResourceManager;
+import org.codehaus.spice.salt.i18n.Resources;
 
 /**
  * Assemble a {@link PartitionTemplate} object from a Configuration object. The
@@ -106,7 +106,7 @@ import org.realityforge.salt.i18n.Resources;
  * specified for <tt>assembly.xml</tt> files.
  *
  * @author Peter Donald
- * @version $Revision: 1.16 $ $Date: 2003-11-29 13:44:15 $
+ * @version $Revision: 1.17 $ $Date: 2003-12-03 02:54:39 $
  */
 public class Assembler
     implements MetaDataBuilder

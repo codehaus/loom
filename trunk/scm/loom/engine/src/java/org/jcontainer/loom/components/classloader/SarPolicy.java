@@ -93,7 +93,7 @@ import java.util.Map;
 import org.jcontainer.dna.Active;
 import org.jcontainer.dna.LogEnabled;
 import org.jcontainer.dna.Logger;
-import org.realityforge.xmlpolicy.runtime.DefaultPolicy;
+import org.codehaus.spice.xmlpolicy.runtime.DefaultPolicy;
 
 /**
  * Policy that extracts information from policy files.

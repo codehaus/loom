@@ -96,12 +96,12 @@ import org.jcontainer.dna.LogEnabled;
 import org.jcontainer.dna.Logger;
 import org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager;
 import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
-import org.realityforge.salt.i18n.ResourceManager;
-import org.realityforge.salt.i18n.Resources;
+import org.codehaus.spice.salt.i18n.ResourceManager;
+import org.codehaus.spice.salt.i18n.Resources;
 
 /**
  * @author Peter Donald
- * @version $Revision: 1.16 $ $Date: 2003-11-29 13:44:20 $
+ * @version $Revision: 1.17 $ $Date: 2003-12-03 02:54:41 $
  * @dna.component
  * @mx.component
  */

@@ -93,14 +93,14 @@ import java.util.Map;
 import org.jcontainer.dna.AbstractLogEnabled;
 import org.jcontainer.dna.impl.ContainerUtil;
 import org.jcontainer.loom.components.util.ResourceUtil;
-import org.realityforge.xmlpolicy.builder.PolicyResolver;
+import org.codehaus.spice.xmlpolicy.builder.PolicyResolver;
 
 /**
  * A basic resolver that resolves container specific features. (like remapping
  * URLs).
  *
  * @author Peter Donald
- * @version $Revision: 1.8 $ $Date: 2003-11-29 13:44:15 $
+ * @version $Revision: 1.9 $ $Date: 2003-12-03 02:54:39 $
  */
 class SarPolicyResolver
     extends AbstractLogEnabled

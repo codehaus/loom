@@ -107,8 +107,8 @@ import org.apache.excalibur.instrument.InstrumentManager;
 import org.apache.excalibur.instrument.Instrumentable;
 import org.jcontainer.dna.AbstractLogEnabled;
 import org.jcontainer.loom.interfaces.LoomException;
-import org.realityforge.salt.i18n.ResourceManager;
-import org.realityforge.salt.i18n.Resources;
+import org.codehaus.spice.salt.i18n.ResourceManager;
+import org.codehaus.spice.salt.i18n.Resources;
 
 /**
  * This is a class to help an Application manage the lifecycle of a component.
