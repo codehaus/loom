@@ -3,7 +3,7 @@
     <extend>${basedir}/../../tools/maven/project.xml</extend>
     <name>Extension</name>
     <id>spice-extension</id>
-    <currentVersion>1.1</currentVersion>
+    <currentVersion>1.2-dev</currentVersion>
     <inceptionYear>2000</inceptionYear>
     <package>org.codehaus.spice.extension</package>
 
