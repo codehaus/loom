@@ -41,7 +41,7 @@ import org.realityforge.salt.io.FileUtil;
  * application as necessary.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-07-13 00:15:36 $
+ * @version $Revision: 1.3 $ $Date: 2003-07-24 08:51:48 $
  */
 public class DefaultDeploymentMonitor
     extends AbstractLogEnabled
@@ -56,13 +56,13 @@ public class DefaultDeploymentMonitor
     private long m_frequency;
 
     /**
-     * requires parameter "phoenix.apps.dir" to be set to directory
+     * requires parameter "loom.apps.dir" to be set to directory
      * that the component is to scanner.
      */
     public void parameterize( final Parameters parameters )
         throws ParameterException
     {
-        m_appsDir = parameters.getParameter( "phoenix.apps.dir" );
+        m_appsDir = parameters.getParameter( "loom.apps.dir" );
     }
 
     public void configure( Configuration configuration )
@@ -244,7 +244,7 @@ public class DefaultDeploymentMonitor
     }
 
     /**
-     * Return true if file represents a phoenix deployment.
+     * Return true if file represents a loom deployment.
      *
      * @param file the file
      * @return

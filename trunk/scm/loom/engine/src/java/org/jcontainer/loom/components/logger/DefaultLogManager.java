@@ -63,20 +63,20 @@ public class DefaultLogManager
     private final InitialLoggerStoreFactory m_factory = new InitialLoggerStoreFactory();
 
     /**
-     * Hold the value of phoenix.home
+     * Hold the value of loom.home
      */
-    private File m_phoenixHome;
+    private File m_loomHome;
 
     public void contextualize( final Context context ) throws ContextException
     {
-        m_phoenixHome = (File)context.get( "phoenix.home" );
+        m_loomHome = (File)context.get( "loom.home" );
     }
 
     private Map createLoggerManagerContext( final Map appContext )
     {
         final HashMap data = new HashMap();
         data.putAll( appContext );
-        data.put( "phoenix.home", m_phoenixHome );
+        data.put( "loom.home", m_loomHome );
         return data;
     }
 

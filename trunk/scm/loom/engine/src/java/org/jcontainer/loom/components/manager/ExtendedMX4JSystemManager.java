@@ -22,7 +22,7 @@ import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
 
 /**
- * This component is responsible for managing phoenix instance.
+ * This component is responsible for managing loom instance.
  * Support Flexible jmx helper mbean configuration.
  *
  * @author <a href="mail@leosimons.com">Leo Simons</a>
