@@ -13,17 +13,17 @@
 
     <groupId>loom</groupId>
     <package>org.codehaus.loom</package>
-    <url>http://loom.jcontainer.org</url>
+    <url>http://loom.codehaus.org</url>
     <logo>/images/loom-logo.png</logo>
-    <distributionDirectory>/www/dist.codehaus.org</distributionDirectory>
-    <distributionSite>codehaus.org</distributionSite>
-    <siteDirectory>/www/jcontainer.codehaus.org/loom/</siteDirectory>
-    <siteAddress>loom.jcontainer.org</siteAddress>
+    <distributionDirectory>/home/projects/loom/dist</distributionDirectory>
+    <distributionSite>dist.codehaus.org</distributionSite>
+    <siteDirectory>/home/projects/loom/public_html</siteDirectory>
+    <siteAddress>loom.codehaus.org</siteAddress>
     <issueTrackingUrl>http://jira.codehaus.org/secure/BrowseProject.jspa?id=10131</issueTrackingUrl>
 
     <repository>
-        <connection>scm:cvs:pserver:anonymous@codehaus.org:/scm/cvs:loom</connection>
-        <url>http://jcontainer.cvs.codehaus.org/viewcvs.cgi/jcontainer/loom/?root=codehaus</url>
+        <connection>scm:cvs:pserver:anonymous@cvs.loom.codehaus.org:/home/projects/loom/scm:loom</connection>
+        <url>http://cvs.loom.codehaus.org</url>
     </repository>
 
     <versions>

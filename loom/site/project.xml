@@ -193,7 +193,7 @@
                 <exclude>**/Abstract*</exclude>
             </excludes>
         </unitTest>
-        <nagEmailAddress>jcontainer-interest@lists.codehaus.org</nagEmailAddress>
+        <nagEmailAddress>dev@loom.codehaus.org</nagEmailAddress>
     </build>
 
     <reports>
