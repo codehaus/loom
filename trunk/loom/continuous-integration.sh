@@ -1,7 +1,7 @@
 #!/bin/bash
 
-mailto=jcontainer-interest@lists.codehaus.org
-#mailto=osi@pobox.com
+#mailto=jcontainer-interest@lists.codehaus.org
+mailto=osi@pobox.com
 builddir=.
 
 #JAVA_HOME=/usr/local/j2sdk1.4.1
@@ -29,15 +29,23 @@ rm -Rf ~/.maven/repository/loom/jars
 
 # Compile and test
 maven clean-all | tee target/cleanbuild.log
-maven build | tee target/cleanbuild.log
 
 # See if the "compiling" file is there. If it is, compilation
 # failed.
 if grep -v "BUILD SUCCESSFUL" target/cleanbuild.log ; then
-  echo "Build passed, emailing list"
-  tail target/cleanbuild.log | mutt -s "[PASS] Clean build passed" $mailto
+    maven build | tee target/cleanbuild.log
+    
+    # See if the "compiling" file is there. If it is, compilation
+    # failed.
+    if grep -v "BUILD SUCCESSFUL" target/cleanbuild.log ; then
+      echo "Build passed, emailing list"
+      tail target/cleanbuild.log | mutt -s "[PASS] Clean build passed" $mailto
+    else
+      # Mail Maven's output to the dev list.
+      echo "Build failed, emailing list"
+      cat target/cleanbuild.log | mutt -s "[FAIL] Clean build failed" $mailto
+    fi
 else
-  # Mail Maven's output to the dev list.
-  echo "Build failed, emailing list"
-  cat target/cleanbuild.log | mutt -s "[FAIL] Clean build failed" $mailto
+      echo "Clean failed, emailing list"
+      cat target/cleanbuild.log | mutt -s "[FAIL] Clean failed" $mailto
 fi
