@@ -1,0 +1,95 @@
+<!--
+
+   This is the DTD defining the BlockInfo 1.0
+   descriptor (XML) file format/syntax.
+
+   Author: Peter Donald <peter at apache.org>
+
+   A BlockInfo is an XML file used to describe Blocks and located side-by-side with
+   the Block .class file. It describes the services the Block requires to operate,
+   the services the Block is capable of offerring other Blocks and other support
+   meta data.
+   
+   Copyright (C) The JContainer Group. All rights reserved.
+
+   This software is published under the terms of the JContainer
+   Software License version 1.1, a copy of which has been included
+   with this distribution in the LICENSE.txt file.
+
+   This product includes software developed by the
+   Apache Software Foundation (http://www.apache.org/).
+
+  -->
+
+<!--
+The blockinfo is the document root, it defines:
+
+block	     the specifc details about this block
+services     the services offered by this block
+dependencies the services that this block require to operate
+-->
+<!ELEMENT blockinfo (block?, services?, management-access-points?, dependencies?)>
+<!ATTLIST blockinfo id ID #IMPLIED>
+
+<!--
+The block element describes the block, it defines:
+
+name	        the human readable name of block type. Must be a string
+             containing alphanumeric characters, '.', '_' and starting
+             with a letter.
+version	     the version of the block in (in the format #.#.#, #.# or # where
+             # is a integer
+schema-type  string representing the type of schema information available
+             to validate block configuration
+-->
+<!ELEMENT block          (name?,version?,schema-type?)>
+  <!ELEMENT name         (#PCDATA) >
+  <!ELEMENT version      (#PCDATA) >
+  <!ELEMENT schema-type  (#PCDATA) >
+
+<!--
+The service element describes a service that the block
+can provide to other blocks, or this block depends upon.
+It defines:
+
+name         the name of the service. This must be equal to the class name of the
+             interface that defines the service.
+version	     the version of the block in (in the format #.#.#, #.# or # where
+             # is a integer
+-->
+<!ELEMENT service   EMPTY >
+  <!ATTLIST service
+       name CDATA #REQUIRED
+       version CDATA #IMPLIED
+  >
+
+<!--
+The service dependency describes a service that the block
+requires. It defines:
+
+role         the role of the service. This is the value that is used to lookup the
+             service in the ComponentManager. If not provided it defaults to the
+             value specified in the name attribute of service element
+service	     the service that is required
+-->
+<!ELEMENT dependency  (role?,service) >
+  <!ELEMENT role        (#PCDATA) >
+
+<!--
+The services element contains a list of services that this Block supports.
+It contains service elements.
+-->
+<!ELEMENT services    (service*)>
+
+<!--
+The services element contains a list of services that this
+Block exports to the Management system. It contains service
+elements.
+-->
+<!ELEMENT management-access-points    (service*)>
+
+<!--
+The dependencies element contains a list of services that this Block requires.
+It contains dependency elements.
+-->
+<!ELEMENT dependencies    (dependency*)>
