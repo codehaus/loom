@@ -132,8 +132,16 @@
         </dependency>
         <dependency>
             <groupId>jcomponent</groupId>
+            <artifactId>jcomponent-alchemist</artifactId>
+            <version>20031025.132828</version>
+            <properties>
+                <category>container</category>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>jcomponent</groupId>
             <artifactId>jcomponent-loggerstore</artifactId>
-            <version>1.0-b1</version>
+            <version>20031025.133935</version>
             <properties>
                 <category>container</category>
             </properties>
