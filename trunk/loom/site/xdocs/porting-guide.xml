@@ -124,7 +124,7 @@ maven sar
                         <li>logkit</li>
                         <li>log4j</li>
                         <li>mx4j-jmx</li>
-                        <li>phoenix-client</li>
+                        <li>avalon-phoenix-client</li>
                     </ul>
                 </p>
                 <p>
@@ -149,7 +149,7 @@ maven sar
                         <li>isorelax.jar</li>
                         <li>jing.jar</li>
                         <li>logkit</li>
-                        <li>phoenix-client</li>
+                        <li>avalon-phoenix-client</li>
                         <li>xalan</li>
                         <li>xercesImpl</li>
                         <li>xml-apis</li>

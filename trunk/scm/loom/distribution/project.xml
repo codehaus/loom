@@ -32,8 +32,8 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>phoenix</groupId>
-            <artifactId>phoenix-client</artifactId>
+            <groupId>avalon-phoenix</groupId>
+            <artifactId>avalon-phoenix-client</artifactId>
             <version>4.0.4</version>
             <properties>
                 <category>shared</category>
