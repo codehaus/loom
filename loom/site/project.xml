@@ -9,22 +9,32 @@
 
     <dependencies>
         <dependency>
-            <id>ant</id>
-            <version>1.5</version>
+            <groupId>loom</groupId>
+            <artifactId>maven-loom-plugin</artifactId>
+            <version>${pom.currentVersion}</version>
+            <type>plugin</type>
         </dependency>
         <dependency>
-            <id>logkit</id>
-            <version>1.2.2</version>
+            <groupId>loom</groupId>
+            <artifactId>loom-classman</artifactId>
+            <version>${pom.currentVersion}</version>
         </dependency>
         <dependency>
-            <id>avalon-framework</id>
-            <version>4.1.5</version>
+            <groupId>loom</groupId>
+            <artifactId>loom-extension</artifactId>
+            <version>${pom.currentVersion}</version>
         </dependency>
         <dependency>
-            <groupId>avalon-phoenix</groupId>
-            <artifactId>avalon-phoenix-client</artifactId>
-            <version>4.0.4</version>
+            <groupId>loom</groupId>
+            <artifactId>loom-xmlpolicy</artifactId>
+            <version>${pom.currentVersion}</version>
         </dependency>
+        <dependency>
+            <groupId>loom</groupId>
+            <artifactId>loom-extension</artifactId>
+            <version>${pom.currentVersion}</version>
+        </dependency>
+
         <dependency>
             <groupId>dna</groupId>
             <artifactId>dna-api</artifactId>
@@ -36,8 +46,45 @@
             <version>1.1</version>
         </dependency>
         <dependency>
-            <id>excalibur-instrument-manager-interfaces</id>
+            <groupId>dna</groupId>
+            <artifactId>maven-dna-plugin</artifactId>
+            <version>1.1</version>
+            <type>plugin</type>
+        </dependency>
+
+        <dependency>
+            <groupId>spice</groupId>
+            <artifactId>spice-loggerstore</artifactId>
+            <version>1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>spice</groupId>
+            <artifactId>spice-alchemist</artifactId>
+            <version>1.2-rc1</version>
+        </dependency>
+        <dependency>
+            <groupId>spice</groupId>
+            <artifactId>spice-configkit</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>spice</groupId>
+            <artifactId>spice-salt</artifactId>
             <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <id>avalon-framework</id>
+            <version>4.1.5</version>
+        </dependency>
+        <dependency>
+            <groupId>avalon-phoenix</groupId>
+            <artifactId>avalon-phoenix-client</artifactId>
+            <version>4.0.4</version>
+        </dependency>
+        <dependency>
+            <id>logkit</id>
+            <version>1.2.2</version>
         </dependency>
         <dependency>
             <id>excalibur-instrument</id>
@@ -48,19 +95,20 @@
             <version>1.0</version>
         </dependency>
         <dependency>
-            <groupId>spice</groupId>
-            <artifactId>spice-alchemist</artifactId>
-            <version>1.2-rc1</version>
+            <id>excalibur-instrument-manager-interfaces</id>
+           <version>1.0</version>
         </dependency>
-        <dependency>
-            <groupId>spice</groupId>
-            <artifactId>spice-loggerstore</artifactId>
+        <dependency> <!-- for spice-loggerstore -->
+            <groupId>excalibur</groupId>
+            <artifactId>excalibur-logger</artifactId>
             <version>1.1</version>
         </dependency>
-        <dependency>
-            <id>log4j</id>
-            <version>1.2.8</version>
+        <dependency><!-- for excalibur-logger -->
+            <groupId>excalibur</groupId>
+            <artifactId>excalibur-i18n</artifactId>
+            <version>1.0</version>
         </dependency>
+
         <dependency>
             <groupId>mx4j</groupId>
             <artifactId>mx4j-jmx</artifactId>
@@ -72,36 +120,27 @@
             <version>1.1</version>
         </dependency>
         <dependency>
+            <id>log4j</id>
+            <version>1.2.8</version>
+        </dependency>
+        <dependency>
             <id>oro</id>
             <version>2.0.7</version>
-        </dependency>
-        <dependency>
-            <id>qdox</id>
-            <version>1.3</version>
-        </dependency>
-        <dependency>
-            <groupId>loom</groupId>
-            <artifactId>loom-classman</artifactId>
-            <version>${pom.currentVersion}</version>
         </dependency>
         <dependency>
             <groupId>commons-cli</groupId>
             <artifactId>commons-cli</artifactId>
             <version>1.0</version>
         </dependency>
-        <dependency>
-            <groupId>spice</groupId>
-            <artifactId>spice-configkit</artifactId>
-            <version>1.2</version>
-        </dependency>
+
         <dependency>
             <groupId>metaclass</groupId>
             <artifactId>metaclass-runtime</artifactId>
             <version>1.1</version>
         </dependency>
-        <dependency> 
+        <dependency>
             <groupId>metaclass</groupId>
-            <artifactId>metaclass-jmx</artifactId>
+            <artifactId>metaclass-tools</artifactId>
             <version>1.1</version>
         </dependency>
         <dependency>
@@ -111,31 +150,16 @@
             <type>plugin</type>
         </dependency>
         <dependency>
-            <groupId>dna</groupId>
-            <artifactId>maven-dna-plugin</artifactId>
+            <groupId>metaclass</groupId>
+            <artifactId>metaclass-jmx</artifactId>
             <version>1.1</version>
-            <type>plugin</type>
         </dependency>
-        <dependency>
-            <groupId>loom</groupId>
-            <artifactId>loom-xmlpolicy</artifactId>
-            <version>${pom.currentVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>spice</groupId>
-            <artifactId>spice-salt</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>loom</groupId>
-            <artifactId>loom-extension</artifactId>
-            <version>${pom.currentVersion}</version>
-        </dependency>
-        <dependency><!-- for metaclass-runtime -->
+        <dependency> <!-- for metaclass-runtime -->
             <groupId>asm</groupId>
             <artifactId>asm</artifactId>
             <version>1.4</version>
         </dependency>
+
         <dependency><!-- for spice-configkit -->
             <id>isorelax</id>
             <version>20020414</version>
@@ -152,28 +176,28 @@
             <id>relaxngDatatype</id>
             <version>20020414</version>
         </dependency>
-        <dependency> <!-- for unit testing -->
-            <groupId>excalibur</groupId>
-            <artifactId>excalibur-logger</artifactId>
-            <version>1.1</version>
-        </dependency>
-        <dependency><!-- for unit testing -->
-            <groupId>excalibur</groupId>
-            <artifactId>excalibur-i18n</artifactId>
-            <version>1.0</version>
+        <dependency>
+            <groupId>tanukisoft</groupId>
+            <artifactId>wrapper</artifactId>
+            <version>3.1.0</version>
         </dependency>
         <dependency>
-            <groupId>commons-jelly</groupId>
-            <artifactId>commons-jelly-tags-velocity</artifactId>
-            <version>20030303.205659</version>
+           <groupId>commons-jelly</groupId>
+           <artifactId>commons-jelly-tags-velocity</artifactId>
+           <version>20030303.205659</version>
         </dependency>
         <dependency>
-            <id>velocity</id>
+           <id>velocity</id>
+           <version>1.3</version>
+        </dependency>
+        <dependency>
+            <id>qdox</id>
             <version>1.3</version>
         </dependency>
         <dependency>
-            <id>wrapper</id>
-            <version>3.0.3</version>
+            <groupId>ant</groupId>
+            <artifactId>ant</artifactId>
+            <version>1.5.1</version>
         </dependency>
     </dependencies>
 
