@@ -8,10 +8,9 @@
  * This product includes software developed by the
  * Apache Software Foundation (http://www.apache.org/).
  */
- package org.apache.avalon.phoenix;
+package org.apache.avalon.phoenix;
 
 import java.util.EventListener;
-import org.apache.avalon.phoenix.BlockEvent;
 
 /**
  * Implementations of this interface receive notifications about

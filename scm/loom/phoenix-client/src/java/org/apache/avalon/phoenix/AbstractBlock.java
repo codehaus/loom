@@ -8,7 +8,7 @@
  * This product includes software developed by the
  * Apache Software Foundation (http://www.apache.org/).
  */
- package org.apache.avalon.phoenix;
+package org.apache.avalon.phoenix;
 
 import org.apache.avalon.framework.component.ComponentException;
 import org.apache.avalon.framework.component.ComponentManager;
@@ -19,7 +19,6 @@ import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.context.Context;
 import org.apache.avalon.framework.context.Contextualizable;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
-import org.apache.avalon.phoenix.BlockContext;
 
 /**
  * This is an <code>AbstractBlock</code> that makes deployment a bit
@@ -27,7 +26,7 @@ import org.apache.avalon.phoenix.BlockContext;
  *
  * @author <a href="mailto:bloritsch@apache.org">Berin Loritsch</a>
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version CVS $Revision: 1.2 $ $Date: 2003-06-29 01:27:26 $
+ * @version CVS $Revision: 1.3 $ $Date: 2003-06-29 02:52:06 $
  * @deprecated As Block interface is deprecated this class is also
  *             deprecated with no replacement.
  */
