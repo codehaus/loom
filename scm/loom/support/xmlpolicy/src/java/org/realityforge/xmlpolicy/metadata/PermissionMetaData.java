@@ -12,7 +12,7 @@ package org.realityforge.xmlpolicy.metadata;
  * signers of a codebase.
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-04-16 11:45:59 $
+ * @version $Revision: 1.2 $ $Date: 2003-06-04 22:49:36 $
  */
 public class PermissionMetaData
 {
@@ -62,6 +62,14 @@ public class PermissionMetaData
         if( null == classname )
         {
             throw new NullPointerException( "classname" );
+        }
+        if( null == signedBy && null != keyStore )
+        {
+            throw new NullPointerException( "signedBy" );
+        }
+        if( null == keyStore && null != signedBy )
+        {
+            throw new NullPointerException( "keyStore" );
         }
 
         m_classname = classname;
