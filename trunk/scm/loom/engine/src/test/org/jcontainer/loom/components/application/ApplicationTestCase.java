@@ -15,6 +15,11 @@ import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.impl.ConsoleLogger;
 import org.jcontainer.dna.impl.DefaultConfiguration;
 import org.jcontainer.loom.components.deployer.PhoenixProfileBuilder;
+import org.jcontainer.loom.components.application.data.Component4;
+import org.jcontainer.loom.components.application.data.Component3;
+import org.jcontainer.loom.components.application.data.Component2;
+import org.jcontainer.loom.components.application.data.Component1;
+import org.jcontainer.loom.components.application.data.Service1;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.tools.LoomToolConstants;
 import org.jcontainer.loom.tools.configuration.ConfigurationBuilder;
@@ -32,59 +37,55 @@ import org.xml.sax.InputSource;
  *  An basic test case for the Application.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.12 $ $Date: 2003-10-16 00:40:51 $
+ * @version $Revision: 1.13 $ $Date: 2003-10-16 00:56:16 $
  */
 public class ApplicationTestCase
     extends TestCase
 {
-    private static final String PKG_NAME =
-        "org.jcontainer.loom.components.application.data.";
-    private static final String S1_NAME = PKG_NAME + "Service1";
+    private static final Class S1_TYPE = Service1.class;
+    private static final Class C1_TYPE = Component1.class;
+    private static final Class C2_TYPE = Component2.class;
+    private static final Class C3_TYPE = Component3.class;
+    private static final Class C4_TYPE = Component4.class;
+
+    private static final String S1_NAME = S1_TYPE.getName();
+    private static final String C1_NAME = C1_TYPE.getName();
+    private static final String C2_NAME = C2_TYPE.getName();
+    private static final String C3_NAME = C3_TYPE.getName();
+    private static final String C4_NAME = C4_TYPE.getName();
+
     private static final String S1_ARRAY_NAME = S1_NAME + DependencyDescriptor.ARRAY_POSTFIX;
     private static final String S1_MAP_NAME = S1_NAME + DependencyDescriptor.MAP_POSTFIX;
-    private static final String C1_NAME = PKG_NAME + "Component1";
-    private static final String C2_NAME = PKG_NAME + "Component2";
-    private static final String C3_NAME = PKG_NAME + "Component3";
-    private static final String C4_NAME = PKG_NAME + "Component4";
 
     private static final ComponentInfo C1 =
-        new ComponentInfo( null, C1_NAME,
+        new ComponentInfo( C1_TYPE,
                            ServiceDescriptor.EMPTY_SET,
                            new DependencyDescriptor[]{new DependencyDescriptor( S1_NAME,
                                                                                 S1_NAME,
-                                                                                false)},
-                           null
-        );
+                                                                                false )},
+                           null );
 
     private static final ComponentInfo C2 =
-        new ComponentInfo( null, C2_NAME,
+        new ComponentInfo( C2_TYPE,
                            new ServiceDescriptor[]{new ServiceDescriptor( S1_NAME )},
                            DependencyDescriptor.EMPTY_SET,
-                           null
-        );
+                           null );
 
     private static final ComponentInfo C3 =
-        new ComponentInfo( null, C3_NAME,
+        new ComponentInfo( C3_TYPE,
                            ServiceDescriptor.EMPTY_SET,
                            new DependencyDescriptor[]{new DependencyDescriptor( S1_ARRAY_NAME,
                                                                                 S1_ARRAY_NAME,
                                                                                 false )},
-                           null
-        );
+                           null );
 
     private static final ComponentInfo C4 =
-        new ComponentInfo( null, C4_NAME,
+        new ComponentInfo( C4_TYPE,
                            ServiceDescriptor.EMPTY_SET,
                            new DependencyDescriptor[]{new DependencyDescriptor( S1_MAP_NAME,
                                                                                 S1_MAP_NAME,
                                                                                 false )},
-                           null
-        );
-
-    public ApplicationTestCase( final String name )
-    {
-        super( name );
-    }
+                           null );
 
     public void testBasic()
         throws Exception
@@ -92,7 +93,7 @@ public class ApplicationTestCase
         final ComponentMetaData md1 =
             new ComponentMetaData( "c1",
                                    C1_NAME,
-                                   new DependencyMetaData[]{new DependencyMetaData( S1_NAME, "c2", "c2")},
+                                   new DependencyMetaData[]{new DependencyMetaData( S1_NAME, "c2", "c2" )},
                                    null,
                                    null,
                                    false );

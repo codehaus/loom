@@ -23,7 +23,7 @@ import java.io.Serializable;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.8 $ $Date: 2003-10-16 00:40:51 $
+ * @version $Revision: 1.9 $ $Date: 2003-10-16 00:56:16 $
  */
 public class ComponentInfo
     implements Serializable
@@ -32,11 +32,6 @@ public class ComponentInfo
      * The type of the component.
      */
     private final Class m_type;
-
-    /**
-     * The implementation key for component (usually classname).
-     */
-    private final String m_implementationKey;
 
     /**
      * Descriptors for the services exported by component.
@@ -57,15 +52,10 @@ public class ComponentInfo
      * Basic constructor that takes as parameters all parts.
      */
     public ComponentInfo( final Class type,
-                          final String implementationKey,
                           final ServiceDescriptor[] services,
                           final DependencyDescriptor[] dependencies,
                           final SchemaDescriptor configurationSchema )
     {
-        if( null == implementationKey )
-        {
-            throw new NullPointerException( "implementationKey" );
-        }
         if( null == services )
         {
             throw new NullPointerException( "services" );
@@ -75,7 +65,6 @@ public class ComponentInfo
             throw new NullPointerException( "dependencies" );
         }
         m_type = type;
-        m_implementationKey = implementationKey;
         m_services = services;
         m_dependencies = dependencies;
         m_configurationSchema = configurationSchema;
@@ -89,16 +78,6 @@ public class ComponentInfo
     public Class getType()
     {
         return m_type;
-    }
-
-    /**
-     * Return the implementation key for component (usually classname).
-     *
-     * @return the implementation key for component (usually classname).
-     */
-    public String getImplementationKey()
-    {
-        return m_implementationKey;
     }
 
     /**
@@ -132,16 +111,16 @@ public class ComponentInfo
     }
 
     /**
-     * Retrieve a dependency with a particular role.
+     * Retrieve a dependency with a particular key.
      *
-     * @param role the role
+     * @param key the key
      * @return the dependency or null if it does not exist
      */
-    public DependencyDescriptor getDependency( final String role )
+    public DependencyDescriptor getDependency( final String key )
     {
         for( int i = 0; i < m_dependencies.length; i++ )
         {
-            if( m_dependencies[ i ].getKey().equals( role ) )
+            if( m_dependencies[ i ].getKey().equals( key ) )
             {
                 return m_dependencies[ i ];
             }

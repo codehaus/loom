@@ -24,11 +24,11 @@ import org.w3c.dom.Element;
 
 /**
  * This component validates the components configuration using
- * the ConfigKit toolkit. 
+ * the ConfigKit toolkit.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author <a href="mailto:proyal at apache.org">Peter Royal</a>
- * @version $Revision: 1.9 $ $Date: 2003-10-15 03:54:47 $
+ * @version $Revision: 1.10 $ $Date: 2003-10-16 00:56:16 $
  * @dna.component
  */
 public class DefaultConfigurationValidator
@@ -54,7 +54,7 @@ public class DefaultConfigurationValidator
         }
 
         final String classname =
-            component.getInfo().getImplementationKey();
+            component.getInfo().getType().getName();
         if( getLogger().isDebugEnabled() )
         {
             final String message =

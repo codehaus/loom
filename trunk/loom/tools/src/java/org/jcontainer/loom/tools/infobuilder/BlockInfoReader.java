@@ -28,7 +28,7 @@ import org.xml.sax.InputSource;
  * <a href="package-summary.html#external">package summary</a>.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.9 $ $Date: 2003-10-16 00:40:51 $
+ * @version $Revision: 1.10 $ $Date: 2003-10-16 00:56:16 $
  */
 public final class BlockInfoReader
     extends AbstractLogEnabled
@@ -133,7 +133,6 @@ public final class BlockInfoReader
         final SchemaDescriptor schema = buildConfigurationSchema( classname, configuration );
 
         return new ComponentInfo( type,
-                                  classname,
                                   services,
                                   dependencies,
                                   schema );
