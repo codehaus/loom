@@ -90,7 +90,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.Map;
 import org.apache.avalon.framework.logger.Logger;
 import org.apache.excalibur.instrument.InstrumentManager;
 import org.codehaus.spice.loggerstore.LoggerStore;
@@ -141,9 +140,6 @@ class DefaultApplicationContext
     private final File m_workDirectory;
     private final File m_homeDirectory;
 
-    /** The map containing all the named loaders. */
-    private final Map m_loaders;
-
     /** The kernel associate with context */
     private Kernel m_kernel;
 
@@ -151,8 +147,7 @@ class DefaultApplicationContext
                                          final File homeDirectory,
                                          final File workDirectory,
                                          final ClassLoader classLoader,
-                                         final LoggerStore store,
-                                         final Map loaders )
+                                         final LoggerStore store )
     {
         if( null == profile )
         {
@@ -179,7 +174,6 @@ class DefaultApplicationContext
         m_store = store;
         m_workDirectory = workDirectory;
         m_homeDirectory = homeDirectory;
-        m_loaders = loaders;
     }
 
     /**
@@ -320,20 +314,6 @@ class DefaultApplicationContext
         throws Exception
     {
         m_blockManager.unregister( name );
-    }
-
-    public ClassLoader getClassLoader( final String name )
-        throws Exception
-    {
-        final ClassLoader classLoader = (ClassLoader)m_loaders.get( name );
-        if( null == classLoader )
-        {
-            final String message =
-                REZ.format( "applicationcontext.error.noloader",
-                            name );
-            throw new Exception( message );
-        }
-        return classLoader;
     }
 
     /**

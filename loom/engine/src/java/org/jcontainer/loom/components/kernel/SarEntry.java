@@ -87,7 +87,6 @@
 package org.jcontainer.loom.components.kernel;
 
 import java.io.File;
-import java.util.Map;
 import org.codehaus.spice.loggerstore.LoggerStore;
 import org.jcontainer.loom.components.util.profile.PartitionProfile;
 import org.jcontainer.loom.interfaces.Application;
@@ -105,15 +104,13 @@ final class SarEntry
     private final LoggerStore m_store;
     private final File m_homeDirectory;
     private final File m_workDirectory;
-    private final Map m_classLoaders;
     private Application m_application;
 
     protected SarEntry( final PartitionProfile profile,
                         final File homeDirectory,
                         final File workDirectory,
                         final ClassLoader classLoader,
-                        final LoggerStore store,
-                        final Map classLoaders )
+                        final LoggerStore store )
     {
         if( null == profile )
         {
@@ -135,17 +132,12 @@ final class SarEntry
         {
             throw new NullPointerException( "homeDirectory" );
         }
-        if( null == classLoaders )
-        {
-            throw new NullPointerException( "classLoaders" );
-        }
 
         m_profile = profile;
         m_classLoader = classLoader;
         m_store = store;
         m_homeDirectory = homeDirectory;
         m_workDirectory = workDirectory;
-        m_classLoaders = classLoaders;
     }
 
     public File getHomeDirectory()
@@ -181,10 +173,5 @@ final class SarEntry
     public ClassLoader getClassLoader()
     {
         return m_classLoader;
-    }
-
-    public Map getClassLoaders()
-    {
-        return m_classLoaders;
     }
 }

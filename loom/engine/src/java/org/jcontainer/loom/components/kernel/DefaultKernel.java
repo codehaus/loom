@@ -88,7 +88,6 @@ package org.jcontainer.loom.components.kernel;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.Map;
 import org.apache.avalon.framework.container.ContainerUtil;
 import org.apache.excalibur.instrument.InstrumentManager;
 import org.codehaus.spice.loggerstore.LoggerStore;
@@ -125,7 +124,7 @@ import org.jcontainer.loom.interfaces.SystemManager;
  * configured and initialized.
  *
  * @author Peter Donald
- * @author <a href="mailto:leosimons@apache.org">Leo Simons</a>
+ * @author Leo Simons
  * @dna.component
  * @mx.component
  */
@@ -404,8 +403,7 @@ public class DefaultKernel
                                 final File homeDirectory,
                                 final File workDirectory,
                                 final ClassLoader classLoader,
-                                final LoggerStore store,
-                                final Map classloaders )
+                                final LoggerStore store )
         throws Exception
     {
 
@@ -413,7 +411,7 @@ public class DefaultKernel
         final SarEntry entry =
             new SarEntry( profile, homeDirectory,
                           workDirectory, classLoader,
-                          store, classloaders );
+                          store );
         m_entries.put( name, entry );
 
         try
@@ -422,8 +420,8 @@ public class DefaultKernel
         }
         catch( final Exception e )
         {
-            final String message = REZ.format( "kernel.error.entry.start",
-                                               name );
+            final String message =
+                REZ.format( "kernel.error.entry.start", name );
             getLogger().warn( message, e );
             throw e;
         }
@@ -439,14 +437,12 @@ public class DefaultKernel
                                            entry.getHomeDirectory(),
                                            entry.getWorkDirectory(),
                                            entry.getClassLoader(),
-                                           entry.getLoggerStore(),
-                                           entry.getClassLoaders() );
+                                           entry.getLoggerStore() );
 
-        org.jcontainer.dna.impl.ContainerUtil.enableLogging( context,
-                                                             createContextLogger(
-                                                                 name ) );
-        org.jcontainer.dna.impl.ContainerUtil.compose( context,
-                                                       createResourceLocator() );
+        org.jcontainer.dna.impl.ContainerUtil.
+            enableLogging( context, createContextLogger( name ) );
+        org.jcontainer.dna.impl.ContainerUtil.
+            compose( context, createResourceLocator() );
         org.jcontainer.dna.impl.ContainerUtil.initialize( context );
         return context;
     }
