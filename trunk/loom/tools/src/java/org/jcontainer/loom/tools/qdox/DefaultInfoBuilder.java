@@ -26,7 +26,7 @@ import org.realityforge.metaclass.model.Attribute;
  * all of the javadoc tags present in JavaClass object model.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-10-05 01:18:58 $
+ * @version $Revision: 1.7 $ $Date: 2003-10-06 12:48:52 $
  */
 public class DefaultInfoBuilder
     extends AbstractInfoBuilder
@@ -149,7 +149,9 @@ public class DefaultInfoBuilder
         }
         else
         {
-            final String location = getNamedParameter( tag, "location", "" );
+            final String defaultLocation = javaClass.getName() + "-schema.xml";
+            final String location =
+                getNamedParameter( tag, "location", defaultLocation );
             final String type = getNamedParameter( tag, "type", "" );
 
             return new SchemaDescriptor( location, type, Attribute.EMPTY_SET );

@@ -101,8 +101,8 @@ import org.jcontainer.loom.tools.infobuilder.data.otherpkg.Service3;
  * A simple avalon component to test QDox loading of info etc.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-08-17 18:27:34 $
- * @phoenix:block
+ * @version $Revision: 1.4 $ $Date: 2003-10-06 12:48:52 $
+ * @phoenix:block version="1.0"
  * @phoenix:service name="org.jcontainer.loom.tools.infobuilder.data.Service1"
  * @phoenix:service name="org.jcontainer.loom.tools.infobuilder.data.otherpkg.Service2"
  * @phoenix:service name="org.jcontainer.loom.tools.infobuilder.data.otherpkg.Service3"

@@ -16,8 +16,9 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.util.Properties;
 import junit.framework.TestCase;
+import org.jcontainer.dna.impl.ConsoleLogger;
+import org.jcontainer.dna.impl.ContainerUtil;
 import org.jcontainer.loom.tools.info.ComponentDescriptor;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ContextDescriptor;
@@ -27,15 +28,13 @@ import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
 import org.jcontainer.loom.tools.qdox.DefaultInfoBuilder;
 import org.jcontainer.loom.tools.qdox.LegacyInfoBuilder;
-import org.jcontainer.dna.impl.ConsoleLogger;
-import org.jcontainer.dna.impl.ContainerUtil;
 import org.realityforge.metaclass.model.Attribute;
 
 /**
  * Abstract class which TestCases can extend.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.10 $ $Date: 2003-10-06 10:12:55 $
+ * @version $Revision: 1.11 $ $Date: 2003-10-06 12:48:52 $
  */
 public class InfoBuilderTestCase
     extends TestCase
@@ -45,10 +44,7 @@ public class InfoBuilderTestCase
 
     private static final String BASE_DIR = '/' + BASE_PACKAGE.replace( '.', '/' );
 
-    private static final String COMPONENT1 = BASE_PACKAGE + "component1";
     private static final String COMPONENT2 = BASE_PACKAGE + "component2";
-    private static final String COMPONENT3 = BASE_PACKAGE + "component3";
-    private static final String COMPONENT4 = BASE_PACKAGE + "component4";
 
     private static final String SOURCE1 = BASE_DIR + "QDoxComponent1.java";
     private static final String SOURCE1_INFO = BASE_PACKAGE + "QDoxComponent1";
@@ -61,58 +57,15 @@ public class InfoBuilderTestCase
         super( name );
     }
 
-    public void testLoadXMLComponent1()
-        throws Exception
-    {
-        final ComponentInfo actual = loadComponentInfo( COMPONENT1 );
-        final ComponentInfo expected = createDummyComponentInfo();
-
-        InfoAssert.assertEqualInfos( COMPONENT1 + " should be equal to constructed actual",
-                                     expected,
-                                     actual );
-    }
-
     public void testLoadLegacyComponent()
         throws Exception
     {
         final ComponentInfo actual = loadComponentInfo( COMPONENT2 );
-        final ComponentInfo expected = loadComponentInfo( COMPONENT3 );
+        final ComponentInfo expected = createDummyComponentInfo();
 
-        InfoAssert.assertEqualStructure( COMPONENT2 + " should be identical to " + COMPONENT3,
+        InfoAssert.assertEqualStructure( COMPONENT2 + " should be identical to Dummy",
                                          expected,
                                          actual );
-    }
-
-    public void testLoadParametersComponent()
-        throws Exception
-    {
-        final ComponentInfo actual = loadComponentInfo( COMPONENT4 );
-        final ComponentInfo expected = createComponentInfoWithParameters();
-
-        InfoAssert.assertEqualStructure( COMPONENT4 + " should be identical to " + COMPONENT4,
-                                         expected,
-                                         actual );
-    }
-
-    private ComponentInfo createComponentInfoWithParameters()
-    {
-        final ComponentDescriptor component =
-            new ComponentDescriptor( "org.realityforge.Component1", Attribute.EMPTY_SET );
-
-        return new ComponentInfo( component,
-                                  ServiceDescriptor.EMPTY_SET,
-                                  ContextDescriptor.EMPTY_CONTEXT,
-                                  DependencyDescriptor.EMPTY_SET,
-                                  null
-        );
-    }
-
-    public void testWriteXMLComponent1()
-        throws Exception
-    {
-        runWriteReadTest( createDummyComponentInfo(),
-                          new XMLInfoWriter(),
-                          new XMLInfoReader() );
     }
 
     public void testWriteLegacyXMLComponent1()
@@ -194,53 +147,38 @@ public class InfoBuilderTestCase
     private ComponentInfo createDummyComponentInfo()
     {
         final ComponentDescriptor component =
-            new ComponentDescriptor( "org.realityforge.Component1", Attribute.EMPTY_SET );
+            new ComponentDescriptor( "org.jcontainer.loom.tools.infobuilder.data.component2",
+                                     Attribute.EMPTY_SET );
 
-        final EntryDescriptor entry1 = new EntryDescriptor( "mbean",
-                                                            "javax.jmx.MBeanServer",
-                                                            false,
-                                                            Attribute.EMPTY_SET );
-
-        final EntryDescriptor[] entrys = new EntryDescriptor[]{entry1};
+        final EntryDescriptor[] entrys = new EntryDescriptor[]{};
         final ContextDescriptor context =
             new ContextDescriptor( "org.apache.avalon.phoenix.BlockContext",
                                    entrys,
                                    Attribute.EMPTY_SET );
 
-        final ServiceDescriptor service1 = createServiceDescriptor();
+        final ServiceDescriptor service1 =
+            new ServiceDescriptor( "org.apache.avalon.cornerstone.services.scheduler.TimeScheduler",
+                                   Attribute.EMPTY_SET );
+        final ServiceDescriptor service2 =
+            new ServiceDescriptor( "org.apache.avalon.cornerstone.services.scheduler.TimeScheduler2",
+                                   new Attribute[]{LegacyUtil.MX_ATTRIBUTE} );
 
-        final ServiceDescriptor[] services = new ServiceDescriptor[]{service1};
+        final ServiceDescriptor[] services = new ServiceDescriptor[]{service1, service2};
         final DependencyDescriptor dependency1 =
-            new DependencyDescriptor( "org.realityforge.Service2",
-                                      "org.realityforge.Service2",
-                                      true,
-                                      Attribute.EMPTY_SET );
-        final DependencyDescriptor dependency2 =
-            new DependencyDescriptor( "foo",
-                                      "org.realityforge.Service3",
+            new DependencyDescriptor( "org.apache.avalon.cornerstone.services.threads.ThreadManager",
+                                      "org.apache.avalon.cornerstone.services.threads.ThreadManager",
                                       false,
                                       Attribute.EMPTY_SET );
         final DependencyDescriptor[] deps =
-            new DependencyDescriptor[]{dependency1, dependency2};
+            new DependencyDescriptor[]{dependency1};
 
         final SchemaDescriptor schema =
-            new SchemaDescriptor( "",
+            new SchemaDescriptor( "component2-schema.xml",
                                   "http://relaxng.org/ns/structure/1.0",
                                   Attribute.EMPTY_SET );
 
         return new ComponentInfo( component, services,
                                   context, deps, schema );
-    }
-
-    private ServiceDescriptor createServiceDescriptor()
-    {
-        final Properties parameters = new Properties();
-        parameters.setProperty( "display-name", "Special Service" );
-        parameters.setProperty( "description-key", "service1.desc" );
-        final Attribute attribute = new Attribute( "doc", parameters );
-
-        final Attribute[] attributes = new Attribute[]{attribute};
-        return new ServiceDescriptor( "org.realityforge.Service1", attributes );
     }
 
     protected ComponentInfo loadComponentInfo( final String classname )

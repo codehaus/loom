@@ -91,7 +91,6 @@ import com.thoughtworks.qdox.model.JavaClass;
 import java.io.File;
 import java.io.IOException;
 import org.apache.tools.ant.BuildException;
-import org.jcontainer.loom.tools.ant.FormatEnum;
 
 /**
  * MetaInfo Generation Ant Taskdef
@@ -117,9 +116,6 @@ public class MetaGenerateTask
     public void execute()
         throws BuildException
     {
-        final FormatEnum format = new FormatEnum();
-        format.setValue( "legacy" );
-        setFormat( format );
         super.execute();
         outputClasses();
     }
@@ -127,7 +123,7 @@ public class MetaGenerateTask
     /**
      * Output the classes
      *
-     * @throws org.apache.tools.ant.BuildException If a problem writing output
+     * @throws BuildException If a problem writing output
      */
     private void outputClasses()
         throws BuildException

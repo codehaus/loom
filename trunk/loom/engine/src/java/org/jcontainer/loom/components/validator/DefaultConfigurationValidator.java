@@ -43,7 +43,7 @@ import org.w3c.dom.Element;
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author <a href="mailto:proyal at apache.org">Peter Royal</a>
- * @version $Revision: 1.6 $ $Date: 2003-10-06 05:20:55 $
+ * @version $Revision: 1.7 $ $Date: 2003-10-06 12:48:52 $
  * @dna.component
  */
 public class DefaultConfigurationValidator
@@ -92,9 +92,9 @@ public class DefaultConfigurationValidator
             return true;
         }
 
-       final String classname =
-          component.getInfo().getDescriptor().getImplementationKey();
-       if( getLogger().isDebugEnabled() )
+        final String classname =
+            component.getInfo().getDescriptor().getImplementationKey();
+        if( getLogger().isDebugEnabled() )
         {
             final String message =
                 "Validating component " + component.getMetaData().getName() +
@@ -111,7 +111,7 @@ public class DefaultConfigurationValidator
                 "Schema type specified as " + schema.getType() +
                 " was translated to URI " + type + " for component named " +
                 component.getMetaData().getName() + " of type " +
-               classname +
+                classname +
                 ". It is recomended that the components Info specify the " +
                 "URI rather than the type for compatability reasons.";
             System.err.println( message );

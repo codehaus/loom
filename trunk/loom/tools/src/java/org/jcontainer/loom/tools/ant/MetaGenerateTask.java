@@ -18,7 +18,6 @@ import org.apache.tools.ant.BuildException;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.infobuilder.InfoWriter;
 import org.jcontainer.loom.tools.infobuilder.LegacyBlockInfoWriter;
-import org.jcontainer.loom.tools.infobuilder.XMLInfoWriter;
 import org.jcontainer.loom.tools.qdox.DefaultInfoBuilder;
 import org.jcontainer.loom.tools.qdox.LegacyInfoBuilder;
 
@@ -28,36 +27,20 @@ import org.jcontainer.loom.tools.qdox.LegacyInfoBuilder;
  *
  * @author Paul Hammant
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-10-06 10:12:54 $
+ * @version $Revision: 1.6 $ $Date: 2003-10-06 12:48:52 $
  */
 public class MetaGenerateTask
     extends AbstractQdoxTask
 {
-    /*
-    * A set of type codes for format.
-    */
-    public static final int XML_TYPE = 0;
-    public static final int LEGACY_TYPE = 2;
-
-    /**
-     * A utility object that writes out info as xml files.
-     */
-    private static final InfoWriter c_xmlWriter = new XMLInfoWriter();
-
     /**
      * A utility object that writes out info as serialized object files.
      */
-    private static final InfoWriter c_legacyWriter = new LegacyBlockInfoWriter();
+    private static final InfoWriter c_infoWriter = new LegacyBlockInfoWriter();
 
     /**
      * The destination directory for metadata files.
      */
     private File m_destDir;
-
-    /**
-     * Variable that indicates the output type.
-     */
-    private int m_format;
 
     /**
      * Variable that indicates whether the output
@@ -74,16 +57,6 @@ public class MetaGenerateTask
     public void setDestDir( final File destDir )
     {
         m_destDir = destDir;
-    }
-
-    /**
-     * Specify the output format. Must be one of xml or serialized.
-     *
-     * @param format the output format
-     */
-    public void setFormat( final FormatEnum format )
-    {
-        m_format = format.getTypeCode();
     }
 
     /**
@@ -106,7 +79,7 @@ public class MetaGenerateTask
         validate();
 
         final String message =
-            "Writing Info descriptors as " + getOutputDescription() + ".";
+            "Writing Info descriptors as xml.";
         log( message );
 
         super.execute();
@@ -144,23 +117,6 @@ public class MetaGenerateTask
             final String message =
                 "DestDir (" + m_destDir + ") could not be created.";
             throw new BuildException( message );
-        }
-    }
-
-    /**
-     * Return a description of output format to print as debug message.
-     *
-     * @return the output formats descriptive name
-     */
-    private String getOutputDescription()
-    {
-        if( XML_TYPE == m_format )
-        {
-            return "xml";
-        }
-        else
-        {
-            return "legacy xml";
         }
     }
 
@@ -256,14 +212,7 @@ public class MetaGenerateTask
      */
     private InfoWriter getInfoWriter()
     {
-        if( XML_TYPE == m_format )
-        {
-            return c_xmlWriter;
-        }
-        else
-        {
-            return c_legacyWriter;
-        }
+            return c_infoWriter;
     }
 
     /**
@@ -276,16 +225,8 @@ public class MetaGenerateTask
     private File getOutputFileForClass( final String classname )
         throws IOException
     {
-        String filename =
-            classname.replace( '.', File.separatorChar );
-        if( XML_TYPE == m_format )
-        {
-            filename += "-info.xml";
-        }
-        else
-        {
-            filename += ".xinfo";
-        }
+        final String filename =
+            classname.replace( '.', File.separatorChar ) + ".xinfo";
         return new File( m_destDir, filename ).getCanonicalFile();
     }
 
