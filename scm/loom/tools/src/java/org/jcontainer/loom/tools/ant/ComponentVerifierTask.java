@@ -22,7 +22,7 @@ import org.jcontainer.loom.tools.verifier.InfoVerifier;
  * is compatible with the {@link org.jcontainer.loom.tools.info.ComponentInfo}.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.8 $ $Date: 2003-10-06 13:42:07 $
+ * @version $Revision: 1.9 $ $Date: 2003-10-16 00:40:51 $
  */
 public class ComponentVerifierTask
     extends Task
@@ -68,15 +68,13 @@ public class ComponentVerifierTask
 
         try
         {
-            final Class implementation =
+            final Class type =
                 classLoader.loadClass( m_classname );
             final ComponentInfo componentInfo =
-                builder.buildComponentInfo( implementation.getName(),
-                                            implementation.getClassLoader() );
+                builder.buildComponentInfo( type );
             verifier.verifyType( "test",
-                                 m_classname,
                                  componentInfo,
-                                 implementation );
+                                 type );
         }
         catch( final Exception e )
         {

@@ -29,7 +29,7 @@ import org.jcontainer.loom.tools.profile.ProfileBuilder;
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.11 $ $Date: 2003-10-16 00:20:28 $
+ * @version $Revision: 1.12 $ $Date: 2003-10-16 00:40:51 $
  */
 public class PhoenixProfileBuilder
     extends AbstractLogEnabled
@@ -52,11 +52,12 @@ public class PhoenixProfileBuilder
         final ComponentFactory factory = new DefaultComponentFactory( classLoader );
         setupLogger( factory, "factory" );
 
-        return assembleSarProfile( metaData, factory );
+        return assembleSarProfile( metaData, factory, classLoader );
     }
 
     private PartitionProfile assembleSarProfile( final PartitionMetaData metaData,
-                                                 final ComponentFactory factory )
+                                                 final ComponentFactory factory,
+                                                 final ClassLoader classLoader )
         throws Exception
     {
         final PartitionMetaData blockPartition =
@@ -66,7 +67,7 @@ public class PhoenixProfileBuilder
 
         final PartitionProfile blockProfile = assembleProfile( blockPartition, factory );
         final PartitionProfile listenerProfile =
-            assembleListenerProfile( listenerPartition );
+            assembleListenerProfile( listenerPartition, classLoader );
 
         final PartitionProfile[] profiles = new PartitionProfile[]{blockProfile, listenerProfile};
         return new PartitionProfile( metaData,
@@ -74,15 +75,17 @@ public class PhoenixProfileBuilder
                                      ComponentProfile.EMPTY_SET );
     }
 
-    private PartitionProfile assembleListenerProfile( final PartitionMetaData metaData )
+    private PartitionProfile assembleListenerProfile( final PartitionMetaData metaData,
+                                                      final ClassLoader classLoader )
+    throws Exception
     {
         final ArrayList componentSet = new ArrayList();
         final ComponentMetaData[] components = metaData.getComponents();
         for( int i = 0; i < components.length; i++ )
         {
             final ComponentMetaData component = components[ i ];
-            final ComponentInfo info =
-                createListenerInfo( component.getImplementationKey() );
+            final Class type = classLoader.loadClass( component.getImplementationKey() );
+            final ComponentInfo info = createListenerInfo( type );
             final ComponentProfile profile = new ComponentProfile( info, component );
             componentSet.add( profile );
         }
@@ -127,12 +130,13 @@ public class PhoenixProfileBuilder
     /**
      * Create a {@link ComponentInfo} for a Listener with specified classname.
      *
-     * @param implementationKey the classname of listener
+     * @param type the listener type
      * @return the ComponentInfo for listener
      */
-    private static ComponentInfo createListenerInfo( final String implementationKey )
+    private static ComponentInfo createListenerInfo( final Class type )
     {
-        return new ComponentInfo( implementationKey,
+        return new ComponentInfo( type,
+                                  type.getName(),
                                   ServiceDescriptor.EMPTY_SET,
                                   DependencyDescriptor.EMPTY_SET,
                                   null );

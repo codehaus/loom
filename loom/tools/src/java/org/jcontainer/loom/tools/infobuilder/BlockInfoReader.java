@@ -28,7 +28,7 @@ import org.xml.sax.InputSource;
  * <a href="package-summary.html#external">package summary</a>.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.8 $ $Date: 2003-10-15 04:20:42 $
+ * @version $Revision: 1.9 $ $Date: 2003-10-16 00:40:51 $
  */
 public final class BlockInfoReader
     extends AbstractLogEnabled
@@ -43,56 +43,56 @@ public final class BlockInfoReader
      * Create a {@link ComponentInfo} object for specified
      * classname, in specified ClassLoader.
      *
-     * @param classname The classname of Component
-     * @param classLoader the ClassLoader to load info from
+     * @param type The Components type
      * @return the created ComponentInfo
      * @throws Exception if an error occurs
      */
-    public ComponentInfo buildComponentInfo( final String classname,
-                                             final ClassLoader classLoader )
+    public ComponentInfo buildComponentInfo( final Class type )
         throws Exception
     {
-        final String xinfo = classname.replace( '.', '/' ) + ".xinfo";
-        final InputStream inputStream = classLoader.getResourceAsStream( xinfo );
+        final String xinfo = type.getName().replace( '.', '/' ) + ".xinfo";
+        final InputStream inputStream =
+            type.getClassLoader().getResourceAsStream( xinfo );
         if( null == inputStream )
         {
             return null;
         }
-        return createComponentInfo( classname, inputStream );
+        return createComponentInfo( type, inputStream );
     }
 
     /**
      * Create a {@link ComponentInfo} object for specified
      * classname, loaded from specified {@link InputStream}.
      *
-     * @param implementationKey The classname of Component
+     * @param type The Component type
      * @param inputStream the InputStream to load ComponentInfo from
      * @return the created ComponentInfo
      * @throws Exception if an error occurs
      */
-    public ComponentInfo createComponentInfo( final String implementationKey,
+    private ComponentInfo createComponentInfo( final Class type,
                                               final InputStream inputStream )
         throws Exception
     {
         final InputSource input = new InputSource( inputStream );
         final Configuration configuration =
             ConfigurationBuilder.build( input, null, getLogger() );
-        return build( implementationKey, configuration );
+        return build( type, configuration );
     }
 
     /**
      * Create a {@link ComponentInfo} object for specified classname from
      * specified configuration data.
      *
-     * @param classname The classname of Component
+     * @param type The Component type
      * @param info the ComponentInfo configuration
      * @return the created ComponentInfo
      * @throws Exception if an error occurs
      */
-    private ComponentInfo build( final String classname,
+    private ComponentInfo build( final Class type,
                                  final Configuration info )
         throws Exception
     {
+        final String classname = type.getName();
         if( getLogger().isDebugEnabled() )
         {
             final String message =
@@ -132,9 +132,11 @@ public final class BlockInfoReader
         configuration = info.getChild( "block" );
         final SchemaDescriptor schema = buildConfigurationSchema( classname, configuration );
 
-        return new ComponentInfo( classname,
+        return new ComponentInfo( type,
+                                  classname,
                                   services,
-                                  dependencies, schema );
+                                  dependencies,
+                                  schema );
     }
 
     /**
@@ -156,11 +158,10 @@ public final class BlockInfoReader
             final String location = LegacyUtil.getSchemaLocationFor( classname );
             return new SchemaDescriptor( location, schemaType );
         }
-
     }
 
     /**
-     * A utility method to build an array of {@link org.jcontainer.loom.tools.info.DependencyDescriptor}
+     * A utility method to build an array of {@link DependencyDescriptor}
      * objects from specified configuration and classname.
      *
      * @param classname The classname of Component (used for logging purposes)
@@ -186,7 +187,7 @@ public final class BlockInfoReader
     }
 
     /**
-     * A utility method to build a {@link org.jcontainer.loom.tools.info.DependencyDescriptor}
+     * A utility method to build a {@link DependencyDescriptor}
      * object from specified configuraiton.
      *
      * @param classname The classname of Component (used for logging purposes)
@@ -227,7 +228,7 @@ public final class BlockInfoReader
     }
 
     /**
-     * A utility method to build an array of {@link org.jcontainer.loom.tools.info.ServiceDescriptor}
+     * A utility method to build an array of {@link ServiceDescriptor}
      * objects from specified configuraiton.
      *
      * @param info the services configuration
@@ -256,7 +257,7 @@ public final class BlockInfoReader
     }
 
     /**
-     * A utility method to build a {@link org.jcontainer.loom.tools.info.ServiceDescriptor}
+     * A utility method to build a {@link ServiceDescriptor}
      * object from specified configuraiton data.
      *
      * @param service the service Configuration
@@ -266,7 +267,7 @@ public final class BlockInfoReader
     private ServiceDescriptor buildService( final Configuration service )
         throws ConfigurationException
     {
-        final String implementationKey = service.getAttribute( "name" );
-        return new ServiceDescriptor( implementationKey );
+        final String type = service.getAttribute( "name" );
+        return new ServiceDescriptor( type );
     }
 }
