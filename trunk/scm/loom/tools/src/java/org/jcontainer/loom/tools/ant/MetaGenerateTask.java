@@ -18,7 +18,6 @@ import org.apache.tools.ant.BuildException;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.infobuilder.InfoWriter;
 import org.jcontainer.loom.tools.infobuilder.LegacyBlockInfoWriter;
-import org.jcontainer.loom.tools.infobuilder.SerializedInfoWriter;
 import org.jcontainer.loom.tools.infobuilder.XMLInfoWriter;
 import org.jcontainer.loom.tools.qdox.DefaultInfoBuilder;
 import org.jcontainer.loom.tools.qdox.LegacyInfoBuilder;
@@ -29,7 +28,7 @@ import org.jcontainer.loom.tools.qdox.LegacyInfoBuilder;
  *
  * @author Paul Hammant
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-06-29 01:07:35 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-06 10:12:54 $
  */
 public class MetaGenerateTask
     extends AbstractQdoxTask
@@ -38,18 +37,12 @@ public class MetaGenerateTask
     * A set of type codes for format.
     */
     public static final int XML_TYPE = 0;
-    public static final int SER_TYPE = 1;
     public static final int LEGACY_TYPE = 2;
 
     /**
      * A utility object that writes out info as xml files.
      */
     private static final InfoWriter c_xmlWriter = new XMLInfoWriter();
-
-    /**
-     * A utility object that writes out info as serialized object files.
-     */
-    private static final InfoWriter c_serWriter = new SerializedInfoWriter();
 
     /**
      * A utility object that writes out info as serialized object files.
@@ -165,10 +158,6 @@ public class MetaGenerateTask
         {
             return "xml";
         }
-        else if( SER_TYPE == m_format )
-        {
-            return "serialized objects";
-        }
         else
         {
             return "legacy xml";
@@ -271,10 +260,6 @@ public class MetaGenerateTask
         {
             return c_xmlWriter;
         }
-        else if( SER_TYPE == m_format )
-        {
-            return c_serWriter;
-        }
         else
         {
             return c_legacyWriter;
@@ -296,10 +281,6 @@ public class MetaGenerateTask
         if( XML_TYPE == m_format )
         {
             filename += "-info.xml";
-        }
-        else if( SER_TYPE == m_format )
-        {
-            filename += "-info.ser";
         }
         else
         {

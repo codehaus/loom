@@ -20,7 +20,7 @@ import org.realityforge.salt.i18n.Resources;
  * is specified in the <a href="package-summary.html#external">package summary</a>.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-10-05 10:07:04 $
+ * @version $Revision: 1.7 $ $Date: 2003-10-06 10:12:54 $
  */
 public final class InfoBuilder
     extends AbstractLogEnabled
@@ -29,7 +29,6 @@ public final class InfoBuilder
         ResourceManager.getPackageResources( InfoBuilder.class );
 
     private final InfoReader m_xmlInfoCreator = createXMLInfoCreator();
-    private final InfoReader m_serialInfoCreator = new SerializedInfoReader();
     private final InfoReader m_legacyInfoCreator = createLegacyInfoCreator();
 
     /**
@@ -38,7 +37,6 @@ public final class InfoBuilder
     public void enableLogging( final Logger logger )
     {
         super.enableLogging( logger );
-        setupLogger( m_serialInfoCreator );
         if( null != m_xmlInfoCreator )
         {
             setupLogger( m_xmlInfoCreator );
@@ -79,13 +77,7 @@ public final class InfoBuilder
                                              final ClassLoader classLoader )
         throws Exception
     {
-        ComponentInfo info = buildComponentFromSer( classname, classLoader );
-        if( null != info )
-        {
-            return info;
-        }
-
-        info = buildComponentFromLegacy( classname, classLoader );
+        ComponentInfo info = buildComponentFromLegacy( classname, classLoader );
         if( null != info )
         {
             return info;
@@ -94,28 +86,6 @@ public final class InfoBuilder
         {
             return buildComponentFromXML( classname, classLoader );
         }
-    }
-
-    /**
-     * Build {@link ComponentInfo} from the XML descriptor format.
-     *
-     * @param classname The classname of Component
-     * @param classLoader the ClassLoader to load info from
-     * @return the created {@link ComponentInfo}
-     * @throws java.lang.Exception if an error occurs
-     */
-    private ComponentInfo buildComponentFromSer( final String classname,
-                                                 final ClassLoader classLoader )
-        throws Exception
-    {
-        final String xinfo = deriveResourceName( classname, "-info.ser" );
-        final InputStream inputStream = classLoader.getResourceAsStream( xinfo );
-        if( null == inputStream )
-        {
-            return null;
-        }
-
-        return m_serialInfoCreator.createComponentInfo( classname, inputStream );
     }
 
     /**

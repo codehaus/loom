@@ -35,7 +35,7 @@ import org.realityforge.metaclass.model.Attribute;
  * Abstract class which TestCases can extend.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.9 $ $Date: 2003-10-05 10:07:05 $
+ * @version $Revision: 1.10 $ $Date: 2003-10-06 10:12:55 $
  */
 public class InfoBuilderTestCase
     extends TestCase
@@ -105,14 +105,6 @@ public class InfoBuilderTestCase
                                   DependencyDescriptor.EMPTY_SET,
                                   null
         );
-    }
-
-    public void testWriteSerComponent1()
-        throws Exception
-    {
-        runWriteReadTest( createDummyComponentInfo(),
-                          new SerializedInfoWriter(),
-                          new SerializedInfoReader() );
     }
 
     public void testWriteXMLComponent1()
