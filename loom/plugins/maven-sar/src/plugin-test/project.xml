@@ -3,14 +3,15 @@
 <project>
     <id>test-maven-sar-plugin</id>
     <currentVersion>test</currentVersion>
-	<name>Test project for Maven Sar Plugin</name>
-	<dependencies>
+    <name>Test project for Maven Sar Plugin</name>
+
+    <dependencies>
         <dependency>
             <groupId>loom</groupId>
             <artifactId>maven-sar-plugin</artifactId>
             <version>1.0-beta1-dev</version>
             <type>plugin</type>
         </dependency>
-	</dependencies>
+    </dependencies>
 
 </project>
