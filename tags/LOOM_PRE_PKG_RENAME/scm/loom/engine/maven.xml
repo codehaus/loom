@@ -1,0 +1,50 @@
+<project
+    xmlns:j="jelly:core"
+    xmlns:maven="jelly:maven"
+    xmlns:ant="jelly:ant"
+    default="main">
+
+    <preGoal name="java:compile">
+        <ant:mkdir dir="${basedir}/target/src/java/org/jcontainer/loom/interfaces"/>
+        <ant:tstamp/>
+        <j:file name="${basedir}/target/src/java/org/jcontainer/loom/interfaces/Version.java"
+            omitXmlDeclaration="true" escapeText="false">
+            package org.jcontainer.loom.interfaces;
+            interface Version
+            {
+            String SOFTWARE = "${pom.name}";
+            String VERSION = "${pom.currentVersion}";
+            String DATE = "${TODAY}";
+            }
+        </j:file>
+        <ant:path id="version.src.set"
+            location="${basedir}/target/src/java"/>
+        <maven:addPath id="maven.compile.src.set" refid="version.src.set"/>
+    </preGoal>
+
+    <goal name="main">
+        <attainGoal name="build"/>
+    </goal>
+
+    <goal name="build">
+        <attainGoal name="jar:install"/>
+    </goal>
+
+    <goal name="deploy">
+        <attainGoal name="jar:deploy"/>
+    </goal>
+
+    <postGoal name="test:compile">
+        <attainGoal name="generateMetaData"/>
+    </postGoal>
+
+    <goal name="generateMetaData" prereqs="dna:metagenerate">
+        <ant:mc_generate destDir="${basedir}/target/test-classes">
+            <ant:interceptorSet refid="maven.metaclass.interceptors"/>
+            <ant:fileset dir="src/test">
+                <include name="**/data/*"/>
+            </ant:fileset>
+        </ant:mc_generate>
+    </goal>
+
+</project>

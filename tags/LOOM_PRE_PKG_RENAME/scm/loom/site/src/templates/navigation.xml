@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="${pom.name}">
+
+    <title>${pom.name}</title>
+
+    <body>
+        <links>
+            <item href="http://loom.jcontainer.org" name="Loom"/>
+            <item href="http://jcontainer.org" name="JContainer"/>
+            <item href="http://codehaus.org" name="Codehaus"/>
+            <item href="http://maven.apache.org" name="Maven"/>
+        </links>
+	#parse( "navigation.menu" )
+
+    </body>
+</project>
+

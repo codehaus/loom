@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<project>
+    <extend>${basedir}/../../project.xml</extend>
+    <name>ClassMan</name>
+    <id>loom-classman</id>
+    <package>org.jcontainer.loom.classman</package>
+    <inceptionYear>2002</inceptionYear>
+
+    <shortDescription>Toolkit to construct ClassLoader lattices from an XML descriptor.</shortDescription>
+
+    <description>
+        The ClassMan toolkit is a set of utility classes that enable
+        ClassLoader hierarchies to be constructed from xml
+        configurations.
+    </description>
+
+    <versions>
+        <version>
+            <id>1.0</id>
+            <name>1.0</name>
+            <tag>CLASSMAN_1_0-tag</tag>
+        </version>
+        <version>
+            <id>1.1</id>
+            <name>1.1</name>
+            <tag>CLASSMAN_1_1-tag</tag>
+        </version>
+    </versions>
+
+    <dependencies>
+        <dependency>
+            <id>oro</id>
+            <version>2.0.7</version>
+            <properties>
+                <category>runtime</category>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>spice</groupId>
+            <artifactId>spice-salt</artifactId>
+            <version>1.0</version>
+            <properties>
+                <category>runtime</category>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>loom</groupId>
+            <artifactId>loom-extension</artifactId>
+            <version>${pom.currentVersion}</version>
+            <properties>
+                <category>runtime</category>
+            </properties>
+        </dependency>
+    </dependencies>
+</project>

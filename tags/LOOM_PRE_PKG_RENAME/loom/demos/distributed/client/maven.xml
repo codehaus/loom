@@ -1,0 +1,7 @@
+<project default="main">
+
+    <goal name="main">
+        <attainGoal name="jar:jar"/>
+    </goal>
+
+</project>

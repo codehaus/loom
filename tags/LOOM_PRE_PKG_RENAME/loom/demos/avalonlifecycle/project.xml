@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<project>
+    <extend>${basedir}/../../project.xml</extend>
+    <name>Loom Avalon Lifecycle Demo</name>
+    <id>demo-avalonlifecycle</id>
+    <package>org.jcontainer.loom.demos.avalonlifecycle</package>
+    <shortDescription>Avalon Lifecycle Demo</shortDescription>
+    <description>
+        Avalon Lifecycle Demo app for deployment in Loom Application Server.
+    </description>
+
+    <dependencies>
+        <dependency>
+            <groupId>loom</groupId>
+            <artifactId>maven-loom-plugin</artifactId>
+            <version>${pom.currentVersion}</version>
+            <type>plugin</type>
+        </dependency>
+        <dependency>
+            <id>avalon-framework</id>
+            <version>4.1.5</version>
+        </dependency>
+    </dependencies>
+
+</project>

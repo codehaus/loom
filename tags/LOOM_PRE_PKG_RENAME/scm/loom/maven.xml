@@ -1,0 +1,88 @@
+<project default="main" xmlns:j="jelly:core" xmlns:maven="jelly:maven" xmlns:util="jelly:util">
+
+    <goal name="main">
+        <attainGoal name="loom:build"/>
+    </goal>
+
+    <goal name="loom:build">
+        <util:tokenize var="items" delim="," trim="true">${loom.build.include}</util:tokenize>
+        <j:forEach var="item" items="${items}">
+            <attainGoal name="build:${item}"/>
+        </j:forEach>
+    </goal>
+
+    <goal name="build:plugins">
+        <echo message="Build plugins"/>
+        <maven:reactor basedir="${basedir}" includes="plugins/project.xml" goals="loom:clean,loom:install" banner="Building Plugins" ignoreFailures="false"/>
+    </goal>
+
+    <goal name="build:components">
+        <echo message="Build components"/>
+        <maven:reactor basedir="${basedir}" includes="engine/project.xml,support/*/project.xml,launcher/project.xml" goals="clean:clean,build" banner="Building" ignoreFailures="false"/>
+    </goal>
+
+    <goal name="build:demos">
+        <echo message="Build demos"/>
+        <maven:reactor basedir="${basedir}" includes="demos/*/project.xml" goals="clean:clean,build" banner="Building" ignoreFailures="false"/>
+    </goal>
+
+    <goal name="build:distribution">
+        <echo message="Build distribution"/>
+        <maven:reactor basedir="${basedir}" includes="distribution/project.xml" goals="clean:clean,build" banner="Building" ignoreFailures="false"/>
+    </goal>
+
+    <goal name="loom:clean">
+        <util:tokenize var="items" delim="," trim="true">${loom.clean.include}</util:tokenize>
+        <j:forEach var="item" items="${items}">
+            <attainGoal name="clean:${item}"/>
+        </j:forEach>
+    </goal>
+
+    <goal name="clean:plugins">
+        <echo message="Clean plugins"/>
+        <maven:reactor basedir="${basedir}" includes="plugins/project.xml" goals="loom:clean" banner="Cleaning" ignoreFailures="false"/>
+    </goal>
+
+    <goal name="clean:components">
+        <echo message="Clean components"/>
+        <maven:reactor basedir="${basedir}" includes="*/project.xml" excludes="demos/*/project.xml,support/*/project.xml,distribution/project.xml,plugins/project.xml,site/project.xml" goals="clean:clean" banner="Cleaning" ignoreFailures="false"/>
+    </goal>
+
+    <goal name="clean:distribution">
+        <echo message="Clean distribution"/>
+        <maven:reactor basedir="${basedir}" includes="distribution/project.xml" goals="clean:clean" banner="Cleaning" ignoreFailures="false"/>
+    </goal>
+
+    <goal name="clean:demos">
+        <echo message="Clean demos"/>
+        <maven:reactor basedir="${basedir}" includes="demos/*/project.xml" goals="clean:clean" banner="Cleaning" ignoreFailures="false"/>
+    </goal>
+
+    <goal name="loom:deploy">
+        <util:tokenize var="items" delim="," trim="true">${loom.deploy.include}</util:tokenize>
+        <j:forEach var="item" items="${items}">
+            <attainGoal name="deploy:${item}"/>
+        </j:forEach>
+    </goal>
+
+    <goal name="deploy:plugins">
+        <echo message="Deploying all plugins"/>
+        <maven:reactor basedir="${basedir}" includes="plugins/project.xml" goals="loom:clean,loom:deploy" banner="Deploying" ignoreFailures="false"/>
+    </goal>
+
+    <goal name="deploy:components">
+        <echo message="Deploying all components"/>
+        <maven:reactor basedir="${basedir}" includes="*/project.xml" excludes="demos/*/project.xml,support/*/project.xml,distribution/project.xml,plugins/project.xml,site/project.xml" goals="clean:clean,deploy" banner="Deploying" ignoreFailures="false"/>
+    </goal>
+
+    <goal name="deploy:distribution">
+        <echo message="Deploy distribution"/>
+        <maven:reactor basedir="${basedir}" includes="distribution/project.xml" goals="clean:clean,deploy" banner="Deploying" ignoreFailures="false"/>
+    </goal>
+
+    <goal name="deploy:demos">
+        <echo message="Deploy demos"/>
+        <maven:reactor basedir="${basedir}" includes="demos/*/project.xml" goals="clean:clean,deploy" banner="Deploying" ignoreFailures="false"/>
+    </goal>
+
+</project>

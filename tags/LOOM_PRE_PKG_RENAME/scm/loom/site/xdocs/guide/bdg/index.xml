@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<document>
+    <properties>
+        <title>Guide - for Block Developers</title>
+        <author email="bloritsch@apache.org">Berin Loritsch</author>
+        <abstract>
+            The Block Developer's Guide (BDG) is written to bring an overview
+            of how to create and deploy a Block. The Block is the component that
+            is hosted in the Loom micro-kernel.
+        </abstract>
+    </properties>
+    <body>
+        <section name="Who Should Read This Guide?">
+            <p>
+                The BDG is written for developers who want to create
+                blocks for Loom. It is assumed that you are familiar with
+                Java, XML, Avalon patterns and server side security issues.
+                This book provides an overview of the underlying technology,
+                Java classes and interfaces, component model, and
+                behavior of server Blocks within Loom.
+            </p>
+            <p>
+                While this guide concentrates on server fundamentals, it
+                should not be construed as a "dummy's" guide. Server side
+                programming is complex because of the performance and security
+                issues you must balance.
+            </p>
+            <p>
+                You should be well versed in the Java language and have some
+                practical experience developing server solutions. If you need
+                a stronger background on server side programming, I suggest
+                finding a good book on the subject.
+            </p>
+        </section>
+        <section name="Organization">
+            <p>
+                Here is how the information is presented. The first few
+                chapters are foundational material, and describe the basic
+                concepts you can use in your own blocks. The later chapters
+                specify in detail the formal requirements of Block
+                implementations.
+            </p>
+            <p>
+                Here is how the information is presented. The first few
+                chapters are foundational material, and describe the basic
+                concepts you can use in your own blocks. The later chapters
+                specify in detail the formal requirements of Block
+                implementations.
+            </p>
+            <ul>
+                <li></li>
+            </ul>
+        </section>
+    </body>
+</document>

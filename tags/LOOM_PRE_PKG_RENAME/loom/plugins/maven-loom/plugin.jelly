@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+
+<project xmlns:j="jelly:core" xmlns:ant="jelly:ant" xmlns:artifact="artifact" xmlns:license="license" xmlns:util="jelly:util">
+
+    <j:set var="loom.sar.final.name" value="${pom.artifactId}.sar"/>
+    <j:set var="logging" value="${context.getVariable('maven.loom.logging')}"/>
+
+    <!--==================================================================-->
+    <!-- Default goal : Builds a sar file                                 -->
+    <!--==================================================================-->
+    <goal name="loom" prereqs="loom:sar" description="Build a sar file"/>
+
+    <!--==================================================================-->
+    <!-- Setup Descriptor Tools                                           -->
+    <!--==================================================================-->
+    <goal name="loom:init" prereqs="dna:init" description="Setup Loom Descriptor Processing Tasks">
+
+        <ant:mc_interceptorSet id="maven.loom.interceptors">
+            <ant:interceptor name="org.jcontainer.loom.info.PhoenixAttributeInterceptor">
+                <ant:classpath>
+                    <ant:pathelement path="${plugin.dir}"/>
+                    <!--
+                    The following allows applications to resolve * imports for
+                    types in the source code. If this is not included then
+                    all imports must be fully specified or else they will be
+                    incorrectly specified in attributes file.
+                    -->
+                    <!--<ant:path refid="maven.dependency.classpath"/>-->
+                </ant:classpath>
+            </ant:interceptor>
+        </ant:mc_interceptorSet>
+
+        <ant:mc_addToInterceptorSet dest="maven.metaclass.interceptors" source="maven.loom.interceptors"/>
+    </goal>
+
+    <!--==================================================================-->
+    <!-- Metagenerate descriptor files                                    -->
+    <!--==================================================================-->
+    <goal name="loom:metagenerate" prereqs="loom:init,metaclass:generate" description="Generate Loom Descriptor Files">
+    </goal>
+
+    <!--==================================================================-->
+    <!-- Builds a sar file                                                -->
+    <!--==================================================================-->
+    <goal name="loom:sar" prereqs="jar:jar" description="Build a Loom sar file">
+
+        <ant:echo message="Building sar ${loom.sar.final.name}"/>
+        <!-- Ensure maven.loom.build.dir exists -->
+        <ant:mkdir dir="${maven.loom.build.dir}"/>
+        <ant:jar destfile="${maven.loom.build.dir}/${loom.sar.final.name}">
+            <!-- Add Sar descriptor files to SAR-INF/ -->
+            <ant:zipfileset file="${maven.loom.assembly}" fullpath="SAR-INF/assembly.xml"/>
+            <ant:zipfileset file="${maven.loom.config}" fullpath="SAR-INF/config.xml"/>
+            <ant:zipfileset file="${maven.loom.environment}" fullpath="SAR-INF/environment.xml"/>
+            <j:if test="${!empty(logging)}">
+                <ant:zipfileset file="${logging}" prefix="SAR-INF/"/>
+            </j:if>
+            <!-- Add build artifacts -->
+            <ant:zipfileset dir="${maven.loom.build.dir}" prefix="SAR-INF/lib">
+                <ant:include name="${maven.loom.lib.include}"/>
+                <ant:exclude name="${maven.loom.lib.exclude}"/>
+            </ant:zipfileset>
+            <!-- Add dependency artifacts -->
+            <j:forEach var="artifact" items="${pom.artifacts}">
+                <j:set var="dependency" value="${artifact.dependency}"/>
+                <j:if test="${dependency.getProperty('sar.bundle')=='true'}">
+                    <ant:zipfileset dir="${maven.repo.local}/${dependency.artifactDirectory}/jars/" prefix="SAR-INF/lib">
+                        <ant:include name="${dependency.artifact}"/>
+                    </ant:zipfileset>
+                </j:if>
+            </j:forEach>
+            <!-- Add resources with targetPath = 'SAR-INF' -->
+            <j:forEach var="resource" items="${pom.build.resources}">
+                <ant:patternset id="maven.loom.resources.set">
+                    <j:forEach var="include" items="${resource.includes}">
+                        <ant:include name="${include}"/>
+                    </j:forEach>
+                    <j:forEach var="exclude" items="${resource.excludes}">
+                        <ant:exclude name="${exclude}"/>
+                    </j:forEach>
+                </ant:patternset>
+                <j:set var="directory" value='${resource.directory}'/>
+                <j:if test="${directory == null}">
+                    <j:set var="directory" value='${basedir}'/>
+                </j:if>
+                <j:set var="targetPath" value='${resource.targetPath}'/>
+                <j:if test="${targetPath == 'SAR-INF'}">
+                    <ant:echo message="Adding resources from directory ${directory} to ${targetPath}..."/>
+                    <ant:zipfileset dir="${directory}" prefix="${targetPath}">
+                        <ant:patternset refid="maven.loom.resources.set"/>
+                    </ant:zipfileset>
+                </j:if>
+            </j:forEach>
+
+            <j:set var="licenseFileName">
+                <license:fileName/>
+            </j:set>
+            <util:file name="${licenseFileName}" var="licenseFile"/>
+            <ant:metainf dir="${licenseFile.canonicalFile.parent}">
+                <ant:include name="${licenseFile.canonicalFile.name}"/>
+            </ant:metainf>
+
+            <ant:manifest>
+                <ant:attribute name="Built-By" value="${user.name}"/>
+                <ant:section name="${pom.package}">
+                    <ant:attribute name="Specification-Title" value="${pom.artifactId}"/>
+                    <ant:attribute name="Specification-Version" value="${pom.currentVersion}"/>
+                    <ant:attribute name="Specification-Vendor" value="${pom.organization.name}"/>
+                    <ant:attribute name="Implementation-Title" value="${pom.package}"/>
+                    <ant:attribute name="Implementation-Version" value="${pom.currentVersion}"/>
+                    <ant:attribute name="Implementation-Vendor" value="${pom.organization.name}"/>
+                </ant:section>
+            </ant:manifest>
+        </ant:jar>
+
+    </goal>
+
+    <!--==================================================================-->
+    <!-- Install the sar in the local repository                          -->
+    <!--==================================================================-->
+    <goal name="loom:install" prereqs="loom:sar" description="Install the sar in the local repository">
+
+        <artifact:install artifact="${maven.loom.build.dir}/${loom.sar.final.name}" type="sar" project="${pom}"/>
+
+    </goal>
+
+    <!--==================================================================-->
+    <!-- Install snapshot of the sar in the local repository              -->
+    <!--==================================================================-->
+    <goal name="loom:install-snapshot" prereqs="loom:sar" description="Install snapshot of the sar in the local repository">
+
+        <artifact:install-snapshot artifact="${maven.loom.build.dir}/${loom.sar.final.name}" type="sar" project="${pom}"/>
+
+    </goal>
+
+    <!--==================================================================-->
+    <!-- Deploy the sar to the remote repository                          -->
+    <!--==================================================================-->
+    <goal name="loom:deploy" prereqs="sar" description="Deploy the sar to the remote repository">
+
+        <artifact:deploy artifact="${maven.loom.build.dir}/${loom.sar.final.name}" type="sar" project="${pom}"/>
+
+    </goal>
+
+    <!--==================================================================-->
+    <!-- Deploy snapshot of the sar to the remote repository              -->
+    <!--==================================================================-->
+    <goal name="loom:deploy-snapshot" prereqs="loom:sar" description="Deploy snapshot of the sar to the remote repository">
+
+        <artifact:deploy-snapshot artifact="${maven.loom.build.dir}/${loom.sar.final.name}" type="sar" project="${pom}"/>
+
+    </goal>
+
+    <!--==================================================================-->
+    <!-- Special no-op goal which can be used by other plugin which need  -->
+    <!-- to get access to any of this plugin's property. This is          -->
+    <!-- temporary, until we get explicit plugin dependencies.            -->
+    <!--==================================================================-->
+    <goal name="loom:load"/>
+
+</project>

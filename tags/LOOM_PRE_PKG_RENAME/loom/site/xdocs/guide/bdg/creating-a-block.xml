@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<document>
+    <properties>
+        <title>Guide - Creating a Component</title>
+    </properties>
+    <body>
+        <section name="Introduction">
+            <p>
+                This document will describe the process for creating your first
+                component. The following steps are required before your
+                component is ready for assembling.
+            </p>
+            <ol>
+                <li>Write the Component.</li>
+                <li>Associate MetaData with the Component.</li>
+                <li>Package the component and related resources into a jar file.</li>
+            </ol>
+        </section>
+        <section name="Writing the Component">
+            <p>
+                Writing the component is the main task you will be called to
+                do. It follows all the rules of writing a standard Avalon
+                component. If a component implements the Contextualizable interface
+                it will be passed an instance of
+                <code>org.apache.avalon.phoenix.BlockContext</code> which is
+                an extended version of
+                <code>org.apache.avalon.Context</code>.
+                Other than this minor change the container supports all the
+                Avalon lifecycle methods.
+            </p>
+        </section>
+        <section name="Associate MetaData with the Component">
+            <p>
+                Loom uses the same mechanism as is described in the
+                <a href="http://dna.jcontainer.org/metadata">DNA MetaData
+                documentation</a>. The developer should be aware that the DNA
+                documentation describes the metadata associated with DNA
+                components. The only difference that must be taken into account
+                for Avalon components is the name of the methods that the
+                attributes are associated with. For example the dna.dependency
+                attribute must be on associated with either Avalons
+                Composable.compose(ComponentManager) or
+                Serviceable.service(ServiceManager) methods.
+            </p>
+            <p>
+                The only difference is that Loom has an enhanced Ant task to
+                generate the MetaData. This enhanced has backward compatible
+                support for Phoenix metadata annotations and should be used
+                if classes contain historic annotations. See below for a
+                sample on how to use the task to generate metadata.
+            </p>
+            <source>
+                &lt;taskdef
+    name="generatemeta"
+    classname="org.jcontainer.loom.info.GenerateLoomDescriptorsTask"&gt;
+                &lt;classpath refid="maven-sar.class.path" /&gt;
+                &lt;classpath refid="dna-tools.class.path" /&gt;
+                &lt;classpath refid="metaclass.class.path" /&gt;
+                &lt;classpath refid="qdox.class.path" /&gt;
+                &lt;/taskdef&gt;
+
+                &lt;generatemeta dest="target/classes"&gt;
+                &lt;fileset dir="src/java"&gt;
+                &lt;include name="**/*.java"/&gt;
+                &lt;/fileset&gt;
+                &lt;/generatemeta&gt;
+            </source>
+        </section>
+        <section name="Create the jar package">
+            <p>
+                The final step is packaging up the implementation files,
+                MetaClass descriptors and other resources into a jar file.
+            </p>
+        </section>
+    </body>
+</document>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<document>
+    <properties>
+        <title>Development Roles</title>
+        <author email="leosimons@apache.org">Leo Simons</author>
+    </properties>
+    <body>
+        <section name="Introduction">
+            <p>
+              In Loom development, we identify several roles. Each of these has its own
+       guide. If you plan to aid in the development of Loom itself, or if you are
+       responsible for all these aspects, you should read all the guides. Otherwise, you
+       should be able to learn everything you need to know from the guide that fits your
+       role.
+            </p>
+        </section>
+        <section name="The Administrator">
+            <p>The administrator is responsible for getting Loom to run and for keeping it
+            running. He typically controls the startup and shutdown of the standalone server
+            or daemon, and uses a management console to keep the server in top condition.</p>
+            <p>
+                <a href="administrator.html">Administrator's Guide</a>
+            </p>
+        </section>
+        <section name="The Deployer">
+            <p>The deployer manages (un/re)deployment of the applications hosted withing Loom,
+            typically through a management console. In real life, this is often the same person
+             as the adminstrator.</p>
+
+            <p>
+                <a href="deployers.html">Deployer's Guide</a>
+            </p>
+
+        </section>
+        <section name="The Assembler">
+            <p>The assembler takes pre-written blocks and glues these together to create a
+             server application. Assemblers usually work closely with block developers.</p>
+            <p>
+                <a href="assemblers/index.html">Assembler Guide</a>
+            </p>
+        </section>
+        <section name="The Block Developer">
+            <p>The block developer creates reusable components (called blocks) that can be
+             wired together to form a server applications.</p>
+            <p>
+                <a href="bdg/index.html">Block Developers Guide</a>
+            </p>
+        </section>
+    </body>
+</document>

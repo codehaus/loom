@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document>
+    <properties>
+        <title>HelloWorld Demo</title>
+        <author>Paul Hammant</author>
+        <author>Mauro Talevi</author>
+    </properties>
+
+    <body>
+        <section name="Introduction">
+            <p> The 'Hello World' demo server component is a socket listener app
+		that replies 'Hello World' to client applications that open the port.
+		The reply is in HTML form so can be viewed by a Browser.  The HTTP
+		headers are missing, but it still works.  Telnet is another client that
+		can view the message. </p>
+        </section>
+        <section name="Architecture">
+            <p> The following shows how the HelloWorld demo block depends on
+		ConnectionManager from cornerstone.  These  two blocks packaged
+		as a server application (SAR file) are loaded and launched by Loom,
+		itself sitting on top of Avalon's framework. </p>
+        </section>
+        <section name="Source modules">
+            <p> The HelloWorld demo comprises of the following modules,
+		all contained within the src directory </p>
+            <ol>
+                <li>
+                    <code>org.jcontainer.loom.demos.helloworld</code> This
+		package contains the Java source for 'Hello World' and the xinfo block
+		descriptor.
+                </li>
+                <li>
+                    <code>conf/assembly.xml</code> This contains the assembly
+		instructions for the resulting server archive (SAR) file.
+                </li>
+                <li>
+                    <code>conf/config.xml</code> This contains the
+		configuration for the resulting server archive (SAR) file.
+                </li>
+            </ol>
+        </section>
+        <section name="Java Source">
+            <subsection name="HelloWorldHandler.java">
+                <p> Instantiated and dispatched by the impl once per socket request that
+		comes in. </p>
+            </subsection>
+            <subsection name="HelloWorldServer.java">
+                <p> The interface that's the contract for the Server block.  As it
+		happens HelloWorld is not that resusable.  If it were
+		"ObjectDataBase.java" many server apps could use it through this
+		interface.  The interface could set more useful things that the
+		greeting ("Hello", "Bonjour", "Ciao", etc.) </p>
+            </subsection>
+            <subsection name="HelloWorldServerImpl.java">
+                <p> This like all impls implements an interface.  Which interface is
+		rather obvious in this case. It's a standard pattern that uses other
+		blocks (SocketManager and ConnectionManager) to do the hard work of
+		listening on a port, pooling threads and connections and organizing
+		socket invokations in a queue and multi app friendly way. </p>
+            </subsection>
+        </section>
+        <section name="Configuration">
+            <subsection name="assembly.xml">
+                <p> The file is renamed as part of the build process to assembly.xml,
+		and only has a separate name here to aid development.  The bulk of the
+		contents of the file pertain to other blocks including ones that
+		HelloWorld is dependant upon.  Here's the section that's for HelloWorld
+                </p>
+                <source>
+(text snipped)
+                    &lt;block class="org.jcontainer.loom.demos.helloworld.HelloWorldServerImpl"
+           name="helloworldserver" &gt;
+                    &lt;provide name="socketsection"
+                   role="org.apache.avalon.cornerstone.services.sockets.SocketManager"/&gt;
+                    &lt;provide name="connections"
+                   role="org.apache.avalon.cornerstone.services.connection.ConnectionManager" /&gt;
+                    &lt;/block&gt;
+(text snipped)
+                </source>
+                <p> Of the block element, listed attributes are the instatiatable class
+		implementing the HelloWorld interface (not mentioned itself in this
+		assembly xml), the display name of the block, and two services that
+		HelloWorld needs. </p>
+            </subsection>
+            <subsection name="config.xml">
+                <p> The file is renamed as part of the build process to config.xml, and
+		only has a separate name here to aid development.  Again here is the
+		pertinent section: </p>
+                <source>
+                    &lt;helloworldserver&gt;
+                    &lt;port&gt;8999&lt;/port&gt;
+                    &lt;bind&gt;127.0.0.1&lt;/bind&gt;
+                    &lt;helloworldhandler&gt;
+                    &lt;connectiontimeout&gt; 360000 &lt;/connectiontimeout&gt;
+                    &lt;/helloworldhandler&gt;
+                    &lt;/helloworldserver&gt;
+                </source>
+                <p> The configuration element named &lt;helloworldserver&gt; is used as
+		it's name suggests and is passed the blocks being used for the app.
+		Elements port and bind are used by the socket manager. </p>
+                <p> If you had configuration for an app, you'd specify it here in with
+		element and attribute names that are invented for the application.     </p>
+            </subsection>
+            <subsection name="Starting your own server project">
+                <p> Familiarity with Maven and its build system would be a good place to
+		start.  Simply</p>
+                <source>
+cd demos/helloworld
+maven
+                </source>
+            </subsection>
+        </section>
+    </body>
+</document>
