@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <project>
+    <extend>${basedir}/../project.xml</extend>
     <pomVersion>3</pomVersion>
     <name>Loom Launcher</name>
     <id>loom-launcher</id>
@@ -16,7 +17,7 @@
     <dependencies>
         <dependency>
             <id>wrapper</id>
-            <version>3.0.0</version>
+            <version>3.0.3</version>
         </dependency>
     </dependencies>
 
