@@ -29,9 +29,4 @@ LOOM_HOME=`cd "$PRGDIR/.." ; pwd`
 
 unset THIS_PROG
 
-# For Cygwin, ensure paths are in UNIX format before anything is touched
-if $cygwin; then
-  [ -n "$LOOM_HOME" ] && LOOM_HOME=`cygpath --unix "$LOOM_HOME"`
-fi
-
 $LOOM_HOME/bin/loom.sh run $*
