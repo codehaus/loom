@@ -14,7 +14,7 @@ import java.util.Set;
  * notifications about changes of a directory's content.
  *
  * @author Johan Sjoberg
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public interface DirectoryChangeListener
 {
@@ -34,4 +34,9 @@ public interface DirectoryChangeListener
      * @param fileSet a Set of files
      */
     public void directoryChange( int type, Set fileSet );
+
+    /**
+     * Indication that the scanner was unable to view the contents of the directory
+     */
+    void unableToListContents();
 }

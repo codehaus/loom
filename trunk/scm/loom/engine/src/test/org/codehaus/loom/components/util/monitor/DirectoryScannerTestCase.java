@@ -7,16 +7,17 @@
  */
 package org.codehaus.loom.components.util.monitor;
 
-import junit.framework.TestCase;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Iterator;
+
+import junit.framework.TestCase;
 
 /**
  * Testcase for DirectoryScanner
  *
  * @author Johan Sjoberg
- * @version $Revision: 1.2 $ $Date: 2004-08-17 15:08:57 $
+ * @version $Revision: 1.3 $ $Date: 2004-10-11 20:12:28 $
  */
 public class DirectoryScannerTestCase extends TestCase
 {
