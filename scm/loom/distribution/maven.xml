@@ -6,6 +6,7 @@
     xmlns:define="jelly:define"
     xmlns:util="jelly:util"
     xmlns:ant="jelly:ant"
+    xmlns:deploy="deploy"
     xmlns:archive="loom:archive">
 
     <define:taglib uri="loom:archive">
@@ -35,6 +36,14 @@
                 </ant:copy>
             </j:if>
         </define:tag>
+        <define:tag name="deploy">
+		    <deploy:artifact
+	    	  artifact="${maven.build.dir}/${distribution}"
+	      		  type="distributions"
+	          assureDirectoryCommand="mkdir -p"
+	      	  siteCommand="cd @deployDirectory@; chmod g+w ${distribution}; chgrp ${maven.remote.group} ${distribution}"
+	    	/>
+        </define:tag>
     </define:taglib>
 
     <goal name="main">
@@ -42,7 +51,7 @@
     </goal>
     
     <goal name="build">
-        <j:set var="distDir" value='target/${maven.final.name}'/>
+        <j:set var="distDir" value='${maven.build.dir}/${maven.final.name}'/>
         <ant:mkdir dir="${distDir}/tools/lib"/>
         <ant:mkdir dir="${distDir}/container/lib"/>
         <ant:mkdir dir="${distDir}/lib"/>
@@ -107,16 +116,16 @@
         </ant:copy>
         
 	    <!-- Create a tar.gz file -->
-	    <ant:tar longfile="gnu" tarfile="target/${maven.final.name}.tar">
+	    <ant:tar longfile="gnu" tarfile="${maven.build.dir}/${maven.final.name}.tar">
 	      <ant:tarfileset dir="${distDir}" prefix="${maven.final.name}"/>
 	    </ant:tar>
 	
-	    <ant:gzip zipfile="target/${maven.final.name}.tar.gz"
-	    	src="target/${maven.final.name}.tar" />
-	    <ant:delete file="target/${maven.final.name}.tar"/>
+	    <ant:gzip zipfile="${maven.build.dir}/${maven.final.name}.tar.gz"
+	    	src="${maven.build.dir}/${maven.final.name}.tar" />
+	    <ant:delete file="${maven.build.dir}/${maven.final.name}.tar"/>
 	
 	    <!-- Create a zip file -->
-	    <ant:zip destfile="target/${maven.final.name}.zip">
+	    <ant:zip destfile="${maven.build.dir}/${maven.final.name}.zip">
 	      <ant:zipfileset dir="${distDir}" prefix="${maven.final.name}"/>
 	    </ant:zip>
     	
@@ -124,7 +133,7 @@
 
 	
     <preGoal name="build">
-        <j:set var="wrapperDir" value='target/wrapper'/>
+        <j:set var="wrapperDir" value='${maven.build.dir}/wrapper'/>
         <ant:mkdir dir="${wrapperDir}"/>
         <ant:mkdir dir="${maven.repo.local}/wrapper/distributions/"/>
         <ant:setproxy proxyhost="${maven.proxy.host}" proxyport="${maven.proxy.port}"/>
@@ -191,6 +200,8 @@
     </preGoal>
 
     <goal name="deploy">
+        <archive:deploy distribution="${maven.final.name}.zip"/>
+        <archive:deploy distribution="${maven.final.name}.tar.gz"/>
     </goal>
 
 </project>
