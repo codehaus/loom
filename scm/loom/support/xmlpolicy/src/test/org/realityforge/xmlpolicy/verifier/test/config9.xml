@@ -1,5 +1,5 @@
 <policy version="1.0">
-    <keystore name="a"
+    <keystore name="aaaaaa"
         location="sar:/conf/keystore"
         type="JKS"/>
     <grant code-base="myCodeBase">
