@@ -54,6 +54,12 @@
 
     <mailingLists>
         <mailingList>
+            <name>Loom User</name>
+            <subscribe>user-subscribe@loom.codehaus.org</subscribe>
+            <unsubscribe>user-unsubscribe@loom.codehaus.org</unsubscribe>
+            <archive>http://archive.loom.codehaus.org/user</archive>
+        </mailingList>
+        <mailingList>
             <name>Loom Dev</name>
             <subscribe>dev-subscribe@loom.codehaus.org</subscribe>
             <unsubscribe>dev-unsubscribe@loom.codehaus.org</unsubscribe>
