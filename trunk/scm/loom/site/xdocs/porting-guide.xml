@@ -7,58 +7,51 @@
     <body>
         <section name="Porting Phoenix 4.0.x applications">
             <p>
-		    Loom 1.0 supports applications running in Phoenix 4.0.x releases,
-		    provided that the Sar is built using the
-                <a href="/plugins/maven-loom/">Maven Loom Plugin</a>
-		    provided by Loom and the appropriate libraries are bundles in the Sar.
+            Loom 1.0 supports applications running in Phoenix 4.0.x releases,
+            provided that the appropriate libraries are bundled in the Sar.
             </p>
 
             <p>
-            For users that still have an
-                <a href="http://ant.apache.org">Apache Ant</a> based build, the Phoenix Sar
-            task can still be used. Otherwise, it is possible to create a Loom Sar using Ant's
-                <code>jar</code> task.
+            For users that still have an  <a href="http://ant.apache.org">Apache Ant</a>
+            based build, the Phoenix Sar task can still be used. Otherwise, it is possible
+            to create a Loom Sar using Ant's <code>jar</code> task.
             </p>
+
             <subsection name="Creating a Loom Sar with Maven">
                 <p>
-			Since the generation of metaclass descriptors is more generic in
-			Loom compared with Phoenix, but still fully compatible with it,
-			users can deploy applications running in Phoenix 4.0.x by simply
-			regenerating from the Java source the descriptors using the Maven Loom Plugin.
+            Since the generation of metaclass descriptors is more generic in
+            Loom compared with Phoenix, but still fully compatible with it,
+            users can deploy applications running in Phoenix 4.0.x by simply
+            regenerating from the Java source the descriptors using the Maven Loom Plugin.
                 </p>
+
                 <p>
-			To create a Loom Sar, using the
-                    <a href="/plugins/maven-loom/">Maven Loom Plugin</a>
-			simply add the dependency to your Maven project
-                    <source>
-                        <![CDATA[
-<dependency>
+            To create a Loom Sar, using the
+             <a href="/plugins/maven-loom/">Maven Loom Plugin</a>
+            simply add the dependency to your Maven project
+                    <source><![CDATA[<dependency>
     <groupId>loom</groupId>
     <artifactId>maven-loom-plugin</artifactId>
     <version>[plugin-version]</version>
     <type>plugin</type>
-</dependency>
-                    ]]>
-                    </source>
-			and execute
-                    <source>
-maven loom:sar
-                    </source>
+</dependency>]]></source>
+            and execute <source>maven loom:sar</source>
                 </p>
             </subsection>
+
             <subsection name="Creating a Loom Sar with Ant">
                 <p>
             Loom's new metaclass descriptors can still be created with Ant.
-			Since the generation of metaclass descriptors is more generic in
-			Loom compared with Phoenix, but still fully compatible with it,
-			users can deploy applications running in Phoenix 4.0.x by simply
-			regenerating from the Java source the descriptors using the Maven Sar Plugin.
+            Since the generation of metaclass descriptors is more generic in
+            Loom compared with Phoenix, but still fully compatible with it,
+            users can deploy applications running in Phoenix 4.0.x by simply
+            regenerating from the Java source the descriptors using the Maven Sar Plugin.
                 </p>
 
-                <p>To do so, use the following in your Ant build file (Jar file versions may need to be adjusted to the
-                latest releases) :
-                    <source><![CDATA[
-<taskdef
+                <p>
+            To do so, use the following in your Ant build file (Jar file versions may need to be
+            adjusted to the latest releases) :
+                    <source><![CDATA[<taskdef
     name="metaclassGen"
     classname="org.codehaus.metaclass.tools.tasks.GenerateClassDescriptorsTask"
 >
@@ -77,38 +70,37 @@ maven loom:sar
             <pathelement location="${path.to}/maven-loom-plugin-[version].jar"/>
         </classpath>
     </interceptor>
-</metaclassGen>
-
-                    ]]></source>
+</metaclassGen>]]></source>
                 </p>
 
-                <p>For the time being, it is recommended to continue using the Ant-based Sar task to create a Sar.
-                (instructions on how to create one without it are welcome!)</p>
+                <p>
+            For the time being, it is recommended to continue using the Ant-based Sar
+            task to create a Sar. (instructions on how to create one without it are welcome!)
+                </p>
             </subsection>
             <subsection name="Comparison of libraries bundled">
                 <p>
-			Compared to the Phoenix 4.0.x distribution, in the Loom 1.0 distribution
-			some of the libraries in the
-                    <code>lib/</code> directory
-			have been removed as they are not used by the container.
-			If your app uses any of the excluded libraries,
-			you simply need to bundle them with the sar, or put them in the
-                    <code>lib/</code> directory.
+            Compared to the Phoenix 4.0.x distribution, in the Loom 1.0 distribution
+            some of the libraries in the <code>lib/</code> directory have been
+            removed as they are not used by the container. If your app uses any
+            of the excluded libraries, you simply need to bundle them with the sar,
+            or put them in the <code>lib/</code> directory.
                 </p>
 
                 <p>
-                    The general migration tip is to make sure that what is in your old
-                    <code>lib/</code> directory
-                    is either in the new
-                    <code>lib/</code> directory, or bundled with your sar.
-                </p>
-
-                <p>There were migration issues from Phoenix 4.0.3 to 4.0.4, but that should not be an issue upgrading to
-                Loom, as the problem libraries are no longer in a shared classpath between the Loom core and applications.
+            The general migration tip is to make sure that what is in your old
+            <code>lib/</code> directory is either in the new <code>lib/</code>
+            directory, or bundled with your sar.
                 </p>
 
                 <p>
-			Loom 1.0 comes with a lean set of application libraries:
+            There were migration issues from Phoenix 4.0.3 to 4.0.4, but that should not be
+            an issue upgrading to Loom, as the problem libraries are no longer in a shared
+            classpath between the Loom core and applications.
+                </p>
+
+                <p>
+            Loom 1.0 comes with a lean set of application libraries:
                     <ul>
                         <li>asm</li>
                         <li>avalon-framework</li>
@@ -123,7 +115,7 @@ maven loom:sar
                     </ul>
                 </p>
                 <p>
-			Phoenix 4.0.x ships a bigger set of libraries:
+            Phoenix 4.0.x ships a bigger set of libraries:
                     <ul>
                         <li>avalon-framework</li>
                         <li>avalon-phoenix-client</li>
