@@ -23,7 +23,7 @@ import org.realityforge.metaclass.tools.qdox.DefaultQDoxAttributeInterceptor;
  * into modern DNA and MX attributes.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-10-15 05:19:00 $
+ * @version $Revision: 1.6 $ $Date: 2003-10-15 05:21:10 $
  */
 public class PhoenixAttributeInterceptor
     extends DefaultQDoxAttributeInterceptor
@@ -252,7 +252,7 @@ public class PhoenixAttributeInterceptor
      * @param classname the classname of component
      * @return the location of the schema
      */
-    static String getSchemaLocationFor( final String classname )
+    String getSchemaLocationFor( final String classname )
     {
         final int index = classname.lastIndexOf( "." );
         String location = classname;
