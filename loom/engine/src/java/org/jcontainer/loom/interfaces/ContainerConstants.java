@@ -111,12 +111,6 @@ public interface ContainerConstants
     String DATE = Version.DATE;
 
     /**
-     * The name of the attribute used to determine whether
-     * a block is not proxied.
-     */
-    String DISABLE_PROXY_ATTR = "loom:disable-proxy";
-
-    /**
      * The name which the assembly is registered into Loom
      * using.
      */
