@@ -93,7 +93,7 @@ package org.jcontainer.loom.demos.avalonlifecycle;
  * .. and try stopt/starting the blocks.
  *
  * @phoenix:block
- * @phoenix:service name="org.jcontainer.loom.demos.avalonlifecycle.Lifecycle1"
+ * @dna.service name="org.jcontainer.loom.demos.avalonlifecycle.Lifecycle1"
  * @author  Paul Hammant <Paul_Hammant@yahoo.com>
  */
 public class AlternativeLifecycle1Impl
