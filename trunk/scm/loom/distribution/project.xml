@@ -130,7 +130,7 @@
         <dependency>
             <groupId>spice</groupId>
             <artifactId>spice-alchemist</artifactId>
-            <version>20031120.105516</version>
+            <version>1.1-dev</version>
             <properties>
                 <category>container</category>
             </properties>
@@ -191,9 +191,9 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>spice</groupId>
-            <artifactId>spice-metaclass-jmx</artifactId>
-            <version>20031017.081651</version>
+            <groupId>metaclass</groupId>
+            <artifactId>metaclass-jmx</artifactId>
+            <version>1.0-rc3-dev</version>
             <properties>
                 <category>container</category>
             </properties>
