@@ -16,7 +16,7 @@ import java.util.Iterator;
  * Testcase for DirectoryScanner
  *
  * @author Johan Sjoberg
- * @version $Revision: 1.1 $ $Date: 2004-07-12 14:46:50 $
+ * @version $Revision: 1.2 $ $Date: 2004-08-17 15:08:57 $
  */
 public class DirectoryScannerTestCase extends TestCase
 {
@@ -209,14 +209,25 @@ public class DirectoryScannerTestCase extends TestCase
         }
         fileIterator = changeListener.m_fileSet.iterator();
         File changedFile = (File)fileIterator.next();
-        if( !( changedFile.getPath().endsWith( "b.txt" ) ) )
+        if( ( changedFile.getPath().endsWith( "b.txt" ) ) )
         {
-            fail( "Wrong filename addition test, [b.txt] expected." );
+            File changedFile2 = (File)fileIterator.next();
+            if( !( changedFile2.getPath().endsWith( "a.txt" ) ) )
+            {
+                fail( "Wrong filename in addition test, [a.txt] expected." );
+            }
         }
-        changedFile = (File)fileIterator.next();
-        if( !( changedFile.getPath().endsWith( "a.txt" ) ) )
+        else if( ( changedFile.getPath().endsWith( "a.txt" ) ) )
         {
-            fail( "Wrong filename addition test, [a.txt] expected." );
+            File changedFile2 = (File)fileIterator.next();
+            if( !( changedFile2.getPath().endsWith( "b.txt" ) ) )
+            {
+                fail( "Wrong filename in addition test, [b.txt] expected." );
+            }
+        }
+        else
+        {
+            fail( "Wrong filename addition test, [a.txt] or [b.txt] expected." );
         }
 
         // Test file modification
@@ -230,14 +241,25 @@ public class DirectoryScannerTestCase extends TestCase
         }
         fileIterator = changeListener.m_fileSet.iterator();
         changedFile = (File)fileIterator.next();
-        if( !( changedFile.getPath().endsWith( "b.txt" ) ) )
+        if( ( changedFile.getPath().endsWith( "b.txt" ) ) )
         {
-            fail( "Wrong filename in modification test, [b.txt] expected." );
+            File changedFile2 = (File)fileIterator.next();
+            if( !( changedFile2.getPath().endsWith( "a.txt" ) ) )
+            {
+                fail( "Wrong filename in modification test, [a.txt] expected." );
+            }
         }
-        changedFile = (File)fileIterator.next();
-        if( !( changedFile.getPath().endsWith( "a.txt" ) ) )
+        else if( ( changedFile.getPath().endsWith( "a.txt" ) ) )
         {
-            fail( "Wrong filename in modification test, [a.txt] expected." );
+            File changedFile2 = (File)fileIterator.next();
+            if( !( changedFile2.getPath().endsWith( "b.txt" ) ) )
+            {
+                fail( "Wrong filename in modification test, [b.txt] expected." );
+            }
+        }
+        else
+        {
+            fail( "Wrong filename modification test, [a.txt] or [b.txt] expected." );
         }
 
         // Test file removal
@@ -251,14 +273,25 @@ public class DirectoryScannerTestCase extends TestCase
         }
         fileIterator = changeListener.m_fileSet.iterator();
         changedFile = (File)fileIterator.next();
-        if( !( changedFile.getPath().endsWith( "b.txt" ) ) )
+        if( ( changedFile.getPath().endsWith( "b.txt" ) ) )
         {
-            fail( "Wrong filename in removal test, [b.txt] expected." );
+            File changedFile2 = (File)fileIterator.next();
+            if( !( changedFile2.getPath().endsWith( "a.txt" ) ) )
+            {
+                fail( "Wrong filename in removal test, [a.txt] expected." );
+            }
         }
-        changedFile = (File)fileIterator.next();
-        if( !( changedFile.getPath().endsWith( "a.txt" ) ) )
+        else if( ( changedFile.getPath().endsWith( "a.txt" ) ) )
         {
-            fail( "Wrong filename in removal test, [a.txt] expected." );
+            File changedFile2 = (File)fileIterator.next();
+            if( !( changedFile2.getPath().endsWith( "b.txt" ) ) )
+            {
+                fail( "Wrong filename in removal test, [b.txt] expected." );
+            }
+        }
+        else
+        {
+            fail( "Wrong filename removal test, [a.txt] or [b.txt] expected." );
         }
 
         deleteDirectory( testDirectory );
@@ -267,10 +300,23 @@ public class DirectoryScannerTestCase extends TestCase
 
     /**
      * Create a directory for testing
+     *
+     * @return A newly created test directory
      */
     private File createTestDirectory() throws Exception
     {
-        File testDirectory = new File( "directory_scanner_testcase" );
+        String tempDirectoryName = System.getProperty( "java.io.tmpdir" );
+        String testDirectoryName = "loom_directory_scanner_testcase";
+        if( null != tempDirectoryName )
+        {
+            testDirectoryName = tempDirectoryName + "/" + testDirectoryName;
+        }
+        int counter = 0;
+        File testDirectory = new File( testDirectoryName );
+        while( testDirectory.exists() )
+        {
+            testDirectory = new File( testDirectoryName + "-" + counter++ );
+        }
         testDirectory.deleteOnExit();
         testDirectory.mkdirs();
         return testDirectory;
