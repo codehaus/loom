@@ -8,7 +8,7 @@
   <goal name="clean-all">
     <maven:maven
         descriptor="${basedir}/plugins/project.xml"
-        goals="plugins-clean"
+        goals="clean-all"
         ignoreFailures="false"/>
     <attainGoal name="clean"/>
   </goal>
@@ -16,12 +16,16 @@
   <goal name="build">
     <maven:maven
         descriptor="${basedir}/plugins/project.xml"
-        goals="plugins-install"
+        goals="build"
         ignoreFailures="false"/>
     <attainGoal name="jar:install"/>       
   </goal>
 
   <goal name="deploy">
+    <maven:maven
+        descriptor="${basedir}/plugins/project.xml"
+        goals="deploy"
+        ignoreFailures="false"/>
     <attainGoal name="jar:deploy"/>       
   </goal>
 

@@ -2,64 +2,63 @@
   xmlns:maven="jelly:maven">
 
   <goal name="main">
-    <attainGoal name="plugins-build"/>
+    <attainGoal name="build"/>
   </goal>
 
   <goal 
-    name="plugins-build"
+    name="build"
     description="Build each plugin into an installable jar">
     <maven:reactor
       basedir="${basedir}"
       includes="*/project.xml"
-      excludes="examples/*"
-      goals="clean,plugin"
+      goals="build"
       banner="Building"
       ignoreFailures="true"
     />
   </goal>
 
   <goal 
-    name="plugins-install"
+    name="install"
     description="Installs each plugin into plugins dir">
     <maven:reactor
       basedir="${basedir}"
       includes="*/project.xml"
-      excludes="examples/*"
-      goals="clean,plugin:install"
-      banner="Building"
+      goals="install"
+      banner="Installing"
       ignoreFailures="true"
     />
   </goal>
 
-  <goal name="plugins-clean"
+  <goal 
+    name="deploy"
+    description="Deploys each plugin">
+    <maven:reactor
+      basedir="${basedir}"
+      includes="*/project.xml"
+      goals="deploy"
+      banner="Deploying"
+      ignoreFailures="true"
+    />
+  </goal>
+
+  <goal name="clean-all"
     description="Cleans each plugin project">
     <maven:reactor
       basedir="${basedir}"
       includes="*/project.xml"
       goals="clean"
-      banner="Building"
+      banner="Cleaning"
       ignoreFailures="false"
     />
   </goal>
 
-  <goal name="plugins-convert-snapshots"
-    description="Converts each plugin snapshot versions into resolved timestamped versions.">
-      <maven:reactor
-        basedir="${basedir}"
-        includes="*/project.xml"
-        goals="convert-snapshots-auto"
-        banner="Resolving snapshot versions"
-        ignoreFailures="true"
-      />
-  </goal>
-
-  <goal name="plugins-docs"
+  <goal name="docs"
     description="Builds each plugin documentation">
     <maven:reactor
       basedir="${basedir}"
       includes="*/project.xml"
       goals="xdoc"
-      banner="Generating Docs For"
+      banner="Generating Docs"
       ignoreFailures="false"
     />
   </goal>
