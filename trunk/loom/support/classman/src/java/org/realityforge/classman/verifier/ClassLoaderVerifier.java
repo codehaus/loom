@@ -36,11 +36,11 @@ import org.realityforge.salt.i18n.ResourceManager;
  * </ul>
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-06-13 01:06:06 $
+ * @version $Revision: 1.4 $ $Date: 2003-06-27 03:42:13 $
  */
 public class ClassLoaderVerifier
 {
-    private final static Resources REZ =
+    private static final Resources REZ =
         ResourceManager.getPackageResources( ClassLoaderVerifier.class );
 
     public void verifyClassLoaderSet( final ClassLoaderSetMetaData set )
