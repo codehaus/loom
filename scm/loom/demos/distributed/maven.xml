@@ -11,7 +11,7 @@
          <maven:reactor
             basedir="${basedir}"
             includes="*/project.xml"
-            goals="clean"
+            goals="clean:clean"
             banner="Cleaning"
             ignoreFailures="false"/>
     </goal>
@@ -21,7 +21,7 @@
         <maven:reactor
             basedir="${basedir}"
             includes="*/project.xml"
-            goals="clean,build"
+            goals="clean:clean,main"
             banner="Building"
             ignoreFailures="false" />
 
@@ -32,7 +32,7 @@
         <maven:reactor
             basedir="${basedir}"
             includes="*/project.xml"
-            goals="clean,deploy"
+            goals="clean:clean,deploy"
             banner="Deploying"
             ignoreFailures="false" />
     </goal>
