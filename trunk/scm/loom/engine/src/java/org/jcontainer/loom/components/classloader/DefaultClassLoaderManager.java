@@ -211,6 +211,7 @@ public class DefaultClassLoaderManager
 
     /**
      * @dna.dependency type="ExtensionManager"
+     * @dna.dependency type="ClassLoader/common"
      */
     public void compose( final ResourceLocator locator )
         throws MissingResourceException
@@ -218,6 +219,8 @@ public class DefaultClassLoaderManager
         final ExtensionManager extensionManager =
             (ExtensionManager)locator.lookup( ExtensionManager.class.getName() );
         m_packageManager = new PackageManager( extensionManager );
+        m_commonClassLoader = (ClassLoader)locator.
+            lookup( ClassLoader.class.getName() + "/common" );
     }
 
     /**
