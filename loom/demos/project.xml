@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <project>
     <extend>${basedir}/../project.xml</extend>
+    <currentVersion>1.0-beta</currentVersion>
     <name>Loom Demo</name>
     <id>loom-demo</id>
     <shortDescription>Loom Demos</shortDescription>
@@ -39,6 +40,5 @@
             </resource>
         </resources>
     </build>
-
 
 </project>
