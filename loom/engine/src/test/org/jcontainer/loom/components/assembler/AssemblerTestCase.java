@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 import junit.framework.TestCase;
 import org.jcontainer.dna.Configuration;
+import org.jcontainer.dna.ConfigurationException;
 import org.jcontainer.dna.impl.ConsoleLogger;
 import org.jcontainer.dna.impl.DefaultConfiguration;
 import org.jcontainer.loom.components.assembler.data.Component1;
@@ -32,7 +33,7 @@ import org.xml.sax.InputSource;
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author <a href="mailto:peter.royal@pobox.com">Peter Royal</a>
- * @version $Revision: 1.12 $ $Date: 2003-11-05 03:42:12 $
+ * @version $Revision: 1.13 $ $Date: 2003-11-05 07:27:08 $
  */
 public class AssemblerTestCase
     extends TestCase
@@ -165,6 +166,75 @@ public class AssemblerTestCase
         assertTrue( "Block4 getBlockInfo non null",
                     null != block4.getInfo() );
         assertEquals( "Block4 isDisableProxy", false, isProxyDisabled( block4 ) );
+    }
+
+    public void testBuildDependency()
+        throws Exception
+    {
+        final String name = "Blah";
+        final String alias = name;
+        final String role = "com.biz.Service";
+        final Assembler assembler = new Assembler();
+        final DefaultConfiguration provide = new DefaultConfiguration( "provide", "", "" );
+        provide.setAttribute( "name", name );
+        provide.setAttribute( "role", role );
+        final DependencyDirective directive =
+            assembler.buildDependency( provide );
+        assertEquals( "name", name, directive.getProviderName() );
+        assertEquals( "role", role, directive.getKey() );
+        assertEquals( "alias", alias, directive.getAlias() );
+    }
+
+    public void testBuildDependencyThatSpecifiesAlias()
+        throws Exception
+    {
+        final String name = "Blah";
+        final String alias = "Blee";
+        final String role = "com.biz.Service";
+        final Assembler assembler = new Assembler();
+        final DefaultConfiguration provide = new DefaultConfiguration( "provide", "", "" );
+        provide.setAttribute( "name", name );
+        provide.setAttribute( "role", role );
+        provide.setAttribute( "alias", alias );
+        final DependencyDirective directive =
+            assembler.buildDependency( provide );
+        assertEquals( "name", name, directive.getProviderName() );
+        assertEquals( "role", role, directive.getKey() );
+        assertEquals( "alias", alias, directive.getAlias() );
+    }
+
+    public void testBuildDependencyThatMissesName()
+        throws Exception
+    {
+        final Assembler assembler = new Assembler();
+        final DefaultConfiguration provide = new DefaultConfiguration( "provide", "", "" );
+        provide.setAttribute( "role", "com.biz.Service" );
+        try
+        {
+            assembler.buildDependency( provide );
+        }
+        catch( final ConfigurationException ce )
+        {
+            return;
+        }
+        fail( "Expected ConfigurationException due to missing name" );
+    }
+
+    public void testBuildDependencyThatMissesRole()
+        throws Exception
+    {
+        final Assembler assembler = new Assembler();
+        final DefaultConfiguration provide = new DefaultConfiguration( "provide", "", "" );
+        provide.setAttribute( "name", "MyService" );
+        try
+        {
+            assembler.buildDependency( provide );
+        }
+        catch( final ConfigurationException ce )
+        {
+            return;
+        }
+        fail( "Expected ConfigurationException due to missing role" );
     }
 
     protected PartitionProfile assembleSar( final String config )
