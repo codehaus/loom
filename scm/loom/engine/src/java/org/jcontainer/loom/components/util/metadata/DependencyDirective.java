@@ -87,24 +87,24 @@
 package org.jcontainer.loom.components.util.metadata;
 
 /**
- * The {@link org.jcontainer.loom.components.util.metadata.DependencyMetaData} is the mapping of a component as a dependency
+ * The DependencyDirective is the mapping of a component as a dependency
  * of another component. Each component declares dependencies (via
- * {@link org.jcontainer.loom.components.util.info.ComponentInfo})
- * and for each dependency there must be a coressponding DependencyMetaData which
- * has a matching key. The name value in {@link org.jcontainer.loom.components.util.metadata.DependencyMetaData} object must refer
- * to another Component that implements a service as specified in DependencyInfo.
+ * ComponentInfo) and for each dependency there must be a coressponding
+ * DependencyDirective which has a matching key. The name value in
+ * DependencyDirective object must refer to another Component that implements
+ * a service as specified in DependencyInfo.
  *
  * <p>Note that it is invalid to have circular dependencies.</p>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-10-16 14:45:46 $
+ * @version $Revision: 1.1 $ $Date: 2003-11-03 06:43:15 $
  */
-public final class DependencyMetaData
+public final class DependencyDirective
 {
     /**
      * Empty set of dependencys.
      */
-    public static final DependencyMetaData[] EMPTY_SET = new DependencyMetaData[ 0 ];
+    public static final DependencyDirective[] EMPTY_SET = new DependencyDirective[ 0 ];
 
     /**
      * The key that the client component will use to access a dependency.
@@ -127,10 +127,10 @@ public final class DependencyMetaData
      * Create Association between key and provider.
      *
      * @param key the key the client uses to access component
-     * @param providerName the name of {@link org.jcontainer.loom.components.util.metadata.ComponentMetaData}
+     * @param providerName the name of ComponentTemplate
      *   that is associated as a service provider
      */
-    public DependencyMetaData( final String key,
+    public DependencyDirective( final String key,
                                final String providerName,
                                final String alias )
     {
@@ -164,7 +164,7 @@ public final class DependencyMetaData
     }
 
     /**
-     * Return the name of a {@link org.jcontainer.loom.components.util.metadata.ComponentMetaData} instance that will used to
+     * Return the name of a ComponentTemplate instance that will used to
      * fulfill the dependency.
      *
      * @return the name of the Component that will provide the dependency.

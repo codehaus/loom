@@ -7,7 +7,7 @@
  */
 package org.jcontainer.loom.components.util.profile;
 
-import org.jcontainer.loom.components.util.metadata.PartitionMetaData;
+import org.jcontainer.loom.components.util.metadata.PartitionTemplate;
 
 /**
  * The PartitionProfile contains the set of data required
@@ -16,7 +16,7 @@ import org.jcontainer.loom.components.util.metadata.PartitionMetaData;
  * objects.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-10-16 14:45:47 $
+ * @version $Revision: 1.2 $ $Date: 2003-11-03 06:43:15 $
  */
 public class PartitionProfile
 {
@@ -26,9 +26,9 @@ public class PartitionProfile
     public static final PartitionProfile[] EMPTY_SET = new PartitionProfile[ 0 ];
 
     /**
-     * The {@link org.jcontainer.loom.components.util.metadata.PartitionMetaData} for this partition.
+     * The PartitionTemplate for this partition.
      */
-    private final PartitionMetaData m_metaData;
+    private final PartitionTemplate m_metaData;
 
     /**
      * An array of partitions that are contained by this
@@ -49,7 +49,7 @@ public class PartitionProfile
      * @param partitions the partitions contained by this partition
      * @param components the components contained by this partition
      */
-    public PartitionProfile( final PartitionMetaData metaData,
+    public PartitionProfile( final PartitionTemplate metaData,
                              final PartitionProfile[] partitions,
                              final ComponentProfile[] components )
     {
@@ -76,7 +76,7 @@ public class PartitionProfile
      *
      * @return the metaData about this profile.
      */
-    public PartitionMetaData getMetaData()
+    public PartitionTemplate getMetaData()
     {
         return m_metaData;
     }
@@ -129,7 +129,7 @@ public class PartitionProfile
         for( int i = 0; i < m_components.length; i++ )
         {
             final ComponentProfile component = m_components[ i ];
-            if( component.getMetaData().getName().equals( name ) )
+            if( component.getTemplate().getName().equals( name ) )
             {
                 return component;
             }

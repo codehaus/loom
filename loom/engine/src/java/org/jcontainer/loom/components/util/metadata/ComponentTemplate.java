@@ -14,21 +14,21 @@ import org.jcontainer.dna.Configuration;
 
 /**
  * Each component declared in the application is represented by
- * a ComponentMetaData. Note that this does not necessarily imply
+ * a ComponentTemplate. Note that this does not necessarily imply
  * that there is only one instance of actual component. The
- * ComponentMetaData could represent a pool of components, a single
+ * ComponentTemplate could represent a pool of components, a single
  * component or a component prototype that is reused to create
  * new components as needed.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-10-16 14:45:46 $
+ * @version $Revision: 1.1 $ $Date: 2003-11-03 06:43:15 $
  */
-public class ComponentMetaData
+public class ComponentTemplate
 {
     /**
      * Empty set of component metadata.
      */
-    public static final ComponentMetaData[] EMPTY_SET = new ComponentMetaData[ 0 ];
+    public static final ComponentTemplate[] EMPTY_SET = new ComponentTemplate[ 0 ];
 
     /**
      * The name of the component. This is an
@@ -48,7 +48,7 @@ public class ComponentMetaData
      * The resolution of any dependencies required by
      * the component type.
      */
-    private final DependencyMetaData[] m_dependencies;
+    private final DependencyDirective[] m_dependencies;
 
     /**
      * The parameters for component (if any).
@@ -66,7 +66,7 @@ public class ComponentMetaData
     private final boolean m_disableProxy;
 
     /**
-     * Create a ComponentMetaData.
+     * Create a ComponentTemplate.
      *
      * @param name the abstract name of component meta data instance
      * @param implementationKey the key used to create component (usually a classname)
@@ -75,9 +75,9 @@ public class ComponentMetaData
      * @param configuration the configuration that the component will be provided (may be null)
      * @param disableProxy true if proxy should be disabled
      */
-    public ComponentMetaData( final String name,
+    public ComponentTemplate( final String name,
                               final String implementationKey,
-                              final DependencyMetaData[] dependencies,
+                              final DependencyDirective[] dependencies,
                               final Parameters parameters,
                               final Configuration configuration,
                               final boolean disableProxy )
@@ -138,7 +138,7 @@ public class ComponentMetaData
      *
      * @return the dependency for component.
      */
-    public DependencyMetaData[] getDependencies()
+    public DependencyDirective[] getDependencies()
     {
         return m_dependencies;
     }
@@ -168,7 +168,7 @@ public class ComponentMetaData
      *
      * @return the dependency for component with specified key.
      */
-    public DependencyMetaData getDependency( final String key )
+    public DependencyDirective getDependency( final String key )
     {
         for( int i = 0; i < m_dependencies.length; i++ )
         {
@@ -186,20 +186,20 @@ public class ComponentMetaData
      *
      * @return all the dependencies for key
      */
-    public DependencyMetaData[] getDependencies( final String key )
+    public DependencyDirective[] getDependencies( final String key )
     {
         final List result = new ArrayList();
 
         for( int i = 0; i < m_dependencies.length; i++ )
         {
-            final DependencyMetaData dependency = m_dependencies[ i ];
+            final DependencyDirective dependency = m_dependencies[ i ];
             if( dependency.getKey().equals( key ) )
             {
                 result.add( dependency );
             }
         }
 
-        return (DependencyMetaData[])result.
-            toArray( new DependencyMetaData[ result.size() ] );
+        return (DependencyDirective[])result.
+            toArray( new DependencyDirective[ result.size() ] );
     }
 }

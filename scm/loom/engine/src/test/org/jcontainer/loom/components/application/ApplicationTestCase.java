@@ -20,9 +20,9 @@ import org.jcontainer.loom.components.assembler.data.Service1;
 import org.jcontainer.loom.components.util.info.ComponentInfo;
 import org.jcontainer.loom.components.util.info.DependencyDescriptor;
 import org.jcontainer.loom.components.util.info.ServiceDescriptor;
-import org.jcontainer.loom.components.util.metadata.ComponentMetaData;
-import org.jcontainer.loom.components.util.metadata.DependencyMetaData;
-import org.jcontainer.loom.components.util.metadata.PartitionMetaData;
+import org.jcontainer.loom.components.util.metadata.ComponentTemplate;
+import org.jcontainer.loom.components.util.metadata.DependencyDirective;
+import org.jcontainer.loom.components.util.metadata.PartitionTemplate;
 import org.jcontainer.loom.components.util.profile.ComponentProfile;
 import org.jcontainer.loom.components.util.profile.PartitionProfile;
 import org.jcontainer.loom.components.assembler.data.Component1;
@@ -36,7 +36,7 @@ import org.xml.sax.InputSource;
  *  An basic test case for the Application.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.16 $ $Date: 2003-10-16 14:45:47 $
+ * @version $Revision: 1.17 $ $Date: 2003-11-03 06:43:16 $
  */
 public class ApplicationTestCase
     extends TestCase
@@ -89,37 +89,37 @@ public class ApplicationTestCase
     public void testBasic()
         throws Exception
     {
-        final ComponentMetaData md1 =
-            new ComponentMetaData( "c1",
+        final ComponentTemplate md1 =
+            new ComponentTemplate( "c1",
                                    C1_NAME,
-                                   new DependencyMetaData[]{new DependencyMetaData( S1_NAME, "c2", "c2" )},
+                                   new DependencyDirective[]{new DependencyDirective( S1_NAME, "c2", "c2" )},
                                    null,
                                    null,
                                    false );
         final ComponentProfile cp1 = new ComponentProfile( C1, md1 );
-        final ComponentMetaData md2 =
-            new ComponentMetaData( "c2",
+        final ComponentTemplate md2 =
+            new ComponentTemplate( "c2",
                                    C2_NAME,
-                                   DependencyMetaData.EMPTY_SET,
+                                   DependencyDirective.EMPTY_SET,
                                    null,
                                    null,
                                    true );
         final ComponentProfile cp2 = new ComponentProfile( C2, md2 );
-        final PartitionMetaData blockPartitionMD =
-            new PartitionMetaData( ContainerConstants.BLOCK_PARTITION,
+        final PartitionTemplate blockPartitionMD =
+            new PartitionTemplate( ContainerConstants.BLOCK_PARTITION,
                                    new String[]{ContainerConstants.LISTENER_PARTITION},
-                                   PartitionMetaData.EMPTY_SET,
-                                   new ComponentMetaData[]{md1, md2} );
-        final PartitionMetaData listenerPartitionMD =
-            new PartitionMetaData( ContainerConstants.LISTENER_PARTITION,
+                                   PartitionTemplate.EMPTY_SET,
+                                   new ComponentTemplate[]{md1, md2} );
+        final PartitionTemplate listenerPartitionMD =
+            new PartitionTemplate( ContainerConstants.LISTENER_PARTITION,
                                    new String[ 0 ],
-                                   PartitionMetaData.EMPTY_SET,
-                                   ComponentMetaData.EMPTY_SET );
-        final PartitionMetaData partitionMD =
-            new PartitionMetaData( "test",
+                                   PartitionTemplate.EMPTY_SET,
+                                   ComponentTemplate.EMPTY_SET );
+        final PartitionTemplate partitionMD =
+            new PartitionTemplate( "test",
                                    new String[ 0 ],
-                                   new PartitionMetaData[]{blockPartitionMD, listenerPartitionMD},
-                                   ComponentMetaData.EMPTY_SET );
+                                   new PartitionTemplate[]{blockPartitionMD, listenerPartitionMD},
+                                   ComponentTemplate.EMPTY_SET );
 
         final PartitionProfile blockPartitionProfile =
             new PartitionProfile( blockPartitionMD,
@@ -139,64 +139,64 @@ public class ApplicationTestCase
     public void testArrayAssembly()
         throws Exception
     {
-        final DependencyMetaData[] c3Deps =
-            new DependencyMetaData[]{new DependencyMetaData( S1_ARRAY_NAME,
+        final DependencyDirective[] c3Deps =
+            new DependencyDirective[]{new DependencyDirective( S1_ARRAY_NAME,
                                                              "c2a",
                                                              "c2a" ),
-                                     new DependencyMetaData( S1_ARRAY_NAME,
+                                     new DependencyDirective( S1_ARRAY_NAME,
                                                              "c2b",
                                                              "c2b" ),
-                                     new DependencyMetaData( S1_ARRAY_NAME,
+                                     new DependencyDirective( S1_ARRAY_NAME,
                                                              "c2c",
                                                              "c2c" )};
-        final ComponentMetaData md3 =
-            new ComponentMetaData( "c3",
+        final ComponentTemplate md3 =
+            new ComponentTemplate( "c3",
                                    C3_NAME,
                                    c3Deps,
                                    null,
                                    null,
                                    false );
         final ComponentProfile cp3 = new ComponentProfile( C3, md3 );
-        final ComponentMetaData md2a =
-            new ComponentMetaData( "c2a",
+        final ComponentTemplate md2a =
+            new ComponentTemplate( "c2a",
                                    C2_NAME,
-                                   DependencyMetaData.EMPTY_SET,
+                                   DependencyDirective.EMPTY_SET,
                                    null,
                                    null,
                                    false );
         final ComponentProfile cp2a = new ComponentProfile( C2, md2a );
-        final ComponentMetaData md2b =
-            new ComponentMetaData( "c2b",
+        final ComponentTemplate md2b =
+            new ComponentTemplate( "c2b",
                                    C2_NAME,
-                                   DependencyMetaData.EMPTY_SET,
+                                   DependencyDirective.EMPTY_SET,
                                    null,
                                    null,
                                    false );
         final ComponentProfile cp2b = new ComponentProfile( C2, md2b );
-        final ComponentMetaData md2c =
-            new ComponentMetaData( "c2c",
+        final ComponentTemplate md2c =
+            new ComponentTemplate( "c2c",
                                    C2_NAME,
-                                   DependencyMetaData.EMPTY_SET,
+                                   DependencyDirective.EMPTY_SET,
                                    null,
                                    null,
                                    false );
         final ComponentProfile cp2c = new ComponentProfile( C2, md2c );
 
-        final PartitionMetaData blockPartitionMD =
-            new PartitionMetaData( ContainerConstants.BLOCK_PARTITION,
+        final PartitionTemplate blockPartitionMD =
+            new PartitionTemplate( ContainerConstants.BLOCK_PARTITION,
                                    new String[]{ContainerConstants.LISTENER_PARTITION},
-                                   PartitionMetaData.EMPTY_SET,
-                                   new ComponentMetaData[]{md3, md2a, md2b, md2c} );
-        final PartitionMetaData listenerPartitionMD =
-            new PartitionMetaData( ContainerConstants.LISTENER_PARTITION,
+                                   PartitionTemplate.EMPTY_SET,
+                                   new ComponentTemplate[]{md3, md2a, md2b, md2c} );
+        final PartitionTemplate listenerPartitionMD =
+            new PartitionTemplate( ContainerConstants.LISTENER_PARTITION,
                                    new String[ 0 ],
-                                   PartitionMetaData.EMPTY_SET,
-                                   ComponentMetaData.EMPTY_SET );
-        final PartitionMetaData partitionMD =
-            new PartitionMetaData( "test",
+                                   PartitionTemplate.EMPTY_SET,
+                                   ComponentTemplate.EMPTY_SET );
+        final PartitionTemplate partitionMD =
+            new PartitionTemplate( "test",
                                    new String[ 0 ],
-                                   new PartitionMetaData[]{blockPartitionMD, listenerPartitionMD},
-                                   ComponentMetaData.EMPTY_SET );
+                                   new PartitionTemplate[]{blockPartitionMD, listenerPartitionMD},
+                                   ComponentTemplate.EMPTY_SET );
 
         final PartitionProfile blockPartitionProfile =
             new PartitionProfile( blockPartitionMD,
@@ -216,64 +216,64 @@ public class ApplicationTestCase
     public void testMapAssembly()
         throws Exception
     {
-        final DependencyMetaData[] c4Deps =
-            new DependencyMetaData[]{new DependencyMetaData( S1_MAP_NAME,
+        final DependencyDirective[] c4Deps =
+            new DependencyDirective[]{new DependencyDirective( S1_MAP_NAME,
                                                              "c2a",
                                                              "c2a" ),
-                                     new DependencyMetaData( S1_MAP_NAME,
+                                     new DependencyDirective( S1_MAP_NAME,
                                                              "c2b",
                                                              "c2b" ),
-                                     new DependencyMetaData( S1_MAP_NAME,
+                                     new DependencyDirective( S1_MAP_NAME,
                                                              "c2c",
                                                              "anAlias" )};
-        final ComponentMetaData md4 =
-            new ComponentMetaData( "c4",
+        final ComponentTemplate md4 =
+            new ComponentTemplate( "c4",
                                    C4_NAME,
                                    c4Deps,
                                    null,
                                    null,
                                    false );
         final ComponentProfile cp4 = new ComponentProfile( C4, md4 );
-        final ComponentMetaData md2a =
-            new ComponentMetaData( "c2a",
+        final ComponentTemplate md2a =
+            new ComponentTemplate( "c2a",
                                    C2_NAME,
-                                   DependencyMetaData.EMPTY_SET,
+                                   DependencyDirective.EMPTY_SET,
                                    null,
                                    null,
                                    false );
         final ComponentProfile cp2a = new ComponentProfile( C2, md2a );
-        final ComponentMetaData md2b =
-            new ComponentMetaData( "c2b",
+        final ComponentTemplate md2b =
+            new ComponentTemplate( "c2b",
                                    C2_NAME,
-                                   DependencyMetaData.EMPTY_SET,
+                                   DependencyDirective.EMPTY_SET,
                                    null,
                                    null,
                                    false );
         final ComponentProfile cp2b = new ComponentProfile( C2, md2b );
-        final ComponentMetaData md2c =
-            new ComponentMetaData( "c2c",
+        final ComponentTemplate md2c =
+            new ComponentTemplate( "c2c",
                                    C2_NAME,
-                                   DependencyMetaData.EMPTY_SET,
+                                   DependencyDirective.EMPTY_SET,
                                    null,
                                    null,
                                    false );
         final ComponentProfile cp2c = new ComponentProfile( C2, md2c );
 
-        final PartitionMetaData blockPartitionMD =
-            new PartitionMetaData( ContainerConstants.BLOCK_PARTITION,
+        final PartitionTemplate blockPartitionMD =
+            new PartitionTemplate( ContainerConstants.BLOCK_PARTITION,
                                    new String[]{ContainerConstants.LISTENER_PARTITION},
-                                   PartitionMetaData.EMPTY_SET,
-                                   new ComponentMetaData[]{md4, md2a, md2b, md2c} );
-        final PartitionMetaData listenerPartitionMD =
-            new PartitionMetaData( ContainerConstants.LISTENER_PARTITION,
+                                   PartitionTemplate.EMPTY_SET,
+                                   new ComponentTemplate[]{md4, md2a, md2b, md2c} );
+        final PartitionTemplate listenerPartitionMD =
+            new PartitionTemplate( ContainerConstants.LISTENER_PARTITION,
                                    new String[ 0 ],
-                                   PartitionMetaData.EMPTY_SET,
-                                   ComponentMetaData.EMPTY_SET );
-        final PartitionMetaData partitionMD =
-            new PartitionMetaData( "test",
+                                   PartitionTemplate.EMPTY_SET,
+                                   ComponentTemplate.EMPTY_SET );
+        final PartitionTemplate partitionMD =
+            new PartitionTemplate( "test",
                                    new String[ 0 ],
-                                   new PartitionMetaData[]{blockPartitionMD, listenerPartitionMD},
-                                   ComponentMetaData.EMPTY_SET );
+                                   new PartitionTemplate[]{blockPartitionMD, listenerPartitionMD},
+                                   ComponentTemplate.EMPTY_SET );
 
         final PartitionProfile blockPartitionProfile =
             new PartitionProfile( blockPartitionMD,

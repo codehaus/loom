@@ -102,8 +102,8 @@ import org.jcontainer.dna.AbstractLogEnabled;
 import org.jcontainer.loom.components.util.ConfigurationConverter;
 import org.jcontainer.loom.components.util.factory.ComponentFactory;
 import org.jcontainer.loom.components.util.info.ComponentInfo;
-import org.jcontainer.loom.components.util.metadata.ComponentMetaData;
-import org.jcontainer.loom.components.util.metadata.DependencyMetaData;
+import org.jcontainer.loom.components.util.metadata.ComponentTemplate;
+import org.jcontainer.loom.components.util.metadata.DependencyDirective;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
@@ -120,7 +120,7 @@ import org.realityforge.salt.i18n.Resources;
  * {@link org.jcontainer.loom.components.util.verifier.AssemblyVerifier}</p>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-11-03 06:17:58 $
+ * @version $Revision: 1.5 $ $Date: 2003-11-03 06:43:15 $
  */
 public abstract class AbstractResourceProvider
     extends AbstractLogEnabled
@@ -172,7 +172,7 @@ public abstract class AbstractResourceProvider
     /**
      * Create a component for a particular entry.
      * This implementation uses the associated
-     * {@link org.jcontainer.loom.components.util.factory.ComponentFactory} to create instance of
+     * ComponentFactory to create instance of
      * component.
      *
      * @param entry the entry
@@ -182,7 +182,7 @@ public abstract class AbstractResourceProvider
     public Object createObject( final Object entry )
         throws Exception
     {
-        final ComponentMetaData component = getMetaData( entry );
+        final ComponentTemplate component = getMetaData( entry );
         final String implementationKey = component.getImplementationKey();
         return m_factory.createComponent( implementationKey );
     }
@@ -197,7 +197,7 @@ public abstract class AbstractResourceProvider
     public Parameters createParameters( final Object entry )
         throws Exception
     {
-        final ComponentMetaData component = getMetaData( entry );
+        final ComponentTemplate component = getMetaData( entry );
         final Parameters parameters = component.getParameters();
         if( null == parameters )
         {
@@ -220,7 +220,7 @@ public abstract class AbstractResourceProvider
     public Configuration createConfiguration( final Object entry )
         throws Exception
     {
-        final ComponentMetaData component = getMetaData( entry );
+        final ComponentTemplate component = getMetaData( entry );
         final Configuration configuration =
             ConfigurationConverter.toConfiguration( component.getConfiguration() );
         if( null == configuration )
@@ -234,7 +234,7 @@ public abstract class AbstractResourceProvider
     }
 
     /**
-     * Create a {@link org.apache.avalon.framework.context.Context} object that contains values specified in map.
+     * Create a Context object that contains values specified in map.
      * The default implementation creates a basic Context object but different
      * containers may choose to overide this to provide their own subclass of context.
      *
@@ -249,16 +249,16 @@ public abstract class AbstractResourceProvider
     }
 
     /**
-     * Return the {@link org.jcontainer.loom.components.util.metadata.ComponentMetaData} for specified component entry.
-     * This implementation assumes that entry is instance of {@link org.jcontainer.loom.components.util.metadata.ComponentMetaData}
+     * Return the ComponentTemplate for specified component entry.
+     * This implementation assumes that entry is instance of ComponentTemplate
      * but subclasses should overide this method if this assumption does not hold true.
      *
      * @param entry the component entry
-     * @return the ComponentMetaData
+     * @return the ComponentTemplate
      */
-    protected ComponentMetaData getMetaData( final Object entry )
+    protected ComponentTemplate getMetaData( final Object entry )
     {
-        return (ComponentMetaData)entry;
+        return (ComponentTemplate)entry;
     }
 
     /**
@@ -313,7 +313,7 @@ public abstract class AbstractResourceProvider
      *
      * @param entry the entry
      * @return a new ServiceManager for component
-     * @throws java.lang.Exception if unable to create resource
+     * @throws Exception if unable to create resource
      */
     public final ServiceManager createServiceManager( final Object entry )
         throws Exception
@@ -348,29 +348,29 @@ public abstract class AbstractResourceProvider
      * Create a Map of services for specified component.
      * The map maps key name to service provider.
      *
-     * @param componentEntry the component entry creating map for
+     * @param entry the component entry creating map for
      * @return the map
      * @throws java.lang.Exception if error aquiring a service to place in map
      */
-    private Map createServiceMap( final Object componentEntry )
+    private Map createServiceMap( final Object entry )
         throws Exception
     {
-        final ComponentMetaData component = getMetaData( componentEntry );
+        final ComponentTemplate component = getMetaData( entry );
         final String impl = component.getImplementationKey();
         final ComponentInfo info = m_factory.createInfo( impl );
-        final DependencyMetaData[] dependencies = component.getDependencies();
+        final DependencyDirective[] dependencies = component.getDependencies();
 
         final HashMap services = new HashMap();
 
         for( int i = 0; i < dependencies.length; i++ )
         {
-            final DependencyMetaData dependency = dependencies[ i ];
+            final DependencyDirective dependency = dependencies[ i ];
             final String key = dependency.getKey();
             final String providerName = dependency.getProviderName();
             final boolean optional = info.getDependency( key ).isOptional();
 
             final Object service =
-                getService( providerName, componentEntry );
+                getService( providerName, entry );
             if( null == service )
             {
                 final String message =

@@ -86,7 +86,7 @@
  */
 package org.jcontainer.loom.components.util.verifier;
 
-import org.jcontainer.loom.components.util.metadata.ComponentMetaData;
+import org.jcontainer.loom.components.util.metadata.ComponentTemplate;
 import org.jcontainer.loom.components.util.profile.ComponentProfile;
 import org.jcontainer.loom.components.util.profile.PartitionProfile;
 import org.jcontainer.loom.interfaces.ContainerConstants;
@@ -119,7 +119,7 @@ import org.realityforge.salt.i18n.Resources;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-10-26 03:39:39 $
+ * @version $Revision: 1.3 $ $Date: 2003-11-03 06:43:15 $
  */
 public class SarVerifier
     extends AssemblyVerifier
@@ -217,7 +217,7 @@ public class SarVerifier
                                   final ClassLoader classLoader )
         throws Exception
     {
-        final ComponentMetaData metaData = block.getMetaData();
+        final ComponentTemplate metaData = block.getTemplate();
         final Class clazz = loadClass( "block", metaData, classLoader );
 
         m_infoVerifier.verifyType( metaData.getName(),
@@ -235,7 +235,7 @@ public class SarVerifier
     }
 
     private Class loadClass( final String type,
-                             final ComponentMetaData metaData,
+                             final ComponentTemplate metaData,
                              final ClassLoader classLoader )
         throws Exception
     {
@@ -282,7 +282,7 @@ public class SarVerifier
                                      final ClassLoader classLoader )
         throws Exception
     {
-        final ComponentMetaData metaData = listener.getMetaData();
+        final ComponentTemplate metaData = listener.getTemplate();
         final Class clazz = loadClass( "listener", metaData, classLoader );
         if( !BLOCKLISTENER_CLASS.isAssignableFrom( clazz ) )
         {
@@ -348,13 +348,13 @@ public class SarVerifier
     {
         for( int i = 0; i < blocks.length; i++ )
         {
-            final String name = blocks[ i ].getMetaData().getName();
+            final String name = blocks[ i ].getTemplate().getName();
             checkNameUnique( name, blocks, listeners, i, -1 );
         }
 
         for( int i = 0; i < listeners.length; i++ )
         {
-            final String name = listeners[ i ].getMetaData().getName();
+            final String name = listeners[ i ].getTemplate().getName();
             checkNameUnique( name, blocks, listeners, -1, i );
         }
     }
@@ -382,7 +382,7 @@ public class SarVerifier
         //Verify no blocks have the same name
         for( int i = 0; i < blocks.length; i++ )
         {
-            final String other = blocks[ i ].getMetaData().getName();
+            final String other = blocks[ i ].getTemplate().getName();
             if( blockIndex != i && name.equals( other ) )
             {
                 final String message = REZ.format( "duplicate-name", name );
@@ -393,7 +393,7 @@ public class SarVerifier
         //Verify no listeners have the same name
         for( int i = 0; i < listeners.length; i++ )
         {
-            final String other = listeners[ i ].getMetaData().getName();
+            final String other = listeners[ i ].getTemplate().getName();
             if( listenerIndex != i && name.equals( other ) )
             {
                 final String message = REZ.format( "duplicate-name", name );
