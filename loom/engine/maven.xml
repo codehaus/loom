@@ -25,12 +25,12 @@
     </postGoal>
 
     <goal name="generateMetaData" prereqs="dna:metagenerate">
-        <ant:mc_generate destDir="${basedir}/target/test-classes">
+        <ant:metaclass_generate destDir="${basedir}/target/test-classes">
             <ant:interceptorSet refid="maven.metaclass.interceptors"/>
             <ant:fileset dir="src/test">
                 <include name="**/data/*"/>
             </ant:fileset>
-        </ant:mc_generate>
+        </ant:metaclass_generate>
     </goal>
 
 </project>

@@ -177,7 +177,7 @@
         <dependency>
             <groupId>metaclass</groupId>
             <artifactId>metaclass-runtime</artifactId>
-            <version>1.0-rc3-dev</version>
+            <version>1.1-rc4-dev</version>
             <properties>
                 <category>shared</category>
             </properties>
@@ -193,7 +193,7 @@
         <dependency>
             <groupId>metaclass</groupId>
             <artifactId>metaclass-jmx</artifactId>
-            <version>1.0-rc3-dev</version>
+            <version>1.1-rc4-dev</version>
             <properties>
                 <category>container</category>
             </properties>
