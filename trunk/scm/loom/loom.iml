@@ -43,6 +43,7 @@
     <orderEntry type="library" name="Ant" level="application" />
     <orderEntry type="module" module-name="dna" />
     <orderEntry type="module" module-name="metaclass" />
+    <orderEntry type="module" module-name="salt" />
   </component>
 </module>
 

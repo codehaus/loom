@@ -107,7 +107,7 @@ import org.codehaus.dna.impl.ContainerUtil;
  * split across multiple directories.
  *
  * @author Peter Donald
- * @version $Revision: 1.1 $ $Date: 2004-04-19 22:22:48 $
+ * @version $Revision: 1.2 $ $Date: 2004-04-21 01:39:58 $
  */
 class SarLoaderResolver
     extends SimpleLoaderResolver
@@ -288,13 +288,24 @@ class SarLoaderResolver
     }
 
     /**
-     * Route Logging to Avalons Logger.
+     * Route Logging to Logger facade.
      *
      * @param message the warn message
      */
     protected void warn( final String message )
     {
         m_logger.warn( message );
+    }
+
+    /**
+     * Route Logging to Logger facade.
+     *
+     * @param message the warn message
+     */
+    protected void warn( final String message, 
+                         final Throwable t )
+    {
+        m_logger.warn( message, t );
     }
 
     protected void scanDependencies( final Extension[] required,
