@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<document>
+    <properties>
+    <title>BlockInfo Specification</title>
+        
+        <author email="peter at apache.org">Peter Donald</author>
+  </properties>
+
+    <body>
+        <section name="The BlockInfo File">
+            <p>
+                The BlockInfo file defines meta-information about a block, such
+                as which services the block depends upon, and which services it
+                can offer to other blocks.
+            </p>
+
+            <p>
+                The BlockInfo file is an XML file.  It must be located in the same jar
+                file as the block's implementing class.  It must have the same name
+                as the block's class, with the extention <source>.xinfo</source>.  Thus,
+                if you were looking up the BlockInfo for a block of class
+                <source>com.biz.cornerstone.blocks.MyBlock</source>, you would look up the
+                resource <source>com/biz/cornerstone/blocks/MyBlock.xinfo</source> in the
+                jar file containing the block.
+            </p>
+
+            <p>
+                Below is an example BlockInfo file:
+            </p>
+            <source>
+
+&lt;?xml version="1.0"?>
+
+&lt;blockinfo>
+
+    &lt;block>
+        &lt;version>1.2.3&lt;/version>
+    &lt;/block>
+
+    &lt;services>
+        &lt;service name="com.biz.cornerstone.services.MyService"
+                 version="2.1.3" />
+    &lt;/services>
+
+    &lt;dependencies>
+        &lt;dependency>
+            &lt;role>com.biz.cornerstone.services.Authorizer&lt;/role>
+            &lt;service name="com.biz.cornerstone.service.Authorizer"
+                     version="1.2"/>
+        &lt;/dependency>
+        &lt;dependency>
+            &lt;!-- note that role is not specified and defaults
+                 to name of service. The service version is not
+                 specified and it defaults to "1.0" -->
+            &lt;service name="com.biz.cornerstone.service.RoleMapper"/>
+        &lt;/dependency>
+    &lt;/dependencies>
+
+&lt;/blockinfo>
+            </source>
+
+            <p>
+                You will notice that the information in the BlockInfo file is separated
+                into three main sections:
+            </p>
+            <ul>
+                <li>The <source>&lt;block></source> element, which defines the name and version of the block.</li>
+                <li>The <source>&lt;services></source> element, which defines the services the block provides.</li>
+                <li>The <source>&lt;dependencies></source> element, which defines the services the block uses.</li>
+            </ul>
+        </section>
+
+        <section name="The &lt;block> Element">
+            <p>
+                The <source>&lt;block></source> element specifies the name and version
+                of the block.  The <source>&lt;block></source> element includes
+                the following nested elements:
+            </p>
+            <table>
+                <tr>
+          <th>Element</th>
+          <th>Description</th>
+        </tr>
+                <tr>
+                    <td>
+            <source>&lt;name></source>
+          </td>
+                    <td>A descriptive name for the block.  Optional.</td>
+                </tr>
+                <tr>
+                    <td>
+            <source>&lt;version></source>
+          </td>
+                    <td>
+                        The version of the block.  Must be of the format
+                        major.minor.micro, where minor and micro are optional.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+            <source>&lt;schema-type></source>
+          </td>
+                    <td>
+                        The type of configuration schema provided with the block.
+                        Possible values depend on the Configuration Validator
+                        that Phoenix is using.  This value is ignored by the
+                        default Configuration Validator.  Optional.
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+        <section name="The &lt;services> Element">
+            <p>
+                The <source>&lt;services></source> element defines the services
+                that the block can offer to other blocks.  This element is optional;
+                A block can choose to not offer any services to other blocks.
+            </p>
+            <p>
+                The <source>&lt;services></source> element should contain a
+                nested <source>&lt;service></source> element for each service
+                that the block provides.  The <source>&lt;service></source>
+                element takes the following attributes:
+            </p>
+            <table>
+                <tr>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+                <tr>
+                    <td>name</td>
+                    <td>
+                        The service name.  This is the fully qualified name of
+                        the service interface.  The block must implement this
+                        interface.  The service name is also used to identify
+                        the service in the BlockInfo files of blocks that use
+                        the service (see below).
+                    </td>
+                </tr>
+                <tr>
+                    <td>version</td>
+                    <td>
+                        The version of the service.  This must be of the form
+                        major.minor.micro, where minor and micro are optional.
+                        Default value is 1.0.
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+        <section name="The &lt;dependencies> Element">
+            <p>
+                The <source>&lt;dependencies></source> element defines the services
+                that the block requires to operate.  Phoenix provides these
+                services to the block using the <source>ServiceManager</source>
+                passed to the block's <source>Serviceable.service()</source> method.
+            </p>
+            <p>
+                The <source>&lt;dependencies></source> element should contain
+                a nested <source>&lt;dependency></source> element for each
+                service that the block uses.  The <source>&lt;dependency></source>
+                element takes the following nested elements:
+            </p>
+
+            <subsection name="The &lt;service> Element">
+                <p>
+                    The <source>&lt;service></source> element
+                    defines the expected service.  The service element takes the following
+                    attributes:
+                </p>
+                <table>
+                    <tr>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+                    <tr>
+                        <td>name</td>
+                        <td>
+                            The service name.  This must be the fully qualified
+                            name of the service interface.  The object returned
+                            by the <source>ServiceManager</source> is guaranteed to
+                            be castable to this interface.  The service name is
+                            also used to identify the service in the BlockInfo
+                            file of blocks that provide the service (see above).
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>version</td>
+                        <td>
+                            The expected version of the service.  This must be of
+                            the form major.minor.micro, where minor and micro are
+                            optional.  The default value is 1.0.
+                        </td>
+                    </tr>
+                </table>
+            </subsection>
+
+            <subsection name="The &lt;role> Element"/>
+            <p>
+                The <source>&lt;role></source> element specifies the role that
+                the service plays.  This must match the role name that the block
+                supplies when it locates the service using
+                <source>ServiceManager.lookup( role )</source>.
+                The role name is also used in the
+                <a href="assembly-xml-specification.html">Assembly File</a>,
+                to identify the dependency when connecting the block to the
+                services it requires.  The <source>&lt;role></source> element
+                is optional, and the role name defaults to the service name.
+            </p>
+        </section>
+
+        <section name="The &lt;management-access-points> Element">
+            <p>
+                The <source>&lt;management-access-points></source> element
+                defines the management interfaces that the block provides.
+                These interfaces are exported by Phoenix's management system
+                to allow the block to be managed.
+            </p>
+            <p>
+                The <source>&lt;management-access-points></source> element must
+                contain a <source>&lt;service></source> element for each of the
+                block's management interfaces.  The <source>&lt;service></source>
+                element takes the following attributes:
+            </p>
+            <table>
+                <tr>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+                <tr>
+                    <td>name</td>
+                    <td>
+                        The fully qualified name of the management interface.
+                        The block must implement this interface.
+                    </td>
+                </tr>
+                <tr>
+                    <td>version</td>
+                    <td>
+                        The version of the management interface.  Default value
+                        is 1.0
+                    </td>
+                </tr>
+            </table>
+        </section>
+    </body>
+</document>
