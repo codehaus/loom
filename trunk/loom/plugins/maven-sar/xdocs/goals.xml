@@ -3,7 +3,7 @@
 <document>
     <properties>
         <title>Maven Sar Plug-in Goals</title>
-        <author email="mauro.talevi at aquilonia.org">Mauro Talevi</author>
+        <author>Mauro Talevi</author>
     </properties>
     <body>
         <goals>
