@@ -88,12 +88,10 @@ package org.jcontainer.loom.components.manager;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.jcontainer.dna.Active;
 import org.jcontainer.dna.AbstractLogEnabled;
+import org.jcontainer.dna.Active;
 import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.interfaces.SystemManager;
-import org.realityforge.salt.i18n.ResourceManager;
-import org.realityforge.salt.i18n.Resources;
 
 /**
  * This is abstract implementation of SystemManager.
@@ -104,9 +102,6 @@ public abstract class AbstractSystemManager
     extends AbstractLogEnabled
     implements SystemManager, Active
 {
-    private static final Resources REZ =
-        ResourceManager.getPackageResources( AbstractSystemManager.class );
-
     private final Map m_entries = new HashMap();
 
     private SubContext m_subContext;
@@ -144,9 +139,7 @@ public abstract class AbstractSystemManager
         final Object entry = m_entries.remove( name );
         if( null == entry )
         {
-            final String message =
-                REZ.format( "manager.error.unregister.noentry", name );
-            throw new LoomException( message );
+            return;
         }
 
         unexport( name, entry );
@@ -189,18 +182,6 @@ public abstract class AbstractSystemManager
         throws LoomException;
 
     /**
-     * Verfify that name is well formed.
-     *
-     * @param name the name
-     * @param object the object so named
-     */
-    protected void verifyName( final String name,
-                               final Object object )
-        throws LoomException
-    {
-    }
-
-    /**
      * Helper method to help check before an objects registration.
      * Verifies name and object are not null and verifies no entry exists using name.
      *
@@ -216,19 +197,15 @@ public abstract class AbstractSystemManager
         {
             throw new NullPointerException( "object" );
         }
-
         if( null == name )
         {
             throw new NullPointerException( "name" );
         }
 
-        verifyName( name, object );
-
         if( null != m_entries.get( name ) )
         {
-            final String message = REZ.format( "manager.error.register.exists", name );
+            final String message = name + " already registered in SystemManager";
             throw new LoomException( message );
         }
     }
-
 }

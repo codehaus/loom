@@ -718,17 +718,8 @@ public class DefaultEmbeddor
 
         for( int i = 0; i < m_entries.length; i++ )
         {
-            final String role = m_entries[ i ].getRole();
-            if( null == role )
-            {
-                continue;
-            }
-            final ManagementRegistration registration =
-                ManagementRegistration.getManagementInfoForRole( role );
-            if( null != registration )
-            {
-                mxExporter.unregister( registration.getName() );
-            }
+            final EmbeddorEntry entry = m_entries[ i ];
+            mxExporter.unregister( entry.getLoggerName() );
         }
     }
 
