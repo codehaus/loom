@@ -20,7 +20,8 @@ import java.util.Set;
  * detected it will notify its <code>DirectoryChangeListener</code>.
  *
  * @author Johan Sjoberg
- * @version $Revision: 1.1 $ $Date: 2004-07-12 14:46:23 $
+ * @author Peter Donald
+ * @version $Revision: 1.2 $ $Date: 2004-07-13 12:24:45 $
  */
 public class DirectoryScanner implements Runnable
 {
