@@ -106,7 +106,7 @@ import org.realityforge.salt.i18n.Resources;
  * and is in the format specified for <tt>assembly.xml</tt> files.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.13 $ $Date: 2003-11-03 06:43:15 $
+ * @version $Revision: 1.14 $ $Date: 2003-11-05 07:27:08 $
  */
 public class Assembler
     implements MetaDataBuilder
@@ -305,14 +305,26 @@ public class Assembler
         final ArrayList dependencies = new ArrayList();
         for( int j = 0; j < provides.length; j++ )
         {
-            final Configuration provide = provides[ j ];
-            final String requiredName = provide.getAttribute( "name" );
-            final String alias = provide.getAttribute( "alias", requiredName );
-            final String key = provide.getAttribute( "role" );
-
-            dependencies.add( new DependencyDirective( key, requiredName, alias ) );
+            final DependencyDirective directive = buildDependency( provides[ j ] );
+            dependencies.add( directive );
         }
 
         return (DependencyDirective[])dependencies.toArray( new DependencyDirective[ dependencies.size() ] );
+    }
+
+    /**
+     * Parse a dependency directive from provide.
+     *
+     * @param provide the provide element
+     * @return the directive
+     * @throws ConfigurationException if element malformed
+     */
+    DependencyDirective buildDependency( final Configuration provide )
+        throws ConfigurationException
+    {
+        final String requiredName = provide.getAttribute( "name" );
+        final String alias = provide.getAttribute( "alias", requiredName );
+        final String key = provide.getAttribute( "role" );
+        return new DependencyDirective( key, requiredName, alias );
     }
 }
