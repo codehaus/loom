@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <project>
     <extend>${basedir}/../project.xml</extend>
-    <name>MetaClass Extensions For Loom</name>
-    <id>metaclass-loom</id>
+    <name>Loom MetaClass Extensions</name>
+    <id>loom-info</id>
     <package>org.jcontainer.loom.info</package>
 
     <shortDescription>Tools to generating Loom Type MetaData.</shortDescription>
