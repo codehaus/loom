@@ -96,7 +96,6 @@ import java.net.URL;
  * /myapp context).
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @see DeployerMBean
  */
 public interface Deployer
 {

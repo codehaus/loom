@@ -108,7 +108,6 @@ import org.jcontainer.loom.interfaces.ApplicationContext;
 import org.jcontainer.loom.interfaces.ConfigurationInterceptor;
 import org.jcontainer.loom.interfaces.ConfigurationValidator;
 import org.jcontainer.loom.interfaces.Kernel;
-import org.jcontainer.loom.interfaces.KernelMBean;
 import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.interfaces.SystemManager;
 import org.realityforge.salt.i18n.ResourceManager;
@@ -127,11 +126,11 @@ import org.realityforge.salt.i18n.Resources;
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author <a href="mailto:leosimons@apache.org">Leo Simons</a>
  * @dna.component
- * @mx.interface topic="Kernel" type="org.jcontainer.loom.interfaces.KernelMBean"
+ * @mx.component
  */
 public class DefaultKernel
     extends AbstractLogEnabled
-    implements Kernel, KernelMBean, Active, Composable, Configurable
+    implements Kernel, Active, Composable, Configurable
 {
     private static final Resources REZ =
         ResourceManager.getPackageResources( DefaultKernel.class );
@@ -247,6 +246,9 @@ public class DefaultKernel
         }
     }
 
+    /**
+     * @mx.attribute description="the list of applications running in the container"
+     */
     public String[] getApplicationNames()
     {
         if( isLocked() )
@@ -458,6 +460,10 @@ public class DefaultKernel
         return serviceManager;
     }
 
+    /**
+     * @mx.operation description="Removes the application from the container"
+     * @mx.parameter name="name" description="the name of application to remove"
+     */
     public void removeApplication( final String name )
         throws Exception
     {
