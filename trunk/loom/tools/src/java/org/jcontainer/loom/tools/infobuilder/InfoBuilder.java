@@ -18,7 +18,7 @@ import org.jcontainer.loom.tools.info.ComponentInfo;
  * is specified in the <a href="package-summary.html#external">package summary</a>.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.9 $ $Date: 2003-10-06 12:51:25 $
+ * @version $Revision: 1.10 $ $Date: 2003-10-06 12:56:10 $
  */
 public final class InfoBuilder
     extends AbstractLogEnabled
@@ -26,7 +26,7 @@ public final class InfoBuilder
     /**
      * The InfoReader.
      */
-    private final LegacyBlockInfoReader m_infoCreator = new LegacyBlockInfoReader();
+    private final BlockInfoReader m_infoCreator = new BlockInfoReader();
 
     /**
      * Setup logging for all subcomponents
