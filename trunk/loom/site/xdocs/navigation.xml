@@ -38,7 +38,6 @@
                     <item href="/guide/bdg/creating-a-block.html" name="Creating a Block"/>
                     <item href="/guide/bdg/what-is-an-application-listener.html" name="What is an Application Listener"/>
                     <item href="/guide/bdg/making-loom-compatible-comps.html" name="Making Compatible Components"/>
-                    <item href="/guide/bdg/doclet-tags.html" name="Doclet Tags"/>
                 </item>
             </item>
             <item href="/guide/mx/index.html" name="Management Guide" collapse="true">
