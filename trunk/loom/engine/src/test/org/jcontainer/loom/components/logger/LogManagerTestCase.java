@@ -30,7 +30,7 @@ import org.jcontainer.loom.interfaces.LogManager;
  *  An basic test case for the LogManager.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-07-24 23:37:02 $
+ * @version $Revision: 1.6 $ $Date: 2003-07-24 23:45:23 $
  */
 public class LogManagerTestCase
     extends TestCase
@@ -59,7 +59,8 @@ public class LogManagerTestCase
     {
         final BlockMetaData[] blocks = new BlockMetaData[ 0 ];
         final BlockListenerMetaData[] listeners = new BlockListenerMetaData[ 0 ];
-        final File homeDirectory = new File( m_baseDirectory, subdir );
+        final File homeDirectory = new File( m_baseDirectory, subdir ).getAbsoluteFile();
+        System.out.println( "homeDirectory = " + homeDirectory );
         return new SarMetaData( "test",
                                 homeDirectory,
                                 blocks,
