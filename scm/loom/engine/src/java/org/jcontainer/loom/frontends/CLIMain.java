@@ -421,7 +421,16 @@ public final class CLIMain
         System.out.println( "--- Message ---" );
         System.out.println( throwable.getMessage() );
         System.out.println( "--- Stack Trace ---" );
-        System.out.println( ExceptionUtil.printStackTrace( throwable ) );
+
+        final Throwable root = ExceptionUtil.getRootCause( throwable );
+        Throwable element = throwable;
+        while( root != element )
+        {
+            System.out.println( element.getMessage() );
+            System.out.println( "--- Rethrown From ---" );
+            element = ExceptionUtil.getCause( element );
+        }
+        System.out.println( ExceptionUtil.printStackTrace( root ) );
         System.out.println( "---------------------------------------------------------" );
         System.out.println( REZ.getString( "main.exception.footer" ) );
 
