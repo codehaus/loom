@@ -8,7 +8,6 @@
 package org.jcontainer.loom.tools.info;
 
 import java.io.Serializable;
-import org.realityforge.metaclass.model.Attribute;
 
 /**
  * This class contains the meta information about a particular
@@ -24,10 +23,9 @@ import org.realityforge.metaclass.model.Attribute;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-10-06 14:10:48 $
+ * @version $Revision: 1.7 $ $Date: 2003-10-14 08:42:16 $
  */
 public class ComponentInfo
-    extends FeatureDescriptor
     implements Serializable
 {
     /**
@@ -54,12 +52,10 @@ public class ComponentInfo
      * Basic constructor that takes as parameters all parts.
      */
     public ComponentInfo( final String implementationKey,
-                          final Attribute[] atttributes,
                           final ServiceDescriptor[] services,
                           final DependencyDescriptor[] dependencies,
                           final SchemaDescriptor configurationSchema )
     {
-        super( atttributes );
         if( null == implementationKey )
         {
             throw new NullPointerException( "implementationKey" );

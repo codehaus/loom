@@ -104,7 +104,7 @@ import org.realityforge.metaclass.model.Attribute;
  *
  * @author Paul Hammant
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-10-11 08:59:20 $
+ * @version $Revision: 1.3 $ $Date: 2003-10-14 08:42:16 $
  */
 public class BlockInfoBuilder
 {
@@ -128,7 +128,6 @@ public class BlockInfoBuilder
         final DependencyDescriptor[] dependencies = buildDependencies( javaClass );
 
         return new ComponentInfo( javaClass.getFullyQualifiedName(),
-                                  Attribute.EMPTY_SET,
                                   services,
                                   dependencies,
                                   schema );

@@ -18,34 +18,13 @@ import org.realityforge.metaclass.model.Attribute;
  * A set of utilities for asserting  facts about info objects.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.8 $ $Date: 2003-10-06 14:10:49 $
+ * @version $Revision: 1.9 $ $Date: 2003-10-14 08:42:16 $
  */
 public class InfoAssert
 {
     public static void assertEqualStructure( final String message,
                                              final ComponentInfo expected,
                                              final ComponentInfo actual )
-    {
-        assertEqualAttributes( message + ": Component.attribute",
-                               expected.getAttributes(),
-                               actual.getAttributes() );
-
-        assertEqualFeatures( message, expected, actual );
-    }
-
-    public static void assertEqualInfos( final String message,
-                                         final ComponentInfo expected,
-                                         final ComponentInfo actual )
-    {
-        Assert.assertEquals( message + ": Component.type",
-                             expected.getImplementationKey(),
-                             actual.getImplementationKey() );
-        assertEqualStructure( message, expected, actual );
-    }
-
-    public static void assertEqualFeatures( final String message,
-                                            final ComponentInfo expected,
-                                            final ComponentInfo actual )
     {
         final SchemaDescriptor expectedSchema = expected.getConfigurationSchema();
         final SchemaDescriptor actualSchema = actual.getConfigurationSchema();
@@ -58,6 +37,16 @@ public class InfoAssert
         final DependencyDescriptor[] expectedDeps = expected.getDependencies();
         final DependencyDescriptor[] actualDeps = actual.getDependencies();
         assertEqualDeps( message, expectedDeps, actualDeps );
+    }
+
+    public static void assertEqualInfos( final String message,
+                                         final ComponentInfo expected,
+                                         final ComponentInfo actual )
+    {
+        Assert.assertEquals( message + ": Component.type",
+                             expected.getImplementationKey(),
+                             actual.getImplementationKey() );
+        assertEqualStructure( message, expected, actual );
     }
 
     private static void assertEqualSchema( final String message,
