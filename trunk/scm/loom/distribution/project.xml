@@ -122,7 +122,7 @@
         <dependency>
             <groupId>spice</groupId>
             <artifactId>spice-loggerstore</artifactId>
-            <version>1.1-dev</version>
+            <version>1.1</version>
             <properties>
                 <category>container</category>
             </properties>
@@ -130,7 +130,7 @@
         <dependency>
             <groupId>spice</groupId>
             <artifactId>spice-alchemist</artifactId>
-            <version>1.1-dev</version>
+            <version>1.1</version>
             <properties>
                 <category>container</category>
             </properties>
