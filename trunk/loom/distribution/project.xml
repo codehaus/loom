@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <project>
-    <pomVersion>3</pomVersion>
+    <extend>${basedir}/../project.xml</extend>
     <name>Loom Distribution</name>
     <id>loom</id>
     <currentVersion>1.0dev</currentVersion>

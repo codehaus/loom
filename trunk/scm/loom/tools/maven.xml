@@ -22,6 +22,7 @@
   </goal>
 
   <goal name="deploy">
+    <attainGoal name="jar:deploy"/>       
   </goal>
 
 </project>
