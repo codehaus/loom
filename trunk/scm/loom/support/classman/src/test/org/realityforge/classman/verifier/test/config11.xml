@@ -1,0 +1,7 @@
+<classloaders default="*system*" version="1.0">
+    <predefined name="*system*"/>
+
+    <classloader name="X" parent="*system*"/>
+    <classloader name="X" parent="*system*"/>
+
+</classloaders>
