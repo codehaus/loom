@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<document>
+  <properties>
+    <title>Guide - Making components that are Phoenix compatible</title>
+    
+
+  <author email="hammant@apache.org">Paul Hammant</author>
+  </properties>
+  <body>
+    <section name="Introduction">
+      <p>
+      Quite often reusable components are made elsewhere.  Apache has a number
+      of places where this activity is going on.  While we get it right most of
+      the time, some components developed elsewhere are harder to use in Phoenix.
+      </p>
+    </section>
+    <section name="Things to remember">
+      <p>
+        There are a number of common sense things to remember when making or
+        adapting a Java component to be reusable in Phoenix as block.
+      </p>
+      <subsection name="Beanification">
+        <p>
+          </p>
+        <ul>
+            <li>Have a public empty constructor for your main class</li>
+            <li>Have setters for its configuration.</li>
+            <li>Do not assume that the File is where dependancies are - people may reuse this in jars, applets etc.</li>
+            <li>Divorce your main method (if appl) from your main class - Phoenix does not call main methods.</li>
+            <li>Consider that the setup and initialization of the bean does not happen in the
+                constructor - as a convenience to the user, have an initialize() method</li>
+            <li>If the comp has start/stop functinality consider having start() and stop() methods.</li>
+            <li>Try to avoid Singleton concepts.  There could be multiple blocks in one sar using differnt (by design) instances of your bean</li>
+          </ul>
+        <p>
+        </p>
+      </subsection>
+      <subsection name="Inversion of Control Pattern">
+         <p>The IoC pattern is described <a href="http://avalon.apache.org/framework/guide-patterns-ioc.html">
+         here</a>.  This means for Phoenix avoiding static concepts including loggers.</p>
+      </subsection>
+      <subsection name="Separation of interface and implementation">
+        <p>
+         The separation of interface/implementation pattern is described <a href="http://avalon.apache.org/framework/guide-patterns-soii.html">here</a>.
+         For Phoenix this means we can (if done completely) mount the implementation jar in place where hosted client components (beans, servlets etc) can use the API, but not see the implementation.  We can also reimplement or wrap
+         bits of the implementation.  For example we could write a pluggable implementation that could, for a certain API
+         journal some methods, but still delegate to the real implementation.  Which pluggable implementation is used by Phoenix when it
+         boots is determined in assembly.xml of course.
+        </p>
+      </subsection>
+      <subsection name="Opening up the API">
+        <p>
+         Given that you have divided into interface and implementation, there are probably plenty of methods you
+         can put method in the interface you never though might be used.  For example if you are making JDBC
+         compliant relational database, and it is a bean, you could easily think that the only use would be
+         clients via JDBC over sockets.  Well, given that Phoenix can now mount the RDBMS block, it might want
+         to be reused by other blocks that other people have developed inside the the same SAR file.  In that case
+         have beanlike methods of ...
+        </p>
+        <ol>
+          <li>Database createDatabase(String name)</li>
+          <li>Database cloneDatabase(String name)</li>
+        </ol>
+        <p>
+        .. might be useful.  Just because you can only see a ServerSocket interface does not mean that others do.
+        </p>
+      </subsection>
+    </section>
+    <section name="Example compatible component">
+    <p>
+      Below are an interface and implementation that are suitably separated, are beanlike and is in accordance
+      with the IoC pattern...</p>
+<source>
+package examplecomp;
+public interface WebServer {
+    void mountWar(String contextName, URL pathToWar);
+    void unMountWar(String contextName);
+}
+
+package examplecomp.server;
+public class MyWebServer implements WebServer {
+
+    public MyWebServer() {
+        // whatever.
+    }
+    public void setPort(int port) {
+        // this is one configuration item.
+    }
+    public void initialize() {
+        // whatever.
+    }
+    public void start() {
+        // whatever.
+    }
+    public void stop() {
+        // whatever.
+    }
+    public void mountWar(String contextName, URL pathToWar) {
+        // whatever.
+    }
+    public void unMountWar(String contextName) {
+        // whatever.
+    }
+}
+</source>
+      <p>For standalone mode, it might be launched like so:</p>
+<source>
+package examplecomp.main;
+public class WebServerMain {
+    public static void main(String[] args) throws Exception {
+        MyWebServer ws = new WebServer();
+        ws.setPort(Integer.parseInt(args[0]));
+        ws.initialize();
+        ws.start();
+        ws.mountWar(args[1], new File(args[2]).toURL());
+    }
+}
+</source>
+      <p>When we are trying to run this in phoenix we might have this wrapper:</p>
+<source>
+package examplecomp.block;
+public class WebServerBlock
+    extends AbstractLoggable
+    implements WebServer, Startable, Configurable, Initializable {
+
+    private int mPort;
+    private WebServer mWebServer;
+
+    public WebServerBlock() {
+        mWebServer = new MyWebServer();
+    }
+
+    public void configure(final Configuration configuration)
+        throws ConfigurationException {
+        mPort = configuration.getChild("port").getValueAsInteger( 9001 );
+    }
+
+    public void initialize() throws Exception {
+        mWebServer.setPort(mPort);
+        mWebServer.initialize();
+    }
+
+    public final void start() throws Exception {
+        mWebServer.start();
+    }
+
+    public void stop() throws Exception {
+    mWebServer.stop();
+    }
+
+    public void mountWar(String contextName, String pathToWar) {
+        mWebServer.mountWar(contextName, pathToWar);
+    }
+
+    public void unMountWar(String contextName) {
+        mWebServer.unMountWar(contextName);
+    }
+}
+</source>
+      <p>This basically shows the implementation wrapped and taking its configuration from the config.xml
+      that phoenix prefers from configuration.  If the developer wanted they could ignore
+      that place of configuration and use their own config files.  If the WebServer block were
+      being reused by another Phoenix block (say an EJB server), it might be like so:</p>
+<source>
+package somebeanserver;
+public class EJBBlock
+    extends AbstractLoggable
+    implements Composable {
+
+    private WebServer mWebServer;
+
+    public void compose(final ComponentManager compMgr)
+        throws ComponentException {
+        mWebServer = compMgr.lookup("WebServer");
+    }
+
+    public void mountEar(String contextName, String pathToEar) {
+        String[] warContextNames = getWarContexts(pathToEar);
+        URL[] wars = getWarFiles(pathToEar);
+        for (int i = 0; i &lt; wars.length; i++) {
+            mWebServer.mountWar(warContextNames[i], wars[i]);
+        }
+    }
+
+    public void unMountEar(String contextName) {
+        // whatever
+    }
+}
+</source>
+    </section>
+    <section name="Misconceptions">
+      <p>
+        The following are worth stating:
+        </p>
+      <ul>
+          <li>You do not have to implement any Avalon interfaces to be reusable (wrap strategy) inside Avalon.</li>
+          <li>Being Phoenix compatible is just as useful for whole servers as it is for small components.</li>
+          <li>Being Phoenix compatible can be for tools that are intended for client-side as well as server use.</li>
+        </ul>
+      <p>
+      </p>
+    </section>
+
+  </body>
+</document>
