@@ -23,11 +23,16 @@ import org.jcontainer.loom.tools.info.FeatureDescriptor;
  * new components as needed.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-06-29 01:07:36 $
+ * @version $Revision: 1.4 $ $Date: 2003-07-05 05:29:02 $
  */
 public class ComponentMetaData
     extends FeatureDescriptor
 {
+    /**
+     * Empty set of component metadata.
+     */
+    public static final ComponentMetaData[] EMPTY_SET = new ComponentMetaData[ 0 ];
+
     /**
      * The name of the component. This is an
      * abstract name used during assembly.
