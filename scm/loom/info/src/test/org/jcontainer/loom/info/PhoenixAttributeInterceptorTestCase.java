@@ -19,7 +19,7 @@ import java.util.ArrayList;
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-10-15 05:19:01 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-15 05:21:11 $
  */
 public class PhoenixAttributeInterceptorTestCase
     extends TestCase
@@ -312,6 +312,7 @@ public class PhoenixAttributeInterceptorTestCase
         assertEquals( "attribute.parameter(location)",
                       "MyClass-schema.xml", result.getParameter( "location" ) );
     }
+
     public void testProcessMethodAttributeWithPhoenixDependency()
         throws Exception
     {
@@ -459,5 +460,21 @@ public class PhoenixAttributeInterceptorTestCase
         assertEquals( "attributes[2].parameter(description)",
                       "This is the description",
                       attributes[ 2 ].getParameter( "description" ) );
+    }
+
+    public void testGetSchemaLocationForClassInDefaultPackage()
+        throws Exception
+    {
+        final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
+        final String location = interceptor.getSchemaLocationFor( "Foo" );
+        assertEquals( "location", "Foo-schema.xml", location );
+    }
+
+    public void testGetSchemaLocationForClassInNonDefaultPackage()
+        throws Exception
+    {
+        final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
+        final String location = interceptor.getSchemaLocationFor( "com.biz.Foo" );
+        assertEquals( "location", "Foo-schema.xml", location );
     }
 }
