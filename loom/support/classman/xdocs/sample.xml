@@ -2,15 +2,15 @@
 
 <document>
     <properties>
-        <title>CLoader - Example</title>
+        <title>ClassMan - Example</title>
         <author email="peter at apache.org">Peter Donald</author>
     </properties>
     <body>
         <section name="Introduction">
-            <p>This describes a simple example of Loader descriptor.
+            <p>This describes a simple example of ClassMan descriptor.
             Let us assume that
             <a href="http://avalon.apache.org/phoenix">Phoenix</a>
-            has been integrated with Loader and that the snippet defining
+            has been integrated with ClassMan and that the snippet defining
             classloader is included in Phoenixes deployment format (the
             .sar file).</p>
             <p>Let us also assume that we want to host a servlet container
@@ -35,7 +35,7 @@ Container         CL
             <p>Unfortunately, in our case Phoenix already assembles the
             Servlet Container CL by default and does not give us the
             opportunity to construct the Servlet API CL as a parent ClassLoader.
-            Luckily we can overide this using the Loader toolkit using the
+            Luckily we can overide this using the ClassMan toolkit using the
             following configuration file.</p>
 <source>
     <![CDATA[
