@@ -15,14 +15,14 @@ import org.jcontainer.loom.components.util.info.ComponentInfo;
 import org.jcontainer.loom.components.util.info.DependencyDescriptor;
 import org.jcontainer.loom.components.util.info.SchemaDescriptor;
 import org.jcontainer.loom.components.util.info.ServiceDescriptor;
-import org.realityforge.metaclass.Attributes;
-import org.realityforge.metaclass.model.Attribute;
+import org.codehaus.metaclass.Attributes;
+import org.codehaus.metaclass.model.Attribute;
 
 /**
  * A BlockInfoReader is responsible for building ComponentInfo objects from DNA MetaClass descriptors.
  *
  * @author Peter Donald
- * @version $Revision: 1.1 $ $Date: 2004-02-20 03:49:49 $
+ * @version $Revision: 1.2 $ $Date: 2004-04-18 18:53:02 $
  */
 public final class MetaClassBlockInfoReader implements BlockInfoReader
 {
