@@ -23,7 +23,7 @@
         <appender-ref ref="DEFAULT"/>
     </root>
 
-    <logger name="root.myBlock">
+    <logger name="myBlock">
         <priority value="debug"/>
         <appender-ref ref="MYBLOCK_FILE"/>
     </logger>
