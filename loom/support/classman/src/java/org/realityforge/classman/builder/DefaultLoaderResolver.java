@@ -22,7 +22,7 @@ import org.realityforge.salt.io.FileUtil;
  * {@link #m_baseDirectory} value.
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-06-05 00:20:08 $
+ * @version $Revision: 1.4 $ $Date: 2003-06-05 00:22:23 $
  */
 public class DefaultLoaderResolver
     extends SimpleLoaderResolver
@@ -152,7 +152,7 @@ public class DefaultLoaderResolver
     private String[] prefixPatterns( final String prefix,
                                      final String[] patterns )
     {
-        if( 0 == prefix.length() || "".equals( prefix ) )
+        if( 0 == prefix.length() || ".".equals( prefix ) )
         {
             return patterns;
         }
