@@ -17,13 +17,14 @@
 
     <dependencies>
         <dependency>
-            <id>avalon-framework</id>
-            <version>4.0</version>
+            <groupId>avalon</groupId>
+            <artifactId>avalon-framework</artifactId>
+            <version>20030713</version>
         </dependency>
         <dependency>
-        	<groupId>loom</groupId>
-            <artifactId>phoenix-client</artifactId>
-            <version>1.0dev</version>
+        	<groupId>avalon</groupId>
+            <artifactId>avalon-phoenix-client</artifactId>
+            <version>20030819</version>
         </dependency>
         <dependency>
             <groupId>spice</groupId>

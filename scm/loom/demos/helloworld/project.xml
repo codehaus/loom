@@ -26,9 +26,9 @@
             <version>20030801</version>
         </dependency>
         <dependency>
-        	<groupId>loom</groupId>
-            <artifactId>phoenix-client</artifactId>
-            <version>1.0dev</version>
+        	<groupId>avalon</groupId>
+            <artifactId>avalon-phoenix-client</artifactId>
+            <version>20030819</version>
         </dependency>
         <dependency>
         	<groupId>loom</groupId>
