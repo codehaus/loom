@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE blockinfo
+         PUBLIC "-//PHOENIX/Block Info DTD Version 1.0//EN"
+         "http://avalon.apache.org/dtds/phoenix/blockinfo_1.0s.dtd">
+
+<blockinfo>
+
+    <!-- section to describe block -->
+    <block>
+        <version>1.0</version>
+        <schema-type>http://relaxng.org/ns/structure/1.0</schema-type>
+    </block>
+
+    <!-- services that are offered by this block -->
+    <services>
+        <service name="org.apache.avalon.cornerstone.services.scheduler.TimeScheduler"/>
+    </services>
+
+    <!-- interfaces that may be exported to manange this block -->
+    <management-access-points>
+        <service name="org.apache.avalon.cornerstone.services.scheduler.TimeScheduler2"/>
+    </management-access-points>
+
+    <!-- services that are required by this block -->
+    <dependencies>
+        <dependency>
+            <service name="org.apache.avalon.cornerstone.services.threads.ThreadManager"/>
+        </dependency>
+    </dependencies>
+</blockinfo>
