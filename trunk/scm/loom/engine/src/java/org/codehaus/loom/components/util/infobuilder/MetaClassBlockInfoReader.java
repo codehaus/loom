@@ -22,7 +22,7 @@ import org.codehaus.metaclass.model.Attribute;
  * A BlockInfoReader is responsible for building ComponentInfo objects from DNA MetaClass descriptors.
  *
  * @author Peter Donald
- * @version $Revision: 1.2 $ $Date: 2004-05-01 12:48:34 $
+ * @version $Revision: 1.3 $ $Date: 2004-07-11 00:44:30 $
  */
 public final class MetaClassBlockInfoReader implements BlockInfoReader
 {
@@ -108,7 +108,7 @@ public final class MetaClassBlockInfoReader implements BlockInfoReader
             final String key = attribute.getParameter( "key" );
             final String depType = attribute.getParameter( "type" );
             final boolean optional =
-                attribute.getParameter( "optional" ).equals( "true" );
+                attribute.getParameter( "optional" ).equals( "false" );
             deps.add( new DependencyDescriptor( key, depType, optional ) );
         }
 
