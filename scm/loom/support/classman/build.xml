@@ -42,7 +42,7 @@
 
     <target name="test" description="o Run the test cases" depends="build,build-test-data">
         <mkdir dir="${target.reports}"/>
-        <property name="target.basedir" file="target/classes"/>
+        <property name="target.basedir" location="target/classes"/>
         <echo message="target.basedir=${target.basedir}"/>
         <junit dir="./" printSummary="yes"
             haltonfailure="true" fork="true" haltonerror="true">
