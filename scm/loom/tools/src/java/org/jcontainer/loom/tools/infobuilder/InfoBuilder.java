@@ -11,9 +11,8 @@ import java.io.InputStream;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.logger.Logger;
 import org.jcontainer.loom.tools.info.ComponentInfo;
-import org.jcontainer.loom.tools.infobuilder.LegacyBlockInfoReader;
-import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
+import org.realityforge.salt.i18n.Resources;
 
 /**
  * A InfoBuilder is responsible for building {@link org.jcontainer.loom.tools.info.ComponentInfo}
@@ -21,7 +20,7 @@ import org.realityforge.salt.i18n.ResourceManager;
  * is specified in the <a href="package-summary.html#external">package summary</a>.
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-26 09:34:20 $
+ * @version $Revision: 1.2 $ $Date: 2003-06-26 09:35:27 $
  */
 public final class InfoBuilder
     extends AbstractLogEnabled

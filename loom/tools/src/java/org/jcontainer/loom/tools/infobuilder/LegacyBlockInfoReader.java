@@ -14,6 +14,7 @@ import org.apache.avalon.excalibur.i18n.Resources;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
+import org.jcontainer.loom.tools.configuration.ConfigurationBuilder;
 import org.jcontainer.loom.tools.info.Attribute;
 import org.jcontainer.loom.tools.info.ComponentDescriptor;
 import org.jcontainer.loom.tools.info.ComponentInfo;
@@ -21,8 +22,6 @@ import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.tools.info.LoggerDescriptor;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
-import org.jcontainer.loom.tools.configuration.ConfigurationBuilder;
-import org.jcontainer.loom.tools.infobuilder.LegacyUtil;
 import org.xml.sax.InputSource;
 
 /**
@@ -32,7 +31,7 @@ import org.xml.sax.InputSource;
  * <a href="package-summary.html#external">package summary</a>.
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-26 09:34:20 $
+ * @version $Revision: 1.2 $ $Date: 2003-06-26 09:35:27 $
  */
 public final class LegacyBlockInfoReader
     extends AbstractLogEnabled
