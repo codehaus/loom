@@ -73,6 +73,7 @@
             <id>pdonald</id>
             <roles>
                 <role>Founder</role>
+                <role>Developer</role>
             </roles>
             <timezone>+10</timezone>
         </developer>
@@ -90,7 +91,7 @@
             <url>http://fotap.org/~osi</url>
             <roles>
                 <role>Founder</role>
-                <role>Hacker</role>
+                <role>Developer</role>
             </roles>
             <timezone>-5</timezone>
         </developer>
@@ -99,6 +100,7 @@
             <id>mauro</id>
             <roles>
                 <role>Founder</role>
+                <role>Developer</role>
             </roles>
             <timezone>0</timezone>
         </developer>
@@ -106,7 +108,7 @@
             <name>Johan Sjoberg</name>
             <id>sjoberg</id>
             <roles>
-                <role>Hacker</role>
+                <role>Developer</role>
             </roles>
             <timezone>+2</timezone>
         </developer>
