@@ -89,26 +89,25 @@ package org.jcontainer.loom.launcher;
 import java.util.Hashtable;
 import java.util.Observable;
 import java.util.Observer;
-
 import org.tanukisoftware.wrapper.WrapperListener;
 import org.tanukisoftware.wrapper.WrapperManager;
 
 /**
- * A frontend for Phoenix that starts it as a native service
- * using the Java Service Wrapper at http://wrapper.tanukisoftware.org
+ * A frontend for Phoenix that starts it as a native service using the Java
+ * Service Wrapper at http://wrapper.tanukisoftware.org
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
+ * @author Peter Donald
  * @author <a href="mailto:leif@tanukisoftware.com">Leif Mortenson</a>
  */
 public class DaemonLauncher
     implements WrapperListener, Observer
 {
     /**
-     * In order to avoid calling the Wrapper stop method recursively, we need
-     *  to keep track of whether or not the Wrapper already knows we are
-     *  stopping.  Necessary because of the way the shutdown process in
-     *  Phoenix works.   Ideally, we would unregister this Observer with
-     *  CLIMain but we can't do that for security reasons.
+     * In order to avoid calling the Wrapper stop method recursively, we need to
+     * keep track of whether or not the Wrapper already knows we are stopping.
+     * Necessary because of the way the shutdown process in Phoenix works.
+     * Ideally, we would unregister this Observer with CLIMain but we can't do
+     * that for security reasons.
      */
     private boolean m_ignoreUpdates = false;
 
@@ -117,15 +116,13 @@ public class DaemonLauncher
      *-------------------------------------------------------------*/
     /**
      * The start method is called when the WrapperManager is signaled by the
-     *  native wrapper code that it can start its application.  This
-     *  method call is expected to return, so a new thread should be launched
-     *  if necessary.
+     * native wrapper code that it can start its application.  This method call
+     * is expected to return, so a new thread should be launched if necessary.
      *
      * @param args List of arguments used to initialize the application.
-     *
-     * @return Any error code if the application should exit on completion
-     *         of the start method.  If there were no problems then this
-     *         method should return null.
+     * @return Any error code if the application should exit on completion of
+     *         the start method.  If there were no problems then this method
+     *         should return null.
      */
     public Integer start( final String[] args )
     {
@@ -169,15 +166,14 @@ public class DaemonLauncher
 
     /**
      * Called when the application is shutting down.  The Wrapper assumes that
-     *  this method will return fairly quickly.  If the shutdown code code
-     *  could potentially take a long time, then WrapperManager.stopping()
-     *  should be called to extend the timeout period.  If for some reason,
-     *  the stop method can not return, then it must call
-     *  WrapperManager.stopped() to avoid warning messages from the Wrapper.
+     * this method will return fairly quickly.  If the shutdown code code could
+     * potentially take a long time, then WrapperManager.stopping() should be
+     * called to extend the timeout period.  If for some reason, the stop method
+     * can not return, then it must call WrapperManager.stopped() to avoid
+     * warning messages from the Wrapper.
      *
      * @param exitCode The suggested exit code that will be returned to the OS
-     *                 when the JVM exits.
-     *
+     * when the JVM exits.
      * @return The exit code to actually return to the OS.  In most cases, this
      *         should just be the value of exitCode, however the user code has
      *         the option of changing the exit code if there are any problems
@@ -194,10 +190,10 @@ public class DaemonLauncher
 
     /**
      * Called whenever the native wrapper code traps a system control signal
-     *  against the Java process.  It is up to the callback to take any actions
-     *  necessary.  Possible values are: WrapperManager.WRAPPER_CTRL_C_EVENT,
-     *    WRAPPER_CTRL_CLOSE_EVENT, WRAPPER_CTRL_LOGOFF_EVENT, or
-     *    WRAPPER_CTRL_SHUTDOWN_EVENT
+     * against the Java process.  It is up to the callback to take any actions
+     * necessary.  Possible values are: WrapperManager.WRAPPER_CTRL_C_EVENT,
+     * WRAPPER_CTRL_CLOSE_EVENT, WRAPPER_CTRL_LOGOFF_EVENT, or
+     * WRAPPER_CTRL_SHUTDOWN_EVENT
      *
      * @param event The system control signal.
      */
@@ -207,7 +203,8 @@ public class DaemonLauncher
         {
             if( WrapperManager.isDebugEnabled() )
             {
-                System.out.println( "DaemonLauncher: controlEvent(" + event + ") - Ignored." );
+                System.out.println(
+                    "DaemonLauncher: controlEvent(" + event + ") - Ignored." );
             }
 
             // This application ignores all incoming control events.
@@ -217,7 +214,8 @@ public class DaemonLauncher
         {
             if( WrapperManager.isDebugEnabled() )
             {
-                System.out.println( "DaemonLauncher: controlEvent(" + event + ") - Stopping." );
+                System.out.println(
+                    "DaemonLauncher: controlEvent(" + event + ") - Stopping." );
             }
 
             // Not being run under a wrapper, so this isn't an NT service and should always exit.
@@ -231,10 +229,10 @@ public class DaemonLauncher
      * Methods
      *-------------------------------------------------------------*/
     /**
-     * We use an Observer rather than operating on some more meaningful
-     * event system as Observer and friends can be loaded from system
-     * ClassLoader and thus the Embeddor does not have to share a common
-     * classloader ancestor with invoker
+     * We use an Observer rather than operating on some more meaningful event
+     * system as Observer and friends can be loaded from system ClassLoader and
+     * thus the Embeddor does not have to share a common classloader ancestor
+     * with invoker
      */
     public void update( final Observable observable, final Object arg )
     {
@@ -243,8 +241,10 @@ public class DaemonLauncher
             // Ignore this update
             if( WrapperManager.isDebugEnabled() )
             {
-                System.out.println( "DaemonLauncher: " + arg
-                                    + " request ignored because stop already called." );
+                System.out.println(
+                    "DaemonLauncher: " +
+                    arg
+                    + " request ignored because stop already called." );
                 System.out.flush();
             }
         }
@@ -287,7 +287,8 @@ public class DaemonLauncher
             }
             else
             {
-                throw new IllegalArgumentException( "Unknown action " + command );
+                throw new IllegalArgumentException(
+                    "Unknown action " + command );
             }
         }
     }
