@@ -99,7 +99,7 @@ import org.codehaus.loom.interfaces.ContainerConstants;
 import org.codehaus.loom.interfaces.Kernel;
 import org.codehaus.loom.interfaces.LoomException;
 import org.codehaus.loom.interfaces.SystemManager;
-import org.codehaus.spice.alchemist.LoggerAlchemist;
+import org.codehaus.spice.alchemist.logger.LoggerAlchemist;
 import org.codehaus.spice.loggerstore.LoggerStore;
 import org.codehaus.spice.salt.i18n.ResourceManager;
 import org.codehaus.spice.salt.i18n.Resources;
