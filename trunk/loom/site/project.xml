@@ -3,79 +3,9 @@
     <extend>${basedir}/../project.xml</extend>
     <name>JContainer Loom</name>
     <id>loom-site</id>
-    <organization>
-        <name>JContainer Group. Portions &#169; 1997-2003, Apache Software Foundation</name>
-        <url>http://jcontainer.org</url>
-    </organization>
     <shortDescription>JContainer Loom web site</shortDescription>
     <description>JContainer Loom web site</description>
 
-    <url>http://loom.jcontainer.org</url>
-    <siteAddress>loom.jcontainer.org</siteAddress>
-    <logo>/images/loom-logo.png</logo>
-    <issueTrackingUrl>http://jira.codehaus.org/secure/BrowseProject.jspa?id=10131</issueTrackingUrl>
-    <siteDirectory>/www/jcontainer.codehaus.org/loom/</siteDirectory>
-
-    <mailingLists>
-        <mailingList>
-            <name>JContainer Interest</name>
-            <subscribe>http://lists.codehaus.org/mailman/listinfo/jcontainer-interest</subscribe>
-            <unsubscribe>http://lists.codehaus.org/mailman/listinfo/jcontainer-interest</unsubscribe>
-            <archive>http://lists.codehaus.org/pipermail/jcontainer-interest</archive>
-        </mailingList>
-        <mailingList>
-            <name>JContainer Commits</name>
-            <subscribe>http://lists.codehaus.org/mailman/listinfo/jcontainer-commits</subscribe>
-            <unsubscribe>http://lists.codehaus.org/mailman/listinfo/jcontainer-commits</unsubscribe>
-            <archive>http://lists.codehaus.org/pipermail/jcontainer-commits</archive>
-        </mailingList>
-    </mailingLists>
-
-    <developers>
-        <developer>
-            <name>Peter Donald</name>
-            <id>pdonald</id>
-            <email>peter@realityforge.org</email>
-            <roles>
-                <role>Founder</role>
-            </roles>
-            <timezone>+10</timezone>
-        </developer>
-        <developer>
-            <name>Paul Hammant</name>
-            <id>paul</id>
-            <roles>
-                <role>Founder</role>
-            </roles>
-        </developer>
-        <developer>
-            <name>Peter Royal</name>
-            <id>proyal</id>
-            <email>peter.royal@pobox.com</email>
-            <url>http://fotap.org/~osi</url>
-            <roles>
-                <role>Founder</role>
-                <role>Hacker</role>
-            </roles>
-            <timezone>-5</timezone>
-        </developer>
-        <developer>
-            <name>Mauro Talevi</name>
-            <id>mauro</id>
-            <email>mauro.talevi at aquilonia.org</email>
-            <roles>
-                <role>Founder</role>
-            </roles>
-            <timezone>0</timezone>
-        </developer>
-    </developers>
-
-    <contributors>
-        <contributor>
-            <name>Johan Sjoberg</name>
-            <email>johan.sjoberg@avaintec.com</email>
-        </contributor>
-    </contributors>
 
     <build>
         <nagEmailAddress>jcontainer-interest@lists.codehaus.org</nagEmailAddress>
