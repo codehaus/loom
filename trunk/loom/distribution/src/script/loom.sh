@@ -3,8 +3,8 @@
 # -----------------------------------------------------------------------------
 # Loom start script.
 #
-# Author: Alexis Agahi <alag at users.sourceforge.net>
-#         Peter Donald <peter at realityforge.org>
+# Author: Alexis Agahi
+#         Peter Donald
 #
 # Environment Variable Prequisites
 #
