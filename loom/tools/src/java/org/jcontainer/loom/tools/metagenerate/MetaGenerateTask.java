@@ -32,8 +32,7 @@ public class MetaGenerateTask
      */
     public void setInheritance( final boolean inheritance )
     {
-        //TODO: Do inheritance based on markup rather than based on task run
-        //m_inheritance = inheritance;
+        log( "Inheritance should not be specified at the task level" );
     }
 
     public void setDest( final File destDir )
