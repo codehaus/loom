@@ -98,18 +98,17 @@ import org.apache.avalon.framework.context.DefaultContext;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.avalon.framework.service.DefaultServiceManager;
 import org.apache.avalon.framework.service.ServiceManager;
+import org.jcontainer.dna.AbstractLogEnabled;
+import org.jcontainer.loom.tools.configuration.ConfigurationConverter;
 import org.jcontainer.loom.tools.factory.ComponentBundle;
 import org.jcontainer.loom.tools.factory.ComponentFactory;
-import org.jcontainer.loom.tools.lifecycle.ResourceProvider;
-import org.jcontainer.loom.tools.metadata.ComponentMetaData;
-import org.jcontainer.loom.tools.metadata.DependencyMetaData;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ContextDescriptor;
-import org.jcontainer.loom.tools.info.EntryDescriptor;
-import org.jcontainer.loom.tools.configuration.ConfigurationConverter;
-import org.jcontainer.dna.AbstractLogEnabled;
-import org.realityforge.salt.i18n.Resources;
+import org.jcontainer.loom.tools.info.DependencyDescriptor;
+import org.jcontainer.loom.tools.metadata.ComponentMetaData;
+import org.jcontainer.loom.tools.metadata.DependencyMetaData;
 import org.realityforge.salt.i18n.ResourceManager;
+import org.realityforge.salt.i18n.Resources;
 
 /**
  * This is a base object via which the
@@ -124,7 +123,7 @@ import org.realityforge.salt.i18n.ResourceManager;
  * {@link org.jcontainer.loom.tools.verifier.AssemblyVerifier}</p>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-10-05 10:07:04 $
+ * @version $Revision: 1.7 $ $Date: 2003-10-06 13:32:45 $
  */
 public abstract class AbstractResourceProvider
     extends AbstractLogEnabled
@@ -284,10 +283,10 @@ public abstract class AbstractResourceProvider
 
         final Map contextData = new HashMap();
 
-        final EntryDescriptor[] entrys = descriptor.getEntrys();
+        final DependencyDescriptor[] entrys = descriptor.getEntrys();
         for( int i = 0; i < entrys.length; i++ )
         {
-            final EntryDescriptor entry = entrys[ i ];
+            final DependencyDescriptor entry = entrys[ i ];
             final String key = entry.getKey();
             final String type = entry.getType();
             final boolean optional = entry.isOptional();

@@ -11,7 +11,6 @@ import junit.framework.Assert;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ContextDescriptor;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
-import org.jcontainer.loom.tools.info.EntryDescriptor;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
 import org.realityforge.metaclass.model.Attribute;
@@ -20,7 +19,7 @@ import org.realityforge.metaclass.model.Attribute;
  * A set of utilities for asserting  facts about info objects.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-10-06 13:29:05 $
+ * @version $Revision: 1.7 $ $Date: 2003-10-06 13:32:45 $
  */
 public class InfoAssert
 {
@@ -152,8 +151,8 @@ public class InfoAssert
     }
 
     public static void assertEqualEntrys( final String message,
-                                          final EntryDescriptor[] expected,
-                                          final EntryDescriptor[] actual )
+                                          final DependencyDescriptor[] expected,
+                                          final DependencyDescriptor[] actual )
     {
         Assert.assertEquals( message + " Length", expected.length, actual.length );
         for( int i = 0; i < expected.length; i++ )

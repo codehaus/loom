@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ContextDescriptor;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
-import org.jcontainer.loom.tools.info.EntryDescriptor;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
 import org.realityforge.metaclass.model.Attribute;
@@ -25,7 +24,7 @@ import org.realityforge.metaclass.model.Attribute;
  * all of the javadoc tags present in JavaClass object model.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.8 $ $Date: 2003-10-06 13:29:05 $
+ * @version $Revision: 1.9 $ $Date: 2003-10-06 13:32:45 $
  */
 public class DefaultInfoBuilder
     extends AbstractInfoBuilder
@@ -105,12 +104,12 @@ public class DefaultInfoBuilder
                 final String entryType = getNamedParameter( tags[ i ], "type" );
                 final String optional = getNamedParameter( tags[ i ], "optional", "false" );
                 final boolean isOptional = "true".equals( optional );
-                final EntryDescriptor entry =
-                    new EntryDescriptor( key, entryType, isOptional, Attribute.EMPTY_SET );
+                final DependencyDescriptor entry =
+                    new DependencyDescriptor( key, entryType, isOptional, Attribute.EMPTY_SET );
                 entrySet.add( entry );
             }
-            final EntryDescriptor[] entrys =
-                (EntryDescriptor[])entrySet.toArray( new EntryDescriptor[ entrySet.size() ] );
+            final DependencyDescriptor[] entrys =
+                (DependencyDescriptor[])entrySet.toArray( new DependencyDescriptor[ entrySet.size() ] );
 
             return new ContextDescriptor( type, entrys, Attribute.EMPTY_SET );
         }
