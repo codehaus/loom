@@ -16,7 +16,7 @@ import junit.framework.TestCase;
  * TestCases for Extension.
  *
  * @author Peter Donald
- * @version $Revision: 1.3 $ $Date: 2003-12-02 08:09:24 $
+ * @version $Revision: 1.4 $ $Date: 2004-03-21 23:45:45 $
  */
 public class ExtensionTestCase
     extends TestCase
@@ -67,7 +67,7 @@ public class ExtensionTestCase
             "required1-Specification-Version: 1.0\n" +
             "required1-Implementation-Version: 1.0.2\n" +
             "required1-Implementation-Vendor-Id: org.realityforge.spice\n" +
-            "required1-Implementation-URL: http://spice.realityforge.org/required1.jar\n";
+            "required1-Implementation-URL: http://spice.codehaus.org/required1.jar\n";
         final Manifest manifest = getManifest( manifestString );
 
         final Extension[] available = Extension.getAvailable( manifest );
@@ -82,7 +82,7 @@ public class ExtensionTestCase
                       required[ 0 ].getSpecificationVendor() );
         assertEquals( "required SpecVersion", "1.0",
                       required[ 0 ].getSpecificationVersion().toString() );
-        assertEquals( "required URL", "http://spice.realityforge.org/required1.jar",
+        assertEquals( "required URL", "http://spice.codehaus.org/required1.jar",
                       required[ 0 ].getImplementationURL() );
         assertEquals( "required ImpVendor", null,
                       required[ 0 ].getImplementationVendor() );
@@ -102,12 +102,12 @@ public class ExtensionTestCase
             "required1-Specification-Version: 1.0\n" +
             "required1-Implementation-Version: 1.0.2\n" +
             "required1-Implementation-Vendor-Id: org.realityforge.spice\n" +
-            "required1-Implementation-URL: http://spice.realityforge.org/required1.jar\n" +
+            "required1-Implementation-URL: http://spice.codehaus.org/required1.jar\n" +
             "required2-Extension-Name: spice.required2\n" +
             "required2-Specification-Version: 1.0\n" +
             "required2-Implementation-Version: 1.0.2\n" +
             "required2-Implementation-Vendor-Id: org.realityforge.spice\n" +
-            "required2-Implementation-URL: http://spice.realityforge.org/required2.jar\n";
+            "required2-Implementation-URL: http://spice.codehaus.org/required2.jar\n";
         final Manifest manifest = getManifest( manifestString );
 
         final Extension[] available = Extension.getAvailable( manifest );
@@ -121,7 +121,7 @@ public class ExtensionTestCase
                       required[ 0 ].getSpecificationVendor() );
         assertEquals( "required SpecVersion", "1.0",
                       required[ 0 ].getSpecificationVersion().toString() );
-        assertEquals( "required URL", "http://spice.realityforge.org/required1.jar",
+        assertEquals( "required URL", "http://spice.codehaus.org/required1.jar",
                       required[ 0 ].getImplementationURL() );
         assertEquals( "required ImpVendor", null,
                       required[ 0 ].getImplementationVendor() );
@@ -136,7 +136,7 @@ public class ExtensionTestCase
                       required[ 1 ].getSpecificationVendor() );
         assertEquals( "required SpecVersion", "1.0",
                       required[ 1 ].getSpecificationVersion().toString() );
-        assertEquals( "required URL", "http://spice.realityforge.org/required2.jar",
+        assertEquals( "required URL", "http://spice.codehaus.org/required2.jar",
                       required[ 1 ].getImplementationURL() );
         assertEquals( "required ImpVendor", null,
                       required[ 1 ].getImplementationVendor() );
@@ -162,7 +162,7 @@ public class ExtensionTestCase
             "required1-Specification-Version: 1.0\n" +
             "required1-Implementation-Version: 1.0.2\n" +
             "required1-Implementation-Vendor-Id: org.realityforge.spice\n" +
-            "required1-Implementation-URL: http://spice.realityforge.org/required1.jar\n";
+            "required1-Implementation-URL: http://spice.codehaus.org/required1.jar\n";
         final Manifest manifest = getManifest( manifestString );
 
         final Extension[] available = Extension.getAvailable( manifest );
@@ -191,7 +191,7 @@ public class ExtensionTestCase
                       required[ 0 ].getSpecificationVendor() );
         assertEquals( "required SpecVersion", "1.0",
                       required[ 0 ].getSpecificationVersion().toString() );
-        assertEquals( "required URL", "http://spice.realityforge.org/required1.jar",
+        assertEquals( "required URL", "http://spice.codehaus.org/required1.jar",
                       required[ 0 ].getImplementationURL() );
         assertEquals( "required ImpVendor", null,
                       required[ 0 ].getImplementationVendor() );
@@ -211,7 +211,7 @@ public class ExtensionTestCase
             "required1-Specification-Version: 1.0 \n" +
             "required1-Implementation-Version: 1.0.2 \n" +
             "required1-Implementation-Vendor-Id: org.realityforge.spice \n" +
-            "required1-Implementation-URL: http://spice.realityforge.org/required1.jar \n";
+            "required1-Implementation-URL: http://spice.codehaus.org/required1.jar \n";
         final Manifest manifest = getManifest( manifestString );
 
         final Extension[] available = Extension.getAvailable( manifest );
@@ -226,7 +226,7 @@ public class ExtensionTestCase
                       required[ 0 ].getSpecificationVendor() );
         assertEquals( "required SpecVersion", "1.0",
                       required[ 0 ].getSpecificationVersion().toString() );
-        assertEquals( "required URL", "http://spice.realityforge.org/required1.jar",
+        assertEquals( "required URL", "http://spice.codehaus.org/required1.jar",
                       required[ 0 ].getImplementationURL() );
         assertEquals( "required ImpVendor", null,
                       required[ 0 ].getImplementationVendor() );
