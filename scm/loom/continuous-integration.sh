@@ -1,7 +1,6 @@
 #!/bin/bash
 
 PATH=$HOME/bin:$JAVA_HOME/bin:$MAVEN_HOME/bin:$ANT_HOME/bin:$PATH
-#CVS_RSH=$HOME/ssh1.sh
 
 export JAVA_HOME
 export MAVEN_HOME
