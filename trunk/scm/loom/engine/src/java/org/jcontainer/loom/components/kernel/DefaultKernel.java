@@ -105,7 +105,6 @@ import org.jcontainer.dna.impl.DefaultResourceLocator;
 import org.jcontainer.loom.components.application.DefaultApplication;
 import org.jcontainer.loom.interfaces.Application;
 import org.jcontainer.loom.interfaces.ApplicationContext;
-import org.jcontainer.loom.interfaces.ApplicationMBean;
 import org.jcontainer.loom.interfaces.ConfigurationInterceptor;
 import org.jcontainer.loom.interfaces.ConfigurationValidator;
 import org.jcontainer.loom.interfaces.Kernel;
@@ -127,6 +126,8 @@ import org.realityforge.salt.i18n.Resources;
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author <a href="mailto:leosimons@apache.org">Leo Simons</a>
+ * @phoenix:block
+ * @mx.interface type="org.jcontainer.loom.interfaces.KernelMBean"
  */
 public class DefaultKernel
     extends AbstractLogEnabled
@@ -134,16 +135,6 @@ public class DefaultKernel
 {
     private static final Resources REZ =
         ResourceManager.getPackageResources( DefaultKernel.class );
-
-    /**
-     * The interfaces of application that are exported to Management system.
-     * Declared up here to avoid classloader deadlock issues where ApplicationMBean
-     * is loaded after the application starts. If the application is also loading
-     * classes and happens to recursively enter the bootstrap classloader a deadlock
-     * can be caused. P{lacing class interfaces up here avoids this deadlock.
-     */
-    private static final Class[] APPLICATION_INTERFACES =
-        new Class[]{ApplicationMBean.class};
 
     ///SystemManager provided by Embeddor
     private SystemManager m_systemManager;
@@ -359,9 +350,7 @@ public class DefaultKernel
                 // manage application
                 try
                 {
-                    m_applicationManager.register( name,
-                                                   application,
-                                                   APPLICATION_INTERFACES );
+                    m_applicationManager.register( name, application );
                 }
                 catch( final Throwable t )
                 {

@@ -123,32 +123,16 @@ public abstract class AbstractSystemManager
     }
 
     /**
-     * @see SystemManager#register(String, Object, Class[])
-     */
-    public synchronized void register( final String name,
-                                       final Object object,
-                                       final Class[] interfaces )
-        throws LoomException, IllegalArgumentException
-    {
-        if( null == interfaces )
-        {
-            final String message =
-                REZ.format( "manager.error.interfaces.null", name );
-            throw new IllegalArgumentException( message );
-        }
-        verifyInterfaces( object, interfaces );
-
-        doRegister( name, object, interfaces );
-    }
-
-    /**
      * @see SystemManager#register(String, Object)
      */
     public synchronized void register( final String name,
                                        final Object object )
         throws LoomException, IllegalArgumentException
     {
-        doRegister( name, object, null );
+        checkRegister( name, object );
+
+        final Object exportedObject = export( name, object );
+        m_entries.put( name, exportedObject );
     }
 
     /**
@@ -157,7 +141,7 @@ public abstract class AbstractSystemManager
     public synchronized void unregister( final String name )
         throws LoomException
     {
-        final ManagedEntry entry = (ManagedEntry)m_entries.remove( name );
+        final Object entry = m_entries.remove( name );
         if( null == entry )
         {
             final String message =
@@ -165,7 +149,7 @@ public abstract class AbstractSystemManager
             throw new LoomException( message );
         }
 
-        unexport( name, entry.getExportedObject() );
+        unexport( name, entry );
     }
 
     /**
@@ -188,11 +172,10 @@ public abstract class AbstractSystemManager
      *
      * @param name the name of object
      * @param object the object
-     * @param interfaces the interfaces
      * @return the exported object
      * @throws LoomException if an error occurs
      */
-    protected abstract Object export( String name, Object object, Class[] interfaces )
+    protected abstract Object export( String name, Object object )
         throws LoomException;
 
     /**
@@ -215,48 +198,6 @@ public abstract class AbstractSystemManager
                                final Object object )
         throws LoomException
     {
-    }
-
-    /**
-     * Verify that an interface conforms to the requirements of management medium.
-     *
-     * @param clazz the interface class
-     * @throws LoomException if verification fails
-     */
-    protected abstract void verifyInterface( Class clazz )
-        throws LoomException;
-
-    /**
-     * Verify that object implements interfaces and interfaces are of "acceptable form".
-     * "Acceptable form" is determined by specific management policy.
-     *
-     * @param object the object
-     * @param interfaces the array of interfaces to check
-     * @throws LoomException if an error occurs
-     */
-    private void verifyInterfaces( final Object object, final Class[] interfaces )
-        throws LoomException
-    {
-        for( int i = 0; i < interfaces.length; i++ )
-        {
-            final Class clazz = interfaces[ i ];
-
-            if( !clazz.isInterface() )
-            {
-                final String message =
-                    REZ.format( "manager.error.verify.notinterface", clazz.getName() );
-                throw new LoomException( message );
-            }
-
-            if( !clazz.isInstance( object ) )
-            {
-                final String message =
-                    REZ.format( "manager.error.verify.notinstance", clazz.getName() );
-                throw new LoomException( message );
-            }
-
-            verifyInterface( clazz );
-        }
     }
 
     /**
@@ -290,24 +231,4 @@ public abstract class AbstractSystemManager
         }
     }
 
-    /**
-     * Utility method that actually does the registration.
-     *
-     * @param name the name to register under
-     * @param object the object
-     * @param interfaces the interfaces (may be null)
-     * @throws LoomException if error occurs
-     */
-    private void doRegister( final String name,
-                             final Object object,
-                             final Class[] interfaces )
-        throws LoomException
-    {
-        checkRegister( name, object );
-
-        final Object exportedObject = export( name, object, interfaces );
-        final ManagedEntry entry =
-            new ManagedEntry( object, interfaces, exportedObject );
-        m_entries.put( name, entry );
-    }
 }

@@ -19,7 +19,7 @@ import org.jcontainer.loom.components.util.DNAAvalonLogger;
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-10-05 10:07:04 $
+ * @version $Revision: 1.4 $ $Date: 2003-10-15 03:43:09 $
  */
 class MockApplicationContext
     implements ApplicationContext
@@ -44,7 +44,7 @@ class MockApplicationContext
         //ignore
     }
 
-    public void exportObject( String name, Class[] interfaceClasses, Object object )
+    public void exportObject( String name, Object object )
         throws Exception
     {
         //ignore

@@ -8,7 +8,7 @@
         <ant:mkdir dir="${basedir}/target/src/java/org/jcontainer/loom/interfaces"/>
         <ant:tstamp/>
         <j:file name="${basedir}/target/src/java/org/jcontainer/loom/interfaces/Version.java"
-            omitXmlDeclaration="true" escapeText="false" >
+            omitXmlDeclaration="true" escapeText="false">
             package org.jcontainer.loom.interfaces;
             interface Version
             {
@@ -25,6 +25,20 @@
     <goal name="main">
         <attainGoal name="build"/>
     </goal>
+
+    <postGoal name="java:compile">
+        <ant:taskdef name="metagenerate"
+	            classname="org.jcontainer.loom.info.GenerateLoomDescriptorsTask">
+	        <ant:classpath>
+	            <ant:path refid="maven.dependency.classpath"/>
+	        </ant:classpath>
+	    </ant:taskdef>
+	    <ant:echo message="Generating Component Descriptors"/>
+	    <ant:mkdir dir="${maven.build.dest}"/>
+	    <metagenerate destDir="${maven.build.dest}">
+	        <ant:fileset dir="${maven.sar.metagenerate.src}"/>
+	    </metagenerate>
+    </postGoal>
 
     <goal name="build">
         <attainGoal name="jar:install"/>

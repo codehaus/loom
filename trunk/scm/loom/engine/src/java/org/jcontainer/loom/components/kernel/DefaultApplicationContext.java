@@ -305,15 +305,13 @@ class DefaultApplicationContext
      * and using the specified name.
      *
      * @param name the name of object to export
-     * @param services the interface of object with which to export
      * @param object the actual object to export
      */
     public void exportObject( final String name,
-                              final Class[] services,
                               final Object object )
         throws Exception
     {
-        m_blockManager.register( name, object, services );
+        m_blockManager.register( name, object );
     }
 
     /**

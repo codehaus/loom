@@ -85,6 +85,14 @@
             </properties>
         </dependency>
         <dependency>
+            <groupId>spice</groupId>
+            <artifactId>spice-metaclass-jmx</artifactId>
+            <version>20031015.021238</version>
+            <properties>
+                <category>container</category>
+            </properties>
+        </dependency>
+        <dependency>
             <id>excalibur-monitor</id>
             <version>20030713</version>
             <properties>

@@ -21,25 +21,25 @@
                 components should be managed, the operations and attributes
                 to expose, and descriptions for each these to help guide the user.
                 Each block and component
-                stores this data in an 'MXINFO file' that is distributed along
+                stores this data in an MetaClass descriptor that is distributed along
                 with the class files that make up Loom and the Loom-enabled
                 applications.
             </p>
             <p>
                 The second area is the Loom component that uses the
-                MXINFO files to generate a user interface through which Loom
-                and its applications are interacted with.  It is anticipated that a number
-                of such interfaces will be developed.  The current implementation
-                of the management component uses the MXINFO files to generate
-                ModelMBeans that are then registered and exposed through a slightly
-                customized JMX implementation called
+                MetaClass files to generate a user interface through which Loom
+                and its applications are interacted with.  It is anticipated
+                that a number of such interfaces will be developed.  The current
+                implementation of the management component uses the descriptors
+                to generate ModelMBeans that are then registered and exposed
+                through a slightly customized JMX implementation called
                 <a href="http://mx4j.sourceforge.net/">MX4J</a>.
             </p>
             <p>
-                Note that nothing about the MXINFO file is dependant on using
+                Note that nothing about the descriptor is dependant on using
                 JMX, and the block author does not need to know or care about
                 how Loom, the application, and its blocks will be managed.
-                His/her responsibility is limited to creating an MXINFO file.
+                His/her responsibility is limited to creating an descriptor file.
             </p>
             <p>
                 The guide is broken into a number of sections, each
@@ -67,27 +67,15 @@
                 <a href="overview.html">Step-by-Step</a>
             </p>
         </section>
-        <section name="MXINFO File Format">
+        <section name="Using XDoclet Tags to Generate the Descriptor file">
             <p>
-                Management meta-data is stored in MXINFO files.  This section
-                describes its structure, as well as the runtime requirements
-                of the management agent.
+                It is recommended that component and block authors make use
+                of custom JavaDoc tags inserted into the source code.  These
+                tags are parsed using the MetaClass tool to produce the
+                descriptor.
             </p>
             <p>
-                <a href="mxinfo.html">MXINFO Format</a>
-            </p>
-        </section>
-        <section name="Using XDoclet Tags to Generate MXINFO file">
-            <p>
-                Instead of writing MXINFO files directly it is recommended that
-                component and block authors make use of custom tags inserted
-                into the source code.  These tags are parsed using the
-                <a href="http://xdoclet.sourceforge.net/">XDoclet</a>
-                engine to produce the MXINFO file.  This section describes
-                how to use the feature.
-            </p>
-            <p>
-                <a href="doclet-tags.html">XDoclet Tags</a>
+                <a href="doclet-tags.html">Doclet Tags</a>
             </p>
         </section>
     </body>
