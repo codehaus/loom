@@ -6,21 +6,20 @@
  * with this distribution in the LICENSE.txt file.
  */
 package org.codehaus.spice.extension;
+
 /**
- * Enum used in {@link Extension} to indicate the compatability
- * of one extension to another. See {@link Extension} for instances
- * of object.
+ * Enum used in {@link Extension} to indicate the compatability of one extension
+ * to another. See {@link Extension} for instances of object.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-12-02 07:56:59 $
+ * @author Peter Donald
+ * @version $Revision: 1.2 $ $Date: 2003-12-02 08:08:09 $
  * @see Extension
  */
 public final class Compatability
 {
-    /**
-     * A string representaiton of compatability level.
-     */
+    /** A string representaiton of compatability level. */
     private final String m_name;
+
     /**
      * Create a compatability enum with specified name.
      *
@@ -34,6 +33,7 @@ public final class Compatability
         }
         m_name = name;
     }
+
     /**
      * Return name of compatability level.
      *
@@ -43,6 +43,7 @@ public final class Compatability
     {
         return m_name;
     }
+
     /**
      * Return name of compatability level.
      *

@@ -6,22 +6,24 @@
  * with this distribution in the LICENSE.txt file.
  */
 package org.codehaus.spice.extension;
+
 import java.util.StringTokenizer;
+
 /**
- * Utility class to contain version numbers in "Dewey Decimal"
- * syntax.  Numbers in the "Dewey Decimal" syntax consist of positive
- * decimal integers separated by periods ".".  For example, "2.0" or
- * "1.2.3.4.5.6.7".  This allows an extensible number to be used to
- * represent major, minor, micro, etc versions.  The version number
- * must begin with a number.
+ * Utility class to contain version numbers in "Dewey Decimal" syntax.  Numbers
+ * in the "Dewey Decimal" syntax consist of positive decimal integers separated
+ * by periods ".".  For example, "2.0" or "1.2.3.4.5.6.7".  This allows an
+ * extensible number to be used to represent major, minor, micro, etc versions.
+ * The version number must begin with a number.
  *
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-12-02 07:56:59 $
+ * @author Peter Donald
+ * @version $Revision: 1.2 $ $Date: 2003-12-02 08:08:09 $
  */
 public final class DeweyDecimal
 {
     ///Array of components that make up DeweyDecimal
     private int[] m_components;
+
     /**
      * Construct a DeweyDecimal from an array of integer components.
      *
@@ -35,6 +37,7 @@ public final class DeweyDecimal
             m_components[ i ] = components[ i ];
         }
     }
+
     /**
      * Construct a DeweyDecimal from string in DeweyDecimal format.
      *
@@ -44,7 +47,9 @@ public final class DeweyDecimal
     public DeweyDecimal( final String string )
         throws NumberFormatException
     {
-        final StringTokenizer tokenizer = new StringTokenizer( string, ".", true );
+        final StringTokenizer tokenizer = new StringTokenizer( string,
+                                                               ".",
+                                                               true );
         final int size = tokenizer.countTokens();
         m_components = new int[ ( size + 1 ) / 2 ];
         for( int i = 0; i < m_components.length; i++ )
@@ -68,6 +73,7 @@ public final class DeweyDecimal
             }
         }
     }
+
     /**
      * Return number of components in <code>DeweyDecimal</code>.
      *
@@ -77,6 +83,7 @@ public final class DeweyDecimal
     {
         return m_components.length;
     }
+
     /**
      * Return the component at specified index.
      *
@@ -87,20 +94,26 @@ public final class DeweyDecimal
     {
         return m_components[ index ];
     }
+
     /**
-     * Return <code>true</code> if this <code>DeweyDecimal</code> is
-     * equal to the other <code>DeweyDecimal</code>.
+     * Return <code>true</code> if this <code>DeweyDecimal</code> is equal to
+     * the other <code>DeweyDecimal</code>.
      *
      * @param other the other DeweyDecimal
      * @return true if equal to other DeweyDecimal, false otherwise
      */
     public boolean isEqual( final DeweyDecimal other )
     {
-        final int max = Math.max( other.m_components.length, m_components.length );
+        final int max = Math.max( other.m_components.length,
+                                  m_components.length );
         for( int i = 0; i < max; i++ )
         {
-            final int component1 = ( i < m_components.length ) ? m_components[ i ] : 0;
-            final int component2 = ( i < other.m_components.length ) ? other.m_components[ i ] : 0;
+            final int component1 = ( i < m_components.length ) ?
+                                   m_components[ i ] :
+                                   0;
+            final int component2 = ( i < other.m_components.length ) ?
+                                   other.m_components[ i ] :
+                                   0;
             if( component2 != component1 )
             {
                 return false;
@@ -108,9 +121,10 @@ public final class DeweyDecimal
         }
         return true; // Exact match
     }
+
     /**
-     * Return <code>true</code> if this <code>DeweyDecimal</code> is
-     * less than the other <code>DeweyDecimal</code>.
+     * Return <code>true</code> if this <code>DeweyDecimal</code> is less than
+     * the other <code>DeweyDecimal</code>.
      *
      * @param other the other DeweyDecimal
      * @return true if less than other DeweyDecimal, false otherwise
@@ -119,31 +133,39 @@ public final class DeweyDecimal
     {
         return !isGreaterThanOrEqual( other );
     }
+
     /**
-     * Return <code>true</code> if this <code>DeweyDecimal</code> is
-     * less than or equal to the other <code>DeweyDecimal</code>.
+     * Return <code>true</code> if this <code>DeweyDecimal</code> is less than
+     * or equal to the other <code>DeweyDecimal</code>.
      *
      * @param other the other DeweyDecimal
-     * @return true if less than or equal to other DeweyDecimal, false otherwise
+     * @return true if less than or equal to other DeweyDecimal, false
+     *         otherwise
      */
     public boolean isLessThanOrEqual( final DeweyDecimal other )
     {
         return !isGreaterThan( other );
     }
+
     /**
-     * Return <code>true</code> if this <code>DeweyDecimal</code> is
-     * greater than the other <code>DeweyDecimal</code>.
+     * Return <code>true</code> if this <code>DeweyDecimal</code> is greater
+     * than the other <code>DeweyDecimal</code>.
      *
      * @param other the other DeweyDecimal
      * @return true if greater than other DeweyDecimal, false otherwise
      */
     public boolean isGreaterThan( final DeweyDecimal other )
     {
-        final int max = Math.max( other.m_components.length, m_components.length );
+        final int max = Math.max( other.m_components.length,
+                                  m_components.length );
         for( int i = 0; i < max; i++ )
         {
-            final int component1 = ( i < m_components.length ) ? m_components[ i ] : 0;
-            final int component2 = ( i < other.m_components.length ) ? other.m_components[ i ] : 0;
+            final int component1 = ( i < m_components.length ) ?
+                                   m_components[ i ] :
+                                   0;
+            final int component2 = ( i < other.m_components.length ) ?
+                                   other.m_components[ i ] :
+                                   0;
             if( component2 > component1 )
             {
                 return false;
@@ -155,20 +177,27 @@ public final class DeweyDecimal
         }
         return false; // Exact match
     }
+
     /**
-     * Return <code>true</code> if this <code>DeweyDecimal</code> is
-     * greater than or equal to the other <code>DeweyDecimal</code>.
+     * Return <code>true</code> if this <code>DeweyDecimal</code> is greater
+     * than or equal to the other <code>DeweyDecimal</code>.
      *
      * @param other the other DeweyDecimal
-     * @return true if greater than or equal to other DeweyDecimal, false otherwise
+     * @return true if greater than or equal to other DeweyDecimal, false
+     *         otherwise
      */
     public boolean isGreaterThanOrEqual( final DeweyDecimal other )
     {
-        final int max = Math.max( other.m_components.length, m_components.length );
+        final int max = Math.max( other.m_components.length,
+                                  m_components.length );
         for( int i = 0; i < max; i++ )
         {
-            final int component1 = ( i < m_components.length ) ? m_components[ i ] : 0;
-            final int component2 = ( i < other.m_components.length ) ? other.m_components[ i ] : 0;
+            final int component1 = ( i < m_components.length ) ?
+                                   m_components[ i ] :
+                                   0;
+            final int component2 = ( i < other.m_components.length ) ?
+                                   other.m_components[ i ] :
+                                   0;
             if( component2 > component1 )
             {
                 return false;
@@ -180,6 +209,7 @@ public final class DeweyDecimal
         }
         return true; // Exact match
     }
+
     /**
      * Return string representation of <code>DeweyDecimal</code>.
      *
