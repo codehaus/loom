@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<project default="main">
+
+    <goal name="main">
+        <attainGoal name="build"/>
+    </goal>
+    
+    <goal name="build">
+        <attainGoal name="site:generate"/>    	
+    </goal>
+
+    <goal name="deploy">
+        <attainGoal name="site:deploy"/>    	
+    </goal>
+
+</project>
