@@ -86,7 +86,7 @@
  */
 package org.jcontainer.loom.components.classloader;
 
-import org.codehaus.spice.xmlpolicy.verifier.PolicyVerifier;
+import org.jcontainer.loom.xmlpolicy.verifier.PolicyVerifier;
 import org.jcontainer.dna.LogEnabled;
 import org.jcontainer.dna.Logger;
 
@@ -94,7 +94,7 @@ import org.jcontainer.dna.Logger;
  * A simple adapter for verifier to support logging to container subsystems.
  *
  * @author Peter Donald
- * @version $Revision: 1.8 $ $Date: 2003-12-03 10:44:40 $
+ * @version $Revision: 1.9 $ $Date: 2004-03-31 03:39:03 $
  */
 class SarPolicyVerifier
     extends PolicyVerifier

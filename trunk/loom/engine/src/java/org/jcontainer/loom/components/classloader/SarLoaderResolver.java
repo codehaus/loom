@@ -91,8 +91,8 @@ import java.net.URL;
 import java.security.Policy;
 import java.util.Arrays;
 import java.util.Set;
-import org.codehaus.spice.classman.builder.SimpleLoaderResolver;
-import org.codehaus.spice.extension.Extension;
+import org.jcontainer.loom.classman.builder.SimpleLoaderResolver;
+import org.jcontainer.loom.extension.Extension;
 import org.codehaus.spice.salt.i18n.ResourceManager;
 import org.codehaus.spice.salt.i18n.Resources;
 import org.jcontainer.dna.LogEnabled;
@@ -107,7 +107,7 @@ import org.jcontainer.loom.components.util.ResourceUtil;
  * split across multiple directories.
  *
  * @author Peter Donald
- * @version $Revision: 1.10 $ $Date: 2003-12-03 10:44:40 $
+ * @version $Revision: 1.11 $ $Date: 2004-03-31 03:39:03 $
  */
 class SarLoaderResolver
     extends SimpleLoaderResolver

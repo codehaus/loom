@@ -90,7 +90,7 @@ import java.security.CodeSource;
 import java.security.PermissionCollection;
 import java.security.Permissions;
 import java.util.Map;
-import org.codehaus.spice.xmlpolicy.runtime.DefaultPolicy;
+import org.jcontainer.loom.xmlpolicy.runtime.DefaultPolicy;
 import org.jcontainer.dna.Active;
 import org.jcontainer.dna.LogEnabled;
 import org.jcontainer.dna.Logger;

@@ -4,6 +4,18 @@
     xmlns:ant="jelly:ant"
     default="jar:install">
 
+    <goal name="main">
+        <attainGoal name="build"/>
+    </goal>
+
+    <goal name="build">
+        <attainGoal name="jar:install"/>
+    </goal>
+
+    <goal name="deploy">
+        <attainGoal name="jar:deploy"/>
+    </goal>
+
     <preGoal name="xdoc:copy-user-resources">
         <ant:mkdir dir="${basedir}/xdocs"/>
         <ant:copy file="${basedir}/src/java/org/jcontainer/loom/classman/reader/classloader.dtd"

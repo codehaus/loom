@@ -87,7 +87,7 @@
 package org.jcontainer.loom.components.extensions.pkgmgr;
 
 import java.io.File;
-import org.codehaus.spice.extension.Extension;
+import org.jcontainer.loom.extension.Extension;
 
 /**
  * This contains the required meta-data for an "Optional Package" (formerly

@@ -90,7 +90,7 @@ import java.io.File;
 import java.net.URL;
 import java.security.Policy;
 import java.util.Map;
-import org.codehaus.spice.xmlpolicy.builder.PolicyResolver;
+import org.jcontainer.loom.xmlpolicy.builder.PolicyResolver;
 import org.jcontainer.dna.AbstractLogEnabled;
 import org.jcontainer.dna.impl.ContainerUtil;
 import org.jcontainer.loom.components.util.ResourceUtil;
@@ -100,7 +100,7 @@ import org.jcontainer.loom.components.util.ResourceUtil;
  * URLs).
  *
  * @author Peter Donald
- * @version $Revision: 1.10 $ $Date: 2003-12-03 10:44:40 $
+ * @version $Revision: 1.11 $ $Date: 2004-03-31 03:39:03 $
  */
 class SarPolicyResolver
     extends AbstractLogEnabled
