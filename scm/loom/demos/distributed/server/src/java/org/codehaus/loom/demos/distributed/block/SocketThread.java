@@ -89,17 +89,19 @@ package org.codehaus.loom.demos.distributed.block;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 
 /**
  * SocketThread accepts socket connections
  *
- * @author <a href="mailto:Paul_Hammant@yahoo.com">Paul Hammant</a>
+ * @author <a href="mailto:Paul_Hammant at yahoo.com">Paul Hammant</a>
  */
 public class SocketThread
     extends Thread
 {
     private ServerImpl m_ServerImpl;
     private ServerSocket m_serverSocket;
+    private boolean m_isRunning;
 
     protected SocketThread( final ServerImpl serverImpl,
                             final int port )
@@ -119,14 +121,17 @@ public class SocketThread
 
     public void run()
     {
-
-        while( true )
+        m_isRunning = true;
+        while( m_isRunning )
         {
             try
             {
                 final ConnectionThread ct =
-                    new ConnectionThread( m_serverSocket.accept() );
+                  new ConnectionThread( m_serverSocket.accept() );
                 ct.start();
+            }
+            catch( final SocketException se )
+            {
             }
             catch( final IOException ioe )
             {
@@ -135,6 +140,21 @@ public class SocketThread
                 System.out.println( message );
                 ioe.printStackTrace();
             }
+        }
+    }
+
+    public void close()
+    {
+        m_isRunning = false;
+        try
+        {
+            m_serverSocket.close();
+        }
+        catch( final IOException ioe )
+        {
+            final String message = "Some problem with closing a socket.";
+            System.out.println( message );
+            ioe.printStackTrace();
         }
     }
 
