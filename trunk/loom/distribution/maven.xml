@@ -6,46 +6,7 @@
     xmlns:define="jelly:define"
     xmlns:util="jelly:util"
     xmlns:ant="jelly:ant"
-    xmlns:deploy="deploy"
-    xmlns:archive="loom:archive"
     xmlns:wrapper="loom:wrapper">
-
-    <define:taglib uri="loom:archive">
-        <define:tag name="copy-deps">
-            <j:if test="${projectDescriptor != null}">
-                <maven:pom var="pom" projectDescriptor="${projectDescriptor}"/>
-            </j:if>
-
-            <j:set var="mavenRepoLocal" value='${context.getVariable("maven.repo.local")}'/>
-            <j:forEach var="dep" items="${pom.dependencies}">
-                <j:if test='${category.equals(dep.getProperty("category"))}'>
-                    <j:set var="addDeps" value='true'/>
-                </j:if>
-            </j:forEach>
-
-            <j:if test='${addDeps == "true" }'>
-                <ant:mkdir dir="${todir}"/>
-                <ant:copy todir="${todir}" flatten="true">
-                    <ant:fileset dir="${mavenRepoLocal}">
-                        <j:forEach var="dep" items="${pom.dependencies}">
-                            <j:if test='${category.equals(dep.getProperty("category"))}'>
-                                <ant:include name="${dep.artifactDirectory}/jars/${dep.artifact}"/>
-                                <ant:include name="${dep.artifactDirectory}/licenses/${dep.artifactId}.license"/>
-                            </j:if>
-                        </j:forEach>
-                    </ant:fileset>
-                </ant:copy>
-            </j:if>
-        </define:tag>
-        <define:tag name="deploy">
-		    <deploy:artifact
-	    	  artifact="${maven.build.dir}/${distribution}"
-	      		  type="distributions"
-	          assureDirectoryCommand="mkdir -p"
-	      	  siteCommand="cd @deployDirectory@; chmod g+w ${distribution}; chgrp ${maven.remote.group} ${distribution}"
-	    	/>
-        </define:tag>
-    </define:taglib>
 
     <define:taglib uri="loom:wrapper">
         <define:tag name="install">
@@ -119,19 +80,16 @@
     </goal>
 
     <goal name="build">
-    	<attainGoal name="build:bin"/>
-    	<attainGoal name="build:src"/>
+    	<attainGoal name="release:build-distribution-bin"/>
+    	<attainGoal name="release:build-distribution-src"/>
     </goal>
 
-    <goal name="build:bin-core">
-        <j:set var="distDir" value='${maven.build.dir}/${maven.final.name}'/>
-        <ant:mkdir dir="${distDir}/tools/lib"/>
-        <ant:mkdir dir="${distDir}/container/lib"/>
-        <ant:mkdir dir="${distDir}/lib"/>
-        <archive:copy-deps todir="${distDir}/tools/lib" category="tools"/>
-        <archive:copy-deps todir="${distDir}/container/lib" category="container"/>
-        <archive:copy-deps todir="${distDir}/lib" category="shared"/>
+    <preGoal name="release:setup-distribution-bin">
+        <wrapper:install/>
+    </preGoal>
 
+    <postGoal name="release:setup-distribution-bin">
+        <j:set var="distDir" value="${maven.build.dir}/${maven.release.name.bin}"/>
         <ant:mkdir dir="${distDir}/conf"/>
         <ant:copy file="src/conf/kernel.xml" todir="${distDir}/conf"/>
         <ant:copy file="src/conf/wrapper.conf" todir="${distDir}/conf"/>
@@ -192,29 +150,9 @@
         </ant:copy>
 
         <ant:copy file="${basedir}/../LICENSE.txt" todir="${distDir}"/>
-    </goal>
+    </postGoal>
 
-    <preGoal name="build:bin">
-        <wrapper:install/>
-    </preGoal>
-
-    <goal name="build:bin">
-        <attainGoal name="build:bin-core"/>
-
-	    <!-- Create a tar.gz file -->
-	    <ant:tar longfile="gnu" tarfile="${maven.build.dir}/${maven.final.name}.tar">
-	      <ant:tarfileset dir="${distDir}" prefix="${maven.final.name}"/>
-	    </ant:tar>
-
-	    <ant:gzip zipfile="${maven.build.dir}/${maven.final.name}.tar.gz"
-	    	src="${maven.build.dir}/${maven.final.name}.tar" />
-	    <ant:delete file="${maven.build.dir}/${maven.final.name}.tar"/>
-
-	    <!-- Create a zip file -->
-	    <ant:zip destfile="${maven.build.dir}/${maven.final.name}.zip">
-	      <ant:zipfileset dir="${distDir}" prefix="${maven.final.name}"/>
-	    </ant:zip>
-
+    <postGoal name="release:build-distribution-bin">
     	<ant:copy todir="${maven.repo.local}/${pom.artifactDirectory}/distributions"
       		overwrite="true">
       		<ant:fileset dir="${maven.build.dir}">
@@ -222,31 +160,16 @@
       			<ant:include name="${maven.final.name}.zip"/>
       		</ant:fileset>
         </ant:copy>
+    </postGoal>
+
+
+    <goal name="deploy">
+    	<attainGoal name="release:deploy-distribution-bin"/>
+    	<attainGoal name="release:deploy-distribution-src"/>
     </goal>
 
-    <goal name="build:src" prereqs="scm:checkout-project">
-        <!-- Create a tar.gz file -->
-        <ant:tar longfile="gnu" tarfile="${maven.build.dir}/${maven.final.name.src}.tar">
-            <ant:tarfileset dir="${maven.scm.checkout.dir}/${maven.scm.cvs.module}" prefix="${maven.final.name.src}"/>
-        </ant:tar>
-
-        <ant:gzip zipfile="${maven.build.dir}/${maven.final.name.src}.tar.gz"
-            src="${maven.build.dir}/${maven.final.name.src}.tar"/>
-        <ant:delete file="${maven.build.dir}/${maven.final.name.src}.tar"/>
-
-        <!-- Create a zip file -->
-        <ant:zip destfile="${maven.build.dir}/${maven.final.name.src}.zip">
-            <ant:zipfileset dir="${maven.scm.checkout.dir}/${maven.scm.cvs.module}" prefix="${maven.final.name.src}"/>
-        </ant:zip>
-
+    <goal name="clean">
+    	<attainGoal name="clean:clean"/>
     </goal>
-
-    <goal name="deploy" prereqs="build">
-        <archive:deploy distribution="${maven.final.name}.zip"/>
-        <archive:deploy distribution="${maven.final.name.src}.zip"/>
-        <archive:deploy distribution="${maven.final.name}.tar.gz"/>
-        <archive:deploy distribution="${maven.final.name.src}.tar.gz"/>
-    </goal>
-
 
 </project>
