@@ -191,4 +191,94 @@ public class ReaderTestCase
                       null,
                       permission1.getSignedBy() );
     }
+
+    public void testConfig5()
+        throws Exception
+    {
+        final PolicyMetaData policy = buildFromResource( "config5.xml" );
+
+        assertEquals( "Policy KeyStore Count",
+                      1,
+                      policy.getKeyStores().length );
+
+        final KeyStoreMetaData keyStore = policy.getKeyStores()[ 0 ];
+        assertEquals( "KeyStore Name",
+                      "default",
+                      keyStore.getName() );
+        assertEquals( "KeyStore Location",
+                      "sar:/conf/keystore",
+                      keyStore.getLocation() );
+        assertEquals( "KeyStore Type",
+                      "JKS",
+                      keyStore.getType() );
+
+        assertEquals( "Policy Grant Count",
+                      2,
+                      policy.getGrants().length );
+
+        final GrantMetaData grant1 = policy.getGrants()[ 0 ];
+        final GrantMetaData grant2 = policy.getGrants()[ 1 ];
+
+        assertEquals( "grant1.getCodebase()",
+                      "myCodeBase",
+                      grant1.getCodebase() );
+        assertEquals( "grant1.getKeyStore()",
+                      null,
+                      grant1.getKeyStore() );
+        assertEquals( "grant1.getSignedBy()",
+                      null,
+                      grant1.getSignedBy() );
+
+        assertEquals( "grant1.getPermissions().length",
+                      1,
+                      grant1.getPermissions().length );
+
+        final PermissionMetaData permission1 = grant1.getPermissions()[ 0 ];
+        assertEquals( "permission1.getClassname()",
+                      "java.io.FilePermission",
+                      permission1.getClassname() );
+        assertEquals( "permission1.getAction()",
+                      "read,write",
+                      permission1.getAction() );
+        assertEquals( "permission1.getTarget()",
+                      "${/}tmp${/}*",
+                      permission1.getTarget() );
+        assertEquals( "permission1.getKeyStore()",
+                      "default",
+                      permission1.getKeyStore() );
+        assertEquals( "permission1.getSignedBy()",
+                      "Bob",
+                      permission1.getSignedBy() );
+
+        assertEquals( "grant2.getCodebase()",
+                      "sar:/SAR-INF/lib/*",
+                      grant2.getCodebase() );
+        assertEquals( "grant2.getKeyStore()",
+                      "default",
+                      grant2.getKeyStore() );
+        assertEquals( "grant2.getSignedBy()",
+                      "Bob",
+                      grant2.getSignedBy() );
+
+        assertEquals( "grant2.getPermissions().length",
+                      1,
+                      grant2.getPermissions().length );
+
+        final PermissionMetaData permission2 = grant2.getPermissions()[ 0 ];
+        assertEquals( "permission2.getClassname()",
+                      "java.io.FilePermission",
+                      permission2.getClassname() );
+        assertEquals( "permission2.getAction()",
+                      null,
+                      permission2.getAction() );
+        assertEquals( "permission2.getTarget()",
+                      null,
+                      permission2.getTarget() );
+        assertEquals( "permission2.getKeyStore()",
+                      null,
+                      permission2.getKeyStore() );
+        assertEquals( "permission2.getSignedBy()",
+                      null,
+                      permission2.getSignedBy() );
+    }
 }
