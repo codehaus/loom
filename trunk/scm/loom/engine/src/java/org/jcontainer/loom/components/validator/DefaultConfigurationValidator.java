@@ -7,7 +7,6 @@
  */
 package org.jcontainer.loom.components.validator;
 
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import org.jcontainer.loom.interfaces.ConfigurationValidator;
@@ -22,10 +21,9 @@ import org.jcontainer.dna.AbstractLogEnabled;
 import org.jcontainer.dna.impl.ConfigurationUtil;
 import org.jcontainer.dna.impl.DefaultConfiguration;
 import org.realityforge.configkit.ConfigValidator;
-import org.realityforge.configkit.ConfigValidatorFactory;
 import org.realityforge.configkit.ValidationResult;
+import org.realityforge.configkit.ComponentConfigUtil;
 import org.w3c.dom.Element;
-import org.xml.sax.InputSource;
 
 /**
  * This component validates the components configuration using
@@ -45,8 +43,8 @@ import org.xml.sax.InputSource;
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author <a href="mailto:proyal at apache.org">Peter Royal</a>
- * @version $Revision: 1.5 $ $Date: 2003-10-05 10:07:04 $
- * @phoenix.component
+ * @version $Revision: 1.6 $ $Date: 2003-10-06 05:20:55 $
+ * @dna.component
  */
 public class DefaultConfigurationValidator
     extends AbstractLogEnabled
@@ -94,11 +92,13 @@ public class DefaultConfigurationValidator
             return true;
         }
 
-        if( getLogger().isDebugEnabled() )
+       final String classname =
+          component.getInfo().getDescriptor().getImplementationKey();
+       if( getLogger().isDebugEnabled() )
         {
             final String message =
                 "Validating component " + component.getMetaData().getName() +
-                " of type " + component.getInfo().getDescriptor().getImplementationKey() +
+                " of type " + classname +
                 " with schema " + schema.getLocation() + " of type " + schema.getType();
             getLogger().debug( message );
         }
@@ -111,21 +111,30 @@ public class DefaultConfigurationValidator
                 "Schema type specified as " + schema.getType() +
                 " was translated to URI " + type + " for component named " +
                 component.getMetaData().getName() + " of type " +
-                component.getInfo().getDescriptor().getImplementationKey() +
+               classname +
                 ". It is recomended that the components Info specify the " +
                 "URI rather than the type for compatability reasons.";
             System.err.println( message );
             getLogger().warn( message );
         }
 
-        //Get the InputSource for schema
-        final InputSource inputSource =
-            getSchemaInputSource( component, classLoader );
-
         //Actually perform the validation
         try
         {
-            final ConfigValidator validator = ConfigValidatorFactory.create( type, inputSource );
+            final ConfigValidator validator =
+                ComponentConfigUtil.getComponentConfigValidator( classname,
+                                                                 classLoader,
+                                                                 schema.getLocation(),
+                                                                 schema.getType() );
+            if( null == validator )
+            {
+                final String message =
+                    "Missing schema for component " + component.getMetaData().getName() +
+                    " of type " + classname +
+                    " with schema " + schema.getLocation() + " of type " + schema.getType();
+                getLogger().warn( message );
+                return false;
+            }
             final Configuration configuration = component.getMetaData().getConfiguration();
             final DefaultConfiguration newConfiguration =
                 new DefaultConfiguration( "root",
@@ -166,68 +175,6 @@ public class DefaultConfigurationValidator
         else
         {
             return type;
-        }
-    }
-
-    /**
-     * Get the input source for schema specified by ComponentInfo object.
-     *
-     * @param component the component profile
-     * @param classLoader the classloader to load schema from
-     * @return the InputSource for schema
-     * @throws ConfigurationException if unable to locate schema
-     */
-    private InputSource getSchemaInputSource( final ComponentProfile component,
-                                              final ClassLoader classLoader )
-        throws ConfigurationException
-    {
-        final SchemaDescriptor schema = component.getInfo().getConfigurationSchema();
-        final String resource = calcSchemaResource( component );
-        final InputStream inputStream = classLoader.getResourceAsStream( resource );
-        if( null == inputStream )
-        {
-            final String message = "Unable to find Schema for component " +
-                component.getMetaData().getName() + " of type " +
-                component.getInfo().getDescriptor().getImplementationKey() +
-                " at location " + resource;
-            throw new ConfigurationException( message, null );
-        }
-
-        final InputSource inputSource = new InputSource( inputStream );
-        inputSource.setSystemId( schema.getLocation() );
-        return inputSource;
-    }
-
-    /**
-     * Determine the absolute name of the resource that contains schema.
-     * If the location starts with a '/' then the location is absolute
-     * otherwise the location is relative to the components class.
-     *
-     * @param component the component profile
-     * @return the absolute name of schema resource
-     */
-    private String calcSchemaResource( final ComponentProfile component )
-    {
-        final SchemaDescriptor schema = component.getInfo().getConfigurationSchema();
-        final String location = schema.getLocation();
-        if( location.startsWith( "/" ) )
-        {
-            return location;
-        }
-        else
-        {
-            final String classname =
-                component.getInfo().getDescriptor().getImplementationKey();
-            String resource = classname;
-            final int index = classname.lastIndexOf( '.' );
-            resource = classname;
-            if( -1 != index )
-            {
-                resource = classname.substring( 0, index + 1 );
-            }
-            resource = resource.replace( '.', '/' );
-            resource += location;
-            return resource;
         }
     }
 }
