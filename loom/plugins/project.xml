@@ -21,7 +21,7 @@
 
     <distributionDirectory>/home/projects/loom/dist</distributionDirectory>
     <distributionSite>dist.codehaus.org</distributionSite>
-    <siteDirectory>/home/projects/loom/public_html/plugins</siteDirectory>
+    <siteDirectory>/home/projects/loom/public_html/releases/${pom.currentVersion}/plugins</siteDirectory>
     <siteAddress>loom.codehaus.org</siteAddress>
 
     <build>
