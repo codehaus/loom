@@ -34,6 +34,10 @@
 </dependency>			
 ]]>
 </source>
+			set in your project.properties
+<source>
+maven.sar.metagenerate=true
+</source>			
 			and execute
 <source>
 maven sar
