@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE component-info
-      PUBLIC "-//AVALON/Component Info DTD Version 1.0//EN"
-             "http://avalon.apache.org/dtds/info/componentinfo_1_0.dtd" >
+      PUBLIC "-//LOOM/Component Info DTD Version 1.0//EN"
+             "http://jcontainer.codehaus.org/loom/componentinfo_1.0.dtd" >
 
 <component-info>
     <component type="org.jcontainer.loom.tools.infobuilder.data.QDoxLegacyComponent1"/>
