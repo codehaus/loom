@@ -31,28 +31,20 @@ import org.xml.sax.InputSource;
  *  An basic test case for the LogManager.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.9 $ $Date: 2003-10-05 10:07:04 $
+ * @version $Revision: 1.10 $ $Date: 2003-10-16 14:14:51 $
  */
 public class LogManagerTestCase
     extends TestCase
 {
     private static final String DEFAULT_LOGFILE = "logs" + File.separator + "default.log";
     private static final String BLOCK_LOGFILE = "logs" + File.separator + "myBlock.log";
-
     private File m_baseDirectory;
-
-    public LogManagerTestCase( final String name )
-    {
-        super( name );
-    }
 
     protected void setUp() throws Exception
     {
-        m_baseDirectory = new File( "target" + File.separator + "testdata" );
-        m_baseDirectory.mkdirs();
-
+        m_baseDirectory = generateDirectory();
         //Because log4j does not guarentee dir creation ;(
-        final File logDir = new File( m_baseDirectory, "logs" );
+        final File logDir = new File( generateDirectory(), "logs" );
         logDir.mkdirs();
     }
 
@@ -96,19 +88,18 @@ public class LogManagerTestCase
     private void runtTestForConfigFile( final int index ) throws Exception
     {
         final Logger hierarchy = createHierarchy( index );
-        runLoggerTest( hierarchy, DEFAULT_LOGFILE, index );
+        runLoggerTest( hierarchy, DEFAULT_LOGFILE );
 
         final Logger childLogger = hierarchy.getChildLogger( "myBlock" );
-        runLoggerTest( childLogger, BLOCK_LOGFILE, index );
+        runLoggerTest( childLogger, BLOCK_LOGFILE );
     }
 
     private void runLoggerTest( final Logger logger,
-                                final String logfile,
-                                final int index )
+                                final String logfile )
     {
-        final long before = getFileSize( index, logfile );
+        final long before = getFileSize( logfile );
         logger.warn( "Danger Will Robinson, Danger!" );
-        final long after = getFileSize( index, logfile );
+        final long after = getFileSize( logfile );
 
         assertFileGrew( logfile, before, after );
     }
@@ -119,10 +110,9 @@ public class LogManagerTestCase
                     before < after );
     }
 
-    private long getFileSize( final int index, final String filename )
+    private long getFileSize( final String filename )
     {
-        final File base = getBaseDir( index );
-        final File file = new File( base, filename );
+        final File file = new File( m_baseDirectory, filename );
         StringBuffer sb = new StringBuffer();
         try
         {
@@ -141,12 +131,6 @@ public class LogManagerTestCase
         return sb.length();
     }
 
-    private File getBaseDir( final int index )
-    {
-        final String baseDir = getBaseDirName( index );
-        return new File( m_baseDirectory, baseDir );
-    }
-
     private Logger createHierarchy( final int index )
         throws Exception
     {
@@ -160,7 +144,7 @@ public class LogManagerTestCase
         if( 3 == index )
         {
             final File file =
-                new File( getBaseDir( index ).getAbsolutePath() + File.separator + "logs" );
+                new File( m_baseDirectory.getAbsolutePath() + File.separator + "logs" );
             file.mkdirs();
         }
 
@@ -196,5 +180,30 @@ public class LogManagerTestCase
         final InputStream resource =
             getClass().getResourceAsStream( config );
         return ConfigurationUtil.buildFromXML( new InputSource( resource ) );
+    }
+
+    private static final File generateDirectory()
+        throws IOException
+    {
+        final File baseDirectory = getBaseDirectory();
+        final File dir =
+            File.createTempFile( "mgtest", ".tmp", baseDirectory ).getCanonicalFile();
+        dir.delete();
+        dir.mkdirs();
+        assertTrue( "dir.exists()", dir.exists() );
+        return dir;
+    }
+
+    private static final File getBaseDirectory()
+    {
+        final String tempDir = System.getProperty( "java.io.tmpdir" );
+        final String baseDir = System.getProperty( "basedir", tempDir );
+
+        final File base = new File( baseDir ).getAbsoluteFile();
+        final String pathname =
+            base + File.separator + "target" + File.separator + "test-data";
+        final File dir = new File( pathname );
+        dir.mkdirs();
+        return dir;
     }
 }
