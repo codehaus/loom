@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+
+<document>
+    <properties>
+        <title>CLoader - Overview</title>
+        <author email="peter at apache.org">Peter Donald</author>
+    </properties>
+    <body>
+        <section name="Introduction">
+            <p>The Loader toolkit is a set of utility classes that enable
+            ClassLoader hierarchies to be constructed from xml
+            configurations.</p>
+            <p>Each ClassLoader can be defined in terms of;</p>
+            <ul>
+                <li><a href="api/org/apache/excalibur/loader/metadata/EntryDef.html">
+                Entrys</a>: URLs designating either a directory or a file</li>
+                <li><a href="api/org/apache/excalibur/loader/metadata/FileSetDef.html">
+                FileSets</a>: Sets of files defined in a manner similar
+                to Ants Filests.</li>
+                <li><a href="http://jakarta.apache.org/avalon/excalibur/extension/api/org/apache/avalon/excalibur/extension/Extension.html">
+                Extensions</a>: Definitions of Extensions, aka "Optional Packages".</li>
+            </ul>
+            <p>Each ClassLoader also has a name and a parent. The parent is the
+            name of the parent ClassLoader. Usually the parent ClassLoaders are
+            one of the predefined ClassLoaders. The predefined are passed into
+            the Loader toolkit from external application code.</p>
+            <p>The predefined ClassLoaders are generally named according to
+            a pattern that places the '*' at start and end of name. ie
+            "*myPredefinedClassLoader*". Many containers pass in the following
+            predefined Classloaders.</p>
+            <ul>
+                <li>*system*: The System ClassLoader.</li>
+                <li>*common*: Common between container and client code.</li>
+                <li>*shared*: Shared between all client code.</li>
+            </ul>
+            <p>For an example ClassLoader hierarchy see the website for
+            <a href="http://jakarta.apache.org/ant/myrmidon/classloader.html">
+            Myrmidon</a>, an Ant2 proposal.</p>
+            <p>The commented <a href="classloader.dtd">DTD</a> describes the descriptor
+            format explicitly. However if you prefer to learn by example then you can
+            look at a <a href="sample.html">sample</a> descriptor and its explanation.</p>
+            <p>If you need to embed the Toolkit in your own application it is recomended
+            that you look over the <a href="embedding.html">Embedding HOWTO</a>.</p>
+        </section>
+    </body>
+</document>

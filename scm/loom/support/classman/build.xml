@@ -1,0 +1,77 @@
+<project default="test" name="cloader" basedir=".">
+
+    <property name="target.dir" value="target"/>
+    <property name="target.classes" value="target/classes"/>
+    <property name="target.reports" value="target/test-reports"/>
+    <property name="final.name" value="cloader-1.0"/>
+
+    <target name="build" description="o Build the code">
+
+        <echo>
+            WARNING: Build file is only for use by GUMP and thus
+            should not be used by developers. Please use maven instead.
+            As a result ClassPath for dependencies is not defined.
+        </echo>
+
+        <mkdir dir="${target.classes}"/>
+        <javac destdir="${target.classes}"
+            deprecation="true" debug="true" optimize="false" excludes="**/package.html">
+            <src>
+                <pathelement location="src/java"/>
+                <pathelement location="src/test"/>
+            </src>
+        </javac>
+
+        <jar jarfile="target/${final.name}.jar"
+            excludes="**/package.html"
+            basedir="${target.classes}"/>
+    </target>
+
+    <target name="clean" description="o Clean up the generated directories">
+        <delete dir="${target.dir}"/>
+    </target>
+
+    <target name="test" description="o Run the test cases" depends="build,build-test-data">
+        <mkdir dir="${target.reports}"/>
+        <junit dir="./" printSummary="yes"
+            haltonfailure="true" fork="true" haltonerror="true">
+            <sysproperty key="basedir" value="src/test"/>
+            <formatter usefile="true" type="plain"/>
+            <formatter usefile="false" type="plain"/>
+            <classpath>
+                <pathelement path="${target.classes}"/>
+            </classpath>
+            <batchtest todir="${target.reports}">
+                <fileset dir="src/test">
+                    <include name="**/*TestCase*"/>
+                    <exclude name="**/Abstract*"/>
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+
+    <target name="build-test-data">
+        <mkdir dir="target/testdata"/>
+        <javac destdir="target/testdata"
+            deprecation="true" debug="true" optimize="false" excludes="**/package.html">
+            <src>
+                <pathelement location="src/testdata"/>
+            </src>
+        </javac>
+        <mkdir dir="${target.classes}"/>
+        <mkdir dir="${target.classes}/SAR-INF/lib"/>
+        <jar jarfile="${target.classes}/cl1.jar" basedir="target/testdata">
+            <include name="org/realityforge/classman/test/data/cl1/**"/>
+        </jar>
+        <jar jarfile="${target.classes}/cl2.jar" basedir="target/testdata">
+            <include name="org/realityforge/classman/test/data/cl2/**"/>
+        </jar>
+        <jar jarfile="${target.classes}/SAR-INF/lib/cl3.jar" basedir="target/testdata">
+            <include name="org/realityforge/classman/test/data/cl3/**"/>
+        </jar>
+        <jar jarfile="${target.classes}/SAR-INF/lib/cl4.jar" basedir="target/testdata">
+            <include name="org/realityforge/classman/test/data/cl4/**"/>
+        </jar>
+    </target>
+
+</project>

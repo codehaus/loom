@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<project>
+    <extend>${basedir}/../../tools/maven/project.xml</extend>
+    <name>ClassMan</name>
+    <id>spice-classman</id>
+    <gumpRepositoryId>components</gumpRepositoryId>
+    <currentVersion>1.0</currentVersion>
+    <inceptionYear>2002</inceptionYear>
+
+    <shortDescription>Toolkit to construct ClassLoader lattices from an XML descriptor.</shortDescription>
+
+    <description>
+        The Loader toolkit is a set of utility classes that enable
+        ClassLoader hierarchies to be constructed from xml
+        configurations.
+    </description>
+
+    <dependencies>
+        <dependency>
+            <id>oro</id>
+            <version>2.0.7</version>
+        </dependency>
+        <dependency>
+            <id>excalibur-i18n</id>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <id>excalibur-extension</id>
+            <version>1.0a</version>
+        </dependency>
+    </dependencies>
+
+    <developers>
+        <developer>
+            <name>Peter Donald</name>
+            <id>donaldp</id>
+            <email>peter at apache.org</email>
+            <roles>
+                <role>Developer</role>
+            </roles>
+        </developer>
+    </developers>
+</project>

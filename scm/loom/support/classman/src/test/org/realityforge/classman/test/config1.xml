@@ -1,0 +1,43 @@
+<classloaders default="*system*" version="1.0">
+    <predefined name="*system*"/>
+
+    <classloader name="LOADER_1" parent="*system*">
+        <entry location="cl1.jar"/>
+    </classloader>
+
+    <classloader name="LOADER_2" parent="*system*">
+        <entry location="cl2.jar"/>
+    </classloader>
+
+    <classloader name="LOADER_3" parent="*system*">
+        <fileset dir=".">
+            <include name="**/*.jar"/>
+            <exclude name="SAR-INF/lib/*.jar"/>
+        </fileset>
+    </classloader>
+
+    <classloader name="LOADER_4" parent="LOADER_1">
+        <fileset dir=".">
+            <include name="SAR-INF/lib/*.jar"/>
+        </fileset>
+    </classloader>
+
+    <classloader name="LOADER_5" parent="LOADER_1">
+        <fileset dir=".">
+            <include name="SAR-INF/**/cl4.jar"/>
+        </fileset>
+    </classloader>
+
+    <classloader name="LOADER_6" parent="LOADER_1">
+        <fileset dir="SAR-INF">
+            <include name="lib/cl4.jar"/>
+        </fileset>
+    </classloader>
+
+    <join name="JOIN_1">
+        <classloader-ref name="LOADER_1"/>
+        <classloader-ref name="LOADER_2"/>
+    </join>
+
+
+</classloaders>
