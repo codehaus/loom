@@ -240,11 +240,11 @@ public class DefaultEmbeddor
     public void execute()
         throws Exception
     {
-        //  If the kernel is empty at this point, it is because the server was
-        //  started without supplying any applications, display a message to
-        //  give the user a clue as to why the server is shutting down
-        //  immediately.
-        if( emptyKernel() )
+        // If the kernel is empty at this point, it is because the server was
+        // started without supplying any applications. If 'persistent' wasn't
+        // set to true, display a message to give the user a clue as to why
+        // the server is shutting down immediately.
+        if( emptyKernel() && !m_persistent )
         {
             final String message = REZ.getString(
                 "embeddor.error.start.no-apps" );
