@@ -16,6 +16,7 @@
 
   	<goal name="deploy">   
 		<attainGoal name="plugin:deploy"/>
+		<attainGoal name="site:deploy"/>
 		<ant:property name="artifact" value="${maven.final.name}.jar"/>
 	    <deploy:artifact
     	  artifact="${maven.build.dir}/${artifact}"
