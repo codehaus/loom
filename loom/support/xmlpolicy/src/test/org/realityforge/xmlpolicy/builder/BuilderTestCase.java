@@ -8,9 +8,14 @@
 package org.realityforge.xmlpolicy.builder;
 
 import junit.framework.TestCase;
+import junit.framework.Test;
 import org.realityforge.xmlpolicy.metadata.GrantMetaData;
 import org.realityforge.xmlpolicy.metadata.KeyStoreMetaData;
 import org.realityforge.xmlpolicy.metadata.PolicyMetaData;
+import java.security.Policy;
+import java.security.CodeSource;
+import java.security.PermissionCollection;
+import java.security.cert.Certificate;
 
 /**
  * TestCase for Builder package.
@@ -23,6 +28,28 @@ public class BuilderTestCase
     public BuilderTestCase( final String name )
     {
         super( name );
+    }
+
+    public void testEmptyMetaData()
+        throws Exception
+    {
+        final PolicyBuilder builder = new PolicyBuilder();
+        final PolicyMetaData metaData =
+            new PolicyMetaData( new KeyStoreMetaData[ 0 ], new GrantMetaData[ 0 ] );
+        final TestResolver resolver = new TestResolver();
+        try
+        {
+            final Policy policy = builder.buildPolicy( metaData, resolver );
+            final PermissionCollection permissions =
+                policy.getPermissions( new CodeSource( null, new Certificate[ 0 ] ) );
+            assertEquals( "Expect no permissions for empty metaData",
+                          false, 
+                          permissions.elements().hasMoreElements() );
+        }
+        catch( final Exception e )
+        {
+            fail( "Expected to be able to build Policy with empty metadata" );
+        }
     }
 
     public void testNullResolverInBuildPolicy()
