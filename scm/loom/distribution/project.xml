@@ -13,37 +13,40 @@
             <groupId>loom</groupId>
             <artifactId>loom-launcher</artifactId>
             <version>${pom.currentVersion}</version>
+		    <url>http://dist.codehaus.org/loom/jars</url>
         </dependency>
         <dependency>
             <groupId>loom</groupId>
             <artifactId>loom-engine</artifactId>
             <version>${pom.currentVersion}</version>
+		    <url>http://dist.codehaus.org/loom/jars</url>
             <properties>
                 <category>container</category>
-            </properties>
-        </dependency>
-        <dependency>
-            <groupId>dna</groupId>
-            <artifactId>dna-tools</artifactId>
-            <version>20031016.083103</version>
-            <properties>
-                <category>tools</category>
-            </properties>
-        </dependency>
-        <dependency>
-            <groupId>loom</groupId>
-            <artifactId>loom-info</artifactId>
-            <version>${pom.currentVersion}</version>
-            <properties>
-                <category>tools</category>
             </properties>
         </dependency>
         <dependency>
             <groupId>loom</groupId>
             <artifactId>loom-tools</artifactId>
             <version>${pom.currentVersion}</version>
+		    <url>http://dist.codehaus.org/loom/jars</url>
             <properties>
                 <category>tools</category>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>avalon</groupId>
+            <artifactId>avalon-framework</artifactId>
+            <version>20030713</version>
+            <properties>
+                <category>shared</category>
+            </properties>
+        </dependency>
+        <dependency>
+        	<groupId>avalon</groupId>
+            <artifactId>avalon-phoenix-client</artifactId>
+            <version>20030819</version>
+            <properties>
+                <category>shared</category>
             </properties>
         </dependency>
         <dependency>
@@ -58,14 +61,7 @@
             <groupId>dna</groupId>
             <artifactId>dna-impl</artifactId>
             <version>20031005.014103</version>
-            <properties>
-                <category>shared</category>
-            </properties>
-        </dependency>
-        <dependency>
-            <groupId>spice</groupId>
-            <artifactId>spice-metaclass</artifactId>
-            <version>20031005.002435</version>
+		    <url>http://dist.codehaus.org/dna/jars</url>
             <properties>
                 <category>shared</category>
             </properties>
@@ -75,37 +71,6 @@
             <version>1.2.2</version>
             <properties>
                 <category>shared</category>
-            </properties>
-        </dependency>
-        <dependency>
-            <groupId>avalon</groupId>
-            <artifactId>avalon-framework</artifactId>
-            <version>20030713</version>
-            <properties>
-                <category>shared</category>
-            </properties>
-        </dependency>
-        <dependency>
-            <groupId>avalon</groupId>
-            <artifactId>avalon-phoenix-client</artifactId>
-            <version>20030819</version>
-            <properties>
-                <category>shared</category>
-            </properties>
-        </dependency>
-        <dependency>
-            <id>excalibur-instrument-manager-interfaces</id>
-            <version>0.1</version>
-            <properties>
-                <category>container</category>
-            </properties>
-        </dependency>
-        <dependency>
-            <groupId>spice</groupId>
-            <artifactId>spice-metaclass-jmx</artifactId>
-            <version>20031017.081651</version>
-            <properties>
-                <category>container</category>
             </properties>
         </dependency>
         <dependency>
@@ -128,6 +93,19 @@
             <properties>
                 <category>container</category>
             </properties>
+        </dependency>
+        <dependency>
+            <id>excalibur-instrument-manager-interfaces</id>
+            <version>0.1</version>
+            <properties>
+                <category>container</category>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>maven</groupId>
+            <artifactId>maven-release-plugin</artifactId>
+            <version>1.2-dev</version>
+            <type>plugin</type>
         </dependency>
         <dependency>
             <groupId>mx4j</groupId>
@@ -161,6 +139,13 @@
             </properties>
         </dependency>
         <dependency>
+            <id>oro</id>
+            <version>2.0.7</version>
+            <properties>
+                <category>tools</category>
+            </properties>
+        </dependency>
+        <dependency>
             <groupId>spice</groupId>
             <artifactId>spice-classman</artifactId>
             <version>20030818.014108</version>
@@ -181,6 +166,30 @@
             <artifactId>spice-configkit</artifactId>
             <version>1.1.3</version>
             <properties>
+                <category>tools</category>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>spice</groupId>
+            <artifactId>spice-extension</artifactId>
+            <version>1.0</version>
+            <properties>
+                <category>container</category>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>spice</groupId>
+            <artifactId>spice-metaclass</artifactId>
+            <version>20031005.002435</version>
+            <properties>
+                <category>shared</category>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>spice</groupId>
+            <artifactId>spice-metaclass-jmx</artifactId>
+            <version>20031015.021238</version>
+            <properties>
                 <category>container</category>
             </properties>
         </dependency>
@@ -195,22 +204,7 @@
         <dependency>
             <groupId>spice</groupId>
             <artifactId>spice-salt</artifactId>
-            <version>20031018.073218</version>
-            <properties>
-                <category>tools</category>
-            </properties>
-        </dependency>
-        <dependency>
-            <groupId>spice</groupId>
-            <artifactId>spice-extension</artifactId>
-            <version>1.0</version>
-            <properties>
-                <category>container</category>
-            </properties>
-        </dependency>
-        <dependency>
-            <id>oro</id>
-            <version>2.0.7</version>
+            <version>0.8dev</version>
             <properties>
                 <category>tools</category>
             </properties>
@@ -219,28 +213,28 @@
             <id>isorelax</id>
             <version>20020414</version>
             <properties>
-                <category>container</category>
+                <category>tools</category>
             </properties>
         </dependency>
         <dependency><!-- for spice-configkit -->
             <id>msv</id>
             <version>20020414</version>
             <properties>
-                <category>container</category>
+                <category>tools</category>
             </properties>
         </dependency>
         <dependency><!-- for spice-configkit -->
             <id>xsdlib</id>
             <version>20030225</version>
             <properties>
-                <category>container</category>
+                <category>tools</category>
             </properties>
         </dependency>
         <dependency><!-- for spice-configkit -->
             <id>relaxngDatatype</id>
             <version>20020414</version>
             <properties>
-                <category>container</category>
+                <category>tools</category>
             </properties>
         </dependency>
         <dependency> <!-- for jcomponent-loggerstore -->
