@@ -34,7 +34,7 @@ import org.realityforge.xmlpolicy.metadata.PolicyMetaData;
  * PolicyMetaData.
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-05 08:52:07 $
+ * @version $Revision: 1.3 $ $Date: 2003-06-05 09:04:04 $
  */
 public class PolicyBuilder
 {
@@ -274,62 +274,6 @@ public class PolicyBuilder
     }
 
     /**
-     * A utility method to get a default codesource
-     * that covers all files on fielsystem
-     *
-     * @return the code source
-     */
-    private CodeSource createDefaultCodeSource()
-    {
-        //Create a URL that covers whole file system.
-        final URL url;
-        try
-        {
-            url = new URL( "file:/-" );
-        }
-        catch( final MalformedURLException mue )
-        {
-            //will never happen
-            throw new IllegalStateException( mue.getMessage() );
-        }
-        final CodeSource codeSource = new CodeSource( url, null );
-        return codeSource;
-    }
-
-    /**
-     * A utility method to get all the default permissions.
-     */
-    private Permission[] getDefaultPermissions()
-    {
-        final ArrayList list = new ArrayList();
-        //these properties straight out ot ${java.home}/lib/security/java.policy
-        list.add( new PropertyPermission( "os.name", "read" ) );
-        list.add( new PropertyPermission( "os.arch", "read" ) );
-        list.add( new PropertyPermission( "os.version", "read" ) );
-        list.add( new PropertyPermission( "file.separator", "read" ) );
-        list.add( new PropertyPermission( "path.separator", "read" ) );
-        list.add( new PropertyPermission( "line.separator", "read" ) );
-
-        list.add( new PropertyPermission( "java.version", "read" ) );
-        list.add( new PropertyPermission( "java.vendor", "read" ) );
-        list.add( new PropertyPermission( "java.vendor.url", "read" ) );
-
-        list.add( new PropertyPermission( "java.class.version", "read" ) );
-        list.add( new PropertyPermission( "java.vm.version", "read" ) );
-        list.add( new PropertyPermission( "java.vm.vendor", "read" ) );
-        list.add( new PropertyPermission( "java.vm.name", "read" ) );
-
-        list.add( new PropertyPermission( "java.specification.version", "read" ) );
-        list.add( new PropertyPermission( "java.specification.vendor", "read" ) );
-        list.add( new PropertyPermission( "java.specification.name", "read" ) );
-        list.add( new PropertyPermission( "java.vm.specification.version", "read" ) );
-        list.add( new PropertyPermission( "java.vm.specification.vendor", "read" ) );
-        list.add( new PropertyPermission( "java.vm.specification.name", "read" ) );
-
-        return (Permission[])list.toArray( new Permission[ list.size() ] );
-    }
-
-    /**
      * Create a keystore of specified type and loading from specified url.
      *
      * @param type the type of key store
@@ -442,5 +386,61 @@ public class PolicyBuilder
         {
             return keyStore;
         }
+    }
+
+    /**
+     * A utility method to get a default codesource
+     * that covers all files on fielsystem
+     *
+     * @return the code source
+     */
+    private CodeSource createDefaultCodeSource()
+    {
+        //Create a URL that covers whole file system.
+        final URL url;
+        try
+        {
+            url = new URL( "file:/-" );
+        }
+        catch( final MalformedURLException mue )
+        {
+            //will never happen
+            throw new IllegalStateException( mue.getMessage() );
+        }
+        final CodeSource codeSource = new CodeSource( url, null );
+        return codeSource;
+    }
+
+    /**
+     * A utility method to get all the default permissions.
+     */
+    private Permission[] getDefaultPermissions()
+    {
+        final ArrayList list = new ArrayList();
+        //these properties straight out ot ${java.home}/lib/security/java.policy
+        list.add( new PropertyPermission( "os.name", "read" ) );
+        list.add( new PropertyPermission( "os.arch", "read" ) );
+        list.add( new PropertyPermission( "os.version", "read" ) );
+        list.add( new PropertyPermission( "file.separator", "read" ) );
+        list.add( new PropertyPermission( "path.separator", "read" ) );
+        list.add( new PropertyPermission( "line.separator", "read" ) );
+
+        list.add( new PropertyPermission( "java.version", "read" ) );
+        list.add( new PropertyPermission( "java.vendor", "read" ) );
+        list.add( new PropertyPermission( "java.vendor.url", "read" ) );
+
+        list.add( new PropertyPermission( "java.class.version", "read" ) );
+        list.add( new PropertyPermission( "java.vm.version", "read" ) );
+        list.add( new PropertyPermission( "java.vm.vendor", "read" ) );
+        list.add( new PropertyPermission( "java.vm.name", "read" ) );
+
+        list.add( new PropertyPermission( "java.specification.version", "read" ) );
+        list.add( new PropertyPermission( "java.specification.vendor", "read" ) );
+        list.add( new PropertyPermission( "java.specification.name", "read" ) );
+        list.add( new PropertyPermission( "java.vm.specification.version", "read" ) );
+        list.add( new PropertyPermission( "java.vm.specification.vendor", "read" ) );
+        list.add( new PropertyPermission( "java.vm.specification.name", "read" ) );
+
+        return (Permission[])list.toArray( new Permission[ list.size() ] );
     }
 }
