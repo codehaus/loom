@@ -22,6 +22,15 @@
             </src>
         </javac>
 
+        <copy todir="${target.classes}">
+            <fileset dir="src/test">
+                <exclude name="**/*.java"/>
+            </fileset>
+            <fileset dir="src/java">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+
         <jar jarfile="target/${final.name}.jar"
             excludes="**/package.html"
             basedir="${target.classes}"/>
