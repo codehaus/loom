@@ -63,11 +63,14 @@ public class RuntimeTestCase
     public void testEntryCtor()
         throws Exception
     {
+        final URL url = new URL( "http://spice.sourveforge.net" );
+        final CodeSource codeSource = new CodeSource( url, new Certificate[ 0 ] );
+        final Permissions permissions = new Permissions();
         try
         {
-            new PolicyEntry( new CodeSource( new URL( "http://spice.sourveforge.net" ),
-                                             new Certificate[ 0 ] ),
-                             new Permissions() );
+            final PolicyEntry entry = new PolicyEntry( codeSource, permissions );
+            assertEquals( "Entry.getCodeSource", codeSource, entry.getCodeSource() );
+            assertEquals( "Entry.getPermissions", permissions, entry.getPermissions() );
         }
         catch( final Throwable t )
         {
