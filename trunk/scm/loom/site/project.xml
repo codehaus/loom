@@ -22,9 +22,9 @@
             <version>4.1.4</version>
         </dependency>
         <dependency>
-            <groupId>avalon</groupId>
-            <artifactId>avalon-phoenix-client</artifactId>
-            <version>20030819</version>
+            <groupId>phoenix</groupId>
+            <artifactId>phoenix-client</artifactId>
+            <version>4.0.4</version>
         </dependency>
         <dependency>
             <groupId>dna</groupId>
