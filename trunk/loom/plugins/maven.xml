@@ -15,7 +15,7 @@
       ignoreFailures="true"/>
   </goal>
 
-  <goal 
+  <goal
     name="install"
     description="Installs each plugin into plugins dir">
     <maven:reactor
@@ -41,7 +41,7 @@
     <maven:reactor
       basedir="${basedir}"
       includes="*/project.xml"
-      goals="clean"
+      goals="clean:clean"
       banner="Cleaning"
       ignoreFailures="false"/>
   </goal>
