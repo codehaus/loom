@@ -67,7 +67,7 @@
         </dependency>
         <dependency>
             <id>excalibur-instrument-manager-interfaces</id>
-            <version>0.1</version>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <id>excalibur-monitor</id>
@@ -79,12 +79,12 @@
         </dependency>
         <dependency>
             <id>excalibur-instrument-manager</id>
-            <version>0.1</version>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>spice</groupId>
             <artifactId>spice-alchemist</artifactId>
-            <version>1.1</version>
+            <version>20040617.222741</version>
         </dependency>
         <dependency>
             <groupId>spice</groupId>
