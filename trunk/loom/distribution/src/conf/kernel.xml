@@ -161,13 +161,13 @@
             class="org.jcontainer.loom.components.kernel.DefaultKernel"
             logger="kernel"/>
 
-        <component role="org.jcontainer.loom.interfaces.ConfigurationRepository"
-            class="org.jcontainer.loom.components.configuration.DefaultConfigurationRepository"
+        <component role="org.jcontainer.loom.interfaces.ConfigurationInterceptor"
+            class="org.jcontainer.loom.components.configuration.NoopConfigurationInterceptor"
             logger="config"/>
 
         <!--
-        <component role="org.jcontainer.loom.interfaces.ConfigurationRepository"
-        class="org.jcontainer.loom.components.configuration.FileSystemPersistentConfigurationRepository"
+        <component role="org.jcontainer.loom.interfaces.ConfigurationInterceptor"
+        class="org.jcontainer.loom.components.configuration.FileSystemPersistentConfigurationInterceptor"
         logger="config"/>
             -->
 
