@@ -7,15 +7,14 @@
  */
 package org.realityforge.xmlpolicy.builder;
 
+import java.security.CodeSource;
+import java.security.PermissionCollection;
+import java.security.Policy;
+import java.security.cert.Certificate;
 import junit.framework.TestCase;
-import junit.framework.Test;
 import org.realityforge.xmlpolicy.metadata.GrantMetaData;
 import org.realityforge.xmlpolicy.metadata.KeyStoreMetaData;
 import org.realityforge.xmlpolicy.metadata.PolicyMetaData;
-import java.security.Policy;
-import java.security.CodeSource;
-import java.security.PermissionCollection;
-import java.security.cert.Certificate;
 
 /**
  * TestCase for Builder package.
@@ -43,7 +42,7 @@ public class BuilderTestCase
             final PermissionCollection permissions =
                 policy.getPermissions( new CodeSource( null, new Certificate[ 0 ] ) );
             assertEquals( "Expect no permissions for empty metaData",
-                          false, 
+                          false,
                           permissions.elements().hasMoreElements() );
         }
         catch( final Exception e )
