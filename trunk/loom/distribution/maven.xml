@@ -41,13 +41,6 @@
                     <ant:filter token="app.long.name" value="${pom.artifactId}"/>
                 </ant:filterset>
             </ant:copy>
-            <ant:copy file="${wrapper.install.dir}/${distName}/src/bin/bash.script.in"
-                tofile="${wrapper.install.dir}/${pom.artifactId}-wrapper.bash">
-                <ant:filterset>
-                    <ant:filter token="app.name" value="${pom.artifactId}"/>
-                    <ant:filter token="app.long.name" value="${pom.artifactId}"/>
-                </ant:filterset>
-            </ant:copy>
             <!-- win32 wrapper -->
             <j:set var="distName" value='wrapper_win32_${wrapper.version}'/>
             <ant:get src="${distURL}/${distName}.zip"
