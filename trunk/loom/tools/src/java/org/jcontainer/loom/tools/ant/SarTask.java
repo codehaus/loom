@@ -13,9 +13,9 @@ import org.apache.tools.ant.taskdefs.Jar;
 import org.apache.tools.ant.types.ZipFileSet;
 
 /**
- * Creates a Sar archive.  
+ * Creates a Sar archive.
  * Required attributes are: sarfile, assembly, config, enviroment.
- * Optional attribute: logging. 
+ * Optional attribute: logging.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author <a href="mailto:stefan.bodewig@epost.de">Stefan Bodewig</a>
@@ -78,12 +78,6 @@ public class SarTask
         }
     }
 
-    public void setServer( final File server )
-    {
-        System.err.println( "DEPRECATED: Server attribute of sar task is deprecated" );
-        setEnvironment( server );
-    }
-
     public void setEnvironment( final File environment )
     {
         m_environment = environment;
@@ -143,8 +137,8 @@ public class SarTask
         pushFile( "SAR-INF/config.xml", m_config );
         pushFile( "SAR-INF/assembly.xml", m_assembly );
         pushFile( "SAR-INF/environment.xml", m_environment );
-        if( m_logging != null 
-         && m_logging.exists() 
+        if( m_logging != null
+         && m_logging.exists()
          && m_logging.isFile() )
         {
             pushFile( "SAR-INF/" + m_logging.getName(), m_logging );
