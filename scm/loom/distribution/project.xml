@@ -43,7 +43,7 @@
         <dependency>
             <groupId>dna</groupId>
             <artifactId>dna-api</artifactId>
-            <version>1.0</version>
+            <version>1.1-rc2</version>
             <properties>
                 <category>shared</category>
             </properties>
@@ -51,10 +51,9 @@
         <dependency>
             <groupId>dna</groupId>
             <artifactId>dna-impl</artifactId>
-            <version>20031005.014103</version>
-		    <url>http://dist.codehaus.org/dna/jars</url>
-            <properties>
-                <category>shared</category>
+            <version>1.1-rc2</version>
+		    <properties>
+                <category>container</category>
             </properties>
         </dependency>
         <dependency>
@@ -179,7 +178,7 @@
         <dependency>
             <groupId>spice</groupId>
             <artifactId>spice-metaclass</artifactId>
-            <version>20031005.002435</version>
+            <version>1.0-rc2</version>
             <properties>
                 <category>shared</category>
             </properties>

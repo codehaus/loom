@@ -7,24 +7,20 @@
  */
 package org.jcontainer.loom.info;
 
-import java.util.ArrayList;
-import java.util.Properties;
-
-import junit.framework.TestCase;
-
-import org.realityforge.metaclass.model.Attribute;
-
 import com.thoughtworks.qdox.model.DefaultDocletTag;
 import com.thoughtworks.qdox.model.DefaultDocletTagFactory;
 import com.thoughtworks.qdox.model.DocletTagFactory;
 import com.thoughtworks.qdox.model.JavaClass;
 import com.thoughtworks.qdox.model.JavaMethod;
 import com.thoughtworks.qdox.model.JavaSource;
+import java.util.ArrayList;
+import java.util.Properties;
+import junit.framework.TestCase;
+import org.realityforge.metaclass.model.Attribute;
 
 /**
- *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-11-29 00:55:57 $
+ * @version $Revision: 1.3 $ $Date: 2003-11-29 07:25:08 $
  */
 public class PhoenixAttributeInterceptorTestCase
     extends TestCase
@@ -35,11 +31,14 @@ public class PhoenixAttributeInterceptorTestCase
         final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
         final Attribute attribute = new Attribute( "ignored" );
         final Attribute result =
-            interceptor.processClassAttribute(new JavaClass(new JavaSource()),attribute );
+            interceptor.processClassAttribute( new JavaClass( new JavaSource() ),
+                                               attribute );
         assertNotNull( "attribute", result );
         assertEquals( "attribute.name", "ignored", result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );
-        assertEquals( "attribute.parameterCount", 0, result.getParameterCount() );
+        assertEquals( "attribute.parameterCount",
+                      0,
+                      result.getParameterCount() );
     }
 
     public void testProcessClassAttributeWithPhoenixBlock()
@@ -48,11 +47,14 @@ public class PhoenixAttributeInterceptorTestCase
         final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
         final Attribute attribute = new Attribute( "phoenix:block" );
         final Attribute result =
-            interceptor.processClassAttribute(new JavaClass(new JavaSource()),attribute );
+            interceptor.processClassAttribute( new JavaClass( new JavaSource() ),
+                                               attribute );
         assertNotNull( "attribute", result );
         assertEquals( "attribute.name", "dna.component", result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );
-        assertEquals( "attribute.parameterCount", 0, result.getParameterCount() );
+        assertEquals( "attribute.parameterCount",
+                      0,
+                      result.getParameterCount() );
     }
 
     public void testProcessClassAttributeWithPhoenixMxTopic()
@@ -61,14 +63,20 @@ public class PhoenixAttributeInterceptorTestCase
         final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
         final Properties parameters = new Properties();
         parameters.setProperty( "name", "MyTopic" );
-        final Attribute attribute = new Attribute( "phoenix:mx-topic", parameters );
+        final Attribute attribute = new Attribute( "phoenix:mx-topic",
+                                                   parameters );
         final Attribute result =
-            interceptor.processClassAttribute(new JavaClass(new JavaSource()),attribute );
+            interceptor.processClassAttribute( new JavaClass( new JavaSource() ),
+                                               attribute );
         assertNotNull( "attribute", result );
         assertEquals( "attribute.name", "mx.component", result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );
-        assertEquals( "attribute.parameterCount", 1, result.getParameterCount() );
-        assertEquals( "attribute.parameter(description)", "MyTopic", result.getParameter( "description" ) );
+        assertEquals( "attribute.parameterCount",
+                      1,
+                      result.getParameterCount() );
+        assertEquals( "attribute.parameter(description)",
+                      "MyTopic",
+                      result.getParameter( "description" ) );
     }
 
     public void testProcessClassAttributeWithPhoenixService()
@@ -77,14 +85,20 @@ public class PhoenixAttributeInterceptorTestCase
         final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
         final Properties parameters = new Properties();
         parameters.setProperty( "name", "X" );
-        final Attribute attribute = new Attribute( "phoenix:service", parameters );
+        final Attribute attribute = new Attribute( "phoenix:service",
+                                                   parameters );
         final Attribute result =
-            interceptor.processClassAttribute(new JavaClass(new JavaSource()),attribute );
+            interceptor.processClassAttribute( new JavaClass( new JavaSource() ),
+                                               attribute );
         assertNotNull( "attribute", result );
         assertEquals( "attribute.name", "dna.service", result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );
-        assertEquals( "attribute.parameterCount", 1, result.getParameterCount() );
-        assertEquals( "attribute.parameter(type)", "X", result.getParameter( "type" ) );
+        assertEquals( "attribute.parameterCount",
+                      1,
+                      result.getParameterCount() );
+        assertEquals( "attribute.parameter(type)",
+                      "X",
+                      result.getParameter( "type" ) );
     }
 
     public void testProcessClassAttributeWithPhoenixMXProxy()
@@ -93,14 +107,20 @@ public class PhoenixAttributeInterceptorTestCase
         final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
         final Properties parameters = new Properties();
         parameters.setProperty( "class", "X" );
-        final Attribute attribute = new Attribute( "phoenix:mx-proxy", parameters );
+        final Attribute attribute = new Attribute( "phoenix:mx-proxy",
+                                                   parameters );
         final Attribute result =
-            interceptor.processClassAttribute(new JavaClass(new JavaSource()),attribute );
+            interceptor.processClassAttribute( new JavaClass( new JavaSource() ),
+                                               attribute );
         assertNotNull( "attribute", result );
         assertEquals( "attribute.name", "mx.proxy", result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );
-        assertEquals( "attribute.parameterCount", 1, result.getParameterCount() );
-        assertEquals( "attribute.parameter(type)", "X", result.getParameter( "type" ) );
+        assertEquals( "attribute.parameterCount",
+                      1,
+                      result.getParameterCount() );
+        assertEquals( "attribute.parameter(type)",
+                      "X",
+                      result.getParameter( "type" ) );
     }
 
     public void testProcessMethodAttributeWithoutTransformation()
@@ -113,7 +133,9 @@ public class PhoenixAttributeInterceptorTestCase
         assertNotNull( "attribute", result );
         assertEquals( "attribute.name", "ignore-me", result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );
-        assertEquals( "attribute.parameterCount", 0, result.getParameterCount() );
+        assertEquals( "attribute.parameterCount",
+                      0,
+                      result.getParameterCount() );
     }
 
     public void testProcessMethodAttributeWithMXDescription()
@@ -136,7 +158,9 @@ public class PhoenixAttributeInterceptorTestCase
         assertNotNull( "attribute", result );
         assertEquals( "attribute.name", "mx.attribute", result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );
-        assertEquals( "attribute.parameterCount", 0, result.getParameterCount() );
+        assertEquals( "attribute.parameterCount",
+                      0,
+                      result.getParameterCount() );
     }
 
     public void testProcessMethodAttributeWithMXAttributeAndDescription()
@@ -148,14 +172,17 @@ public class PhoenixAttributeInterceptorTestCase
         final JavaMethod method = new JavaMethod();
         final ArrayList tags = new ArrayList();
         final DocletTagFactory factory = new DefaultDocletTagFactory();
-        tags.add( factory.createDocletTag( "phoenix:mx-description", description ) );
+        tags.add(
+            factory.createDocletTag( "phoenix:mx-description", description ) );
         method.setTags( tags );
         final Attribute result =
             interceptor.processMethodAttribute( method, attribute );
         assertNotNull( "attribute", result );
         assertEquals( "attribute.name", "mx.attribute", result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );
-        assertEquals( "attribute.parameterCount", 1, result.getParameterCount() );
+        assertEquals( "attribute.parameterCount",
+                      1,
+                      result.getParameterCount() );
         assertEquals( "attribute.parameter(description)",
                       description, result.getParameter( "description" ) );
     }
@@ -173,7 +200,9 @@ public class PhoenixAttributeInterceptorTestCase
         assertNotNull( "attribute", result );
         assertEquals( "attribute.name", "mx.attribute", result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );
-        assertEquals( "attribute.parameterCount", 1, result.getParameterCount() );
+        assertEquals( "attribute.parameterCount",
+                      1,
+                      result.getParameterCount() );
         assertEquals( "attribute.parameter(description)",
                       description, result.getParameter( "description" ) );
     }
@@ -188,7 +217,9 @@ public class PhoenixAttributeInterceptorTestCase
         assertNotNull( "attribute", result );
         assertEquals( "attribute.name", "mx.operation", result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );
-        assertEquals( "attribute.parameterCount", 0, result.getParameterCount() );
+        assertEquals( "attribute.parameterCount",
+                      0,
+                      result.getParameterCount() );
     }
 
     public void testProcessMethodAttributeWithMXOperationAndDescription()
@@ -199,15 +230,17 @@ public class PhoenixAttributeInterceptorTestCase
         final Attribute attribute = new Attribute( "phoenix:mx-operation" );
         final JavaMethod field = new JavaMethod();
         final ArrayList tags = new ArrayList();
-        final DocletTagFactory factory = new DefaultDocletTagFactory();
-        tags.add( factory.createDocletTag( "phoenix:mx-description", description ) );
+        tags.add(
+            new DefaultDocletTag( "phoenix:mx-description", description ) );
         field.setTags( tags );
         final Attribute result =
             interceptor.processMethodAttribute( field, attribute );
         assertNotNull( "attribute", result );
         assertEquals( "attribute.name", "mx.operation", result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );
-        assertEquals( "attribute.parameterCount", 1, result.getParameterCount() );
+        assertEquals( "attribute.parameterCount",
+                      1,
+                      result.getParameterCount() );
         assertEquals( "attribute.parameter(description)",
                       description, result.getParameter( "description" ) );
     }
@@ -225,7 +258,9 @@ public class PhoenixAttributeInterceptorTestCase
         assertNotNull( "attribute", result );
         assertEquals( "attribute.name", "mx.operation", result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );
-        assertEquals( "attribute.parameterCount", 1, result.getParameterCount() );
+        assertEquals( "attribute.parameterCount",
+                      1,
+                      result.getParameterCount() );
         assertEquals( "attribute.parameter(description)",
                       description, result.getParameter( "description" ) );
     }
@@ -234,17 +269,22 @@ public class PhoenixAttributeInterceptorTestCase
         throws Exception
     {
         final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
-        final Attribute attribute = new Attribute( "phoenix:configuration-schema" );
-        final JavaClass javaClass = new JavaClass(new JavaSource());
+        final Attribute attribute = new Attribute(
+            "phoenix:configuration-schema" );
+        final JavaClass javaClass = new JavaClass( new JavaSource() );
         javaClass.setName( "com.biz.MyClass" );
         final JavaMethod method = new JavaMethod();
         method.setParentClass( javaClass );
         final Attribute result =
             interceptor.processMethodAttribute( method, attribute );
         assertNotNull( "attribute", result );
-        assertEquals( "attribute.name", "dna.configuration", result.getName() );
+        assertEquals( "attribute.name",
+                      "dna.configuration",
+                      result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );
-        assertEquals( "attribute.parameterCount", 0, result.getParameterCount() );
+        assertEquals( "attribute.parameterCount",
+                      0,
+                      result.getParameterCount() );
     }
 
     public void testProcessMethodAttributeWithPhoenixConfigurationSchemaSpecifyingType()
@@ -254,17 +294,22 @@ public class PhoenixAttributeInterceptorTestCase
         final Properties parameters = new Properties();
         final String type = "BobbaFett";
         parameters.setProperty( "type", type );
-        final Attribute attribute = new Attribute( "phoenix:configuration-schema", parameters );
-        final JavaClass javaClass = new JavaClass(new JavaSource());
+        final Attribute attribute = new Attribute(
+            "phoenix:configuration-schema", parameters );
+        final JavaClass javaClass = new JavaClass( new JavaSource() );
         javaClass.setName( "com.biz.MyClass" );
         final JavaMethod method = new JavaMethod();
         method.setParentClass( javaClass );
         final Attribute result =
             interceptor.processMethodAttribute( method, attribute );
         assertNotNull( "attribute", result );
-        assertEquals( "attribute.name", "dna.configuration", result.getName() );
+        assertEquals( "attribute.name",
+                      "dna.configuration",
+                      result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );
-        assertEquals( "attribute.parameterCount", 1, result.getParameterCount() );
+        assertEquals( "attribute.parameterCount",
+                      1,
+                      result.getParameterCount() );
         assertEquals( "attribute.parameter(type)",
                       type, result.getParameter( "type" ) );
     }
@@ -275,17 +320,22 @@ public class PhoenixAttributeInterceptorTestCase
         final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
         final Properties parameters = new Properties();
         parameters.setProperty( "type", "relax-ng" );
-        final Attribute attribute = new Attribute( "phoenix:configuration-schema", parameters );
-        final JavaClass javaClass = new JavaClass(new JavaSource());
+        final Attribute attribute = new Attribute(
+            "phoenix:configuration-schema", parameters );
+        final JavaClass javaClass = new JavaClass( new JavaSource() );
         javaClass.setName( "com.biz.MyClass" );
         final JavaMethod method = new JavaMethod();
         method.setParentClass( javaClass );
         final Attribute result =
             interceptor.processMethodAttribute( method, attribute );
         assertNotNull( "attribute", result );
-        assertEquals( "attribute.name", "dna.configuration", result.getName() );
+        assertEquals( "attribute.name",
+                      "dna.configuration",
+                      result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );
-        assertEquals( "attribute.parameterCount", 1, result.getParameterCount() );
+        assertEquals( "attribute.parameterCount",
+                      1,
+                      result.getParameterCount() );
         assertEquals( "attribute.parameter(type)",
                       "http://relaxng.org/ns/structure/1.0",
                       result.getParameter( "type" ) );
@@ -298,13 +348,16 @@ public class PhoenixAttributeInterceptorTestCase
         final Properties parameters = new Properties();
         final String type = "BobbaFett";
         parameters.setProperty( "name", type );
-        final Attribute attribute = new Attribute( "phoenix:dependency", parameters );
+        final Attribute attribute = new Attribute( "phoenix:dependency",
+                                                   parameters );
         final Attribute result =
             interceptor.processMethodAttribute( new JavaMethod(), attribute );
         assertNotNull( "attribute", result );
         assertEquals( "attribute.name", "dna.dependency", result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );
-        assertEquals( "attribute.parameterCount", 1, result.getParameterCount() );
+        assertEquals( "attribute.parameterCount",
+                      1,
+                      result.getParameterCount() );
         assertEquals( "attribute.parameter(type)",
                       type, result.getParameter( "type" ) );
     }
@@ -318,13 +371,16 @@ public class PhoenixAttributeInterceptorTestCase
         final String key = "myKey";
         parameters.setProperty( "name", type );
         parameters.setProperty( "role", key );
-        final Attribute attribute = new Attribute( "phoenix:dependency", parameters );
+        final Attribute attribute = new Attribute( "phoenix:dependency",
+                                                   parameters );
         final Attribute result =
             interceptor.processMethodAttribute( new JavaMethod(), attribute );
         assertNotNull( "attribute", result );
         assertEquals( "attribute.name", "dna.dependency", result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );
-        assertEquals( "attribute.parameterCount", 2, result.getParameterCount() );
+        assertEquals( "attribute.parameterCount",
+                      2,
+                      result.getParameterCount() );
         assertEquals( "attribute.parameter(type)",
                       type, result.getParameter( "type" ) );
         assertEquals( "attribute.parameter(key)",
@@ -335,13 +391,21 @@ public class PhoenixAttributeInterceptorTestCase
         throws Exception
     {
         final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
-        final Attribute[] input = new Attribute[]{new Attribute( "RandomJAttribute" )};
+        final Attribute[] input = new Attribute[]{
+            new Attribute( "RandomJAttribute" )};
         final Attribute[] attributes =
-            interceptor.processClassAttributes(new JavaClass(new JavaSource()),input );
+            interceptor.processClassAttributes(
+                new JavaClass( new JavaSource() ), input );
         assertEquals( "attributes.length", 1, attributes.length );
-        assertEquals( "attributes[0].name", "RandomJAttribute", attributes[ 0 ].getName() );
-        assertEquals( "attributes[0].value", null, attributes[ 0 ].getValue() );
-        assertEquals( "attributes[0].parameterCount", 0, attributes[ 0 ].getParameterCount() );
+        assertEquals( "attributes[0].name",
+                      "RandomJAttribute",
+                      attributes[ 0 ].getName() );
+        assertEquals( "attributes[0].value",
+                      null,
+                      attributes[ 0 ].getValue() );
+        assertEquals( "attributes[0].parameterCount",
+                      0,
+                      attributes[ 0 ].getParameterCount() );
     }
 
     public void testProcessClassAttributesWithMXService()
@@ -354,33 +418,54 @@ public class PhoenixAttributeInterceptorTestCase
         final Attribute attribute = new Attribute( "phoenix:mx", parameters );
         final Attribute[] input = new Attribute[]{attribute};
         final Attribute[] attributes =
-            interceptor.processClassAttributes(new JavaClass(new JavaSource()),input );
+            interceptor.processClassAttributes(
+                new JavaClass( new JavaSource() ), input );
         assertEquals( "attributes.length", 2, attributes.length );
-        assertEquals( "attributes[0].name", "dna.service", attributes[ 0 ].getName() );
-        assertEquals( "attributes[0].value", null, attributes[ 0 ].getValue() );
-        assertEquals( "attributes[0].parameterCount", 1, attributes[ 0 ].getParameterCount() );
+        assertEquals( "attributes[0].name",
+                      "dna.service",
+                      attributes[ 0 ].getName() );
+        assertEquals( "attributes[0].value",
+                      null,
+                      attributes[ 0 ].getValue() );
+        assertEquals( "attributes[0].parameterCount",
+                      1,
+                      attributes[ 0 ].getParameterCount() );
         assertEquals( "attributes[0].parameter(type)",
                       type, attributes[ 0 ].getParameter( "type" ) );
-        assertEquals( "attributes[1].name", "mx.interface", attributes[ 1 ].getName() );
-        assertEquals( "attributes[1].value", null, attributes[ 1 ].getValue() );
-        assertEquals( "attributes[1].parameterCount", 2, attributes[ 1 ].getParameterCount() );
+        assertEquals( "attributes[1].name",
+                      "mx.interface",
+                      attributes[ 1 ].getName() );
+        assertEquals( "attributes[1].value",
+                      null,
+                      attributes[ 1 ].getValue() );
+        assertEquals( "attributes[1].parameterCount",
+                      2,
+                      attributes[ 1 ].getParameterCount() );
         assertEquals( "attributes[1].parameter(type)",
                       type, attributes[ 1 ].getParameter( "type" ) );
         assertEquals( "attributes[1].parameter(topic)",
-                      "PerformMagicService", attributes[ 1 ].getParameter( "type" ) );
+                      "PerformMagicService",
+                      attributes[ 1 ].getParameter( "type" ) );
     }
 
     public void testProcessMethodAttributesWithoutMXOperation()
         throws Exception
     {
         final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
-        final Attribute[] input = new Attribute[]{new Attribute( "RandomJAttribute" )};
+        final Attribute[] input = new Attribute[]{
+            new Attribute( "RandomJAttribute" )};
         final Attribute[] attributes =
             interceptor.processMethodAttributes( new JavaMethod(), input );
         assertEquals( "attributes.length", 1, attributes.length );
-        assertEquals( "attributes[0].name", "RandomJAttribute", attributes[ 0 ].getName() );
-        assertEquals( "attributes[0].value", null, attributes[ 0 ].getValue() );
-        assertEquals( "attributes[0].parameterCount", 0, attributes[ 0 ].getParameterCount() );
+        assertEquals( "attributes[0].name",
+                      "RandomJAttribute",
+                      attributes[ 0 ].getName() );
+        assertEquals( "attributes[0].value",
+                      null,
+                      attributes[ 0 ].getValue() );
+        assertEquals( "attributes[0].parameterCount",
+                      0,
+                      attributes[ 0 ].getParameterCount() );
 
     }
 
@@ -388,13 +473,20 @@ public class PhoenixAttributeInterceptorTestCase
         throws Exception
     {
         final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
-        final Attribute[] input = new Attribute[]{new Attribute( "mx.operation" )};
+        final Attribute[] input = new Attribute[]{
+            new Attribute( "mx.operation" )};
         final Attribute[] attributes =
             interceptor.processMethodAttributes( new JavaMethod(), input );
         assertEquals( "attributes.length", 1, attributes.length );
-        assertEquals( "attributes[0].name", "mx.operation", attributes[ 0 ].getName() );
-        assertEquals( "attributes[0].value", null, attributes[ 0 ].getValue() );
-        assertEquals( "attributes[0].parameterCount", 0, attributes[ 0 ].getParameterCount() );
+        assertEquals( "attributes[0].name",
+                      "mx.operation",
+                      attributes[ 0 ].getName() );
+        assertEquals( "attributes[0].value",
+                      null,
+                      attributes[ 0 ].getValue() );
+        assertEquals( "attributes[0].parameterCount",
+                      0,
+                      attributes[ 0 ].getParameterCount() );
     }
 
     public void testProcessMethodAttributesWithMXOperationWithMalformedParameter()
@@ -407,12 +499,24 @@ public class PhoenixAttributeInterceptorTestCase
         final Attribute[] attributes =
             interceptor.processMethodAttributes( new JavaMethod(), input );
         assertEquals( "attributes.length", 2, attributes.length );
-        assertEquals( "attributes[0].name", "mx.operation", attributes[ 0 ].getName() );
-        assertEquals( "attributes[0].value", null, attributes[ 0 ].getValue() );
-        assertEquals( "attributes[0].parameterCount", 0, attributes[ 0 ].getParameterCount() );
-        assertEquals( "attributes[1].name", "param", attributes[ 1 ].getName() );
-        assertEquals( "attributes[1].value", "var", attributes[ 1 ].getValue() );
-        assertEquals( "attributes[1].parameterCount", 0, attributes[ 1 ].getParameterCount() );
+        assertEquals( "attributes[0].name",
+                      "mx.operation",
+                      attributes[ 0 ].getName() );
+        assertEquals( "attributes[0].value",
+                      null,
+                      attributes[ 0 ].getValue() );
+        assertEquals( "attributes[0].parameterCount",
+                      0,
+                      attributes[ 0 ].getParameterCount() );
+        assertEquals( "attributes[1].name",
+                      "param",
+                      attributes[ 1 ].getName() );
+        assertEquals( "attributes[1].value",
+                      "var",
+                      attributes[ 1 ].getValue() );
+        assertEquals( "attributes[1].parameterCount",
+                      0,
+                      attributes[ 1 ].getParameterCount() );
     }
 
     public void testProcessMethodAttributesWithMXOperationWithParameter()
@@ -421,19 +525,38 @@ public class PhoenixAttributeInterceptorTestCase
         final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
         final Attribute[] input =
             new Attribute[]{new Attribute( "mx.operation" ),
-                            new Attribute( "param", "var This is the description" )};
+                            new Attribute( "param",
+                                           "var This is the description" )};
         final Attribute[] attributes =
             interceptor.processMethodAttributes( new JavaMethod(), input );
         assertEquals( "attributes.length", 3, attributes.length );
-        assertEquals( "attributes[0].name", "mx.operation", attributes[ 0 ].getName() );
-        assertEquals( "attributes[0].value", null, attributes[ 0 ].getValue() );
-        assertEquals( "attributes[0].parameterCount", 0, attributes[ 0 ].getParameterCount() );
-        assertEquals( "attributes[1].name", "param", attributes[ 1 ].getName() );
-        assertEquals( "attributes[1].value", "var This is the description", attributes[ 1 ].getValue() );
-        assertEquals( "attributes[1].parameterCount", 0, attributes[ 1 ].getParameterCount() );
-        assertEquals( "attributes[2].name", "mx.parameter", attributes[ 2 ].getName() );
-        assertEquals( "attributes[2].value", null, attributes[ 2 ].getValue() );
-        assertEquals( "attributes[2].parameterCount", 2, attributes[ 2 ].getParameterCount() );
+        assertEquals( "attributes[0].name",
+                      "mx.operation",
+                      attributes[ 0 ].getName() );
+        assertEquals( "attributes[0].value",
+                      null,
+                      attributes[ 0 ].getValue() );
+        assertEquals( "attributes[0].parameterCount",
+                      0,
+                      attributes[ 0 ].getParameterCount() );
+        assertEquals( "attributes[1].name",
+                      "param",
+                      attributes[ 1 ].getName() );
+        assertEquals( "attributes[1].value",
+                      "var This is the description",
+                      attributes[ 1 ].getValue() );
+        assertEquals( "attributes[1].parameterCount",
+                      0,
+                      attributes[ 1 ].getParameterCount() );
+        assertEquals( "attributes[2].name",
+                      "mx.parameter",
+                      attributes[ 2 ].getName() );
+        assertEquals( "attributes[2].value",
+                      null,
+                      attributes[ 2 ].getValue() );
+        assertEquals( "attributes[2].parameterCount",
+                      2,
+                      attributes[ 2 ].getParameterCount() );
         assertEquals( "attributes[2].parameter(name)",
                       "var",
                       attributes[ 2 ].getParameter( "name" ) );

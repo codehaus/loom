@@ -12,12 +12,16 @@
             overwrite="true">
 			<ant:fileset dir="${maven.build.dir}">
 				<ant:include name="*.sar"/>
-			</ant:fileset>            
+			</ant:fileset>
         </ant:copy>
     </goal>
 
     <goal name="deploy">
         <attainGoal name="sar:deploy"/>
     </goal>
+
+    <postGoal name="java:compile">
+        <attainGoal name="sar:metagenerate"/>
+    </postGoal>
 
 </project>

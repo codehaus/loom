@@ -7,7 +7,6 @@
     xmlns:util="jelly:util">
 
     <j:set var="maven.sar.final.name" value="${pom.artifactId}.sar"/>
-    <j:set var="metagenerate" value="${context.getVariable('maven.sar.metagenerate')}"/>
     <j:set var="logging" value="${context.getVariable('maven.sar.logging')}"/>
 
     <!--==================================================================-->
@@ -16,36 +15,34 @@
     <goal name="sar" prereqs="sar:sar" description="Build a sar file"/>
 
     <!--==================================================================-->
-    <!-- Metagenerate descriptor files - only if maven.sar.metagenerate=true   -->
+    <!-- Setup Descriptor Tools                                           -->
     <!--==================================================================-->
-    <goal name="sar:metagenerate" 
-        description="Metagenerate descriptor files">
-        <j:if test="${metagenerate == 'true'}">
-            <ant:echo message="Generating Component Descriptors"/>
-            <!-- Define taskdef -->
-            <ant:taskdef name="metagenerate"
-                classname="org.jcontainer.loom.info.GenerateLoomDescriptorsTask">
+    <goal name="sar:init"
+        prereqs="dna:init"
+        description="Setup Loom Descriptor Processing Tasks">
+
+        <ant:mc_interceptorSet id="maven.loom.interceptors">
+            <ant:interceptor
+                name="org.jcontainer.loom.info.PhoenixAttributeInterceptor">
                 <ant:classpath>
                     <ant:pathelement path="${plugin.dir}"/>
-                    <ant:pathelement path="${plugin.getDependencyPath('dna:dna-tools')}"/>
-                    <ant:pathelement path="${plugin.getDependencyPath('qdox')}"/>
-                    <ant:pathelement path="${plugin.getDependencyPath('spice:spice-metaclass')}"/>
                 </ant:classpath>
-            </ant:taskdef>
-            <!-- Ensure maven.build.dest exists -->
-            <ant:mkdir dir="${maven.build.dest}"/>
-            <metagenerate destDir="${maven.build.dest}">
-                <ant:fileset dir="${maven.sar.metagenerate.src}">
-                    <ant:include name="${maven.sar.metagenerate.include}"/>
-                    <ant:exclude name="${maven.sar.metagenerate.exclude}"/>
-                </ant:fileset>
-            </metagenerate>
-        </j:if>
+            </ant:interceptor>
+        </ant:mc_interceptorSet>
+
+        <ant:mc_addToInterceptorSet
+            dest="maven.metaclass.interceptors"
+            source="maven.loom.interceptors"/>
     </goal>
 
-    <postGoal name="java:compile">
-        <attainGoal name="sar:metagenerate"/>
-    </postGoal>
+    <!--==================================================================-->
+    <!-- Metagenerate descriptor files                                    -->
+    <!--==================================================================-->
+    <goal name="sar:metagenerate"
+        prereqs="sar:init"
+        description="Generate Loom Descriptor Files">
+        <attainGoal name="metaclass:generate"/>
+    </goal>
 
     <!--==================================================================-->
     <!-- Builds a sar file                                                -->
