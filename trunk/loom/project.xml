@@ -1,20 +1,25 @@
 <?xml version="1.0"?>
 <project>
-
     <pomVersion>3</pomVersion>
 
     <currentVersion>1.0</currentVersion>
     <inceptionYear>2000</inceptionYear>
+    <!--<logo>/images/logo.gif</logo>-->
 
     <organization>
         <name>The JContainer Group</name>
-        <url>http://jcontainer.org/loom/</url>
+        <url>http://loom.jcontainer.org/</url>
+	    <!--<logo>/images/logo.gif</logo>-->
     </organization>
 
 	<groupId>loom</groupId>
     <package>org.jcontainer.loom.${pom.artifactId.substring(5)}</package>
-    <url>http://jcontainer.org/loom/${pom.artifactId.substring(5)}</url>
+    <url>http://loom.jcontainer.org/${pom.artifactId.substring(5)}</url>
     <distributionDirectory>/home/groups/s/sp/spice/htdocs/maven/${groupId}</distributionDirectory>
     <distributionSite>spice.sourceforge.net</distributionSite>
-
+    
+    <repository>
+        <connection>scm:cvs:peserver:anoncvs@codehaus.org:/cvsroot/jcontainer:jcontainer</connection>    
+        <url>http://jcontainer.cvs.codehaus.org/</url>
+    </repository>
 </project>
