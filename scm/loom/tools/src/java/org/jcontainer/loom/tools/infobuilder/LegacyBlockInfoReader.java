@@ -30,7 +30,7 @@ import org.xml.sax.InputSource;
  * <a href="package-summary.html#external">package summary</a>.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.11 $ $Date: 2003-10-05 10:07:04 $
+ * @version $Revision: 1.12 $ $Date: 2003-10-06 12:48:52 $
  */
 public final class LegacyBlockInfoReader
     extends AbstractLogEnabled
@@ -95,7 +95,7 @@ public final class LegacyBlockInfoReader
 
         configuration = info.getChild( "block" );
         final ComponentDescriptor descriptor =
-            buildComponentDescriptor( classname, configuration );
+            new ComponentDescriptor( classname, Attribute.EMPTY_SET );
         final String implementationKey = descriptor.getImplementationKey();
 
         final ServiceDescriptor[] services = buildServices( info );
@@ -255,14 +255,7 @@ public final class LegacyBlockInfoReader
         throws ConfigurationException
     {
         final String implementationKey = service.getAttribute( "name" );
-        final String version = service.getAttribute( "version", null );
-
         final ArrayList attributeSet = new ArrayList();
-        if( null != version )
-        {
-            attributeSet.add( LegacyUtil.createVersionAttribute( version ) );
-        }
-
         if( isManagement )
         {
             attributeSet.add( LegacyUtil.MX_ATTRIBUTE );
@@ -272,21 +265,4 @@ public final class LegacyBlockInfoReader
         return new ServiceDescriptor( implementationKey, attributes );
     }
 
-    /**
-     * A utility method to build a {@link org.jcontainer.loom.tools.info.ComponentDescriptor}
-     * object from specified configuraiton data and classname.
-     *
-     * @param config the Component Configuration
-     * @return the created ComponentDescriptor
-     */
-    private ComponentDescriptor buildComponentDescriptor( final String classname,
-                                                          final Configuration config )
-    {
-        final String version = config.getChild( "version" ).getValue( "1.0" );
-        final ArrayList attributeSet = new ArrayList();
-        attributeSet.add( LegacyUtil.createVersionAttribute( version ) );
-
-        final Attribute[] attributes = (Attribute[])attributeSet.toArray( new Attribute[ attributeSet.size() ] );
-        return new ComponentDescriptor( classname, attributes );
-    }
 }

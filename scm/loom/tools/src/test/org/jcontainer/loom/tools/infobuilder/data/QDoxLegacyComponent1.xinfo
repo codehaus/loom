@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE blockinfo
+    PUBLIC "-//LOOM/Block Info DTD Version 1.0//EN"
+    "http://jcontainer.codehaus.org/loom/blockinfo_1.0.dtd">
+
+<blockinfo>
+
+    <!-- section to describe block -->
+    <block>
+        <version>1.0</version>
+        <schema-type>http://relaxng.org/ns/structure/1.0</schema-type>
+    </block>
+
+    <!-- services that are offered by this block -->
+    <services>
+        <service name="org.jcontainer.loom.tools.infobuilder.data.Service1"/>
+        <service name="org.jcontainer.loom.tools.infobuilder.data.otherpkg.Service2"/>
+        <service name="org.jcontainer.loom.tools.infobuilder.data.otherpkg.Service3"/>
+    </services>
+
+
+    <management-access-points>
+        <service name="org.jcontainer.loom.tools.infobuilder.data.otherpkg.ServiceMBean"/>
+    </management-access-points>
+
+    <!-- services that are required by this block -->
+    <dependencies>
+        <dependency>
+            <role>foo</role>
+            <service name="org.jcontainer.loom.tools.infobuilder.data.otherpkg.Service3"/>
+        </dependency>
+        <dependency>
+            <service name="org.jcontainer.loom.tools.infobuilder.data.otherpkg.Service3"/>
+        </dependency>
+        <dependency>
+            <service name="org.jcontainer.loom.tools.infobuilder.data.otherpkg.Service2"/>
+        </dependency>
+    </dependencies>
+</blockinfo>
