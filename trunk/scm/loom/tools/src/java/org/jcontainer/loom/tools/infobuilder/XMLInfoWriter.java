@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import org.jcontainer.loom.tools.info.Attribute;
 import org.jcontainer.loom.tools.info.ComponentDescriptor;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ContextDescriptor;
@@ -20,12 +19,13 @@ import org.jcontainer.loom.tools.info.EntryDescriptor;
 import org.jcontainer.loom.tools.info.LoggerDescriptor;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
+import org.realityforge.metaclass.model.Attribute;
 
 /**
  * Write {@link org.jcontainer.loom.tools.info.ComponentInfo} objects to a stream as xml documents.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-06-29 01:07:35 $
+ * @version $Revision: 1.4 $ $Date: 2003-10-05 01:06:31 $
  */
 public class XMLInfoWriter
     implements InfoWriter

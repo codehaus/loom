@@ -86,8 +86,8 @@
  */
 package org.jcontainer.loom.tools.metadata;
 
-import org.jcontainer.loom.tools.info.Attribute;
 import org.jcontainer.loom.tools.info.FeatureDescriptor;
+import org.realityforge.metaclass.model.Attribute;
 
 /**
  * The {@link DependencyMetaData} is the mapping of a component as a dependency
@@ -100,7 +100,7 @@ import org.jcontainer.loom.tools.info.FeatureDescriptor;
  * <p>Note that it is invalid to have circular dependencies.</p>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-08-17 18:27:34 $
+ * @version $Revision: 1.6 $ $Date: 2003-10-05 01:06:31 $
  */
 public final class DependencyMetaData
     extends FeatureDescriptor

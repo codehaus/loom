@@ -87,9 +87,9 @@
 package org.jcontainer.loom.components.application;
 
 import org.jcontainer.loom.interfaces.ContainerConstants;
-import org.jcontainer.loom.tools.info.Attribute;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
+import org.realityforge.metaclass.model.Attribute;
 
 /**
  * This is the structure describing each block before it is loaded.

@@ -7,6 +7,8 @@
  */
 package org.jcontainer.loom.tools.info;
 
+import org.realityforge.metaclass.model.Attribute;
+
 /**
  * A descriptor that describes dependency information for
  * a particular Component. This class contains information
@@ -30,7 +32,7 @@ package org.jcontainer.loom.tools.info;
  * demands.</p>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-29 01:07:35 $
+ * @version $Revision: 1.3 $ $Date: 2003-10-05 01:06:31 $
  */
 public final class DependencyDescriptor
     extends FeatureDescriptor

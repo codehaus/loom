@@ -10,6 +10,14 @@
 
     <dependencies>
         <dependency>
+            <groupId>spice</groupId>
+            <artifactId>spice-metaclass</artifactId>
+            <version>20031005.002435</version>
+            <properties>
+                <category>shared</category>
+            </properties>
+        </dependency>
+        <dependency>
             <groupId>avalon</groupId>
             <artifactId>avalon-logkit</artifactId>
             <version>20030527</version>

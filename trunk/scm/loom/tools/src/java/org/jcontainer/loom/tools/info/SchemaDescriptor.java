@@ -7,6 +7,8 @@
  */
 package org.jcontainer.loom.tools.info;
 
+import org.realityforge.metaclass.model.Attribute;
+
 /**
  * A descriptor describing the schema to validate the components
  * {@link org.apache.avalon.framework.parameters.Parameters} or
@@ -22,7 +24,7 @@ package org.jcontainer.loom.tools.info;
  * about Schema requirements.</p>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-06-29 01:07:35 $
+ * @version $Revision: 1.4 $ $Date: 2003-10-05 01:06:31 $
  */
 public class SchemaDescriptor
     extends FeatureDescriptor

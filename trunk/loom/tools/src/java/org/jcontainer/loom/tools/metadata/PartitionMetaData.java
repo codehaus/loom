@@ -7,8 +7,8 @@
  */
 package org.jcontainer.loom.tools.metadata;
 
-import org.jcontainer.loom.tools.info.Attribute;
 import org.jcontainer.loom.tools.info.FeatureDescriptor;
+import org.realityforge.metaclass.model.Attribute;
 
 /**
  * In each Assembly there may be groups of components that
@@ -19,7 +19,7 @@ import org.jcontainer.loom.tools.info.FeatureDescriptor;
  * each other.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-07-19 01:51:59 $
+ * @version $Revision: 1.4 $ $Date: 2003-10-05 01:06:31 $
  */
 public class PartitionMetaData
     extends FeatureDescriptor

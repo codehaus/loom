@@ -14,7 +14,6 @@ import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.jcontainer.loom.tools.configuration.ConfigurationBuilder;
-import org.jcontainer.loom.tools.info.Attribute;
 import org.jcontainer.loom.tools.info.ComponentDescriptor;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ContextDescriptor;
@@ -25,6 +24,7 @@ import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
+import org.realityforge.metaclass.model.Attribute;
 import org.xml.sax.InputSource;
 
 /**
@@ -33,7 +33,7 @@ import org.xml.sax.InputSource;
  * is specified in the <a href="package-summary.html#external">package summary</a>.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-07-07 13:12:59 $
+ * @version $Revision: 1.7 $ $Date: 2003-10-05 01:06:31 $
  */
 public final class XMLInfoReader
     extends AbstractLogEnabled
@@ -401,7 +401,7 @@ public final class XMLInfoReader
         final Properties parameters = buildParameters( config );
         if( 0 == parameters.size() )
         {
-            return new Attribute( name, null );
+            return new Attribute( name );
         }
         else
         {

@@ -90,7 +90,6 @@ import com.thoughtworks.qdox.model.DocletTag;
 import com.thoughtworks.qdox.model.JavaClass;
 import com.thoughtworks.qdox.model.JavaMethod;
 import java.util.ArrayList;
-import org.jcontainer.loom.tools.info.Attribute;
 import org.jcontainer.loom.tools.info.ComponentDescriptor;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ContextDescriptor;
@@ -99,6 +98,7 @@ import org.jcontainer.loom.tools.info.LoggerDescriptor;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
 import org.jcontainer.loom.tools.infobuilder.LegacyUtil;
+import org.realityforge.metaclass.model.Attribute;
 
 /**
  * Build a ComponentInfo object by interpreting Phoenix style javadoc
@@ -106,7 +106,7 @@ import org.jcontainer.loom.tools.infobuilder.LegacyUtil;
  *
  * @author Paul Hammant
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-08-17 18:27:34 $
+ * @version $Revision: 1.7 $ $Date: 2003-10-05 01:06:31 $
  */
 public class LegacyInfoBuilder
     extends AbstractInfoBuilder

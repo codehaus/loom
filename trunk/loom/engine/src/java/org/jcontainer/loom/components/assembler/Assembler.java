@@ -95,13 +95,13 @@ import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.tools.LoomToolConstants;
-import org.jcontainer.loom.tools.info.Attribute;
 import org.jcontainer.loom.tools.metadata.ComponentMetaData;
 import org.jcontainer.loom.tools.metadata.DependencyMetaData;
 import org.jcontainer.loom.tools.metadata.MetaDataBuilder;
 import org.jcontainer.loom.tools.metadata.PartitionMetaData;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
+import org.realityforge.metaclass.model.Attribute;
 
 /**
  * Assemble a {@link PartitionMetaData} object from a Configuration
@@ -109,7 +109,7 @@ import org.realityforge.salt.i18n.Resources;
  * and is in the format specified for <tt>assembly.xml</tt> files.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-10-05 00:13:54 $
+ * @version $Revision: 1.6 $ $Date: 2003-10-05 01:06:31 $
  */
 public class Assembler
     extends AbstractLogEnabled
@@ -229,7 +229,7 @@ public class Assembler
             if( disableProxy )
             {
                 final Attribute attribute =
-                    new Attribute( ContainerConstants.DISABLE_PROXY_ATTR, null );
+                    new Attribute( ContainerConstants.DISABLE_PROXY_ATTR );
                 attributeSet.add( attribute );
             }
 

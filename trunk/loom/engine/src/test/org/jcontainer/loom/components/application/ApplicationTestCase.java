@@ -17,7 +17,6 @@ import org.apache.avalon.framework.logger.ConsoleLogger;
 import org.jcontainer.loom.components.deployer.PhoenixProfileBuilder;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.tools.configuration.ConfigurationBuilder;
-import org.jcontainer.loom.tools.info.Attribute;
 import org.jcontainer.loom.tools.info.ComponentDescriptor;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
@@ -31,12 +30,13 @@ import org.jcontainer.loom.tools.profile.PartitionProfile;
 import org.jcontainer.loom.tools.profile.ComponentProfile;
 import org.jcontainer.loom.tools.LoomToolConstants;
 import org.xml.sax.InputSource;
+import org.realityforge.metaclass.model.Attribute;
 
 /**
  *  An basic test case for the Application.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-07-19 03:04:45 $
+ * @version $Revision: 1.2 $ $Date: 2003-10-05 01:06:31 $
  */
 public class ApplicationTestCase
     extends TestCase
@@ -118,7 +118,7 @@ public class ApplicationTestCase
                                    DependencyMetaData.EMPTY_SET,
                                    null,
                                    null,
-                                   new Attribute[]{new Attribute( ContainerConstants.DISABLE_PROXY_ATTR, null )} );
+                                   new Attribute[]{new Attribute( ContainerConstants.DISABLE_PROXY_ATTR )} );
         final ComponentProfile cp2 = new ComponentProfile( C2, md2 );
         final PartitionMetaData blockPartitionMD =
             new PartitionMetaData( LoomToolConstants.BLOCK_PARTITION,
