@@ -89,6 +89,7 @@ package org.jcontainer.loom.components.monitor;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -102,6 +103,7 @@ import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.ConfigurationException;
 import org.jcontainer.dna.MissingResourceException;
 import org.jcontainer.dna.ResourceLocator;
+import org.jcontainer.loom.components.util.ExtensionFileFilter;
 import org.jcontainer.loom.interfaces.Deployer;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
@@ -113,7 +115,7 @@ import org.realityforge.salt.io.FileUtil;
  * application as necessary.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.13 $ $Date: 2003-10-29 22:20:42 $
+ * @version $Revision: 1.14 $ $Date: 2003-10-29 22:46:17 $
  */
 public class DefaultDeploymentMonitor
     extends AbstractLogEnabled
@@ -151,6 +153,7 @@ public class DefaultDeploymentMonitor
     public void initialize()
         throws Exception
     {
+        deployDefaultApplications();
         final DirectoryResource resource =
             new DirectoryResource( m_appsDir.getPath() );
         resource.addPropertyChangeListener( this );
@@ -320,5 +323,33 @@ public class DefaultDeploymentMonitor
         return
             !file.isDirectory() &&
             file.getName().endsWith( ".sar" );
+    }
+
+    /**
+     * The deployer is used to load the applications from the
+     * default-apps-location specified in Parameters.
+     *
+     * @throws Exception if an error occurs
+     */
+    protected void deployDefaultApplications()
+        throws Exception
+    {
+        final ExtensionFileFilter filter = new ExtensionFileFilter( ".sar" );
+        final File[] files = m_appsDir.listFiles( filter );
+        if( null != files )
+        {
+            deployFiles( files );
+        }
+    }
+
+    private void deployFiles( final File[] files )
+        throws Exception
+    {
+        Arrays.sort( files );
+        for( int i = 0; i < files.length; i++ )
+        {
+            final File file = files[ i ];
+            deployApplication( file );
+        }
     }
 }

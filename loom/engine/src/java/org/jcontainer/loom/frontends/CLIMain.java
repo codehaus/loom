@@ -124,7 +124,6 @@ public final class CLIMain
     private static final Resources REZ =
         ResourceManager.getPackageResources( CLIMain.class );
 
-    static final String APPS_DIR = File.class.getName() + "/apps";
     static final String HOME_DIR = File.class.getName() + "/home";
     static final String PERSISTENT = Boolean.class.getName() + "/persistent";
     static final String DISABLE_HOOK = "disable-hook";
@@ -132,9 +131,6 @@ public final class CLIMain
 
     private static final String DEFAULT_LOG_FILE =
         File.separator + "logs" + File.separator + "loom.log";
-
-    private static final String DEFAULT_APPS_DIR =
-        File.separator + "apps";
 
     private static final String DEFAULT_CONF_FILE =
         File.separator + "conf" + File.separator + "kernel.xml";
@@ -155,6 +151,7 @@ public final class CLIMain
     private Logger m_logger;
 
     private File m_home;
+    private FileTarget m_logTarget;
 
     /**
      * Main entry point.
@@ -193,18 +190,6 @@ public final class CLIMain
                 properties.setProperty( CONFIGFILE,
                                         configFile.toString() );
             }
-            final String appsPath;
-            if( !properties.containsKey( APPS_DIR ) )
-            {
-                appsPath = m_home + DEFAULT_APPS_DIR;
-            }
-            else
-            {
-                appsPath = properties.getProperty( APPS_DIR );
-            }
-            final File appsDirFile =
-                new File( appsPath ).getCanonicalFile();
-            data.put( APPS_DIR, appsDirFile );
 
             final Boolean persistent;
             if( !properties.containsKey( PERSISTENT ) )
@@ -226,6 +211,7 @@ public final class CLIMain
             handleException( throwable );
         }
 
+        m_logTarget.close();
         return m_exitCode;
     }
 
@@ -352,13 +338,13 @@ public final class CLIMain
             properties.getProperty( "log-priority", "INFO" );
         final ExtendedPatternFormatter formatter = new ExtendedPatternFormatter( DEFAULT_FORMAT );
         final File file = new File( logDestination );
-        final FileTarget logTarget = new FileTarget( file, false, formatter );
+        m_logTarget = new FileTarget( file, false, formatter );
 
         //Create an anonymous hierarchy so no other
         //components can get access to logging hierarchy
         final Hierarchy hierarchy = new Hierarchy();
         final org.apache.log.Logger logger = hierarchy.getLoggerFor( "Loom" );
-        logger.setLogTargets( new LogTarget[]{logTarget} );
+        logger.setLogTargets( new LogTarget[]{m_logTarget} );
         logger.setPriority( Priority.getPriorityForName( logPriority ) );
         logger.info( "Logger started" );
         return new LogkitLogger( logger );
@@ -445,16 +431,21 @@ public final class CLIMain
     private void handleException( final Throwable throwable )
     {
         System.out.println( REZ.getString( "main.exception.header" ) );
-        final String trace =
-            ExceptionUtil.prettyPrintStackTrace( throwable,
-                                                 "org.jcontainer.loom.components" );
+        final String trace;
+        if( null != m_logger )
+        {
+            trace =
+                ExceptionUtil.prettyPrintStackTrace( throwable,
+                                                     "org.jcontainer.loom.components" );
+            m_logger.error( throwable.getMessage(), throwable );
+        }
+        else
+        {
+            trace = ExceptionUtil.printStackTrace( throwable );
+        }
         System.out.println( trace );
         System.out.println( REZ.getString( "main.exception.footer" ) );
 
-        if( null != m_logger )
-        {
-            m_logger.error( throwable.getMessage(), throwable );
-        }
         m_exitCode = 1;
     }
 }

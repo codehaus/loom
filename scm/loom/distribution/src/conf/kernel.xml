@@ -128,18 +128,6 @@
         logger="packages"/>
         -->
 
-        <!--
-        Can disable the Hot-Deploy monitor by commenting out the next component.
-        -->
-        <component
-            class="org.jcontainer.loom.components.monitor.DefaultDeploymentMonitor"
-            logger="monitor">
-            <!-- the amount of time in milliseconds between checks
-            of deployment dir -->
-            <monitor-frequency>1000</monitor-frequency>
-            <base-application-directory>${loom.home}/apps</base-application-directory>
-        </component>
-
         <component role="org.apache.excalibur.instrument.InstrumentManager"
             class="org.jcontainer.loom.components.instrument.NoopInstrumentManager"
             logger="instrument"/>
@@ -163,6 +151,18 @@
         &instrumentables;
         </component>
                 -->
+
+        <!--
+        Can disable the Hot-Deploy monitor by commenting out the next component.
+        -->
+        <component
+            class="org.jcontainer.loom.components.monitor.DefaultDeploymentMonitor"
+            logger="monitor">
+            <!-- the amount of time in milliseconds between checks
+            of deployment dir -->
+            <monitor-frequency>1000</monitor-frequency>
+            <base-application-directory>${loom.home}/apps</base-application-directory>
+        </component>
     </embeddor>
 
 </loom>
