@@ -8,6 +8,7 @@
 
     <j:set var="maven.sar.final.name" value="${pom.artifactId}.sar"/>
     <j:set var="metagenerate" value='${context.getVariable("maven.sar.metagenerate")}'/>
+    <j:set var="logging" value='${context.getVariable("maven.sar.logging")}'/>
 
     <!--==================================================================-->
     <!-- Default goal : Builds a sar file                                 -->
@@ -56,10 +57,12 @@
         <ant:mkdir dir="${maven.sar.build.dir}"/>
         <ant:jar destfile="${maven.sar.build.dir}/${maven.sar.final.name}">
         	<!-- Add Sar descriptor files to SAR-INF/ -->
-        	<ant:zipfileset file="${maven.sar.assembly}" prefix="SAR-INF/"/>
-        	<ant:zipfileset file="${maven.sar.config}" prefix="SAR-INF/"/>
-        	<ant:zipfileset file="${maven.sar.environment}" prefix="SAR-INF/"/>
-        	<ant:zipfileset file="${maven.sar.logging}" prefix="SAR-INF/"/>
+        	<ant:zipfileset file="${maven.sar.assembly}" fullpath="SAR-INF/assembly.xml"/>
+        	<ant:zipfileset file="${maven.sar.config}" fullpath="SAR-INF/config.xml"/>
+        	<ant:zipfileset file="${maven.sar.environment}" fullpath="SAR-INF/environment.xml"/>
+        	<j:if test="${!empty(logging)}">
+        		<ant:zipfileset file="${logging}" prefix="SAR-INF/"/>
+            </j:if>
             <!-- Add build artifacts -->
             <ant:lib dir="${maven.sar.build.dir}">
                 <ant:include name="${maven.sar.lib.include}"/>
