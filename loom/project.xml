@@ -6,27 +6,103 @@
     <package>org.jcontainer.loom</package>
 
     <organization>
-        <name>The JContainer Group</name>
-        <url>http://loom.jcontainer.org/</url>
-	    <!--<logo>/images/logo.gif</logo>-->
+        <name>Codehaus</name>
+        <url>http://codehaus.org/</url>
+        <logo>http://codehaus.org/codehaus-small.gif</logo>
     </organization>
 
 	<groupId>loom</groupId>
     <package>org.jcontainer.loom.${pom.artifactId.substring(5)}</package>
-    <url>http://loom.jcontainer.org/${pom.artifactId.substring(5)}</url>
+    <url>http://loom.jcontainer.org</url>
+    <logo>/images/loom-logo.png</logo>
     <distributionDirectory>/www/dist.codehaus.org/jcontainer/maven/${groupId}</distributionDirectory>
     <distributionSite>codehaus.org</distributionSite>
+    <siteDirectory>/www/jcontainer.codehaus.org/loom/</siteDirectory>
+    <siteAddress>loom.jcontainer.org</siteAddress>
+    <issueTrackingUrl>http://jira.codehaus.org/secure/BrowseProject.jspa?id=10131</issueTrackingUrl>
     
-    <licenses>
-        <license>
-            <name>The JContainer Software License, Version 1.1</name>
-            <url>http://jcontainer.cvs.codehaus.org/viewcvs.cgi/*checkout*/jcontainer/loom/LICENSE.txt?content-type=text%2Fplain&amp;rev=1.3&amp;root=jcontainer</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
 
     <repository>
         <connection>scm:cvs:pserver:anonymous@codehaus.org:/cvsroot/jcontainer:jcontainer/loom</connection>    
         <url>http://cvs.codehaus.org/viewcvs.cgi/jcontainer/loom/?root=jcontainer</url>
     </repository>
+    
+    <versions>
+        <version>
+            <id>1.0-beta</id>
+            <name>1.0-beta</name>
+            <tag>LOOM_1_0_BETA-tag</tag>
+        </version>
+    </versions>
+
+    <licenses>
+        <license>
+            <name>The JContainer Software License, Version 1.1</name>
+            <url>http://jcontainer.cvs.codehaus.org/viewcvs.cgi/*checkout*/jcontainer/loom/LICENSE.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <mailingLists>
+        <mailingList>
+            <name>JContainer Interest</name>
+            <subscribe>http://lists.codehaus.org/mailman/listinfo/jcontainer-interest</subscribe>
+            <unsubscribe>http://lists.codehaus.org/mailman/listinfo/jcontainer-interest</unsubscribe>
+            <archive>http://lists.codehaus.org/pipermail/jcontainer-interest</archive>
+        </mailingList>
+        <mailingList>
+            <name>JContainer Commits</name>
+            <subscribe>http://lists.codehaus.org/mailman/listinfo/jcontainer-commits</subscribe>
+            <unsubscribe>http://lists.codehaus.org/mailman/listinfo/jcontainer-commits</unsubscribe>
+            <archive>http://lists.codehaus.org/pipermail/jcontainer-commits</archive>
+        </mailingList>
+    </mailingLists>
+
+    <developers>
+        <developer>
+            <name>Peter Donald</name>
+            <id>pdonald</id>
+            <email>peter@realityforge.org</email>
+            <roles>
+                <role>Founder</role>
+            </roles>
+            <timezone>+10</timezone>
+        </developer>
+        <developer>
+            <name>Paul Hammant</name>
+            <id>paul</id>
+            <roles>
+                <role>Founder</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>Peter Royal</name>
+            <id>proyal</id>
+            <email>peter.royal@pobox.com</email>
+            <url>http://fotap.org/~osi</url>
+            <roles>
+                <role>Founder</role>
+                <role>Hacker</role>
+            </roles>
+            <timezone>-5</timezone>
+        </developer>
+        <developer>
+            <name>Mauro Talevi</name>
+            <id>mauro</id>
+            <email>mauro.talevi at aquilonia.org</email>
+            <roles>
+                <role>Founder</role>
+            </roles>
+            <timezone>0</timezone>
+        </developer>
+    </developers>
+
+    <contributors>
+        <contributor>
+            <name>Johan Sjoberg</name>
+            <email>johan.sjoberg@avaintec.com</email>
+        </contributor>
+    </contributors>
+    
+
 </project>
