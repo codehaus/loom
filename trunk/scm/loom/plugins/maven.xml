@@ -2,7 +2,7 @@
     xmlns:maven="jelly:maven">
 
     <goal name="main">
-        <attainGoal name="build"/>
+        <attainGoal name="loom:build"/>
     </goal>
 
     <goal name="loom:build"
