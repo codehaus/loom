@@ -177,7 +177,7 @@ public class DefaultDeployer
     }
 
     /**
-     * Dispose the dpeloyer which effectively means undeploying all the
+     * Dispose the deployer which effectively means undeploying all the
      * currently deployed apps.
      */
     public void dispose()
