@@ -3,6 +3,7 @@
 	xmlns:j="jelly:core"
 	xmlns:ant="jelly:ant"
 	xmlns:maven="jelly:maven"
+	xmlns:util="jelly:util"
     xmlns:velocity="jelly:org.apache.commons.jelly.tags.velocity.VelocityTagLibrary">
 
     <goal name="main">
@@ -18,6 +19,7 @@
     </goal>
 
 	<preGoal name="xdoc:init">
+		<attainGoal name="aggregate-components-source"/>
 		<attainGoal name="aggregate-plugins-xdocs"/>
 		<ant:copy todir="${maven.docs.aggregated.src}" overwrite="true">
         	<ant:fileset dir="${basedir}/xdocs"/>
@@ -70,5 +72,20 @@
    		</j:forEach>
 	</goal>  
 
+    <goal name="aggregate-components-source">
+        <echo message="Aggregate components by source"/>
+        <!-- Aggregates sources -->
+        <ant:mkdir dir="${maven.aggregated.src}/java"/>
+        <ant:mkdir dir="${maven.aggregated.src}/test"/>
+   		<util:tokenize var="componentList" delim="," trim="true">${maven.aggregated.components}</util:tokenize>
+	   	<j:forEach var="component" items="${componentList}">
+	        <ant:copy todir="${maven.aggregated.src}/java">
+    	        <ant:fileset dir="../${component}/src/java"/>
+        	</ant:copy>
+	        <ant:copy todir="${maven.aggregated.src}/test">
+    	        <ant:fileset dir="../${component}/src/test"/>
+        	</ant:copy>
+        </j:forEach>
+    </goal>
 
 </project>

@@ -19,10 +19,30 @@
 	</dependencies>
 
     <build>
+        <!-- Only used if aggregating components by source -->
+        <sourceDirectory>target/aggregated-src/java</sourceDirectory>
+        <unitTestSourceDirectory>target/aggregated-src/test</unitTestSourceDirectory>
+
+        <unitTest>
+            <resource>
+                <directory>target/aggregated-src/test</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </resource>
+
+            <includes>
+                <include>**/*TestCase*</include>
+            </includes>
+            <excludes>
+                <exclude>**/Abstract*</exclude>
+            </excludes>
+        </unitTest>
         <nagEmailAddress>jcontainer-interest@lists.codehaus.org</nagEmailAddress>
     </build>
 
     <reports>
+        <report>maven-javadoc-plugin</report>
         <report>maven-license-plugin</report>
     </reports>
 </project>
