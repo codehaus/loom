@@ -84,7 +84,7 @@
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-package org.jcontainer.loom.tools.lifecycle;
+package org.jcontainer.loom.components.util.lifecycle;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -110,7 +110,7 @@ import org.realityforge.salt.i18n.Resources;
 
 /**
  * This is a base object via which the
- * {@link org.jcontainer.loom.tools.lifecycle.LifecycleHelper}
+ * {@link org.jcontainer.loom.components.util.lifecycle.LifecycleHelper}
  * aquires resources for each component. This base implementation
  * will aquire components and make sure that all required
  * components are present. It will also make sure that the types
@@ -121,7 +121,7 @@ import org.realityforge.salt.i18n.Resources;
  * {@link org.jcontainer.loom.tools.verifier.AssemblyVerifier}</p>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.8 $ $Date: 2003-10-06 14:10:48 $
+ * @version $Revision: 1.1 $ $Date: 2003-10-16 05:40:46 $
  */
 public abstract class AbstractResourceProvider
     extends AbstractLogEnabled

@@ -102,7 +102,7 @@ import org.jcontainer.loom.interfaces.ApplicationContext;
 import org.jcontainer.loom.interfaces.ApplicationMBean;
 import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.tools.LoomToolConstants;
-import org.jcontainer.loom.tools.lifecycle.LifecycleHelper;
+import org.jcontainer.loom.components.util.lifecycle.LifecycleHelper;
 import org.jcontainer.loom.tools.profile.ComponentProfile;
 import org.jcontainer.loom.tools.profile.PartitionProfile;
 import org.realityforge.salt.i18n.ResourceManager;
