@@ -91,12 +91,14 @@ import mx4j.log.Logger;
 /**
  * A class to pipe MX4J's own logger to the one the container wants to use.
  */
-public class MX4JLoggerAdapter extends Logger
+public class MX4JLoggerAdapter
+    extends Logger
 {
     private static org.jcontainer.dna.Logger m_dnaLogger;
 
     /**
      * This is really bad.  A static way of introducing a logger to a tool.
+     *
      * @param logger the Avalon logger.
      */
     public static void setLogger( final org.jcontainer.dna.Logger logger )
@@ -112,7 +114,9 @@ public class MX4JLoggerAdapter extends Logger
      * @param message the message to log.
      * @param throwable a message that may be sent.
      */
-    protected void log( final int level, final Object message, final Throwable throwable )
+    protected void log( final int level,
+                        final Object message,
+                        final Throwable throwable )
     {
         switch( level )
         {

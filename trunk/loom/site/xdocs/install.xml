@@ -1,49 +1,51 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <document>
 
- <properties>
-	<title>Installation</title>
- 	<author email="jcontainer-interest@codehaus.org ">Loom Documentation Team</author>
-  </properties>
+    <properties>
+        <title>Installation</title>
+        <author email="jcontainer-interest@codehaus.org ">Loom Documentation Team</author>
+    </properties>
 
-<body>
+    <body>
 
-<section name="Installation">
-      <title>Installation</title>
+        <section name="Installation">
+            <title>Installation</title>
 
-<p>
+            <p>
     Loom runs on a variety of platforms that have installed the Java 2 Virtual Machine.
-</p>
+            </p>
 
-<p>
+            <p>
     Everything required to run Loom and develop Loom based products comes with the
     distribution. If you wish to help develop Loom then it is recomended that you
     obtain the full source tree from CVS or from the nightly builds.
-</p>
+            </p>
 
-</section>
+        </section>
 
-<section name="Building from source">
-      <title>Building from source</title>
+        <section name="Building from source">
+            <title>Building from source</title>
 
-<p>
-	Loom uses <a href="http://maven.apache.org">Maven</a> as the build tool.
+            <p>
+	Loom uses
+                <a href="http://maven.apache.org">Maven</a> as the build tool.
 	Please consult the online Mavan documentation if you are not familiar with it.
-</p>
+            </p>
 
-<p>	
-    To build Loom 
-</p>
-<source>
-cd loom 
-maven 
-</source>
-<p>
-    The <code>distribution/target/loom-[version]</code> directory will contain the 
+            <p>
+    To build Loom
+            </p>
+            <source>
+cd loom
+maven
+            </source>
+            <p>
+    The
+                <code>distribution/target/loom-[version]</code> directory will contain the
     distribution as it comes in the binary build.
-</p>
+            </p>
 
-</section>
+        </section>
 
-</body>
+    </body>
 </document>

@@ -2,8 +2,8 @@
 
 <assembly>
 
-  <block class="org.jcontainer.loom.demos.distributed.block.DefaultServer" 
-  		 name="distributed-server" >
-  </block>
+    <block class="org.jcontainer.loom.demos.distributed.block.DefaultServer"
+        name="distributed-server">
+    </block>
 
 </assembly>

@@ -52,16 +52,16 @@
         <!-- Ensure maven.sar.build.dir exists -->
         <ant:mkdir dir="${maven.sar.build.dir}"/>
         <ant:jar destfile="${maven.sar.build.dir}/${maven.sar.final.name}">
-        	<!-- Add Sar descriptor files to SAR-INF/ -->
-        	<ant:zipfileset file="${maven.sar.assembly}" fullpath="SAR-INF/assembly.xml"/>
-        	<ant:zipfileset file="${maven.sar.config}" fullpath="SAR-INF/config.xml"/>
-        	<ant:zipfileset file="${maven.sar.environment}" fullpath="SAR-INF/environment.xml"/>
-        	<j:if test="${!empty(logging)}">
-        		<ant:zipfileset file="${logging}" prefix="SAR-INF/"/>
+            <!-- Add Sar descriptor files to SAR-INF/ -->
+            <ant:zipfileset file="${maven.sar.assembly}" fullpath="SAR-INF/assembly.xml"/>
+            <ant:zipfileset file="${maven.sar.config}" fullpath="SAR-INF/config.xml"/>
+            <ant:zipfileset file="${maven.sar.environment}" fullpath="SAR-INF/environment.xml"/>
+            <j:if test="${!empty(logging)}">
+                <ant:zipfileset file="${logging}" prefix="SAR-INF/"/>
             </j:if>
             <!-- Add build artifacts -->
-            <ant:zipfileset dir="${maven.sar.build.dir}" 
-            		     prefix="SAR-INF/lib">
+            <ant:zipfileset dir="${maven.sar.build.dir}"
+                prefix="SAR-INF/lib">
                 <ant:include name="${maven.sar.lib.include}"/>
                 <ant:exclude name="${maven.sar.lib.exclude}"/>
             </ant:zipfileset>
@@ -70,7 +70,7 @@
                 <j:set var="dependency" value="${artifact.dependency}"/>
                 <j:if test="${dependency.getProperty('sar.bundle')=='true'}">
                     <ant:zipfileset dir="${maven.repo.local}/${dependency.artifactDirectory}/jars/"
-                    				prefix="SAR-INF/lib">
+                        prefix="SAR-INF/lib">
                         <ant:include name="${dependency.artifact}"/>
                     </ant:zipfileset>
                 </j:if>

@@ -40,8 +40,8 @@ provide         declare that particular blocks that will provide
 proxy           TODO:description
 -->
 <!ELEMENT block (provide*,proxy?)>
-  <!ATTLIST block class CDATA #REQUIRED>
-  <!ATTLIST block name CDATA #REQUIRED>
+<!ATTLIST block class CDATA #REQUIRED>
+<!ATTLIST block name CDATA #REQUIRED>
 
 <!--
 The provide element declares that a specific service is provided to the block
@@ -52,9 +52,9 @@ name    the name of the block that will provide service
 alias   the alias of the block when it is placed in a Map dependency (may not need to be specified).
 -->
 <!ELEMENT provide EMPTY>
-  <!ATTLIST provide role CDATA #REQUIRED>
-  <!ATTLIST provide name CDATA #REQUIRED>
-  <!ATTLIST provide alias CDATA #IMPLIED>
+<!ATTLIST provide role CDATA #REQUIRED>
+<!ATTLIST provide name CDATA #REQUIRED>
+<!ATTLIST provide alias CDATA #IMPLIED>
 
 <!--
 This indicates whether the block should be proxied.
@@ -62,7 +62,7 @@ This indicates whether the block should be proxied.
 disable set this to true to disable proxying of the block implementation
 -->
 <!ELEMENT proxy EMPTY>
-  <!ATTLIST proxy disable CDATA #REQUIRED>
+<!ATTLIST proxy disable CDATA #REQUIRED>
 
 <!--
 The block element declares a listener exists in the application.
@@ -72,8 +72,8 @@ name            the name of the listener
 class           the class of the listener instance
 -->
 <!ELEMENT listener EMPTY>
-  <!ATTLIST listener name CDATA #REQUIRED>
-  <!ATTLIST listener class CDATA #REQUIRED>
+<!ATTLIST listener name CDATA #REQUIRED>
+<!ATTLIST listener class CDATA #REQUIRED>
 
 <!--
 NOTE: This form is DEPRECATED.
@@ -85,5 +85,5 @@ name            the name of the listener
 class           the class of the listener instance
 -->
 <!ELEMENT block-listener EMPTY>
-  <!ATTLIST block-listener name CDATA #REQUIRED>
-  <!ATTLIST block-listener class CDATA #REQUIRED>
+<!ATTLIST block-listener name CDATA #REQUIRED>
+<!ATTLIST block-listener class CDATA #REQUIRED>

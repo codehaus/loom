@@ -95,12 +95,13 @@ import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.jcontainer.loom.demos.distributed.api.Server;
 
 /**
- * DefaultServer is the block implementing the <code>Server</code> server interface.
- * It delegates implentation of interface to <code>ServerImpl</code> class, which
- * is placed in this package for simplicity but may also be implemented elsewhere.
+ * DefaultServer is the block implementing the <code>Server</code> server
+ * interface. It delegates implentation of interface to <code>ServerImpl</code>
+ * class, which is placed in this package for simplicity but may also be
+ * implemented elsewhere.
  *
- * @author  <a href="mailto:Paul_Hammant@yahoo.com">Paul Hammant</a>
- * @author  <a href="mailto:mauro.talevi at aquilonia.org">Mauro Talevi</a>
+ * @author <a href="mailto:Paul_Hammant@yahoo.com">Paul Hammant</a>
+ * @author <a href="mailto:mauro.talevi at aquilonia.org">Mauro Talevi</a>
  * @dna.component
  * @dna.service type="Server"
  */

@@ -88,9 +88,9 @@ package org.jcontainer.loom.components.kernel;
 
 import java.io.File;
 import java.util.Map;
-import org.jcontainer.loom.interfaces.Application;
-import org.jcontainer.loom.components.util.profile.PartitionProfile;
 import org.codehaus.spice.loggerstore.LoggerStore;
+import org.jcontainer.loom.components.util.profile.PartitionProfile;
+import org.jcontainer.loom.interfaces.Application;
 
 /**
  * This is the structure describing each server application before it is
@@ -109,11 +109,11 @@ final class SarEntry
     private Application m_application;
 
     protected SarEntry( final PartitionProfile profile,
-        final File homeDirectory,
-        final File workDirectory,
-        final ClassLoader classLoader,
-        final LoggerStore store,
-        final Map classLoaders )
+                        final File homeDirectory,
+                        final File workDirectory,
+                        final ClassLoader classLoader,
+                        final LoggerStore store,
+                        final Map classLoaders )
     {
         if( null == profile )
         {

@@ -1,39 +1,40 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <document>
-  <properties>
-    <title>Specification of config.xml </title>
-    <author email="peter at apache.org">Peter Donald</author>
-  </properties>
-  <body>
-    <section name="Introduction">
-      <p>
-        The purpose of the <code>config.xml</code> file is to provide configuration data
+    <properties>
+        <title>Specification of config.xml </title>
+        <author email="peter at apache.org">Peter Donald</author>
+    </properties>
+    <body>
+        <section name="Introduction">
+            <p>
+        The purpose of the
+                <code>config.xml</code> file is to provide configuration data
         to each of the blocks that require configuration data. The format of the
         configuration data is block-specific, thus refer to documentation of Block
         for relevant details. Each element below the root element has a name coresponding
         to the name of a block specified in assembly.xml file. The contents of this
         element is the configuration data for the block.
-      </p>
-    </section>
-    <section name="Sample config.xml file">
-      <source>
-&lt;?xml version="1.0"?>
+            </p>
+        </section>
+        <section name="Sample config.xml file">
+            <source>
+                &lt;?xml version="1.0"?>
 
-&lt;config>
+                &lt;config>
 
-    &lt;myAuthorizer>
-      &lt;!-- ...configuration data here... -->
-    &lt;/myAuthorizer>
+                &lt;myAuthorizer>
+                &lt;!-- ...configuration data here... -->
+                &lt;/myAuthorizer>
 
-    &lt;myBlock>
-      &lt;param1>param1-value&lt;/param1>
-      &lt;an-integer>2&lt;/an-integer>
+                &lt;myBlock>
+                &lt;param1>param1-value&lt;/param1>
+                &lt;an-integer>2&lt;/an-integer>
       ...
-    &lt;/myBlock>
+                &lt;/myBlock>
 
-&lt;/config>
+                &lt;/config>
 
-      </source>
-    </section>
-  </body>
+            </source>
+        </section>
+    </body>
 </document>

@@ -92,18 +92,6 @@ import java.security.Policy;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import org.jcontainer.dna.AbstractLogEnabled;
-import org.jcontainer.dna.Active;
-import org.jcontainer.dna.Composable;
-import org.jcontainer.dna.Configuration;
-import org.jcontainer.dna.ConfigurationException;
-import org.jcontainer.dna.MissingResourceException;
-import org.jcontainer.dna.ResourceLocator;
-import org.jcontainer.dna.impl.ConfigurationUtil;
-import org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager;
-import org.jcontainer.loom.components.extensions.pkgmgr.PackageManager;
-import org.jcontainer.loom.interfaces.ClassLoaderManager;
-import org.jcontainer.loom.interfaces.ClassLoaderSet;
 import org.codehaus.spice.classman.builder.LoaderBuilder;
 import org.codehaus.spice.classman.builder.LoaderResolver;
 import org.codehaus.spice.classman.metadata.ClassLoaderMetaData;
@@ -117,6 +105,18 @@ import org.codehaus.spice.extension.Extension;
 import org.codehaus.spice.xmlpolicy.builder.PolicyBuilder;
 import org.codehaus.spice.xmlpolicy.metadata.PolicyMetaData;
 import org.codehaus.spice.xmlpolicy.reader.PolicyReader;
+import org.jcontainer.dna.AbstractLogEnabled;
+import org.jcontainer.dna.Active;
+import org.jcontainer.dna.Composable;
+import org.jcontainer.dna.Configuration;
+import org.jcontainer.dna.ConfigurationException;
+import org.jcontainer.dna.MissingResourceException;
+import org.jcontainer.dna.ResourceLocator;
+import org.jcontainer.dna.impl.ConfigurationUtil;
+import org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager;
+import org.jcontainer.loom.components.extensions.pkgmgr.PackageManager;
+import org.jcontainer.loom.interfaces.ClassLoaderManager;
+import org.jcontainer.loom.interfaces.ClassLoaderSet;
 import org.w3c.dom.Element;
 
 /**
@@ -149,9 +149,7 @@ public class DefaultClassLoaderManager
      */
     private PackageManager m_packageManager;
 
-    /**
-     * Parent ClassLoader for all applications aka as the "common" classloader.
-     */
+    /** Parent ClassLoader for all applications aka as the "common" classloader. */
     private ClassLoader m_commonClassLoader;
 
     /** The utility class used to verify {@link ClassLoaderMetaData} objects. */

@@ -17,21 +17,17 @@ import org.jcontainer.loom.components.util.metadata.ComponentTemplate;
  * construct a specific instance of the component.
  *
  * @author Peter Donald
- * @version $Revision: 1.4 $ $Date: 2003-11-29 13:44:27 $
+ * @version $Revision: 1.5 $ $Date: 2003-12-03 10:44:43 $
  */
 public class ComponentProfile
 {
     /** An empty array of component profiles. */
     public static final ComponentProfile[] EMPTY_SET = new ComponentProfile[ 0 ];
 
-    /**
-     * The ComponentInfo that describes the type of this component.
-     */
+    /** The ComponentInfo that describes the type of this component. */
     private final ComponentInfo m_info;
 
-    /**
-     * The ComponentTemplate that describes this component.
-     */
+    /** The ComponentTemplate that describes this component. */
     private final ComponentTemplate m_metaData;
 
     /**

@@ -88,6 +88,8 @@ package org.jcontainer.loom.components.extensions;
 
 import java.io.File;
 import java.util.ArrayList;
+import org.codehaus.spice.salt.i18n.ResourceManager;
+import org.codehaus.spice.salt.i18n.Resources;
 import org.jcontainer.dna.Active;
 import org.jcontainer.dna.Configurable;
 import org.jcontainer.dna.Configuration;
@@ -96,12 +98,10 @@ import org.jcontainer.dna.LogEnabled;
 import org.jcontainer.dna.Logger;
 import org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager;
 import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
-import org.codehaus.spice.salt.i18n.ResourceManager;
-import org.codehaus.spice.salt.i18n.Resources;
 
 /**
  * @author Peter Donald
- * @version $Revision: 1.17 $ $Date: 2003-12-03 02:54:41 $
+ * @version $Revision: 1.18 $ $Date: 2003-12-03 10:44:41 $
  * @dna.component
  * @mx.component
  */

@@ -91,23 +91,23 @@ import java.net.URL;
 import java.security.Policy;
 import java.util.Arrays;
 import java.util.Set;
+import org.codehaus.spice.classman.builder.SimpleLoaderResolver;
+import org.codehaus.spice.extension.Extension;
+import org.codehaus.spice.salt.i18n.ResourceManager;
+import org.codehaus.spice.salt.i18n.Resources;
 import org.jcontainer.dna.LogEnabled;
 import org.jcontainer.dna.Logger;
 import org.jcontainer.dna.impl.ContainerUtil;
 import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
 import org.jcontainer.loom.components.extensions.pkgmgr.PackageManager;
 import org.jcontainer.loom.components.util.ResourceUtil;
-import org.codehaus.spice.classman.builder.SimpleLoaderResolver;
-import org.codehaus.spice.extension.Extension;
-import org.codehaus.spice.salt.i18n.ResourceManager;
-import org.codehaus.spice.salt.i18n.Resources;
 
 /**
  * a LoaderResolver that knows about container environment, and the way it is
  * split across multiple directories.
  *
  * @author Peter Donald
- * @version $Revision: 1.9 $ $Date: 2003-12-03 02:54:39 $
+ * @version $Revision: 1.10 $ $Date: 2003-12-03 10:44:40 $
  */
 class SarLoaderResolver
     extends SimpleLoaderResolver

@@ -93,6 +93,9 @@ import java.io.InputStream;
 import java.util.Map;
 import org.apache.avalon.framework.logger.Logger;
 import org.apache.excalibur.instrument.InstrumentManager;
+import org.codehaus.spice.loggerstore.LoggerStore;
+import org.codehaus.spice.salt.i18n.ResourceManager;
+import org.codehaus.spice.salt.i18n.Resources;
 import org.jcomponent.alchemist.LoggerAlchemist;
 import org.jcontainer.dna.AbstractLogEnabled;
 import org.jcontainer.dna.Active;
@@ -106,9 +109,6 @@ import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.Kernel;
 import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.interfaces.SystemManager;
-import org.codehaus.spice.salt.i18n.ResourceManager;
-import org.codehaus.spice.salt.i18n.Resources;
-import org.codehaus.spice.loggerstore.LoggerStore;
 
 /**
  * Manage the "frame" in which Applications operate.

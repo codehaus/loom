@@ -92,6 +92,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.xml.transform.stream.StreamResult;
+import org.codehaus.spice.salt.i18n.ResourceManager;
+import org.codehaus.spice.salt.i18n.Resources;
+import org.codehaus.spice.salt.io.FileUtil;
 import org.jcontainer.dna.AbstractLogEnabled;
 import org.jcontainer.dna.Active;
 import org.jcontainer.dna.Configurable;
@@ -101,19 +104,14 @@ import org.jcontainer.dna.impl.ConfigurationUtil;
 import org.jcontainer.loom.components.configuration.merger.ConfigurationMerger;
 import org.jcontainer.loom.components.util.ExtensionFileFilter;
 import org.jcontainer.loom.interfaces.ConfigurationInterceptor;
-import org.codehaus.spice.salt.i18n.ResourceManager;
-import org.codehaus.spice.salt.i18n.Resources;
-import org.codehaus.spice.salt.io.FileUtil;
 import org.xml.sax.InputSource;
 
 /**
- * <p>
- * A ConfigurationInterceptor that will store partial configurations on disk.
- * </p><p>
- * When a Configuration is retrieved from the repository, the configuration from disk is
- * <i>merged</i> with the configuration from the SAR. This merge is accompilished via
- * {@link ConfigurationMerger#merge}.
- * </p>
+ * <p> A ConfigurationInterceptor that will store partial configurations on
+ * disk. </p><p> When a Configuration is retrieved from the repository, the
+ * configuration from disk is <i>merged</i> with the configuration from the SAR.
+ * This merge is accompilished via {@link ConfigurationMerger#merge}. </p>
+ *
  * @author Peter Royal
  * @see ConfigurationMerger
  */
@@ -122,14 +120,16 @@ public class FileSystemPersistentConfigurationInterceptor
     implements ConfigurationInterceptor, Configurable, Active
 {
     private static final Resources REZ =
-        ResourceManager.getPackageResources( FileSystemPersistentConfigurationInterceptor.class );
+        ResourceManager.getPackageResources(
+            FileSystemPersistentConfigurationInterceptor.class );
 
     private final Map m_persistedConfigurations = new HashMap();
 
     private File m_storageDirectory;
     private String m_debugPath;
 
-    public void configure( final Configuration configuration ) throws ConfigurationException
+    public void configure( final Configuration configuration )
+        throws ConfigurationException
     {
         final String path =
             configuration.getChild( "storage-directory" ).getValue();
@@ -147,7 +147,8 @@ public class FileSystemPersistentConfigurationInterceptor
             throw new ConfigurationException( message, e );
         }
 
-        m_debugPath = configuration.getChild( "debug-output-path" ).getValue( null );
+        m_debugPath =
+        configuration.getChild( "debug-output-path" ).getValue( null );
     }
 
     public Configuration processConfiguration( final String application,
@@ -160,7 +161,9 @@ public class FileSystemPersistentConfigurationInterceptor
 
         if( null != m_debugPath )
         {
-            writeDebugConfiguration( application, block, processedConfiguration );
+            writeDebugConfiguration( application,
+                                     block,
+                                     processedConfiguration );
         }
 
         return processedConfiguration;
@@ -172,11 +175,13 @@ public class FileSystemPersistentConfigurationInterceptor
         throws ConfigurationException
     {
         final Configuration persistedConfiguration =
-            (Configuration)m_persistedConfigurations.get( genKey( application, block ) );
+            (Configuration)m_persistedConfigurations.get(
+                genKey( application, block ) );
 
         if( null != persistedConfiguration )
         {
-            return ConfigurationMerger.merge( persistedConfiguration, configuration );
+            return ConfigurationMerger.merge( persistedConfiguration,
+                                              configuration );
         }
         else
         {
@@ -203,7 +208,8 @@ public class FileSystemPersistentConfigurationInterceptor
     private void loadConfigurations()
         throws Exception
     {
-        final File[] apps = m_storageDirectory.listFiles( new ConfigurationDirectoryFilter() );
+        final File[] apps = m_storageDirectory.listFiles(
+            new ConfigurationDirectoryFilter() );
         for( int i = 0; i < apps.length; i++ )
         {
             loadConfigurations( apps[ i ] );
@@ -214,21 +220,27 @@ public class FileSystemPersistentConfigurationInterceptor
         throws Exception
     {
         final String app = appPath.getName();
-        final File[] blocks = appPath.listFiles( new ExtensionFileFilter( ".xml" ) );
+        final File[] blocks = appPath.listFiles(
+            new ExtensionFileFilter( ".xml" ) );
 
         for( int i = 0; i < blocks.length; i++ )
         {
             final String block =
-                blocks[ i ].getName().substring( 0, blocks[ i ].getName().indexOf( ".xml" ) );
+                blocks[ i ].getName().substring( 0,
+                                                 blocks[ i ].getName().indexOf(
+                                                     ".xml" ) );
 
-            final InputSource input = new InputSource( blocks[ i ].getAbsolutePath() );
+            final InputSource input = new InputSource(
+                blocks[ i ].getAbsolutePath() );
             final Configuration configuration =
                 ConfigurationUtil.buildFromXML( input );
-            m_persistedConfigurations.put( genKey( app, block ), configuration );
+            m_persistedConfigurations.put( genKey( app, block ),
+                                           configuration );
 
             if( getLogger().isDebugEnabled() )
             {
-                getLogger().debug( "Loaded persistent configuration [app: " + app
+                getLogger().debug( "Loaded persistent configuration [app: " +
+                                   app
                                    + ", block: " + block + "]" );
             }
         }
@@ -245,9 +257,10 @@ public class FileSystemPersistentConfigurationInterceptor
     {
         try
         {
-            final File temp = File.createTempFile( application + "-" + block + "-",
-                                                   ".xml",
-                                                   new File( m_debugPath ) );
+            final File temp = File.createTempFile(
+                application + "-" + block + "-",
+                ".xml",
+                new File( m_debugPath ) );
             final StreamResult result =
                 new StreamResult( new FileOutputStream( temp ) );
             ConfigurationUtil.serializeToResult( result, configuration );

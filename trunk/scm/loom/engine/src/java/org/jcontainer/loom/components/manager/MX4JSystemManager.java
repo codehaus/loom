@@ -99,12 +99,12 @@ import javax.management.ReflectionException;
 import mx4j.adaptor.rmi.jrmp.JRMPAdaptorMBean;
 import mx4j.log.Log;
 import mx4j.util.StandardMBeanProxy;
+import org.codehaus.spice.salt.i18n.ResourceManager;
+import org.codehaus.spice.salt.i18n.Resources;
 import org.jcontainer.dna.Configurable;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.ConfigurationException;
 import org.jcontainer.loom.interfaces.ContainerConstants;
-import org.codehaus.spice.salt.i18n.ResourceManager;
-import org.codehaus.spice.salt.i18n.Resources;
 
 /**
  * This component is responsible for managing loom instance.

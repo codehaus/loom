@@ -88,8 +88,8 @@ package org.jcontainer.loom.interfaces;
 
 import java.io.File;
 import java.util.Map;
-import org.jcontainer.loom.components.util.profile.PartitionProfile;
 import org.codehaus.spice.loggerstore.LoggerStore;
+import org.jcontainer.loom.components.util.profile.PartitionProfile;
 
 /**
  * @author Peter Donald

@@ -7,8 +7,8 @@
     </goal>
 
     <goal name="clean">
-         <echo message="Cleaning all components"/>
-         <maven:reactor
+        <echo message="Cleaning all components"/>
+        <maven:reactor
             basedir="${basedir}"
             includes="*/project.xml"
             goals="clean:clean"
@@ -23,7 +23,7 @@
             includes="*/project.xml"
             goals="clean:clean,main"
             banner="Building"
-            ignoreFailures="false" />
+            ignoreFailures="false"/>
 
     </goal>
 
@@ -34,7 +34,7 @@
             includes="*/project.xml"
             goals="clean:clean,deploy"
             banner="Deploying"
-            ignoreFailures="false" />
+            ignoreFailures="false"/>
     </goal>
 
 </project>

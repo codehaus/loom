@@ -89,18 +89,18 @@ package org.jcontainer.loom.components.manager;
 import javax.management.MBeanServer;
 import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
+import org.codehaus.spice.salt.i18n.ResourceManager;
+import org.codehaus.spice.salt.i18n.Resources;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.LoomException;
 import org.realityforge.metaclass.jmx.MBeanBinder;
-import org.codehaus.spice.salt.i18n.ResourceManager;
-import org.codehaus.spice.salt.i18n.Resources;
 
 /**
  * An abstract class via which JMX Managers can extend.
  *
  * @author Peter Donald
  * @author <a href="mailto:Huw@mmlive.com">Huw Roberts</a>
- * @version $Revision: 1.11 $ $Date: 2003-12-03 02:54:42 $
+ * @version $Revision: 1.12 $ $Date: 2003-12-03 10:44:42 $
  */
 public abstract class AbstractJMXManager
     extends AbstractSystemManager

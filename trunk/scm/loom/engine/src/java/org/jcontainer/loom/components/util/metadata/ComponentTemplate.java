@@ -20,7 +20,7 @@ import org.jcontainer.dna.Configuration;
  * reused to create new components as needed.
  *
  * @author Peter Donald
- * @version $Revision: 1.2 $ $Date: 2003-11-29 13:44:26 $
+ * @version $Revision: 1.3 $ $Date: 2003-12-03 10:44:43 $
  */
 public class ComponentTemplate
 {
@@ -40,9 +40,7 @@ public class ComponentTemplate
      */
     private final String m_implementationKey;
 
-    /**
-     * The resolution of any dependencies required by the component type.
-     */
+    /** The resolution of any dependencies required by the component type. */
     private final DependencyDirective[] m_dependencies;
 
     /** The parameters for component (if any). */

@@ -17,21 +17,21 @@ import org.apache.avalon.phoenix.BlockContext;
 import org.apache.avalon.phoenix.metadata.BlockListenerMetaData;
 import org.apache.avalon.phoenix.metadata.BlockMetaData;
 import org.apache.avalon.phoenix.metadata.SarMetaData;
+import org.codehaus.spice.loggerstore.LoggerStore;
+import org.codehaus.spice.salt.io.FileUtil;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.Logger;
 import org.jcontainer.dna.impl.ConfigurationUtil;
 import org.jcontainer.dna.impl.ConsoleLogger;
 import org.jcontainer.dna.impl.ContainerUtil;
 import org.jcontainer.loom.interfaces.LogManager;
-import org.codehaus.spice.salt.io.FileUtil;
-import org.codehaus.spice.loggerstore.LoggerStore;
 import org.xml.sax.InputSource;
 
 /**
  * An basic test case for the LogManager.
  *
  * @author Peter Donald
- * @version $Revision: 1.15 $ $Date: 2003-12-03 07:40:19 $
+ * @version $Revision: 1.16 $ $Date: 2003-12-03 10:44:47 $
  */
 public class LogManagerTestCase
     extends TestCase

@@ -16,7 +16,7 @@
             <id>ant</id>
             <version>1.5.1</version>
             <properties>
-            	<sar.bundle>true</sar.bundle>
+                <sar.bundle>true</sar.bundle>
             </properties>
         </dependency>
     </dependencies>

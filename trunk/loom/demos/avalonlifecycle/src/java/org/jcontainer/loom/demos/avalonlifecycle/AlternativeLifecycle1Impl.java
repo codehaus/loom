@@ -87,14 +87,13 @@
 package org.jcontainer.loom.demos.avalonlifecycle;
 
 /**
- * A demo of the lifecycle methods.  Mount the SAR fle contaning there blocks in Loom, go
- * to the JMX console ..
- *   http://localhost:8082/mbean?objectname=Loom%3Aapplication%3Ddemo-avalonlifecycle%2Ctopic%3DApplication
+ * A demo of the lifecycle methods.  Mount the SAR fle contaning there blocks in
+ * Loom, go to the JMX console .. http://localhost:8082/mbean?objectname=Loom%3Aapplication%3Ddemo-avalonlifecycle%2Ctopic%3DApplication
  * .. and try stopt/starting the blocks.
  *
+ * @author Paul Hammant <Paul_Hammant@yahoo.com>
  * @dna.component
  * @dna.service type="Lifecycle1"
- * @author  Paul Hammant <Paul_Hammant@yahoo.com>
  */
 public class AlternativeLifecycle1Impl
     implements Lifecycle1

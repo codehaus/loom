@@ -8,14 +8,14 @@
 package org.jcontainer.loom.components.util;
 
 import java.util.Map;
+import org.codehaus.spice.configkit.PropertyExpander;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.ConfigurationException;
 import org.jcontainer.dna.impl.DefaultConfiguration;
-import org.codehaus.spice.configkit.PropertyExpander;
 
 /**
  * @author Peter Donald
- * @version $Revision: 1.6 $ $Date: 2003-12-03 09:11:21 $
+ * @version $Revision: 1.7 $ $Date: 2003-12-03 10:44:42 $
  */
 public class ConfigUtil
 {

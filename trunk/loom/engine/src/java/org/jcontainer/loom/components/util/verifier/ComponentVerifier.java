@@ -23,17 +23,17 @@ import org.apache.avalon.framework.logger.LogEnabled;
 import org.apache.avalon.framework.parameters.Parameterizable;
 import org.apache.avalon.framework.parameters.Reparameterizable;
 import org.apache.avalon.framework.service.Serviceable;
-import org.realityforge.metaclass.Attributes;
-import org.realityforge.metaclass.model.Attribute;
 import org.codehaus.spice.salt.i18n.ResourceManager;
 import org.codehaus.spice.salt.i18n.Resources;
+import org.realityforge.metaclass.Attributes;
+import org.realityforge.metaclass.model.Attribute;
 
 /**
  * Utility class to help verify that component respects the rules of an Avalon
  * component.
  *
  * @author Peter Donald
- * @version $Revision: 1.3 $ $Date: 2003-12-03 02:54:43 $
+ * @version $Revision: 1.4 $ $Date: 2003-12-03 10:44:43 $
  */
 public class ComponentVerifier
 {

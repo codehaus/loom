@@ -24,7 +24,8 @@
                 component. If a component implements the Contextualizable interface
                 it will be passed an instance of
                 <code>org.apache.avalon.phoenix.BlockContext</code> which is
-                an extended version of <code>org.apache.avalon.Context</code>.
+                an extended version of
+                <code>org.apache.avalon.Context</code>.
                 Other than this minor change the container supports all the
                 Avalon lifecycle methods.
             </p>
@@ -50,20 +51,20 @@
                 sample on how to use the task to generate metadata.
             </p>
             <source>
-&lt;taskdef
+                &lt;taskdef
     name="generatemeta"
     classname="org.jcontainer.loom.info.GenerateLoomDescriptorsTask"&gt;
-    &lt;classpath refid="maven-sar.class.path" /&gt;
-    &lt;classpath refid="dna-tools.class.path" /&gt;
-    &lt;classpath refid="metaclass.class.path" /&gt;
-    &lt;classpath refid="qdox.class.path" /&gt;
-&lt;/taskdef&gt;
+                &lt;classpath refid="maven-sar.class.path" /&gt;
+                &lt;classpath refid="dna-tools.class.path" /&gt;
+                &lt;classpath refid="metaclass.class.path" /&gt;
+                &lt;classpath refid="qdox.class.path" /&gt;
+                &lt;/taskdef&gt;
 
-&lt;generatemeta dest="target/classes"&gt;
-    &lt;fileset dir="src/java"&gt;
-        &lt;include name="**/*.java"/&gt;
-    &lt;/fileset&gt;
-&lt;/generatemeta&gt;
+                &lt;generatemeta dest="target/classes"&gt;
+                &lt;fileset dir="src/java"&gt;
+                &lt;include name="**/*.java"/&gt;
+                &lt;/fileset&gt;
+                &lt;/generatemeta&gt;
             </source>
         </section>
         <section name="Create the jar package">

@@ -10,9 +10,9 @@
         <attainGoal name="sar:sar"/>
         <ant:copy todir="${basedir}/../../distribution/deploy/apps"
             overwrite="true">
-			<ant:fileset dir="${maven.build.dir}">
-				<ant:include name="*.sar"/>
-			</ant:fileset>
+            <ant:fileset dir="${maven.build.dir}">
+                <ant:include name="*.sar"/>
+            </ant:fileset>
         </ant:copy>
     </goal>
 

@@ -89,6 +89,8 @@ package org.jcontainer.loom.components.assembler;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import org.codehaus.spice.salt.i18n.ResourceManager;
+import org.codehaus.spice.salt.i18n.Resources;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.ConfigurationException;
 import org.jcontainer.loom.components.util.metadata.ComponentTemplate;
@@ -97,8 +99,6 @@ import org.jcontainer.loom.components.util.metadata.MetaDataBuilder;
 import org.jcontainer.loom.components.util.metadata.PartitionTemplate;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.LoomException;
-import org.codehaus.spice.salt.i18n.ResourceManager;
-import org.codehaus.spice.salt.i18n.Resources;
 
 /**
  * Assemble a {@link PartitionTemplate} object from a Configuration object. The
@@ -106,7 +106,7 @@ import org.codehaus.spice.salt.i18n.Resources;
  * specified for <tt>assembly.xml</tt> files.
  *
  * @author Peter Donald
- * @version $Revision: 1.17 $ $Date: 2003-12-03 02:54:39 $
+ * @version $Revision: 1.18 $ $Date: 2003-12-03 10:44:34 $
  */
 public class Assembler
     implements MetaDataBuilder

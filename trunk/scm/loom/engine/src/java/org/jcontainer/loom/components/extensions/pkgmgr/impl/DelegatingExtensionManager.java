@@ -88,16 +88,16 @@ package org.jcontainer.loom.components.extensions.pkgmgr.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import org.codehaus.spice.extension.Extension;
 import org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager;
 import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
-import org.codehaus.spice.extension.Extension;
 
 /**
  * A {@link ExtensionManager} that can delegate to multiple different package
  * repositories.
  *
  * @author Peter Donald
- * @version $Revision: 1.6 $ $Date: 2003-12-03 02:54:41 $
+ * @version $Revision: 1.7 $ $Date: 2003-12-03 10:44:41 $
  */
 public class DelegatingExtensionManager
     implements ExtensionManager

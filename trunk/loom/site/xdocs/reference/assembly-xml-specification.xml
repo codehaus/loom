@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <document>
-   	<properties>
-	    <title>Specification of assembly.xml </title>
+    <properties>
+        <title>Specification of assembly.xml </title>
         <author email="peter at apache.org">Peter Donald</author>
     </properties>
     <body>
         <section name="The Assembly File">
             <p>
-                The <code>assembly.xml</code> file defines how to assemble the
+                The
+                <code>assembly.xml</code> file defines how to assemble the
                 application.  It defines the blocks that make up the application,
                 and how to connect them together.  It also defines the
                 application listeners to include in the application.
@@ -31,7 +32,8 @@
 
         <section name="The block Element">
             <p>
-                The <code>&lt;block></code> element defines a block, and
+                The
+                <code>&lt;block></code> element defines a block, and
                 how to provide services to the block.  The
                 <code>&lt;block></code> element takes the following
                 attributes:
@@ -39,9 +41,9 @@
 
             <table>
                 <tr>
-        			<th>Attribute</th>
-          		  	<th>Description</th>
-        		</tr>
+                    <th>Attribute</th>
+                    <th>Description</th>
+                </tr>
                 <tr>
                     <td>class</td>
                     <td>
@@ -64,13 +66,16 @@
 
             <subsection name="The provide Element">
                 <p>
-                    The <code>&lt;provide&gt;</code> element defines how to
+                    The
+                    <code>&lt;provide&gt;</code> element defines how to
                     provide a particular service to the block. It connects
                     the block to another block that provides the required service.
-                    There must be at least one <code>&lt;provide&gt;</code>
+                    There must be at least one
+                    <code>&lt;provide&gt;</code>
                     element for each dependency listed in the block's
                     metadata descriptor. For array and mapped services,
-                    there may be more than one <code>&lt;provide&gt;</code>
+                    there may be more than one
+                    <code>&lt;provide&gt;</code>
                     element for each dependency. The
                     <code>&lt;provide&gt;</code> element takes the following
                     attributes:
@@ -78,14 +83,15 @@
 
                 <table>
                     <tr>
-			            <th>Attribute</th>
-            			<th>Description</th>
-		           </tr>
+                        <th>Attribute</th>
+                        <th>Description</th>
+                    </tr>
                     <tr>
                         <td>alias</td>
                         <td>
                             The key to use for the service, for mapped services.
-                            Defaults to the value of the <code>name</code>
+                            Defaults to the value of the
+                            <code>name</code>
                             attribute.
                         </td>
                     </tr>
@@ -113,16 +119,18 @@
 
             <subsection name="The proxy Element">
                 <p>
-                    The <code>&lt;proxy></code> element controls whether
+                    The
+                    <code>&lt;proxy></code> element controls whether
                     Loom will wrap the block with a proxy object before
-                    supplying it to other blocks.  The <code>&lt;proxy></code>
+                    supplying it to other blocks.  The
+                    <code>&lt;proxy></code>
                     element takes the following attributes:
                 </p>
                 <table>
                     <tr>
-         			   <th>Attribute</th>
-	          		   <th>Description</th>
-    		       </tr>
+                        <th>Attribute</th>
+                        <th>Description</th>
+                    </tr>
                     <tr>
                         <td>disable</td>
                         <td>Disables the use of a proxy object.  Default is false.</td>
@@ -133,15 +141,17 @@
 
         <section name="The listener Element">
             <p>
-                The <code>&lt;listener></code> element defines an application
-                listener.  The <code>&lt;listener></code>  element takes the
+                The
+                <code>&lt;listener></code> element defines an application
+                listener.  The
+                <code>&lt;listener></code>  element takes the
                 following attributes:
             </p>
             <table>
                 <tr>
-          <th>Attribute</th>
-          <th>Description</th>
-        </tr>
+                    <th>Attribute</th>
+                    <th>Description</th>
+                </tr>
                 <tr>
                     <td>class</td>
                     <td>
@@ -165,10 +175,13 @@
 
         <section name="The block-listener Element (Deprecated)">
             <p>
-                The <code>&lt;block-listener></code> element defines
+                The
+                <code>&lt;block-listener></code> element defines
                 a block listener.  Note that the use of block listeners
-                is deprecated.  The <code>&lt;block-listener></code> element
-                takes the same attributes as the <code>&lt;listener></code>
+                is deprecated.  The
+                <code>&lt;block-listener></code> element
+                takes the same attributes as the
+                <code>&lt;listener></code>
                 element.
             </p>
         </section>
@@ -177,33 +190,35 @@
 
             <p>
                 Below is an example assembly file.  It defines 2 blocks, called
-                <code>myAuthorizer</code> and <code>myBlock</code>, and a
-                listener.  Block <code>myBlock</code> uses the
+                <code>myAuthorizer</code> and
+                <code>myBlock</code>, and a
+                listener.  Block
+                <code>myBlock</code> uses the
                 <code>Authorizer</code> service provided by block
                 <code>myAuthorizer</code>.
             </p>
 
             <source>
 
-&lt;?xml version="1.0"?>
+                &lt;?xml version="1.0"?>
 
-&lt;assembly>
+                &lt;assembly>
 
-    &lt;block name="myAuthorizer"
+                &lt;block name="myAuthorizer"
            class="com.biz.cornerstone.blocks.MyAuthorizer">
-    &lt;/block>
+                &lt;/block>
 
-    &lt;block name="myBlock"
+                &lt;block name="myBlock"
            class="com.biz.cornerstone.blocks.MyBlock">
-        &lt;provide name="myAuthorizer"
+                &lt;provide name="myAuthorizer"
                  role="com.biz.cornerstone.services.Authorizer"/>
-    &lt;/block>
+                &lt;/block>
 
-    &lt;listener name="myListener"
+                &lt;listener name="myListener"
               class="com.biz.cornerstone.listeners.MyListener">
-    &lt;/listener>
+                &lt;/listener>
 
-&lt;/assembly>
+                &lt;/assembly>
             </source>
         </section>
     </body>

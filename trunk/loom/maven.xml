@@ -8,10 +8,10 @@
     </goal>
 
     <goal name="loom:build">
-	   	<util:tokenize var="items" delim="," trim="true">${loom.build.include}</util:tokenize>
-		<j:forEach var="item" items="${items}">
-	        <attainGoal name="build:${item}"/>
-		</j:forEach>
+        <util:tokenize var="items" delim="," trim="true">${loom.build.include}</util:tokenize>
+        <j:forEach var="item" items="${items}">
+            <attainGoal name="build:${item}"/>
+        </j:forEach>
     </goal>
 
     <goal name="build:plugins">
@@ -55,10 +55,10 @@
     </goal>
 
     <goal name="loom:clean">
-	   	<util:tokenize var="items" delim="," trim="true">${loom.clean.include}</util:tokenize>
-		<j:forEach var="item" items="${items}">
-	        <attainGoal name="clean:${item}"/>
-		</j:forEach>
+        <util:tokenize var="items" delim="," trim="true">${loom.clean.include}</util:tokenize>
+        <j:forEach var="item" items="${items}">
+            <attainGoal name="clean:${item}"/>
+        </j:forEach>
     </goal>
 
     <goal name="clean:plugins">
@@ -103,10 +103,10 @@
     </goal>
 
     <goal name="loom:deploy">
-    	<util:tokenize var="items" delim="," trim="true">${loom.deploy.include}</util:tokenize>
-		<j:forEach var="item" items="${items}">
-	        <attainGoal name="deploy:${item}"/>
-		</j:forEach>
+        <util:tokenize var="items" delim="," trim="true">${loom.deploy.include}</util:tokenize>
+        <j:forEach var="item" items="${items}">
+            <attainGoal name="deploy:${item}"/>
+        </j:forEach>
     </goal>
 
     <goal name="deploy:plugins">

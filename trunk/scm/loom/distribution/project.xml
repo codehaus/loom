@@ -13,13 +13,13 @@
             <groupId>loom</groupId>
             <artifactId>loom-launcher</artifactId>
             <version>${pom.currentVersion}</version>
-		    <url>http://dist.codehaus.org/loom/jars</url>
+            <url>http://dist.codehaus.org/loom/jars</url>
         </dependency>
         <dependency>
             <groupId>loom</groupId>
             <artifactId>loom-engine</artifactId>
             <version>${pom.currentVersion}</version>
-		    <url>http://dist.codehaus.org/loom/jars</url>
+            <url>http://dist.codehaus.org/loom/jars</url>
             <properties>
                 <category>container</category>
             </properties>
@@ -52,7 +52,7 @@
             <groupId>dna</groupId>
             <artifactId>dna-impl</artifactId>
             <version>1.1-rc2</version>
-		    <properties>
+            <properties>
                 <category>container</category>
             </properties>
         </dependency>

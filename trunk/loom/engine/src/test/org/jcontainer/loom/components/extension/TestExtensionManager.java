@@ -86,15 +86,15 @@
  */
 package org.jcontainer.loom.components.extension;
 
+import org.codehaus.spice.extension.Extension;
 import org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager;
 import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
-import org.codehaus.spice.extension.Extension;
 
 /**
  * a class to help test sorting of ExtensionManager.
  *
  * @author Peter Donald
- * @version $Revision: 1.6 $ $Date: 2003-12-03 02:54:44 $
+ * @version $Revision: 1.7 $ $Date: 2003-12-03 10:44:44 $
  */
 class TestExtensionManager
     implements ExtensionManager

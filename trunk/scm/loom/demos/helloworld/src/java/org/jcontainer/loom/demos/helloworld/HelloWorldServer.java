@@ -87,7 +87,7 @@
 package org.jcontainer.loom.demos.helloworld;
 
 /**
- * @author  Paul Hammant <Paul_Hammant@yahoo.com>
+ * @author Paul Hammant <Paul_Hammant@yahoo.com>
  * @version 1.0
  */
 public interface HelloWorldServer

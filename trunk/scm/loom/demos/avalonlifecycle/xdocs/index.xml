@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <document>
-  <properties>
-    <title>Avalon Lifecycle Demo</title>
-	<author>Paul Hammant</author>
-	<author>Mauro Talevi</author>
-  </properties>
-  
-  <body>
-    <section name="Introduction">
-<p>The lifecycle demo shows only the calling of the Avalon lifecycle methods
+    <properties>
+        <title>Avalon Lifecycle Demo</title>
+        <author>Paul Hammant</author>
+        <author>Mauro Talevi</author>
+    </properties>
+
+    <body>
+        <section name="Introduction">
+            <p>The lifecycle demo shows only the calling of the Avalon lifecycle methods
 under Loom control.  If you are not familiar with the Avalon lifecycle, please
-refer to the 
-<a href="http://avalon.apache.org/framework/reference-the-lifecycle.html">
-Avalon lifecycle</a> documentation.</p>
-<p>Do not forget that the lifecycle methods are optional.  You can implement
+refer to the
+                <a href="http://avalon.apache.org/framework/reference-the-lifecycle.html">
+Avalon lifecycle</a> documentation.
+            </p>
+            <p>Do not forget that the lifecycle methods are optional.  You can implement
 all of them, as this demo does, some or none of them.</p>
-	</section>
-    <section name="Output">
-<p>This is the output that appears in the Console that Loom was called from:</p>
-<source>
+        </section>
+        <section name="Output">
+            <p>This is the output that appears in the Console that Loom was called from:</p>
+            <source>
 Loom x.y
 
 Lifecycle1Impl.constructor() called. (You should never do too much in here)
@@ -43,7 +44,7 @@ Lifecycle2Impl.stop() called.
 Lifecycle2Impl.dispose() Called
 Lifecycle1Impl.stop() called.
 Lifecycle1Impl.dispose() Called
-</source>
-		</section>
-	</body>
+            </source>
+        </section>
+    </body>
 </document>

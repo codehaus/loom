@@ -92,8 +92,8 @@ import java.security.Permissions;
 import java.security.Policy;
 
 /**
- * Default polic class to give every code base all permssions.
- * Will be replaced once the kernel loads.
+ * Default polic class to give every code base all permssions. Will be replaced
+ * once the kernel loads.
  */
 class FreeNEasyPolicy
     extends Policy

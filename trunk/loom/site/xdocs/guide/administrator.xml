@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <document>
     <properties>
-    <title>Guide - for Administrators</title>
-    <author email="daveweit@optonline.net">David Weit</author>
-  </properties>
+        <title>Guide - for Administrators</title>
+        <author email="daveweit@optonline.net">David Weit</author>
+    </properties>
     <body>
         <section name="Introduction">
             <p>
@@ -23,9 +23,9 @@
                 <p>
                   You can start Loom in the foreground with the following command:
 
-<source>
+                    <source>
 bin/run.[bat|sh]
-</source>
+                    </source>
                 </p>
                 <p>
                   On Windows versions other than NT, you'll need to set
@@ -34,82 +34,87 @@ bin/run.[bat|sh]
                   will cause a clean shutdown.
                 </p>
                 <p>
-                  In UNIX environments, you can also use the <code>loom.sh</code>
+                  In UNIX environments, you can also use the
+                    <code>loom.sh</code>
                   script to start, stop and restart Loom.  It accepts the following
                   (mutually exclusive) arguments
                 </p>
-<source>
+                <source>
 loom.sh [start|stop|run|restart|check]
-</source>
+                </source>
                 <p>
-                The <code>run</code> arg is equivalent to using the <code>run.sh</code> script.
+                The
+                    <code>run</code> arg is equivalent to using the
+                    <code>run.sh</code> script.
                 </p>
             </subsection>
             <subsection name="Using the Java Service Wrapper">
-              <p>
+                <p>
                 Another option for starting and stopping Loom is to build
                 it with support for the
-                <a href="http://wrapper.tanukisoftware.org/">Java Service Wrapper</a>.
-              </p>
-              <p>
+                    <a href="http://wrapper.tanukisoftware.org/">Java Service Wrapper</a>.
+                </p>
+                <p>
                 The main benifit of using the Java Service Wrapper is that it can
                 install Loom as a Linux/Unix deamon or a Windows NT service.
                 It can also detect if the JVM
                 freezes up or crashes and restart the application immediately.
-              </p>
-              <p>
+                </p>
+                <p>
                 Loom distribution comes with both Linux and Windows Wrappers.
                 To build Loom with a Wrapper for another Unix platform, simply change the
-                <code>wrapper.nix</code> property in <code>loom/distribution/project.properties</code>
+                    <code>wrapper.nix</code> property in
+                    <code>loom/distribution/project.properties</code>
                 to the appropriate platform and rebuild.
                 Loom will cache each new distribution downloaded in the Maven local repository.
-              </p>
-              <p>
+                </p>
+                <p>
                 For usage instructions
-              </p>
-<source>
+                </p>
+                <source>
 cd bin/
 wrapper
-</source>
-              <p>
-                The Wrapper configuration file is named <code>conf/wrapper.conf</code>.
-              </p>
+                </source>
+                <p>
+                The Wrapper configuration file is named
+                    <code>conf/wrapper.conf</code>.
+                </p>
             </subsection>
         </section>
         <section name="Using JMX">
             <subsection name="JMX Overview">
-              <p>
+                <p>
                   Loom is tightly integrated with Java Management Extensions (JMX).
                 TODO: say something else.  Integrate this section with the other
-                <a href="mx/index.html">JMX info</a>.
-              </p>
+                    <a href="mx/index.html">JMX info</a>.
+                </p>
             </subsection>
             <subsection name="How to Make Your Block an MBean">
-              <p>
+                <p>
                 It's actually quite simple.  Suppose you wanted to expose the
                 interface from the WebServer block
-                <a href="bdg/making-loom-compatible-comps.html">described</a> in
+                    <a href="bdg/making-loom-compatible-comps.html">described</a> in
                 the Block developer's guide.  You only need to do two things.
-              </p>
-              <p>
+                </p>
+                <p>
                 First, create an MBean interface.  It will look something like this:
-              </p>
-<source>
+                </p>
+                <source>
 package examplecomp.block;
 
 public interface WebServerMBean {
     void mountWar(String contextName, URL pathToWar);
     void unMountWar(String contextName);
 }
-</source>
-              <p>
+                </source>
+                <p>
                 Notice that interface MBean is identical to interface WebServer.
                 In most cases, it should be.
-              </p>
-              <p>
+                </p>
+                <p>
                 Now just make WebServerBlock implement WebServerMBean
-              </p>
-<source>
+                </p>
+                <source>
 package examplecomp.block;
 
 /**
@@ -123,66 +128,66 @@ public class WebServerBlock
     // ...
 
 }
-</source>
+                </source>
             </subsection>
             <subsection name="Using Http Adaptor">
-              <p>
+                <p>
                 The MX4J Http Adaptor allows access to a running Loom server
                 with any web browser.
-              </p>
-              <p>
+                </p>
+                <p>
                 TODO: describe configuration methods when they settle down
-              </p>
-              <p>
+                </p>
+                <p>
                 Then just point your browser to
-                <a href="http://localhost:8082/">http://localhost:8082/</a>.
+                    <a href="http://localhost:8082/">http://localhost:8082/</a>.
                 You should see a list of JMX MBeans you can control.
-              </p>
-              <p>
+                </p>
+                <p>
                 Under the section labled "Domain: Loom" you should see
                 a familier looking name or two.  They depend on the .sar
                 file packaging and configuration, but the web server above
                 would have a name similar to
-  <code>Loom:application=webserver,block=webserver,topic=WebServerMBean</code>.
+                    <code>Loom:application=webserver,block=webserver,topic=WebServerMBean</code>.
                 If you click on the name, you'll find a form that allows you
                 to mount and unmount .war files through the web!
-              </p>
-              <p>
+                </p>
+                <p>
                 If your aren't familiar with the guts of Loom, you may
                 want to browse the source to understand what some of the other
                 MBeans listed do. For example,
-                <code>Loom:component=Embeddor,topic=Embeddor</code> allows
+                    <code>Loom:component=Embeddor,topic=Embeddor</code> allows
                 you to restart and shutdown Loom.  It also provides information,
                 such as the server's start time and uptime, home directory, version,
                 and build information.
-              </p>
+                </p>
             </subsection>
             <subsection name="Using RMI Adaptor">
-              <p>
+                <p>
                 If you would like to write an agent that can administrate Loom
                 programatically, you can use the MX4J RMI Adaptor.  This section
                 is basically duplicating information available in the MX4J
-                <a href="http://mx4j.sourceforge.net/docs/bk01ch03s16.html">
+                    <a href="http://mx4j.sourceforge.net/docs/bk01ch03s16.html">
                 documentation</a>.  Loom uses the JRMP RMI Adaptor.
-              </p>
-              <p>
+                </p>
+                <p>
                 Ensure that the MX4J RMI Adaptor is enabled in kernel.xml
-              </p>
-<source>
-&lt;component role="org.apache.avalon.phoenix.interfaces.SystemManager"
+                </p>
+                <source>
+                    &lt;component role="org.apache.avalon.phoenix.interfaces.SystemManager"
     class="org.apache.avalon.phoenix.components.manager.MX4JSystemManager"
     logger="manager" >
-  &lt;enable-rmi-adaptor>true&lt;/enable-rmi-adaptor>
+                    &lt;enable-rmi-adaptor>true&lt;/enable-rmi-adaptor>
   [other enabled adaptors]
-&lt;/component>
-</source>
-              <p>
+                    &lt;/component>
+                </source>
+                <p>
                 Place mx4j-jmx.jar, mx4j-tools.jar, and jndi.properties (TODO: include it)
                 in your classpath.  Suppose you wanted to shut down Loom.  Create the
                 following class:
-              </p>
+                </p>
 
-<source>
+                <source>
 import mx4j.connector.rmi.jrmp.JRMPConnector;
 import mx4j.connector.RemoteMBeanServer;
 import javax.management.ObjectName;
@@ -206,23 +211,23 @@ public class JrmpShutdown {
         server.invoke(objName, "shutdown", new Object[0], new String[0]);
     }
 }
-</source>
-              <p>
+                </source>
+                <p>
                 Compile and run -- presto! The server stops.
-              </p>
+                </p>
             </subsection>
         </section>
         <section name="Troubleshooting">
-          <p>
-            <strong>Loom stops immediatly after starting, with no error message</strong>
-          </p>
-          <p>
+            <p>
+                <strong>Loom stops immediatly after starting, with no error message</strong>
+            </p>
+            <p>
             Make sure you have a .sar file in the app/ directory.  If there isn't
             a service running, Loom quits immediately.  You can actually
             stop the server by undeploying all registered applications through
             JMX (although that would be a strange way of doing it).
             TODO: is this behavior a good thing?
-          </p>
+            </p>
         </section>
     </body>
 </document>

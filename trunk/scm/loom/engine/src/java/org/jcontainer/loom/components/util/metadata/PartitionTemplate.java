@@ -14,7 +14,7 @@ package org.jcontainer.loom.components.util.metadata;
  * partitions. Partitions can also be nested one inside each other.
  *
  * @author Peter Donald
- * @version $Revision: 1.2 $ $Date: 2003-11-29 13:44:26 $
+ * @version $Revision: 1.3 $ $Date: 2003-12-03 10:44:43 $
  */
 public class PartitionTemplate
 {
@@ -34,14 +34,10 @@ public class PartitionTemplate
      */
     private final String[] m_depends;
 
-    /**
-     * AN array of partitions that are contained by this object.
-     */
+    /** AN array of partitions that are contained by this object. */
     private final PartitionTemplate[] m_partitions;
 
-    /**
-     * AN array of components that are contained by this object.
-     */
+    /** AN array of components that are contained by this object. */
     private final ComponentTemplate[] m_components;
 
     /**

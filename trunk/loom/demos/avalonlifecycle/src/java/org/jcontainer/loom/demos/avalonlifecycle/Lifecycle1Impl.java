@@ -102,17 +102,17 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 
 /**
- * A demo of the lifecycle methods.  Mount the SAR fle contaning there blocks in Loom, go
- * to the JMX console ..
- *   http://localhost:8082/mbean?objectname=Loom%3Aapplication%3Ddemo-avalonlifecycle%2Ctopic%3DApplication
+ * A demo of the lifecycle methods.  Mount the SAR fle contaning there blocks in
+ * Loom, go to the JMX console .. http://localhost:8082/mbean?objectname=Loom%3Aapplication%3Ddemo-avalonlifecycle%2Ctopic%3DApplication
  * .. and try stopt/starting the blocks.
+ *
+ * @author Paul Hammant <Paul_Hammant@yahoo.com>
  * @dna.component
  * @dna.service type="org.jcontainer.loom.demos.avalonlifecycle.Lifecycle1"
- * @author  Paul Hammant <Paul_Hammant@yahoo.com>
  */
 public class Lifecycle1Impl
     implements LogEnabled, Startable, Initializable, Contextualizable,
-    Serviceable, Configurable, Disposable, Lifecycle1
+               Serviceable, Configurable, Disposable, Lifecycle1
 {
     public int myServiceMethod()
     {
@@ -137,21 +137,24 @@ public class Lifecycle1Impl
     public void contextualize( Context context )
         throws ContextException
     {
-        System.out.println( "Lifecycle1Impl.contextualize() called (things like base directory passed in here)." );
+        System.out.println(
+            "Lifecycle1Impl.contextualize() called (things like base directory passed in here)." );
         System.out.flush();
     }
 
     public void service( ServiceManager serviceManager )
         throws ServiceException
     {
-        System.out.println( "Lifecycle1Impl.service() called (lookup on other services possible now)." );
+        System.out.println(
+            "Lifecycle1Impl.service() called (lookup on other services possible now)." );
         System.out.flush();
     }
 
     public void configure( Configuration configuration )
         throws ConfigurationException
     {
-        System.out.println( "Lifecycle1Impl.configure() called (configuration from config.xml passed here)." );
+        System.out.println(
+            "Lifecycle1Impl.configure() called (configuration from config.xml passed here)." );
         System.out.flush();
     }
 
