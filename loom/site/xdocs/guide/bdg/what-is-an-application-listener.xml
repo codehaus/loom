@@ -22,7 +22,7 @@
         after the Application is started and stopped.
       </p>
     </section>
-    <section name="How to make a block listener">
+    <section name="How to make an application listener">
       <p>
         Like normal blocks, an application listener can be <em>LogEnabled</em>
         and take configuration via <em>Configurable</em>.  The special feature
