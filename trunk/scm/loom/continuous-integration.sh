@@ -30,7 +30,7 @@ rm -Rf ~/.maven/plugins/maven-sar-plugin-i*
 
 # Compile and test
 rm -f $logfile
-maven | tee $logfile
+maven 2>&1 | tee $logfile
 
 if grep "BUILD SUCCESSFUL" $logfile ; then
       echo "$name build successful"
