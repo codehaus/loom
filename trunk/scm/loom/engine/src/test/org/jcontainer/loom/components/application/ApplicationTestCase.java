@@ -22,7 +22,7 @@ import org.jcontainer.loom.components.application.data.Component1;
 import org.jcontainer.loom.components.application.data.Service1;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.tools.LoomToolConstants;
-import org.jcontainer.loom.tools.configuration.ConfigurationBuilder;
+import org.jcontainer.loom.components.util.ConfigurationBuilder;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
@@ -37,7 +37,7 @@ import org.xml.sax.InputSource;
  *  An basic test case for the Application.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.14 $ $Date: 2003-10-16 05:11:32 $
+ * @version $Revision: 1.15 $ $Date: 2003-10-16 05:23:54 $
  */
 public class ApplicationTestCase
     extends TestCase

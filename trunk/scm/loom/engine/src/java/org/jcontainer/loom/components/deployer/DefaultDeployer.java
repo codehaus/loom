@@ -115,7 +115,7 @@ import org.jcontainer.loom.interfaces.Kernel;
 import org.jcontainer.loom.interfaces.LogManager;
 import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.tools.LoomToolConstants;
-import org.jcontainer.loom.tools.configuration.ConfigurationBuilder;
+import org.jcontainer.loom.components.util.ConfigurationBuilder;
 import org.jcontainer.loom.tools.profile.ComponentProfile;
 import org.jcontainer.loom.tools.profile.PartitionProfile;
 import org.jcontainer.loom.tools.profile.ProfileBuilder;

@@ -18,7 +18,7 @@ import org.jcontainer.loom.components.assembler.data.Component2;
 import org.jcontainer.loom.components.assembler.data.Component3;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.tools.LoomToolConstants;
-import org.jcontainer.loom.tools.configuration.ConfigurationBuilder;
+import org.jcontainer.loom.components.util.ConfigurationBuilder;
 import org.jcontainer.loom.tools.metadata.DependencyMetaData;
 import org.jcontainer.loom.tools.profile.ComponentProfile;
 import org.jcontainer.loom.tools.profile.PartitionProfile;
@@ -31,7 +31,7 @@ import org.xml.sax.InputSource;
  *  An basic test case for the LogManager.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-10-16 05:11:33 $
+ * @version $Revision: 1.7 $ $Date: 2003-10-16 05:23:54 $
  */
 public class AssemblerTestCase
     extends TestCase
