@@ -26,43 +26,43 @@ import java.util.jar.Manifest;
  * <code>guide/extensions/versioning.html</code>.</p>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-07-28 13:30:46 $
+ * @version $Revision: 1.2 $ $Date: 2003-07-28 13:32:57 $
  */
 public final class Specification
 {
     /**
      * Manifest Attribute Name object for SPECIFICATION_TITLE.
-     * @see java.util.jar.Attributes.Name#SPECIFICATION_TITLE
+     * @see Attributes.Name#SPECIFICATION_TITLE
      */
     public static final Attributes.Name SPECIFICATION_TITLE = Attributes.Name.SPECIFICATION_TITLE;
 
     /**
      * Manifest Attribute Name object for SPECIFICATION_VERSION.
-     * @see java.util.jar.Attributes.Name#SPECIFICATION_VERSION
+     * @see Attributes.Name#SPECIFICATION_VERSION
      */
     public static final Attributes.Name SPECIFICATION_VERSION = Attributes.Name.SPECIFICATION_VERSION;
 
     /**
      * Manifest Attribute Name object for SPECIFICATION_VENDOR.
-     * @see java.util.jar.Attributes.Name#SPECIFICATION_VENDOR
+     * @see Attributes.Name#SPECIFICATION_VENDOR
      */
     public static final Attributes.Name SPECIFICATION_VENDOR = Attributes.Name.SPECIFICATION_VENDOR;
 
     /**
      * Manifest Attribute Name object for IMPLEMENTATION_TITLE.
-     * @see java.util.jar.Attributes.Name#IMPLEMENTATION_TITLE
+     * @see Attributes.Name#IMPLEMENTATION_TITLE
      */
     public static final Attributes.Name IMPLEMENTATION_TITLE = Attributes.Name.IMPLEMENTATION_TITLE;
 
     /**
      * Manifest Attribute Name object for IMPLEMENTATION_VERSION.
-     * @see java.util.jar.Attributes.Name#IMPLEMENTATION_VERSION
+     * @see Attributes.Name#IMPLEMENTATION_VERSION
      */
     public static final Attributes.Name IMPLEMENTATION_VERSION = Attributes.Name.IMPLEMENTATION_VERSION;
 
     /**
      * Manifest Attribute Name object for IMPLEMENTATION_VENDOR.
-     * @see java.util.jar.Attributes.Name#IMPLEMENTATION_VENDOR
+     * @see Attributes.Name#IMPLEMENTATION_VENDOR
      */
     public static final Attributes.Name IMPLEMENTATION_VENDOR = Attributes.Name.IMPLEMENTATION_VENDOR;
 
