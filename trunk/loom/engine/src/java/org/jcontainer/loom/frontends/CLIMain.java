@@ -177,9 +177,7 @@ public final class CLIMain
             System.out.println();
 
             final Properties properties = setup.getParameters();
-            final String loomHome = System.getProperty( "loom.home", ".." );
-            m_home = new File( loomHome ).getCanonicalFile();
-            data.put( HOME_DIR, m_home );
+            m_home = (File)data.get( HOME_DIR );
             if( !properties.containsKey( CONFIGFILE ) )
             {
                 final String filename = m_home + DEFAULT_CONF_FILE;
