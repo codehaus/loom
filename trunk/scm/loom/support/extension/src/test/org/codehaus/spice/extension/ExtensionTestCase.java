@@ -16,16 +16,11 @@ import junit.framework.TestCase;
  * TestCases for Extension.
  *
  * @author Peter Donald
- * @version $Revision: 1.2 $ $Date: 2003-12-02 08:08:09 $
+ * @version $Revision: 1.3 $ $Date: 2003-12-02 08:09:24 $
  */
 public class ExtensionTestCase
     extends TestCase
 {
-    public ExtensionTestCase( final String name )
-    {
-        super( name );
-    }
-
     public void testAvailable()
         throws Exception
     {
