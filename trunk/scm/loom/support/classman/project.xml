@@ -3,8 +3,8 @@
     <extend>${basedir}/../../tools/maven/project.xml</extend>
     <name>ClassMan</name>
     <id>spice-classman</id>
-    <gumpRepositoryId>components</gumpRepositoryId>
-    <currentVersion>1.1dev</currentVersion>
+    <currentVersion>1.1</currentVersion>
+    <package>org.codehaus.spice.salt</package>
     <inceptionYear>2002</inceptionYear>
 
     <shortDescription>Toolkit to construct ClassLoader lattices from an XML descriptor.</shortDescription>
@@ -20,6 +20,11 @@
             <id>1.0</id>
             <name>1.0</name>
             <tag>CLASSMAN_1_0-tag</tag>
+        </version>
+        <version>
+            <id>1.1</id>
+            <name>1.1</name>
+            <tag>CLASSMAN_1_1-tag</tag>
         </version>
     </versions>
 
@@ -42,7 +47,7 @@
         <dependency>
             <groupId>spice</groupId>
             <artifactId>spice-extension</artifactId>
-            <version>1.0</version>
+            <version>1.1</version>
             <properties>
                 <category>runtime</category>
             </properties>
