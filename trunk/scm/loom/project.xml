@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <project>
     <pomVersion>3</pomVersion>
-    <currentVersion>1.0-beta</currentVersion>
+    <currentVersion>1.0-beta1-SNAPSHOT</currentVersion>
     <inceptionYear>1999-2003</inceptionYear>
     <package>org.jcontainer.loom</package>
 
@@ -22,15 +22,20 @@
     <issueTrackingUrl>http://jira.codehaus.org/secure/BrowseProject.jspa?id=10131</issueTrackingUrl>
 
     <repository>
-        <connection>scm:cvs:pserver:anonymous@codehaus.org:/cvsroot/jcontainer:jcontainer/loom</connection>
+        <connection>scm:cvs:pserver:anonymous@codehaus.org:/cvsroot/jcontainer:loom</connection>
         <url>http://cvs.codehaus.org/viewcvs.cgi/jcontainer/loom/?root=jcontainer</url>
     </repository>
 
     <versions>
         <version>
-            <id>1.0-beta</id>
-            <name>1.0-beta</name>
-            <tag>LOOM_1_0_BETA-tag</tag>
+            <id>1.0-beta1-SNAPSHOT</id>
+            <name>1.0-beta1-SNAPSHOT</name>
+            <tag>HEAD</tag>
+        </version>
+        <version>
+            <id>1.0-beta1</id>
+            <name>1.0-beta1</name>
+            <tag>LOOM_1_0_BETA_1-tag</tag>
         </version>
     </versions>
 
