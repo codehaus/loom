@@ -38,7 +38,7 @@ import org.realityforge.salt.i18n.ResourceManager;
  * </ul>
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-04 23:38:36 $
+ * @version $Revision: 1.3 $ $Date: 2003-06-13 01:06:06 $
  */
 public class SimpleLoaderResolver
     implements LoaderResolver
@@ -271,11 +271,11 @@ public class SimpleLoaderResolver
         if( isDebugEnabled() )
         {
             final String message1 =
-                REZ.getString( "available-extensions",
+                REZ.format( "available-extensions",
                                Arrays.asList( available ) );
             debug( message1 );
             final String message2 =
-                REZ.getString( "required-extensions",
+                REZ.format( "required-extensions",
                                Arrays.asList( required ) );
             debug( message2 );
         }
@@ -321,14 +321,14 @@ public class SimpleLoaderResolver
             }
 
             final String message =
-                REZ.getString( "unsatisfied.extensions", new Integer( size ) );
+                REZ.format( "unsatisfied.extensions", new Integer( size ) );
             throw new Exception( message );
         }
 
         if( isDebugEnabled() )
         {
             final String message =
-                REZ.getString( "optional-packages-added", dependencies );
+                REZ.format( "optional-packages-added", dependencies );
             debug( message );
         }
 
@@ -400,7 +400,7 @@ public class SimpleLoaderResolver
                 catch( final IOException ioe )
                 {
                     final String message =
-                        REZ.getString( "bad-classpath-entry", element );
+                        REZ.format( "bad-classpath-entry", element );
                     throw new Exception( message );
                 }
             }
