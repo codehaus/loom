@@ -29,15 +29,16 @@ import org.jcontainer.loom.tools.profile.PartitionProfile;
  *  An basic test case for the LogManager.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-07-07 10:24:54 $
+ * @version $Revision: 1.6 $ $Date: 2003-07-07 10:37:56 $
  */
 public class VerifierTestCase
     extends TestCase
 {
-    private static final String C1_IMPLEMENTATION_KEY = "org.jcontainer.loom.test.data.Component1";
-    private static final String C2_IMPLEMENTATION_KEY = "org.jcontainer.loom.test.data.Component2";
-    private static final String C3_IMPLEMENTATION_KEY = "org.jcontainer.loom.test.data.Component3";
-    private static final String C2_SERVICE = "org.jcontainer.loom.test.data.Service2";
+    private static final String DATA_PKG = "org.jcontainer.loom.tools.data.";
+    private static final String C1_IMPLEMENTATION_KEY = DATA_PKG + "Component1";
+    private static final String C2_IMPLEMENTATION_KEY = DATA_PKG + "Component2";
+    private static final String C3_IMPLEMENTATION_KEY = DATA_PKG + "Component3";
+    private static final String C2_SERVICE = DATA_PKG + "Service2";
     private static final String C1_NAME = "c1";
     private static final String C3_NAME = "c3";
 
@@ -218,7 +219,7 @@ public class VerifierTestCase
                                   PartitionProfile.EMPTY_SET,
                                   new ComponentProfile[]{c3Profile, c2aProfile, c2bProfile, c2cProfile} );
         final PartitionProfile listenerProfile =
-            new PartitionProfile( blockMetaData,
+            new PartitionProfile( listenerMetaData,
                                   PartitionProfile.EMPTY_SET,
                                   ComponentProfile.EMPTY_SET );
         final PartitionProfile profile =
