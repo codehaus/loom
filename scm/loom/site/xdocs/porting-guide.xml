@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <document>
-
     <properties>
         <title>Porting Guide</title>
     </properties>
 
     <body>
-
         <section name="Porting Phoenix 4.0.x applications">
             <p>
 		    Loom 1.0 supports applications running in Phoenix 4.0.x releases,
@@ -14,7 +12,14 @@
                 <a href="/plugins/maven-sar/">Maven Sar Plugin</a>
 		    provided by Loom and the appropriate libraries are bundles in the sar.
             </p>
-            <subsection name="Creating a Loom Sar">
+
+            <p>
+            For users that still have an
+                <a href="http://ant.apache.org">Apache Ant</a> based build, the Phoenix sar
+            task can still be used. Otherwise, it is possible to create a SAR using Ant's
+                <code>jar</code> task.
+            </p>
+            <subsection name="Creating a Loom Sar with Maven">
                 <p>
 			Since the generation of metaclass descriptors is more generic in
 			Loom compared with Phoenix, but still fully compatible with it,
@@ -39,9 +44,9 @@
             compilation by adding the following to a custom maven.xml.
                     <source>
                         <![CDATA[
-    <postGoal name="java:compile">
-        <attainGoal name="sar:metagenerate"/>
-    </postGoal>
+<postGoal name="java:compile">
+    <attainGoal name="sar:metagenerate"/>
+</postGoal>
                     ]]>
                     </source>
 			and execute
@@ -50,6 +55,44 @@ maven sar
                     </source>
                 </p>
             </subsection>
+            <subsection name="Creating a Loom Sar with Ant">
+                <p>
+            Loom's new metaclass descriptors can still be created with Ant.
+			Since the generation of metaclass descriptors is more generic in
+			Loom compared with Phoenix, but still fully compatible with it,
+			users can deploy applications running in Phoenix 4.0.x by simply
+			regenerating from the Java source the descriptors using the Maven Sar Plugin.
+                </p>
+
+                <p>To do so, use the following in your ant build file (JAR file versions may need to be adjusted to the
+                latest releases) :
+                    <source><![CDATA[
+<taskdef
+    name="metaclassGen"
+    classname="org.realityforge.metaclass.tools.tasks.GenerateClassDescriptorsTask"
+>
+    <classpath>
+        <pathelement location="${path.to}/spice-metaclass-1.0-rc3-dev.jar"/>
+        <pathelement location="${path.to}/qdox-1.3.jar"/>
+        <pathelement location="${path.to}/asm-1.4.jar"/>
+    </classpath>
+</taskdef>
+
+<metaclassGen destDir="${dest.dir}" namespaceTagsOnly="false">
+    <fileset dir="${src.dir}"/>
+    <interceptor name="org.jcontainer.loom.info.PhoenixAttributeInterceptor">
+        <classpath>
+            <pathelement location="${path.to}/maven-sar-plugin-1.0-beta1-dev.jar"/>
+        </classpath>
+    </interceptor>
+</metaclassGen>
+
+                    ]]></source>
+                </p>
+
+                <p>For the time being, it is recommended to continue using the Ant-based SAR task to create a SAR.
+                (instructions on how to create one without it are welcome!)</p>
+            </subsection>
             <subsection name="Comparison of libraries bundled">
                 <p>
 			Compared to the Phoenix 4.0.x distribution, in the Loom 1.0 distribution
@@ -57,46 +100,59 @@ maven sar
                     <code>lib/</code> directory
 			have been removed as they are not used by the container.
 			If your app uses any of the excluded libraries,
-			you simply need to bundle them with the sar.
+			you simply need to bundle them with the sar, or put them in the
+                    <code>lib/</code> directory.
                 </p>
+
+                <p>
+                    The general migration tip is to make sure that what is in your old
+                    <code>lib/</code> directory
+                    is either in the new
+                    <code>lib/</code> directory, or bundled with your sar.
+                </p>
+
+                <p>There were migration issues from Phoenix 4.0.3 to 4.0.4, but that should not be an issue upgrading to
+                Loom, as the problem libraries are no longer in a shared classpath between the Loom core and applications.
+                </p>
+
                 <p>
 			Loom 1.0 comes with a lean set of libraries:
-                    <source>
-avalon-framework
-excalibur-instrument
-logkit
-log4j
-mx4j-jmx
-phoenix-client
-                    </source>
+                    <ul>
+                        <li>avalon-framework</li>
+                        <li>excalibur-instrument</li>
+                        <li>logkit</li>
+                        <li>log4j</li>
+                        <li>mx4j-jmx</li>
+                        <li>phoenix-client</li>
+                    </ul>
                 </p>
                 <p>
 			Phoenix 4.0.x ships a bigger set of libraries:
-                    <source>
-avalon-framework
-excalibur-baxter
-excalibur-cli
-excalibur-collections
-excalibur-concurrent
-excalibur-configuration
-excalibur-containerkit
-excalibur-extension
-excalibur-i18n
-excalibur-instrument
-excalibur-io
-excalibur-logger
-excalibur-pool
-excalibur-thread
-excalibur-threadcontext
-excalibur-util
-isorelax.jar
-jing.jar
-logkit
-phoenix-client
-xalan
-xercesImpl
-xml-apis
-                    </source>
+                    <ul>
+                        <li>avalon-framework</li>
+                        <li>excalibur-baxter</li>
+                        <li>excalibur-cli</li>
+                        <li>excalibur-collections</li>
+                        <li>excalibur-concurrent</li>
+                        <li>excalibur-configuration</li>
+                        <li>excalibur-containerkit</li>
+                        <li>excalibur-extension</li>
+                        <li>excalibur-i18n</li>
+                        <li>excalibur-instrument</li>
+                        <li>excalibur-io</li>
+                        <li>excalibur-logger</li>
+                        <li>excalibur-pool</li>
+                        <li>excalibur-thread</li>
+                        <li>excalibur-threadcontext</li>
+                        <li>excalibur-util</li>
+                        <li>isorelax.jar</li>
+                        <li>jing.jar</li>
+                        <li>logkit</li>
+                        <li>phoenix-client</li>
+                        <li>xalan</li>
+                        <li>xercesImpl</li>
+                        <li>xml-apis</li>
+                    </ul>
                 </p>
             </subsection>
         </section>

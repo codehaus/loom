@@ -17,9 +17,8 @@
             <type>plugin</type>
         </dependency>
         <dependency>
-            <groupId>avalon</groupId>
-            <artifactId>avalon-framework</artifactId>
-            <version>4.1.4</version>
+            <id>avalon-framework</id>
+            <version>4.1.5</version>
         </dependency>
     </dependencies>
 
