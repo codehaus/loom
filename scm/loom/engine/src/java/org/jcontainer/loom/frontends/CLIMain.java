@@ -46,7 +46,7 @@ public final class CLIMain
         ResourceManager.getPackageResources( CLIMain.class );
 
     private static final String DEFAULT_LOG_FILE =
-        File.separator + "logs" + File.separator + "phoenix.log";
+        File.separator + "logs" + File.separator + "loom.log";
 
     private static final String DEFAULT_CONF_FILE =
         File.separator + "conf" + File.separator + "kernel.xml";
@@ -89,16 +89,16 @@ public final class CLIMain
             System.out.println();
 
             final Parameters parameters = setup.getParameters();
-            final String phoenixHome = System.getProperty( "phoenix.home", ".." );
-            parameters.setParameter( "phoenix.home", phoenixHome );
-            if( !parameters.isParameter( "phoenix.configfile" ) )
+            final String loomHome = System.getProperty( "loom.home", ".." );
+            parameters.setParameter( "loom.home", loomHome );
+            if( !parameters.isParameter( "loom.configfile" ) )
             {
-                final String filename = phoenixHome + DEFAULT_CONF_FILE;
+                final String filename = loomHome + DEFAULT_CONF_FILE;
                 final File configFile =
                     new File( filename ).getCanonicalFile();
 
                 // setting default
-                parameters.setParameter( "phoenix.configfile",
+                parameters.setParameter( "loom.configfile",
                                          configFile.toString() );
             }
 
@@ -179,7 +179,7 @@ public final class CLIMain
     {
         try
         {
-            final String configFilename = parameters.getParameter( "phoenix.configfile" );
+            final String configFilename = parameters.getParameter( "loom.configfile" );
             final Configuration root = getConfigurationFor( configFilename );
             final Configuration configuration = root.getChild( "embeddor" );
             final String embeddorClassname = configuration.getAttribute( "class" );
@@ -213,9 +213,9 @@ public final class CLIMain
     private Logger createLogger( final Parameters parameters )
         throws Exception
     {
-        final String phoenixHome = parameters.getParameter( "phoenix.home" );
+        final String loomHome = parameters.getParameter( "loom.home" );
         final String logDestination =
-            parameters.getParameter( "log-destination", phoenixHome + DEFAULT_LOG_FILE );
+            parameters.getParameter( "log-destination", loomHome + DEFAULT_LOG_FILE );
         final String logPriority =
             parameters.getParameter( "log-priority", "INFO" );
         final AvalonFormatter formatter = new AvalonFormatter( DEFAULT_FORMAT );
