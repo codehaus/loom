@@ -7,12 +7,11 @@
     <body>
         <section name="Introduction">
             <p>
-  		Loom  is a micro-kernel designed and implemented on top of the
-                <a href="http://dna.codehaus.org">DNA</a> framework and supports components developed
-  		using the
-                <a href="http://avalon.apache.org/framework/">Avalon</a>.
-		In the future Loom will support DNA and
-                <a href="http://picocontainer.org">Pico</a> components.
+                Loom is a micro-kernel designed and implemented on top of the
+                <a href="http://dna.codehaus.org">DNA</a> framework and supports components
+                developed using the <a href="http://avalon.apache.org/framework/">Avalon</a> framework.
+                In the future Loom will support DNA and <a href="http://picocontainer.org">Pico</a>
+                components.
             </p>
             <p>
   		Loom provides a number of facilities to manage the environment of Server Applications.
