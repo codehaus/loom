@@ -43,6 +43,7 @@
             <roles>
                 <role>Founder</role>
             </roles>
+            <timezone>+10</timezone>
         </developer>
         <developer>
             <name>Paul Hammant</name>
@@ -58,7 +59,7 @@
             <url>http://fotap.org/~osi</url>
             <roles>
                 <role>Founder</role>
-                <role>Hacker</role>            
+                <role>Hacker</role>
             </roles>
             <timezone>-5</timezone>
         </developer>
@@ -68,13 +69,13 @@
             <roles>
                 <role>Founder</role>
             </roles>
-        </developer>    
+        </developer>
     </developers>
-    
+
     <build>
         <nagEmailAddress>jcontainer-interest@lists.codehaus.org</nagEmailAddress>
     </build>
-    
+
     <reports>
 <!--        <report>maven-changes-plugin</report>-->
 <!--        <report>maven-changlog-plugin</report>-->
