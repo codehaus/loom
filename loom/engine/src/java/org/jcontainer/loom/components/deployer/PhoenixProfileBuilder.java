@@ -22,15 +22,18 @@ import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.infobuilder.LegacyUtil;
 import org.jcontainer.loom.tools.metadata.ComponentMetaData;
 import org.jcontainer.loom.tools.metadata.PartitionMetaData;
+import org.jcontainer.loom.tools.profile.ProfileBuilder;
+import org.jcontainer.loom.tools.profile.PartitionProfile;
+import org.jcontainer.loom.tools.profile.ComponentProfile;
 
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-29 04:38:21 $
+ * @version $Revision: 1.2 $ $Date: 2003-07-07 13:22:19 $
  */
 public class PhoenixProfileBuilder
     extends AbstractLogEnabled
-    implements org.jcontainer.loom.tools.profile.ProfileBuilder
+    implements ProfileBuilder
 {
     private final Assembler m_assembler = new Assembler();
 
@@ -40,7 +43,7 @@ public class PhoenixProfileBuilder
         setupLogger( m_assembler );
     }
 
-    public org.jcontainer.loom.tools.profile.PartitionProfile buildProfile( Map parameters )
+    public PartitionProfile buildProfile( Map parameters )
         throws Exception
     {
         final PartitionMetaData metaData = m_assembler.buildAssembly( parameters );
@@ -52,8 +55,8 @@ public class PhoenixProfileBuilder
         return assembleSarProfile( metaData, factory );
     }
 
-    private org.jcontainer.loom.tools.profile.PartitionProfile assembleSarProfile( final PartitionMetaData metaData,
-                                                                                   final ComponentFactory factory )
+    private PartitionProfile assembleSarProfile( final PartitionMetaData metaData,
+                                                 final ComponentFactory factory )
         throws Exception
     {
         final PartitionMetaData blockPartition =
@@ -61,14 +64,14 @@ public class PhoenixProfileBuilder
         final PartitionMetaData listenerPartition =
             metaData.getPartition( ContainerConstants.LISTENER_PARTITION );
 
-        final org.jcontainer.loom.tools.profile.PartitionProfile blockProfile = assembleProfile( blockPartition, factory );
-        final org.jcontainer.loom.tools.profile.PartitionProfile listenerProfile =
+        final PartitionProfile blockProfile = assembleProfile( blockPartition, factory );
+        final PartitionProfile listenerProfile =
             assembleListenerProfile( listenerPartition );
 
-        final org.jcontainer.loom.tools.profile.PartitionProfile[] profiles = new org.jcontainer.loom.tools.profile.PartitionProfile[]{blockProfile, listenerProfile};
-        return new org.jcontainer.loom.tools.profile.PartitionProfile( metaData,
-                                                                       profiles,
-                                                                       new org.jcontainer.loom.tools.profile.ComponentProfile[ 0 ] );
+        final PartitionProfile[] profiles = new PartitionProfile[]{blockProfile, listenerProfile};
+        return new PartitionProfile( metaData,
+                                     profiles,
+                                     ComponentProfile.EMPTY_SET );
     }
 
     private org.jcontainer.loom.tools.profile.PartitionProfile assembleListenerProfile( final PartitionMetaData metaData )
@@ -80,13 +83,13 @@ public class PhoenixProfileBuilder
             final ComponentMetaData component = components[ i ];
             final ComponentInfo info =
                 LegacyUtil.createListenerInfo( component.getImplementationKey() );
-            final org.jcontainer.loom.tools.profile.ComponentProfile profile = new org.jcontainer.loom.tools.profile.ComponentProfile( info, component );
+            final ComponentProfile profile = new org.jcontainer.loom.tools.profile.ComponentProfile( info, component );
             componentSet.add( profile );
         }
 
-        final org.jcontainer.loom.tools.profile.ComponentProfile[] profiles =
-            (org.jcontainer.loom.tools.profile.ComponentProfile[])componentSet.toArray( new org.jcontainer.loom.tools.profile.ComponentProfile[ componentSet.size() ] );
-        return new org.jcontainer.loom.tools.profile.PartitionProfile( metaData, org.jcontainer.loom.tools.profile.PartitionProfile.EMPTY_SET, profiles );
+        final ComponentProfile[] profiles =
+            (ComponentProfile[])componentSet.toArray( new ComponentProfile[ componentSet.size() ] );
+        return new PartitionProfile( metaData, PartitionProfile.EMPTY_SET, profiles );
     }
 
     private org.jcontainer.loom.tools.profile.PartitionProfile assembleProfile( final PartitionMetaData metaData,
