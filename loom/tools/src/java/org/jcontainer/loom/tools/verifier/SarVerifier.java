@@ -42,7 +42,7 @@ import org.realityforge.salt.i18n.Resources;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.7 $ $Date: 2003-07-03 06:45:02 $
+ * @version $Revision: 1.8 $ $Date: 2003-07-06 07:48:01 $
  */
 public class SarVerifier
     extends AssemblyVerifier
@@ -335,7 +335,7 @@ public class SarVerifier
         }
         catch( final ClassNotFoundException cnfe )
         {
-            final String message = "Unable to lcoate class " +
+            final String message = "Unable to locate class " +
                 classname + " due to " + cnfe;
             throw new IllegalStateException( message );
         }
