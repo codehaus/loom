@@ -12,26 +12,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>loom</groupId>
-            <artifactId>loom-info</artifactId>
-            <version>${pom.currentVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>dna</groupId>
-            <artifactId>dna-tools</artifactId>
-            <version>20031016.083103</version>
-        </dependency>
-        <dependency>
-            <groupId>dna</groupId>
-            <artifactId>dna-api</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>dna</groupId>
-            <artifactId>dna-impl</artifactId>
-            <version>20031005.014103</version>
-        </dependency>
-        <dependency>
             <groupId>spice</groupId>
             <artifactId>spice-metaclass</artifactId>
             <version>20031005.002435</version>
@@ -44,23 +24,6 @@
             <groupId>avalon</groupId>
             <artifactId>avalon-framework</artifactId>
             <version>20030713</version>
-        </dependency>
-        <dependency>
-        	<groupId>avalon</groupId>
-            <artifactId>avalon-phoenix-client</artifactId>
-            <version>20030819</version>
-        </dependency>
-        <dependency>
-            <id>excalibur-instrument</id>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <id>excalibur-instrument-manager-interfaces</id>
-            <version>0.1</version>
-        </dependency>
-        <dependency>
-            <id>qdox</id>
-            <version>1.1</version>
         </dependency>
         <dependency>
             <groupId>spice</groupId>
