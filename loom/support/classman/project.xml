@@ -3,7 +3,7 @@
     <extend>${basedir}/../../tools/maven/project.xml</extend>
     <name>ClassMan</name>
     <id>spice-classman</id>
-    <currentVersion>1.1</currentVersion>
+    <currentVersion>1.2-dev</currentVersion>
     <package>org.codehaus.spice.classman</package>
     <inceptionYear>2002</inceptionYear>
 
