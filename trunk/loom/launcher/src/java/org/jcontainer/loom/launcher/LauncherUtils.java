@@ -99,20 +99,19 @@ import java.util.StringTokenizer;
  */
 public class LauncherUtils
 {
-    private static final String LOADER_JAR = "loom-launcher.jar";
-
     /**
      * Create a ClassPath for the engine.
      *
      * @return the set of URLs that engine uses to load
-     * @throws java.lang.Exception if unable to aquire classpath
+     * @throws Exception if unable to aquire classpath
      */
-    static URL[] getEngineClassPath()
+    static URL[] generateClassPath( final File homeDir,
+                                    final String libDirectory )
         throws Exception
     {
         final ArrayList urls = new ArrayList();
 
-        final File dir = findEngineLibDir();
+        final File dir = findLibDir( homeDir, libDirectory );
         final File[] files = dir.listFiles();
         for( int i = 0; i < files.length; i++ )
         {
@@ -130,18 +129,17 @@ public class LauncherUtils
      * Find directory to load engine specific libraries from.
      *
      * @return the lib dir
-     * @throws java.lang.Exception if unable to aquire directory
+     * @throws Exception if unable to aquire directory
      */
-    private static File findEngineLibDir()
+    static File findLibDir( final File homeDir,
+                            final String libDirectory )
         throws Exception
     {
-        final String loomHome = findLoomHome();
-        final String engineLibDir =
-            loomHome + File.separator + "container" + File.separator + "lib";
-        final File dir = new File( engineLibDir ).getCanonicalFile();
+        final String engineLibDir = libDirectory.replace( '/', File.separatorChar );
+        final File dir = new File( homeDir, engineLibDir ).getCanonicalFile();
         if( !dir.exists() )
         {
-            throw new Exception( "Unable to locate engine lib directory at " + engineLibDir );
+            throw new Exception( "Unable to locate library directory at " + engineLibDir );
         }
         return dir;
     }
@@ -152,27 +150,30 @@ public class LauncherUtils
      * set to it.
      *
      * @return the location of loom directory
-     * @throws java.lang.Exception if unable to locate directory
+     * @throws Exception if unable to locate directory
      */
-    static String findLoomHome()
+    static File findLoomHome( final String systemProperty,
+                              final String loaderJar )
         throws Exception
     {
-        String loomHome = System.getProperty( "loom.home", null );
+        String loomHome = System.getProperty( systemProperty, null );
         if( null == loomHome )
         {
-            final File loaderDir = findLoaderDir();
-            loomHome = loaderDir.getAbsoluteFile().getParentFile() + File.separator;
+            final File loaderDir =
+                findLoaderDir( systemProperty, loaderJar );
+            return loaderDir.getCanonicalFile().getParentFile();
         }
-
-        loomHome = ( new File( loomHome ) ).getCanonicalFile().toString();
-        System.setProperty( "loom.home", loomHome );
-        return loomHome;
+        else
+        {
+            return new File( loomHome ).getCanonicalFile();
+        }
     }
 
     /**
-     *  Finds the LOADER_JAR file in the classpath.
+     *  Finds the loaderJar file in the classpath.
      */
-    private static final File findLoaderDir()
+    private static final File findLoaderDir( final String systemProperty,
+                                             final String loaderJar )
         throws Exception
     {
         final String classpath = System.getProperty( "java.class.path" );
@@ -183,7 +184,7 @@ public class LauncherUtils
         {
             final String element = tokenizer.nextToken();
 
-            if( element.endsWith( LOADER_JAR ) )
+            if( element.endsWith( loaderJar ) )
             {
                 File file = ( new File( element ) ).getCanonicalFile();
                 file = file.getParentFile();
@@ -191,8 +192,8 @@ public class LauncherUtils
             }
         }
 
-        throw new Exception( "Unable to locate " + LOADER_JAR +
+        throw new Exception( "Unable to locate " + loaderJar +
                              " in classpath. User must specify " +
-                             "loom.home system property." );
+                             systemProperty + " system property." );
     }
 }
