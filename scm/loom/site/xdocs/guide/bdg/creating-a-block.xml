@@ -53,7 +53,7 @@
 &lt;taskdef
     name="generatemeta"
     classname="org.jcontainer.loom.info.GenerateLoomDescriptorsTask"&gt;
-    &lt;classpath refid="loom-info.class.path" /&gt;
+    &lt;classpath refid="maven-sar.class.path" /&gt;
     &lt;classpath refid="dna-tools.class.path" /&gt;
     &lt;classpath refid="metaclass.class.path" /&gt;
     &lt;classpath refid="qdox.class.path" /&gt;
