@@ -93,7 +93,9 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.Set;
+
 import org.apache.avalon.phoenix.BlockContext;
+
 import org.codehaus.spice.loggerstore.LoggerStore;
 import org.codehaus.spice.salt.i18n.ResourceManager;
 import org.codehaus.spice.salt.i18n.Resources;
@@ -163,10 +165,9 @@ public class DefaultDeployer
         m_classLoaderManager = (ClassLoaderManager)locator.
             lookup( ClassLoaderManager.class.getName() );
         m_logManager =
-        (LogManager)locator.lookup( LogManager.class.getName() );
+            (LogManager)locator.lookup( LogManager.class.getName() );
         m_validator =
-        (ConfigurationValidator)locator.lookup(
-            ConfigurationValidator.class.getName() );
+            (ConfigurationValidator)locator.lookup( ConfigurationValidator.class.getName() );
         m_installer = (Installer)locator.lookup( Installer.class.getName() );
     }
 
@@ -174,20 +175,20 @@ public class DefaultDeployer
         throws Exception
     {
         setupLogger( m_verifier );
+        setupLogger( m_builder );
     }
 
     /**
-     * Dispose the deployer which effectively means undeploying all the
-     * currently deployed apps.
+     * Dispose the deployer which effectively means undeploying all the currently deployed apps.
      */
     public void dispose()
     {
         final Set set = m_installations.keySet();
         final String[] applications =
-            (String[])set.toArray( new String[ set.size() ] );
+            (String[])set.toArray( new String[set.size()] );
         for( int i = 0; i < applications.length; i++ )
         {
-            final String name = applications[ i ];
+            final String name = applications[i];
             try
             {
                 undeploy( name );
@@ -238,8 +239,9 @@ public class DefaultDeployer
     /**
      * Undeploy and deploy an installation.
      *
-     * @param name the name of deployment
+     * @param name     the name of deployment
      * @param location the installation to redeploy
+     *
      * @throws LoomException if an error occurs
      */
     public void redeploy( String name, URL location )
@@ -408,8 +410,7 @@ public class DefaultDeployer
                                      homeDirectory,
                                      workDirectory,
                                      classLoader,
-                                     store
-            );
+                                     store );
 
             m_installations.put( name, installation );
 
@@ -448,8 +449,10 @@ public class DefaultDeployer
      * Helper method to load configuration data.
      *
      * @param install the install data
-     * @param key the key under which config data is stored in install data
+     * @param key     the key under which config data is stored in install data
+     *
      * @return the Configuration
+     *
      * @throws LoomException if an error occurs
      */
     private Configuration getConfigurationFor( final Map install,
@@ -474,10 +477,11 @@ public class DefaultDeployer
     }
 
     /**
-     * Pass the configuration to the configurationManager and give it a chance
-     * to process the configuration in one form or another.
+     * Pass the configuration to the configurationManager and give it a chance to process the configuration in one form
+     * or another.
      *
      * @param configuration the block configurations.
+     *
      * @throws LoomException if an error occurs
      */
     private Configuration processConfiguration( final String application,
@@ -491,7 +495,7 @@ public class DefaultDeployer
         final Configuration[] configurations = configuration.getChildren();
         for( int i = 0; i < configurations.length; i++ )
         {
-            final Configuration config = configurations[ i ];
+            final Configuration config = configurations[i];
             try
             {
                 final Configuration newConfig =
@@ -509,11 +513,11 @@ public class DefaultDeployer
     }
 
     /**
-     * Verify that configuration present in config file is valid for this
-     * assembly.
+     * Verify that configuration present in config file is valid for this assembly.
      *
      * @param profile the PartitionProfile
-     * @param config the block configurations.
+     * @param config  the block configurations.
+     *
      * @throws LoomException if an error occurs
      */
     private void verifyConfiguration( final PartitionProfile profile,
@@ -527,7 +531,7 @@ public class DefaultDeployer
             profile.getPartition( ContainerConstants.BLOCK_PARTITION );
         for( int i = 0; i < configurations.length; i++ )
         {
-            final Configuration configuration = configurations[ i ];
+            final Configuration configuration = configurations[i];
             final String name = configuration.getName();
             ComponentProfile component = listenerPartition.getComponent( name );
             if( null == component )
@@ -545,11 +549,11 @@ public class DefaultDeployer
     }
 
     /**
-     * Verify that configuration conforms to schema for all components in this
-     * assembly.
+     * Verify that configuration conforms to schema for all components in this assembly.
      *
-     * @param profile the PartitionProfile
+     * @param profile     the PartitionProfile
      * @param classLoader the classloader application is loaded in
+     *
      * @throws LoomException if an error occurs
      */
     private void validateConfiguration( final PartitionProfile profile,
@@ -559,12 +563,12 @@ public class DefaultDeployer
         final PartitionProfile[] partitions = profile.getPartitions();
         for( int i = 0; i < partitions.length; i++ )
         {
-            validateConfiguration( partitions[ i ], classLoader );
+            validateConfiguration( partitions[i], classLoader );
         }
         final ComponentProfile[] components = profile.getComponents();
         for( int i = 0; i < components.length; i++ )
         {
-            final ComponentProfile component = components[ i ];
+            final ComponentProfile component = components[i];
             boolean isValid = false;
             try
             {

@@ -10,6 +10,7 @@ package org.jcontainer.loom.components.assembler;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+
 import junit.framework.TestCase;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.ConfigurationException;
@@ -34,7 +35,7 @@ import org.xml.sax.InputSource;
  *
  * @author Peter Donald
  * @author <a href="mailto:peter.royal@pobox.com">Peter Royal</a>
- * @version $Revision: 1.15 $ $Date: 2003-11-29 13:44:30 $
+ * @version $Revision: 1.16 $ $Date: 2004-02-20 03:49:49 $
  */
 public class AssemblerTestCase
     extends TestCase
@@ -48,8 +49,8 @@ public class AssemblerTestCase
             getComponents();
         assertEquals( "Block Count", 2, blocks.length );
 
-        final ComponentProfile block1 = blocks[ 0 ];
-        final ComponentProfile block2 = blocks[ 1 ];
+        final ComponentProfile block1 = blocks[0];
+        final ComponentProfile block2 = blocks[1];
         final DependencyDirective[] dependencies1 = block1.getTemplate()
             .getDependencies();
         final DependencyDirective[] dependencies2 = block2.getTemplate()
@@ -63,9 +64,9 @@ public class AssemblerTestCase
                       1, dependencies1.length );
         assertEquals( "Block1 dep1 name",
                       "c2",
-                      dependencies1[ 0 ].getProviderName() );
+                      dependencies1[0].getProviderName() );
         assertEquals( "Block1 dep1 role",
-                      Service1.class.getName(), dependencies1[ 0 ].getKey() );
+                      Service1.class.getName(), dependencies1[0].getKey() );
         assertTrue( "Block1 getBlockInfo non null",
                     null != block1.getInfo() );
         assertEquals( "Block1 isDisableProxy",
@@ -85,10 +86,9 @@ public class AssemblerTestCase
                       isProxyDisabled( block2 ) );
 
         final ComponentProfile[] listeners =
-            partitionProfile.getPartition(
-                ContainerConstants.LISTENER_PARTITION ).
+            partitionProfile.getPartition( ContainerConstants.LISTENER_PARTITION ).
             getComponents();
-        final ComponentProfile listener = listeners[ 0 ];
+        final ComponentProfile listener = listeners[0];
 
         assertEquals( "Listener Count", 1, listeners.length );
         assertEquals( "Listener1 getImplementationKey",
@@ -113,10 +113,10 @@ public class AssemblerTestCase
             .getComponents();
         assertEquals( "Block Count", 4, blocks.length );
 
-        final ComponentProfile block1 = blocks[ 0 ];
-        final ComponentProfile block2 = blocks[ 1 ];
-        final ComponentProfile block3 = blocks[ 2 ];
-        final ComponentProfile block4 = blocks[ 3 ];
+        final ComponentProfile block1 = blocks[0];
+        final ComponentProfile block2 = blocks[1];
+        final ComponentProfile block3 = blocks[2];
+        final ComponentProfile block4 = blocks[3];
         final DependencyDirective[] dependencies1 = block1.getTemplate()
             .getDependencies();
         final DependencyDirective[] dependencies2 = block2.getTemplate()
@@ -174,9 +174,9 @@ public class AssemblerTestCase
         assertEquals( "Block4 getName", "c3", block4.getTemplate().getName() );
         assertEquals( "Block4 getDependencies count",
                       3, dependencies4.length );
-        final DependencyDirective dependency1 = dependencies4[ 0 ];
-        final DependencyDirective dependency2 = dependencies4[ 1 ];
-        final DependencyDirective dependency3 = dependencies4[ 2 ];
+        final DependencyDirective dependency1 = dependencies4[0];
+        final DependencyDirective dependency2 = dependencies4[1];
+        final DependencyDirective dependency3 = dependencies4[2];
         assertEquals( "Block4 dep1 name",
                       "c2a",
                       dependency1.getProviderName() );
@@ -202,28 +202,27 @@ public class AssemblerTestCase
     public void testBuildDependencies()
         throws Exception
     {
-        final DefaultConfiguration[] provides = new DefaultConfiguration[ 2 ];
+        final DefaultConfiguration[] provides = new DefaultConfiguration[2];
         final String name0 = "Cheese";
         final String role0 = "market.Cheddar";
         final String name1 = "Bleu";
         final String role1 = "market.blue";
 
-        provides[ 0 ] = new DefaultConfiguration( "provide", "", "" );
-        provides[ 0 ].setAttribute( "name", name0 );
-        provides[ 0 ].setAttribute( "role", role0 );
-        provides[ 1 ] = new DefaultConfiguration( "provide", "", "" );
-        provides[ 1 ].setAttribute( "name", name1 );
-        provides[ 1 ].setAttribute( "role", role1 );
+        provides[0] = new DefaultConfiguration( "provide", "", "" );
+        provides[0].setAttribute( "name", name0 );
+        provides[0].setAttribute( "role", role0 );
+        provides[1] = new DefaultConfiguration( "provide", "", "" );
+        provides[1].setAttribute( "name", name1 );
+        provides[1].setAttribute( "role", role1 );
 
         final Assembler assembler = new Assembler();
-        final DependencyDirective[] directives = assembler.buildDependencies(
-            provides );
+        final DependencyDirective[] directives = assembler.buildDependencies( provides );
 
         assertEquals( provides.length, directives.length );
-        assertEquals( name0, directives[ 0 ].getProviderName() );
-        assertEquals( name1, directives[ 1 ].getProviderName() );
-        assertEquals( role0, directives[ 0 ].getKey() );
-        assertEquals( role1, directives[ 1 ].getKey() );
+        assertEquals( name0, directives[0].getProviderName() );
+        assertEquals( name1, directives[1].getProviderName() );
+        assertEquals( role0, directives[0].getKey() );
+        assertEquals( role1, directives[1].getKey() );
     }
 
     public void testBuildDependency()
@@ -233,8 +232,7 @@ public class AssemblerTestCase
         final String alias = name;
         final String role = "com.biz.Service";
         final Assembler assembler = new Assembler();
-        final DefaultConfiguration provide = new DefaultConfiguration(
-            "provide", "", "" );
+        final DefaultConfiguration provide = new DefaultConfiguration( "provide", "", "" );
         provide.setAttribute( "name", name );
         provide.setAttribute( "role", role );
         final DependencyDirective directive =
@@ -251,8 +249,7 @@ public class AssemblerTestCase
         final String alias = "Blee";
         final String role = "com.biz.Service";
         final Assembler assembler = new Assembler();
-        final DefaultConfiguration provide = new DefaultConfiguration(
-            "provide", "", "" );
+        final DefaultConfiguration provide = new DefaultConfiguration( "provide", "", "" );
         provide.setAttribute( "name", name );
         provide.setAttribute( "role", role );
         provide.setAttribute( "alias", alias );
@@ -267,8 +264,7 @@ public class AssemblerTestCase
         throws Exception
     {
         final Assembler assembler = new Assembler();
-        final DefaultConfiguration provide = new DefaultConfiguration(
-            "provide", "", "" );
+        final DefaultConfiguration provide = new DefaultConfiguration( "provide", "", "" );
         provide.setAttribute( "role", "com.biz.Service" );
         try
         {
@@ -285,8 +281,7 @@ public class AssemblerTestCase
         throws Exception
     {
         final Assembler assembler = new Assembler();
-        final DefaultConfiguration provide = new DefaultConfiguration(
-            "provide", "", "" );
+        final DefaultConfiguration provide = new DefaultConfiguration( "provide", "", "" );
         provide.setAttribute( "name", "MyService" );
         try
         {
@@ -305,11 +300,11 @@ public class AssemblerTestCase
         final PhoenixProfileBuilder assembler = new PhoenixProfileBuilder();
         final URL resource = getClass().getResource( config );
         assertNotNull( "Config resource: " + config, resource );
+        final ConsoleLogger logger = new ConsoleLogger();
         final Configuration assembly =
-            ConfigurationBuilder.build(
-                new InputSource( resource.toExternalForm() ),
-                ConfigurationBuilder.ASSEMBLY_SCHEMA,
-                new ConsoleLogger() );
+            ConfigurationBuilder.build( new InputSource( resource.toExternalForm() ),
+                                        ConfigurationBuilder.ASSEMBLY_SCHEMA,
+                                        logger );
         final Map parameters = new HashMap();
         parameters.put( ContainerConstants.ASSEMBLY_NAME, "test" );
         parameters.put( ContainerConstants.ASSEMBLY_DESCRIPTOR, assembly );
@@ -317,14 +312,16 @@ public class AssemblerTestCase
                         new DefaultConfiguration( "config", "", "" ) );
         parameters.put( ContainerConstants.ASSEMBLY_CLASSLOADER,
                         getClass().getClassLoader() );
+
+        assembler.enableLogging( logger );
+
         return assembler.buildProfile( parameters );
     }
 
     public void testMalformedBlockListener()
         throws Exception
     {
-        final DefaultConfiguration listener = new DefaultConfiguration(
-            "listner", "", "" );
+        final DefaultConfiguration listener = new DefaultConfiguration( "listner", "", "" );
         final DefaultConfiguration config = new DefaultConfiguration( "config",
                                                                       "",
                                                                       "" );
