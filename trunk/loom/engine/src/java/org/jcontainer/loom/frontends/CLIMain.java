@@ -90,8 +90,6 @@ import java.io.File;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
-import org.apache.avalon.framework.configuration.Configuration;
-import org.apache.avalon.framework.configuration.DefaultConfigurationBuilder;
 import org.apache.avalon.framework.container.ContainerUtil;
 import org.apache.avalon.framework.context.DefaultContext;
 import org.apache.avalon.framework.logger.AvalonFormatter;
@@ -104,9 +102,12 @@ import org.apache.log.Priority;
 import org.apache.log.output.io.FileTarget;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.Embeddor;
+import org.jcontainer.dna.Configuration;
+import org.jcontainer.dna.impl.ConfigurationUtil;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.lang.ExceptionUtil;
+import org.xml.sax.InputSource;
 
 /**
  * The class to load the kernel and start it running.
@@ -256,7 +257,7 @@ public final class CLIMain
         try
         {
             final String configFilename = parameters.getParameter( "loom.configfile" );
-            final Configuration root = getConfigurationFor( configFilename );
+            final Configuration root = ConfigurationUtil.buildFromXML( new InputSource( configFilename ) );
             final Configuration configuration = root.getChild( "embeddor" );
             final String embeddorClassname = configuration.getAttribute( "class" );
             m_embeddor = (Embeddor)Class.forName( embeddorClassname ).newInstance();
@@ -266,7 +267,7 @@ public final class CLIMain
             ContainerUtil.contextualize( m_embeddor,
                                          new DefaultContext( data ) );
             ContainerUtil.parameterize( m_embeddor, parameters );
-            ContainerUtil.configure( m_embeddor, configuration );
+            org.jcontainer.dna.impl.ContainerUtil.configure( m_embeddor, configuration );
             ContainerUtil.initialize( m_embeddor );
         }
         catch( final Throwable throwable )
@@ -394,13 +395,6 @@ public final class CLIMain
         System.out.println( REZ.getString( "main.exception.footer" ) );
 
         m_exitCode = 1;
-    }
-
-    private Configuration getConfigurationFor( final String location )
-        throws Exception
-    {
-        final DefaultConfigurationBuilder builder = new DefaultConfigurationBuilder();
-        return builder.buildFromFile( location );
     }
 }
 

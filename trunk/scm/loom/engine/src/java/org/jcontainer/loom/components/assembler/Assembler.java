@@ -89,8 +89,6 @@ package org.jcontainer.loom.components.assembler;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import org.apache.avalon.framework.configuration.Configuration;
-import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.LoomException;
@@ -99,6 +97,8 @@ import org.jcontainer.loom.tools.metadata.ComponentMetaData;
 import org.jcontainer.loom.tools.metadata.DependencyMetaData;
 import org.jcontainer.loom.tools.metadata.MetaDataBuilder;
 import org.jcontainer.loom.tools.metadata.PartitionMetaData;
+import org.jcontainer.dna.Configuration;
+import org.jcontainer.dna.ConfigurationException;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.metaclass.model.Attribute;
@@ -109,7 +109,7 @@ import org.realityforge.metaclass.model.Attribute;
  * and is in the format specified for <tt>assembly.xml</tt> files.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-10-05 01:06:31 $
+ * @version $Revision: 1.7 $ $Date: 2003-10-05 03:25:07 $
  */
 public class Assembler
     extends AbstractLogEnabled

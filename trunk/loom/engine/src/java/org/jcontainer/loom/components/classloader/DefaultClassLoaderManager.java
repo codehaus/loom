@@ -94,9 +94,6 @@ import java.util.HashMap;
 import java.util.Map;
 import org.realityforge.extension.Extension;
 import org.apache.avalon.framework.activity.Initializable;
-import org.apache.avalon.framework.configuration.Configuration;
-import org.apache.avalon.framework.configuration.ConfigurationException;
-import org.apache.avalon.framework.configuration.ConfigurationUtil;
 import org.apache.avalon.framework.context.Context;
 import org.apache.avalon.framework.context.ContextException;
 import org.apache.avalon.framework.context.Contextualizable;
@@ -108,6 +105,9 @@ import org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager;
 import org.jcontainer.loom.components.extensions.pkgmgr.PackageManager;
 import org.jcontainer.loom.interfaces.ClassLoaderManager;
 import org.jcontainer.loom.interfaces.ClassLoaderSet;
+import org.jcontainer.dna.Configuration;
+import org.jcontainer.dna.ConfigurationException;
+import org.jcontainer.dna.impl.ConfigurationUtil;
 import org.realityforge.classman.builder.LoaderBuilder;
 import org.realityforge.classman.builder.LoaderResolver;
 import org.realityforge.classman.metadata.ClassLoaderMetaData;
@@ -315,7 +315,7 @@ public class DefaultClassLoaderManager
         final String name = "default";
         final String parent = "*system*";
         final String[] entrys = new String[]{"SAR-INF/classes/"};
-        final org.realityforge.extension.Extension[] extensions = new org.realityforge.extension.Extension[ 0 ];
+        final Extension[] extensions = new Extension[ 0 ];
         final FileSetMetaData[] filesets = new FileSetMetaData[]{fileSet};
         final ClassLoaderMetaData loader =
             new ClassLoaderMetaData( name, parent, entrys, extensions, filesets );

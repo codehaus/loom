@@ -95,9 +95,6 @@ import java.util.Map;
 import java.util.Set;
 import org.apache.avalon.framework.activity.Disposable;
 import org.apache.avalon.framework.activity.Initializable;
-import org.apache.avalon.framework.configuration.Configuration;
-import org.apache.avalon.framework.configuration.ConfigurationException;
-import org.apache.avalon.framework.configuration.DefaultConfiguration;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
@@ -122,6 +119,9 @@ import org.jcontainer.loom.tools.profile.ComponentProfile;
 import org.jcontainer.loom.tools.profile.PartitionProfile;
 import org.jcontainer.loom.tools.profile.ProfileBuilder;
 import org.jcontainer.loom.tools.verifier.SarVerifier;
+import org.jcontainer.dna.Configuration;
+import org.jcontainer.dna.ConfigurationException;
+import org.jcontainer.dna.impl.DefaultConfiguration;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 import org.xml.sax.InputSource;
@@ -467,7 +467,10 @@ public class DefaultDeployer
                                                 final Configuration configuration )
         throws LoomException
     {
-        final DefaultConfiguration newConfiguration = new DefaultConfiguration( "config" );
+        final DefaultConfiguration newConfiguration =
+            new DefaultConfiguration( "config",
+                                      configuration.getPath(),
+                                      configuration.getLocation() );
         final Configuration[] configurations = configuration.getChildren();
         for( int i = 0; i < configurations.length; i++ )
         {

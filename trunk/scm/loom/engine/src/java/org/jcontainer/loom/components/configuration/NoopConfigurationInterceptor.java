@@ -7,9 +7,9 @@
  */
 package org.jcontainer.loom.components.configuration;
 
-import org.apache.avalon.framework.configuration.Configuration;
-import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.jcontainer.loom.interfaces.ConfigurationInterceptor;
+import org.jcontainer.dna.Configuration;
+import org.jcontainer.dna.ConfigurationException;
 
 /**
  * Interceptor that does not make any changes to configuration.

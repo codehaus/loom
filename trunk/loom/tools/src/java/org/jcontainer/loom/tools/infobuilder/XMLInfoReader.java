@@ -10,8 +10,6 @@ package org.jcontainer.loom.tools.infobuilder;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Properties;
-import org.apache.avalon.framework.configuration.Configuration;
-import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.jcontainer.loom.tools.configuration.ConfigurationBuilder;
 import org.jcontainer.loom.tools.info.ComponentDescriptor;
@@ -21,6 +19,8 @@ import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.tools.info.EntryDescriptor;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
+import org.jcontainer.dna.Configuration;
+import org.jcontainer.dna.ConfigurationException;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.metaclass.model.Attribute;
@@ -32,7 +32,7 @@ import org.xml.sax.InputSource;
  * is specified in the <a href="package-summary.html#external">package summary</a>.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.9 $ $Date: 2003-10-05 01:18:58 $
+ * @version $Revision: 1.10 $ $Date: 2003-10-05 03:25:12 $
  */
 public final class XMLInfoReader
     extends AbstractLogEnabled
@@ -48,7 +48,7 @@ public final class XMLInfoReader
      * @param implementationKey The classname of Component
      * @param inputStream the InputStream to load ComponentInfo from
      * @return the created ComponentInfo
-     * @throws org.apache.avalon.framework.configuration.ConfigurationException if an error occurs
+     * @throws ConfigurationException if an error occurs
      */
     public ComponentInfo createComponentInfo( final String implementationKey,
                                               final InputStream inputStream )
@@ -66,7 +66,7 @@ public final class XMLInfoReader
      * @param classname The classname of Component
      * @param info the ComponentInfo configuration
      * @return the created ComponentInfo
-     * @throws org.apache.avalon.framework.configuration.ConfigurationException if an error occurs
+     * @throws ConfigurationException if an error occurs
      */
     private ComponentInfo buildComponentInfo( final String classname,
                                               final Configuration info )
@@ -87,7 +87,7 @@ public final class XMLInfoReader
                 REZ.format( "builder.bad-toplevel-element.error",
                             classname,
                             topLevelName );
-            throw new ConfigurationException( message );
+            throw new ConfigurationException( message, info.getPath(), info.getLocation() );
         }
 
         Configuration configuration = null;
@@ -130,7 +130,7 @@ public final class XMLInfoReader
      *
      * @param configuration the loggers configuration
      * @return the created Schema
-     * @throws org.apache.avalon.framework.configuration.ConfigurationException if an error occurs
+     * @throws ConfigurationException if an error occurs
      */
     private SchemaDescriptor buildSchema( final Configuration configuration )
         throws ConfigurationException
@@ -152,7 +152,7 @@ public final class XMLInfoReader
      * @param classname The classname of Component (used for logging purposes)
      * @param configuration the dependencies configuration
      * @return the created DependencyDescriptor
-     * @throws org.apache.avalon.framework.configuration.ConfigurationException if an error occurs
+     * @throws ConfigurationException if an error occurs
      */
     private DependencyDescriptor[] buildDependencies( final String classname,
                                                       final Configuration configuration )
@@ -178,7 +178,7 @@ public final class XMLInfoReader
      * @param classname The classname of Component (used for logging purposes)
      * @param dependency the dependency configuration
      * @return the created DependencyDescriptor
-     * @throws org.apache.avalon.framework.configuration.ConfigurationException if an error occurs
+     * @throws ConfigurationException if an error occurs
      */
     private DependencyDescriptor buildDependency( final String classname,
                                                   final Configuration dependency )
@@ -221,7 +221,7 @@ public final class XMLInfoReader
      *
      * @param context the dependency configuration
      * @return the created ContextDescriptor
-     * @throws org.apache.avalon.framework.configuration.ConfigurationException if an error occurs
+     * @throws ConfigurationException if an error occurs
      */
     private ContextDescriptor buildContext( final Configuration context )
         throws ConfigurationException
@@ -243,8 +243,8 @@ public final class XMLInfoReader
      * objects from specified configuraiton.
      *
      * @param entrySet the set of entrys to build
-     * @return the created {@link org.jcontainer.loom.tools.info.EntryDescriptor}s
-     * @throws org.apache.avalon.framework.configuration.ConfigurationException if an error occurs
+     * @return the created {@link EntryDescriptor}s
+     * @throws ConfigurationException if an error occurs
      */
     private EntryDescriptor[] buildEntrys( final Configuration[] entrySet )
         throws ConfigurationException
@@ -265,7 +265,7 @@ public final class XMLInfoReader
      *
      * @param config the configuration
      * @return the created {@link org.jcontainer.loom.tools.info.EntryDescriptor}
-     * @throws org.apache.avalon.framework.configuration.ConfigurationException if an error occurs
+     * @throws ConfigurationException if an error occurs
      */
     private EntryDescriptor buildEntry( final Configuration config )
         throws ConfigurationException
@@ -285,7 +285,7 @@ public final class XMLInfoReader
      *
      * @param servicesSet the services configuration
      * @return the created ServiceDescriptor
-     * @throws org.apache.avalon.framework.configuration.ConfigurationException if an error occurs
+     * @throws ConfigurationException if an error occurs
      */
     private ServiceDescriptor[] buildServices( final Configuration servicesSet )
         throws ConfigurationException
@@ -308,7 +308,7 @@ public final class XMLInfoReader
      *
      * @param service the service Configuration
      * @return the created ServiceDescriptor
-     * @throws org.apache.avalon.framework.configuration.ConfigurationException if an error occurs
+     * @throws ConfigurationException if an error occurs
      */
     private ServiceDescriptor buildService( final Configuration service )
         throws ConfigurationException
@@ -345,7 +345,7 @@ public final class XMLInfoReader
      *
      * @param config the configuration to build attribute from
      * @return the new Attribute
-     * @throws org.apache.avalon.framework.configuration.ConfigurationException if unable to build attribute due to malformed xml
+     * @throws ConfigurationException if unable to build attribute due to malformed xml
      */
     private Attribute buildAttribute( Configuration config )
         throws ConfigurationException
@@ -389,7 +389,7 @@ public final class XMLInfoReader
      *
      * @param config the Component Configuration
      * @return the created ComponentDescriptor
-     * @throws org.apache.avalon.framework.configuration.ConfigurationException if an error occurs
+     * @throws ConfigurationException if an error occurs
      */
     private ComponentDescriptor buildComponentDescriptor( final Configuration config )
         throws ConfigurationException

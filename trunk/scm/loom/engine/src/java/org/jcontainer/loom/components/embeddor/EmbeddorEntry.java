@@ -86,7 +86,7 @@
  */
 package org.jcontainer.loom.components.embeddor;
 
-import org.apache.avalon.framework.configuration.Configuration;
+import org.jcontainer.dna.Configuration;
 
 /**
  * @author <a href="bauer@denic.de">Joerg Bauer</a>

@@ -109,13 +109,14 @@ import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.tools.lifecycle.ResourceProvider;
 import org.jcontainer.loom.tools.metadata.DependencyMetaData;
 import org.jcontainer.loom.tools.profile.ComponentProfile;
+import org.jcontainer.loom.tools.configuration.ConfigurationConverter;
 
 /**
  * The accessor used to access resources for a particular
  * Block or Listener.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-08-17 18:27:32 $
+ * @version $Revision: 1.4 $ $Date: 2003-10-05 03:25:07 $
  */
 class BlockResourceProvider
     extends AbstractLogEnabled
@@ -369,7 +370,7 @@ class BlockResourceProvider
         throws Exception
     {
         final ComponentProfile metaData = getProfileFor( entry );
-        return metaData.getMetaData().getConfiguration();
+        return ConfigurationConverter.toConfiguration( metaData.getMetaData().getConfiguration() );
     }
 
     public Parameters createParameters( final Object entry )

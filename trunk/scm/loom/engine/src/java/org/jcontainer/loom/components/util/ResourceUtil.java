@@ -88,13 +88,13 @@ package org.jcontainer.loom.components.util;
 
 import java.io.File;
 import java.net.MalformedURLException;
-import org.apache.avalon.framework.configuration.ConfigurationException;
+import org.jcontainer.loom.interfaces.LoomException;
 
 /**
  * A utility class for working with resources in default sar layout.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-08-17 18:27:33 $
+ * @version $Revision: 1.3 $ $Date: 2003-10-05 03:25:09 $
  */
 public class ResourceUtil
 {
@@ -110,12 +110,12 @@ public class ResourceUtil
      * @param codeBase the input url
      * @return the result url, modified to file url if it
      *         is protocol "sar:"
-     * @throws ConfigurationException if invalidly specified URL
+     * @throws LoomException if invalidly specified URL
      */
     public static String expandSarURL( final String codeBase,
                                        final File baseDirectory,
                                        final File workDirectory )
-        throws ConfigurationException
+        throws Exception
     {
         if( codeBase.startsWith( SAR_PROTOCOL ) )
         {
@@ -129,7 +129,7 @@ public class ResourceUtil
             }
             catch( MalformedURLException e )
             {
-                throw new ConfigurationException( e.getMessage(), e );
+                throw new LoomException( e.getMessage(), e );
             }
         }
         else

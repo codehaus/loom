@@ -10,16 +10,17 @@ package org.jcontainer.loom.components.validator;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.avalon.framework.configuration.Configurable;
-import org.apache.avalon.framework.configuration.Configuration;
-import org.apache.avalon.framework.configuration.ConfigurationException;
-import org.apache.avalon.framework.configuration.ConfigurationUtil;
-import org.apache.avalon.framework.configuration.DefaultConfiguration;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.jcontainer.loom.interfaces.ConfigurationValidator;
 import org.jcontainer.loom.tools.configuration.ConfigurationBuilder;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.profile.ComponentProfile;
+import org.jcontainer.loom.components.util.ConfigUtil;
+import org.jcontainer.dna.Configurable;
+import org.jcontainer.dna.Configuration;
+import org.jcontainer.dna.ConfigurationException;
+import org.jcontainer.dna.impl.ConfigurationUtil;
+import org.jcontainer.dna.impl.DefaultConfiguration;
 import org.realityforge.configkit.ConfigValidator;
 import org.realityforge.configkit.ConfigValidatorFactory;
 import org.realityforge.configkit.ValidationResult;
@@ -44,7 +45,7 @@ import org.xml.sax.InputSource;
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author <a href="mailto:proyal at apache.org">Peter Royal</a>
- * @version $Revision: 1.3 $ $Date: 2003-10-05 00:33:57 $
+ * @version $Revision: 1.4 $ $Date: 2003-10-05 03:25:09 $
  * @phoenix.component
  */
 public class DefaultConfigurationValidator
@@ -126,8 +127,11 @@ public class DefaultConfigurationValidator
         {
             final ConfigValidator validator = ConfigValidatorFactory.create( type, inputSource );
             final Configuration configuration = component.getMetaData().getConfiguration();
-            final DefaultConfiguration newConfiguration = new DefaultConfiguration( "root", configuration.getLocation() );
-            newConfiguration.addAll( configuration );
+            final DefaultConfiguration newConfiguration =
+                new DefaultConfiguration( "root",
+                                          configuration.getPath(),
+                                          configuration.getLocation() );
+            ConfigUtil.copy( newConfiguration, configuration );
             final Element element = ConfigurationUtil.toElement( newConfiguration );
             final ValidationResult result = validator.validate( element );
             ConfigurationBuilder.processValidationResults( result, getLogger() );
@@ -173,7 +177,9 @@ public class DefaultConfigurationValidator
      * @return the InputSource for schema
      * @throws ConfigurationException if unable to locate schema
      */
-    private InputSource getSchemaInputSource( final ComponentProfile component, final ClassLoader classLoader ) throws ConfigurationException
+    private InputSource getSchemaInputSource( final ComponentProfile component,
+                                              final ClassLoader classLoader )
+        throws ConfigurationException
     {
         final SchemaDescriptor schema = component.getInfo().getConfigurationSchema();
         final String resource = calcSchemaResource( component );
@@ -184,7 +190,7 @@ public class DefaultConfigurationValidator
                 component.getMetaData().getName() + " of type " +
                 component.getInfo().getDescriptor().getImplementationKey() +
                 " at location " + resource;
-            throw new ConfigurationException( message );
+            throw new ConfigurationException( message, null );
         }
 
         final InputSource inputSource = new InputSource( inputStream );

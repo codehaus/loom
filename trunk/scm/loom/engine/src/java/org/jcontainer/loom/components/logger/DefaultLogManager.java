@@ -95,8 +95,6 @@ import java.util.Properties;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.apache.avalon.framework.configuration.Configuration;
-import org.apache.avalon.framework.configuration.ConfigurationUtil;
 import org.apache.avalon.framework.container.ContainerUtil;
 import org.apache.avalon.framework.context.Context;
 import org.apache.avalon.framework.context.ContextException;
@@ -104,6 +102,7 @@ import org.apache.avalon.framework.context.Contextualizable;
 import org.apache.avalon.framework.context.DefaultContext;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.logger.Logger;
+import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.phoenix.BlockContext;
 import org.jcomponent.loggerstore.DOMLog4JLoggerStoreFactory;
 import org.jcomponent.loggerstore.InitialLoggerStoreFactory;
@@ -115,6 +114,8 @@ import org.jcomponent.loggerstore.PropertyLog4JLoggerStoreFactory;
 import org.jcomponent.loggerstore.SimpleLogKitLoggerStoreFactory;
 import org.jcontainer.loom.components.util.ResourceUtil;
 import org.jcontainer.loom.interfaces.LogManager;
+import org.jcontainer.loom.tools.configuration.ConfigurationConverter;
+import org.jcontainer.dna.impl.ConfigurationUtil;
 import org.realityforge.configkit.PropertyExpander;
 import org.realityforge.configkit.ResolverFactory;
 import org.realityforge.salt.i18n.ResourceManager;
@@ -136,7 +137,7 @@ public class DefaultLogManager
 {
     private static final Resources REZ =
         ResourceManager.getPackageResources( DefaultLogManager.class );
-	
+
     private final PropertyExpander m_expander = new PropertyExpander();
 
     private final InitialLoggerStoreFactory m_factory = new InitialLoggerStoreFactory();
@@ -159,43 +160,43 @@ public class DefaultLogManager
         return data;
     }
 
-
     /**
      * Normalises file paths by replacing File.separatorChar with '/'
      * and storing the path in the map in place of the File object
      * which would be converted back to using the File.separatorChar
-     * 
+     *
      * @param data the Map containing the File objects
-     * @return the Map with the normalised File paths 
+     * @return the Map with the normalised File paths
      */
-    private Map normaliseFilePaths( final Map data ){
-    	final Map map = new HashMap();
-    	map.putAll( data );
-        for ( Iterator i = data.keySet().iterator(); i.hasNext(); )
+    private Map normaliseFilePaths( final Map data )
+    {
+        final Map map = new HashMap();
+        map.putAll( data );
+        for( Iterator i = data.keySet().iterator(); i.hasNext(); )
         {
             final Object key = i.next();
             final Object value = data.get( key );
-            if ( value instanceof File )
+            if( value instanceof File )
             {
                 final File file = (File)value;
-				final String newPath = normalisePath( file.getPath() );
-				// replace File object value with its path
+                final String newPath = normalisePath( file.getPath() );
+                // replace File object value with its path
                 map.put( key, newPath );
             }
         }
         return map;
     }
 
-	/**
-	 * Normalises file path by replacing File.separatorChar with '/'
-	 * 
-	 * @param path the file path is to be normalised
-	 * @return the normalised file path
-	 */
-	private String normalisePath( final String path ) {
-		return path.replace( File.separatorChar, '/' );
-	}
-
+    /**
+     * Normalises file path by replacing File.separatorChar with '/'
+     *
+     * @param path the file path is to be normalised
+     * @return the normalised file path
+     */
+    private String normalisePath( final String path )
+    {
+        return path.replace( File.separatorChar, '/' );
+    }
 
     /**
      * Create a Logger hierarchy for specified application.
@@ -205,15 +206,15 @@ public class DefaultLogManager
      * @return the Log hierarchy
      * @throws Exception if unable to create Loggers
      */
-    public LoggerStore createHierarchy( final Configuration logs,
+    public LoggerStore createHierarchy( final org.jcontainer.dna.Configuration logs,
                                         final File homeDirectory,
                                         final File workDirectory,
                                         final Map context )
         throws Exception
     {
         final Map map = createLoggerManagerContext( context );
-		// normalise file paths to circumvent backslash replacement
-		final Map normalisedMap = normaliseFilePaths( map );
+        // normalise file paths to circumvent backslash replacement
+        final Map normalisedMap = normaliseFilePaths( map );
         if( null == logs )
         {
             LoggerStore store = null;
@@ -279,7 +280,8 @@ public class DefaultLogManager
                 // use the original context map as SimpleLogKitManager requires
                 // the File object in the context
                 config.put( Context.class.getName(), new DefaultContext( map ) );
-                config.put( Configuration.class.getName(), logs );
+                config.put( Configuration.class.getName(), 
+                            ConfigurationConverter.toConfiguration( logs ) );
                 return loggerManager.createLoggerStore( config );
             }
             else if( version.equals( "1.1" ) )
@@ -289,7 +291,8 @@ public class DefaultLogManager
                 final HashMap config = new HashMap();
                 config.put( Logger.class.getName(), getLogger() );
                 config.put( Context.class.getName(), new DefaultContext( normalisedMap ) );
-                config.put( Configuration.class.getName(), logs );
+                config.put( Configuration.class.getName(),
+                            ConfigurationConverter.toConfiguration( logs ) );
                 return loggerManager.createLoggerStore( config );
             }
             else if( version.equals( "log4j" ) )
@@ -311,7 +314,7 @@ public class DefaultLogManager
         }
     }
 
-    private Element buildLog4JConfiguration( final Configuration logs )
+    private Element buildLog4JConfiguration( final org.jcontainer.dna.Configuration logs )
     {
         final Element element = ConfigurationUtil.toElement( logs );
         final Document document = element.getOwnerDocument();

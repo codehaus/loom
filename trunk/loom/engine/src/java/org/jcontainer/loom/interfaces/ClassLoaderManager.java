@@ -88,7 +88,7 @@ package org.jcontainer.loom.interfaces;
 
 import java.io.File;
 import java.util.Map;
-import org.apache.avalon.framework.configuration.Configuration;
+import org.jcontainer.dna.Configuration;
 
 /**
  * Interface for component that creates and manages the
