@@ -1,7 +1,7 @@
 /*
- * Copyright (C) The Spice Group. All rights reserved.
+ * Copyright (C) The JContainer Group. All rights reserved.
  *
- * This software is published under the terms of the Spice
+ * This software is published under the terms of the JContainer
  * Software License version 1.1, a copy of which has been included
  * with this distribution in the LICENSE.txt file.
  */
@@ -23,7 +23,7 @@ import org.realityforge.metaclass.tools.qdox.DefaultQDoxAttributeInterceptor;
  * into modern DNA and MX attributes.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-10-12 04:54:12 $
+ * @version $Revision: 1.2 $ $Date: 2003-10-13 05:17:52 $
  */
 public class PhoenixAttributeInterceptor
     extends DefaultQDoxAttributeInterceptor
