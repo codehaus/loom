@@ -102,7 +102,7 @@ import org.apache.excalibur.instrument.InstrumentManager;
 import org.jcontainer.loom.interfaces.ApplicationContext;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.Kernel;
-import org.jcontainer.loom.interfaces.ManagerException;
+import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.interfaces.SystemManager;
 import org.jcomponent.loggerstore.LoggerStore;
 import org.realityforge.salt.i18n.Resources;
@@ -337,7 +337,7 @@ class DefaultApplicationContext
      *  TODO: context should probably be passed in by reference from the kernel
      */
     private SystemManager getManagementContext()
-        throws ManagerException
+        throws LoomException
     {
         final SystemManager appContext =
             m_systemManager.getSubContext( null, "application" );

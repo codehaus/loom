@@ -91,7 +91,7 @@ import java.util.Map;
 import org.apache.avalon.framework.activity.Disposable;
 import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
-import org.jcontainer.loom.interfaces.ManagerException;
+import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.interfaces.SystemManager;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
@@ -129,7 +129,7 @@ public abstract class AbstractSystemManager
     public synchronized void register( final String name,
                                        final Object object,
                                        final Class[] interfaces )
-        throws ManagerException, IllegalArgumentException
+        throws LoomException, IllegalArgumentException
     {
         if( null == interfaces )
         {
@@ -147,7 +147,7 @@ public abstract class AbstractSystemManager
      */
     public synchronized void register( final String name,
                                        final Object object )
-        throws ManagerException, IllegalArgumentException
+        throws LoomException, IllegalArgumentException
     {
         doRegister( name, object, null );
     }
@@ -156,14 +156,14 @@ public abstract class AbstractSystemManager
      * @see SystemManager#unregister(String)
      */
     public synchronized void unregister( final String name )
-        throws ManagerException
+        throws LoomException
     {
         final ManagedEntry entry = (ManagedEntry)m_entries.remove( name );
         if( null == entry )
         {
             final String message =
                 REZ.format( "manager.error.unregister.noentry", name );
-            throw new ManagerException( message );
+            throw new LoomException( message );
         }
 
         unexport( name, entry.getExportedObject() );
@@ -173,11 +173,11 @@ public abstract class AbstractSystemManager
      * Returns the subcontext of the specified name.  If it does not exist it
      * is created.
      *
-     * @throws ManagerException if context cannot be created or retrieved
+     * @throws LoomException if context cannot be created or retrieved
      * @return  the subcontext with the specified name
      */
     public SystemManager getSubContext( final String parent, final String type )
-        throws ManagerException
+        throws LoomException
     {
         return m_subContext.getSubContext( parent, type );
     }
@@ -191,20 +191,20 @@ public abstract class AbstractSystemManager
      * @param object the object
      * @param interfaces the interfaces
      * @return the exported object
-     * @throws ManagerException if an error occurs
+     * @throws LoomException if an error occurs
      */
     protected abstract Object export( String name, Object object, Class[] interfaces )
-        throws ManagerException;
+        throws LoomException;
 
     /**
      * Stop the exported object from being managed.
      *
      * @param name the name of object
      * @param exportedObject the object return by export
-     * @throws ManagerException if an error occurs
+     * @throws LoomException if an error occurs
      */
     protected abstract void unexport( String name, Object exportedObject )
-        throws ManagerException;
+        throws LoomException;
 
     /**
      * Verfify that name is well formed.
@@ -214,7 +214,7 @@ public abstract class AbstractSystemManager
      */
     protected void verifyName( final String name,
                                final Object object )
-        throws ManagerException
+        throws LoomException
     {
     }
 
@@ -222,10 +222,10 @@ public abstract class AbstractSystemManager
      * Verify that an interface conforms to the requirements of management medium.
      *
      * @param clazz the interface class
-     * @throws ManagerException if verification fails
+     * @throws LoomException if verification fails
      */
     protected abstract void verifyInterface( Class clazz )
-        throws ManagerException;
+        throws LoomException;
 
     /**
      * Verify that object implements interfaces and interfaces are of "acceptable form".
@@ -233,10 +233,10 @@ public abstract class AbstractSystemManager
      *
      * @param object the object
      * @param interfaces the array of interfaces to check
-     * @throws ManagerException if an error occurs
+     * @throws LoomException if an error occurs
      */
     private void verifyInterfaces( final Object object, final Class[] interfaces )
-        throws ManagerException
+        throws LoomException
     {
         for( int i = 0; i < interfaces.length; i++ )
         {
@@ -246,14 +246,14 @@ public abstract class AbstractSystemManager
             {
                 final String message =
                     REZ.format( "manager.error.verify.notinterface", clazz.getName() );
-                throw new ManagerException( message );
+                throw new LoomException( message );
             }
 
             if( !clazz.isInstance( object ) )
             {
                 final String message =
                     REZ.format( "manager.error.verify.notinstance", clazz.getName() );
-                throw new ManagerException( message );
+                throw new LoomException( message );
             }
 
             verifyInterface( clazz );
@@ -266,11 +266,11 @@ public abstract class AbstractSystemManager
      *
      * @param name the name of object
      * @param object the object to be registered
-     * @throws ManagerException if name already exists
+     * @throws LoomException if name already exists
      * @throws IllegalArgumentException if name or object is null
      */
     private void checkRegister( final String name, final Object object )
-        throws ManagerException, IllegalArgumentException
+        throws LoomException, IllegalArgumentException
     {
         if( null == object )
         {
@@ -287,7 +287,7 @@ public abstract class AbstractSystemManager
         if( null != m_entries.get( name ) )
         {
             final String message = REZ.format( "manager.error.register.exists", name );
-            throw new ManagerException( message );
+            throw new LoomException( message );
         }
     }
 
@@ -297,12 +297,12 @@ public abstract class AbstractSystemManager
      * @param name the name to register under
      * @param object the object
      * @param interfaces the interfaces (may be null)
-     * @throws ManagerException if error occurs
+     * @throws LoomException if error occurs
      */
     private void doRegister( final String name,
                              final Object object,
                              final Class[] interfaces )
-        throws ManagerException
+        throws LoomException
     {
         checkRegister( name, object );
 
