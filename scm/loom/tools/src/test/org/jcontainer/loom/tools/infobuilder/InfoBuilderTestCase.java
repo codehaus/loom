@@ -23,14 +23,14 @@ import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
-import org.jcontainer.loom.tools.qdox.LegacyInfoBuilder;
+import org.jcontainer.loom.tools.qdox.BlockInfoBuilder;
 import org.realityforge.metaclass.model.Attribute;
 
 /**
  * Abstract class which TestCases can extend.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.18 $ $Date: 2003-10-11 08:41:56 $
+ * @version $Revision: 1.19 $ $Date: 2003-10-11 08:46:05 $
  */
 public class InfoBuilderTestCase
     extends TestCase
@@ -92,7 +92,7 @@ public class InfoBuilderTestCase
     {
         final ComponentInfo expected = loadComponentInfo( LSOURCE1_INFO );
         final JavaClass javaClass = loadJavaSource( LSOURCE1 );
-        final LegacyInfoBuilder infoBuilder = new LegacyInfoBuilder();
+        final BlockInfoBuilder infoBuilder = new BlockInfoBuilder();
         final ComponentInfo actual = infoBuilder.buildComponentInfo( javaClass );
 
         InfoAssert.assertEqualInfos( " ComponentInfo generated from source file",
