@@ -23,7 +23,7 @@ import org.realityforge.metaclass.tools.qdox.DefaultQDoxAttributeInterceptor;
  * into modern DNA and MX attributes.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-10-13 05:17:52 $
+ * @version $Revision: 1.3 $ $Date: 2003-10-14 00:57:03 $
  */
 public class PhoenixAttributeInterceptor
     extends DefaultQDoxAttributeInterceptor
@@ -49,7 +49,10 @@ public class PhoenixAttributeInterceptor
         }
         else if( name.equals( "phoenix:mx-topic" ) )
         {
-            return new Attribute( "mx.component" );
+            final String description = attribute.getParameter( "name", "" );
+            final Properties parameters = new Properties();
+            parameters.setProperty( "description", description );
+            return new Attribute( "mx.component", parameters );
         }
         else if( name.equals( "phoenix:mx-proxy" ) )
         {

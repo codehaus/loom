@@ -19,7 +19,7 @@ import java.util.ArrayList;
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-10-13 05:17:52 $
+ * @version $Revision: 1.3 $ $Date: 2003-10-14 00:57:02 $
  */
 public class PhoenixAttributeInterceptorTestCase
     extends TestCase
@@ -54,13 +54,16 @@ public class PhoenixAttributeInterceptorTestCase
         throws Exception
     {
         final PhoenixAttributeInterceptor interceptor = new PhoenixAttributeInterceptor();
-        final Attribute attribute = new Attribute( "phoenix:mx-topic" );
+        final Properties parameters = new Properties();
+        parameters.setProperty( "name", "MyTopic" );
+        final Attribute attribute = new Attribute( "phoenix:mx-topic", parameters );
         final Attribute result =
             interceptor.processClassAttribute( new JavaClass(), attribute );
         assertNotNull( "attribute", result );
         assertEquals( "attribute.name", "mx.component", result.getName() );
         assertEquals( "attribute.value", null, result.getValue() );
-        assertEquals( "attribute.parameterCount", 0, result.getParameterCount() );
+        assertEquals( "attribute.parameterCount", 1, result.getParameterCount() );
+        assertEquals( "attribute.parameter(description)", "MyTopic", result.getParameter( "description" ) );
     }
 
     public void testProcessClassAttributeWithPhoenixService()
