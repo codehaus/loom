@@ -1,0 +1,185 @@
+<!--
+
+   This is the DTD defining the Avalon ComponentInfo 1.0
+   descriptor (XML) file format/syntax.
+
+   Author: Peter Donald <peter at apache.org>
+
+   A ComponentInfo is an XML file used to describe Components and located side-by-side with
+   the Component .class file. It describes the services the Component requires to operate,
+   the services the Component is capable of offerring other Component, the context entrys
+   that Component requires and other support meta data.
+
+   Copyright (C) The JContainer Group. All rights reserved.
+
+   This software is published under the terms of the JContainer
+   Software License version 1.1, a copy of which has been included
+   with this distribution in the LICENSE.txt file.
+
+  -->
+
+<!--
+The component-info is the document root, it defines:
+
+component    the specifc details about this component
+loggers      the loggers used by this component
+context      the context required by this component
+services     the services offered by this component
+dependencies the services that this component require to operate
+schema       the configuration/parameters schema that this component
+             validates against
+-->
+<!ELEMENT component-info (component, loggers?, context?, services?, dependencies?, configuration-schema?, parameters-schema?)>
+<!ATTLIST component-info id ID #IMPLIED>
+
+<!--
+The service-info is the document root for service info file, it defines:
+
+service    the specifc details about this service
+methods      the methods declared by this service
+-->
+<!ELEMENT service-info (service, methods?)>
+
+<!--
+The component element describes the component, it defines:
+
+name	        the human readable name of component type. Must be a string
+             containing alphanumeric characters, '.', '_' and starting
+             with a letter.
+-->
+<!ELEMENT component      (attribute*)>
+  <!ATTLIST component type CDATA #REQUIRED >
+
+<!--
+The schema element defines the configuration schema for the component, it defines:
+
+location       the location of the schema relative the the component
+-->
+<!ELEMENT configuration-schema      (attribute*)>
+  <!ATTLIST configuration-schema location CDATA #IMPLIED >
+  <!ATTLIST configuration-schema type CDATA #IMPLIED >
+
+<!--
+The schema element defines the parameters schema for the component, it defines:
+
+location       the location of the schema relative the the component
+-->
+<!ELEMENT parameters-schema      (attribute*)>
+  <!ATTLIST parameters-schema location CDATA #IMPLIED >
+  <!ATTLIST parameters-schema type CDATA #IMPLIED >
+
+<!--
+The logger element defines the loggers that are available to component.
+The element has one attribute specifying name of Logger. It contains:
+
+attribute	  Optional attributes about logger
+-->
+<!ELEMENT logger   (attribute*) >
+  <!ATTLIST logger name CDATA #IMPLIED >
+
+<!--
+The context element defines what values and type of context
+is available to component.
+It contains:
+
+entrys    	  Key value pairs that component uses
+attribute	        Optional attributes about service
+-->
+<!ELEMENT context   (entry*,attribute*) >
+  <!ATTLIST context type CDATA #IMPLIED >
+
+<!--
+The service element defines a service that the component
+can provide to other component.
+
+type         the name of the service. This is usually equal to the class
+             name of the interface that defines the service.
+
+It contains:
+
+attribute	  Optional attributes about service
+-->
+<!ELEMENT service   (attribute*) >
+  <!ATTLIST service type CDATA #REQUIRED >
+
+<!--
+The service dependency describes a service that the component
+requires. It defines:
+
+key          the key used to lookup service. If not provided it defaults
+             to the value specified in the name attribute of service element
+-->
+<!ELEMENT dependency  (attribute*) >
+  <!ATTLIST dependency
+       key CDATA #IMPLIED
+       type CDATA #REQUIRED
+       optional CDATA #IMPLIED >
+
+<!--
+The loggers element contains a list of loggers that component uses.
+-->
+<!ELEMENT loggers    (logger*)>
+
+<!--
+The services element contains a list of services that this component supports.
+It contains service elements.
+-->
+<!ELEMENT services    (service*)>
+
+<!--
+The dependencies element contains a list of services that this component requires.
+It contains dependency elements.
+-->
+<!ELEMENT dependencies    (dependency*)>
+
+<!--
+The methods element contains a list of methods declared by service.
+-->
+<!ELEMENT methods    (method*)>
+
+<!--
+The entry element defines entry in context.
+It defines:
+
+key          the key for entry.
+value  	     the value of entry.
+optional     is entry optional
+-->
+<!ELEMENT entry   (attribute*) >
+  <!ATTLIST entry
+       key CDATA #REQUIRED
+       type CDATA #REQUIRED
+       optional CDATA #IMPLIED
+  >
+
+<!ELEMENT method (parameter*,attribute*) >
+  <!ATTLIST method
+       name CDATA #REQUIRED
+       return-type CDATA #REQUIRED >
+
+<!ELEMENT parameter (attribute*) >
+  <!ATTLIST parameter type CDATA #REQUIRED >
+
+<!--
+The method element defines a method.
+It defines:
+
+key          the key for entry.
+value  	     the value of entry.
+optional     is entry optional
+-->
+<!ELEMENT attribute   (param*) >
+  <!ATTLIST attribute name CDATA #REQUIRED >
+
+<!--
+The param element defines an parameter to a attribute.
+It defines:
+
+name         the name of attribute.
+value  	     the value of attribute.
+-->
+<!ELEMENT param   EMPTY >
+  <!ATTLIST param
+       name CDATA #REQUIRED
+       value CDATA #REQUIRED
+  >

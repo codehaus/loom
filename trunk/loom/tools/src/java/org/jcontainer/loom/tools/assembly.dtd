@@ -1,0 +1,89 @@
+<!--
+
+   This is the DTD defining the Phoenix Assembly 1.0
+   descriptor (XML) file format/syntax.
+
+   Author: Peter Donald <peter at apache.org>
+
+   The assembly.xml file is used to define which blocks are instantiated and how
+   they are linked together in an application.
+
+   Copyright (C) The JContainer Group. All rights reserved.
+
+   This software is published under the terms of the JContainer
+   Software License version 1.1, a copy of which has been included
+   with this distribution in the LICENSE.txt file.
+
+   This product includes software developed by the
+    Apache Software Foundation (http://www.apache.org/).
+
+-->
+
+<!--
+The assembly is the document root, it defines:
+
+block           a block that exists in the application
+block-listener  a listener that exists in the application
+-->
+<!ELEMENT assembly (block|block-listener|listener)*>
+<!ATTLIST assembly id ID #IMPLIED>
+
+<!--
+The block element declares a block exists in the application.
+The element defines:
+
+name            the name of a block
+class           the class of block instance
+
+provide         declare that particular blocks that will provide
+                the block with particular services
+proxy           TODO:description
+-->
+<!ELEMENT block (provide*,proxy?)>
+  <!ATTLIST block class CDATA #REQUIRED>
+  <!ATTLIST block name CDATA #REQUIRED>
+
+<!--
+The provide element declares that a specific service is provided to the block
+by another block. The provide element defines:
+
+role    the name of the service that is being provided (aka the role of service)
+name    the name of the block that will provide service
+alias   the alias of the block when it is placed in a Map dependency (may not need to be specified).
+-->
+<!ELEMENT provide EMPTY>
+  <!ATTLIST provide role CDATA #REQUIRED>
+  <!ATTLIST provide name CDATA #REQUIRED>
+  <!ATTLIST provide alias CDATA #IMPLIED>
+
+<!--
+This indicates whether the block should be proxied.
+
+disable set this to true to disable proxying of the block implementation
+-->
+<!ELEMENT proxy EMPTY>
+  <!ATTLIST proxy disable CDATA #REQUIRED>
+
+<!--
+The block element declares a listener exists in the application.
+The element defines:
+
+name            the name of the listener
+class           the class of the listener instance
+-->
+<!ELEMENT listener EMPTY>
+  <!ATTLIST listener name CDATA #REQUIRED>
+  <!ATTLIST listener class CDATA #REQUIRED>
+
+<!--
+NOTE: This form is DEPRECATED.
+
+The block element declares a block listener exists in the application.
+The element defines:
+
+name            the name of the listener
+class           the class of the listener instance
+-->
+<!ELEMENT block-listener EMPTY>
+  <!ATTLIST block-listener name CDATA #REQUIRED>
+  <!ATTLIST block-listener class CDATA #REQUIRED>
