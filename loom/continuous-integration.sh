@@ -4,7 +4,6 @@
 #ANT_HOME=$HOME/cvs/ant/dist
 PATH=$HOME/bin:$JAVA_HOME/bin:$MAVEN_HOME/bin:$ANT_HOME/bin:$PATH
 #CVS_RSH=$HOME/ssh1.sh
-#CVSROOT=:ext:$USER@cvs.codehaus.org:/cvsroot/picocontainer
 
 export JAVA_HOME
 export MAVEN_HOME
