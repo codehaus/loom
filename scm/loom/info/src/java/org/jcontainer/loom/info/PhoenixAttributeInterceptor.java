@@ -23,7 +23,7 @@ import org.realityforge.metaclass.tools.qdox.DefaultQDoxAttributeInterceptor;
  * into modern DNA and MX attributes.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-10-14 00:57:03 $
+ * @version $Revision: 1.4 $ $Date: 2003-10-15 03:54:12 $
  */
 public class PhoenixAttributeInterceptor
     extends DefaultQDoxAttributeInterceptor
@@ -118,6 +118,7 @@ public class PhoenixAttributeInterceptor
             final Properties parameters = new Properties();
             if( null != type )
             {
+                //Check for "relax-ng" ==> "http://relaxng.org/ns/structure/1.0"
                 parameters.setProperty( "type", type );
             }
             return new Attribute( "dna.configuration", parameters );
