@@ -14,6 +14,14 @@
         Policy objects to be constructed from xml descriptors.
     </description>
 
+    <versions>
+        <version>
+            <id>1.0</id>
+            <name>1.0</name>
+            <tag>XMLPOLICY_1_0-tag</tag>
+        </version>
+    </versions>
+
     <dependencies>
         <dependency>
             <id>spice-salt</id>
