@@ -101,12 +101,12 @@ import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
 /**
- * Assemble a {@link org.jcontainer.loom.components.util.metadata.PartitionMetaData} object from a Configuration
+ * Assemble a {@link PartitionMetaData} object from a Configuration
  * object. The Configuration object represents the assembly descriptor
  * and is in the format specified for <tt>assembly.xml</tt> files.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.11 $ $Date: 2003-10-16 14:45:44 $
+ * @version $Revision: 1.12 $ $Date: 2003-11-03 05:56:07 $
  */
 public class Assembler
     implements MetaDataBuilder
@@ -115,7 +115,7 @@ public class Assembler
         ResourceManager.getPackageResources( Assembler.class );
 
     /**
-     * Create a {@link org.jcontainer.loom.components.util.metadata.PartitionMetaData} object based on specified
+     * Create a {@link PartitionMetaData} object based on specified
      * name and assembly configuration. This implementation takes two
      * parameters. {@link ContainerConstants#ASSEMBLY_NAME} specifies
      * the name of the assembly and
@@ -139,7 +139,7 @@ public class Assembler
     }
 
     /**
-     * Create a {@link org.jcontainer.loom.components.util.metadata.PartitionMetaData} object based on specified
+     * Create a {@link PartitionMetaData} object based on specified
      * name and assembly configuration.
      *
      * @param name the name of Sar
@@ -178,7 +178,7 @@ public class Assembler
     }
 
     /**
-     * Create an array of {@link org.jcontainer.loom.components.util.metadata.ComponentMetaData} objects to represent
+     * Create an array of {@link ComponentMetaData} objects to represent
      * the &lt;block .../&gt; sections in <tt>assembly.xml</tt>.
      *
      * @param blocks the list of Configuration objects for blocks
@@ -199,7 +199,7 @@ public class Assembler
     }
 
     /**
-     * Create a single {@link org.jcontainer.loom.components.util.metadata.ComponentMetaData} object to represent
+     * Create a single {@link ComponentMetaData} object to represent
      * specified &lt;block .../&gt; section.
      *
      * @param block the Configuration object for block
@@ -238,7 +238,7 @@ public class Assembler
     }
 
     /**
-     * Create an array of {@link org.jcontainer.loom.components.util.metadata.ComponentMetaData} objects to represent
+     * Create an array of {@link ComponentMetaData} objects to represent
      * the &lt;listener .../&gt; sections in <tt>assembly.xml</tt>.
      *
      * @param listenerConfigs the list of Configuration objects for listenerConfigs
@@ -260,7 +260,7 @@ public class Assembler
     }
 
     /**
-     * Create a {@link org.jcontainer.loom.components.util.metadata.ComponentMetaData} object to represent
+     * Create a {@link ComponentMetaData} object to represent
      * the specified &lt;listener .../&gt; section.
      *
      * @param listener the Configuration object for listener
