@@ -15,8 +15,8 @@ import org.apache.excalibur.instrument.manager.DefaultInstrumentManager;
  * LoomInstrumentManager is a wrapper around ExcaliburInstrumentManager
  * from the <a href="http://excalibur.apache.org">Apache Excalibur</a> project.
  *
- * @author Johan Sjöberg
- * @version $Revision: 1.2 $
+ * @author Johan Sjoberg
+ * @version $Revision: 1.3 $
  *
  * @dna.component
  */
