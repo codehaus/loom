@@ -165,8 +165,8 @@
         <component
             class="org.codehaus.loom.components.monitor.DefaultDeploymentMonitor"
             logger="monitor">
-            <!--Amount of time in milliseconds between checks of the deployment dir -->
-            <monitor-frequency>1000</monitor-frequency>
+            <!--Amount of time in seconds between checks of the deployment directory -->
+            <scanner-frequency>5</scanner-frequency>
             <base-application-directory>${loom.home}/apps</base-application-directory>
         </component>
     </embeddor>

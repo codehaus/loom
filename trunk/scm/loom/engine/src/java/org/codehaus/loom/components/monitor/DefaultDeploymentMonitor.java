@@ -116,7 +116,7 @@ import org.codehaus.dna.ResourceLocator;
  *
  * @author Peter Donald
  * @author Johan Sjoberg
- * @version $Revision: 1.3 $ $Date: 2004-07-12 14:51:58 $
+ * @version $Revision: 1.4 $ $Date: 2004-07-15 08:52:55 $
  */
 public class DefaultDeploymentMonitor
     extends AbstractLogEnabled
@@ -143,15 +143,21 @@ public class DefaultDeploymentMonitor
      * The parameters <code>scanner-frequency</code> and
      * <code>base-application-directory</code> are used. The latter is
      * mandatory. If no <code>scanner-frequency</code> is given it defaults
-     * to <code>1000L</code>, which means one second.
+     * to 5, which means five seconds. If the value is zero or negative five
+     * seconds will also be used as the default.
      *
      * @param configuration The configuration object
      */
     public void configure( Configuration configuration )
         throws ConfigurationException
     {
-        m_frequency =
-          configuration.getChild( "scanner-frequency" ).getValueAsLong( 1000L );
+        m_frequency = 1000L
+          * configuration.getChild( "scanner-frequency" ).getValueAsLong( 5L );
+        if( m_frequency <= 0 )
+        {
+            m_frequency = 5000L;
+        }
+
         final String appsDir =
           configuration.getChild( "base-application-directory" ).getValue();
         m_appsDir = new File( appsDir );
