@@ -15,7 +15,7 @@ the environment.xml file. Tell us what you think
   <classloader name="foo" parent="*api*">
     <entry location="sar:/some/dir/classes"/>
     <entry location="sar:/some/dir/mypackage.jar"/>
-    <entry url="http://www.realityforge.org/some.jar"/>
+    <entry url="http://spice.codehaus.org/some.jar"/>
   </classloader>
 
   <classloader name="bar" parent="*system*">
