@@ -86,13 +86,13 @@
  */
 package org.jcontainer.loom.interfaces;
 
-import org.jcontainer.loom.tools.profile.ComponentProfile;
+import org.jcontainer.loom.components.util.profile.ComponentProfile;
 
 /**
  * Handles parsing of configuration schema and validation against schema
  *
  * @author <a href="mailto:proyal@apache.org">Peter Royal</a>
- * @version CVS $Revision: 1.4 $ $Date: 2003-09-02 04:36:58 $
+ * @version CVS $Revision: 1.5 $ $Date: 2003-10-16 14:45:47 $
  */
 public interface ConfigurationValidator
 {

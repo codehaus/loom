@@ -88,8 +88,8 @@ package org.jcontainer.loom.components.kernel;
 
 import java.io.File;
 import java.util.Map;
-import org.jcontainer.loom.interfaces.Application;
 import org.jcomponent.loggerstore.LoggerStore;
+import org.jcontainer.loom.interfaces.Application;
 
 /**
  * This is the structure describing each server application before it is loaded.
@@ -98,7 +98,7 @@ import org.jcomponent.loggerstore.LoggerStore;
  */
 final class SarEntry
 {
-    private final org.jcontainer.loom.tools.profile.PartitionProfile m_profile;
+    private final org.jcontainer.loom.components.util.profile.PartitionProfile m_profile;
     private final ClassLoader m_classLoader;
     private final LoggerStore m_store;
     private final File m_homeDirectory;
@@ -106,7 +106,7 @@ final class SarEntry
     private final Map m_classLoaders;
     private Application m_application;
 
-    protected SarEntry( final org.jcontainer.loom.tools.profile.PartitionProfile profile,
+    protected SarEntry( final org.jcontainer.loom.components.util.profile.PartitionProfile profile,
                         final File homeDirectory,
                         final File workDirectory,
                         final ClassLoader classLoader,
@@ -166,7 +166,7 @@ final class SarEntry
         m_application = application;
     }
 
-    public org.jcontainer.loom.tools.profile.PartitionProfile getProfile()
+    public org.jcontainer.loom.components.util.profile.PartitionProfile getProfile()
     {
         return m_profile;
     }

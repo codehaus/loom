@@ -97,26 +97,26 @@ import org.apache.avalon.framework.component.ComponentManager;
 import org.apache.avalon.framework.component.WrapperComponentManager;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.context.Context;
+import org.apache.avalon.framework.logger.Logger;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.avalon.framework.service.DefaultServiceManager;
 import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.avalon.framework.logger.Logger;
 import org.apache.excalibur.instrument.InstrumentManager;
+import org.jcontainer.dna.AbstractLogEnabled;
+import org.jcontainer.loom.components.util.ConfigurationConverter;
+import org.jcontainer.loom.components.util.info.DependencyDescriptor;
+import org.jcontainer.loom.components.util.lifecycle.ResourceProvider;
+import org.jcontainer.loom.components.util.metadata.DependencyMetaData;
+import org.jcontainer.loom.components.util.profile.ComponentProfile;
 import org.jcontainer.loom.interfaces.Application;
 import org.jcontainer.loom.interfaces.ApplicationContext;
-import org.jcontainer.loom.tools.info.DependencyDescriptor;
-import org.jcontainer.loom.components.util.lifecycle.ResourceProvider;
-import org.jcontainer.loom.tools.metadata.DependencyMetaData;
-import org.jcontainer.loom.tools.profile.ComponentProfile;
-import org.jcontainer.loom.components.util.ConfigurationConverter;
-import org.jcontainer.dna.AbstractLogEnabled;
 
 /**
  * The accessor used to access resources for a particular
  * Block or Listener.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.9 $ $Date: 2003-10-16 05:48:07 $
+ * @version $Revision: 1.10 $ $Date: 2003-10-16 14:45:44 $
  */
 class BlockResourceProvider
     extends AbstractLogEnabled

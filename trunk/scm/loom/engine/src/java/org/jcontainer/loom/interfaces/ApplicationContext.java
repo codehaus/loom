@@ -88,9 +88,9 @@ package org.jcontainer.loom.interfaces;
 
 import java.io.File;
 import java.io.InputStream;
-import org.apache.excalibur.instrument.InstrumentManager;
 import org.apache.avalon.framework.logger.Logger;
-import org.jcontainer.loom.tools.profile.PartitionProfile;
+import org.apache.excalibur.instrument.InstrumentManager;
+import org.jcontainer.loom.components.util.profile.PartitionProfile;
 
 /**
  * Manage the "context" in which Applications operate.

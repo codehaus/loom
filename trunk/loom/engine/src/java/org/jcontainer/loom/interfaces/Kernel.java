@@ -89,7 +89,7 @@ package org.jcontainer.loom.interfaces;
 import java.io.File;
 import java.util.Map;
 import org.jcomponent.loggerstore.LoggerStore;
-import org.jcontainer.loom.tools.profile.PartitionProfile;
+import org.jcontainer.loom.components.util.profile.PartitionProfile;
 
 /**
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>

@@ -98,15 +98,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-import org.jcontainer.dna.Active;
-import org.jcontainer.dna.Parameterizable;
-import org.jcontainer.dna.ParameterException;
-import org.jcontainer.dna.Parameters;
 import org.jcontainer.dna.AbstractLogEnabled;
+import org.jcontainer.dna.Active;
+import org.jcontainer.dna.ParameterException;
+import org.jcontainer.dna.Parameterizable;
+import org.jcontainer.dna.Parameters;
+import org.jcontainer.loom.components.ParameterConstants;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.Installer;
 import org.jcontainer.loom.interfaces.LoomException;
-import org.jcontainer.loom.components.ParameterConstants;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.io.FileUtil;
@@ -117,7 +117,7 @@ import org.realityforge.salt.io.IOUtil;
  * and installing it as appropriate.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.9 $ $Date: 2003-10-05 10:07:03 $
+ * @version $Revision: 1.10 $ $Date: 2003-10-16 14:45:45 $
  */
 public class DefaultInstaller
     extends AbstractLogEnabled

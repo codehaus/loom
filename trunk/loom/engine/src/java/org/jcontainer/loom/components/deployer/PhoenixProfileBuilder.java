@@ -10,24 +10,23 @@ package org.jcontainer.loom.components.deployer;
 import java.util.ArrayList;
 import java.util.Map;
 import org.jcontainer.loom.components.assembler.Assembler;
+import org.jcontainer.loom.components.util.factory.ComponentBundle;
+import org.jcontainer.loom.components.util.factory.ComponentFactory;
+import org.jcontainer.loom.components.util.factory.DefaultComponentFactory;
+import org.jcontainer.loom.components.util.info.ComponentInfo;
+import org.jcontainer.loom.components.util.info.DependencyDescriptor;
+import org.jcontainer.loom.components.util.info.ServiceDescriptor;
+import org.jcontainer.loom.components.util.metadata.ComponentMetaData;
+import org.jcontainer.loom.components.util.metadata.PartitionMetaData;
+import org.jcontainer.loom.components.util.profile.ComponentProfile;
+import org.jcontainer.loom.components.util.profile.PartitionProfile;
+import org.jcontainer.loom.components.util.profile.ProfileBuilder;
 import org.jcontainer.loom.interfaces.ContainerConstants;
-import org.jcontainer.loom.tools.LoomToolConstants;
-import org.jcontainer.loom.tools.factory.ComponentBundle;
-import org.jcontainer.loom.tools.factory.ComponentFactory;
-import org.jcontainer.loom.tools.factory.DefaultComponentFactory;
-import org.jcontainer.loom.tools.info.ComponentInfo;
-import org.jcontainer.loom.tools.info.DependencyDescriptor;
-import org.jcontainer.loom.tools.info.ServiceDescriptor;
-import org.jcontainer.loom.tools.metadata.ComponentMetaData;
-import org.jcontainer.loom.tools.metadata.PartitionMetaData;
-import org.jcontainer.loom.tools.profile.ComponentProfile;
-import org.jcontainer.loom.tools.profile.PartitionProfile;
-import org.jcontainer.loom.tools.profile.ProfileBuilder;
 
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.14 $ $Date: 2003-10-16 05:11:32 $
+ * @version $Revision: 1.15 $ $Date: 2003-10-16 14:45:45 $
  */
 public class PhoenixProfileBuilder
     implements ProfileBuilder
@@ -51,9 +50,9 @@ public class PhoenixProfileBuilder
         throws Exception
     {
         final PartitionMetaData blockPartition =
-            metaData.getPartition( LoomToolConstants.BLOCK_PARTITION );
+            metaData.getPartition( ContainerConstants.BLOCK_PARTITION );
         final PartitionMetaData listenerPartition =
-            metaData.getPartition( LoomToolConstants.LISTENER_PARTITION );
+            metaData.getPartition( ContainerConstants.LISTENER_PARTITION );
 
         final PartitionProfile blockProfile = assembleProfile( blockPartition, factory );
         final PartitionProfile listenerProfile =
@@ -118,7 +117,7 @@ public class PhoenixProfileBuilder
     }
 
     /**
-     * Create a {@link ComponentInfo} for a Listener with specified classname.
+     * Create a {@link org.jcontainer.loom.components.util.info.ComponentInfo} for a Listener with specified classname.
      *
      * @param type the listener type
      * @return the ComponentInfo for listener

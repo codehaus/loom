@@ -90,9 +90,9 @@ import org.apache.avalon.phoenix.ApplicationEvent;
 import org.apache.avalon.phoenix.ApplicationListener;
 import org.apache.avalon.phoenix.BlockEvent;
 import org.apache.avalon.phoenix.BlockListener;
-import org.jcontainer.loom.components.util.ComponentInfoConverter;
 import org.apache.avalon.phoenix.metadata.SarMetaData;
 import org.apache.avalon.phoenix.metainfo.BlockInfo;
+import org.jcontainer.loom.components.util.ComponentInfoConverter;
 
 /**
  * Manage a set of {@link ApplicationListener} objects and propogate
@@ -155,7 +155,7 @@ final class ListenerSupport
      */
     private BlockEvent createEvent( final BlockEntry entry )
     {
-        final org.jcontainer.loom.tools.profile.ComponentProfile profile = entry.getProfile();
+        final org.jcontainer.loom.components.util.profile.ComponentProfile profile = entry.getProfile();
         final BlockInfo blockInfo = ComponentInfoConverter.toBlockInfo( profile.getInfo() );
         final BlockEvent event =
             new BlockEvent( profile.getMetaData().getName(),

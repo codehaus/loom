@@ -25,13 +25,15 @@ import org.apache.avalon.framework.parameters.Reparameterizable;
 import org.apache.avalon.framework.service.Serviceable;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
+import org.realityforge.metaclass.model.Attribute;
+import org.realityforge.metaclass.Attributes;
 
 /**
  * Utility class to help verify that component respects the
  * rules of an Avalon component.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-10-16 05:47:17 $
+ * @version $Revision: 1.7 $ $Date: 2003-10-16 14:45:56 $
  */
 public class ComponentVerifier
 {
@@ -69,21 +71,26 @@ public class ComponentVerifier
     };
 
     /**
-     * Verify that the supplied implementation class
-     * and service classes are valid for a component.
+     * Verfiy that specified components designate classes that implement the
+     * advertised interfaces.
      *
      * @param name the name of component
-     * @param implementation the implementation class of component
-     * @param services the classes representing services
-     * @throws VerifyException if error thrown on failure and
-     *         component fails check
+     * @param type the component type
+     * @throws Exception if an error occurs
      */
-    public void verifyComponent( final String name,
-                                 final Class implementation,
-                                 final Class[] services )
-        throws VerifyException
+    public void verifyType( final String name, final Class type )
+        throws Exception
     {
-        verifyComponent( name, implementation, services, true );
+        final Attribute attribute =
+            Attributes.getAttribute( type, "dna.component" );
+        if( null == attribute )
+        {
+            final String message =
+                "Component " + name + " does not specify correct metadata";
+            throw new Exception( message );
+        }
+        final Class[] interfaces = getServiceClasses( name, type );
+        verifyComponent( name, type, interfaces, false );
     }
 
     /**
@@ -96,14 +103,14 @@ public class ComponentVerifier
      * @param buildable if true will verify that it is instantiateable
      *                  via class.newInstance(). May not be required for
      *                  some components that are created via a factory.
-     * @throws VerifyException if error thrown on failure and
+     * @throws Exception if error thrown on failure and
      *         component fails check
      */
     public void verifyComponent( final String name,
                                  final Class implementation,
                                  final Class[] services,
                                  final boolean buildable )
-        throws VerifyException
+        throws Exception
     {
         if( buildable )
         {
@@ -121,13 +128,13 @@ public class ComponentVerifier
      * @param name the name of component
      * @param implementation the class representign component
      * @param services the services that the implementation must provide
-     * @throws VerifyException if error thrown on failure and
+     * @throws Exception if error thrown on failure and
      *         component fails check
      */
     public void verifyImplementsServices( final String name,
                                           final Class implementation,
                                           final Class[] services )
-        throws VerifyException
+        throws Exception
     {
         for( int i = 0; i < services.length; i++ )
         {
@@ -138,7 +145,7 @@ public class ComponentVerifier
                                 name,
                                 implementation.getName(),
                                 services[ i ].getName() );
-                throw new VerifyException( message );
+                throw new Exception( message );
             }
         }
     }
@@ -149,12 +156,12 @@ public class ComponentVerifier
      *
      * @param name the name of component
      * @param clazz the class representing component
-     * @throws VerifyException if error thrown on failure and
+     * @throws Exception if error thrown on failure and
      *         component fails check
      */
     public void verifyClass( final String name,
                              final Class clazz )
-        throws VerifyException
+        throws Exception
     {
         verifyNoArgConstructor( name, clazz );
         verifyNonAbstract( name, clazz );
@@ -170,12 +177,12 @@ public class ComponentVerifier
      *
      * @param name the name of component
      * @param classes the classes representign services
-     * @throws VerifyException if error thrown on failure and
+     * @throws Exception if error thrown on failure and
      *         component fails check
      */
     public void verifyServices( final String name,
                                 final Class[] classes )
-        throws VerifyException
+        throws Exception
     {
         for( int i = 0; i < classes.length; i++ )
         {
@@ -189,12 +196,12 @@ public class ComponentVerifier
      *
      * @param name the name of component
      * @param clazz the class representign service
-     * @throws VerifyException if error thrown on failure and
+     * @throws Exception if error thrown on failure and
      *         component fails check
      */
     public void verifyService( final String name,
                                final Class clazz )
-        throws VerifyException
+        throws Exception
     {
         verifyServiceIsaInterface( name, clazz );
         verifyServiceIsPublic( name, clazz );
@@ -207,12 +214,12 @@ public class ComponentVerifier
      *
      * @param name the name of component
      * @param implementation the implementation class
-     * @throws VerifyException if error thrown on failure and
+     * @throws Exception if error thrown on failure and
      *         component fails check
      */
     public void verifyLifecycles( final String name,
                                   final Class implementation )
-        throws VerifyException
+        throws Exception
     {
         final boolean composable =
             Composable.class.isAssignableFrom( implementation ) ||
@@ -224,7 +231,7 @@ public class ComponentVerifier
                 REZ.format( "verifier.incompat-serviceable.error",
                             name,
                             implementation.getName() );
-            throw new VerifyException( message );
+            throw new Exception( message );
         }
 
         final boolean configurable =
@@ -239,7 +246,7 @@ public class ComponentVerifier
                 REZ.format( "verifier.incompat-config.error",
                             name,
                             implementation.getName() );
-            throw new VerifyException( message );
+            throw new Exception( message );
         }
     }
 
@@ -249,12 +256,12 @@ public class ComponentVerifier
      *
      * @param name the name of component
      * @param clazz the class representign service
-     * @throws VerifyException if error thrown on failure and
+     * @throws Exception if error thrown on failure and
      *         component fails check
      */
     public void verifyServiceIsaInterface( final String name,
                                            final Class clazz )
-        throws VerifyException
+        throws Exception
     {
         if( !clazz.isInterface() )
         {
@@ -262,7 +269,7 @@ public class ComponentVerifier
                 REZ.format( "verifier.non-interface-service.error",
                             name,
                             clazz.getName() );
-            throw new VerifyException( message );
+            throw new Exception( message );
         }
     }
 
@@ -272,12 +279,12 @@ public class ComponentVerifier
      *
      * @param name the name of component
      * @param clazz the class representign service
-     * @throws VerifyException if error thrown on failure and
+     * @throws Exception if error thrown on failure and
      *         component fails check
      */
     public void verifyServiceIsPublic( final String name,
                                        final Class clazz )
-        throws VerifyException
+        throws Exception
     {
         final boolean isPublic =
             Modifier.isPublic( clazz.getModifiers() );
@@ -287,7 +294,7 @@ public class ComponentVerifier
                 REZ.format( "verifier.non-public-service.error",
                             name,
                             clazz.getName() );
-            throw new VerifyException( message );
+            throw new Exception( message );
         }
     }
 
@@ -297,12 +304,12 @@ public class ComponentVerifier
      *
      * @param name the name of component
      * @param clazz the class representign service
-     * @throws VerifyException if error thrown on failure and
+     * @throws Exception if error thrown on failure and
      *         component fails check
      */
     public void verifyServiceNotALifecycle( final String name,
                                             final Class clazz )
-        throws VerifyException
+        throws Exception
     {
         for( int i = 0; i < FRAMEWORK_CLASSES.length; i++ )
         {
@@ -314,7 +321,7 @@ public class ComponentVerifier
                                 name,
                                 clazz.getName(),
                                 lifecycle.getName() );
-                throw new VerifyException( message );
+                throw new Exception( message );
             }
         }
     }
@@ -325,12 +332,12 @@ public class ComponentVerifier
      *
      * @param name the name of component
      * @param clazz the class representign component
-     * @throws VerifyException if error thrown on failure and
+     * @throws Exception if error thrown on failure and
      *         component fails check
      */
     public void verifyNoArgConstructor( final String name,
                                         final Class clazz )
-        throws VerifyException
+        throws Exception
     {
         try
         {
@@ -341,7 +348,7 @@ public class ComponentVerifier
                     REZ.format( "verifier.non-public-ctor.error",
                                 name,
                                 clazz.getName() );
-                throw new VerifyException( message );
+                throw new Exception( message );
             }
         }
         catch( final NoSuchMethodException nsme )
@@ -350,7 +357,7 @@ public class ComponentVerifier
                 REZ.format( "verifier.missing-noargs-ctor.error",
                             name,
                             clazz.getName() );
-            throw new VerifyException( message );
+            throw new Exception( message );
         }
     }
 
@@ -360,12 +367,12 @@ public class ComponentVerifier
      *
      * @param name the name of component
      * @param clazz the class representign component
-     * @throws VerifyException if error thrown on failure and
+     * @throws Exception if error thrown on failure and
      *         component fails check
      */
     public void verifyNonAbstract( final String name,
                                    final Class clazz )
-        throws VerifyException
+        throws Exception
     {
         final boolean isAbstract =
             Modifier.isAbstract( clazz.getModifiers() );
@@ -375,7 +382,7 @@ public class ComponentVerifier
                 REZ.format( "verifier.abstract-class.error",
                             name,
                             clazz.getName() );
-            throw new VerifyException( message );
+            throw new Exception( message );
         }
     }
 
@@ -385,12 +392,12 @@ public class ComponentVerifier
      *
      * @param name the name of component
      * @param clazz the class representign component
-     * @throws VerifyException if error thrown on failure and
+     * @throws Exception if error thrown on failure and
      *         component fails check
      */
     public void verifyPublic( final String name,
                               final Class clazz )
-        throws VerifyException
+        throws Exception
     {
         final boolean isPublic =
             Modifier.isPublic( clazz.getModifiers() );
@@ -400,7 +407,7 @@ public class ComponentVerifier
                 REZ.format( "verifier.nonpublic-class.error",
                             name,
                             clazz.getName() );
-            throw new VerifyException( message );
+            throw new Exception( message );
         }
     }
 
@@ -410,12 +417,12 @@ public class ComponentVerifier
      *
      * @param name the name of component
      * @param clazz the class representign component
-     * @throws VerifyException if error thrown on failure and
+     * @throws Exception if error thrown on failure and
      *         component fails check
      */
     public void verifyNonPrimitive( final String name,
                                     final Class clazz )
-        throws VerifyException
+        throws Exception
     {
         if( clazz.isPrimitive() )
         {
@@ -423,7 +430,7 @@ public class ComponentVerifier
                 REZ.format( "verifier.primitive-class.error",
                             name,
                             clazz.getName() );
-            throw new VerifyException( message );
+            throw new Exception( message );
         }
     }
 
@@ -433,12 +440,12 @@ public class ComponentVerifier
      *
      * @param name the name of component
      * @param clazz the class representign component
-     * @throws VerifyException if error thrown on failure and
+     * @throws Exception if error thrown on failure and
      *         component fails check
      */
     public void verifyNonInterface( final String name,
                                     final Class clazz )
-        throws VerifyException
+        throws Exception
     {
         if( clazz.isInterface() )
         {
@@ -446,7 +453,7 @@ public class ComponentVerifier
                 REZ.format( "verifier.interface-class.error",
                             name,
                             clazz.getName() );
-            throw new VerifyException( message );
+            throw new Exception( message );
         }
     }
 
@@ -456,12 +463,12 @@ public class ComponentVerifier
      *
      * @param name the name of component
      * @param clazz the class representign component
-     * @throws VerifyException if error thrown on failure and
+     * @throws Exception if error thrown on failure and
      *         component fails check
      */
     public void verifyNonArray( final String name,
                                 final Class clazz )
-        throws VerifyException
+        throws Exception
     {
         if( clazz.isArray() )
         {
@@ -469,7 +476,45 @@ public class ComponentVerifier
                 REZ.format( "verifier.array-class.error",
                             name,
                             clazz.getName() );
-            throw new VerifyException( message );
+            throw new Exception( message );
         }
+    }
+
+    /**
+     * Retrieve an array of Classes for all the services that a Component
+     * offers. This method also makes sure all services offered are
+     * interfaces.
+     *
+     * @param name the name of component
+     * @param type the component type
+     * @return an array of Classes for all the services
+     * @throws Exception if an error occurs
+     */
+    protected Class[] getServiceClasses( final String name,
+                                         final Class type )
+        throws Exception
+    {
+        final ClassLoader classLoader = type.getClassLoader();
+        final Attribute[] attributes =
+            Attributes.getAttributes( type, "dna.service" );
+        final Class[] classes = new Class[ attributes.length ];
+        for( int i = 0; i < attributes.length; i++ )
+        {
+            final String classname = attributes[ i ].getParameter( "type" );
+            try
+            {
+                classes[ i ] = classLoader.loadClass( classname );
+            }
+            catch( final Throwable t )
+            {
+                final String message =
+                    "Unable to load service class \"" +
+                    classname + "\" for Component named \"" +
+                    name + "\". (Reason: " + t + ").";
+                throw new Exception( message );
+            }
+        }
+
+        return classes;
     }
 }

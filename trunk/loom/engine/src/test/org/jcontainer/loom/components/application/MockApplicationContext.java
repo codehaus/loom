@@ -14,12 +14,12 @@ import org.apache.excalibur.instrument.InstrumentManager;
 import org.jcontainer.loom.components.instrument.NoopInstrumentManager;
 import org.jcontainer.loom.components.util.DNAAvalonLogger;
 import org.jcontainer.loom.interfaces.ApplicationContext;
-import org.jcontainer.loom.tools.profile.PartitionProfile;
+import org.jcontainer.loom.components.util.profile.PartitionProfile;
 
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-10-15 04:20:42 $
+ * @version $Revision: 1.6 $ $Date: 2003-10-16 14:45:47 $
  */
 class MockApplicationContext
     implements ApplicationContext

@@ -90,11 +90,11 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import org.jcontainer.loom.components.extensions.pkgmgr.PackageManager;
 import org.apache.oro.text.regex.MalformedPatternException;
 import org.apache.oro.text.regex.Pattern;
 import org.apache.oro.text.regex.Perl5Compiler;
 import org.apache.oro.text.regex.Perl5Matcher;
+import org.jcontainer.loom.components.extensions.pkgmgr.PackageManager;
 
 /**
  * This resolver has all the same properties as the
@@ -103,7 +103,7 @@ import org.apache.oro.text.regex.Perl5Matcher;
  * {@link #m_baseDirectory} value.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-08-17 18:27:32 $
+ * @version $Revision: 1.4 $ $Date: 2003-10-16 14:45:45 $
  * @deprecated Convert to ClassMan SimpleLoaderResolver when it updates
  *             dependecy to latest Excalibur-Extension
  */

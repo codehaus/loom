@@ -385,7 +385,7 @@ public class DefaultKernel
         }
     }
 
-    public void addApplication( final org.jcontainer.loom.tools.profile.PartitionProfile profile,
+    public void addApplication( final org.jcontainer.loom.components.util.profile.PartitionProfile profile,
                                 final File homeDirectory,
                                 final File workDirectory,
                                 final ClassLoader classLoader,

@@ -88,13 +88,13 @@ package org.jcontainer.loom.frontends;
 
 import java.util.List;
 import java.util.Properties;
+import org.jcontainer.loom.components.ParameterConstants;
 import org.realityforge.cli.CLArgsParser;
 import org.realityforge.cli.CLOption;
 import org.realityforge.cli.CLOptionDescriptor;
 import org.realityforge.cli.CLUtil;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
-import org.jcontainer.loom.components.ParameterConstants;
 
 /**
  * The class prepare parameters based on input options.

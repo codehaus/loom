@@ -12,6 +12,9 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import org.apache.avalon.framework.CascadingException;
+import org.jcontainer.dna.Configuration;
+import org.jcontainer.dna.Logger;
+import org.jcontainer.dna.impl.SAXConfigurationHandler;
 import org.realityforge.configkit.ConfigValidator;
 import org.realityforge.configkit.ConfigValidatorFactory;
 import org.realityforge.configkit.ResolverFactory;
@@ -24,15 +27,12 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.XMLReader;
-import org.jcontainer.dna.Configuration;
-import org.jcontainer.dna.Logger;
-import org.jcontainer.dna.impl.SAXConfigurationHandler;
 
 /**
  * Utility class used to load Configuration trees from XML files.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-10-16 05:23:54 $
+ * @version $Revision: 1.2 $ $Date: 2003-10-16 14:45:46 $
  */
 public class ConfigurationBuilder
 {

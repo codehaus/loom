@@ -96,9 +96,9 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
-import org.realityforge.extension.Extension;
 import org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager;
 import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
+import org.realityforge.extension.Extension;
 
 /**
  * <p>Interface used to contain "Optional Packages" (formerly known as
@@ -107,7 +107,7 @@ import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
  * a path to find the Optional Packages.</p>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-08-17 18:27:32 $
+ * @version $Revision: 1.4 $ $Date: 2003-10-16 14:45:45 $
  * @see OptionalPackage
  * @see ExtensionManager
  */

@@ -1,14 +1,14 @@
 <catalog version="1.0">
     <entity
         publicId="-//PHOENIX/Assembly DTD Version 1.0//EN"
-        resource="org/jcontainer/loom/tools/assembly_1_0.dtd"/>
+        resource="org/jcontainer/loom/components/util/assembly_1_0.dtd"/>
     <entity
         publicId="-//PHOENIX/Assembly DTD Version 1.1//EN"
-        resource="org/jcontainer/loom/tools/assembly_1_0.dtd"/>
+        resource="org/jcontainer/loom/components/util/assembly_1_0.dtd"/>
     <entity
         publicId="-//LOOM/Assembly DTD Version 1.0//EN"
-        resource="org/jcontainer/loom/tools/assembly_1_0.dtd"/>
+        resource="org/jcontainer/loom/components/util/assembly_1_0.dtd"/>
     <entity
         publicId="-//LOOM/Assembly DTD Version 1.1//EN"
-        resource="org/jcontainer/loom/tools/assembly_1_0.dtd"/>
+        resource="org/jcontainer/loom/components/util/assembly_1_0.dtd"/>
 </catalog>

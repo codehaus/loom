@@ -14,17 +14,17 @@ import org.apache.avalon.phoenix.metadata.BlockMetaData;
 import org.apache.avalon.phoenix.metadata.DependencyMetaData;
 import org.apache.avalon.phoenix.metadata.SarMetaData;
 import org.apache.avalon.phoenix.metainfo.BlockInfo;
-import org.jcontainer.loom.tools.LoomToolConstants;
-import org.jcontainer.loom.tools.info.ComponentInfo;
-import org.jcontainer.loom.tools.metadata.ComponentMetaData;
-import org.jcontainer.loom.tools.profile.ComponentProfile;
-import org.jcontainer.loom.tools.profile.PartitionProfile;
+import org.jcontainer.loom.components.util.info.ComponentInfo;
+import org.jcontainer.loom.components.util.metadata.ComponentMetaData;
+import org.jcontainer.loom.components.util.profile.ComponentProfile;
+import org.jcontainer.loom.components.util.profile.PartitionProfile;
+import org.jcontainer.loom.interfaces.ContainerConstants;
 
 /**
- * Convert a {@link ComponentMetaData} into a {@link BlockMetaData}.
+ * Convert a {@link org.jcontainer.loom.components.util.metadata.ComponentMetaData} into a {@link BlockMetaData}.
  *
  * @author <a href="mailto:peter@apache.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-10-15 04:20:42 $
+ * @version $Revision: 1.7 $ $Date: 2003-10-16 14:45:46 $
  */
 public class ComponentMetaDataConverter
 {
@@ -36,9 +36,9 @@ public class ComponentMetaDataConverter
                                              final File homeDirectory )
     {
         final PartitionProfile blockPartition =
-            partition.getPartition( LoomToolConstants.BLOCK_PARTITION );
+            partition.getPartition( ContainerConstants.BLOCK_PARTITION );
         final PartitionProfile listenerPartition =
-            partition.getPartition( LoomToolConstants.LISTENER_PARTITION );
+            partition.getPartition( ContainerConstants.LISTENER_PARTITION );
         final BlockListenerMetaData[] listeners =
             toBlockListeners( listenerPartition.getMetaData().getComponents() );
         final BlockMetaData[] blocks =
@@ -50,10 +50,10 @@ public class ComponentMetaDataConverter
     }
 
     /**
-     * Convert a set of {@link ComponentProfile} object
+     * Convert a set of {@link org.jcontainer.loom.components.util.profile.ComponentProfile} object
      * into a set of {@link BlockMetaData} objects.
      *
-     * @param components the {@link ComponentProfile} objects
+     * @param components the {@link org.jcontainer.loom.components.util.profile.ComponentProfile} objects
      * @return the {@link BlockMetaData} objects
      */
     private static BlockMetaData[] toBlocks( final ComponentProfile[] components )
@@ -70,9 +70,9 @@ public class ComponentMetaDataConverter
     }
 
     /**
-     * Convert a {@link ComponentMetaData} object into a {@link BlockListenerMetaData} object.
+     * Convert a {@link org.jcontainer.loom.components.util.metadata.ComponentMetaData} object into a {@link BlockListenerMetaData} object.
      *
-     * @param listeners the {@link ComponentMetaData} object
+     * @param listeners the {@link org.jcontainer.loom.components.util.metadata.ComponentMetaData} object
      * @return the {@link BlockListenerMetaData} object
      */
     public static BlockListenerMetaData[] toBlockListeners( final ComponentMetaData[] listeners )
@@ -89,9 +89,9 @@ public class ComponentMetaDataConverter
     }
 
     /**
-     * Convert a {@link ComponentMetaData} object into a {@link BlockMetaData} object.
+     * Convert a {@link org.jcontainer.loom.components.util.metadata.ComponentMetaData} object into a {@link BlockMetaData} object.
      *
-     * @param component the {@link ComponentMetaData} object
+     * @param component the {@link org.jcontainer.loom.components.util.metadata.ComponentMetaData} object
      * @return the {@link BlockMetaData} object
      */
     public static BlockMetaData toBlockMetaData( final ComponentMetaData component,
@@ -115,7 +115,7 @@ public class ComponentMetaDataConverter
      * @return the Phoenix dependencys
      */
     private static DependencyMetaData[] toPhoenixDependencys(
-        final org.jcontainer.loom.tools.metadata.DependencyMetaData[] dependencies )
+        final org.jcontainer.loom.components.util.metadata.DependencyMetaData[] dependencies )
     {
         final ArrayList depends = new ArrayList();
         for( int i = 0; i < dependencies.length; i++ )

@@ -15,29 +15,28 @@ import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.impl.ConsoleLogger;
 import org.jcontainer.dna.impl.DefaultConfiguration;
 import org.jcontainer.loom.components.deployer.PhoenixProfileBuilder;
-import org.jcontainer.loom.components.application.data.Component4;
-import org.jcontainer.loom.components.application.data.Component3;
-import org.jcontainer.loom.components.application.data.Component2;
-import org.jcontainer.loom.components.application.data.Component1;
-import org.jcontainer.loom.components.application.data.Service1;
-import org.jcontainer.loom.interfaces.ContainerConstants;
-import org.jcontainer.loom.tools.LoomToolConstants;
 import org.jcontainer.loom.components.util.ConfigurationBuilder;
-import org.jcontainer.loom.tools.info.ComponentInfo;
-import org.jcontainer.loom.tools.info.DependencyDescriptor;
-import org.jcontainer.loom.tools.info.ServiceDescriptor;
-import org.jcontainer.loom.tools.metadata.ComponentMetaData;
-import org.jcontainer.loom.tools.metadata.DependencyMetaData;
-import org.jcontainer.loom.tools.metadata.PartitionMetaData;
-import org.jcontainer.loom.tools.profile.ComponentProfile;
-import org.jcontainer.loom.tools.profile.PartitionProfile;
+import org.jcontainer.loom.components.assembler.data.Service1;
+import org.jcontainer.loom.components.util.info.ComponentInfo;
+import org.jcontainer.loom.components.util.info.DependencyDescriptor;
+import org.jcontainer.loom.components.util.info.ServiceDescriptor;
+import org.jcontainer.loom.components.util.metadata.ComponentMetaData;
+import org.jcontainer.loom.components.util.metadata.DependencyMetaData;
+import org.jcontainer.loom.components.util.metadata.PartitionMetaData;
+import org.jcontainer.loom.components.util.profile.ComponentProfile;
+import org.jcontainer.loom.components.util.profile.PartitionProfile;
+import org.jcontainer.loom.components.assembler.data.Component1;
+import org.jcontainer.loom.components.assembler.data.Component2;
+import org.jcontainer.loom.components.assembler.data.Component3;
+import org.jcontainer.loom.components.assembler.data.Component4;
+import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.xml.sax.InputSource;
 
 /**
  *  An basic test case for the Application.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.15 $ $Date: 2003-10-16 05:23:54 $
+ * @version $Revision: 1.16 $ $Date: 2003-10-16 14:45:47 $
  */
 public class ApplicationTestCase
     extends TestCase
@@ -107,12 +106,12 @@ public class ApplicationTestCase
                                    true );
         final ComponentProfile cp2 = new ComponentProfile( C2, md2 );
         final PartitionMetaData blockPartitionMD =
-            new PartitionMetaData( LoomToolConstants.BLOCK_PARTITION,
-                                   new String[]{LoomToolConstants.LISTENER_PARTITION},
+            new PartitionMetaData( ContainerConstants.BLOCK_PARTITION,
+                                   new String[]{ContainerConstants.LISTENER_PARTITION},
                                    PartitionMetaData.EMPTY_SET,
                                    new ComponentMetaData[]{md1, md2} );
         final PartitionMetaData listenerPartitionMD =
-            new PartitionMetaData( LoomToolConstants.LISTENER_PARTITION,
+            new PartitionMetaData( ContainerConstants.LISTENER_PARTITION,
                                    new String[ 0 ],
                                    PartitionMetaData.EMPTY_SET,
                                    ComponentMetaData.EMPTY_SET );
@@ -184,12 +183,12 @@ public class ApplicationTestCase
         final ComponentProfile cp2c = new ComponentProfile( C2, md2c );
 
         final PartitionMetaData blockPartitionMD =
-            new PartitionMetaData( LoomToolConstants.BLOCK_PARTITION,
-                                   new String[]{LoomToolConstants.LISTENER_PARTITION},
+            new PartitionMetaData( ContainerConstants.BLOCK_PARTITION,
+                                   new String[]{ContainerConstants.LISTENER_PARTITION},
                                    PartitionMetaData.EMPTY_SET,
                                    new ComponentMetaData[]{md3, md2a, md2b, md2c} );
         final PartitionMetaData listenerPartitionMD =
-            new PartitionMetaData( LoomToolConstants.LISTENER_PARTITION,
+            new PartitionMetaData( ContainerConstants.LISTENER_PARTITION,
                                    new String[ 0 ],
                                    PartitionMetaData.EMPTY_SET,
                                    ComponentMetaData.EMPTY_SET );
@@ -261,12 +260,12 @@ public class ApplicationTestCase
         final ComponentProfile cp2c = new ComponentProfile( C2, md2c );
 
         final PartitionMetaData blockPartitionMD =
-            new PartitionMetaData( LoomToolConstants.BLOCK_PARTITION,
-                                   new String[]{LoomToolConstants.LISTENER_PARTITION},
+            new PartitionMetaData( ContainerConstants.BLOCK_PARTITION,
+                                   new String[]{ContainerConstants.LISTENER_PARTITION},
                                    PartitionMetaData.EMPTY_SET,
                                    new ComponentMetaData[]{md4, md2a, md2b, md2c} );
         final PartitionMetaData listenerPartitionMD =
-            new PartitionMetaData( LoomToolConstants.LISTENER_PARTITION,
+            new PartitionMetaData( ContainerConstants.LISTENER_PARTITION,
                                    new String[ 0 ],
                                    PartitionMetaData.EMPTY_SET,
                                    ComponentMetaData.EMPTY_SET );

@@ -11,20 +11,21 @@ import org.apache.tools.ant.AntClassLoader;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 import org.apache.tools.ant.types.Path;
-import org.jcontainer.loom.tools.info.ComponentInfo;
-import org.jcontainer.loom.tools.verifier.InfoVerifier;
+import org.jcontainer.loom.tools.verifier.ComponentVerifier;
 
 /**
- * Simple task to load a {@link ComponentInfo} descriptor,
+ * Simple task to load a {@link org.jcontainer.loom.components.util.info.ComponentInfo} descriptor,
  * a component class and verify that the implementation class
- * is compatible with the {@link ComponentInfo}.
+ * is compatible with the ComponentInfo.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.12 $ $Date: 2003-10-16 05:50:21 $
+ * @version $Revision: 1.13 $ $Date: 2003-10-16 14:45:55 $
  */
 public class ComponentVerifierTask
     extends Task
 {
+    private static final ComponentVerifier VERIFIER = new ComponentVerifier();
+
     private Path m_classpath;
     private String m_classname;
 
@@ -57,13 +58,11 @@ public class ComponentVerifierTask
         }
 
         final AntClassLoader classLoader = new AntClassLoader( getProject(), m_classpath );
-        final InfoVerifier verifier = new InfoVerifier();
-
         try
         {
             final Class type =
                 classLoader.loadClass( m_classname );
-            verifier.verifyType( "test", type );
+            VERIFIER.verifyType( "test", type );
         }
         catch( final Exception e )
         {
