@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<document>
+    <properties>
+        <title>Management Guide</title>
+        <author email="huw@apache.org">Huw Roberts</author>
+    </properties>
+    <body>
+        <section name="Introduction">
+            <p>
+                Management refers to how a running instance of Loom, along with
+                its components, applications and blocks is supervised and manipulated.
+                This guide covers the steps required to write management-enabled
+                applications using Loom.
+            </p>
+        </section>
+        <section name="Overview">
+            <p>
+                Management in Loom is divided into two distinct areas.  The first
+                area is the the management metadata.  This is information about which
+                applications, blocks and
+                components should be managed, the operations and attributes
+                to expose, and descriptions for each these to help guide the user.
+                Each block and component
+                stores this data in an MetaClass descriptor that is distributed along
+                with the class files that make up Loom and the Loom-enabled
+                applications.
+            </p>
+            <p>
+                The second area is the Loom component that uses the
+                MetaClass files to generate a user interface through which Loom
+                and its applications are interacted with.  It is anticipated
+                that a number of such interfaces will be developed.  The current
+                implementation of the management component uses the descriptors
+                to generate ModelMBeans that are then registered and exposed
+                through a slightly customized JMX implementation called
+                <a href="http://mx4j.sourceforge.net/">MX4J</a>.
+            </p>
+            <p>
+                Note that nothing about the descriptor is dependant on using
+                JMX, and the block author does not need to know or care about
+                how Loom, the application, and its blocks will be managed.
+                His/her responsibility is limited to creating an descriptor file.
+            </p>
+            <p>
+                The guide is broken into a number of sections, each
+                covering a particular aspect of the management picture.
+            </p>
+        </section>
+        <section name="Organizing Structure for Management Data">
+            <p>
+                This section provides a conceptual overview of the elements that
+                are used to represent management information within Loom.
+                An understanding of these elements and their relationships is
+                essential for all users of the management functionality.
+            </p>
+            <p>
+                <a href="structure.html">Structure</a>
+            </p>
+        </section>
+        <section name="Step-By-Step Walk-Through">
+            <p>
+                This section walks through the steps that are needed to make a
+                block manageable.  The emphasis is on illuminating the process,
+                it does not cover every feature or option.
+            </p>
+            <p>
+                <a href="overview.html">Step-by-Step</a>
+            </p>
+        </section>
+        <section name="Using XDoclet Tags to Generate the Descriptor file">
+            <p>
+                It is recommended that component and block authors make use
+                of custom JavaDoc tags inserted into the source code.  These
+                tags are parsed using the MetaClass tool to produce the
+                descriptor.
+            </p>
+            <p>
+                <a href="doclet-tags.html">Doclet Tags</a>
+            </p>
+        </section>
+    </body>
+</document>

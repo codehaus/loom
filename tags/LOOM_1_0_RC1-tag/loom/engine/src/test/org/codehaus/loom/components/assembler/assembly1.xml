@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE assembly PUBLIC "-//LOOM/Assembly DTD Version 1.0//EN"
+                  "http://loom.codehaus.org/assembly_1.0.dtd">
+
+<assembly>
+
+    <block class="org.codehaus.loom.components.assembler.data.Component1"
+        name="c1">
+        <provide name="c2"
+            role="org.codehaus.loom.components.assembler.data.Service1"/>
+    </block>
+
+    <block class="org.codehaus.loom.components.assembler.data.Component2"
+        name="c2">
+        <proxy disable="true"/>
+    </block>
+
+    <listener class="org.codehaus.loom.components.assembler.data.Listener1"
+        name="l1"/>
+</assembly>

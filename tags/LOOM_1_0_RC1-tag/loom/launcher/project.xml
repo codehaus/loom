@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<project>
+    <extend>${basedir}/../project.xml</extend>
+    <name>Loom Launcher</name>
+    <id>loom-launcher</id>
+    <package>org.codehaus.loom.launcher</package>
+    <shortDescription>Tools to launch Loom.</shortDescription>
+    <description>
+        This toolkit is the launcher for Loom Application Server.
+    </description>
+
+    <dependencies>
+        <dependency>
+            <id>wrapper</id>
+            <version>3.0.3</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <sourceDirectory>src/java</sourceDirectory>
+    </build>
+
+</project>

@@ -1,0 +1,7 @@
+<policy version="1.0">
+
+    <!-- a grant with no codebase -->
+    <grant>
+        <permission class="java.io.FilePermission"/>
+    </grant>
+</policy>

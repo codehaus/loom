@@ -1,0 +1,29 @@
+<project default="build:components" xmlns:j="jelly:core" xmlns:maven="jelly:maven" xmlns:util="jelly:util">
+
+    <goal name="build:components">
+        <echo message="Build components"/>
+        <maven:reactor basedir="${basedir}" includes="plugins/maven-loom/project.xml,engine/project.xml,distribution/project.xml,support/*/project.xml,launcher/project.xml" goals="clean:clean,build" banner="Building" ignoreFailures="false"/>
+    </goal>
+
+    <goal name="build:demos">
+        <echo message="Build demos"/>
+        <maven:reactor basedir="${basedir}" includes="demos/*/project.xml,demos/distributed/*/project.xml" goals="clean:clean,build" banner="Building" ignoreFailures="false"/>
+    </goal>
+
+    <goal name="loom:clean">
+        <maven:reactor basedir="${basedir}" includes="distribution/project.xml,plugins/maven-loom/project.xml,engine/project.xml,support/*/project.xml,launcher/project.xml,demos/*/project.xml," goals="clean:clean" banner="Building" ignoreFailures="false"/>
+    </goal>
+
+    <goal name="loom:deploy" prereqs="deploy:components"/>
+
+    <goal name="deploy:components">
+        <echo message="Deploying all components"/>
+        <maven:reactor basedir="${basedir}" includes="*/project.xml" excludes="demos/*/project.xml,site/project.xml" goals="clean:clean,deploy" banner="Deploying" ignoreFailures="false"/>
+    </goal>
+
+    <goal name="deploy:demos">
+        <echo message="Deploy demos"/>
+        <maven:reactor basedir="${basedir}" includes="demos/*/project.xml,demos/distributed/*/project.xml" goals="clean:clean,deploy" banner="Deploying" ignoreFailures="false"/>
+    </goal>
+
+</project>

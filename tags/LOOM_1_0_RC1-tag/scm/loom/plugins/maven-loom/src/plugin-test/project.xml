@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project>
+    <id>test-maven-loom-plugin</id>
+    <currentVersion>test</currentVersion>
+    <name>Test project for Maven Loom Plugin</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>loom</groupId>
+            <artifactId>maven-loom-plugin</artifactId>
+            <version>1.0</version>
+            <type>plugin</type>
+        </dependency>
+        <dependency>
+            <id>ant</id>
+            <version>1.5.1</version>
+            <properties>
+                <sar.bundle>true</sar.bundle>
+            </properties>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <sourceDirectory>${basedir}/src/java</sourceDirectory>
+        <unitTestSourceDirectory>${basedir}/src/test</unitTestSourceDirectory>
+
+        <unitTest>
+            <includes>
+                <include>**/*TestCase.java</include>
+            </includes>
+        </unitTest>
+
+    </build>
+
+</project>

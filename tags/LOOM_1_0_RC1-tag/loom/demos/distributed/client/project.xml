@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<project>
+    <extend>${basedir}/../../../project.xml</extend>
+    <name>Loom Distributed Client Demo</name>
+    <id>demo-distributed-client</id>
+    <package>org.codehaus.loom.demos.distributed.client</package>
+    <shortDescription>Distributed Client Demo</shortDescription>
+    <description>
+        Distribuited Client Demo app for deployment in Loom Application Server.
+    </description>
+
+    <dependencies>
+        <dependency>
+            <groupId>loom</groupId>
+            <artifactId>maven-sar-plugin</artifactId>
+            <version>${pom.currentVersion}</version>
+            <type>plugin</type>
+        </dependency>
+    </dependencies>
+
+</project>
