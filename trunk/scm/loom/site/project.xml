@@ -54,8 +54,13 @@
         </dependency>
         <dependency>
             <groupId>jcomponent</groupId>
+            <artifactId>jcomponent-alchemist</artifactId>
+            <version>20031025.132828</version>
+        </dependency>
+        <dependency>
+            <groupId>jcomponent</groupId>
             <artifactId>jcomponent-loggerstore</artifactId>
-            <version>1.0-b1</version>
+            <version>20031025.133935</version>
         </dependency>
         <dependency>
             <id>log4j</id>
@@ -97,7 +102,12 @@
         <dependency>
             <groupId>spice</groupId>
             <artifactId>spice-metaclass</artifactId>
-            <version>20031005.002435</version>
+            <version>20031016.074122</version>
+        </dependency>
+        <dependency>
+            <groupId>spice</groupId>
+            <artifactId>spice-metaclass-jmx</artifactId>
+            <version>20031017.081651</version>
         </dependency>
         <dependency>
             <groupId>spice</groupId>
