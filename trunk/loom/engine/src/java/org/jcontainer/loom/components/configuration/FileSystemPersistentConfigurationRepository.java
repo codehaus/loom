@@ -121,7 +121,7 @@ public class FileSystemPersistentConfigurationRepository
         throws ConfigurationException
     {
         final String path =
-            configuration.getChild( "storage-directory" ).getValue( "${phoenix.home}/conf/apps" );
+            configuration.getChild( "storage-directory" ).getValue( "${loom.home}/conf/apps" );
 
         try
         {

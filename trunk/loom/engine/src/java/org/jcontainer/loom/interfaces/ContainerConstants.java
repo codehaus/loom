@@ -41,7 +41,7 @@ public interface ContainerConstants
     String DISABLE_PROXY_ATTR = "loom:disable-proxy";
 
     /**
-     * The name which the assembly is registered into phoenix
+     * The name which the assembly is registered into Loom
      * using.
      */
     String ASSEMBLY_NAME = "loom:assembly-name";
