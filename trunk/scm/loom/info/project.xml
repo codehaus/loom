@@ -17,9 +17,14 @@
             <version>1.0</version>
         </dependency>
         <dependency>
+            <groupId>dna</groupId>
+            <artifactId>dna-tools</artifactId>
+            <version>20031016.074359</version>
+        </dependency>
+        <dependency>
             <groupId>spice</groupId>
             <artifactId>spice-metaclass</artifactId>
-            <version>20031005.002435</version>
+            <version>20031016.074122</version>
         </dependency>
         <dependency>
             <id>ant</id>

@@ -7,6 +7,7 @@
  */
 package org.jcontainer.loom.info;
 
+import org.jcontainer.dna.tools.metaclass.DNAAttributeInterceptor;
 import org.realityforge.metaclass.tools.tasks.GenerateClassDescriptorsTask;
 import org.realityforge.metaclass.tools.tasks.PluginElement;
 
@@ -16,7 +17,7 @@ import org.realityforge.metaclass.tools.tasks.PluginElement;
  * information into MetaClass descriptors.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-10-13 05:50:35 $
+ * @version $Revision: 1.2 $ $Date: 2003-10-16 08:43:28 $
  */
 public class GenerateLoomDescriptorsTask
     extends GenerateClassDescriptorsTask
@@ -30,9 +31,12 @@ public class GenerateLoomDescriptorsTask
         final PluginElement filter = new PluginElement();
         filter.setName( PhoenixJavaClassFilter.class.getName() );
         addFilter( filter );
-        final PluginElement interceptor = new PluginElement();
-        interceptor.setName( PhoenixAttributeInterceptor.class.getName() );
-        addInterceptor( interceptor );
+        final PluginElement phoenixInterceptor = new PluginElement();
+        phoenixInterceptor.setName( PhoenixAttributeInterceptor.class.getName() );
+        addInterceptor( phoenixInterceptor );
+        final PluginElement dnaInterceptor = new PluginElement();
+        dnaInterceptor.setName( DNAAttributeInterceptor.class.getName() );
+        addInterceptor( dnaInterceptor );
         super.execute();
     }
 }
