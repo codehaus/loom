@@ -100,7 +100,7 @@ import org.realityforge.salt.i18n.Resources;
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author <a href="mailto:Huw@mmlive.com">Huw Roberts</a>
- * @version $Revision: 1.8 $ $Date: 2003-10-17 08:51:32 $
+ * @version $Revision: 1.9 $ $Date: 2003-10-18 08:11:11 $
  */
 public abstract class AbstractJMXManager
     extends AbstractSystemManager
@@ -164,9 +164,9 @@ public abstract class AbstractJMXManager
     {
         try
         {
-            BINDER.bindMBean( exportedObject,
-                              createObjectName( name ),
-                              getMBeanServer() );
+            BINDER.unbindMBean( exportedObject,
+                                createObjectName( name ),
+                                getMBeanServer() );
         }
         catch( final Exception e )
         {
