@@ -6,8 +6,9 @@
     <body>
         <section name="Downloading Loom">
             <p>
-                There should be a release of Loom shortly. In the meantime,
-                please grab a copy from CVS and play around with that.
+                Both distributions and jars are downloadable from the 
+                <a href="http://dist.jcontainer.org/maven/loom">
+                JContainer Loom Maven repository</a>.
             </p>
         </section>
     </body>
