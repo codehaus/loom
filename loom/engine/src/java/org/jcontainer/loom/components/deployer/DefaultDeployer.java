@@ -114,7 +114,6 @@ import org.jcontainer.loom.interfaces.ConfigurationInterceptor;
 import org.jcontainer.loom.interfaces.ConfigurationValidator;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.Deployer;
-import org.jcontainer.loom.interfaces.DeployerMBean;
 import org.jcontainer.loom.interfaces.Installer;
 import org.jcontainer.loom.interfaces.Kernel;
 import org.jcontainer.loom.interfaces.LogManager;
@@ -128,11 +127,11 @@ import org.xml.sax.InputSource;
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @dna.component
- * @mx.interface topic="Deployer" type="org.jcontainer.loom.interfaces.DeployerMBean"
+ * @mx.component
  */
 public class DefaultDeployer
     extends AbstractLogEnabled
-    implements Deployer, Composable, Active, DeployerMBean
+    implements Deployer, Composable, Active
 {
     private static final Resources REZ =
         ResourceManager.getPackageResources( DefaultDeployer.class );
@@ -202,9 +201,8 @@ public class DefaultDeployer
     }
 
     /**
-     * Redeploy an application.
-     *
-     * @param name the name of deployment
+     * @mx.operation description="Redeploy an installation."
+     * @mx.parameter name="name" description="the name of deployment"
      * @throws LoomException if an error occurs
      */
     public void redeploy( final String name )
@@ -260,9 +258,8 @@ public class DefaultDeployer
     }
 
     /**
-     * Undeploy an application.
-     *
-     * @param name the name of deployment
+     * @mx.operation description="Undeploy an installation."
+     * @mx.parameter name="name" description="the name of deployment"
      * @throws LoomException if an error occurs
      */
     public void undeploy( final String name )
@@ -288,10 +285,9 @@ public class DefaultDeployer
     }
 
     /**
-     * Deploy an application from an installation.
-     *
-     * @param name the name of application
-     * @param sarURL the location to deploy from represented as String
+     * @mx.operation description="Deploy an installation."
+     * @mx.parameter name="name" description="the name of deployment"
+     * @mx.parameter name="sarURL" description="the installation to deploy"
      * @throws LoomException if an error occurs
      */
     public void deploy( final String name, final String sarURL )
@@ -308,10 +304,9 @@ public class DefaultDeployer
     }
 
     /**
-     * Deploy an application from an installation.
-     *
-     * @param name the name of application
-     * @param location the location to deploy from
+     * @mx.operation description="Deploy an installation."
+     * @mx.parameter name="name" description="the name of deployment"
+     * @mx.parameter name="location" description="the installation to deploy"
      * @throws LoomException if an error occurs
      */
     public void deploy( final String name, final URL location )

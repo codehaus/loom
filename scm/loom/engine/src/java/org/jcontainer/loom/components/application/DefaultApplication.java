@@ -102,7 +102,6 @@ import org.jcontainer.loom.components.util.profile.ComponentProfile;
 import org.jcontainer.loom.components.util.profile.PartitionProfile;
 import org.jcontainer.loom.interfaces.Application;
 import org.jcontainer.loom.interfaces.ApplicationContext;
-import org.jcontainer.loom.interfaces.ApplicationMBean;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.LoomException;
 import org.realityforge.salt.i18n.ResourceManager;
@@ -116,11 +115,11 @@ import org.realityforge.salt.i18n.Resources;
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author Leo Simons
  * @dna.component
- * @mx.interface topic="Application" type="org.jcontainer.loom.interfaces.ApplicationMBean"
+ * @mx.component
  */
 public final class DefaultApplication
     extends AbstractLogEnabled
-    implements Application, ApplicationMBean, Active
+    implements Application, Active
 {
     private static final Resources REZ =
         ResourceManager.getPackageResources( DefaultApplication.class );
@@ -222,17 +221,14 @@ public final class DefaultApplication
         setupLogger( m_blockAccessor, "lifecycle" );
     }
 
+    /**
+     * @mx.attribute description="the names of the blocks that compose this Application"
+     */
     public String[] getBlockNames()
     {
         return (String[])m_entries.keySet().toArray( new String[ 0 ] );
     }
 
-    /**
-     *
-     *
-     * @param name
-     * @return
-     */
     public Object getBlock( final String name )
     {
         final BlockEntry entry = (BlockEntry)m_entries.get( name );
@@ -247,9 +243,7 @@ public final class DefaultApplication
     }
 
     /**
-     * Get the name of the application.
-     *
-     * @return the name of the application
+     * @mx.attribute description="the name of the application."
      */
     public String getName()
     {
@@ -257,9 +251,7 @@ public final class DefaultApplication
     }
 
     /**
-     * Get the name to display in Management UI.
-     *
-     * @return the name of the application to display in UI
+     * @mx.attribute description="the name to display in Management UI."
      */
     public String getDisplayName()
     {
@@ -267,9 +259,7 @@ public final class DefaultApplication
     }
 
     /**
-     * Get the string used to describe the application in the UI.
-     *
-     * @return a short description of the application
+     * @mx.attribute description="the string used to describe the application in the UI."
      */
     public String getDescription()
     {
@@ -277,9 +267,7 @@ public final class DefaultApplication
     }
 
     /**
-     * Get location of Application installation
-     *
-     * @return the home directory of application
+     * @mx.attribute description="the location of Application installation"
      */
     public String getHomeDirectory()
     {
@@ -287,10 +275,7 @@ public final class DefaultApplication
     }
 
     /**
-     * Return true if the application is
-     * running or false otherwise.
-     *
-     * @return true if application is running, false otherwise
+     * @mx.attribute description="True if the application is running or false otherwise."
      */
     public boolean isRunning()
     {

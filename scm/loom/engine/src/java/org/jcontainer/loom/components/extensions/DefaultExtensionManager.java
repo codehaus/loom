@@ -97,19 +97,18 @@ import org.jcontainer.dna.Parameters;
 import org.jcontainer.loom.components.ParameterConstants;
 import org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager;
 import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
-import org.jcontainer.loom.interfaces.ExtensionManagerMBean;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
 /**
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.12 $ $Date: 2003-10-17 08:05:48 $
+ * @version $Revision: 1.13 $ $Date: 2003-10-26 08:11:32 $
  * @dna.component
- * @mx.interface topic="ExtensionManager" type="org.jcontainer.loom.interfaces.ExtensionManagerMBean"
+ * @mx.component
  */
 public class DefaultExtensionManager
     extends org.jcontainer.loom.components.extensions.pkgmgr.impl.DefaultExtensionManager
-    implements LogEnabled, Parameterizable, Active, ExtensionManager, ExtensionManagerMBean
+    implements LogEnabled, Parameterizable, Active, ExtensionManager
 {
     private final static Resources REZ =
         ResourceManager.getPackageResources( DefaultExtensionManager.class );
@@ -142,6 +141,30 @@ public class DefaultExtensionManager
         clearCache();
     }
 
+    /**
+     * Retrieve an array of paths where each
+     * element in array represents a directory
+     * in which the ExtensionManager will look
+     * for Extensions.
+     *
+     * @mx.attribute description="The list of paths to search in"
+     *
+     * @return the list of paths to search in
+     */
+    public File[] getPaths()
+    {
+        return super.getPaths();
+    }
+
+    /**
+     * Force the ExtensionManager to rescan the paths
+     * to discover new Extensions that have been added
+     * or remove old Extensions that have been removed.
+     *
+     * @mx.operation description="Force the ExtensionManager to rescan the paths
+     * to discover new Extensions that have been added
+     * or remove old Extensions that have been removed."
+     */
     public void rescanPath()
     {
         super.scanPath();

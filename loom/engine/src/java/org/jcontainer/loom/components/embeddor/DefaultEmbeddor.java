@@ -110,7 +110,6 @@ import org.jcontainer.loom.components.util.ExtensionFileFilter;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.Deployer;
 import org.jcontainer.loom.interfaces.Embeddor;
-import org.jcontainer.loom.interfaces.EmbeddorMBean;
 import org.jcontainer.loom.interfaces.Kernel;
 import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.interfaces.SystemManager;
@@ -125,11 +124,11 @@ import org.realityforge.salt.i18n.Resources;
  * @author <a href="peter at realityforge.org">Peter Donald</a>
  * @author <a href="bauer@denic.de">Joerg Bauer</a>
  * @dna.component
- * @mx.interface topic="Embeddor" type="org.jcontainer.loom.interfaces.EmbeddorMBean"
+ * @mx.component
  */
 public class DefaultEmbeddor
     extends AbstractLogEnabled
-    implements Embeddor, EmbeddorMBean, Parameterizable, Composable, Configurable, Active
+    implements Embeddor, Parameterizable, Composable, Configurable, Active
 {
     private static final Resources REZ =
         ResourceManager.getPackageResources( DefaultEmbeddor.class );
@@ -384,7 +383,7 @@ public class DefaultEmbeddor
     }
 
     /**
-     * Request the Embeddor shutsdown.
+     * @mx.operation description="Request the Embeddor shutsdown."
      */
     public void shutdown()
     {
@@ -396,9 +395,9 @@ public class DefaultEmbeddor
     }
 
     /**
-     * Ask the embeddor to restart itself if this operation is supported.
+     * @mx.operation description="Request the Embeddor restart."
      *
-     * @throws UnsupportedOperationException if restart not supported
+     * @throws UnsupportedOperationException if restart not a supported operation
      */
     public void restart()
         throws UnsupportedOperationException
@@ -415,10 +414,12 @@ public class DefaultEmbeddor
     }
 
     /**
-     * Get name by which the server is know.
+     * Get name by which the server is known.
      * Usually this defaults to {@link ContainerConstants#SOFTWARE} but the admin
      * may assign another name. This is useful when you
      * are managing a cluster of servers.
+     *
+     * @mx.attribute description="The name by which the server is known."
      *
      * @return the name of server
      */
@@ -428,9 +429,11 @@ public class DefaultEmbeddor
     }
 
     /**
-     * Get location of Phoenix installation
+     * Get location of container installation
      *
-     * @return the home directory of loom
+     * @mx.attribute description="The location of container installation."
+     *
+     * @return the home directory of container
      */
     public String getHomeDirectory()
     {
@@ -439,6 +442,8 @@ public class DefaultEmbeddor
 
     /**
      * Get the date at which this server started.
+     *
+     * @mx.attribute description="the date at which this server started."
      *
      * @return the date at which this server started
      */
@@ -451,6 +456,8 @@ public class DefaultEmbeddor
      * Retrieve the number of millisecond
      * the server has been up.
      *
+     * @mx.attribute description="the number of millisecond the server has been up."
+     *
      * @return the the number of millisecond the server has been up
      */
     public long getUpTimeInMillis()
@@ -460,8 +467,9 @@ public class DefaultEmbeddor
 
     /**
      * Retrieve a string identifying version of server.
-     * Usually looks like "v4.0.1a".
+     * Usually looks like "x.y.z".
      *
+     * @mx.attribute description="Retrieve a string identifying version of server."
      * @return version string of server.
      */
     public String getVersion()
@@ -474,6 +482,7 @@ public class DefaultEmbeddor
      * Possibly the date on which it was built, where it was built,
      * with what features it was built and so forth.
      *
+     * @mx.attribute description="a string defining the build."
      * @return the string describing build
      */
     public String getBuild()
