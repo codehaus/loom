@@ -32,7 +32,7 @@ import org.jcontainer.dna.AbstractLogEnabled;
  * rules of an Avalon component.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-10-05 10:07:05 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-16 05:45:57 $
  */
 public class ComponentVerifier
     extends AbstractLogEnabled
@@ -77,7 +77,7 @@ public class ComponentVerifier
      * @param name the name of component
      * @param implementation the implementation class of component
      * @param services the classes representing services
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if error thrown on failure and
+     * @throws VerifyException if error thrown on failure and
      *         component fails check
      */
     public void verifyComponent( final String name,
@@ -98,7 +98,7 @@ public class ComponentVerifier
      * @param buildable if true will verify that it is instantiateable
      *                  via class.newInstance(). May not be required for
      *                  some components that are created via a factory.
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if error thrown on failure and
+     * @throws VerifyException if error thrown on failure and
      *         component fails check
      */
     public void verifyComponent( final String name,
@@ -123,7 +123,7 @@ public class ComponentVerifier
      * @param name the name of component
      * @param implementation the class representign component
      * @param services the services that the implementation must provide
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if error thrown on failure and
+     * @throws VerifyException if error thrown on failure and
      *         component fails check
      */
     public void verifyImplementsServices( final String name,
@@ -151,7 +151,7 @@ public class ComponentVerifier
      *
      * @param name the name of component
      * @param clazz the class representing component
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if error thrown on failure and
+     * @throws VerifyException if error thrown on failure and
      *         component fails check
      */
     public void verifyClass( final String name,
@@ -172,7 +172,7 @@ public class ComponentVerifier
      *
      * @param name the name of component
      * @param classes the classes representign services
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if error thrown on failure and
+     * @throws VerifyException if error thrown on failure and
      *         component fails check
      */
     public void verifyServices( final String name,
@@ -191,7 +191,7 @@ public class ComponentVerifier
      *
      * @param name the name of component
      * @param clazz the class representign service
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if error thrown on failure and
+     * @throws VerifyException if error thrown on failure and
      *         component fails check
      */
     public void verifyService( final String name,
@@ -209,7 +209,7 @@ public class ComponentVerifier
      *
      * @param name the name of component
      * @param implementation the implementation class
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if error thrown on failure and
+     * @throws VerifyException if error thrown on failure and
      *         component fails check
      */
     public void verifyLifecycles( final String name,
@@ -253,7 +253,7 @@ public class ComponentVerifier
      *
      * @param name the name of component
      * @param clazz the class representign service
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if error thrown on failure and
+     * @throws VerifyException if error thrown on failure and
      *         component fails check
      */
     public void verifyServiceIsaInterface( final String name,
@@ -277,7 +277,7 @@ public class ComponentVerifier
      *
      * @param name the name of component
      * @param clazz the class representign service
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if error thrown on failure and
+     * @throws VerifyException if error thrown on failure and
      *         component fails check
      */
     public void verifyServiceIsPublic( final String name,
@@ -303,7 +303,7 @@ public class ComponentVerifier
      *
      * @param name the name of component
      * @param clazz the class representign service
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if error thrown on failure and
+     * @throws VerifyException if error thrown on failure and
      *         component fails check
      */
     public void verifyServiceNotALifecycle( final String name,
@@ -332,7 +332,7 @@ public class ComponentVerifier
      *
      * @param name the name of component
      * @param clazz the class representign component
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if error thrown on failure and
+     * @throws VerifyException if error thrown on failure and
      *         component fails check
      */
     public void verifyNoArgConstructor( final String name,
@@ -369,7 +369,7 @@ public class ComponentVerifier
      *
      * @param name the name of component
      * @param clazz the class representign component
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if error thrown on failure and
+     * @throws VerifyException if error thrown on failure and
      *         component fails check
      */
     public void verifyNonAbstract( final String name,
@@ -395,7 +395,7 @@ public class ComponentVerifier
      *
      * @param name the name of component
      * @param clazz the class representign component
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if error thrown on failure and
+     * @throws VerifyException if error thrown on failure and
      *         component fails check
      */
     public void verifyPublic( final String name,
@@ -421,7 +421,7 @@ public class ComponentVerifier
      *
      * @param name the name of component
      * @param clazz the class representign component
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if error thrown on failure and
+     * @throws VerifyException if error thrown on failure and
      *         component fails check
      */
     public void verifyNonPrimitive( final String name,
@@ -445,7 +445,7 @@ public class ComponentVerifier
      *
      * @param name the name of component
      * @param clazz the class representign component
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if error thrown on failure and
+     * @throws VerifyException if error thrown on failure and
      *         component fails check
      */
     public void verifyNonInterface( final String name,
@@ -469,7 +469,7 @@ public class ComponentVerifier
      *
      * @param name the name of component
      * @param clazz the class representign component
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if error thrown on failure and
+     * @throws VerifyException if error thrown on failure and
      *         component fails check
      */
     public void verifyNonArray( final String name,
