@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document>
+
+  <properties>
+    <title>Sar Properties</title>
+    <author email="mauro.talevi at aquilonia.org">Mauro Talevi</author>
+  </properties>
+
+  <body>
+    <section name="Sar Settings">
+      <table>
+        <tr><th>Property</th><th>Optional?</th><th>Description</th></tr>
+        <tr>
+          <td>maven.sar.src</td>
+          <td>Yes</td>
+          <td>Location of sar source in source tree. 
+              Defaults to <code>${maven.src.dir}</code>.
+          </td>
+        </tr>
+        <tr>
+          <td>maven.sar.assembly</td>
+          <td>Yes</td>
+          <td>Location of the <code>assembly.xml</code> file. 
+              Defaults to <code>${maven.sar.src}/conf/assembly.xml</code>.
+          </td>
+        </tr>
+        <tr>
+          <td>maven.sar.config</td>
+          <td>Yes</td>
+          <td>Location of the <code>config.xml</code> file. 
+              Defaults to <code>${maven.sar.src}/conf/config.xml</code>.
+          </td>
+        </tr>
+        <tr>
+          <td>maven.sar.environment</td>
+          <td>Yes</td>
+          <td>Location of the <code>environment.xml</code> file. 
+              Defaults to <code>${maven.sar.src}/conf/environment.xml</code>.
+          </td>
+        </tr>
+        <tr>
+          <td>maven.sar.build.dir</td>
+          <td>Yes</td>
+          <td>Directory where the sar will be generated. 
+              Defaults to <code>${maven.build.dir}</code>.
+          </td>
+        </tr>
+        <tr>
+          <td>maven.sar.metagenerate</td>
+          <td>Yes</td>
+          <td>Boolean to metagenerate xinfo from source. 
+              Defaults to <code>false</code>.
+          </td>
+        </tr>
+        <tr>
+          <td>maven.sar.metagenerate.src</td>
+          <td>Yes</td>
+          <td>Directory of the metagenerate source.
+              Defaults to <code>${maven.src.dir}/java</code>.
+          </td>
+        </tr>
+        <tr>
+          <td>maven.sar.metagenerate.include</td>
+          <td>Yes</td>
+          <td>Files to include in metagenerate source.
+              Defaults to <code>**/*.java</code>. Files are relative to <code>${maven.sar.metagenerate.src}</code>.
+          </td>
+        </tr>
+        <tr>
+          <td>maven.sar.metagenerate.exclude</td>
+          <td>Yes</td>
+          <td>Files to exclude in metagenerate source.
+              Defaults to none.  Files are relative to <code>${maven.sar.metagenerate.src}</code>.
+          </td>
+        </tr>
+        <tr>
+          <td>maven.sar.artifacts.include</td>
+          <td>Yes</td>
+          <td>Artifacts to include in sar.
+              Defaults to <code>${pom.artifactId}*.jar</code>. Files are relative to <code>${maven.sar.build.dir}</code>.
+          </td>
+        </tr>
+        <tr>
+          <td>maven.sar.artifacts.exclude</td>
+          <td>Yes</td>
+          <td>Artifacts to exclude in sar.
+              Defaults to none. Files are relative to <code>${maven.sar.build.dir}</code>.
+          </td>
+        </tr>
+      </table>
+    </section>
+    <section name="Including Jars in the app">
+	  <p>
+	    You must tell Maven what jars you want included in the Webapp. This
+	    is achieved by specifying meta-information in the POM, using the
+	    following syntax:
+	  </p>
+
+<source><![CDATA[
+  <dependency>
+    <id>jarid</id>
+    <version>jarversion</version>
+    <properties>
+      <sar.bundle.jar>true</sar.bundle.jar>
+    </properties>
+  </dependency>
+]]></source>
+
+    </section>
+  </body>
+</document>
