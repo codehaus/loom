@@ -35,7 +35,7 @@ import org.codehaus.dna.AbstractLogEnabled;
  * the service interfaces.</li> </ul>
  *
  * @author Peter Donald
- * @version $Revision: 1.2 $ $Date: 2004-05-01 12:48:34 $
+ * @version $Revision: 1.3 $ $Date: 2004-11-07 21:46:44 $
  */
 public class AssemblyVerifier
     extends AbstractLogEnabled
@@ -423,9 +423,10 @@ public class AssemblyVerifier
             //user has specified an uneeded dependency.
             if( null == descriptor )
             {
+                final String name = dependencySet[ i ].getProviderName();
                 final String message =
                     REZ.format( "assembly.unknown-dependency.error",
-                                key,
+                                name,
                                 key,
                                 component.getTemplate().getName() );
                 throw new Exception( message );
