@@ -1,15 +1,10 @@
 <?xml version="1.0"?>
 <project>
-    <pomVersion>3</pomVersion>
+    <extend>${basedir}/../project.xml</extend>
     <name>Loom HelloWorld Demo</name>
-    <groupId>loom</groupId>
     <id>demo-helloworld</id>
-    <currentVersion>1.0dev</currentVersion>
-    <inceptionYear>1999-2003</inceptionYear>
     <package>org.jcontainer.loom.demos.helloworld</package>
-
     <shortDescription>HelloWorld Demo</shortDescription>
-
     <description>
         HelloWorld Demo app for deployment in Loom Application Server.
     </description>
@@ -28,7 +23,7 @@
         <dependency>
             <groupId>loom</groupId>
             <artifactId>loom-tools</artifactId>
-            <version>1.0dev</version>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>jcomponent</groupId>
@@ -65,37 +60,5 @@
             <version>1.1</version>
         </dependency>
     </dependencies>
-
-    <build>
-        <sourceDirectory>src/java</sourceDirectory>
-        <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
-
-        <unitTest>
-            <includes>
-                <include>**/*TestCase.java</include>
-            </includes>
-            <excludes>
-                <exclude>**/Abstract*.java</exclude>
-            </excludes>
-            <resources>
-                <resource>
-                    <directory>${basedir}/src/test</directory>
-                    <includes>
-                        <include>**/*.xml</include>
-                        <include>**/*.xinfo</include>
-                    </includes>
-                </resource>
-            </resources>
-        </unitTest>
-
-        <resources>
-            <resource>
-                <directory>${basedir}/src/java</directory>
-                <excludes>
-                    <exclude>**/*.java</exclude>
-                </excludes>
-            </resource>
-        </resources>
-    </build>
 
 </project>

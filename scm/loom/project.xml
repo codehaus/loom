@@ -1,10 +1,9 @@
 <?xml version="1.0"?>
 <project>
     <pomVersion>3</pomVersion>
-
-    <currentVersion>1.0</currentVersion>
-    <inceptionYear>2000</inceptionYear>
-    <!--<logo>/images/logo.gif</logo>-->
+    <currentVersion>1.0-beta</currentVersion>
+    <inceptionYear>1999-2003</inceptionYear>
+    <package>org.jcontainer.loom</package>
 
     <organization>
         <name>The JContainer Group</name>

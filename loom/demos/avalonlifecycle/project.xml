@@ -1,15 +1,10 @@
 <?xml version="1.0"?>
 <project>
-    <pomVersion>3</pomVersion>
+    <extend>${basedir}/../project.xml</extend>
     <name>Loom Avalon Lifecycle Demo</name>
-    <groupId>loom</groupId>
     <id>demo-avalonlifecycle</id>
-    <currentVersion>1.0dev</currentVersion>
-    <inceptionYear>1999-2003</inceptionYear>
     <package>org.jcontainer.loom.demos.avalonlifecycle</package>
-
     <shortDescription>Avalon Lifecycle Demo</shortDescription>
-
     <description>
         Avalon Lifecycle Demo app for deployment in Loom Application Server.
     </description>
@@ -33,7 +28,7 @@
         <dependency>
         	<groupId>loom</groupId>
             <artifactId>loom-tools</artifactId>
-            <version>1.0dev</version>
+            <version>1.0</version>
         </dependency>
         <dependency>        <!-- for metagenerating xinfo -->
         	<id>qdox</id>

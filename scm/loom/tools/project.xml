@@ -1,21 +1,20 @@
 <?xml version="1.0"?>
 <project>
     <extend>${basedir}/../project.xml</extend>
-    <pomVersion>3</pomVersion>
     <name>Loom Tools</name>
     <id>loom-tools</id>
-    <currentVersion>1.0dev</currentVersion>
-    <inceptionYear>1999-2003</inceptionYear>
     <package>org.jcontainer.loom.tools</package>
-
     <shortDescription>Tools to for Loom Component Writers.</shortDescription>
-
     <description>
         This is a toolkit for Loom Component writers that aids
         in developing and maintaining Loom components.
     </description>
 
     <dependencies>
+        <dependency>
+            <id>ant</id>
+            <version>1.5</version>
+        </dependency>
         <dependency>
             <groupId>avalon</groupId>
             <artifactId>avalon-framework</artifactId>
@@ -27,25 +26,21 @@
             <version>20030819</version>
         </dependency>
         <dependency>
-            <groupId>spice</groupId>
-            <artifactId>spice-salt</artifactId>
-            <version>0.8dev</version>
-        </dependency>
-        <dependency>
-            <id>ant</id>
-            <version>1.5</version>
-        </dependency>
-        <dependency>
-            <id>qdox</id>
-            <version>1.1</version>
-        </dependency>
-        <dependency>
             <id>excalibur-instrument</id>
             <version>1.0</version>
         </dependency>
         <dependency>
             <id>excalibur-instrument-manager-interfaces</id>
             <version>0.1</version>
+        </dependency>
+        <dependency>
+            <id>qdox</id>
+            <version>1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>spice</groupId>
+            <artifactId>spice-salt</artifactId>
+            <version>0.8dev</version>
         </dependency>
         <dependency> <!-- for unit testing the schema validation -->
             <groupId>spice</groupId>
@@ -101,7 +96,6 @@
                 </excludes>
             </resource>
         </resources>
-
     </build>
 
 </project>

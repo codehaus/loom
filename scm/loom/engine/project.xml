@@ -1,24 +1,68 @@
 <?xml version="1.0"?>
 <project>
     <extend>${basedir}/../project.xml</extend>
-    <pomVersion>3</pomVersion>
     <name>Loom Engine</name>
     <id>loom-engine</id>
-    <currentVersion>1.0dev</currentVersion>
-    <inceptionYear>1999-2003</inceptionYear>
-    <package>org.jcontainer.loom</package>
-
     <shortDescription>Main Engine for hosting components.</shortDescription>
-
     <description>
         The core of the Loom Application Server.
     </description>
 
     <dependencies>
         <dependency>
+            <groupId>avalon</groupId>
+            <artifactId>avalon-logkit</artifactId>
+            <version>20030527</version>
+        </dependency>
+        <dependency>
+            <groupId>avalon</groupId>
+            <artifactId>avalon-framework</artifactId>
+            <version>20030713</version>
+        </dependency>
+        <dependency>
+            <groupId>avalon</groupId>
+            <artifactId>avalon-phoenix-client</artifactId>
+            <version>20030819</version>
+        </dependency>
+        <dependency>
+            <id>excalibur-instrument-manager-interfaces</id>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
+            <id>excalibur-monitor</id>
+            <version>20030713</version>
+        </dependency>
+        <dependency>
+            <id>excalibur-instrument</id>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <id>excalibur-instrument-manager</id>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
             <groupId>jcomponent</groupId>
             <artifactId>jcomponent-loggerstore</artifactId>
             <version>1.0-b1</version>
+        </dependency>
+        <dependency>
+            <groupId>loom</groupId>
+            <artifactId>loom-tools</artifactId>
+            <version>1.0-beta</version>
+        </dependency>
+        <dependency>
+            <groupId>mx4j</groupId>
+            <artifactId>mx4j-jmx</artifactId>
+            <version>1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>mx4j</groupId>
+            <artifactId>mx4j-tools</artifactId>
+            <version>1.1</version>
+        </dependency>
+        <dependency>
+            <id>log4j</id>
+            <version>1.2.8</version>
         </dependency>
         <dependency>
             <groupId>spice</groupId>
@@ -46,59 +90,9 @@
             <version>0.8dev</version>
         </dependency>
         <dependency>
-            <groupId>loom</groupId>
-            <artifactId>loom-tools</artifactId>
-            <version>1.0dev</version>
-        </dependency>
-        <dependency>
-            <groupId>mx4j</groupId>
-            <artifactId>mx4j-jmx</artifactId>
-            <version>1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>mx4j</groupId>
-            <artifactId>mx4j-tools</artifactId>
-            <version>1.1</version>
-        </dependency>
-        <dependency>
-            <id>log4j</id>
-            <version>1.2.8</version>
-        </dependency>
-        <dependency>
-            <id>excalibur-instrument-manager-interfaces</id>
-            <version>0.1</version>
-        </dependency>
-        <dependency>
-            <id>excalibur-monitor</id>
-            <version>20030713</version>
-        </dependency>
-        <dependency>
-            <id>excalibur-instrument</id>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <id>excalibur-instrument-manager</id>
-            <version>0.1</version>
-        </dependency>
-        <dependency>
             <groupId>spice</groupId>
             <artifactId>spice-extension</artifactId>
             <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>avalon</groupId>
-            <artifactId>avalon-logkit</artifactId>
-            <version>20030527</version>
-        </dependency>
-        <dependency>
-            <groupId>avalon</groupId>
-            <artifactId>avalon-framework</artifactId>
-            <version>20030713</version>
-        </dependency>
-        <dependency>
-            <groupId>avalon</groupId>
-            <artifactId>avalon-phoenix-client</artifactId>
-            <version>20030819</version>
         </dependency>
         <dependency>
             <id>oro</id>
