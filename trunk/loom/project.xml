@@ -22,8 +22,8 @@
     <issueTrackingUrl>http://jira.codehaus.org/secure/BrowseProject.jspa?id=10131</issueTrackingUrl>
 
     <repository>
-        <connection>scm:cvs:pserver:anonymous@codehaus.org:/cvsroot/jcontainer:loom</connection>
-        <url>http://cvs.codehaus.org/viewcvs.cgi/jcontainer/loom/?root=jcontainer</url>
+        <connection>scm:cvs:pserver:anonymous@codehaus.org:/scm/cvs:loom</connection>
+        <url>http://jcontainer.cvs.codehaus.org/viewcvs.cgi/jcontainer/loom/?root=codehaus</url>
     </repository>
 
     <versions>
