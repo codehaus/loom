@@ -90,6 +90,7 @@ import java.util.HashSet;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.ConfigurationException;
 import org.jcontainer.dna.impl.DefaultConfiguration;
+import org.jcontainer.dna.impl.ConfigurationUtil;
 import org.jcontainer.loom.components.util.ConfigUtil;
 
 /**
@@ -222,7 +223,7 @@ public class ConfigurationSplitter
             {
                 layer.addChild( kids[ i ] );
             }
-            else if( !ConfigUtil.equals( kids[ i ], mergedWith ) )
+            else if( !ConfigurationUtil.equals( kids[ i ], mergedWith ) )
             {
                 final DefaultConfiguration layerChild = doSplit( kids[ i ], mergedWith, keyAttr );
 
