@@ -15,11 +15,11 @@
 	<groupId>loom</groupId>
     <package>org.jcontainer.loom.${pom.artifactId.substring(5)}</package>
     <url>http://loom.jcontainer.org/${pom.artifactId.substring(5)}</url>
-    <distributionDirectory>/home/groups/s/sp/spice/htdocs/maven/${groupId}</distributionDirectory>
-    <distributionSite>spice.sourceforge.net</distributionSite>
+    <distributionDirectory>/www/dist.codehaus.org/jcontainer/${groupId}</distributionDirectory>
+    <distributionSite>codehaus.org</distributionSite>
     
     <repository>
-        <connection>scm:cvs:peserver:anoncvs@codehaus.org:/cvsroot/jcontainer:jcontainer</connection>    
+        <connection>scm:cvs:pserver:anoncvs@codehaus.org:/cvsroot/jcontainer:jcontainer</connection>    
         <url>http://jcontainer.cvs.codehaus.org/</url>
     </repository>
 </project>
