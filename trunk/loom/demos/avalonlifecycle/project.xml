@@ -19,17 +19,7 @@
         <dependency>
             <groupId>avalon</groupId>
             <artifactId>avalon-framework</artifactId>
-            <version>20030713</version>
-        </dependency>
-        <dependency>
-            <groupId>avalon</groupId>
-            <artifactId>avalon-cornerstone</artifactId>
-            <version>20030801</version>
-        </dependency>
-        <dependency>
-            <groupId>avalon</groupId>
-            <artifactId>avalon-phoenix-client</artifactId>
-            <version>20030819</version>
+            <version>4.1.4</version>
         </dependency>
     </dependencies>
 
