@@ -20,7 +20,7 @@ import org.realityforge.salt.i18n.Resources;
  * is specified in the <a href="package-summary.html#external">package summary</a>.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-06-29 01:07:35 $
+ * @version $Revision: 1.4 $ $Date: 2003-07-05 06:01:24 $
  */
 public final class InfoBuilder
     extends AbstractLogEnabled
@@ -164,8 +164,8 @@ public final class InfoBuilder
         if( null == inputStream )
         {
             final String message =
-                REZ.getString( "builder.missing-info.error",
-                               classname );
+                REZ.format( "builder.missing-info.error",
+                            classname );
             throw new Exception( message );
         }
 
@@ -189,8 +189,8 @@ public final class InfoBuilder
         else
         {
             final String message =
-                REZ.getString( "builder.missing-xml-creator.error",
-                               classname );
+                REZ.format( "builder.missing-xml-creator.error",
+                            classname );
             throw new Exception( message );
         }
     }
