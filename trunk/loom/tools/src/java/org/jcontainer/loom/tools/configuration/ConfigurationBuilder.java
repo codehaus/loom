@@ -32,14 +32,14 @@ import org.xml.sax.XMLReader;
  * Utility class used to load Configuration trees from XML files.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-07-19 03:06:33 $
+ * @version $Revision: 1.7 $ $Date: 2003-09-20 18:37:53 $
  */
 public class ConfigurationBuilder
 {
     public static final String COMPONENTINFO_SCHEMA = "-//LOOM/Component Info DTD Version 1.0//EN";
     public static final String BLOCKINFO_SCHEMA = "-//LOOM/Block Info DTD Version 1.0//EN";
     public static final String MXINFO_SCHEMA = "-//LOOM/Mx Info DTD Version 1.0//EN";
-    public static final String ASSEMBLY_SCHEMA = "-//LOOM/Assembly DTD Version 1.1//EN";
+    public static final String ASSEMBLY_SCHEMA = "-//LOOM/Assembly DTD Version 1.0//EN";
 
     /**
      * The resolver that builder uses.
