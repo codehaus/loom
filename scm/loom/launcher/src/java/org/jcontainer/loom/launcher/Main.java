@@ -102,11 +102,8 @@ import java.util.Map;
  */
 public final class Main
 {
-    private static final String MAIN_CLASS =
-        "org.jcontainer.loom.frontends.CLIMain";
-
     private static Object c_frontend;
-    static final String LOADER_JAR = "loom-launcher.jar";
+    private static ShutdownHook c_hook;
 
     /**
      * Main entry point for Loom.
@@ -127,13 +124,13 @@ public final class Main
      * external (calling) application. Protected to allow
      * access from DaemonLauncher.
      *
-     * @param args the command line arg array
+     * @param options the command line arg array
      * @param data a set of extra parameters to pass to embeddor
      * @param blocking false if the current thread is expected to return.
      *
      * @return the exit code which should be used to exit the JVM
      */
-    protected static final int startup( final String[] args,
+    protected static final int startup( final String[] options,
                                         final Map data,
                                         final boolean blocking )
     {
@@ -159,15 +156,34 @@ public final class Main
             Thread.currentThread().setContextClassLoader( classLoader );
 
             //Create main launcher
-            final Class clazz = classLoader.loadClass( MAIN_CLASS );
+            final Class clazz =
+                classLoader.loadClass( "org.jcontainer.loom.frontends.CLIMain" );
             final Class[] paramTypes =
-                new Class[]{args.getClass(), Map.class, Boolean.TYPE};
+                new Class[]{options.getClass(), Map.class, Boolean.TYPE};
             final Method method = clazz.getMethod( "main", paramTypes );
-            c_frontend = clazz.newInstance();
+
+            final Object frontend;
+            synchronized( Main.class )
+            {
+                c_frontend = clazz.newInstance();
+                frontend = c_frontend;
+            }
+
+            //By default add a shutdown hook that will invoke
+            //shutdown on container when JVM shuts down
+            final String enableShutdownHook =
+                System.getProperty( "disable.shutdown.hook" );
+            if( !"false".equals( enableShutdownHook ) )
+            {
+                c_hook = new ShutdownHook();
+                Runtime.getRuntime().addShutdownHook( c_hook );
+            }
 
             //kick the tires and light the fires....
-            final Integer integer = (Integer)method.invoke(
-                c_frontend, new Object[]{args, data, new Boolean( blocking )} );
+            final Object[] args =
+                new Object[]{options, data, new Boolean( blocking )};
+            final Integer integer =
+                (Integer)method.invoke( frontend, args );
             exitCode = integer.intValue();
         }
         catch( final Exception e )
@@ -185,26 +201,37 @@ public final class Main
      */
     protected static final void shutdown()
     {
-        if( null == c_frontend )
+        final Object frontend;
+        synchronized( Main.class )
+        {
+            frontend = c_frontend;
+            c_frontend = null;
+        }
+        if( null == frontend )
         {
             return;
+        }
+        if( null != c_hook && c_hook != Thread.currentThread() )
+        {
+            //Null hook so it is not tried to be removed
+            //when we are shutting down. (Attempting to remove
+            //hook during shutdown raises an exception).
+
+            Runtime.getRuntime().removeShutdownHook( c_hook );
+            c_hook = null;
         }
 
         try
         {
-            final Class clazz = c_frontend.getClass();
+            final Class clazz = frontend.getClass();
             final Method method = clazz.getMethod( "shutdown", new Class[ 0 ] );
 
             //Lets put this sucker to sleep
-            method.invoke( c_frontend, new Object[ 0 ] );
+            method.invoke( frontend, new Object[ 0 ] );
         }
         catch( final Exception e )
         {
             e.printStackTrace();
-        }
-        finally
-        {
-            c_frontend = null;
         }
     }
 }

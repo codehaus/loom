@@ -111,7 +111,6 @@ class CLISetup
     private static final int LOG_FILE_OPT = 'l';
     private static final int PERSISTENT_OPT = 'p';
     private static final int CONFIGFILE_OPT = 'f';
-    private static final int DISABLE_HOOK_OPT = 2;
 
     ///Parameters created by parsing CLI options
     private final Properties m_parameters = new Properties();
@@ -139,7 +138,7 @@ class CLISetup
      */
     private CLOptionDescriptor[] createCLOptions()
     {
-        final CLOptionDescriptor options[] = new CLOptionDescriptor[ 6 ];
+        final CLOptionDescriptor options[] = new CLOptionDescriptor[ 5 ];
         options[ 0 ] =
             new CLOptionDescriptor( "help",
                                     CLOptionDescriptor.ARGUMENT_DISALLOWED,
@@ -156,16 +155,11 @@ class CLISetup
                                     DEBUG_LOG_OPT,
                                     REZ.getString( "cli.opt.debug-init.desc" ) );
         options[ 3 ] =
-            new CLOptionDescriptor( "disable-hook",
-                                    CLOptionDescriptor.ARGUMENT_DISALLOWED,
-                                    DISABLE_HOOK_OPT,
-                                    REZ.getString( "cli.opt.disable-hook.desc" ) );
-        options[ 4 ] =
             new CLOptionDescriptor( "persistent",
                                     CLOptionDescriptor.ARGUMENT_DISALLOWED,
                                     PERSISTENT_OPT,
                                     REZ.getString( "cli.opt.persistent.desc" ) );
-        options[ 5 ] =
+        options[ 4 ] =
             new CLOptionDescriptor( "configfile",
                                     CLOptionDescriptor.ARGUMENT_REQUIRED,
                                     CONFIGFILE_OPT,
@@ -221,10 +215,6 @@ class CLISetup
 
                 case PERSISTENT_OPT:
                     m_parameters.setProperty( CLIMain.PERSISTENT, "true" );
-                    break;
-
-                case DISABLE_HOOK_OPT:
-                    m_parameters.setProperty( CLIMain.DISABLE_HOOK, "true" );
                     break;
 
                 case CONFIGFILE_OPT:
