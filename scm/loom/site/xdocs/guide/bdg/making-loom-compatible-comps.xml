@@ -7,9 +7,10 @@
     <body>
         <section name="Introduction">
             <p>
-      Quite often reusable components are made elsewhere.  Apache has a number
-      of places where this activity is going on.  While we get it right most of
-      the time, some components developed elsewhere are harder to use in Loom.
+      Quite often reusable components are made elsewhere.  Codehaus and also
+      Apache have a number of places where this activity is going on. While we
+      get it right most of the time, some components developed elsewhere are harder
+      to use in Loom.
             </p>
         </section>
         <section name="Things to remember">
@@ -31,35 +32,38 @@
             </subsection>
             <subsection name="Inversion of Control Pattern">
                 <p>The IoC pattern is described
-                    <a href="http://avalon.apache.org/framework/guide-patterns-ioc.html">
+                    <a href="http://avalon.apache.org/framework/cop/index.html">
          here</a>.  This means for Loom avoiding static concepts including loggers.
                 </p>
             </subsection>
             <subsection name="Separation of interface and implementation">
                 <p>
          The separation of interface/implementation pattern is described
-                    <a href="http://avalon.apache.org/framework/guide-patterns-soii.html">here</a>.
-         For Loom this means we can (if done completely) mount the implementation jar in place where hosted client components (beans, servlets etc) can use the API, but not see the implementation.  We can also reimplement or wrap
-         bits of the implementation.  For example we could write a pluggable implementation that could, for a certain API
-         journal some methods, but still delegate to the real implementation.  Which pluggable implementation is used by Loom when it
-         boots is determined in assembly.xml of course.
+         <a href="http://avalon.apache.org/framework/cop/index.html">here</a>.
+         For Loom this means we can (if done completely) mount the implementation jar in
+         place where hosted client components (beans, servlets etc) can use the API,
+         but not see the implementation.  We can also reimplement or wrap bits of the
+         implementation.  For example we could write a pluggable implementation that could,
+         for a certain API journal some methods, but still delegate to the real implementation.
+         Which pluggable implementation is used by Loom when it boots is determined in
+         assembly.xml of course.
                 </p>
             </subsection>
             <subsection name="Opening up the API">
                 <p>
          Given that you have divided into interface and implementation, there are probably plenty of methods you
-         can put method in the interface you never though might be used.  For example if you are making JDBC
+         can put in the interface you never though might be used. For example if you are making JDBC
          compliant relational database, and it is a bean, you could easily think that the only use would be
-         clients via JDBC over sockets.  Well, given that Loom can now mount the RDBMS block, it might want
+         clients via JDBC over sockets. Well, given that Loom can now mount the RDBMS block, it might want
          to be reused by other blocks that other people have developed inside the the same SAR file.  In that case
          have beanlike methods of ...
                 </p>
                 <ol>
-                    <li>Database createDatabase(String name)</li>
-                    <li>Database cloneDatabase(String name)</li>
+                    <li>Database createDatabase( String name )</li>
+                    <li>Database cloneDatabase( String name )</li>
                 </ol>
                 <p>
-        .. might be useful.  Just because you can only see a ServerSocket interface does not mean that others do.
+        .. might be useful. Just because you can only see a ServerSocket interface does not mean that others do.
                 </p>
             </subsection>
         </section>
@@ -98,8 +102,7 @@ public class MyWebServer implements WebServer {
     public void unMountWar(String contextName) {
         // whatever.
     }
-}
-            </source>
+}</source>
             <p>For standalone mode, it might be launched like so:</p>
             <source>
 package examplecomp.main;
@@ -111,8 +114,7 @@ public class WebServerMain {
         ws.start();
         ws.mountWar(args[1], new File(args[2]).toURL());
     }
-}
-            </source>
+}</source>
             <p>When we are trying to run this in phoenix we might have this wrapper:</p>
             <source>
 package examplecomp.block;
@@ -152,8 +154,7 @@ public class WebServerBlock
     public void unMountWar(String contextName) {
         mWebServer.unMountWar(contextName);
     }
-}
-            </source>
+}</source>
             <p>This basically shows the implementation wrapped and taking its configuration from the config.xml
       that phoenix prefers from configuration.  If the developer wanted they could ignore
       that place of configuration and use their own config files.  If the WebServer block were
@@ -182,8 +183,7 @@ public class EJBBlock
     public void unMountEar(String contextName) {
         // whatever
     }
-}
-            </source>
+}</source>
         </section>
         <section name="Misconceptions">
             <p>
@@ -191,7 +191,7 @@ public class EJBBlock
             </p>
             <ul>
                 <li>You do not have to implement any Avalon interfaces to be
-              reusable (wrap strategy) inside Avalon.</li>
+              reusable (wrap strategy) inside Loom.</li>
                 <li>Being Loom compatible is just as useful for whole servers as it is for small components.</li>
                 <li>Being Loom compatible can be for tools that are intended for client-side as well as server use.</li>
             </ul>
