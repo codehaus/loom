@@ -5,9 +5,9 @@
         <maven:reactor basedir="${basedir}" includes="plugins/maven-loom/project.xml,engine/project.xml,distribution/project.xml,support/*/project.xml,launcher/project.xml" goals="clean:clean,build" banner="Building" ignoreFailures="false"/>
     </goal>
 
-    <goal name="build:demos" prereqs="build:components">
+    <goal name="build:demos">
         <echo message="Build demos"/>
-        <maven:reactor basedir="${basedir}" includes="demos/*/project.xml" goals="clean:clean,build" banner="Building" ignoreFailures="false"/>
+        <maven:reactor basedir="${basedir}" includes="demos/*/project.xml,demos/distributed/*/project.xml" goals="clean:clean,build" banner="Building" ignoreFailures="false"/>
     </goal>
 
     <goal name="loom:clean">
@@ -21,9 +21,9 @@
         <maven:reactor basedir="${basedir}" includes="*/project.xml" excludes="demos/*/project.xml,site/project.xml" goals="clean:clean,deploy" banner="Deploying" ignoreFailures="false"/>
     </goal>
 
-    <goal name="deploy:demos" prereqs="build:components">
+    <goal name="deploy:demos">
         <echo message="Deploy demos"/>
-        <maven:reactor basedir="${basedir}" includes="demos/*/project.xml" goals="clean:clean,deploy" banner="Deploying" ignoreFailures="false"/>
+        <maven:reactor basedir="${basedir}" includes="demos/*/project.xml,demos/distributed/*/project.xml" goals="clean:clean,deploy" banner="Deploying" ignoreFailures="false"/>
     </goal>
 
 </project>
