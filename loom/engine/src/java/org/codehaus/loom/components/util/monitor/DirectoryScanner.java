@@ -21,7 +21,7 @@ import java.util.Set;
  *
  * @author Johan Sjoberg
  * @author Peter Donald
- * @version $Revision: 1.2 $ $Date: 2004-07-13 12:24:45 $
+ * @version $Revision: 1.3 $ $Date: 2004-07-15 08:50:54 $
  */
 public class DirectoryScanner implements Runnable
 {
@@ -32,7 +32,7 @@ public class DirectoryScanner implements Runnable
     private volatile boolean m_keepRunning = false;
 
     /** Poll frequency */
-    private long m_frequency = 1000L * 60L;
+    private long m_frequency = 1000L * 5L;
 
     /** Priority of the monitor thread */
     private int m_priority = Thread.NORM_PRIORITY;
