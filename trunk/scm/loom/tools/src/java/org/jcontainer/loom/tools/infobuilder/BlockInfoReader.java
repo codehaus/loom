@@ -29,7 +29,7 @@ import org.xml.sax.InputSource;
  * <a href="package-summary.html#external">package summary</a>.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-10-06 13:29:04 $
+ * @version $Revision: 1.3 $ $Date: 2003-10-06 13:42:07 $
  */
 public final class BlockInfoReader
     extends AbstractLogEnabled
@@ -41,13 +41,35 @@ public final class BlockInfoReader
         ResourceManager.getPackageResources( BlockInfoReader.class );
 
     /**
-     * Create a {@link org.jcontainer.loom.tools.info.ComponentInfo} object for specified
-     * classname, loaded from specified {@link java.io.InputStream}.
+     * Create a {@link ComponentInfo} object for specified
+     * classname, in specified ClassLoader.
+     *
+     * @param classname The classname of Component
+     * @param classLoader the ClassLoader to load info from
+     * @return the created ComponentInfo
+     * @throws Exception if an error occurs
+     */
+    public ComponentInfo buildComponentInfo( final String classname,
+                                             final ClassLoader classLoader )
+        throws Exception
+    {
+        final String xinfo = classname.replace( '.', '/' ) + ".xinfo";
+        final InputStream inputStream = classLoader.getResourceAsStream( xinfo );
+        if( null == inputStream )
+        {
+            return null;
+        }
+        return createComponentInfo( classname, inputStream );
+    }
+
+    /**
+     * Create a {@link ComponentInfo} object for specified
+     * classname, loaded from specified {@link InputStream}.
      *
      * @param implementationKey The classname of Component
      * @param inputStream the InputStream to load ComponentInfo from
      * @return the created ComponentInfo
-     * @throws org.apache.avalon.framework.configuration.ConfigurationException if an error occurs
+     * @throws Exception if an error occurs
      */
     public ComponentInfo createComponentInfo( final String implementationKey,
                                               final InputStream inputStream )
@@ -59,13 +81,13 @@ public final class BlockInfoReader
     }
 
     /**
-     * Create a {@link org.jcontainer.loom.tools.info.ComponentInfo} object for specified classname from
+     * Create a {@link ComponentInfo} object for specified classname from
      * specified configuration data.
      *
      * @param classname The classname of Component
      * @param info the ComponentInfo configuration
      * @return the created ComponentInfo
-     * @throws org.apache.avalon.framework.configuration.ConfigurationException if an error occurs
+     * @throws Exception if an error occurs
      */
     private ComponentInfo build( final String classname,
                                  final Configuration info )

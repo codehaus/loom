@@ -11,10 +11,10 @@ import org.apache.tools.ant.AntClassLoader;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 import org.apache.tools.ant.types.Path;
-import org.jcontainer.loom.tools.info.ComponentInfo;
-import org.jcontainer.loom.tools.infobuilder.InfoBuilder;
-import org.jcontainer.loom.tools.verifier.InfoVerifier;
 import org.jcontainer.dna.impl.ConsoleLogger;
+import org.jcontainer.loom.tools.info.ComponentInfo;
+import org.jcontainer.loom.tools.infobuilder.BlockInfoReader;
+import org.jcontainer.loom.tools.verifier.InfoVerifier;
 
 /**
  * Simple task to load a {@link org.jcontainer.loom.tools.info.ComponentInfo} descriptor,
@@ -22,7 +22,7 @@ import org.jcontainer.dna.impl.ConsoleLogger;
  * is compatible with the {@link org.jcontainer.loom.tools.info.ComponentInfo}.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.7 $ $Date: 2003-10-06 13:37:06 $
+ * @version $Revision: 1.8 $ $Date: 2003-10-06 13:42:07 $
  */
 public class ComponentVerifierTask
     extends Task
@@ -60,7 +60,7 @@ public class ComponentVerifierTask
 
         final AntClassLoader classLoader = new AntClassLoader( getProject(), m_classpath );
 
-        final InfoBuilder builder = new InfoBuilder();
+        final BlockInfoReader builder = new BlockInfoReader();
         builder.enableLogging( new ConsoleLogger( ConsoleLogger.LEVEL_INFO ) );
 
         final InfoVerifier verifier = new InfoVerifier();
