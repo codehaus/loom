@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE blockinfo PUBLIC "-//LOOM/Block Info DTD Version 1.0//EN"
+          "http://jcontainer.codehaus.org/loom/blockinfo_1.0.dtd">
+
+<blockinfo>
+
+    <!-- section to describe block -->
+    <block>
+        <version>1.0</version>
+    </block>
+
+    <!-- services that are offered by this block -->
+    <services>
+        <service name="org.jcontainer.loom.tools.data.Service2"/>
+    </services>
+</blockinfo>
