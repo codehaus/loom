@@ -15,7 +15,7 @@
 	<groupId>loom</groupId>
     <package>org.jcontainer.loom.${pom.artifactId.substring(5)}</package>
     <url>http://loom.jcontainer.org/${pom.artifactId.substring(5)}</url>
-    <distributionDirectory>/www/dist.codehaus.org/jcontainer/${groupId}</distributionDirectory>
+    <distributionDirectory>/www/dist.codehaus.org/jcontainer/maven/${groupId}</distributionDirectory>
     <distributionSite>codehaus.org</distributionSite>
     
     <repository>
