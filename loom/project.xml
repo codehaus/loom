@@ -19,7 +19,7 @@
     <distributionSite>dist.codehaus.org</distributionSite>
     <siteDirectory>/home/projects/loom/public_html</siteDirectory>
     <siteAddress>loom.codehaus.org</siteAddress>
-    <issueTrackingUrl>http://jira.codehaus.org/secure/BrowseProject.jspa?id=10131</issueTrackingUrl>
+    <issueTrackingUrl>http://jira.codehaus.org/secure/BrowseProject.jspa?id=10210</issueTrackingUrl>
 
     <repository>
         <connection>scm:cvs:pserver:anonymous@cvs.loom.codehaus.org:/home/projects/loom/scm:loom</connection>
