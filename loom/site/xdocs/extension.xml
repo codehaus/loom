@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document>
     <properties>
-        <title>Overview</title>
+        <title>Extensions</title>
         <author>Peter Donald</author>
     </properties>
     <body>
-        <section name="Introduction">
+        <section name="Extensions">
             <p>
                 The Extension toolkit contains classes to represent entrys for
                 "Optional Package" instances (formerly known as "Standard Extension")
                 as described in the manifest of a JAR file. The toolkit can also
                 parse and represent Specification sections described in manifests.
             </p>
-        </section>
-        <section name="Extensions">
             <p>
                 The "Optional Package" mechanism can be used to declare is used
                 to declare dependencies on libraries. Prior to JDK1.3, an "Optional
