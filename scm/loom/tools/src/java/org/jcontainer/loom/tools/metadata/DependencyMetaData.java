@@ -5,7 +5,7 @@
  * Software License version 1.1, a copy of which has been included
  * with this distribution in the LICENSE.txt file.
  */
- package org.jcontainer.loom.tools.metadata;
+package org.jcontainer.loom.tools.metadata;
 
 import org.jcontainer.loom.tools.info.Attribute;
 import org.jcontainer.loom.tools.info.FeatureDescriptor;
@@ -22,11 +22,16 @@ import org.jcontainer.loom.tools.info.FeatureDescriptor;
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author <a href="mailto:mcconnell@apache.org">Stephen McConnell</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-29 01:07:36 $
+ * @version $Revision: 1.3 $ $Date: 2003-07-05 05:37:09 $
  */
 public final class DependencyMetaData
     extends FeatureDescriptor
 {
+    /**
+     * Empty set of dependencys.
+     */
+    public static final DependencyMetaData[] EMPTY_SET = new DependencyMetaData[ 0 ];
+
     /**
      * The key that the client component will use to access a dependency.
      */
