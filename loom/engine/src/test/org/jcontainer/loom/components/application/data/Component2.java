@@ -10,9 +10,9 @@ package org.jcontainer.loom.components.application.data;
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-07-19 02:24:46 $
+ * @version $Revision: 1.2 $ $Date: 2003-07-19 02:28:19 $
  */
 public class Component2
-    implements Service2
+    implements Service1
 {
 }
