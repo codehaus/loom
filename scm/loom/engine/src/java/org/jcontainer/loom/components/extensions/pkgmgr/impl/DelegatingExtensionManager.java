@@ -88,7 +88,7 @@ package org.jcontainer.loom.components.extensions.pkgmgr.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import org.codehaus.spice.extension.Extension;
+import org.jcontainer.loom.extension.Extension;
 import org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager;
 import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
 
@@ -97,7 +97,7 @@ import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
  * repositories.
  *
  * @author Peter Donald
- * @version $Revision: 1.7 $ $Date: 2003-12-03 10:44:41 $
+ * @version $Revision: 1.8 $ $Date: 2004-03-31 03:39:04 $
  */
 public class DelegatingExtensionManager
     implements ExtensionManager

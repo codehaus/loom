@@ -89,7 +89,7 @@ package org.jcontainer.loom.components.extensions.pkgmgr;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-import org.codehaus.spice.extension.Extension;
+import org.jcontainer.loom.extension.Extension;
 
 /**
  * Basic Implementation Of PackageManager Interface used to manage "Optional
@@ -97,7 +97,7 @@ import org.codehaus.spice.extension.Extension;
  * are stored on file system in a number of directories.
  *
  * @author Peter Donald
- * @version $Revision: 1.6 $ $Date: 2003-12-03 02:54:41 $
+ * @version $Revision: 1.7 $ $Date: 2004-03-31 03:39:04 $
  * @todo Determine an appropriate interface to this service and an appropriate
  * mechanism via which to do searching and expansion of a package set. At that
  * point separate out implementation and interface for mechanism.
