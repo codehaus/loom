@@ -12,6 +12,7 @@ import org.apache.avalon.phoenix.metainfo.BlockDescriptor;
 import org.apache.avalon.phoenix.metainfo.BlockInfo;
 import org.apache.avalon.phoenix.metainfo.DependencyDescriptor;
 import org.apache.avalon.phoenix.metainfo.ServiceDescriptor;
+import org.apache.avalon.framework.Version;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.infobuilder.LegacyUtil;
@@ -20,10 +21,12 @@ import org.jcontainer.loom.tools.infobuilder.LegacyUtil;
  * Convert a {@link org.jcontainer.loom.tools.info.ComponentInfo} into a {@link BlockInfo}.
  *
  * @author <a href="mailto:peter@apache.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-10-06 13:29:04 $
+ * @version $Revision: 1.6 $ $Date: 2003-10-11 09:03:07 $
  */
 public class ComponentInfoConverter
 {
+    private static final Version VERSION = new Version( 1, 0, 0 );
+
     private ComponentInfoConverter()
     {
     }
@@ -97,7 +100,7 @@ public class ComponentInfoConverter
     private static ServiceDescriptor toPhoenixService(
         final org.jcontainer.loom.tools.info.ServiceDescriptor service )
     {
-        return new ServiceDescriptor( service.getType(), LegacyUtil.VERSION );
+        return new ServiceDescriptor( service.getType(), VERSION );
     }
 
     /**
@@ -127,7 +130,7 @@ public class ComponentInfoConverter
         final org.jcontainer.loom.tools.info.DependencyDescriptor dependency )
     {
         final ServiceDescriptor service =
-            new ServiceDescriptor( dependency.getType(), LegacyUtil.VERSION );
+            new ServiceDescriptor( dependency.getType(), VERSION );
         return new DependencyDescriptor( dependency.getKey(), service );
     }
 
@@ -149,6 +152,6 @@ public class ComponentInfoConverter
         return new BlockDescriptor( null,
                                     component.getImplementationKey(),
                                     schemaType,
-                                    LegacyUtil.VERSION );
+                                    VERSION );
     }
 }
