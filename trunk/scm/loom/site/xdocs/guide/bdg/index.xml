@@ -34,11 +34,22 @@
         </section>
         <section name="Organization">
             <p>
-                Here is how the information is presented. The first few chapters are
-                foundational material, and describe the basic concepts you can use in your
-                own blocks. The later chapters specify in detail the formal requirements of
-                Block implementations.
+                Here is how the information is presented. The first few
+                chapters are foundational material, and describe the basic
+                concepts you can use in your own blocks. The later chapters
+                specify in detail the formal requirements of Block
+                implementations.
             </p>
+            <p>
+                Here is how the information is presented. The first few
+                chapters are foundational material, and describe the basic
+                concepts you can use in your own blocks. The later chapters
+                specify in detail the formal requirements of Block
+                implementations.
+            </p>
+            <ul>
+                <li></li>
+            </ul>
         </section>
     </body>
 </document>

@@ -1,298 +1,299 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <document>
-  <properties>
-    <title>Management Guide - XDoclet Tagging</title>
-    <author email="huw@apache.org">Huw Roberts</author>
-  </properties>
-  <body>
-    <section name="Introduction">
-      <p>
-        Doclet tags inserted into source code automatically generate the mxinfo file.
-        There are a number of advantages to doing it this way:
-      </p>
-      <ul>
-        <li>
-          its a lot faster than writing MXINFO files by hand
-        </li>
-        <li>
-          its harder to make mistakes, since much of the data required for the mxinfo file is
-          parsed out of the source code
-        </li>
-        <li>
-          useful defaults can be used by reading the standard javadoc.
-        </li>
-      </ul>
-      <p>
-        Any class or interface can be used to produce MXINFO files.  How they get used is up to
-        container and its Management subsystem.
-      </p>
-    </section>
-    <section name="The Tags">
-      <p>
-        The following tags are defined:
-      </p>
-      <subsection name="phoenix:mx-topic">
-        <table>
-          <tr>
-            <td>Scope</td>
-            <td>
-              Applies to classes and interfaces.
-            </td>
-          </tr>
-          <tr>
-            <td>Purpose</td>
-            <td>
-              Marks the class or interface as eligible for management.
-            </td>
-          </tr>
-          <tr>
-            <td>Parameters</td>
-            <td>
-              It takes a single attribute, called name, that will be used
-              to uniquely define the Topic for each Target that includes it.
-              This name may be presented to the user in the management agent.
-            </td>
-          </tr>
-          <tr>
-            <td>Notes</td>
-            <td>
+    <properties>
+        <title>Management Guide - XDoclet Tagging</title>
+        <author email="huw@apache.org">Huw Roberts</author>
+    </properties>
+    <body>
+        <section name="Introduction">
+            <p>
+                Doclet tags inserted into source code automatically generate the
+                descriptor. There are a number of advantages to doing it this way:
+            </p>
+            <ul>
+                <li>
+                    its a lot faster than writing MXINFO files by hand
+                </li>
+                <li>
+                    its harder to make mistakes, since much of the data required
+                    for the descriptor is parsed out of the source code
+                </li>
+                <li>
+                    useful defaults can be used by reading the standard javadoc.
+                </li>
+            </ul>
+            <p>
+                Any class or interface can be used to produce MXINFO files.  How they get used is up to
+                container and its Management subsystem.
+            </p>
+        </section>
+        <section name="The Tags">
+            <p>
+                The following tags are defined:
+            </p>
+            <subsection name="phoenix:mx-topic">
+                <table>
+                    <tr>
+                        <td>Scope</td>
+                        <td>
+                            Applies to classes and interfaces.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Purpose</td>
+                        <td>
+                            Marks the class or interface as eligible for management.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>
+                            It takes a single attribute, called name, that will be used
+                            to uniquely define the Topic for each Target that includes it.
+                            This name may be presented to the user in the management agent.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Notes</td>
+                        <td>
 
-            </td>
-          </tr>
-        </table>
-        <p>
-          Example:
-        </p>
-        <source>
-/**
- * This is the interface via which you can manager
- * the root container of Applications.
- *
- * @phoenix:mx-topic name="Kernel"
- *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- */
-        </source>
-      </subsection>
-      <subsection name="phoenix:mx-attribute">
-        <table>
-          <tr>
-            <td>Scope</td>
-            <td>
-              Applies to getter and setter methods.
-            </td>
-          </tr>
-          <tr>
-            <td>Purpose</td>
-            <td>
-              Marks the method as being a getter or setter and as eligible for
-              management.  If the class defines a getter and setter, then just
-              getter should be marked up.
-            </td>
-          </tr>
-          <tr>
-            <td>Parameters</td>
-            <td>
-              None
-            </td>
-          </tr>
-          <tr>
-            <td>Notes</td>
-            <td>
-              Often used in conjuntion with the mx-isWriteable tag
-            </td>
-          </tr>
-        </table>
-        <p>
-          Example:
-        </p>
-        <source>
-/**
- * Gets the list of applications running in the container
- *
- * @phoenix:mx-attribute
- *
- * @return applicationNames The array of application names
- */
-String[] getApplicationNames();
-        </source>
-      </subsection>
-      <subsection name="phoenix:mx-operation">
-        <table>
-          <tr>
-            <td>Scope</td>
-            <td>
-              Applies to methods that are not getters or setters.
-            </td>
-          </tr>
-          <tr>
-            <td>Purpose</td>
-            <td>
-              Marks the method as elible to be a management operation.
-            </td>
-          </tr>
-          <tr>
-            <td>Parameters</td>
-            <td>
-              None
-            </td>
-          </tr>
-          <tr>
-            <td>Notes</td>
-            <td>
-              The standard javadoc is used to generate descriptions for any parameters to the
-              method.
-            </td>
-          </tr>
-        </table>
-        <p>
-          Example:
-        </p>
-        <source>
-/**
- * Removes the application from the container
- *
- * @phoenix:mx-operation
- *
- * @param name the name of application to remove
- */
-void removeApplication( String name )
-        </source>
-      </subsection>
-      <subsection name="phoenix:mx-description">
-        <table>
-          <tr>
-            <td>Scope</td>
-            <td>
-              Applies to manageable attributes and operations (i.e. to methods that also
-              have the mx-operation or mx-attribute tag).
-            </td>
-          </tr>
-          <tr>
-            <td>Purpose</td>
-            <td>
-              The text following the tag is a description of the method suitable for presentation
-              in the management agent.
-            </td>
-          </tr>
-          <tr>
-            <td>Parameters</td>
-            <td>
-              None
-            </td>
-          </tr>
-          <tr>
-            <td>Notes</td>
-            <td>
-              Optional.  If ommitted the javadoc definition is used.
-            </td>
-          </tr>
-        </table>
-        <p>
-          Example:
-        </p>
-        <source>
-/**
- * Retrieve a string identifying version of server.
- * Usually looks like "vX.Y.Z".
- *
- * @phoenix:mx-attribute
- * @phoenix:mx-description Retrieve a string identifying version of server.
- *
- * @return version string of server.
- */
-String getVersion();
-        </source>
-      </subsection>
-      <subsection name="phoenix:mx-proxy">
-        <table>
-          <tr>
-            <td>Scope</td>
-            <td>
-              Applies to classes.
-            </td>
-          </tr>
-          <tr>
-            <td>Purpose</td>
-            <td>
-              The proxy tag is used to indicate that a proxy class should be used
-              to manage some aspect(s) of this object.  At runtime, the management
-              system will instantiate an instance of the proxy class passing in
-              a reference to the managed object in the constructor.  Management
-              calls are then made on the proxy instead of the managed object.
-            </td>
-          </tr>
-          <tr>
-            <td>Parameters</td>
-            <td>
-              Takes a single attribute, "name" that must be the full class name of a class to be used
-              as proxy for the management of this class.
-            </td>
-          </tr>
-          <tr>
-            <td>Notes</td>
-            <td>
-              At runtime it is expected the manager will instantiate the proxy class and use
-              it in place of the Target object.
-            </td>
-          </tr>
-        </table>
-        <p>
-          Example:
-        </p>
-        <source>
+                        </td>
+                    </tr>
+                </table>
+                <p>
+                    Example:
+                </p>
+                <source>
+                    /**
+                    * This is the interface via which you can manager
+                    * the root container of Applications.
+                    *
+                    * @phoenix:mx-topic name="Kernel"
+                    *
+                    * @author
+                    <a href="mailto:peter at apache.org">Peter Donald</a>
+                    */
+                </source>
+            </subsection>
+            <subsection name="phoenix:mx-attribute">
+                <table>
+                    <tr>
+                        <td>Scope</td>
+                        <td>
+                            Applies to getter and setter methods.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Purpose</td>
+                        <td>
+                            Marks the method as being a getter or setter and as eligible for
+                            management.  If the class defines a getter and setter, then just
+                            getter should be marked up.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>
+                            None
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Notes</td>
+                        <td>
+                            Often used in conjuntion with the mx-isWriteable tag
+                        </td>
+                    </tr>
+                </table>
+                <p>
+                    Example:
+                </p>
+                <source>
+                    /**
+                    * Gets the list of applications running in the container
+                    *
+                    * @phoenix:mx-attribute
+                    *
+                    * @return applicationNames The array of application names
+                    */
+                    String[] getApplicationNames();
+                </source>
+            </subsection>
+            <subsection name="phoenix:mx-operation">
+                <table>
+                    <tr>
+                        <td>Scope</td>
+                        <td>
+                            Applies to methods that are not getters or setters.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Purpose</td>
+                        <td>
+                            Marks the method as elible to be a management operation.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>
+                            None
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Notes</td>
+                        <td>
+                            The standard javadoc is used to generate descriptions for any parameters to the
+                            method.
+                        </td>
+                    </tr>
+                </table>
+                <p>
+                    Example:
+                </p>
+                <source>
+                    /**
+                    * Removes the application from the container
+                    *
+                    * @phoenix:mx-operation
+                    *
+                    * @param name the name of application to remove
+                    */
+                    void removeApplication( String name )
+                </source>
+            </subsection>
+            <subsection name="phoenix:mx-description">
+                <table>
+                    <tr>
+                        <td>Scope</td>
+                        <td>
+                            Applies to manageable attributes and operations (i.e. to methods that also
+                            have the mx-operation or mx-attribute tag).
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Purpose</td>
+                        <td>
+                            The text following the tag is a description of the method suitable for presentation
+                            in the management agent.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>
+                            None
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Notes</td>
+                        <td>
+                            Optional.  If ommitted the javadoc definition is used.
+                        </td>
+                    </tr>
+                </table>
+                <p>
+                    Example:
+                </p>
+                <source>
+                    /**
+                    * Retrieve a string identifying version of server.
+                    * Usually looks like "vX.Y.Z".
+                    *
+                    * @phoenix:mx-attribute
+                    * @phoenix:mx-description Retrieve a string identifying version of server.
+                    *
+                    * @return version string of server.
+                    */
+                    String getVersion();
+                </source>
+            </subsection>
+            <subsection name="phoenix:mx-proxy">
+                <table>
+                    <tr>
+                        <td>Scope</td>
+                        <td>
+                            Applies to classes.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Purpose</td>
+                        <td>
+                            The proxy tag is used to indicate that a proxy class should be used
+                            to manage some aspect(s) of this object.  At runtime, the management
+                            system will instantiate an instance of the proxy class passing in
+                            a reference to the managed object in the constructor.  Management
+                            calls are then made on the proxy instead of the managed object.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>
+                            Takes a single attribute, "name" that must be the full class name of a class to be used
+                            as proxy for the management of this class.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Notes</td>
+                        <td>
+                            At runtime it is expected the manager will instantiate the proxy class and use
+                            it in place of the Target object.
+                        </td>
+                    </tr>
+                </table>
+                <p>
+                    Example:
+                </p>
+                <source>
 
-/**
- * Ftp server starting point. Avalon framework will load this
- * from the jar file. This is also the starting point of remote
- * admin.
- *
- * @phoenix:block
- * @phoenix:service name="org.apache.avalon.ftpserver.interfaces.FtpServerInterface"
- *
- * @phoenix:mx-proxy class="org.apache.avalon.ftpserver.FtpServerMxProxy"
- *
- * @author  Rana Bhattacharyya &lt;rana_b@yahoo.com>
- * @author  Paul Hammant &lt;Paul_Hammant@yahoo.com>
- * @version 1.0
- */
+                    /**
+                    * Ftp server starting point. Avalon framework will load this
+                    * from the jar file. This is also the starting point of remote
+                    * admin.
+                    *
+                    * @phoenix:block
+                    * @phoenix:service name="org.apache.avalon.ftpserver.interfaces.FtpServerInterface"
+                    *
+                    * @phoenix:mx-proxy class="org.apache.avalon.ftpserver.FtpServerMxProxy"
+                    *
+                    * @author  Rana Bhattacharyya &lt;rana_b@yahoo.com>
+                    * @author  Paul Hammant &lt;Paul_Hammant@yahoo.com>
+                    * @version 1.0
+                    */
 
-        </source>
-      </subsection>
-    </section>
-    <section name="Build Instructions">
-      <p>
-        To have mxinfo files generated as part as your ant build
-        script, include a task like that this:
-      </p>
-      <source>
+                </source>
+            </subsection>
+        </section>
+        <section name="Build Instructions">
+            <p>
+                To have mxinfo files generated as part as your ant build
+                script, include a task like that this:
+            </p>
+            <source>
 
-&lt;!-- Make .mxinfo automatically for blocks -->
-&lt;target name="phoenix-qdox" depends="compile">
+                &lt;!-- Make .mxinfo automatically for blocks -->
+                &lt;target name="phoenix-qdox" depends="compile">
 
-  &lt;mkdir dir="${build.qdox}"/>
+                &lt;mkdir dir="${build.qdox}"/>
 
-  &lt;taskdef name="generatemeta"
-      classname="org.jcontainer.loom.info.GenerateLoomDescriptorsTask">
-    &lt;classpath refid="project.class.path" />
-  &lt;/taskdef>
+                &lt;taskdef name="generatemeta"
+                classname="org.jcontainer.loom.info.GenerateLoomDescriptorsTask">
+                &lt;classpath refid="project.class.path" />
+                &lt;/taskdef>
 
-  &lt;generatemeta dest="${build.qdox}">
-    &lt;fileset dir="${java.dir}">
-      &lt;include name="**/*.java"/>
-    &lt;/fileset>
-  &lt;/generatemeta>
+                &lt;generatemeta dest="${build.qdox}">
+                &lt;fileset dir="${java.dir}">
+                &lt;include name="**/*.java"/>
+                &lt;/fileset>
+                &lt;/generatemeta>
 
-&lt;/target>
+                &lt;/target>
 
-      </source>
-      <p>
-        Where build.qdox is where the .mxinfo files should be placed, and java.dir
-        is the location of the source files.
-      </p>
-      <p>
-        The qdox jar and phoenix-client.jar need to be in the project.class.path.
-      </p>
-    </section>
-  </body>
+            </source>
+            <p>
+                Where build.qdox is where the .mxinfo files should be placed, and java.dir
+                is the location of the source files.
+            </p>
+            <p>
+                The qdox jar and phoenix-client.jar need to be in the project.class.path.
+            </p>
+        </section>
+    </body>
 </document>
