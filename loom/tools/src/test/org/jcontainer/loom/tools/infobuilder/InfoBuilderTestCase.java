@@ -19,7 +19,6 @@ import java.io.Reader;
 import junit.framework.TestCase;
 import org.jcontainer.dna.impl.ConsoleLogger;
 import org.jcontainer.dna.impl.ContainerUtil;
-import org.jcontainer.loom.tools.info.ComponentDescriptor;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ContextDescriptor;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
@@ -34,7 +33,7 @@ import org.realityforge.metaclass.model.Attribute;
  * Abstract class which TestCases can extend.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.13 $ $Date: 2003-10-06 12:56:11 $
+ * @version $Revision: 1.14 $ $Date: 2003-10-06 13:29:05 $
  */
 public class InfoBuilderTestCase
     extends TestCase
@@ -81,7 +80,7 @@ public class InfoBuilderTestCase
         outputStream.close();
 
         ContainerUtil.enableLogging( reader, new ConsoleLogger() );
-        final String implementationKey = info.getDescriptor().getImplementationKey();
+        final String implementationKey = info.getImplementationKey();
         final FileInputStream inputStream = new FileInputStream( output );
         final ComponentInfo actual = reader.createComponentInfo( implementationKey, inputStream );
         inputStream.close();
@@ -138,10 +137,6 @@ public class InfoBuilderTestCase
 
     private ComponentInfo createDummyComponentInfo()
     {
-        final ComponentDescriptor component =
-            new ComponentDescriptor( "org.jcontainer.loom.tools.infobuilder.data.component2",
-                                     Attribute.EMPTY_SET );
-
         final EntryDescriptor[] entrys = new EntryDescriptor[]{};
         final ContextDescriptor context =
             new ContextDescriptor( "org.apache.avalon.phoenix.BlockContext",
@@ -169,8 +164,12 @@ public class InfoBuilderTestCase
                                   "http://relaxng.org/ns/structure/1.0",
                                   Attribute.EMPTY_SET );
 
-        return new ComponentInfo( component, services,
-                                  context, deps, schema );
+        return new ComponentInfo( "org.jcontainer.loom.tools.infobuilder.data.component2",
+                                     Attribute.EMPTY_SET,
+                                  services,
+                                  context,
+                                  deps,
+                                  schema );
     }
 
     protected ComponentInfo loadComponentInfo( final String classname )

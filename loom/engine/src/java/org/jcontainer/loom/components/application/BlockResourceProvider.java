@@ -116,7 +116,7 @@ import org.jcontainer.dna.AbstractLogEnabled;
  * Block or Listener.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-10-05 10:07:03 $
+ * @version $Revision: 1.6 $ $Date: 2003-10-06 13:29:04 $
  */
 class BlockResourceProvider
     extends AbstractLogEnabled
@@ -162,7 +162,7 @@ class BlockResourceProvider
     {
         final ComponentProfile profile = getProfileFor( entry );
         final ClassLoader classLoader = m_context.getClassLoader();
-        final String classname = profile.getInfo().getDescriptor().getImplementationKey();
+        final String classname = profile.getInfo().getImplementationKey();
         final Class clazz = classLoader.loadClass( classname );
         return clazz.newInstance();
     }

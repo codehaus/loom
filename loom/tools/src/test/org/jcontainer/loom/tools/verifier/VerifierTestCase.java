@@ -9,8 +9,8 @@ package org.jcontainer.loom.tools.verifier;
 
 import junit.framework.TestCase;
 import org.apache.avalon.framework.context.Context;
+import org.jcontainer.dna.impl.ConsoleLogger;
 import org.jcontainer.loom.tools.LoomToolConstants;
-import org.jcontainer.loom.tools.info.ComponentDescriptor;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ContextDescriptor;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
@@ -21,14 +21,13 @@ import org.jcontainer.loom.tools.metadata.DependencyMetaData;
 import org.jcontainer.loom.tools.metadata.PartitionMetaData;
 import org.jcontainer.loom.tools.profile.ComponentProfile;
 import org.jcontainer.loom.tools.profile.PartitionProfile;
-import org.jcontainer.dna.impl.ConsoleLogger;
 import org.realityforge.metaclass.model.Attribute;
 
 /**
  *  An basic test case for the LogManager.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.10 $ $Date: 2003-10-05 10:07:05 $
+ * @version $Revision: 1.11 $ $Date: 2003-10-06 13:29:05 $
  */
 public class VerifierTestCase
     extends TestCase
@@ -87,13 +86,15 @@ public class VerifierTestCase
                                    ComponentMetaData.EMPTY_SET,
                                    Attribute.EMPTY_SET );
         final ComponentInfo c1Info =
-            new ComponentInfo( new ComponentDescriptor( C1_IMPLEMENTATION_KEY, Attribute.EMPTY_SET ),
+            new ComponentInfo( C1_IMPLEMENTATION_KEY,
+                               Attribute.EMPTY_SET,
                                ServiceDescriptor.EMPTY_SET,
                                new ContextDescriptor( Context.class.getName(), EntryDescriptor.EMPTY_SET, Attribute.EMPTY_SET ),
                                new DependencyDescriptor[]{new DependencyDescriptor( C2_SERVICE, C2_SERVICE, false, Attribute.EMPTY_SET )},
                                null );
         final ComponentInfo c2Info =
-            new ComponentInfo( new ComponentDescriptor( C2_IMPLEMENTATION_KEY, Attribute.EMPTY_SET ),
+            new ComponentInfo( C2_IMPLEMENTATION_KEY,
+                               Attribute.EMPTY_SET,
                                new ServiceDescriptor[]{new ServiceDescriptor( C2_SERVICE, Attribute.EMPTY_SET )},
                                new ContextDescriptor( Context.class.getName(), EntryDescriptor.EMPTY_SET, Attribute.EMPTY_SET ),
                                DependencyDescriptor.EMPTY_SET,
@@ -183,7 +184,8 @@ public class VerifierTestCase
                                    Attribute.EMPTY_SET );
 
         final ComponentInfo c3Info =
-            new ComponentInfo( new ComponentDescriptor( C3_IMPLEMENTATION_KEY, Attribute.EMPTY_SET ),
+            new ComponentInfo( C3_IMPLEMENTATION_KEY,
+                               Attribute.EMPTY_SET,
                                ServiceDescriptor.EMPTY_SET,
                                new ContextDescriptor( Context.class.getName(), EntryDescriptor.EMPTY_SET, Attribute.EMPTY_SET ),
                                new DependencyDescriptor[]{new DependencyDescriptor( C2_SERVICE + DependencyDescriptor.ARRAY_POSTFIX,
@@ -192,7 +194,8 @@ public class VerifierTestCase
                                                                                     Attribute.EMPTY_SET )},
                                null );
         final ComponentInfo c2Info =
-            new ComponentInfo( new ComponentDescriptor( C2_IMPLEMENTATION_KEY, Attribute.EMPTY_SET ),
+            new ComponentInfo( C2_IMPLEMENTATION_KEY,
+                               Attribute.EMPTY_SET,
                                new ServiceDescriptor[]{new ServiceDescriptor( C2_SERVICE, Attribute.EMPTY_SET )},
                                new ContextDescriptor( Context.class.getName(), EntryDescriptor.EMPTY_SET, Attribute.EMPTY_SET ),
                                DependencyDescriptor.EMPTY_SET,

@@ -11,11 +11,13 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import junit.framework.TestCase;
+import org.jcontainer.dna.Configuration;
+import org.jcontainer.dna.impl.ConsoleLogger;
+import org.jcontainer.dna.impl.DefaultConfiguration;
 import org.jcontainer.loom.components.deployer.PhoenixProfileBuilder;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.tools.LoomToolConstants;
 import org.jcontainer.loom.tools.configuration.ConfigurationBuilder;
-import org.jcontainer.loom.tools.info.ComponentDescriptor;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
@@ -25,9 +27,6 @@ import org.jcontainer.loom.tools.metadata.DependencyMetaData;
 import org.jcontainer.loom.tools.metadata.PartitionMetaData;
 import org.jcontainer.loom.tools.profile.ComponentProfile;
 import org.jcontainer.loom.tools.profile.PartitionProfile;
-import org.jcontainer.dna.Configuration;
-import org.jcontainer.dna.impl.DefaultConfiguration;
-import org.jcontainer.dna.impl.ConsoleLogger;
 import org.realityforge.metaclass.model.Attribute;
 import org.xml.sax.InputSource;
 
@@ -35,7 +34,7 @@ import org.xml.sax.InputSource;
  *  An basic test case for the Application.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.7 $ $Date: 2003-10-05 13:52:08 $
+ * @version $Revision: 1.8 $ $Date: 2003-10-06 13:29:04 $
  */
 public class ApplicationTestCase
     extends TestCase
@@ -51,7 +50,8 @@ public class ApplicationTestCase
     private static final String C4_NAME = PKG_NAME + "Component4";
 
     private static final ComponentInfo C1 =
-        new ComponentInfo( new ComponentDescriptor( C1_NAME, Attribute.EMPTY_SET ),
+        new ComponentInfo( C1_NAME,
+                           Attribute.EMPTY_SET,
                            ServiceDescriptor.EMPTY_SET,
                            LegacyUtil.CONTEXT_DESCRIPTOR,
                            new DependencyDescriptor[]{new DependencyDescriptor( S1_NAME,
@@ -62,7 +62,8 @@ public class ApplicationTestCase
         );
 
     private static final ComponentInfo C2 =
-        new ComponentInfo( new ComponentDescriptor( C2_NAME, Attribute.EMPTY_SET ),
+        new ComponentInfo( C2_NAME,
+                           Attribute.EMPTY_SET,
                            new ServiceDescriptor[]{new ServiceDescriptor( S1_NAME, Attribute.EMPTY_SET )},
                            LegacyUtil.CONTEXT_DESCRIPTOR,
                            DependencyDescriptor.EMPTY_SET,
@@ -70,7 +71,8 @@ public class ApplicationTestCase
         );
 
     private static final ComponentInfo C3 =
-        new ComponentInfo( new ComponentDescriptor( C3_NAME, Attribute.EMPTY_SET ),
+        new ComponentInfo( C3_NAME,
+                           Attribute.EMPTY_SET,
                            ServiceDescriptor.EMPTY_SET,
                            LegacyUtil.CONTEXT_DESCRIPTOR,
                            new DependencyDescriptor[]{new DependencyDescriptor( S1_ARRAY_NAME,
@@ -81,7 +83,8 @@ public class ApplicationTestCase
         );
 
     private static final ComponentInfo C4 =
-        new ComponentInfo( new ComponentDescriptor( C4_NAME, Attribute.EMPTY_SET ),
+        new ComponentInfo( C4_NAME,
+                           Attribute.EMPTY_SET,
                            ServiceDescriptor.EMPTY_SET,
                            LegacyUtil.CONTEXT_DESCRIPTOR,
                            new DependencyDescriptor[]{new DependencyDescriptor( S1_MAP_NAME,

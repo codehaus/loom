@@ -26,7 +26,7 @@ import org.jcontainer.loom.tools.qdox.LegacyInfoBuilder;
  *
  * @author Paul Hammant
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.8 $ $Date: 2003-10-06 12:56:10 $
+ * @version $Revision: 1.9 $ $Date: 2003-10-06 13:29:04 $
  */
 public class MetaGenerateTask
     extends AbstractQdoxTask
@@ -186,7 +186,7 @@ public class MetaGenerateTask
     private void writeInfo( final ComponentInfo info )
         throws IOException
     {
-        final String fqn = info.getDescriptor().getImplementationKey();
+        final String fqn = info.getImplementationKey();
         final File file = getOutputFileForClass( fqn );
         final OutputStream outputStream = new FileOutputStream( file );
         try

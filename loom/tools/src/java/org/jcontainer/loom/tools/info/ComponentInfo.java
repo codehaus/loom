@@ -8,6 +8,7 @@
 package org.jcontainer.loom.tools.info;
 
 import java.io.Serializable;
+import org.realityforge.metaclass.model.Attribute;
 
 /**
  * This class contains the meta information about a particular
@@ -23,15 +24,16 @@ import java.io.Serializable;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-10-05 01:18:58 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-06 13:29:04 $
  */
 public class ComponentInfo
+    extends FeatureDescriptor
     implements Serializable
 {
     /**
-     * descriptor for the component.
+     * The implementation key for component (usually classname).
      */
-    private final ComponentDescriptor m_descriptor;
+    private final String m_implementationKey;
 
     /**
      * Descriptors for the services exported by component.
@@ -56,15 +58,17 @@ public class ComponentInfo
     /**
      * Basic constructor that takes as parameters all parts.
      */
-    public ComponentInfo( final ComponentDescriptor descriptor,
+    public ComponentInfo( final String implementationKey,
+                          final Attribute[] atttributes,
                           final ServiceDescriptor[] services,
                           final ContextDescriptor context,
                           final DependencyDescriptor[] dependencies,
                           final SchemaDescriptor configurationSchema )
     {
-        if( null == descriptor )
+        super( atttributes );
+        if( null == implementationKey )
         {
-            throw new NullPointerException( "descriptor" );
+            throw new NullPointerException( "implementationKey" );
         }
         if( null == services )
         {
@@ -78,7 +82,7 @@ public class ComponentInfo
         {
             throw new NullPointerException( "dependencies" );
         }
-        m_descriptor = descriptor;
+        m_implementationKey = implementationKey;
         m_services = services;
         m_context = context;
         m_dependencies = dependencies;
@@ -86,13 +90,13 @@ public class ComponentInfo
     }
 
     /**
-     * Return the Component descriptor.
+     * Return the implementation key for component (usually classname).
      *
-     * @return the Component descriptor.
+     * @return the implementation key for component (usually classname).
      */
-    public ComponentDescriptor getDescriptor()
+    public String getImplementationKey()
     {
-        return m_descriptor;
+        return m_implementationKey;
     }
 
     /**
