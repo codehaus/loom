@@ -9,8 +9,6 @@ package org.jcontainer.loom.components.deployer;
 
 import java.util.ArrayList;
 import java.util.Map;
-import org.jcontainer.dna.AbstractLogEnabled;
-import org.jcontainer.dna.Logger;
 import org.jcontainer.loom.components.assembler.Assembler;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.tools.LoomToolConstants;
@@ -29,19 +27,12 @@ import org.jcontainer.loom.tools.profile.ProfileBuilder;
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.13 $ $Date: 2003-10-16 00:56:16 $
+ * @version $Revision: 1.14 $ $Date: 2003-10-16 05:11:32 $
  */
 public class PhoenixProfileBuilder
-    extends AbstractLogEnabled
     implements ProfileBuilder
 {
     private final Assembler m_assembler = new Assembler();
-
-    public void enableLogging( Logger logger )
-    {
-        super.enableLogging( logger );
-        setupLogger( m_assembler );
-    }
 
     public PartitionProfile buildProfile( final Map parameters )
         throws Exception
@@ -50,7 +41,6 @@ public class PhoenixProfileBuilder
         final ClassLoader classLoader =
             (ClassLoader)parameters.get( ContainerConstants.ASSEMBLY_CLASSLOADER );
         final ComponentFactory factory = new DefaultComponentFactory( classLoader );
-        setupLogger( factory, "factory" );
 
         return assembleSarProfile( metaData, factory, classLoader );
     }

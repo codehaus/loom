@@ -23,7 +23,7 @@ import java.io.Serializable;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.9 $ $Date: 2003-10-16 00:56:16 $
+ * @version $Revision: 1.10 $ $Date: 2003-10-16 05:11:33 $
  */
 public class ComponentInfo
     implements Serializable
@@ -56,6 +56,10 @@ public class ComponentInfo
                           final DependencyDescriptor[] dependencies,
                           final SchemaDescriptor configurationSchema )
     {
+        if( null == type )
+        {
+            throw new NullPointerException( "type" );
+        }
         if( null == services )
         {
             throw new NullPointerException( "services" );

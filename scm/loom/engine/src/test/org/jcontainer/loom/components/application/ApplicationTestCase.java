@@ -37,7 +37,7 @@ import org.xml.sax.InputSource;
  *  An basic test case for the Application.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.13 $ $Date: 2003-10-16 00:56:16 $
+ * @version $Revision: 1.14 $ $Date: 2003-10-16 05:11:32 $
  */
 public class ApplicationTestCase
     extends TestCase
@@ -307,7 +307,6 @@ public class ApplicationTestCase
         throws Exception
     {
         final PhoenixProfileBuilder assembler = new PhoenixProfileBuilder();
-        assembler.enableLogging( new ConsoleLogger() );
         final URL resource = getClass().getResource( config );
         assertNotNull( "Config resource: " + config, resource );
         final Configuration assembly =

@@ -172,7 +172,6 @@ public class DefaultDeployer
     public void initialize()
         throws Exception
     {
-        setupLogger( m_builder );
         setupLogger( m_verifier );
     }
 

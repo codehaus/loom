@@ -17,11 +17,18 @@ import org.jcontainer.loom.tools.data.Service2;
  * A test component.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-09-02 04:37:29 $
+ * @version $Revision: 1.3 $ $Date: 2003-10-16 05:11:33 $
+ * @phoenix:block
+ * @dna.service type="org.jcontainer.loom.tools.data.Service1"
  */
 public class Component1
     implements Serviceable, Service1
 {
+    /**
+     * @dna.dependency key="org.jcontainer.loom.tools.data.Service2"
+     *                 type="org.jcontainer.loom.tools.data.Service2"
+     *                 optional="false"
+     */
     public void service( final ServiceManager manager )
         throws ServiceException
     {

@@ -10,6 +10,10 @@ package org.jcontainer.loom.tools.verifier;
 import junit.framework.TestCase;
 import org.jcontainer.dna.impl.ConsoleLogger;
 import org.jcontainer.loom.tools.LoomToolConstants;
+import org.jcontainer.loom.tools.data.Component1;
+import org.jcontainer.loom.tools.data.Component3;
+import org.jcontainer.loom.tools.data.Component2;
+import org.jcontainer.loom.tools.data.Service2;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
@@ -23,41 +27,28 @@ import org.jcontainer.loom.tools.profile.PartitionProfile;
  *  An basic test case for the LogManager.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.17 $ $Date: 2003-10-16 00:56:16 $
+ * @version $Revision: 1.18 $ $Date: 2003-10-16 05:11:33 $
  */
 public class VerifierTestCase
     extends TestCase
 {
-    private static final String DATA_PKG = "org.jcontainer.loom.tools.data.";
-    private static final String C1_IMPLEMENTATION_KEY = DATA_PKG + "Component1";
-    private static final String C2_IMPLEMENTATION_KEY = DATA_PKG + "Component2";
-    private static final String C3_IMPLEMENTATION_KEY = DATA_PKG + "Component3";
-    private static final String C2_SERVICE = DATA_PKG + "Service2";
-    private static final String C1_NAME = "c1";
-    private static final String C3_NAME = "c3";
-
-    public VerifierTestCase( final String name )
-    {
-        super( name );
-    }
-
     public void testBasic()
         throws Exception
     {
         final DependencyMetaData dependency =
-            new DependencyMetaData( C2_SERVICE,
+            new DependencyMetaData( Service2.class.getName(),
                                     "c2",
-                                    C2_SERVICE );
+                                    Service2.class.getName() );
         final ComponentMetaData c1MetaData =
-            new ComponentMetaData( C1_NAME,
-                                   C1_IMPLEMENTATION_KEY,
+            new ComponentMetaData( "c1",
+                                   Component1.class.getName(),
                                    new DependencyMetaData[]{dependency},
                                    null,
                                    null,
                                    false );
         final ComponentMetaData c2MetaData =
             new ComponentMetaData( "c2",
-                                   C2_IMPLEMENTATION_KEY,
+                                   Component2.class.getName(),
                                    DependencyMetaData.EMPTY_SET,
                                    null,
                                    null,
@@ -78,13 +69,13 @@ public class VerifierTestCase
                                    new PartitionMetaData[]{blockMetaData, listenerMetaData},
                                    ComponentMetaData.EMPTY_SET );
         final ComponentInfo c1Info =
-            new ComponentInfo( null,
+            new ComponentInfo( Component1.class,
                                ServiceDescriptor.EMPTY_SET,
-                               new DependencyDescriptor[]{new DependencyDescriptor( C2_SERVICE, C2_SERVICE, false )},
+                               new DependencyDescriptor[]{new DependencyDescriptor( Service2.class.getName(), Service2.class.getName(), false )},
                                null );
         final ComponentInfo c2Info =
-            new ComponentInfo( null,
-                               new ServiceDescriptor[]{new ServiceDescriptor( C2_SERVICE )},
+            new ComponentInfo( Component2.class,
+                               new ServiceDescriptor[]{new ServiceDescriptor( Service2.class.getName() )},
                                DependencyDescriptor.EMPTY_SET,
                                null );
         final ComponentProfile c1Profile =
@@ -110,41 +101,41 @@ public class VerifierTestCase
         throws Exception
     {
         final DependencyMetaData dependency1 =
-            new DependencyMetaData( C2_SERVICE + DependencyDescriptor.ARRAY_POSTFIX,
+            new DependencyMetaData( Service2.class.getName() + DependencyDescriptor.ARRAY_POSTFIX,
                                     "c2a",
-                                    C2_SERVICE );
+                                    Service2.class.getName() );
         final DependencyMetaData dependency2 =
-            new DependencyMetaData( C2_SERVICE + DependencyDescriptor.ARRAY_POSTFIX,
+            new DependencyMetaData( Service2.class.getName() + DependencyDescriptor.ARRAY_POSTFIX,
                                     "c2b",
-                                    C2_SERVICE );
+                                    Service2.class.getName() );
         final DependencyMetaData dependency3 =
-            new DependencyMetaData( C2_SERVICE + DependencyDescriptor.ARRAY_POSTFIX,
+            new DependencyMetaData( Service2.class.getName() + DependencyDescriptor.ARRAY_POSTFIX,
                                     "c2c",
-                                    C2_SERVICE );
+                                    Service2.class.getName() );
         final ComponentMetaData c3MetaData =
-            new ComponentMetaData( C3_NAME,
-                                   C3_IMPLEMENTATION_KEY,
+            new ComponentMetaData( "c3",
+                                   Component3.class.getName(),
                                    new DependencyMetaData[]{dependency1, dependency2, dependency3},
                                    null,
                                    null,
                                    false );
         final ComponentMetaData c2aMetaData =
             new ComponentMetaData( "c2a",
-                                   C2_IMPLEMENTATION_KEY,
+                                   Component2.class.getName(),
                                    DependencyMetaData.EMPTY_SET,
                                    null,
                                    null,
                                    false );
         final ComponentMetaData c2bMetaData =
             new ComponentMetaData( "c2b",
-                                   C2_IMPLEMENTATION_KEY,
+                                   Component2.class.getName(),
                                    DependencyMetaData.EMPTY_SET,
                                    null,
                                    null,
                                    false );
         final ComponentMetaData c2cMetaData =
             new ComponentMetaData( "c2c",
-                                   C2_IMPLEMENTATION_KEY,
+                                   Component2.class.getName(),
                                    DependencyMetaData.EMPTY_SET,
                                    null,
                                    null,
@@ -166,15 +157,15 @@ public class VerifierTestCase
                                    ComponentMetaData.EMPTY_SET );
 
         final ComponentInfo c3Info =
-            new ComponentInfo( null,
+            new ComponentInfo( Component3.class,
                                ServiceDescriptor.EMPTY_SET,
-                               new DependencyDescriptor[]{new DependencyDescriptor( C2_SERVICE + DependencyDescriptor.ARRAY_POSTFIX,
-                                                                                    C2_SERVICE + DependencyDescriptor.ARRAY_POSTFIX,
+                               new DependencyDescriptor[]{new DependencyDescriptor( Service2.class.getName() + DependencyDescriptor.ARRAY_POSTFIX,
+                                                                                    Service2.class.getName() + DependencyDescriptor.ARRAY_POSTFIX,
                                                                                     false )},
                                null );
         final ComponentInfo c2Info =
-            new ComponentInfo( null,
-                               new ServiceDescriptor[]{new ServiceDescriptor( C2_SERVICE )},
+            new ComponentInfo( Component2.class,
+                               new ServiceDescriptor[]{new ServiceDescriptor( Service2.class.getName() )},
                                DependencyDescriptor.EMPTY_SET,
                                null );
         final ComponentProfile c3Profile =

@@ -12,6 +12,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>loom</groupId>
+            <artifactId>loom-info</artifactId>
+            <version>${pom.currentVersion}</version>
+        </dependency>
+        <dependency>
             <groupId>dna</groupId>
             <artifactId>dna-api</artifactId>
             <version>1.0</version>
@@ -91,16 +96,6 @@
             <excludes>
                 <exclude>**/Abstract*.java</exclude>
             </excludes>
-	        <resources>
-                <resource>
-                    <directory>${basedir}/src/test</directory>
-                    <includes>
-                        <include>**/*.xml</include>
-                        <include>**/*.xinfo</include>
-                        <include>**/*.java</include>
-                    </includes>
-                </resource>
-            </resources>
         </unitTest>
 
         <resources>
