@@ -1,5 +1,9 @@
 <?xml version="1.0"?>
-<project default="main">
+<project default="main"
+	xmlns:j="jelly:core"
+	xmlns:ant="jelly:ant"
+	xmlns:maven="jelly:maven"
+    xmlns:velocity="jelly:org.apache.commons.jelly.tags.velocity.VelocityTagLibrary">
 
     <goal name="main">
         <attainGoal name="build"/>
@@ -8,6 +12,17 @@
     <goal name="build">
         <attainGoal name="site:generate"/>    	
     </goal>
+	
+    <goal name="deploy">
+        <attainGoal name="site:deploy"/>    	
+    </goal>
+
+	<preGoal name="xdoc:init">
+		<attainGoal name="aggregate-plugins-xdocs"/>
+		<ant:copy todir="${maven.docs.aggregated.src}" overwrite="true">
+        	<ant:fileset dir="${basedir}/xdocs"/>
+      	</ant:copy>
+	</preGoal>
 
 	<postGoal name="xdoc:copy-user-resources">
 		<copy todir="${maven.build.dir}/docs/dtds" filtering="no">
@@ -16,9 +31,44 @@
         	</fileset>
       	</copy>
 	</postGoal>
-	
-    <goal name="deploy">
-        <attainGoal name="site:deploy"/>    	
-    </goal>
+
+	<goal name="aggregate-plugins-xdocs">
+    	<ant:mkdir dir="${maven.docs.aggregated.src}"/>
+    	<j:set var="pluginsDir" value="${basedir}/../plugins"/>
+    	<j:set var="aggregatedDir" value="${maven.docs.aggregated.src}/plugins"/>
+    	<ant:fileScanner var="plugins">
+        	<ant:fileset dir="${pluginsDir}">
+   	        	<ant:include name="*/project.xml"/>
+            </ant:fileset>
+   		</ant:fileScanner>
+   		<ant:copy todir="${aggregatedDir}">
+   			<ant:fileset dir="${pluginsDir}/xdocs"/>
+   		</ant:copy>
+		<ant:copy todir="${maven.build.dir}/templates">
+   			<ant:fileset dir="src/templates"/>
+		</ant:copy>
+   		<j:forEach items="${plugins.iterator()}" var="plugin">
+        	<maven:pom projectDescriptor="${plugin}" var="pluginPom"/>
+      		<j:set var="name" value="${plugin.parentFile.name}"/>
+      		<ant:copy todir="${aggregatedDir}/${name}">
+      			<ant:fileset dir="${pluginsDir}/${name}/xdocs"/>
+      		</ant:copy>
+			<!-- Generate navigation with correct relative path -->
+        	<j:file name="${maven.build.dir}/templates/navigation.menu" 
+        		omitXmlDeclaration="true" 
+        		prettyPrint="true">
+			    <menu name="Overview">
+			      <item name="Goals"              href="/plugins/${name}/goals.html" />
+			      <item name="Properties"         href="/plugins/${name}/properties.html" />
+			      <item name="Tips"               href="/plugins/${name}/tips.html"/>
+			    </menu>
+	       	</j:file>
+	        <velocity:merge 
+	          name="${aggregatedDir}/${name}/navigation.xml"
+	          basedir="${maven.build.dir}/templates"
+	          template="navigation.xml"/>
+   		</j:forEach>
+	</goal>  
+
 
 </project>
