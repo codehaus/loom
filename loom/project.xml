@@ -1,9 +1,7 @@
 <?xml version="1.0"?>
 <project>
     <pomVersion>3</pomVersion>
-    <currentVersion>1.0-beta1-dev</currentVersion>
     <inceptionYear>1999</inceptionYear>
-    <package>org.codehaus.loom</package>
 
     <organization>
         <name>Codehaus</name>
@@ -11,7 +9,9 @@
         <logo>http://codehaus.org/codehaus-small.gif</logo>
     </organization>
 
-    <groupId>loom</groupId>
+    <groupId>loom</groupId>    
+    <!-- ensure the plugins/project.xml currentVersion is changed accordingly -->
+    <currentVersion>1.0-rc1</currentVersion>
     <package>org.codehaus.loom</package>
     <url>http://loom.codehaus.org</url>
     <logo>/images/loom-logo.png</logo>
@@ -28,14 +28,14 @@
 
     <versions>
         <version>
-            <id>1.0-beta1-SNAPSHOT</id>
-            <name>1.0-beta1-SNAPSHOT</name>
+            <id>1.0-rc2-dev</id>
+            <name>1.0-rc2-dev</name>
             <tag>HEAD</tag>
         </version>
         <version>
-            <id>1.0-beta1</id>
-            <name>1.0-beta1</name>
-            <tag>LOOM_1_0_BETA_1-tag</tag>
+            <id>1.0-rc1</id>
+            <name>1.0-rc1</name>
+            <tag>LOOM_1_0_RC1-tag</tag>
         </version>
     </versions>
 
