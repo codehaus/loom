@@ -422,7 +422,7 @@ public class DefaultEmbeddor
 
     /**
      * Get name by which the server is know.
-     * Usually this defaults to {@link ContainerConstants.SOFTWARE} but the admin
+     * Usually this defaults to {@link ContainerConstants#SOFTWARE} but the admin
      * may assign another name. This is useful when you
      * are managing a cluster of servers.
      *
