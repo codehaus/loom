@@ -3,17 +3,17 @@
     <extend>${basedir}/../project.xml</extend>
     <name>Loom Plugins</name>
     <groupId>loom</groupId>
-    <currentVersion>1.0-rc3-dev</currentVersion>
+    <currentVersion>1.0-rc3</currentVersion>
 
     <versions>
         <version>
             <id>1.0-rc3</id>
-            <name>1.0-r3</name>
+            <name>1.0-rc3</name>
             <tag>LOOM_PLUGINS_1_0_RC3-tag</tag>
         </version>
         <version>
             <id>1.0-rc2</id>
-            <name>1.0-r2</name>
+            <name>1.0-rc2</name>
             <tag>LOOM_PLUGINS_1_0_RC2-tag</tag>
         </version>
     </versions>

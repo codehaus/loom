@@ -11,7 +11,7 @@
 
     <groupId>loom</groupId>    
     <!-- ensure the plugins/project.xml currentVersion is changed accordingly -->
-    <currentVersion>1.0-rc3-dev</currentVersion>
+    <currentVersion>1.0-rc3</currentVersion>
     <package>org.codehaus.loom</package>
     <url>http://loom.codehaus.org</url>
     <logo>/images/loom-logo.png</logo>
