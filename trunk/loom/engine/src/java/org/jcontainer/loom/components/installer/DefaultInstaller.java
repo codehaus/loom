@@ -99,10 +99,10 @@ import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
-import org.apache.avalon.framework.parameters.ParameterException;
-import org.apache.avalon.framework.parameters.Parameterizable;
-import org.apache.avalon.framework.parameters.Parameters;
 import org.jcontainer.dna.Active;
+import org.jcontainer.dna.Parameterizable;
+import org.jcontainer.dna.ParameterException;
+import org.jcontainer.dna.Parameters;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.Installer;
 import org.jcontainer.loom.interfaces.LoomException;
@@ -117,7 +117,7 @@ import org.realityforge.salt.io.IOUtil;
  * and installing it as appropriate.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.7 $ $Date: 2003-10-05 08:10:20 $
+ * @version $Revision: 1.8 $ $Date: 2003-10-05 08:47:14 $
  */
 public class DefaultInstaller
     extends AbstractLogEnabled
@@ -155,7 +155,7 @@ public class DefaultInstaller
      * Retrieve parameter that specifies work directory.
      *
      * @param parameters the parameters to read
-     * @throws org.apache.avalon.framework.parameters.ParameterException if invlaid work directory
+     * @throws ParameterException if invlaid work directory
      */
     public void parameterize( final Parameters parameters )
         throws ParameterException

@@ -90,10 +90,10 @@ import java.io.File;
 import java.util.ArrayList;
 import org.apache.avalon.framework.logger.LogEnabled;
 import org.apache.avalon.framework.logger.Logger;
-import org.apache.avalon.framework.parameters.ParameterException;
-import org.apache.avalon.framework.parameters.Parameterizable;
-import org.apache.avalon.framework.parameters.Parameters;
 import org.jcontainer.dna.Active;
+import org.jcontainer.dna.Parameterizable;
+import org.jcontainer.dna.Parameters;
+import org.jcontainer.dna.ParameterException;
 import org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager;
 import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
 import org.jcontainer.loom.components.ParameterConstants;
@@ -103,7 +103,7 @@ import org.realityforge.salt.i18n.Resources;
 
 /**
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-10-05 08:10:20 $
+ * @version $Revision: 1.7 $ $Date: 2003-10-05 08:47:14 $
  */
 public class DefaultExtensionManager
     extends org.jcontainer.loom.components.extensions.pkgmgr.impl.DefaultExtensionManager
