@@ -745,6 +745,7 @@ public class DefaultEmbeddor
     }
 
     private ResourceLocator getResourceLocator()
+        throws Exception
     {
         final DefaultResourceLocator locator = new DefaultResourceLocator();
         locator.put( Embeddor.class.getName(), this );
@@ -758,6 +759,14 @@ public class DefaultEmbeddor
             final Object component = getEmbeddorComponent( role );
             locator.put( role, component );
         }
+
+        final ClassLoader commonClassLoader =
+            (ClassLoader)m_context.get( "common.classloader" );
+        locator.put( ClassLoader.class.getName() + "/common", commonClassLoader );
+        final ClassLoader containerClassLoader =
+            (ClassLoader)m_context.get( "container.classloader" );
+        locator.put( ClassLoader.class.getName() + "/container", containerClassLoader );
+
         return locator;
     }
 
