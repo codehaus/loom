@@ -89,8 +89,6 @@ package org.jcontainer.loom.components.kernel;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.avalon.framework.activity.Disposable;
-import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.container.ContainerUtil;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.logger.Logger;
@@ -100,6 +98,10 @@ import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 import org.apache.excalibur.instrument.InstrumentManager;
 import org.jcomponent.loggerstore.LoggerStore;
+import org.jcontainer.dna.Active;
+import org.jcontainer.dna.Configurable;
+import org.jcontainer.dna.Configuration;
+import org.jcontainer.dna.ConfigurationException;
 import org.jcontainer.loom.components.application.DefaultApplication;
 import org.jcontainer.loom.interfaces.Application;
 import org.jcontainer.loom.interfaces.ApplicationContext;
@@ -110,9 +112,6 @@ import org.jcontainer.loom.interfaces.Kernel;
 import org.jcontainer.loom.interfaces.KernelMBean;
 import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.interfaces.SystemManager;
-import org.jcontainer.dna.Configurable;
-import org.jcontainer.dna.Configuration;
-import org.jcontainer.dna.ConfigurationException;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
@@ -131,7 +130,7 @@ import org.realityforge.salt.i18n.Resources;
  */
 public class DefaultKernel
     extends AbstractLogEnabled
-    implements Kernel, KernelMBean, Initializable, Serviceable, Disposable, Configurable
+    implements Kernel, KernelMBean, Active, Serviceable, Configurable
 {
     private static final Resources REZ =
         ResourceManager.getPackageResources( DefaultKernel.class );
@@ -309,7 +308,7 @@ public class DefaultKernel
                         createApplicationContext( entry );
                     newApp.setApplicationContext( context );
 
-                    ContainerUtil.initialize( newApp );
+                    org.jcontainer.dna.impl.ContainerUtil.initialize( newApp );
 
                     application = newApp;
                 }
@@ -433,7 +432,7 @@ public class DefaultKernel
 
         ContainerUtil.enableLogging( context, createContextLogger( name ) );
         ContainerUtil.service( context, createServiceManager() );
-        ContainerUtil.initialize( context );
+        org.jcontainer.dna.impl.ContainerUtil.initialize( context );
         return context;
     }
 

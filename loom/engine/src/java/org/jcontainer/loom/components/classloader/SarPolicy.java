@@ -90,9 +90,9 @@ import java.security.CodeSource;
 import java.security.PermissionCollection;
 import java.security.Permissions;
 import java.util.Map;
-import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.logger.LogEnabled;
 import org.apache.avalon.framework.logger.Logger;
+import org.jcontainer.dna.Active;
 import org.realityforge.xmlpolicy.runtime.DefaultPolicy;
 
 /**
@@ -102,7 +102,7 @@ import org.realityforge.xmlpolicy.runtime.DefaultPolicy;
  */
 class SarPolicy
     extends DefaultPolicy
-    implements LogEnabled, Initializable
+    implements LogEnabled, Active
 {
     private Logger m_logger;
     private final Map m_grants;
@@ -122,6 +122,11 @@ class SarPolicy
         throws Exception
     {
         processGrants( m_grants );
+    }
+
+    public void dispose()
+        throws Exception
+    {
     }
 
     public PermissionCollection getPermissions( final CodeSource codeSource )

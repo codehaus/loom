@@ -91,22 +91,22 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Map;
-import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.logger.Logger;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
-import org.jcontainer.loom.components.util.ResourceUtil;
 import org.apache.excalibur.instrument.InstrumentManager;
+import org.jcomponent.loggerstore.LoggerStore;
+import org.jcontainer.dna.Active;
+import org.jcontainer.loom.components.util.ResourceUtil;
 import org.jcontainer.loom.interfaces.ApplicationContext;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.Kernel;
 import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.interfaces.SystemManager;
-import org.jcomponent.loggerstore.LoggerStore;
-import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
+import org.realityforge.salt.i18n.Resources;
 
 /**
  * Manage the "frame" in which Applications operate.
@@ -116,7 +116,7 @@ import org.realityforge.salt.i18n.ResourceManager;
  */
 class DefaultApplicationContext
     extends AbstractLogEnabled
-    implements ApplicationContext, Serviceable, Initializable
+    implements ApplicationContext, Serviceable, Active
 {
     private static final Resources REZ =
         ResourceManager.getPackageResources( DefaultApplicationContext.class );
@@ -197,6 +197,11 @@ class DefaultApplicationContext
         throws Exception
     {
         m_blockManager = getManagementContext();
+    }
+
+    public void dispose()
+        throws Exception
+    {
     }
 
     public InputStream getResourceAsStream( final String name )

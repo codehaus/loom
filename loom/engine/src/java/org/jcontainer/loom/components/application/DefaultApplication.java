@@ -90,20 +90,18 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import org.apache.avalon.framework.activity.Disposable;
-import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.activity.Startable;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.logger.Logger;
 import org.apache.avalon.phoenix.ApplicationListener;
 import org.apache.avalon.phoenix.BlockListener;
 import org.apache.avalon.phoenix.metadata.SarMetaData;
+import org.jcontainer.dna.Active;
 import org.jcontainer.loom.components.util.ComponentMetaDataConverter;
 import org.jcontainer.loom.interfaces.Application;
 import org.jcontainer.loom.interfaces.ApplicationContext;
-import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.interfaces.ApplicationMBean;
-import org.jcontainer.loom.interfaces.ContainerConstants;
+import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.tools.LoomToolConstants;
 import org.jcontainer.loom.tools.lifecycle.LifecycleException;
 import org.jcontainer.loom.tools.lifecycle.LifecycleHelper;
@@ -120,7 +118,7 @@ import org.realityforge.salt.i18n.Resources;
  */
 public final class DefaultApplication
     extends AbstractLogEnabled
-    implements Application, ApplicationMBean, Initializable, Startable, Disposable
+    implements Application, ApplicationMBean, Active, Startable
 {
     private static final Resources REZ =
         ResourceManager.getPackageResources( DefaultApplication.class );

@@ -268,7 +268,7 @@ public final class CLIMain
                                          new DefaultContext( data ) );
             ContainerUtil.parameterize( m_embeddor, parameters );
             org.jcontainer.dna.impl.ContainerUtil.configure( m_embeddor, configuration );
-            ContainerUtil.initialize( m_embeddor );
+            org.jcontainer.dna.impl.ContainerUtil.initialize( m_embeddor );
         }
         catch( final Throwable throwable )
         {
@@ -360,7 +360,7 @@ public final class CLIMain
 
                 try
                 {
-                    ContainerUtil.shutdown( m_embeddor );
+                    org.jcontainer.dna.impl.ContainerUtil.dispose( m_embeddor );
                 }
                 catch( final Throwable throwable )
                 {

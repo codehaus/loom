@@ -93,14 +93,16 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.Set;
-import org.apache.avalon.framework.activity.Disposable;
-import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 import org.apache.avalon.phoenix.BlockContext;
 import org.jcomponent.loggerstore.LoggerStore;
+import org.jcontainer.dna.Active;
+import org.jcontainer.dna.Configuration;
+import org.jcontainer.dna.ConfigurationException;
+import org.jcontainer.dna.impl.DefaultConfiguration;
 import org.jcontainer.loom.interfaces.ClassLoaderManager;
 import org.jcontainer.loom.interfaces.ClassLoaderSet;
 import org.jcontainer.loom.interfaces.ConfigurationInterceptor;
@@ -108,7 +110,6 @@ import org.jcontainer.loom.interfaces.ConfigurationValidator;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.Deployer;
 import org.jcontainer.loom.interfaces.DeployerMBean;
-import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.interfaces.Installer;
 import org.jcontainer.loom.interfaces.Kernel;
 import org.jcontainer.loom.interfaces.LogManager;
@@ -119,9 +120,6 @@ import org.jcontainer.loom.tools.profile.ComponentProfile;
 import org.jcontainer.loom.tools.profile.PartitionProfile;
 import org.jcontainer.loom.tools.profile.ProfileBuilder;
 import org.jcontainer.loom.tools.verifier.SarVerifier;
-import org.jcontainer.dna.Configuration;
-import org.jcontainer.dna.ConfigurationException;
-import org.jcontainer.dna.impl.DefaultConfiguration;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 import org.xml.sax.InputSource;
@@ -133,7 +131,7 @@ import org.xml.sax.InputSource;
  */
 public class DefaultDeployer
     extends AbstractLogEnabled
-    implements Deployer, Serviceable, Initializable, Disposable, DeployerMBean
+    implements Deployer, Serviceable, Active, DeployerMBean
 {
     private static final Resources REZ =
         ResourceManager.getPackageResources( DefaultDeployer.class );

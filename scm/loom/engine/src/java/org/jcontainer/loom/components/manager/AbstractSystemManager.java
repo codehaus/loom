@@ -88,13 +88,12 @@ package org.jcontainer.loom.components.manager;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.avalon.framework.activity.Disposable;
-import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
+import org.jcontainer.dna.Active;
 import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.interfaces.SystemManager;
-import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
+import org.realityforge.salt.i18n.Resources;
 
 /**
  * This is abstract implementation of SystemManager.
@@ -103,7 +102,7 @@ import org.realityforge.salt.i18n.ResourceManager;
  */
 public abstract class AbstractSystemManager
     extends AbstractLogEnabled
-    implements SystemManager, Initializable, Disposable
+    implements SystemManager, Active
 {
     private static final Resources REZ =
         ResourceManager.getPackageResources( AbstractSystemManager.class );
