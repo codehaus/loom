@@ -27,8 +27,6 @@ The mxinfo is the document root, it defines one or more management topics.
 
 -->
 <!ELEMENT mxinfo (topic*,proxy*)>
-<!ATTLIST mxinfo id ID #IMPLIED
-          xmlns CDATA #FIXED "http://avalon.apache.org/dtds/phoenix/mxinfo_1_0.dtd" >
 
 <!--
 The topic element describes a set of attributes and operations relating to a
