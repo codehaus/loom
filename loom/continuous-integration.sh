@@ -26,10 +26,6 @@ mkdir target
 
 # Compile and test
 maven clean-all &> target/cleanbuild.log
-
-cd tools
-maven build &> target/cleanbuild.log
-cd ..
 maven build &> ../target/cleanbuild.log
 
 # See if the "compiling" file is there. If it is, compilation
