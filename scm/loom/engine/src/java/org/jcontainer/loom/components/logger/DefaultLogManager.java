@@ -116,7 +116,7 @@ import org.jcontainer.loom.components.util.ResourceUtil;
 import org.jcontainer.loom.components.util.DNAAvalonLogger;
 import org.jcontainer.loom.components.ParameterConstants;
 import org.jcontainer.loom.interfaces.LogManager;
-import org.jcontainer.loom.tools.configuration.ConfigurationConverter;
+import org.jcontainer.loom.components.util.ConfigurationConverter;
 import org.realityforge.configkit.PropertyExpander;
 import org.realityforge.configkit.ResolverFactory;
 import org.realityforge.salt.i18n.ResourceManager;

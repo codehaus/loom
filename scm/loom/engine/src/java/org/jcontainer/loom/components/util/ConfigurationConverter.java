@@ -5,7 +5,7 @@
  * Software License version 1.1, a copy of which has been included
  * with this distribution in the LICENSE.txt file.
  */
-package org.jcontainer.loom.tools.configuration;
+package org.jcontainer.loom.components.util;
 
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.DefaultConfiguration;
@@ -15,7 +15,7 @@ import org.apache.avalon.framework.configuration.DefaultConfiguration;
  * into Avalon Configuraiton objects.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-10-05 03:25:12 $
+ * @version $Revision: 1.3 $ $Date: 2003-10-16 05:48:07 $
  */
 public class ConfigurationConverter
 {
