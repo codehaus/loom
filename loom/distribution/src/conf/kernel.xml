@@ -64,7 +64,7 @@
             <!--<enable-http-adaptor>true</enable-http-adaptor>-->
 
             <!--
-            The Http Adaptor will use the $PHOENIX_HOME/conf/xsl directory
+            The Http Adaptor will use the $LOOM_HOME/conf/xsl directory
             by default to retrieve it's stylesheets.
             -->
             <stylesheets-dir>${loom.home}/conf/xsl</stylesheets-dir>
