@@ -105,7 +105,7 @@ import org.realityforge.metaclass.model.Attribute;
  *
  * @author Paul Hammant
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.8 $ $Date: 2003-10-05 01:13:14 $
+ * @version $Revision: 1.9 $ $Date: 2003-10-05 01:18:58 $
  */
 public class LegacyInfoBuilder
     extends AbstractInfoBuilder
@@ -125,7 +125,7 @@ public class LegacyInfoBuilder
         final DependencyDescriptor[] dependencies = buildDependencies( javaClass );
 
         return new ComponentInfo( component, services, context,
-                                  dependencies, schema, null );
+                                  dependencies, schema );
     }
 
     /**

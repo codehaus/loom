@@ -12,7 +12,6 @@ import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.context.Contextualizable;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.logger.Logger;
-import org.apache.avalon.framework.parameters.Parameterizable;
 import org.apache.avalon.framework.service.Serviceable;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ContextDescriptor;
@@ -43,7 +42,7 @@ import org.realityforge.salt.i18n.Resources;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-06-29 01:07:36 $
+ * @version $Revision: 1.6 $ $Date: 2003-10-05 01:18:58 $
  */
 public class InfoVerifier
     extends AbstractLogEnabled
@@ -129,7 +128,7 @@ public class InfoVerifier
         verifyDependencyPresence( name, implementationKey, info, implementation );
         verifyContextPresence( name, implementationKey, info, implementation );
         verifyConfigurationSchemaPresence( name, implementationKey, info, implementation );
-        verifyParametersSchemaPresence( name, implementationKey, info, implementation );
+        //verifyParametersSchemaPresence( name, implementationKey, info, implementation );
     }
 
     /**
@@ -174,6 +173,7 @@ public class InfoVerifier
      * @param implementation the class implementing component
      * @throws org.jcontainer.loom.tools.verifier.VerifyException if fails verification check
      */
+/*
     protected void verifyParametersSchemaPresence( final String name,
                                                    final String implementationKey,
                                                    final ComponentInfo info,
@@ -197,6 +197,7 @@ public class InfoVerifier
             }
         }
     }
+*/
 
     /**
      * Verify that the if  the component is not Contextualizable that it

@@ -24,7 +24,7 @@ import org.realityforge.metaclass.model.Attribute;
  * Write {@link org.jcontainer.loom.tools.info.ComponentInfo} objects to a stream as xml documents.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-10-05 01:13:14 $
+ * @version $Revision: 1.6 $ $Date: 2003-10-05 01:18:58 $
  */
 public class XMLInfoWriter
     implements InfoWriter
@@ -51,7 +51,6 @@ public class XMLInfoWriter
         writeServices( writer, info.getServices() );
         writeDependencies( writer, info.getDependencies() );
         writeSchema( writer, "configuration", info.getConfigurationSchema() );
-        writeSchema( writer, "parameters", info.getParametersSchema() );
         writer.write( "</component-info>" );
         writer.flush();
     }

@@ -32,7 +32,7 @@ import org.xml.sax.InputSource;
  * is specified in the <a href="package-summary.html#external">package summary</a>.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.8 $ $Date: 2003-10-05 01:13:14 $
+ * @version $Revision: 1.9 $ $Date: 2003-10-05 01:18:58 $
  */
 public final class XMLInfoReader
     extends AbstractLogEnabled
@@ -108,9 +108,6 @@ public final class XMLInfoReader
         configuration = info.getChild( "configuration-schema", false );
         final SchemaDescriptor configurationSchema = buildSchema( configuration );
 
-        configuration = info.getChild( "parameters-schema", false );
-        final SchemaDescriptor parametersSchema = buildSchema( configuration );
-
         if( getLogger().isDebugEnabled() )
         {
             final String message =
@@ -124,7 +121,7 @@ public final class XMLInfoReader
 
         return new ComponentInfo( descriptor, services,
                                   context, dependencies,
-                                  configurationSchema, parametersSchema );
+                                  configurationSchema );
     }
 
     /**

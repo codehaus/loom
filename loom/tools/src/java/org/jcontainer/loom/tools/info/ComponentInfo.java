@@ -23,7 +23,7 @@ import java.io.Serializable;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-10-05 01:13:14 $
+ * @version $Revision: 1.4 $ $Date: 2003-10-05 01:18:58 $
  */
 public class ComponentInfo
     implements Serializable
@@ -49,11 +49,6 @@ public class ComponentInfo
     private final SchemaDescriptor m_configurationSchema;
 
     /**
-     * Descriptor for the schema of components parameters.
-     */
-    private final SchemaDescriptor m_parametersSchema;
-
-    /**
      * Descriptor for the service dependencies of component.
      */
     private final DependencyDescriptor[] m_dependencies;
@@ -65,8 +60,7 @@ public class ComponentInfo
                           final ServiceDescriptor[] services,
                           final ContextDescriptor context,
                           final DependencyDescriptor[] dependencies,
-                          final SchemaDescriptor configurationSchema,
-                          final SchemaDescriptor parametersSchema )
+                          final SchemaDescriptor configurationSchema )
     {
         if( null == descriptor )
         {
@@ -89,7 +83,6 @@ public class ComponentInfo
         m_context = context;
         m_dependencies = dependencies;
         m_configurationSchema = configurationSchema;
-        m_parametersSchema = parametersSchema;
     }
 
     /**
@@ -131,16 +124,6 @@ public class ComponentInfo
     public SchemaDescriptor getConfigurationSchema()
     {
         return m_configurationSchema;
-    }
-
-    /**
-     * Return the schema for the parameters.
-     *
-     * @return the schema for the parameters.
-     */
-    public SchemaDescriptor getParametersSchema()
-    {
-        return m_parametersSchema;
     }
 
     /**
