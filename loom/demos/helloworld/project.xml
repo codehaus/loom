@@ -12,12 +12,17 @@
     <dependencies>
         <dependency>
             <groupId>loom</groupId>
+            <artifactId>loom-info</artifactId>
+            <version>${pom.currentVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>loom</groupId>
             <artifactId>loom-tools</artifactId>
             <version>${pom.currentVersion}</version>
         </dependency>
         <dependency>
             <groupId>loom</groupId>
-            <artifactId>loom-sar-plugin</artifactId>
+            <artifactId>maven-sar-plugin</artifactId>
             <version>1.0</version>
             <type>plugin</type>
         </dependency>
@@ -61,7 +66,7 @@
                 <sar.bundle>true</sar.bundle>
             </properties>
         </dependency>
-        <dependency> <!-- for metagenerating xinfo --> 
+        <dependency> <!-- for metagenerating xinfo -->
             <groupId>spice</groupId>
             <artifactId>spice-metaclass</artifactId>
             <version>20031005.002435</version>
