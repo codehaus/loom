@@ -122,6 +122,7 @@
     <preGoal name="buildDist">
         <j:set var="wrapperDir" value='target/wrapper'/>
         <ant:mkdir dir="${wrapperDir}"/>
+        <ant:mkdir dir="${maven.repo.local}/wrapper/distributions/"/>
         <ant:setproxy proxyhost="${maven.proxy.host}" proxyport="${maven.proxy.port}"/>
         <j:set var="distURL" value='${wrapper.url}'/>
         <!-- *nix wrapper -->
