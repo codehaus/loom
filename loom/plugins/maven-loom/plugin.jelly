@@ -34,9 +34,9 @@
     </goal>
 
     <!--==================================================================-->
-    <!-- Metagenerate descriptor files                                    -->
+    <!-- Metagenerate descriptors                                         -->
     <!--==================================================================-->
-    <goal name="loom:metagenerate" prereqs="loom:init,metaclass:generate" description="Generate Loom Descriptor Files">
+    <goal name="loom:metagenerate" prereqs="loom:init,metaclass:generate" description="Generate Loom Descriptors">
     </goal>
 
     <!--==================================================================-->
