@@ -5,17 +5,13 @@
         <attainGoal name="build"/>
     </goal>
 
-    <goal name="clean-all">
+    <goal name="clean">
         <echo message="Cleaning all demos"/>
         <maven:reactor
             basedir="${basedir}"
             includes="*/project.xml"
             goals="clean"
             banner="Cleaning"
-            ignoreFailures="false"/>
-        <maven:maven
-            descriptor="${basedir}/distributed/project.xml"
-            goals="clean-all"
             ignoreFailures="false"/>
     </goal>
 
