@@ -14,7 +14,7 @@ import java.io.File;
 
 import junit.framework.TestCase;
 
-import org.apache.avalon.excalibur.extension.Extension;
+import org.realityforge.extension.Extension;
 import org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager;
 import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
 import org.jcontainer.loom.components.extensions.pkgmgr.impl.DelegatingExtensionManager;
@@ -23,7 +23,7 @@ import org.jcontainer.loom.components.extensions.pkgmgr.impl.DelegatingExtension
  * A basic test case for comparator.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-07-18 01:05:02 $
+ * @version $Revision: 1.2 $ $Date: 2003-08-02 12:26:32 $
  */
 public class ComparatorTestCase
     extends TestCase
@@ -110,15 +110,15 @@ public class ComparatorTestCase
 
         assertEquals( "pkgs.length", 2, pkgs.length );
 
-        final Extension extension1 = pkgs[ 0 ].getAvailableExtensions()[ 0 ];
-        final Extension extension2 = pkgs[ 1 ].getAvailableExtensions()[ 0 ];
+        final org.realityforge.extension.Extension extension1 = pkgs[ 0 ].getAvailableExtensions()[ 0 ];
+        final org.realityforge.extension.Extension extension2 = pkgs[ 1 ].getAvailableExtensions()[ 0 ];
         assertEquals( "pkgs[0].vendor", vendor1, extension1.getImplementationVendor() );
         assertEquals( "pkgs[1].vendor", vendor2, extension2.getImplementationVendor() );
     }
 
     private OptionalPackage[] getOptionalPackages( final ExtensionManager manager )
     {
-        return manager.getOptionalPackages( new Extension( NAME, null, null, null, null, null, null ) );
+        return manager.getOptionalPackages( new org.realityforge.extension.Extension( NAME, null, null, null, null, null, null ) );
     }
 
     private ExtensionManager createExtensionManager( final String specVersion1,
@@ -139,13 +139,13 @@ public class ComparatorTestCase
                                            final String specVersion,
                                            final String implVersion )
     {
-        final Extension extension = new Extension( NAME,
+        final org.realityforge.extension.Extension extension = new org.realityforge.extension.Extension( NAME,
                                                    specVersion, null,
                                                    implVersion, vendor, null,
                                                    null );
         final File file = new File( "." );
-        final Extension[] available = new Extension[]{extension};
-        final Extension[] required = new Extension[ 0 ];
+        final org.realityforge.extension.Extension[] available = new org.realityforge.extension.Extension[]{extension};
+        final org.realityforge.extension.Extension[] required = new org.realityforge.extension.Extension[ 0 ];
         return new OptionalPackage( file, available, required );
     }
 

@@ -10,7 +10,7 @@
  */
 package org.jcontainer.loom.components.extension;
 
-import org.apache.avalon.excalibur.extension.Extension;
+import org.realityforge.extension.Extension;
 import org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager;
 import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
 
@@ -18,7 +18,7 @@ import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
  * a class to help test sorting of ExtensionManager.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-07-18 01:05:02 $
+ * @version $Revision: 1.2 $ $Date: 2003-08-02 12:26:32 $
  */
 class TestExtensionManager
     implements ExtensionManager
@@ -30,7 +30,7 @@ class TestExtensionManager
         m_optionalPackages = optionalPackages;
     }
 
-    public OptionalPackage[] getOptionalPackages( final Extension extension )
+    public OptionalPackage[] getOptionalPackages( final org.realityforge.extension.Extension extension )
     {
         return m_optionalPackages;
     }

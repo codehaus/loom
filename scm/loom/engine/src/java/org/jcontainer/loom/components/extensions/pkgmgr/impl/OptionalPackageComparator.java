@@ -11,8 +11,8 @@
 package org.jcontainer.loom.components.extensions.pkgmgr.impl;
 
 import java.util.Comparator;
-import org.apache.avalon.excalibur.extension.DeweyDecimal;
-import org.apache.avalon.excalibur.extension.Extension;
+import org.realityforge.extension.DeweyDecimal;
+import org.realityforge.extension.Extension;
 import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
 
 /**
@@ -21,7 +21,7 @@ import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
  * versions rate lower than specified versions.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-29 04:41:32 $
+ * @version $Revision: 1.2 $ $Date: 2003-08-02 12:26:32 $
  */
 class OptionalPackageComparator
     implements Comparator

@@ -27,7 +27,7 @@ import org.apache.oro.text.regex.Perl5Matcher;
  * {@link #m_baseDirectory} value.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-29 04:38:21 $
+ * @version $Revision: 1.2 $ $Date: 2003-08-02 12:26:32 $
  * @deprecated Convert to ClassMan SimpleLoaderResolver when it updates
  *             dependecy to latest Excalibur-Extension
  */
@@ -37,7 +37,7 @@ class DefaultLoaderResolver
     /**
      * Create a resolver that resolves all files according to specied
      * baseDirectory and using specified {@link PackageManager} to aquire
-     * {@link org.apache.avalon.excalibur.extension.Extension} objects.
+     * {@link org.realityforge.extension.Extension} objects.
      *
      * @param baseDirectory the base directory
      * @param manager the {@link PackageManager}

@@ -16,7 +16,7 @@ import java.security.Policy;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.avalon.excalibur.extension.Extension;
+import org.realityforge.extension.Extension;
 import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
@@ -239,7 +239,7 @@ public class DefaultClassLoaderManager
         final String name = "default";
         final String parent = "*system*";
         final String[] entrys = new String[]{"SAR-INF/classes/"};
-        final Extension[] extensions = new Extension[ 0 ];
+        final org.realityforge.extension.Extension[] extensions = new org.realityforge.extension.Extension[ 0 ];
         final FileSetMetaData[] filesets = new FileSetMetaData[]{fileSet};
         final ClassLoaderMetaData loader =
             new ClassLoaderMetaData( name, parent, entrys, extensions, filesets );
