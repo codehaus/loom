@@ -1,4 +1,21 @@
-<project default="main">
+<project
+    xmlns:j="jelly:core"
+    xmlns:ant="jelly:ant"
+    default="main">
+
+    <preGoal name="java:compile">
+        <ant:mkdir dir="target/src/java/org/jcontainer/loom/interfaces"/>
+        <ant:tstamp property="build.date"/>
+        <j:file name="target/src/java/org/jcontainer/loom/interfaces/Version.java">
+            package org.jcontainer.loom.interfaces;
+            interface Version
+            {
+            String SOFTWARE = "${pom.name}";
+            String VERSION = "${pom.currentVersion}";
+            String DATE = "${build.date}";
+            }
+        </j:file>
+    </preGoal>
 
     <goal name="main">
         <attainGoal name="build"/>
