@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document>
+  <properties>
+    <title>Avalon Lifecycle Demo</title>
+	<author>Paul Hammant</author>
+	<author>Mauro Talevi</author>
+  </properties>
+  
+  <body>
+    <section name="Introduction">
+<p>The lifecycle demo shows only the calling of the Avalon lifecycle methods
+under Loom control.  If you are not familiar with the Avalon lifecycle, please
+refer to the 
+<a href="http://avalon.apache.org/framework/reference-the-lifecycle.html">
+Avalon lifecycle</a> documentation.</p>
+<p>Do not forget that the lifecycle methods are optional.  You can implement
+all of them, as this demo does, some or none of them.</p>
+	</section>
+    <section name="Output">
+<p>This is the output that appears in the Console that Loom was called from:</p>
+<source>
+Loom x.y
+
+Lifecycle1Impl.constructor() called. (You should never do too much in here)
+Lifecycle1Impl.enableLogging() called.
+Lifecycle1Impl.contextualize() called (things like base directory passed in here).
+Lifecycle1Impl.service() called (lookup on other services possible now).
+Lifecycle1Impl.configure() called (configuration from config.xml passed here).
+Lifecycle1Impl.initialize() called.
+Lifecycle1Impl.start() called.
+Lifecycle2Impl.constructor() called. (You should never do too much in here)
+Lifecycle2Impl.enableLogging() called.
+Lifecycle2Impl.contextualize() called (things like base directory passed in here).
+Lifecycle2Impl.service() called (lookup on other services possible now).
+Lifecycle2Impl.service(), Lifecycle1 service looked up
+Lifecycle2Impl.configure() called (configuration from config.xml passed here).
+Lifecycle2Impl.initialize() called.
+Lifecycle1Impl.myServiceMethod() called.
+Lifecycle2Impl.initialize(), Lifecycle1.myServiceMethod() method called result = 123
+Lifecycle2Impl.start() called.
+(Ctrl-C pressed in console) JVM exiting abnormally. Shutting down Loom.
+Lifecycle2Impl.stop() called.
+Lifecycle2Impl.dispose() Called
+Lifecycle1Impl.stop() called.
+Lifecycle1Impl.dispose() Called
+</source>
+		</section>
+	</body>
+</document>
