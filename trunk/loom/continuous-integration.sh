@@ -30,7 +30,9 @@ rm -Rf ~/.maven/repository/$mavenRepo/jars
 rm -f $logfile
 maven | tee $logfile
 
-if grep -L "BUILD SUCCESSFUL" $logfile ; then
+if grep "BUILD SUCCESSFUL" $logfile ; then
+      echo "$name build successful"
+else
       echo "$name clean failed, emailing list"
       cat $logfile | mail -s "[FAIL] $name compilation." $mailto
 fi
