@@ -6,13 +6,14 @@
  * with this distribution in the LICENSE.txt file.
  *
  * This product includes software developed by the
- * Apache Software Foundation (http://www.apache.org/).
+ * Apache Software Foundation (http://www.apache.org/).
  */
 package org.jcontainer.loom.launcher;
 
 import java.util.Hashtable;
 import java.util.Observable;
 import java.util.Observer;
+
 import org.tanukisoftware.wrapper.WrapperListener;
 import org.tanukisoftware.wrapper.WrapperManager;
 
@@ -62,7 +63,7 @@ public class DaemonLauncher
 
         if( WrapperManager.isDebugEnabled() )
         {
-            System.out.println( "DaemonLauncher: Starting up Phoenix" );
+            System.out.println( "DaemonLauncher: starting up." );
         }
 
         try
@@ -75,7 +76,7 @@ public class DaemonLauncher
 
             if( WrapperManager.isDebugEnabled() )
             {
-                System.out.println( "DaemonLauncher: Phoenix startup completed" );
+                System.out.println( "DaemonLauncher: startup completed." );
             }
         }
         catch( final Exception e )
