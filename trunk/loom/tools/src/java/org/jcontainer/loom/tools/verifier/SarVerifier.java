@@ -11,8 +11,10 @@
 package org.jcontainer.loom.tools.verifier;
 
 import org.apache.avalon.framework.logger.Logger;
-import org.jcontainer.loom.tools.metadata.ComponentMetaData;
 import org.jcontainer.loom.tools.LoomToolConstants;
+import org.jcontainer.loom.tools.metadata.ComponentMetaData;
+import org.jcontainer.loom.tools.profile.ComponentProfile;
+import org.jcontainer.loom.tools.profile.PartitionProfile;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 
@@ -42,19 +44,32 @@ import org.realityforge.salt.i18n.Resources;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.8 $ $Date: 2003-07-06 07:48:01 $
+ * @version $Revision: 1.9 $ $Date: 2003-07-06 07:51:26 $
  */
 public class SarVerifier
     extends AssemblyVerifier
 {
+    /**
+     * I18n utils.
+     */
     private static final Resources REZ =
         ResourceManager.getPackageResources( SarVerifier.class );
 
+    /**
+     * The Block class used to warn about deprecation.
+     */
     private static final Class BLOCK_CLASS =
         getClass( "org.apache.avalon.phoenix.Block" );
+
+    /**
+     * The BlockListener class used to warn about deprecation.
+     */
     private static final Class BLOCKLISTENER_CLASS =
         getClass( "org.apache.avalon.phoenix.BlockListener" );
 
+    /**
+     * The Verifier for Info instances.
+     */
     private final InfoVerifier m_infoVerifier = new InfoVerifier();
 
     public void enableLogging( final Logger logger )
@@ -64,15 +79,15 @@ public class SarVerifier
     }
 
     /**
-     * Verify the specified {@link org.jcontainer.loom.tools.profile.PartitionProfile} object.
-     * The rules used to verify {@link org.jcontainer.loom.tools.profile.PartitionProfile} are specified
+     * Verify the specified {@link PartitionProfile} object.
+     * The rules used to verify {@link PartitionProfile} are specified
      * in the Class javadocs.
      *
      * @param profile the Sar profile
      * @param classLoader the classloader to load types from
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if an error occurs
+     * @throws VerifyException if an error occurs
      */
-    public void verifySar( final org.jcontainer.loom.tools.profile.PartitionProfile profile,
+    public void verifySar( final PartitionProfile profile,
                            final ClassLoader classLoader )
         throws VerifyException
     {
@@ -109,9 +124,9 @@ public class SarVerifier
      *
      * @param blocks the ComponentProfile objects for the blocks
      * @param classLoader the Classloader to load type from
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if an error occurs
+     * @throws VerifyException if an error occurs
      */
-    private void verifyBlocksType( final org.jcontainer.loom.tools.profile.ComponentProfile[] blocks,
+    private void verifyBlocksType( final ComponentProfile[] blocks,
                                    final ClassLoader classLoader )
         throws VerifyException
     {
@@ -127,9 +142,9 @@ public class SarVerifier
      *
      * @param block the BlockMetaData object for the blocks
      * @param classLoader the classloader to load type from
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if an error occurs
+     * @throws VerifyException if an error occurs
      */
-    private void verifyBlockType( final org.jcontainer.loom.tools.profile.ComponentProfile block,
+    private void verifyBlockType( final ComponentProfile block,
                                   final ClassLoader classLoader )
         throws VerifyException
     {
@@ -177,9 +192,9 @@ public class SarVerifier
      *
      * @param listeners the BlockListenerMetaData objects for the listeners
      * @param classLoader the classloader to load type from
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if an error occurs
+     * @throws VerifyException if an error occurs
      */
-    private void verifyListenersType( final org.jcontainer.loom.tools.profile.ComponentProfile[] listeners,
+    private void verifyListenersType( final ComponentProfile[] listeners,
                                       final ClassLoader classLoader )
         throws VerifyException
     {
@@ -194,9 +209,9 @@ public class SarVerifier
      *
      * @param listener the BlockListenerMetaData object for the listener
      * @param classLoader the classloader to laod type from
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if an error occurs
+     * @throws VerifyException if an error occurs
      */
-    private void verifyListenerType( final org.jcontainer.loom.tools.profile.ComponentProfile listener,
+    private void verifyListenerType( final ComponentProfile listener,
                                      final ClassLoader classLoader )
         throws VerifyException
     {
@@ -216,7 +231,7 @@ public class SarVerifier
      * Verify that the Sat name specified is valid.
      *
      * @param name the sar name
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if an error occurs
+     * @throws VerifyException if an error occurs
      */
     private void verifySarName( final String name )
         throws VerifyException
@@ -258,10 +273,10 @@ public class SarVerifier
      *
      * @param blocks the Blocks
      * @param listeners the listeners
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if an error occurs
+     * @throws VerifyException if an error occurs
      */
-    private void checkNamesUnique( final org.jcontainer.loom.tools.profile.ComponentProfile[] blocks,
-                                   final org.jcontainer.loom.tools.profile.ComponentProfile[] listeners )
+    private void checkNamesUnique( final ComponentProfile[] blocks,
+                                   final ComponentProfile[] listeners )
         throws VerifyException
     {
         for( int i = 0; i < blocks.length; i++ )
@@ -288,11 +303,11 @@ public class SarVerifier
      *                   match in name (or -1 if name designates a listener)
      * @param listenerIndex the index of listener that is allowed to
      *                      match in name (or -1 if name designates a block)
-     * @throws org.jcontainer.loom.tools.verifier.VerifyException if an error occurs
+     * @throws VerifyException if an error occurs
      */
     private void checkNameUnique( final String name,
-                                  final org.jcontainer.loom.tools.profile.ComponentProfile[] blocks,
-                                  final org.jcontainer.loom.tools.profile.ComponentProfile[] listeners,
+                                  final ComponentProfile[] blocks,
+                                  final ComponentProfile[] listeners,
                                   final int blockIndex,
                                   final int listenerIndex )
         throws VerifyException
