@@ -23,10 +23,10 @@ import org.jcontainer.loom.tools.profile.ComponentProfile;
 import org.jcontainer.loom.tools.profile.PartitionProfile;
 
 /**
- * Convert a {@link org.jcontainer.loom.tools.metadata.ComponentMetaData} into a {@link BlockMetaData}.
+ * Convert a {@link ComponentMetaData} into a {@link BlockMetaData}.
  *
  * @author <a href="mailto:peter@apache.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-07-19 01:54:23 $
+ * @version $Revision: 1.4 $ $Date: 2003-07-19 02:12:06 $
  */
 public class ComponentMetaDataConverter
 {
@@ -72,9 +72,9 @@ public class ComponentMetaDataConverter
     }
 
     /**
-     * Convert a {@link org.jcontainer.loom.tools.metadata.ComponentMetaData} object into a {@link BlockListenerMetaData} object.
+     * Convert a {@link ComponentMetaData} object into a {@link BlockListenerMetaData} object.
      *
-     * @param listeners the {@link org.jcontainer.loom.tools.metadata.ComponentMetaData} object
+     * @param listeners the {@link ComponentMetaData} object
      * @return the {@link BlockListenerMetaData} object
      */
     public static BlockListenerMetaData[] toBlockListeners( final ComponentMetaData[] listeners )
@@ -91,9 +91,9 @@ public class ComponentMetaDataConverter
     }
 
     /**
-     * Convert a {@link org.jcontainer.loom.tools.metadata.ComponentMetaData} object into a {@link BlockMetaData} object.
+     * Convert a {@link ComponentMetaData} object into a {@link BlockMetaData} object.
      *
-     * @param component the {@link org.jcontainer.loom.tools.metadata.ComponentMetaData} object
+     * @param component the {@link ComponentMetaData} object
      * @return the {@link BlockMetaData} object
      */
     public static BlockMetaData toBlockMetaData( final ComponentMetaData component,
