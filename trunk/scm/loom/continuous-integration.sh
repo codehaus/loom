@@ -19,14 +19,15 @@ mailto=jcontainer-interest@lists.codehaus.org
 builddir=.
 logfile=cleanbuild.log
 name=Loom
+mavenRepo=loom
 
 cd $builddir
 
 # Delete compiled local copies to start fresh each time
-rm -Rf ~/.maven/repository/loom/jars
+rm -Rf ~/.maven/repository/$mavenRepo/jars
 
 # Compile and test
-rm $logfile
+rm -f $logfile
 maven | tee $logfile
 
 # See if the "compiling" file is there. If it is, compilation
