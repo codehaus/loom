@@ -18,6 +18,8 @@ import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
 import javax.management.modelmbean.ModelMBean;
 import javax.management.modelmbean.ModelMBeanInfo;
+
+import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.ManagerException;
 import org.realityforge.salt.i18n.Resources;
 import org.realityforge.salt.i18n.ResourceManager;
@@ -27,7 +29,7 @@ import org.realityforge.salt.i18n.ResourceManager;
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author <a href="mailto:Huw@mmlive.com">Huw Roberts</a>
- * @version $Revision: 1.2 $ $Date: 2003-07-13 00:15:36 $
+ * @version $Revision: 1.3 $ $Date: 2003-08-07 16:55:17 $
  */
 public abstract class AbstractJMXManager
     extends AbstractSystemManager
@@ -36,7 +38,7 @@ public abstract class AbstractJMXManager
         ResourceManager.getPackageResources( AbstractJMXManager.class );
     private MBeanInfoBuilder topicBuilder;
     private MBeanServer m_mBeanServer;
-    private String m_domain = "Phoenix";
+    private String m_domain = ContainerConstants.SOFTWARE;
 
     public void initialize()
         throws Exception

@@ -26,9 +26,9 @@ public interface EmbeddorMBean
 
     /**
      * Get name by which the server is known.
-     * Usually this defaults to "Phoenix" but the admin
+     * Usually this defaults to {@link ContainerConstants.SOFTWARE} but the admin
      * may assign another name. This is useful when you
-     * are managing a cluster of Phoenix servers.
+     * are managing a cluster of servers.
      *
      * @phoenix:mx-attribute
      * @phoenix:mx-description Name by which this server is known.
@@ -38,11 +38,11 @@ public interface EmbeddorMBean
     String getName();
 
     /**
-     * Get location of Phoenix installation
+     * Get location of container installation
      *
      * @phoenix:mx-attribute
      *
-     * @return the home directory of loom
+     * @return the home directory of container
      */
     String getHomeDirectory();
 
@@ -67,7 +67,7 @@ public interface EmbeddorMBean
 
     /**
      * Retrieve a string identifying version of server.
-     * Usually looks like "v4.0.1a".
+     * Usually looks like "x.y.z".
      *
      * @phoenix:mx-attribute
      * @phoenix:mx-description Retrieve a string identifying version of server.
