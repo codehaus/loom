@@ -25,17 +25,15 @@ import org.apache.avalon.framework.parameters.Reparameterizable;
 import org.apache.avalon.framework.service.Serviceable;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
-import org.jcontainer.dna.AbstractLogEnabled;
 
 /**
  * Utility class to help verify that component respects the
  * rules of an Avalon component.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-10-16 05:45:57 $
+ * @version $Revision: 1.6 $ $Date: 2003-10-16 05:47:17 $
  */
 public class ComponentVerifier
-    extends AbstractLogEnabled
 {
     /**
      * I18n utils.
@@ -226,7 +224,6 @@ public class ComponentVerifier
                 REZ.format( "verifier.incompat-serviceable.error",
                             name,
                             implementation.getName() );
-            getLogger().error( message );
             throw new VerifyException( message );
         }
 
@@ -242,7 +239,6 @@ public class ComponentVerifier
                 REZ.format( "verifier.incompat-config.error",
                             name,
                             implementation.getName() );
-            getLogger().error( message );
             throw new VerifyException( message );
         }
     }
@@ -266,7 +262,6 @@ public class ComponentVerifier
                 REZ.format( "verifier.non-interface-service.error",
                             name,
                             clazz.getName() );
-            getLogger().error( message );
             throw new VerifyException( message );
         }
     }
@@ -292,7 +287,6 @@ public class ComponentVerifier
                 REZ.format( "verifier.non-public-service.error",
                             name,
                             clazz.getName() );
-            getLogger().error( message );
             throw new VerifyException( message );
         }
     }
@@ -320,7 +314,6 @@ public class ComponentVerifier
                                 name,
                                 clazz.getName(),
                                 lifecycle.getName() );
-                getLogger().error( message );
                 throw new VerifyException( message );
             }
         }
@@ -348,7 +341,6 @@ public class ComponentVerifier
                     REZ.format( "verifier.non-public-ctor.error",
                                 name,
                                 clazz.getName() );
-                getLogger().error( message );
                 throw new VerifyException( message );
             }
         }
@@ -358,7 +350,6 @@ public class ComponentVerifier
                 REZ.format( "verifier.missing-noargs-ctor.error",
                             name,
                             clazz.getName() );
-            getLogger().error( message );
             throw new VerifyException( message );
         }
     }
@@ -384,7 +375,6 @@ public class ComponentVerifier
                 REZ.format( "verifier.abstract-class.error",
                             name,
                             clazz.getName() );
-            getLogger().error( message );
             throw new VerifyException( message );
         }
     }
@@ -410,7 +400,6 @@ public class ComponentVerifier
                 REZ.format( "verifier.nonpublic-class.error",
                             name,
                             clazz.getName() );
-            getLogger().error( message );
             throw new VerifyException( message );
         }
     }
@@ -434,7 +423,6 @@ public class ComponentVerifier
                 REZ.format( "verifier.primitive-class.error",
                             name,
                             clazz.getName() );
-            getLogger().error( message );
             throw new VerifyException( message );
         }
     }
@@ -458,7 +446,6 @@ public class ComponentVerifier
                 REZ.format( "verifier.interface-class.error",
                             name,
                             clazz.getName() );
-            getLogger().error( message );
             throw new VerifyException( message );
         }
     }
@@ -482,7 +469,6 @@ public class ComponentVerifier
                 REZ.format( "verifier.array-class.error",
                             name,
                             clazz.getName() );
-            getLogger().error( message );
             throw new VerifyException( message );
         }
     }
