@@ -28,11 +28,15 @@ mkdir target
 rm -Rf ~/.maven/repository/loom/jars
 
 # Compile and test
+rm target/cleanbuild.log
 maven clean-all | tee target/cleanbuild.log
 
 # See if the "compiling" file is there. If it is, compilation
 # failed.
 if grep -v "BUILD SUCCESSFUL" target/cleanbuild.log ; then
+    echo "Clean passed.."
+
+
     maven build | tee target/cleanbuild.log
     
     # See if the "compiling" file is there. If it is, compilation
