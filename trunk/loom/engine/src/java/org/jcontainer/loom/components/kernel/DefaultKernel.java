@@ -13,8 +13,6 @@ package org.jcontainer.loom.components.kernel;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.avalon.excalibur.i18n.ResourceManager;
-import org.apache.avalon.excalibur.i18n.Resources;
 import org.apache.avalon.framework.CascadingException;
 import org.apache.avalon.framework.activity.Disposable;
 import org.apache.avalon.framework.activity.Initializable;
@@ -39,6 +37,8 @@ import org.jcontainer.loom.interfaces.Kernel;
 import org.jcontainer.loom.interfaces.KernelMBean;
 import org.jcontainer.loom.interfaces.SystemManager;
 import org.realityforge.loggerstore.LoggerStore;
+import org.realityforge.salt.i18n.Resources;
+import org.realityforge.salt.i18n.ResourceManager;
 
 /**
  * The ServerKernel is the core of the Phoenix system.
@@ -131,7 +131,7 @@ public class DefaultKernel
             }
             catch( final Exception e )
             {
-                final String message = REZ.getString( "kernel.error.entry.dispose", names[ i ] );
+                final String message = REZ.format( "kernel.error.entry.dispose", names[ i ] );
                 getLogger().warn( message, e );
             }
         }
@@ -244,8 +244,8 @@ public class DefaultKernel
                     entry.setApplication( null );
 
                     final String message =
-                        REZ.getString( "kernel.error.entry.initialize",
-                                       entry.getProfile().getMetaData().getName() );
+                        REZ.format( "kernel.error.entry.initialize",
+                                    entry.getProfile().getMetaData().getName() );
                     throw new CascadingException( message, t );
                 }
 
@@ -256,8 +256,8 @@ public class DefaultKernel
                 catch( final Throwable t )
                 {
                     final String message =
-                        REZ.getString( "kernel.error.entry.start",
-                                       entry.getProfile().getMetaData().getName() );
+                        REZ.format( "kernel.error.entry.start",
+                                    entry.getProfile().getMetaData().getName() );
 
                     if( m_addInvalidApplications )
                     {
@@ -285,7 +285,7 @@ public class DefaultKernel
                 catch( final Throwable t )
                 {
                     final String message =
-                        REZ.getString( "kernel.error.entry.manage", name );
+                        REZ.format( "kernel.error.entry.manage", name );
                     throw new CascadingException( message, t );
                 }
             }
@@ -307,8 +307,8 @@ public class DefaultKernel
             else
             {
                 final String message =
-                    REZ.getString( "kernel.error.entry.nostop",
-                                   entry.getProfile().getMetaData().getName() );
+                    REZ.format( "kernel.error.entry.nostop",
+                                entry.getProfile().getMetaData().getName() );
                 getLogger().warn( message );
             }
         }
@@ -336,7 +336,7 @@ public class DefaultKernel
         }
         catch( final Exception e )
         {
-            final String message = REZ.getString( "kernel.error.entry.start", name );
+            final String message = REZ.format( "kernel.error.entry.start", name );
             getLogger().warn( message, e );
             throw e;
         }
@@ -394,7 +394,7 @@ public class DefaultKernel
         if( null == entry )
         {
             final String message =
-                REZ.getString( "kernel.error.entry.initialize", name );
+                REZ.format( "kernel.error.entry.initialize", name );
             throw new Exception( message );
         }
         else
@@ -407,7 +407,7 @@ public class DefaultKernel
             catch( final Throwable t )
             {
                 final String message =
-                    REZ.getString( "kernel.error.entry.unmanage", name );
+                    REZ.format( "kernel.error.entry.unmanage", name );
                 throw new CascadingException( message, t );
             }
 

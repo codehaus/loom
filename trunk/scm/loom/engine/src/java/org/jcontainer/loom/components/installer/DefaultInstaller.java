@@ -22,10 +22,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-import org.apache.avalon.excalibur.i18n.ResourceManager;
-import org.apache.avalon.excalibur.i18n.Resources;
-import org.apache.avalon.excalibur.io.FileUtil;
-import org.apache.avalon.excalibur.io.IOUtil;
 import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.parameters.ParameterException;
@@ -34,13 +30,17 @@ import org.apache.avalon.framework.parameters.Parameters;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.InstallationException;
 import org.jcontainer.loom.interfaces.Installer;
+import org.realityforge.salt.i18n.ResourceManager;
+import org.realityforge.salt.i18n.Resources;
+import org.realityforge.salt.io.FileUtil;
+import org.realityforge.salt.io.IOUtil;
 
 /**
  * An Installer is responsible for taking a URL for Sar
  * and installing it as appropriate.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-29 04:38:22 $
+ * @version $Revision: 1.2 $ $Date: 2003-07-13 00:15:36 $
  */
 public class DefaultInstaller
     extends AbstractLogEnabled
@@ -123,9 +123,9 @@ public class DefaultInstaller
         catch( final IOException ioe )
         {
             final String message =
-                REZ.getString( "nodelete-workdir.error",
-                               m_baseWorkDirectory,
-                               ioe.getMessage() );
+                REZ.format( "nodelete-workdir.error",
+                            m_baseWorkDirectory,
+                            ioe.getMessage() );
             getLogger().warn( message, ioe );
         }
     }
@@ -168,9 +168,9 @@ public class DefaultInstaller
                 //ignore
             }
             final String message =
-                REZ.getString( "nodelete-workdir.error",
-                               dir,
-                               ioe.getMessage() );
+                REZ.format( "nodelete-workdir.error",
+                            dir,
+                            ioe.getMessage() );
             getLogger().warn( message, ioe );
         }
     }
@@ -187,14 +187,14 @@ public class DefaultInstaller
         lock();
         try
         {
-            final String notice = REZ.getString( "installing-sar", url );
+            final String notice = REZ.format( "installing-sar", url );
             getLogger().info( notice );
 
             final File file = getFileFor( url );
             if( file.isDirectory() )
             {
                 final String message =
-                    REZ.getString( "install.sar-isa-dir.error", name, url );
+                    REZ.format( "install.sar-isa-dir.error", name, url );
                 throw new InstallationException( message );
             }
 
@@ -204,7 +204,7 @@ public class DefaultInstaller
         }
         catch( final IOException ioe )
         {
-            final String message = REZ.getString( "bad-zip-file", url );
+            final String message = REZ.format( "bad-zip-file", url );
             throw new InstallationException( message, ioe );
         }
         finally
@@ -349,10 +349,10 @@ public class DefaultInstaller
         else
         {
             final String message =
-                REZ.getString( "file-in-the-way",
-                               url,
-                               entry.getName(),
-                               destination );
+                REZ.format( "file-in-the-way",
+                            url,
+                            entry.getName(),
+                            destination );
             getLogger().warn( message );
         }
     }
@@ -493,7 +493,7 @@ public class DefaultInstaller
     {
         if( !url.getProtocol().equals( "file" ) )
         {
-            final String message = REZ.getString( "install-nonlocal", url );
+            final String message = REZ.format( "install-nonlocal", url );
             throw new InstallationException( message );
         }
 
@@ -502,7 +502,7 @@ public class DefaultInstaller
 
         if( !file.exists() )
         {
-            final String message = REZ.getString( "install-nourl", file );
+            final String message = REZ.format( "install-nourl", file );
             throw new InstallationException( message );
         }
 
@@ -530,10 +530,10 @@ public class DefaultInstaller
         catch( final IOException ioe )
         {
             final String message =
-                REZ.getString( "failed-to-expand",
-                               entry.getName(),
-                               file,
-                               ioe.getMessage() );
+                REZ.format( "failed-to-expand",
+                            entry.getName(),
+                            file,
+                            ioe.getMessage() );
             throw new InstallationException( message, ioe );
         }
         finally
@@ -573,15 +573,15 @@ public class DefaultInstaller
         if( !m_baseWorkDirectory.exists() )
         {
             final String message =
-                REZ.getString( "install.create-dir.notice",
-                               m_baseWorkDirectory );
+                REZ.format( "install.create-dir.notice",
+                            m_baseWorkDirectory );
             getLogger().info( message );
 
             if( !m_baseWorkDirectory.mkdirs() )
             {
                 final String error =
-                    REZ.getString( "install.workdir-nocreate.error",
-                                   m_baseWorkDirectory );
+                    REZ.format( "install.workdir-nocreate.error",
+                                m_baseWorkDirectory );
                 throw new Exception( error );
             }
         }
@@ -589,8 +589,8 @@ public class DefaultInstaller
         if( !m_baseWorkDirectory.isDirectory() )
         {
             final String message =
-                REZ.getString( "install.workdir-notadir.error",
-                               m_baseWorkDirectory );
+                REZ.format( "install.workdir-notadir.error",
+                            m_baseWorkDirectory );
             throw new Exception( message );
         }
     }

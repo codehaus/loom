@@ -14,8 +14,6 @@ import java.io.File;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
-import org.apache.avalon.excalibur.i18n.ResourceManager;
-import org.apache.avalon.excalibur.i18n.Resources;
 import org.apache.avalon.framework.ExceptionUtil;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.DefaultConfigurationBuilder;
@@ -31,6 +29,8 @@ import org.apache.log.Priority;
 import org.apache.log.output.io.FileTarget;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.Embeddor;
+import org.realityforge.salt.i18n.Resources;
+import org.realityforge.salt.i18n.ResourceManager;
 
 /**
  * The class to load the kernel and start it running.

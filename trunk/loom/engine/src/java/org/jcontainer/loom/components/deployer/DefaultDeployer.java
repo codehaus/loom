@@ -17,8 +17,6 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.Set;
-import org.apache.avalon.excalibur.i18n.ResourceManager;
-import org.apache.avalon.excalibur.i18n.Resources;
 import org.apache.avalon.framework.activity.Disposable;
 import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.configuration.Configuration;
@@ -44,6 +42,8 @@ import org.jcontainer.loom.interfaces.LogManager;
 import org.jcontainer.loom.tools.configuration.ConfigurationBuilder;
 import org.jcontainer.loom.tools.verifier.SarVerifier;
 import org.realityforge.loggerstore.LoggerStore;
+import org.realityforge.salt.i18n.Resources;
+import org.realityforge.salt.i18n.ResourceManager;
 import org.xml.sax.InputSource;
 
 /**
@@ -113,9 +113,9 @@ public class DefaultDeployer
             catch( final DeploymentException de )
             {
                 final String message =
-                    REZ.getString( "deploy.undeploy-indispose.error",
-                                   name,
-                                   de.getMessage() );
+                    REZ.format( "deploy.undeploy-indispose.error",
+                                name,
+                                de.getMessage() );
                 getLogger().error( message, de );
             }
         }
@@ -135,7 +135,7 @@ public class DefaultDeployer
         if( null == installation )
         {
             final String message =
-                REZ.getString( "deploy.no-deployment.error", name );
+                REZ.format( "deploy.no-deployment.error", name );
             throw new DeploymentException( message );
         }
         try
@@ -193,7 +193,7 @@ public class DefaultDeployer
         if( null == installation )
         {
             final String message =
-                REZ.getString( "deploy.no-deployment.error", name );
+                REZ.format( "deploy.no-deployment.error", name );
             throw new DeploymentException( message );
         }
         try
@@ -240,8 +240,8 @@ public class DefaultDeployer
         if( m_installations.containsKey( name ) )
         {
             final String message =
-                REZ.getString( "deploy.already-deployed.error",
-                               name );
+                REZ.format( "deploy.already-deployed.error",
+                            name );
             throw new DeploymentException( message );
         }
 
@@ -321,8 +321,8 @@ public class DefaultDeployer
             m_installations.put( name, installation );
 
             final String message =
-                REZ.getString( "deploy.notice.sar.add",
-                               name );
+                REZ.format( "deploy.notice.sar.add",
+                            name );
             getLogger().debug( message );
             success = true;
         }
@@ -369,7 +369,7 @@ public class DefaultDeployer
         }
         catch( final Exception e )
         {
-            final String message = REZ.getString( "deploy.error.config.create", location );
+            final String message = REZ.format( "deploy.error.config.create", location );
             getLogger().error( message, e );
             throw new DeploymentException( message, e );
         }
@@ -436,8 +436,8 @@ public class DefaultDeployer
             if( null == component )
             {
                 final String message =
-                    REZ.getString( "deploy.error.extra.config",
-                                   name );
+                    REZ.format( "deploy.error.extra.config",
+                                name );
                 throw new DeploymentException( message );
             }
         }

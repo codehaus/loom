@@ -14,9 +14,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.avalon.excalibur.i18n.ResourceManager;
-import org.apache.avalon.excalibur.i18n.Resources;
-import org.apache.avalon.excalibur.io.FileUtil;
 import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
@@ -30,6 +27,9 @@ import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.jcontainer.loom.components.configuration.merger.ConfigurationMerger;
 import org.jcontainer.loom.components.util.PropertyUtil;
 import org.jcontainer.loom.interfaces.ConfigurationRepository;
+import org.realityforge.salt.i18n.ResourceManager;
+import org.realityforge.salt.i18n.Resources;
+import org.realityforge.salt.io.FileUtil;
 import org.xml.sax.SAXException;
 
 /**
@@ -74,8 +74,8 @@ public class FileSystemPersistentConfigurationRepository
         }
         catch( IOException e )
         {
-            final String message = REZ.getString( "config.error.dir.invalid",
-                                                  m_storageDirectory );
+            final String message = REZ.format( "config.error.dir.invalid",
+                                               m_storageDirectory );
 
             throw new ConfigurationException( message, e );
         }
@@ -132,16 +132,16 @@ public class FileSystemPersistentConfigurationRepository
             }
             else
             {
-                final String message = REZ.getString( "config.error.nonstring",
-                                                      opath.getClass().getName() );
+                final String message = REZ.format( "config.error.nonstring",
+                                                   opath.getClass().getName() );
 
                 throw new ConfigurationException( message );
             }
         }
         catch( Exception e )
         {
-            final String message = REZ.getString( "config.error.missingproperty",
-                                                  configuration.getLocation() );
+            final String message = REZ.format( "config.error.missingproperty",
+                                               configuration.getLocation() );
 
             throw new ConfigurationException( message, e );
         }

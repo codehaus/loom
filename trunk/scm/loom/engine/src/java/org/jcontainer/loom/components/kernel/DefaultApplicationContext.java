@@ -15,8 +15,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Map;
-import org.apache.avalon.excalibur.i18n.ResourceManager;
-import org.apache.avalon.excalibur.i18n.Resources;
 import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.logger.Logger;
@@ -31,6 +29,8 @@ import org.jcontainer.loom.interfaces.Kernel;
 import org.jcontainer.loom.interfaces.ManagerException;
 import org.jcontainer.loom.interfaces.SystemManager;
 import org.realityforge.loggerstore.LoggerStore;
+import org.realityforge.salt.i18n.Resources;
+import org.realityforge.salt.i18n.ResourceManager;
 
 /**
  * Manage the "frame" in which Applications operate.
@@ -178,8 +178,8 @@ class DefaultApplicationContext
         catch( Exception e )
         {
             final String message =
-                REZ.getString( "applicationcontext.error.noremove",
-                               getName() );
+                REZ.format( "applicationcontext.error.noremove",
+                            getName() );
             getLogger().error( message, e );
         }
     }
@@ -247,8 +247,8 @@ class DefaultApplicationContext
         if( null == classLoader )
         {
             final String message =
-                REZ.getString( "applicationcontext.error.noloader",
-                               name );
+                REZ.format( "applicationcontext.error.noloader",
+                            name );
             throw new Exception( message );
         }
         return classLoader;

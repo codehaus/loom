@@ -15,11 +15,11 @@ import java.util.Iterator;
 import java.util.Map;
 import javax.management.MBeanServer;
 import javax.management.MBeanServerFactory;
-import org.apache.avalon.excalibur.i18n.ResourceManager;
-import org.apache.avalon.excalibur.i18n.Resources;
 import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
+import org.realityforge.salt.i18n.Resources;
+import org.realityforge.salt.i18n.ResourceManager;
 
 /**
  * This component is responsible for managing phoenix instance.
@@ -101,7 +101,7 @@ public class ExtendedMX4JSystemManager
         }
         catch( final Exception e )
         {
-            final String message = REZ.getString( "jmxmanager.error.jmxmbean.initialize", scripter.getName() );
+            final String message = REZ.format( "jmxmanager.error.jmxmbean.initialize", scripter.getName() );
             getLogger().error( message, e );
             throw e;
         }
@@ -117,7 +117,7 @@ public class ExtendedMX4JSystemManager
         }
         catch( final Exception e )
         {
-            final String message = REZ.getString( "jmxmanager.error.jmxmbean.dispose", scripter.getName() );
+            final String message = REZ.format( "jmxmanager.error.jmxmbean.dispose", scripter.getName() );
             getLogger().error( message, e );
         }
     }

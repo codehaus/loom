@@ -25,13 +25,13 @@ import javax.management.modelmbean.ModelMBeanInfoSupport;
 import javax.management.modelmbean.ModelMBeanNotificationInfo;
 import javax.management.modelmbean.ModelMBeanOperationInfo;
 import javax.management.modelmbean.RequiredModelMBean;
-import org.apache.avalon.excalibur.i18n.ResourceManager;
-import org.apache.avalon.excalibur.i18n.Resources;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.jcontainer.loom.tools.configuration.ConfigurationBuilder;
 import org.xml.sax.InputSource;
+import org.realityforge.salt.i18n.Resources;
+import org.realityforge.salt.i18n.ResourceManager;
 
 /**
  * An MBeanInfoBuilder is responsible for building Management Topic
@@ -41,7 +41,7 @@ import org.xml.sax.InputSource;
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author <a href="mailto:huw@mmlive.com">Huw Roberts</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-29 04:38:22 $
+ * @version $Revision: 1.2 $ $Date: 2003-07-13 00:15:36 $
  */
 public final class MBeanInfoBuilder
     extends AbstractLogEnabled
@@ -57,7 +57,7 @@ public final class MBeanInfoBuilder
         throws ConfigurationException
     {
         final String notice =
-            REZ.getString( "mxinfo.debug.building", managedClass.getName() );
+            REZ.format( "mxinfo.debug.building", managedClass.getName() );
         getLogger().debug( notice );
 
         // if the managed class has an mxinfo file, build the target from it
@@ -66,7 +66,7 @@ public final class MBeanInfoBuilder
         if( null != config )
         {
             final String message =
-                REZ.getString( "mxinfo.debug.found.mxinfo",
+                REZ.format( "mxinfo.debug.found.mxinfo",
                                managedClass.getName() );
             getLogger().debug( message );
             buildFromMxInfo( target, managedClass, config );
@@ -91,7 +91,7 @@ public final class MBeanInfoBuilder
             catch( final Exception e )
             {
                 final String message =
-                    REZ.getString( "mxinfo.error.target", target.getName() );
+                    REZ.format( "mxinfo.error.target", target.getName() );
                 getLogger().error( message, e );
                 throw new ConfigurationException( message );
             }
@@ -115,7 +115,7 @@ public final class MBeanInfoBuilder
         catch( final Exception e )
         {
             final String message =
-                REZ.getString( "mxinfo.error.introspect", managedClass.getName() );
+                REZ.format( "mxinfo.error.introspect", managedClass.getName() );
             throw new ConfigurationException( message, e );
         }
 
@@ -197,7 +197,7 @@ public final class MBeanInfoBuilder
                                            notifications );
 
             // add it to target
-            final String message = REZ.getString( "mxinfo.debug.adding.topic", topic.getDescription() );
+            final String message = REZ.format( "mxinfo.debug.adding.topic", topic.getDescription() );
             getLogger().debug( message );
 
             target.addTopic( topic );
@@ -205,7 +205,7 @@ public final class MBeanInfoBuilder
         catch( final Exception e )
         {
             final String message =
-                REZ.getString( "mxinfo.error.topic", interfaceClass );
+                REZ.format( "mxinfo.error.topic", interfaceClass );
             throw new ConfigurationException( message, e );
         }
     }
@@ -259,7 +259,7 @@ public final class MBeanInfoBuilder
         try
         {
             final String proxyName = proxyTagConfig.getAttribute( "name" );
-            final String message = REZ.getString( "mxinfo.debug.building.proxy.topic", proxyName );
+            final String message = REZ.format( "mxinfo.debug.building.proxy.topic", proxyName );
             getLogger().debug( message );
 
             final Class proxyClass = managedClass.getClassLoader().loadClass( proxyName );
@@ -281,7 +281,7 @@ public final class MBeanInfoBuilder
             }
             else
             {
-                final String message = REZ.getString( "mxinfo.error.proxy", managedClass.getName() );
+                final String message = REZ.format( "mxinfo.error.proxy", managedClass.getName() );
                 throw new ConfigurationException( message );
             }
         }
@@ -387,7 +387,7 @@ public final class MBeanInfoBuilder
         }
 
         final String message =
-            REZ.getString( "mxinfo.error.missing.property", name );
+            REZ.format( "mxinfo.error.missing.property", name );
         throw new ConfigurationException( message );
     }
 
@@ -490,7 +490,7 @@ public final class MBeanInfoBuilder
                 return methods[ i ];
             }
         }
-        final String message = REZ.getString( "mxinfo.error.missing.method", name );
+        final String message = REZ.format( "mxinfo.error.missing.method", name );
         throw new ConfigurationException( message );
     }
 
@@ -539,7 +539,7 @@ public final class MBeanInfoBuilder
         catch( Exception e )
         {
             final String message =
-                REZ.getString( "mxinfo.error.file", mxinfoName );
+                REZ.format( "mxinfo.error.file", mxinfoName );
             getLogger().error( message, e );
             throw new ConfigurationException( message );
         }

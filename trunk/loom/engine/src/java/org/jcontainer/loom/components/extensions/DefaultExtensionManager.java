@@ -12,8 +12,6 @@ package org.jcontainer.loom.components.extensions;
 
 import java.io.File;
 import java.util.ArrayList;
-import org.apache.avalon.excalibur.i18n.ResourceManager;
-import org.apache.avalon.excalibur.i18n.Resources;
 import org.apache.avalon.framework.activity.Disposable;
 import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.logger.LogEnabled;
@@ -24,13 +22,15 @@ import org.apache.avalon.framework.parameters.Parameters;
 import org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager;
 import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
 import org.jcontainer.loom.interfaces.ExtensionManagerMBean;
+import org.realityforge.salt.i18n.ResourceManager;
+import org.realityforge.salt.i18n.Resources;
 
 /**
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-29 04:38:22 $
+ * @version $Revision: 1.2 $ $Date: 2003-07-13 00:15:36 $
  */
 public class DefaultExtensionManager
-    extends org.apache.avalon.phoenix.components.extensions.pkgmgr.impl.DefaultExtensionManager
+    extends org.jcontainer.loom.components.extensions.pkgmgr.impl.DefaultExtensionManager
     implements LogEnabled, Parameterizable, Initializable, Disposable,
     ExtensionManager, ExtensionManagerMBean
 {
@@ -80,7 +80,7 @@ public class DefaultExtensionManager
             }
 
             final String message =
-                REZ.getString( "extension.packages.notice", list );
+                REZ.format( "extension.packages.notice", list );
             m_logger.debug( message );
         }
     }

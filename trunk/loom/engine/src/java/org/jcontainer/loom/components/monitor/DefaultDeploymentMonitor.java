@@ -16,9 +16,6 @@ import java.io.File;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-import org.apache.avalon.excalibur.i18n.ResourceManager;
-import org.apache.avalon.excalibur.i18n.Resources;
-import org.apache.avalon.excalibur.io.FileUtil;
 import org.apache.avalon.excalibur.monitor.DirectoryResource;
 import org.apache.avalon.excalibur.monitor.impl.ActiveMonitor;
 import org.apache.avalon.framework.activity.Startable;
@@ -34,6 +31,9 @@ import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 import org.jcontainer.loom.interfaces.Deployer;
+import org.realityforge.salt.i18n.Resources;
+import org.realityforge.salt.i18n.ResourceManager;
+import org.realityforge.salt.io.FileUtil;
 
 /**
  * This class is responsible for monitoring the deployment
@@ -41,7 +41,7 @@ import org.jcontainer.loom.interfaces.Deployer;
  * application as necessary.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-29 04:38:22 $
+ * @version $Revision: 1.2 $ $Date: 2003-07-13 00:15:36 $
  */
 public class DefaultDeploymentMonitor
     extends AbstractLogEnabled
@@ -153,9 +153,9 @@ public class DefaultDeploymentMonitor
         try
         {
             final String message =
-                REZ.getString( "scanner.deploy.notice",
-                               name,
-                               file );
+                REZ.format( "scanner.deploy.notice",
+                            name,
+                            file );
             getLogger().info( message );
 
             m_deployer.deploy( name, file.toURL() );
@@ -163,7 +163,7 @@ public class DefaultDeploymentMonitor
         catch( final Exception e )
         {
             final String message =
-                REZ.getString( "scanner.no-deploy.error", file, e );
+                REZ.format( "scanner.no-deploy.error", file, e );
             getLogger().warn( message, e );
         }
     }
@@ -180,15 +180,15 @@ public class DefaultDeploymentMonitor
         try
         {
             final String message =
-                REZ.getString( "scanner.undeploy.notice",
-                               name );
+                REZ.format( "scanner.undeploy.notice",
+                            name );
             getLogger().info( message );
             m_deployer.undeploy( name );
         }
         catch( final Exception e )
         {
             final String message =
-                REZ.getString( "scanner.no-undeploy.error", file, e );
+                REZ.format( "scanner.no-undeploy.error", file, e );
             getLogger().warn( message, e );
         }
     }
@@ -205,16 +205,16 @@ public class DefaultDeploymentMonitor
         try
         {
             final String message =
-                REZ.getString( "scanner.redeploy.notice",
-                               name,
-                               file );
+                REZ.format( "scanner.redeploy.notice",
+                            name,
+                            file );
             getLogger().info( message );
             m_deployer.redeploy( name, file.toURL() );
         }
         catch( final Exception e )
         {
             final String message =
-                REZ.getString( "scanner.no-redeploy.error", file, e );
+                REZ.format( "scanner.no-redeploy.error", file, e );
             getLogger().warn( message, e );
         }
     }
@@ -236,7 +236,7 @@ public class DefaultDeploymentMonitor
             else
             {
                 final String message =
-                    REZ.getString( "scanner.skipping-file.notice", file );
+                    REZ.format( "scanner.skipping-file.notice", file );
                 getLogger().info( message );
             }
         }
