@@ -44,7 +44,7 @@
         <mkdir dir="${target.reports}"/>
         <junit dir="./" printSummary="yes"
             haltonfailure="true" fork="true" haltonerror="true">
-            <sysproperty key="basedir" value="src/test"/>
+            <sysproperty key="basedir" value="target/classes"/>
             <formatter usefile="true" type="plain"/>
             <formatter usefile="false" type="plain"/>
             <classpath>
