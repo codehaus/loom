@@ -13,7 +13,6 @@ import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.jcontainer.loom.tools.info.Attribute;
 import org.jcontainer.loom.tools.info.FeatureDescriptor;
-import org.jcontainer.loom.tools.metadata.DependencyMetaData;
 
 /**
  * Each component declared in the application is represented by
@@ -24,7 +23,7 @@ import org.jcontainer.loom.tools.metadata.DependencyMetaData;
  * new components as needed.
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-29 00:48:45 $
+ * @version $Revision: 1.2 $ $Date: 2003-06-29 00:51:16 $
  */
 public class ComponentMetaData
     extends FeatureDescriptor

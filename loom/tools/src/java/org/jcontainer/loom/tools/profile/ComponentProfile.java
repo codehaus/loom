@@ -7,18 +7,18 @@
  */
 package org.jcontainer.loom.tools.profile;
 
-import org.apache.avalon.phoenix.containerkit.metadata.ComponentMetaData;
 import org.jcontainer.loom.tools.info.ComponentInfo;
+import org.jcontainer.loom.tools.metadata.ComponentMetaData;
 
 /**
  * The ComponentProfile defines a component as a conjunction
- * of the {@link org.jcontainer.loom.tools.info.ComponentInfo} and {@link org.apache.avalon.phoenix.containerkit.metadata.ComponentMetaData}.
+ * of the {@link org.jcontainer.loom.tools.info.ComponentInfo} and {@link org.jcontainer.loom.tools.metadata.ComponentMetaData}.
  * The {@link org.jcontainer.loom.tools.info.ComponentInfo} defines the type of the component
- * and the {@link org.apache.avalon.phoenix.containerkit.metadata.ComponentMetaData} defines the data required to
+ * and the {@link org.jcontainer.loom.tools.metadata.ComponentMetaData} defines the data required to
  * construct a specific instance of the component.
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-29 00:44:44 $
+ * @version $Revision: 1.2 $ $Date: 2003-06-29 00:51:16 $
  */
 public class ComponentProfile
 {
@@ -29,7 +29,7 @@ public class ComponentProfile
     private final ComponentInfo m_info;
 
     /**
-     * The {@link org.apache.avalon.phoenix.containerkit.metadata.ComponentMetaData} that describes
+     * The {@link org.jcontainer.loom.tools.metadata.ComponentMetaData} that describes
      * this component.
      */
     private final ComponentMetaData m_metaData;
@@ -37,7 +37,7 @@ public class ComponentProfile
     /**
      * Creation of a new <code>ComponentProfile</code> instance.
      *
-     * @param metaData the {@link org.apache.avalon.phoenix.containerkit.metadata.ComponentMetaData} instance defining the component.
+     * @param metaData the {@link org.jcontainer.loom.tools.metadata.ComponentMetaData} instance defining the component.
      */
     public ComponentProfile( final ComponentInfo info,
                              final ComponentMetaData metaData )
@@ -57,7 +57,7 @@ public class ComponentProfile
     }
 
     /**
-     * Returns the underlying {@link org.apache.avalon.phoenix.containerkit.metadata.ComponentMetaData} instance.
+     * Returns the underlying {@link org.jcontainer.loom.tools.metadata.ComponentMetaData} instance.
      * @return the component meta data instance
      */
     public ComponentMetaData getMetaData()
