@@ -22,7 +22,7 @@ import org.jcontainer.dna.impl.ConsoleLogger;
  * is compatible with the {@link org.jcontainer.loom.tools.info.ComponentInfo}.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-10-05 10:07:04 $
+ * @version $Revision: 1.7 $ $Date: 2003-10-06 13:37:06 $
  */
 public class ComponentVerifierTask
     extends Task
@@ -71,7 +71,8 @@ public class ComponentVerifierTask
             final Class implementation =
                 classLoader.loadClass( m_classname );
             final ComponentInfo componentInfo =
-                builder.buildComponentInfo( implementation );
+                builder.buildComponentInfo( implementation.getName(),
+                                            implementation.getClassLoader() );
             verifier.verifyType( "test",
                                  m_classname,
                                  componentInfo,
