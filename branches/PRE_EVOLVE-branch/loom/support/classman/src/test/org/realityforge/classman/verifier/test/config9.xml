@@ -1,0 +1,8 @@
+<classloaders default="*system*" version="1.0">
+    <predefined name="*system*"/>
+
+    <join name="j1"/>
+
+    <classloader name="j1" parent="*system*"/>
+
+</classloaders>
