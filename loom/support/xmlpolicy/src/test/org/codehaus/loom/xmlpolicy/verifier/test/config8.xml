@@ -1,5 +1,0 @@
-<policy version="1.0">
-    <keystore name="a"
-        location="sar:/conf/keystore"
-        type="JKS"/>
-</policy>
