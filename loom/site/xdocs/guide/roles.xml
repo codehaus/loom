@@ -9,15 +9,15 @@
     <body>
         <section name="Introduction">
             <p>
-              In phoenix-based development, we identify several roles. Each of these has its own
-       guide. If you plan to aid in the development of phoenix itself, or if you are
+              In Loom development, we identify several roles. Each of these has its own
+       guide. If you plan to aid in the development of Loom itself, or if you are
        responsible for all these aspects, you should read all the guides. Otherwise, you
        should be able to learn everything you need to know from the guide that fits your
        role.
             </p>
         </section>
         <section name="The Administrator">
-            <p>The administrator is responsible for getting phoenix to run and for keeping it
+            <p>The administrator is responsible for getting Loom to run and for keeping it
             running. He typically controls the startup and shutdown of the standalone server
             or daemon, and uses a management console to keep the server in top condition.</p>
             <p>
@@ -25,7 +25,7 @@
             </p>
         </section>
         <section name="The Deployer">
-            <p>The deployer manages (un/re)deployment of the applications hosted withing phoenix,
+            <p>The deployer manages (un/re)deployment of the applications hosted withing Loom,
             typically through a management console. In real life, this is often the same person
              as the adminstrator.</p>
 
