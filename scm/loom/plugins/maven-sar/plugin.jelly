@@ -52,21 +52,14 @@
     <goal name="sar:sar" prereqs="jar:jar" description="Build a sar file">
 
         <ant:echo message="Building sar ${maven.sar.final.name}"/>
-        <!-- Define taskdef -->
-        <ant:taskdef name="sar"
-            classname="org.jcontainer.loom.tools.ant.SarTask">
-            <ant:classpath>
-                <ant:pathelement path="${plugin.dir}"/>
-                <ant:pathelement path="${plugin.getDependencyPath('ant')}"/>
-            </ant:classpath>
-        </ant:taskdef>
         <!-- Ensure maven.sar.build.dir exists -->
         <ant:mkdir dir="${maven.sar.build.dir}"/>
-        <sar sarfile="${maven.sar.build.dir}/${maven.sar.final.name}"
-            assembly="${maven.sar.assembly}"
-            config="${maven.sar.config}"
-            environment="${maven.sar.environment}"
-            logging="${maven.sar.logging}">
+        <ant:jar destfile="${maven.sar.build.dir}/${maven.sar.final.name}">
+        	<!-- Add Sar descriptor files to SAR-INF/ -->
+        	<ant:zipfileset file="${maven.sar.assembly}" prefix="SAR-INF/"/>
+        	<ant:zipfileset file="${maven.sar.config}" prefix="SAR-INF/"/>
+        	<ant:zipfileset file="${maven.sar.environment}" prefix="SAR-INF/"/>
+        	<ant:zipfileset file="${maven.sar.logging}" prefix="SAR-INF/"/>
             <!-- Add build artifacts -->
             <ant:lib dir="${maven.sar.build.dir}">
                 <ant:include name="${maven.sar.lib.include}"/>
@@ -128,7 +121,7 @@
                         value="${pom.organization.name}"/>
                 </ant:section>
             </ant:manifest>
-        </sar>
+        </ant:jar>
 
     </goal>
 
