@@ -101,7 +101,7 @@ import org.jcontainer.loom.demos.distributed.api.Server;
  * implemented elsewhere.
  *
  * @author <a href="mailto:Paul_Hammant@yahoo.com">Paul Hammant</a>
- * @author <a href="mailto:mauro.talevi at aquilonia.org">Mauro Talevi</a>
+ * @author Mauro Talevi
  * @dna.component
  * @dna.service type="Server"
  */
