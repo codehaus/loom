@@ -88,13 +88,12 @@ package org.jcontainer.loom.components.extensions;
 
 import java.io.File;
 import java.util.ArrayList;
-import org.apache.avalon.framework.activity.Disposable;
-import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.logger.LogEnabled;
 import org.apache.avalon.framework.logger.Logger;
 import org.apache.avalon.framework.parameters.ParameterException;
 import org.apache.avalon.framework.parameters.Parameterizable;
 import org.apache.avalon.framework.parameters.Parameters;
+import org.jcontainer.dna.Active;
 import org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager;
 import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
 import org.jcontainer.loom.interfaces.ExtensionManagerMBean;
@@ -103,12 +102,11 @@ import org.realityforge.salt.i18n.Resources;
 
 /**
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-08-17 18:27:32 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-05 03:41:36 $
  */
 public class DefaultExtensionManager
     extends org.jcontainer.loom.components.extensions.pkgmgr.impl.DefaultExtensionManager
-    implements LogEnabled, Parameterizable, Initializable, Disposable,
-    ExtensionManager, ExtensionManagerMBean
+    implements LogEnabled, Parameterizable, Active, ExtensionManager, ExtensionManagerMBean
 {
     private final static Resources REZ =
         ResourceManager.getPackageResources( DefaultExtensionManager.class );

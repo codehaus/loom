@@ -98,11 +98,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.parameters.ParameterException;
 import org.apache.avalon.framework.parameters.Parameterizable;
 import org.apache.avalon.framework.parameters.Parameters;
+import org.jcontainer.dna.Active;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.Installer;
 import org.jcontainer.loom.interfaces.LoomException;
@@ -116,11 +116,11 @@ import org.realityforge.salt.io.IOUtil;
  * and installing it as appropriate.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-10-05 00:12:37 $
+ * @version $Revision: 1.6 $ $Date: 2003-10-05 03:41:36 $
  */
 public class DefaultInstaller
     extends AbstractLogEnabled
-    implements Installer, Parameterizable, Initializable
+    implements Installer, Parameterizable, Active
 {
     private static final Resources REZ =
         ResourceManager.getPackageResources( DefaultInstaller.class );
@@ -204,6 +204,11 @@ public class DefaultInstaller
                             ioe.getMessage() );
             getLogger().warn( message, ioe );
         }
+    }
+
+    public void dispose()
+        throws Exception
+    {
     }
 
     /**

@@ -92,11 +92,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.xml.transform.stream.StreamResult;
-import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.context.Context;
 import org.apache.avalon.framework.context.ContextException;
 import org.apache.avalon.framework.context.Contextualizable;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
+import org.jcontainer.dna.Active;
 import org.jcontainer.dna.Configurable;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.ConfigurationException;
@@ -123,7 +123,7 @@ import org.xml.sax.InputSource;
  */
 public class FileSystemPersistentConfigurationInterceptor
     extends AbstractLogEnabled
-    implements ConfigurationInterceptor, Contextualizable, Configurable, Initializable
+    implements ConfigurationInterceptor, Contextualizable, Configurable, Active
 {
     private static final Resources REZ =
         ResourceManager.getPackageResources( FileSystemPersistentConfigurationInterceptor.class );
@@ -235,6 +235,11 @@ public class FileSystemPersistentConfigurationInterceptor
         {
             FileUtil.forceMkdir( new File( m_debugPath ) );
         }
+    }
+
+    public void dispose()
+        throws Exception
+    {
     }
 
     private void loadConfigurations()

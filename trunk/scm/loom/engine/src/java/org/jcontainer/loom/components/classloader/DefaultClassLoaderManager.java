@@ -93,7 +93,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import org.realityforge.extension.Extension;
-import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.context.Context;
 import org.apache.avalon.framework.context.ContextException;
 import org.apache.avalon.framework.context.Contextualizable;
@@ -107,6 +106,7 @@ import org.jcontainer.loom.interfaces.ClassLoaderManager;
 import org.jcontainer.loom.interfaces.ClassLoaderSet;
 import org.jcontainer.dna.Configuration;
 import org.jcontainer.dna.ConfigurationException;
+import org.jcontainer.dna.Active;
 import org.jcontainer.dna.impl.ConfigurationUtil;
 import org.realityforge.classman.builder.LoaderBuilder;
 import org.realityforge.classman.builder.LoaderResolver;
@@ -139,7 +139,7 @@ import org.w3c.dom.Element;
  */
 public class DefaultClassLoaderManager
     extends AbstractLogEnabled
-    implements ClassLoaderManager, Contextualizable, Serviceable, Initializable
+    implements ClassLoaderManager, Contextualizable, Serviceable, Active
 {
     /**
      * Constant for name of element that indicates custom
@@ -233,6 +233,11 @@ public class DefaultClassLoaderManager
         final Map defined = new HashMap();
         defined.put( "*system*", m_commonClassLoader );
         m_predefinedLoaders = Collections.unmodifiableMap( defined );
+    }
+
+    public void dispose()
+        throws Exception
+    {
     }
 
     /**

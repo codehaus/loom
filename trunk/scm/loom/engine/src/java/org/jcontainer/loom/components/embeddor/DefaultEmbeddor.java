@@ -91,8 +91,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
-import org.apache.avalon.framework.activity.Disposable;
-import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.container.ContainerUtil;
 import org.apache.avalon.framework.context.Context;
 import org.apache.avalon.framework.context.ContextException;
@@ -104,19 +102,20 @@ import org.apache.avalon.framework.parameters.Parameterizable;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.avalon.framework.service.DefaultServiceManager;
 import org.apache.avalon.framework.service.ServiceManager;
+import org.jcontainer.dna.Active;
+import org.jcontainer.dna.Configurable;
+import org.jcontainer.dna.Configuration;
+import org.jcontainer.dna.ConfigurationException;
+import org.jcontainer.loom.components.util.ExtensionFileFilter;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.Deployer;
 import org.jcontainer.loom.interfaces.Embeddor;
 import org.jcontainer.loom.interfaces.EmbeddorMBean;
 import org.jcontainer.loom.interfaces.Kernel;
-import org.jcontainer.loom.interfaces.SystemManager;
 import org.jcontainer.loom.interfaces.LoomException;
-import org.jcontainer.loom.components.util.ExtensionFileFilter;
-import org.jcontainer.dna.Configurable;
-import org.jcontainer.dna.Configuration;
-import org.jcontainer.dna.ConfigurationException;
-import org.realityforge.salt.i18n.Resources;
+import org.jcontainer.loom.interfaces.SystemManager;
 import org.realityforge.salt.i18n.ResourceManager;
+import org.realityforge.salt.i18n.Resources;
 
 /**
  * This is the object that is interacted with to create, manage and
@@ -129,7 +128,7 @@ import org.realityforge.salt.i18n.ResourceManager;
 public class DefaultEmbeddor
     extends AbstractLogEnabled
     implements Embeddor, EmbeddorMBean, Contextualizable,
-    Parameterizable, Configurable, Initializable, Disposable
+    Parameterizable, Configurable, Active
 {
     private static final Resources REZ =
         ResourceManager.getPackageResources( DefaultEmbeddor.class );
@@ -608,7 +607,7 @@ public class DefaultEmbeddor
         ContainerUtil.service( object, getServiceManager() );
         ContainerUtil.parameterize( object, createChildParameters() );
         org.jcontainer.dna.impl.ContainerUtil.configure( object, config );
-        ContainerUtil.initialize( object );
+        org.jcontainer.dna.impl.ContainerUtil.initialize( object );
         ContainerUtil.start( object );
     }
 
@@ -631,7 +630,8 @@ public class DefaultEmbeddor
             {
                 continue;
             }
-            ContainerUtil.shutdown( object );
+            ContainerUtil.stop( object );
+            org.jcontainer.dna.impl.ContainerUtil.dispose( object );
         }
     }
 
