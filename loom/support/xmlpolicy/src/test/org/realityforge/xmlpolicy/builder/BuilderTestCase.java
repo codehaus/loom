@@ -12,6 +12,7 @@ import java.security.AllPermission;
 import java.security.CodeSource;
 import java.security.PermissionCollection;
 import java.security.Policy;
+import java.security.UnresolvedPermission;
 import java.security.cert.Certificate;
 import java.util.Enumeration;
 import junit.framework.TestCase;
@@ -156,5 +157,67 @@ public class BuilderTestCase
             }
         }
         fail( "Expected to get permission set with ALlPermission contained" );
+    }
+
+    public void testMetaDataWithAPermissionAndCertsAndUnResolverPerm()
+        throws Exception
+    {
+        final PolicyBuilder builder = new TestPolicyBuilder();
+        final PermissionMetaData permission =
+            new PermissionMetaData( AllPermission.class.getName(), null, null,
+                                    "jenny", "default" );
+        final GrantMetaData grant =
+            new GrantMetaData( "file:/", "jenny", "default",
+                               new PermissionMetaData[]{permission} );
+        final KeyStoreMetaData keyStore =
+            new KeyStoreMetaData( "default", "http://spice.sourceforge.net", "DoDgY" );
+        final PolicyMetaData metaData =
+            new PolicyMetaData( new KeyStoreMetaData[]{keyStore}, new GrantMetaData[]{grant} );
+        final TestResolver resolver = new TestResolver();
+        final Policy policy = builder.buildPolicy( metaData, resolver );
+        final CodeSource codesource =
+            new CodeSource( new URL( "file:/" ), new Certificate[]{MockCertificate.JENNY_CERTIFICATE} );
+        final PermissionCollection permissions = policy.getPermissions( codesource );
+        final Enumeration enumeration = permissions.elements();
+        while( enumeration.hasMoreElements() )
+        {
+            final Object perm = enumeration.nextElement();
+            if( perm instanceof UnresolvedPermission )
+            {
+                return;
+            }
+        }
+        fail( "Expected to get permission set with UnresolvedPermission contained" );
+    }
+
+    public void testMetaDataWithAPermissionAndCertsAndMisnamedPerm()
+        throws Exception
+    {
+        final PolicyBuilder builder = new TestPolicyBuilder();
+        final PermissionMetaData permission =
+            new PermissionMetaData( AllPermission.class.getName() + "sss", null, null,
+                                    null, null );
+        final GrantMetaData grant =
+            new GrantMetaData( "file:/", "jenny", "default",
+                               new PermissionMetaData[]{permission} );
+        final KeyStoreMetaData keyStore =
+            new KeyStoreMetaData( "default", "http://spice.sourceforge.net", "DoDgY" );
+        final PolicyMetaData metaData =
+            new PolicyMetaData( new KeyStoreMetaData[]{keyStore}, new GrantMetaData[]{grant} );
+        final TestResolver resolver = new TestResolver();
+        final Policy policy = builder.buildPolicy( metaData, resolver );
+        final CodeSource codesource =
+            new CodeSource( new URL( "file:/" ), new Certificate[]{MockCertificate.JENNY_CERTIFICATE} );
+        final PermissionCollection permissions = policy.getPermissions( codesource );
+        final Enumeration enumeration = permissions.elements();
+        while( enumeration.hasMoreElements() )
+        {
+            final Object perm = enumeration.nextElement();
+            if( perm instanceof UnresolvedPermission )
+            {
+                return;
+            }
+        }
+        fail( "Expected to get permission set with UnresolvedPermission contained" );
     }
 }
