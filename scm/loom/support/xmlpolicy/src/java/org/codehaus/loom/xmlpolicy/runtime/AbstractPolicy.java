@@ -143,10 +143,10 @@ public abstract class AbstractPolicy
     private void copyPermissions( final Permissions destination,
                                   final Permissions source )
     {
-        final Enumeration enum = source.elements();
-        while( enum.hasMoreElements() )
+        final Enumeration enumeration = source.elements();
+        while( enumeration.hasMoreElements() )
         {
-            destination.add( (Permission)enum.nextElement() );
+            destination.add( (Permission)enumeration.nextElement() );
         }
     }
 
