@@ -25,7 +25,7 @@ import org.realityforge.xmlpolicy.metadata.PolicyMetaData;
 /**
  * TestCase for Builder package.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  */
 public class BuilderTestCase
     extends TestCase

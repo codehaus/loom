@@ -33,8 +33,8 @@ import org.realityforge.xmlpolicy.metadata.PolicyMetaData;
  * A Utility class that builds a Policy object from a specified
  * PolicyMetaData.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-06-05 22:39:12 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.6 $ $Date: 2003-06-27 03:45:57 $
  */
 public class PolicyBuilder
 {

@@ -22,8 +22,8 @@ import org.realityforge.classman.metadata.JoinMetaData;
  * actual {@link java.lang.ClassLoader}s out of the
  * {@link ClassLoaderSetMetaData} objects.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-04-04 13:52:12 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.2 $ $Date: 2003-06-27 03:45:05 $
  */
 public class LoaderBuilder
 {

@@ -13,7 +13,7 @@ import org.realityforge.classman.test.AbstractLoaderTestCase;
 /**
  * TestCase for {@link org.realityforge.classman.reader.ClassLoaderSetReader}.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  */
 public class ReaderTestCase
     extends AbstractLoaderTestCase

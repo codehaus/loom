@@ -10,8 +10,8 @@ package org.realityforge.classman.test;
 /**
  * Constants used in the tests.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-04-04 13:52:14 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.2 $ $Date: 2003-06-27 03:45:16 $
  */
 public interface DataConstants
 {

@@ -18,8 +18,8 @@ import java.util.Map;
  * URL. It is also necessary for the target values of permissions
  * to be "resolved" using a pseuedo expression language.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-04-16 11:45:59 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.2 $ $Date: 2003-06-27 03:45:57 $
  */
 public interface PolicyResolver
 {

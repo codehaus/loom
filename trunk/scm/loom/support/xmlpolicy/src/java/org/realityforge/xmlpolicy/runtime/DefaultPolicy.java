@@ -19,7 +19,7 @@ import java.util.Map;
  * Note that it was a deliberate decision to limit the time at which you can
  * specify policy data for security reasons.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  */
 public class DefaultPolicy
     extends AbstractPolicy

@@ -12,7 +12,7 @@ import junit.framework.TestCase;
 /**
  * TestCase for {@link org.realityforge.xmlpolicy.reader.PolicyReader}.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  */
 public class MetaDataTestCase
     extends TestCase

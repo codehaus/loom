@@ -20,8 +20,8 @@ import org.realityforge.salt.io.PathMatcher;
  * scanning of filesets. It scans filesets based on classes
  * {@link #m_baseDirectory} value.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-06-05 23:51:50 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.6 $ $Date: 2003-06-27 03:45:05 $
  */
 public class DefaultLoaderResolver
     extends SimpleLoaderResolver

@@ -19,8 +19,8 @@ import org.realityforge.classman.test.DataConstants;
 /**
  * Unit test for join classloader.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-04-10 10:54:30 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.4 $ $Date: 2003-06-27 03:45:10 $
  */
 public class JoinClassLoaderTestCase
     extends AbstractLoaderTestCase

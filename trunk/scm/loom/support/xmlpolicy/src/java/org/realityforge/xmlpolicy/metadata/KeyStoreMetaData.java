@@ -11,8 +11,8 @@ package org.realityforge.xmlpolicy.metadata;
  * This class defines a keystore that is used when locating
  * signers of a codebase.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-04-16 11:45:59 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.2 $ $Date: 2003-06-27 03:45:58 $
  */
 public class KeyStoreMetaData
 {

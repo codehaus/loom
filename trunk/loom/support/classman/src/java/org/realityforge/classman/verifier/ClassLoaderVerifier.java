@@ -35,8 +35,8 @@ import org.realityforge.salt.i18n.ResourceManager;
  *       classloaders.</li>
  * </ul>
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-06-27 03:42:48 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.6 $ $Date: 2003-06-27 03:45:08 $
  */
 public class ClassLoaderVerifier
 {
