@@ -24,12 +24,11 @@ import org.jcontainer.loom.tools.metadata.PartitionMetaData;
 import org.jcontainer.loom.tools.profile.ComponentProfile;
 import org.jcontainer.loom.tools.profile.PartitionProfile;
 import org.jcontainer.loom.tools.profile.ProfileBuilder;
-import org.realityforge.metaclass.model.Attribute;
 
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.8 $ $Date: 2003-10-11 09:05:17 $
+ * @version $Revision: 1.9 $ $Date: 2003-10-14 08:42:15 $
  */
 public class PhoenixProfileBuilder
     extends AbstractLogEnabled
@@ -133,7 +132,6 @@ public class PhoenixProfileBuilder
     private static ComponentInfo createListenerInfo( final String implementationKey )
     {
         return new ComponentInfo( implementationKey,
-                                  Attribute.EMPTY_SET,
                                   ServiceDescriptor.EMPTY_SET,
                                   DependencyDescriptor.EMPTY_SET,
                                   null );

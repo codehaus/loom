@@ -24,7 +24,7 @@ import org.realityforge.metaclass.model.Attribute;
  *  An basic test case for the LogManager.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.13 $ $Date: 2003-10-06 14:10:49 $
+ * @version $Revision: 1.14 $ $Date: 2003-10-14 08:42:16 $
  */
 public class VerifierTestCase
     extends TestCase
@@ -84,13 +84,11 @@ public class VerifierTestCase
                                    Attribute.EMPTY_SET );
         final ComponentInfo c1Info =
             new ComponentInfo( C1_IMPLEMENTATION_KEY,
-                               Attribute.EMPTY_SET,
                                ServiceDescriptor.EMPTY_SET,
                                new DependencyDescriptor[]{new DependencyDescriptor( C2_SERVICE, C2_SERVICE, false, Attribute.EMPTY_SET )},
                                null );
         final ComponentInfo c2Info =
             new ComponentInfo( C2_IMPLEMENTATION_KEY,
-                               Attribute.EMPTY_SET,
                                new ServiceDescriptor[]{new ServiceDescriptor( C2_SERVICE, Attribute.EMPTY_SET )},
                                DependencyDescriptor.EMPTY_SET,
                                null );
@@ -180,7 +178,6 @@ public class VerifierTestCase
 
         final ComponentInfo c3Info =
             new ComponentInfo( C3_IMPLEMENTATION_KEY,
-                               Attribute.EMPTY_SET,
                                ServiceDescriptor.EMPTY_SET,
                                new DependencyDescriptor[]{new DependencyDescriptor( C2_SERVICE + DependencyDescriptor.ARRAY_POSTFIX,
                                                                                     C2_SERVICE + DependencyDescriptor.ARRAY_POSTFIX,
@@ -189,7 +186,6 @@ public class VerifierTestCase
                                null );
         final ComponentInfo c2Info =
             new ComponentInfo( C2_IMPLEMENTATION_KEY,
-                               Attribute.EMPTY_SET,
                                new ServiceDescriptor[]{new ServiceDescriptor( C2_SERVICE, Attribute.EMPTY_SET )},
                                DependencyDescriptor.EMPTY_SET,
                                null );

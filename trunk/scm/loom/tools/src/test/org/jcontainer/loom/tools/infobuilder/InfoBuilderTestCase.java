@@ -30,7 +30,7 @@ import org.realityforge.metaclass.model.Attribute;
  * Abstract class which TestCases can extend.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.19 $ $Date: 2003-10-11 08:46:05 $
+ * @version $Revision: 1.20 $ $Date: 2003-10-14 08:42:16 $
  */
 public class InfoBuilderTestCase
     extends TestCase
@@ -140,7 +140,6 @@ public class InfoBuilderTestCase
                                   Attribute.EMPTY_SET );
 
         return new ComponentInfo( "org.jcontainer.loom.tools.infobuilder.data.component2",
-                                     Attribute.EMPTY_SET,
                                   services,
                                   deps,
                                   schema );
