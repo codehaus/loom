@@ -8,7 +8,7 @@
   </properties>
   <body>
     <section name="Introduction">
-      <p>In Avalon Phoenix, there are three component layers:</p>
+      <p>In Avalon Loom, there are three component layers:</p>
         <ul>
           <li>Blocks</li>
           <li>Components</li>

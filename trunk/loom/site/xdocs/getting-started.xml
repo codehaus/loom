@@ -17,13 +17,13 @@
 
 <p>
     This document provides developers with simple documentation for getting
-    started with Phoenix. For information about the overall structure of
-    Avalon Framework (on which Phoenix is based), please refer to the
+    started with Loom. For information about the overall structure of
+    Avalon Framework (on which Loom is based), please refer to the
     <a href="http://avalon.apache.org/framework/index.html">Framework documentation</a>.
 </p>
 
 <p>
-    Instructions for downloading and installing Phoenix can be found on the
+    Instructions for downloading and installing Loom can be found on the
     <a href="install.html">Install</a> document.
 </p>
 
@@ -51,12 +51,12 @@
 <section name="Run the HelloWorld example">
 
 <p>
-    After you have successfully built Phoenix, you can verify that it
+    After you have successfully built Loom, you can verify that it
     has compiled correctly by running the HelloWorld demo Service Application.
 </p>
 <p>
     Firstly you will need to get the demo-helloworld.sar file and drop it into
-    the apps directory of Phoenix.  Currently it needs to be built from CVS -
+    the apps directory of Loom.  Currently it needs to be built from CVS -
     <i>TODO -- demo application</i>
 </p>
 <p>
@@ -80,8 +80,8 @@ you are 127.0.0.1 at 127.0.0.1
     </source>
 </p>
 <p>
-    This shows that Phoenix has unpacked and launched the server application contained
-    within the demo-helloworld.sar file.  If you close and relaunch Phoenix, it should
+    This shows that Loom has unpacked and launched the server application contained
+    within the demo-helloworld.sar file.  If you close and relaunch Loom, it should
     restart the application.
 </p>
 <p>
@@ -92,24 +92,24 @@ you are 127.0.0.1 at 127.0.0.1
     share connection pooling across multiple servers.
 </p>
 </section>
-<section name="The Phoenix Developer Kit - A different example">
+<section name="The Loom Developer Kit - A different example">
 <p>
     This self contained kit could be considered a starter project for someone wanting to make a
-    Phoenix compatible application.  The idea is that you start with this skeleton including
+    Loom compatible application.  The idea is that you start with this skeleton including
     Ant build script and then add in more and more as your se code to copy from elsewhere.
 </p>
 <p>
     This  also demonstrates that it is possible to make a server application that is dual mode.
-    Dual mode to us is the ability for the server application to run inside Phoenix and to
+    Dual mode to us is the ability for the server application to run inside Loom and to
     stand-alone from the command line.  It is a little bit of a sleight of hand as the codebase
     would be zipped into two forms - the sar file for phoenix and a jar file for standalone.
 </p>
 <p>
-    The Phoenix development kit originates in Phoenix's CVS.  When you have that file, unzip it
+    The Loom development kit originates in Loom's CVS.  When you have that file, unzip it
     and immediately launch ant to make the jars and sars.  There are four:
     </p>
       <ol>
-      <li>phoenix-demo.sar - the server app in Phoenix form</li>
+      <li>phoenix-demo.sar - the server app in Loom form</li>
       <li>phoenix-demo-block.sar - used inside the sar</li>
       <li>phoenix-demo-client.sar - a client app to test the server</li>
       <li>phoenix-demo-server.sar - the server app in standalone form</li>
@@ -125,10 +125,10 @@ Ctrl-C to exit
 String passed = Hello!!!!!
     </source>
 
-    The Server app running inside Phoenix and after being tested with the client app (see below):
+    The Server app running inside Loom and after being tested with the client app (see below):
 
     <source>
-Phoenix 4.0a4
+        Loom 4.0a4
 
 Server started on port 1234
 String passed = Hello!!!!!
@@ -140,7 +140,7 @@ String passed = Hello!!!!!
 java -jar phoenix-demo-client.jar localhost 7654 Hello!!!!!
     </source>
 
-    (Change the port to 1234 from 7654 to poke the in-Phoenix server).
+    (Change the port to 1234 from 7654 to poke the in-Loom server).
 
 </p>
 <p>

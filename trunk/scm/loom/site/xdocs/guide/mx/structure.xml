@@ -2,14 +2,14 @@
 <document>
   <properties>
     <title>Management Guide - Organizing Structure</title>
-    
+
 
   <author email="huw@apache.org">Huw Roberts</author>
   </properties>
   <body>
     <section name="Introduction">
       <p>
-        Phoenix Management separates the information on what should be managed
+        Loom Management separates the information on what should be managed
         from the implementation of the management agent.  In order to maintain
         this separation, yet still allow the management interface to be rich
         and structured enough to be useful, it is necessary to impose an organizing
@@ -26,7 +26,7 @@
       </p>
       <subsection name="Context">
         <p>
-          In Phoenix, each managed object belongs to a single Context
+          In Loom, each managed object belongs to a single Context
           The Context contains a list of managed components called Targets.  In
           addition to the list of Targets, a Context can also have zero or more
           sub-Contexts.
@@ -34,7 +34,7 @@
         <p>
           This nested structure of Contexts is the principal
           organizing element for management data, and is the bridge between
-          the management code embedded in Phoenix and the implementation of the
+          the management code embedded in Loom and the implementation of the
           management component.  It is represented by the
           <source>org.apache.avalon.phoenix.interfaces.SystemManager</source>
           interface.
@@ -42,7 +42,7 @@
       </subsection>
       <subsection name="Target">
         <p>
-          A target is a manageable object.  Examples of Targets in Phoenix include the
+          A target is a manageable object.  Examples of Targets in Loom include the
           components, the applications and the blocks.  Each target has one or more topics.
     </p>
       </subsection>
@@ -59,7 +59,7 @@
     This diagram illustrates how this might be presented in a management GUI:
       </p>
       <source>
-Phoenix
+Loom
  |
  +--Components
  |   +-- Kernel
@@ -78,11 +78,11 @@ Phoenix
                 +-- Block 2
       </source>
       <p>
-        In this example Phoenix, Components and Blocks are Contexts.  Kernel, Deployer, Hello World, Block 1, etc are Targets.  Each Target will then have one or more Topics.  Topics might be Logging, Lifecycle, Deployer, etc.
+        In this example Loom, Components and Blocks are Contexts.  Kernel, Deployer, Hello World, Block 1, etc are Targets.  Each Target will then have one or more Topics.  Topics might be Logging, Lifecycle, Deployer, etc.
       </p>
       <p>
         In a jmx environment each topic would most likely be exported as its own mbean
-        (so in the above example the jmx name would be 'Instance=Phoenix,Application=Hello_World,Block=Block_2,Topic=Logger'.
+        (so in the above example the jmx name would be 'Instance=Loom,Application=Hello_World,Block=Block_2,Topic=Logger'.
       </p>
       <p>
         In a swing environment each topic might have its own tab.
@@ -91,8 +91,8 @@ Phoenix
     In a command line environment, the syntax might be:
       </p>
       <source>
-phoenix-mx.set( "Phoenix/Applications/Hello World/Logging/LogLevel", "DEBUG" );
-phoenix-mx.describe( ""Phoenix/Applications/Hello World/Logging/LogLevel" );
+phoenix-mx.set( "Loom/Applications/Hello World/Logging/LogLevel", "DEBUG" );
+phoenix-mx.describe( ""Loom/Applications/Hello World/Logging/LogLevel" );
       </source>
       <p>
         Again, the point behind the 'Organizing Structure' is to keep the management specification

@@ -2,8 +2,8 @@
 <document>
   <properties>
     <title>Guide - Creating a Server Application</title>
-    
-    
+
+
   <author email="peter at apache.org">Peter Donald</author>
   </properties>
   <body>
@@ -26,7 +26,7 @@
         As a assembler it is your responsibility to select the particular Blocks
         required to build your application. You may aquire the Blocks from a number
         of sources depending on your resources. You may use the core Blocks supplied
-        with Phoenix, contract someone to build the component or download the Block
+        with Loom, contract someone to build the component or download the Block
         from an online repository.
       </p>
     </section>
@@ -59,7 +59,7 @@
     </section>
     <section name="Create the sar file">
       <p>
-        The sar file format is the standard distribution format of Phoenix Server
+        The sar file format is the standard distribution format of Loom Server
         Applications. It is a standard Jar file with a specific directory layout.
         The config.xml, environment.xml and assembly.xml file must be stored in
         <source>SAR-INF/</source> directory of the archive. All jar files, including

@@ -8,8 +8,8 @@
         <section name="Who Should Read This Book?">
             <p>
               The Server Assemblers Guide is written for assemblers who want to assemble a
-              Server Application for Phoenix. It is assumed that you are familiar with
-              the basic concepts of the Phoenix framework.
+              Server Application for Loom. It is assumed that you are familiar with
+              the basic concepts of the Loom framework.
             </p>
             <p>
               This book concentrates on assembly, and as such requires no knowledge of

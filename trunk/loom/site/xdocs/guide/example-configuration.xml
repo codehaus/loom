@@ -2,9 +2,9 @@
 <document>
   <properties>
     <title>Guide - Example Configuration</title>
-    
-    
-    
+
+
+
   <author email="mcconnell@osm.net">Stephen McConnell</author>
     <author email="g-froehlich@gmx.de">Gerhard Froehlich</author>
   </properties>
@@ -38,9 +38,9 @@
       Unlike a Java interface, the service includes a version tag. So
       it's possible for a block to have several services with possibly
       different versions. If there are multiple services then just
-      declare them with multiple service entries here. Phoenix will make
+      declare them with multiple service entries here. Loom will make
       sure that the class with the same name as the .xinfo file
-      implements these interfaces (if it doesn't then Phoenix will
+      implements these interfaces (if it doesn't then Loom will
       terminate).
       -->
       &lt;service name="org.apache.acme.hub.gateway.FactoryService"/>
@@ -119,7 +119,7 @@
 
 &lt;/blockinfo>
 
-      
+
       </source>
       <p>Next is the block declaration (an extract from an <source>assembly.xml</source>
       file). This enables the declaration of WHERE the services are coming from.
@@ -154,7 +154,7 @@
   &lt;!-- more assembly information here -->
 
 &lt;/assembly>
-      
+
       </source>
     <subsection name=""/>
 

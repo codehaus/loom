@@ -2,50 +2,50 @@
 <document>
   <properties>
     <title>Alternate Kernels</title>
-    
-      
+
+
   <author email="hammant@apache.org">Paul Hammant</author>
   </properties>
   <body>
     <section name="Introduction">
        <p>
-          Phoenix can launch with alternate kernels.  Apart from the default 
-          kernel which is suitable for deploying in live scenarios, we 
+          Loom can launch with alternate kernels.  Apart from the default
+          kernel which is suitable for deploying in live scenarios, we
           supply a kernel which loads beanshell during startup.
        </p>
     </section>
     <section name="Beanshell enabled kernel">
       <p>
-        This allows pretty much anything to be done to applications 
-        and blocks once started.  As such it is not suitable for live 
+        This allows pretty much anything to be done to applications
+        and blocks once started.  As such it is not suitable for live
         deployment as it could be considered a bit of a hackers tool.
       </p>
       <p>
-        The supplied commands are getblock, prtapps, prtblocks, resumeapp, 
-        rmvapp, startapp, stopapp and suspendapp.  With getapp, you can 
+        The supplied commands are getblock, prtapps, prtblocks, resumeapp,
+        rmvapp, startapp, stopapp and suspendapp.  With getapp, you can
         invoke any of the public methods on the implementation, including
         interacting with the block's methods from its service.
       </p>
       <p>
         To create a beanshell capable kernel, place the bsh-1.2b7.jar from
-        <a href="http://www.beanshell.org/download.html">here</a> in the 
-        lib directory of phoenix before building it.  You will need to edit the 
+        <a href="http://www.beanshell.org/download.html">here</a> in the
+        lib directory of phoenix before building it.  You will need to edit the
         'beanshell.jars' and 'kernel.impl.class' parts of the ant.properties file.
-        You may also want to add your own convenience bsh scripts to the 
+        You may also want to add your own convenience bsh scripts to the
         src/bsh/ directory.
       </p>
       <p>
-        Alternatively, with a binary distribution of Phoenix, it is sufficient 
+        Alternatively, with a binary distribution of Loom, it is sufficient
         to just place the beanshell jar in the lib directiory of an unzipped
-        Phoenix.  To enable it, edit conf/kernel.conf and change the kernel line
+          Loom.  To enable it, edit conf/kernel.conf and change the kernel line
         to use the BeanShellKernel.
-      </p>            
-      
+      </p>
+
     </section>
     <section name="Beanshell enabled, remotely accessible kernel">
       <p>
         This is to-do.
-      </p>      
+      </p>
     </section>
   </body>
 </document>

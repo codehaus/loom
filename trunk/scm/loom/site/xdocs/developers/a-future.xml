@@ -2,14 +2,19 @@
 <document>
   <properties>
     <title>A future</title>
-    
-    
+
+
   <author email="Paul_Hammant@yahoo.com">Paul Hammant</author>
   </properties>
   <body>
     <section name="Introduction">
       <p>
-        A long term aim of Phoenix is to provide a platform that hosts multiple third party applications written only in Java within a single virtual machine.  The Phoenix platform is currently hosted on an Operating System such as Unix, Windows or Mac.  It could function directly on top of a Java Operating System.  A CPU combined with a suitable amount of memory, a basic BIOS, a Kernal, a suitable JVM and runtime library, could mount Phoenix and hosted server applications.
+        A long term aim of Loom is to provide a platform that hosts multiple third party
+          applications written only in Java within a single virtual machine.  The Loom
+          platform is currently hosted on an Operating System such as Unix, Windows or Mac.
+          It could function directly on top of a Java Operating System.  A CPU combined with
+          a suitable amount of memory, a basic BIOS, a Kernal, a suitable JVM and runtime
+          library, could mount Loom and hosted server applications.
       </p>
     </section>
     <section name="One step further">
@@ -19,9 +24,9 @@
       <img src="http://www.sun.com/products-n-solutions/hw/networking/images/prodsplash/x1.jpg" alt="Sun X1"/>
       <p>
         If that rackable server had 32 such CPUs, each with 128Mb of memory all
-        booting Phoenix. And if the CPUs shared a single hard drive, we might have
+        booting Loom. And if the CPUs shared a single hard drive, we might have
         a machine that was tuned to CPU intensive activities. Cocoon/Tomcat, EJB
-        clusters, might be load balanced by one of the CPUs running a Phoenix load
+        clusters, might be load balanced by one of the CPUs running a Loom load
         balancer.  Alternate scenarios are for virtual site hosting.  It could be
         a "1U" render or bean farm with each internal CPU having its own TCP/IP
         address.

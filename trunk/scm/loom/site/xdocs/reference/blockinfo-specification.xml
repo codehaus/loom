@@ -2,7 +2,7 @@
 <document>
     <properties>
     <title>BlockInfo Specification</title>
-        
+
         <author email="peter at apache.org">Peter Donald</author>
   </properties>
 
@@ -103,7 +103,7 @@
                     <td>
                         The type of configuration schema provided with the block.
                         Possible values depend on the Configuration Validator
-                        that Phoenix is using.  This value is ignored by the
+                        that Loom is using.  This value is ignored by the
                         default Configuration Validator.  Optional.
                     </td>
                 </tr>
@@ -151,7 +151,7 @@
         <section name="The &lt;dependencies> Element">
             <p>
                 The <source>&lt;dependencies></source> element defines the services
-                that the block requires to operate.  Phoenix provides these
+                that the block requires to operate.  Loom provides these
                 services to the block using the <source>ServiceManager</source>
                 passed to the block's <source>Serviceable.service()</source> method.
             </p>
@@ -213,7 +213,7 @@
             <p>
                 The <source>&lt;management-access-points></source> element
                 defines the management interfaces that the block provides.
-                These interfaces are exported by Phoenix's management system
+                These interfaces are exported by Loom's management system
                 to allow the block to be managed.
             </p>
             <p>

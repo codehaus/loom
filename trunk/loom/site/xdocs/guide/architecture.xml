@@ -2,24 +2,24 @@
 <document>
     <properties>
     <title>Guide - Architectural overview</title>
-        
-        
+
+
     <author email="leosimons@apache.org">Leo Simons</author>
   </properties>
     <body>
         <section name="Introduction">
             <p>
-              This document briefly describes the Phoenix server architecture.
+              This document briefly describes the Loom server architecture.
             </p>
         </section>
         <section name="Multiple Server Application hosting">
             <p>
-              Phoenix hosts one or more server applications at the same time in the same Virtual machine.
+                Loom hosts one or more server applications at the same time in the same Virtual machine.
             </p>
             <p>
-                <strong>Phoenix layer diagram</strong>
+                <strong>Loom layer diagram</strong>
             </p>
-                <figure src="images/phoenix-layers.jpg" alt="Phoenix Layers"/>
+                <figure src="images/phoenix-layers.jpg" alt="Loom Layers"/>
             <p>
               Shown above are three hosted server applications.  A mail server that would implement
               multiple listeners for incoming and outgoing services (POP3, SMTP, IMAP etc).  Outlook,
@@ -33,18 +33,18 @@
         </section>
         <section name="Packaging of a Server Application">
             <p>
-              Phoenix application are distributed in a single archive.
+                Loom application are distributed in a single archive.
             </p>
             <subsection name="Packaging in terms of blocks">
                 <p>
-                  Phoenix hosts server applications made up of blocks.  The blocks may depend on libraries
+                  Loom hosts server applications made up of blocks.  The blocks may depend on libraries
                   to function correctly.  The blocks are tied together with Assembly instructions and Configured
                   externally.
                 </p>
                 <p>
-                    <strong>Phoenix application in block view</strong>
+                    <strong>Loom application in block view</strong>
                 </p>
-                    <img src="../images/loom-app-block.jpg" alt="Phoenix App Block"/>
+                    <img src="../images/loom-app-block.jpg" alt="Loom App Block"/>
             </subsection>
             <subsection name="Packaging in terms of block jar files">
                 <p>
@@ -53,20 +53,20 @@
                   within a directory "SAR-INF/lib" insde the sar file).  The Assembly and configuration instructions
                   are in xml form and contained within a "SAR-INF" directory inside the sar file.
                 </p>
-                <img src="../images/loom-app-blockjars.jpg" alt="Phoenix application in block jar view"/>
+                <img src="../images/loom-app-blockjars.jpg" alt="Loom application in block jar view"/>
             </subsection>
-            <subsection name="FtpServer as a Phoenix application">
+            <subsection name="FtpServer as a Loom application">
                 <p>
                   FtpServer (part of the Avalon/Cornerstone project) is distributed in sar form.  Here is a
                   view of it's blocks.  It has no third party jars that it depends on.
                 </p>
                 <p>
-                    <strong>FtpServer, a real Phoenix application</strong>
+                    <strong>FtpServer, a real Loom application</strong>
                 </p>
-                    <figure src="images/phoenix-app-ftpserver.jpg" alt="Phoenix App FtpServer"/>
+                    <figure src="images/phoenix-app-ftpserver.jpg" alt="Loom App FtpServer"/>
             </subsection>
             <p>
-              Notes - Phoenix does not limit the number of blocks that it allows in a sar file.  We have taksdefs for Apache's Ant
+              Notes - Loom does not limit the number of blocks that it allows in a sar file.  We have taksdefs for Apache's Ant
               tool for making sar files.  See the "Block Developers Guide" (left
               margin of this page) for more what/how/why.
             </p>

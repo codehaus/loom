@@ -2,29 +2,29 @@
 <document>
   <properties>
     <title>Guide - PUnit</title>
-    
-    
+
+
   <author email="Paul_Hammant@yahoo.com">Paul Hammant</author>
   </properties>
   <body>
     <section name="Introduction">
       <p>
-        Phoenix has a component/lifecycle aware unit test framework called PUnit.  It has no requirements on 
-        external meta information.  As such it could be used for unit testing for a wide range of Avalon-Framework 
+        Loom has a component/lifecycle aware unit test framework called PUnit.  It has no requirements on
+        external meta information.  As such it could be used for unit testing for a wide range of Avalon-Framework
         enabled components.  Having said that, usage requires some knowledge of multi component applications and
-        the order of component lifecycling. PUnit builds on JUnit.  You should have testing experience of 
+        the order of component lifecycling. PUnit builds on JUnit.  You should have testing experience of
         <a href="http://www.junit.org">JUnit</a> before using PUnit.
       </p>
     </section>
     <section name="Example Usage">
       <p>
-        There is a unit test framework for Phoenix called PUnit.  It is used for pseudo in-container testing of Phoenix 
-        components.  The main class PUnitTestCase should be extended by the developer, some manual setup done, then 
+        There is a unit test framework for Loom called PUnit.  It is used for pseudo in-container testing of Loom
+        components.  The main class PUnitTestCase should be extended by the developer, some manual setup done, then
         normal assertXXX() testing.
       </p>
       <p>
-        <strong>Test component (from Phoenix's own PUnit TestCase)</strong>
-      </p>      
+        <strong>Test component (from Loom's own PUnit TestCase)</strong>
+      </p>
       <source>
 public class TestBlock
         implements Serviceable, Configurable, Initializable, Contextualizable, LogEnabled
@@ -66,11 +66,11 @@ public class TestBlock
     }
 
 
-}      
-      </source>      
+}
+      </source>
       <p>
-        <strong>Example TestCase (from Phoenix's own PUnit TestCase)</strong>
-      </p>      
+        <strong>Example TestCase (from Loom's own PUnit TestCase)</strong>
+      </p>
       <source>
 public class PUnitTestCaseTestCase extends PUnitTestCase
 {
@@ -104,24 +104,24 @@ public class PUnitTestCaseTestCase extends PUnitTestCase
         shutdown();
     }
 
-}      
+}
       </source>
       <p>
-        What is shown here is a single block being manually instantiated, and registered with PUnit 
-        (addBlock).  Configuration rather than being from a file, is handed in from this source 
-        via DefaultConfigurationBuilder (see its other methods for more flexibility).  The method 
-        startup() is causing the components (one only in this case) to be started. After the normal 
-        asserts have been invoked, the shutdown() is appropriate to tidy up in time for the next 
-        test.  If you have multiple tests to do, it might be best to do all that is setup and 
-        tearDown methods.       
+        What is shown here is a single block being manually instantiated, and registered with PUnit
+        (addBlock).  Configuration rather than being from a file, is handed in from this source
+        via DefaultConfigurationBuilder (see its other methods for more flexibility).  The method
+        startup() is causing the components (one only in this case) to be started. After the normal
+        asserts have been invoked, the shutdown() is appropriate to tidy up in time for the next
+        test.  If you have multiple tests to do, it might be best to do all that is setup and
+        tearDown methods.
       </p>
       <p>
         It is important for developers to know the order of dependancy of their components, and in
         fact, the dependency needs of all components used in the test.  This is normally the role
-        of the assembler rather than the developer, but there is no way that unit testing can 
+        of the assembler rather than the developer, but there is no way that unit testing can
         occur without all component needs being satisfied.  Of course the developer can use mock
         implementations of the required services.  Lastly, the order of dependency is important.
-        Phoenix itself spends some effort determining which components are not needed by anything
+        Loom itself spends some effort determining which components are not needed by anything
         and cycles them first during startup.  The last to be cycled are those that depend on the
         others.
       </p>
@@ -134,20 +134,20 @@ public class PUnitTestCaseTestCase extends PUnitTestCase
   &lt;path id="test.class.path">
     &lt;pathelement location="build/testclasses"/>
     &lt;path refid="compile.classpath"/>
-    &lt;pathelement location="lib/phoenix-punit.jar"/>        
-    &lt;pathelement location="lib/excalibur-containerkit-1.0.jar"/>    
+    &lt;pathelement location="lib/phoenix-punit.jar"/>
+    &lt;pathelement location="lib/excalibur-containerkit-1.0.jar"/>
     &lt;pathelement location="lib/excalibur-i18n-1.0.jar"/>
-  &lt;/path>     
+  &lt;/path>
       </source>
       <p>
         As with most testing frameworks, compilation of test classes is required before tests can be invoked...
       </p>
-      <source>      
+      <source>
      &lt;target name="test" depends="compile" description="compiles and runs unit tests">
- 
+
          &lt;mkdir dir="build/testclasses"/>
- 
-         &lt;javac 
+
+         &lt;javac
              destdir="build/testclasses"
              debug="${build.debug}"
              optimize="${build.optimize}"
@@ -155,17 +155,17 @@ public class PUnitTestCaseTestCase extends PUnitTestCase
              &lt;classpath refid="test.class.path" />
              &lt;src path="src/test" />
          &lt;/javac>
- 
+
          &lt;mkdir dir="build/tests"/>
- 
+
          &lt;junit fork="true"
              haltonfailure="${junit.failonerror}"
              printsummary="yes"
              dir="build/tests">
              &lt;classpath refid="test.class.path"/>
- 
+
              &lt;formatter type="plain"/>
- 
+
              &lt;batchtest todir="build/tests">
                  &lt;fileset dir="build/testclasses">
                      &lt;include name="**/*TestCase.class"/>
@@ -173,9 +173,9 @@ public class PUnitTestCaseTestCase extends PUnitTestCase
                  &lt;/fileset>
              &lt;/batchtest>
          &lt;/junit>
- 
-    &lt;/target> 
-      </source>    
+
+    &lt;/target>
+      </source>
     </section>
 
   </body>

@@ -26,7 +26,7 @@
         Contextualizable interface it will be passed an instance of
         <source>org.apache.avalon.phoenix.BlockContext</source> which is an extended version
         of <source>org.apache.avalon.Context</source>. Other than this minor change the
-        Block's container (the Phoenix Kernel) supports all the Avalon lifecycle
+        Block's container (the Loom Kernel) supports all the Avalon lifecycle
         methods or will in the near future (at the moment suspend/resume is not yet
         supported).
       </p>

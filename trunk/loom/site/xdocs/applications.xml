@@ -3,19 +3,19 @@
     <properties>
         <title>Application</title>
 
-        
+
             <author email="Paul_Hammant@yahoo.com">Paul Hammant</author>
-        
+
     </properties>
     <body>
 
         <section name="Introduction">
-            
+
             <p>
-                This page lists applications that run on top of the Phoenix application kernel.
+                This page lists applications that run on top of the Loom application kernel.
                 Each of these applications applications are at different stages of development
                 and evolution. Some of the "applications" are thin wrappers around existing
-                products that make them capable of being managed from within Phoenix. While
+                products that make them capable of being managed from within Loom. While
                 others are applications are assembled from reusable Blocks.
             </p>
             <p>
@@ -34,7 +34,7 @@
         </section>
 
         <section name="Application list">
-            
+
 
             <p>
                 <strong>James</strong>:
@@ -64,7 +64,7 @@
                 <a href="http://incubator.apache.org/projects/ftpserver">http://incubator.apache.org/projects/ftpserver</a>
             </p>
             <p>
-                FTPServer is a solid FTPServer built on top of Phoenix.
+                FTPServer is a solid FTPServer built on top of Loom.
             </p>
 
             <p>
@@ -73,8 +73,8 @@
             </p>
             <p>
                 Hendrik Schreiber has an excellent web server that is servlet capable.  It comes
-                with a block for use within Phoenix. As a demo, it is possible to build a SAR
-                file to see the default webapp of Jo! running under Phoenix control.  Jo! is Open-Source
+                with a block for use within Loom. As a demo, it is possible to build a SAR
+                file to see the default webapp of Jo! running under Loom control.  Jo! is Open-Source
                 (LGPL license).
             </p>
 
@@ -84,7 +84,7 @@
             </p>
             <p>
                 Alexis Agahi and Vinaysahil Chandran have migrated JabaServer (an open-source Java
-                implementation of Jabber) to be Phoenix dependant. JabberServer is under a
+                implementation of Jabber) to be Loom dependant. JabberServer is under a
                 BSD license.
             </p>
 
@@ -101,11 +101,11 @@
                 <a href="http://www.jesktop.com">http://www.jesktop.com</a>
             </p>
             <p>
-                This is a desktop GUI that sits on Phoenix.
+                This is a desktop GUI that sits on Loom.
             </p>
 
             <p>
-                <strong>PhoenixJMS</strong>:
+                <strong>LoomJMS</strong>:
                 <a href="http://sourceforge.net/projects/phoenixjms">http://sourceforge.net/projects/phoenixjms</a>
             </p>
             <p>
@@ -118,7 +118,7 @@
             </p>
             <p>
                 A wrapper that allows the Hypersonic SQL engine
-                to be served from inside Phoenix.
+                to be served from inside Loom.
             </p>
 
             <p>

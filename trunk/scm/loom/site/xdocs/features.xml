@@ -2,7 +2,7 @@
 <document>
  <properties>
     <title>Features</title>
-  
+
  <author email="leosimons@apache.org">Leo Simons</author>
   </properties>
 <body>
@@ -14,7 +14,7 @@
 </section>
 
 <section name="Extensible architecture">
-    <p>Phoenix is written as an extensible micro-kernel. This allows you to:</p>
+    <p>Loom is written as an extensible micro-kernel. This allows you to:</p>
     <ul>
         <li>Customise behaviour quickly</li>
         <li>Plug in extra functionality effortlessly</li>
@@ -23,7 +23,7 @@
 </section>
 
 <section name="Flexible environment">
-    <p>Phoenix has native support for use in the following environments:</p>
+    <p>Loom has native support for use in the following environments:</p>
     <ul>
         <li>Command-line stand-alone program</li>
         <li>Unix daemon</li>
@@ -32,7 +32,7 @@
 </section>
 
 <section name="Integrated management">
-    <p>Phoenix enables JMX management of your software:</p>
+    <p>Loom enables JMX management of your software:</p>
     <ul>
         <li>All aspects of phoenix itself are manageable, including
         startup/shutdown, deployment, management and logging.</li>
@@ -43,15 +43,15 @@
 </section>
 
 <section name="Ease and speed up application development">
-    <p>Phoenix is a container for (server) applications. It can host
+    <p>Loom is a container for (server) applications. It can host
     multiple applications within the same JVM, while keeping them securely
     isolated from each other.</p>
 
-    <p>Phoenix provides simple XML configuration files that allow you to
+    <p>Loom provides simple XML configuration files that allow you to
     rapidly assemble a customised server applications from readily available
     components (called blocks).</p>
 
-    <p>Phoenix provides the following services to hosted applications:</p>
+    <p>Loom provides the following services to hosted applications:</p>
     <ul>
         <li>Lifecycle management</li>
         <li>Configuration management and persistence</li>
@@ -61,7 +61,7 @@
         <li>An isolated environment</li>
     </ul>
 
-    <p>Phoenix leverages the Avalon Framework, making it compatible with other
+    <p>Loom leverages the Avalon Framework, making it compatible with other
     Avalon-based projects like Excalibur and Cornerstone, enabling you to
     easily reuse their functionality.</p>
 </section>
