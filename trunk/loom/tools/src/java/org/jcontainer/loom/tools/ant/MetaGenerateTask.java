@@ -14,12 +14,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import org.apache.avalon.phoenix.framework.tools.infobuilder.InfoWriter;
-import org.apache.avalon.phoenix.framework.tools.infobuilder.LegacyBlockInfoWriter;
-import org.apache.avalon.phoenix.framework.tools.infobuilder.SerializedInfoWriter;
-import org.apache.avalon.phoenix.framework.tools.infobuilder.XMLInfoWriter;
 import org.apache.tools.ant.BuildException;
 import org.jcontainer.loom.tools.info.ComponentInfo;
+import org.jcontainer.loom.tools.infobuilder.InfoWriter;
+import org.jcontainer.loom.tools.infobuilder.LegacyBlockInfoWriter;
+import org.jcontainer.loom.tools.infobuilder.SerializedInfoWriter;
+import org.jcontainer.loom.tools.infobuilder.XMLInfoWriter;
 import org.jcontainer.loom.tools.qdox.DefaultInfoBuilder;
 import org.jcontainer.loom.tools.qdox.LegacyInfoBuilder;
 
@@ -29,7 +29,7 @@ import org.jcontainer.loom.tools.qdox.LegacyInfoBuilder;
  *
  * @author Paul Hammant
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-26 08:52:31 $
+ * @version $Revision: 1.3 $ $Date: 2003-06-26 09:35:27 $
  */
 public class MetaGenerateTask
     extends AbstractQdoxTask

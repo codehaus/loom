@@ -10,14 +10,13 @@ package org.jcontainer.loom.tools.infobuilder;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import org.jcontainer.loom.tools.info.ComponentInfo;
-import org.jcontainer.loom.tools.infobuilder.InfoReader;
 
 /**
  * Create {@link org.jcontainer.loom.tools.info.ComponentInfo} objects from stream made up of
  * serialized object.
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-26 09:34:20 $
+ * @version $Revision: 1.2 $ $Date: 2003-06-26 09:35:27 $
  */
 public class SerializedInfoReader
     implements InfoReader
