@@ -1,7 +1,7 @@
 /* ====================================================================
- * JContainer Software License, version 1.1
+ * Loom Software License, version 1.1
  *
- * Copyright (c) 2003, JContainer Group. All rights reserved.
+ * Copyright (c) 2003, Loom Group. All rights reserved.
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -14,7 +14,7 @@
  *    the documentation and/or other materials provided with the
  *    distribution.
  *
- * 3. Neither the name of the JContainer Group nor the name "Loom" nor
+ * 3. Neither the name of the Loom Group nor the name "Loom" nor
  *    the names of its contributors may be used to endorse or promote
  *    products derived from this software without specific prior
  *    written permission.
@@ -34,7 +34,7 @@
  *
  * ====================================================================
  *
- * JContainer Loom includes code from the Apache Software Foundation
+ * Loom Loom includes code from the Apache Software Foundation
  *
  * ====================================================================
  * The Apache Software License, Version 1.1
@@ -102,7 +102,7 @@ import org.codehaus.spice.salt.i18n.Resources;
  *
  * @author Peter Donald
  * @author <a href="mailto:Huw@mmlive.com">Huw Roberts</a>
- * @version $Revision: 1.2 $ $Date: 2004-04-20 21:46:37 $
+ * @version $Revision: 1.3 $ $Date: 2004-05-01 12:48:35 $
  */
 public abstract class AbstractJMXManager
     extends AbstractSystemManager

@@ -1,7 +1,7 @@
 /*
- * Copyright (C) The JContainer Group. All rights reserved.
+ * Copyright (C) The Loom Group. All rights reserved.
  *
- * This software is published under the terms of the JContainer
+ * This software is published under the terms of the Loom
  * Software License version 1.1, a copy of which has been included
  * with this distribution in the LICENSE.txt file.
  */
@@ -22,7 +22,7 @@ import org.codehaus.metaclass.model.Attribute;
 
 /**
  * @author Peter Donald
- * @version $Revision: 1.1 $ $Date: 2004-04-19 21:39:20 $
+ * @version $Revision: 1.2 $ $Date: 2004-05-01 12:48:35 $
  */
 public class PhoenixAttributeInterceptorTestCase
     extends TestCase
