@@ -99,15 +99,19 @@ import org.apache.avalon.framework.context.Context;
 import org.apache.avalon.framework.context.DefaultContext;
 import org.apache.avalon.framework.logger.Logger;
 import org.apache.avalon.phoenix.BlockContext;
+import org.codehaus.spice.configkit.PropertyExpander;
+import org.codehaus.spice.configkit.ResolverFactory;
+import org.codehaus.spice.loggerstore.LoggerStore;
+import org.codehaus.spice.loggerstore.LoggerStoreFactory;
+import org.codehaus.spice.loggerstore.factories.DOMLog4JLoggerStoreFactory;
+import org.codehaus.spice.loggerstore.factories.InitialLoggerStoreFactory;
+import org.codehaus.spice.loggerstore.factories.Jdk14LoggerStoreFactory;
+import org.codehaus.spice.loggerstore.factories.LogKitLoggerStoreFactory;
+import org.codehaus.spice.loggerstore.factories.PropertyLog4JLoggerStoreFactory;
+import org.codehaus.spice.loggerstore.factories.SimpleLogKitLoggerStoreFactory;
+import org.codehaus.spice.salt.i18n.ResourceManager;
+import org.codehaus.spice.salt.i18n.Resources;
 import org.jcomponent.alchemist.LoggerAlchemist;
-import org.jcomponent.loggerstore.LoggerStore;
-import org.jcomponent.loggerstore.LoggerStoreFactory;
-import org.jcomponent.loggerstore.factories.DOMLog4JLoggerStoreFactory;
-import org.jcomponent.loggerstore.factories.InitialLoggerStoreFactory;
-import org.jcomponent.loggerstore.factories.Jdk14LoggerStoreFactory;
-import org.jcomponent.loggerstore.factories.LogKitLoggerStoreFactory;
-import org.jcomponent.loggerstore.factories.PropertyLog4JLoggerStoreFactory;
-import org.jcomponent.loggerstore.factories.SimpleLogKitLoggerStoreFactory;
 import org.jcontainer.dna.AbstractLogEnabled;
 import org.jcontainer.dna.Composable;
 import org.jcontainer.dna.MissingResourceException;
@@ -116,10 +120,6 @@ import org.jcontainer.dna.impl.ConfigurationUtil;
 import org.jcontainer.loom.components.util.ConfigurationConverter;
 import org.jcontainer.loom.components.util.ResourceUtil;
 import org.jcontainer.loom.interfaces.LogManager;
-import org.codehaus.spice.configkit.PropertyExpander;
-import org.codehaus.spice.configkit.ResolverFactory;
-import org.codehaus.spice.salt.i18n.ResourceManager;
-import org.codehaus.spice.salt.i18n.Resources;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -208,11 +208,11 @@ public class DefaultLogManager
      * @return the Log hierarchy
      * @throws Exception if unable to create Loggers
      */
-    public LoggerStore createHierarchy(
-        final org.jcontainer.dna.Configuration logs,
-        final File homeDirectory,
-        final File workDirectory,
-        final Map context )
+    public LoggerStore
+        createHierarchy( final org.jcontainer.dna.Configuration logs,
+                         final File homeDirectory,
+                         final File workDirectory,
+                         final Map context )
         throws Exception
     {
         final Map map = createLoggerManagerContext( context );
@@ -322,8 +322,8 @@ public class DefaultLogManager
         }
     }
 
-    private Element buildLog4JConfiguration(
-        final org.jcontainer.dna.Configuration logs )
+    private Element
+        buildLog4JConfiguration( final org.jcontainer.dna.Configuration logs )
     {
         final Element element = ConfigurationUtil.toElement( logs );
         final Document document = element.getOwnerDocument();

@@ -91,7 +91,9 @@ import java.util.HashMap;
 import java.util.Map;
 import org.apache.avalon.framework.container.ContainerUtil;
 import org.apache.excalibur.instrument.InstrumentManager;
-import org.jcomponent.loggerstore.LoggerStore;
+import org.codehaus.spice.loggerstore.LoggerStore;
+import org.codehaus.spice.salt.i18n.ResourceManager;
+import org.codehaus.spice.salt.i18n.Resources;
 import org.jcontainer.dna.AbstractLogEnabled;
 import org.jcontainer.dna.Active;
 import org.jcontainer.dna.Composable;
@@ -103,6 +105,7 @@ import org.jcontainer.dna.MissingResourceException;
 import org.jcontainer.dna.ResourceLocator;
 import org.jcontainer.dna.impl.DefaultResourceLocator;
 import org.jcontainer.loom.components.application.DefaultApplication;
+import org.jcontainer.loom.components.util.profile.PartitionProfile;
 import org.jcontainer.loom.interfaces.Application;
 import org.jcontainer.loom.interfaces.ApplicationContext;
 import org.jcontainer.loom.interfaces.ConfigurationInterceptor;
@@ -110,8 +113,6 @@ import org.jcontainer.loom.interfaces.ConfigurationValidator;
 import org.jcontainer.loom.interfaces.Kernel;
 import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.interfaces.SystemManager;
-import org.codehaus.spice.salt.i18n.ResourceManager;
-import org.codehaus.spice.salt.i18n.Resources;
 
 /**
  * The ServerKernel is the core of the container system. The kernel is
@@ -169,15 +170,14 @@ public class DefaultKernel
     public void compose( final ResourceLocator locator )
         throws MissingResourceException
     {
-        m_systemManager =
-        (SystemManager)locator.lookup( SystemManager.class.getName() );
+        m_systemManager = (SystemManager)locator.
+            lookup( SystemManager.class.getName() );
         m_repository = (ConfigurationInterceptor)locator.
             lookup( ConfigurationInterceptor.class.getName() );
-        m_validator =
-        (ConfigurationValidator)locator.lookup(
-            ConfigurationValidator.class.getName() );
-        m_instrumentManager =
-        (InstrumentManager)locator.lookup( InstrumentManager.class.getName() );
+        m_validator = (ConfigurationValidator)locator.
+            lookup( ConfigurationValidator.class.getName() );
+        m_instrumentManager = (InstrumentManager)locator.
+            lookup( InstrumentManager.class.getName() );
     }
 
     public void configure( final Configuration configuration )
@@ -400,13 +400,12 @@ public class DefaultKernel
         }
     }
 
-    public void addApplication(
-        final org.jcontainer.loom.components.util.profile.PartitionProfile profile,
-        final File homeDirectory,
-        final File workDirectory,
-        final ClassLoader classLoader,
-        final LoggerStore store,
-        final Map classloaders )
+    public void addApplication( final PartitionProfile profile,
+                                final File homeDirectory,
+                                final File workDirectory,
+                                final ClassLoader classLoader,
+                                final LoggerStore store,
+                                final Map classloaders )
         throws Exception
     {
 

@@ -94,7 +94,6 @@ import java.util.Map;
 import org.apache.avalon.framework.logger.Logger;
 import org.apache.excalibur.instrument.InstrumentManager;
 import org.jcomponent.alchemist.LoggerAlchemist;
-import org.jcomponent.loggerstore.LoggerStore;
 import org.jcontainer.dna.AbstractLogEnabled;
 import org.jcontainer.dna.Active;
 import org.jcontainer.dna.Composable;
@@ -109,6 +108,7 @@ import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.interfaces.SystemManager;
 import org.codehaus.spice.salt.i18n.ResourceManager;
 import org.codehaus.spice.salt.i18n.Resources;
+import org.codehaus.spice.loggerstore.LoggerStore;
 
 /**
  * Manage the "frame" in which Applications operate.
@@ -193,8 +193,8 @@ class DefaultApplicationContext
         m_systemManager = (SystemManager)locator.
             lookup( SystemManager.class.getName() );
         m_kernel = (Kernel)locator.lookup( Kernel.class.getName() );
-        m_instrumentManager =
-        (InstrumentManager)locator.lookup( InstrumentManager.class.getName() );
+        m_instrumentManager = (InstrumentManager)locator.
+            lookup( InstrumentManager.class.getName() );
     }
 
     public void initialize()
