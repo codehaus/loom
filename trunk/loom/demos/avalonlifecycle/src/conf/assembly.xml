@@ -7,16 +7,16 @@
     <!--
        This is an alternative to the other Lifecycle1 implementation
 
-    <block class="org.jcontainer.loom.demos.avalonlifecycle.AlternativeLifecycle1Impl"
+    <block class="org.codehaus.loom.demos.avalonlifecycle.AlternativeLifecycle1Impl"
            name="lifecycle1" />
     -->
 
-    <block class="org.jcontainer.loom.demos.avalonlifecycle.Lifecycle1Impl"
+    <block class="org.codehaus.loom.demos.avalonlifecycle.Lifecycle1Impl"
         name="lifecycle1"/>
 
-    <block class="org.jcontainer.loom.demos.avalonlifecycle.Lifecycle2Impl"
+    <block class="org.codehaus.loom.demos.avalonlifecycle.Lifecycle2Impl"
         name="lifecycle2">
-        <provide name="lifecycle1" role="org.jcontainer.loom.demos.avalonlifecycle.Lifecycle1"/>
+        <provide name="lifecycle1" role="org.codehaus.loom.demos.avalonlifecycle.Lifecycle1"/>
     </block>
 
 </assembly>

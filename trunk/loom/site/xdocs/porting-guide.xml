@@ -81,7 +81,7 @@ maven sar
 
 <metaclassGen destDir="${dest.dir}" namespaceTagsOnly="false">
     <fileset dir="${src.dir}"/>
-    <interceptor name="org.jcontainer.loom.info.PhoenixAttributeInterceptor">
+    <interceptor name="org.codehaus.loom.info.PhoenixAttributeInterceptor">
         <classpath>
             <pathelement location="${path.to}/maven-sar-plugin-1.0-beta1-dev.jar"/>
         </classpath>

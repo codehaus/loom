@@ -21,7 +21,7 @@
 			Codehaus Distribution Server</a>.
             </p>
             <p>To install in your local Maven plugin repository, ensure that
-                <code>http://dist.jcontainer.org/maven</code>
+                <code>http://dist.codehaus.org/</code>
 		   is part of the
                 <code>maven.repo.remote</code> list and simply
 			specify the plugin name as a dependency with type

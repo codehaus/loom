@@ -34,7 +34,7 @@
           organizing element for management data, and is the bridge between
           the management code embedded in Loom and the implementation of the
           management component.  It is represented by the
-                    <code>org.jcontainer.loom.interfaces.SystemManager</code>
+                    <code>org.codehaus.loom.interfaces.SystemManager</code>
           interface.
                 </p>
             </subsection>

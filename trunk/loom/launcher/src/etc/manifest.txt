@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
 Created-By: JContainer/Loom
-Main-Class: org.jcontainer.loom.launcher.Main
+Main-Class: org.codehaus.loom.launcher.Main

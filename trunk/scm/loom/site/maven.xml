@@ -28,7 +28,7 @@
 
     <postGoal name="xdoc:copy-user-resources">
         <ant:copy todir="${maven.build.dir}/docs/dtds" filtering="no">
-            <ant:fileset dir="${basedir}/../engine/src/java/org/jcontainer/loom/components/util">
+            <ant:fileset dir="${basedir}/../engine/src/java/org/codehaus/loom/components/util">
                 <ant:include name="*.dtd"/>
             </ant:fileset>
         </ant:copy>
@@ -101,11 +101,11 @@
     </goal>
 
     <preGoal name="java:compile">
-        <ant:mkdir dir="${maven.aggregated.src}/java/org/jcontainer/loom/interfaces"/>
+        <ant:mkdir dir="${maven.aggregated.src}/java/org/codehaus/loom/interfaces"/>
         <ant:tstamp/>
-        <j:file name="${maven.aggregated.src}/java/org/jcontainer/loom/interfaces/Version.java"
+        <j:file name="${maven.aggregated.src}/java/org/codehaus/loom/interfaces/Version.java"
             omitXmlDeclaration="true" escapeText="false">
-            package org.jcontainer.loom.interfaces;
+            package org.codehaus.loom.interfaces;
             interface Version
             {
             String SOFTWARE = "${pom.name}";

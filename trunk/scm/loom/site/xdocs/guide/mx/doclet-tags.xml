@@ -274,7 +274,7 @@
                 &lt;mkdir dir="${build.qdox}"/>
 
                 &lt;taskdef name="generatemeta"
-                classname="org.jcontainer.loom.info.GenerateLoomDescriptorsTask">
+                classname="org.codehaus.loom.info.GenerateLoomDescriptorsTask">
                 &lt;classpath refid="project.class.path" />
                 &lt;/taskdef>
 
