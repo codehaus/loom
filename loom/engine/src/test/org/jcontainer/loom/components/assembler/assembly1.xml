@@ -15,4 +15,6 @@
         <proxy disable="true"/>
     </block>
 
+    <listener class="org.jcontainer.loom.components.assembler.data.Listener1"
+        name="l1"/>
 </assembly>
