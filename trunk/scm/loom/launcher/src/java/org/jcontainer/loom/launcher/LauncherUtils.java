@@ -61,7 +61,7 @@ public class LauncherUtils
     {
         final String loomHome = findLoomHome();
         final String engineLibDir =
-            loomHome + File.separator + "bin" + File.separator + "lib";
+            loomHome + File.separator + "container" + File.separator + "lib";
         final File dir = new File( engineLibDir ).getCanonicalFile();
         if( !dir.exists() )
         {
