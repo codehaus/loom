@@ -123,11 +123,7 @@
     	<attainGoal name="build:src"/>
     </goal>
 
-    <preGoal name="build:bin">
-        <wrapper:install/>    	
-    </preGoal>
-
-    <goal name="build:bin">
+    <goal name="build:bin-core">
         <j:set var="distDir" value='${maven.build.dir}/${maven.final.name}'/>
         <ant:mkdir dir="${distDir}/tools/lib"/>
         <ant:mkdir dir="${distDir}/container/lib"/>
@@ -141,7 +137,7 @@
         <ant:copy file="src/conf/wrapper.conf" todir="${distDir}/conf"/>
         <ant:copy todir="${distDir}/conf">
             <ant:fileset dir="deploy/conf">
-                <ant:include name="*.xml"/>
+                <ant:include name="**/*.xml"/>
             </ant:fileset>
         </ant:copy>
 
@@ -167,7 +163,7 @@
         <ant:mkdir dir="${distDir}/lib"/>
         <ant:copy todir="${distDir}/lib">
             <ant:fileset dir="deploy/lib">
-                <ant:include name="*.jar"/>
+                <ant:include name="**/*.jar"/>
             </ant:fileset>
         </ant:copy>
 
@@ -196,7 +192,15 @@
         </ant:copy>
 
         <ant:copy file="${basedir}/../LICENSE.txt" todir="${distDir}"/>
-        
+    </goal>
+
+    <preGoal name="build:bin">
+        <wrapper:install/>    	
+    </preGoal>
+
+    <goal name="build:bin">
+        <attainGoal name="build:bin-core"/>
+
 	    <!-- Create a tar.gz file -->
 	    <ant:tar longfile="gnu" tarfile="${maven.build.dir}/${maven.final.name}.tar">
 	      <ant:tarfileset dir="${distDir}" prefix="${maven.final.name}"/>
