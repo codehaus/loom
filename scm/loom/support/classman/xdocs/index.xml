@@ -8,9 +8,11 @@
     <body>
         <section name="Introduction">
             <p>The ClassMan toolkit is a set of utility classes that enable
-            ClassLoader hierarchies to be constructed from xml
-            configurations.</p>
-            <p>Each ClassLoader can be defined in terms of;</p>
+            ClassLoader hierarchies to be constructed from xml configurations.
+            The toolkit supports hierarchial ClassLoaders and ClassLoaders defined
+            by directed graphs via the use of "Join" ClassLoaders that can have
+            multiple parents. This results in construction of a ClassLoader lattice.</p>
+            <p>Each non-Join ClassLoader can be defined in terms of;</p>
             <ul>
                 <li>Entrys: URLs designating either a directory or a file</li>
                 <li><a href="apidocs/org/realityforge/classman/metadata/FileSetMetaData.html">
