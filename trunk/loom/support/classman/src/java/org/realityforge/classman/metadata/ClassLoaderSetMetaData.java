@@ -8,34 +8,26 @@
 package org.realityforge.classman.metadata;
 
 /**
- * This class defines a set of ClassLoaders and
- * the default ClassLoader to use.
+ * This class defines a set of ClassLoaders and the default ClassLoader to use.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-27 03:45:07 $
+ * @version $Revision: 1.3 $ $Date: 2003-12-02 07:28:52 $
  */
 public class ClassLoaderSetMetaData
 {
     /**
-     * The name of the current classloader.
-     * This may be used by other ClassLoader definitions to refer
-     * to this ClassLoader.
+     * The name of the current classloader. This may be used by other
+     * ClassLoader definitions to refer to this ClassLoader.
      */
     private final String m_default;
 
-    /**
-     * The set of ClassLoaders predefined by the application.
-     */
+    /** The set of ClassLoaders predefined by the application. */
     private final String[] m_predefined;
 
-    /**
-     * The classloaders defined in set.
-     */
+    /** The classloaders defined in set. */
     private final ClassLoaderMetaData[] m_classLoaders;
 
-    /**
-     * The joining classloaders defined in set.
-     */
+    /** The joining classloaders defined in set. */
     private final JoinMetaData[] m_joins;
 
     /**
@@ -113,11 +105,9 @@ public class ClassLoaderSetMetaData
     }
 
     /**
-     * Return true if specified name, designates a
-     * predefined ClassLoader.
+     * Return true if specified name, designates a predefined ClassLoader.
      *
-     * @return true if specified name, designates a
-     *              predefined ClassLoader.
+     * @return true if specified name, designates a predefined ClassLoader.
      */
     public boolean isPredefined( final String name )
     {

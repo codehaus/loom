@@ -8,34 +8,27 @@
 package org.realityforge.classman.metadata;
 
 /**
- * This class defines a classloader that "merges" multiple
- * classloaders. For this to be successful, it is required that
- * the ClassLoaders contain disjoint sets of classes (with the
- * exception of classes loaded from the system classpath).
+ * This class defines a classloader that "merges" multiple classloaders. For
+ * this to be successful, it is required that the ClassLoaders contain disjoint
+ * sets of classes (with the exception of classes loaded from the system
+ * classpath).
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-27 03:45:07 $
+ * @version $Revision: 1.3 $ $Date: 2003-12-02 07:28:52 $
  */
 public class JoinMetaData
 {
     /**
-     * The name of the current classloader.
-     * This may be used by other ClassLoader definitions to refer
-     * to this ClassLoader.
+     * The name of the current classloader. This may be used by other
+     * ClassLoader definitions to refer to this ClassLoader.
      */
     private final String m_name;
 
-    /**
-     * The list of classloaders that are merged in
-     * this classloader.
-     */
+    /** The list of classloaders that are merged in this classloader. */
     private final String[] m_classloaders;
 
     /**
      * The definition for set of classloaders
-     *
-     * @param name
-     * @param classloaders
      */
     public JoinMetaData( final String name,
                          final String[] classloaders )
@@ -55,11 +48,9 @@ public class JoinMetaData
     }
 
     /**
-     * Return the list of classloaders that are merged in
-     * this classloader
+     * Return the list of classloaders that are merged in this classloader
      *
-     * @return the list of classloaders that are merged
-     *         in this classloader
+     * @return the list of classloaders that are merged in this classloader
      */
     public String[] getClassloaders()
     {

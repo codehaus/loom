@@ -10,40 +10,30 @@ package org.realityforge.classman.metadata;
 import org.realityforge.extension.Extension;
 
 /**
- * This class defines a specific classloader, made up of
- * entrys, {@link org.realityforge.extension.Extension} and
- * {@link FileSetMetaData} objects.
+ * This class defines a specific classloader, made up of entrys, {@link
+ * org.realityforge.extension.Extension} and {@link FileSetMetaData} objects.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-08-01 02:51:54 $
+ * @version $Revision: 1.4 $ $Date: 2003-12-02 07:28:52 $
  */
 public class ClassLoaderMetaData
 {
     /**
-     * The name of the current classloader.
-     * This may be used by other ClassLoader definitions to refer
-     * to this ClassLoader.
+     * The name of the current classloader. This may be used by other
+     * ClassLoader definitions to refer to this ClassLoader.
      */
     private final String m_name;
 
-    /**
-     * The name of the parent classloader.
-     */
+    /** The name of the parent classloader. */
     private final String m_parent;
 
-    /**
-     * The Entrys that are added to this ClassLoader.
-     */
+    /** The Entrys that are added to this ClassLoader. */
     private final String[] m_entrys;
 
-    /**
-     * The Entrys that are required by this ClassLoader.
-     */
+    /** The Entrys that are required by this ClassLoader. */
     private final Extension[] m_extensions;
 
-    /**
-     * The Filesets that are added to this ClassLoader.
-     */
+    /** The Filesets that are added to this ClassLoader. */
     private final FileSetMetaData[] m_filesets;
 
     public ClassLoaderMetaData( final String name,
