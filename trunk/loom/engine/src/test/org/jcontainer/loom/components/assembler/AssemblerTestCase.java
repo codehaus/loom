@@ -30,7 +30,7 @@ import org.xml.sax.InputSource;
  *  An basic test case for the LogManager.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.9 $ $Date: 2003-11-03 06:43:16 $
+ * @version $Revision: 1.10 $ $Date: 2003-11-05 03:19:21 $
  */
 public class AssemblerTestCase
     extends TestCase
@@ -41,7 +41,7 @@ public class AssemblerTestCase
 
     }
 
-    public void _testBasic()
+    public void testBasic()
         throws Exception
     {
         final PartitionProfile partitionProfile = assembleSar( "assembly1.xml" );

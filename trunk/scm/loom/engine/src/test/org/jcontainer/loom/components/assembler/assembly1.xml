@@ -7,7 +7,7 @@
     <block class="org.jcontainer.loom.components.assembler.data.Component1"
         name="c1">
         <provide name="c2"
-            role="org.jcontainer.loom.components.assembler.data.Service2"/>
+            role="org.jcontainer.loom.components.assembler.data.Service1"/>
     </block>
 
     <block class="org.jcontainer.loom.components.assembler.data.Component2"
