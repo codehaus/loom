@@ -94,7 +94,7 @@ import java.net.Socket;
 import org.codehaus.loom.demos.distributed.api.Server;
 
 /**
- * @author <a href="mailto:Paul_Hammant@yahoo.com">Paul Hammant</a>
+ * @author <a href="mailto:Paul_Hammant at yahoo.com">Paul Hammant</a>
  */
 public class ServerImpl
     implements Server

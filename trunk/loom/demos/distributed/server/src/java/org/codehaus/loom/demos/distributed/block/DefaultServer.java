@@ -137,7 +137,7 @@ public class DefaultServer
     public void stop()
         throws Exception
     {
-        m_socketThread.interrupt();
+        m_socketThread.close();
         m_socketThread = null;
 
         System.out.println( "Server stopped on port " + m_port );
