@@ -25,7 +25,7 @@
         <dependency>
             <groupId>spice</groupId>
             <artifactId>spice-classman</artifactId>
-            <version>1.1dev</version>
+            <version>20030818.014108</version>
             <properties>
                 <category>container</category>
             </properties>
