@@ -1,11 +1,10 @@
 <?xml version="1.0"?>
 <project>
-    <extend>${basedir}/../../tools/maven/project.xml</extend>
+    <extend>${basedir}/../../project.xml</extend>
     <name>Extension</name>
-    <id>spice-extension</id>
-    <currentVersion>1.2-dev</currentVersion>
+    <id>loom-extension</id>
     <inceptionYear>2000</inceptionYear>
-    <package>org.codehaus.spice.extension</package>
+    <package>org.jcontainer.loom.extension</package>
 
     <shortDescription>Parse and represent "Extension" and Specification information</shortDescription>
 
@@ -27,15 +26,4 @@
             <tag>EXTENSION_1_1-tag</tag>
         </version>
     </versions>
-
-    <developers>
-        <developer>
-            <name>Peter Donald</name>
-            <id>donaldp</id>
-
-            <roles>
-                <role>Developer</role>
-            </roles>
-        </developer>
-    </developers>
 </project>

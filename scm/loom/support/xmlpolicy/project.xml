@@ -1,11 +1,10 @@
 <?xml version="1.0"?>
 <project>
-    <extend>${basedir}/../../tools/maven/project.xml</extend>
+    <extend>${basedir}/../../project.xml</extend>
     <name>XMLPolicy</name>
-    <id>spice-xmlpolicy</id>
-    <currentVersion>1.2-dev</currentVersion>
+    <id>loom-xmlpolicy</id>
     <inceptionYear>2002</inceptionYear>
-    <package>org.codehaus.spice.xmlpolicy</package>
+    <package>org.jcontainer.loom.xmlpolicy</package>
 
     <shortDescription>Toolkit to construct Policy object from an XML descriptor.</shortDescription>
 
@@ -37,15 +36,4 @@
             </properties>
         </dependency>
     </dependencies>
-
-    <developers>
-        <developer>
-            <name>Peter Donald</name>
-            <id>donaldp</id>
-
-            <roles>
-                <role>Developer</role>
-            </roles>
-        </developer>
-    </developers>
 </project>
