@@ -89,6 +89,7 @@
             <roles>
                 <role>Founder</role>
             </roles>
+            <timezone>0</timezone>
         </developer>
         <developer>
             <name>Peter Royal</name>
