@@ -18,6 +18,7 @@
 
     <url>http://loom.jcontainer.org</url>
     <siteAddress>loom.jcontainer.org</siteAddress>
+    <logo>/images/loom-logo.png</logo>
     <issueTrackingUrl>http://jira.codehaus.org/secure/BrowseProject.jspa?id=10131</issueTrackingUrl>
     <siteDirectory>/www/jcontainer.codehaus.org/loom/</siteDirectory>
 
