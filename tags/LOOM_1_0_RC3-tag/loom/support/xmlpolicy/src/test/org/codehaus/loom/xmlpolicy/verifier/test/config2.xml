@@ -1,0 +1,9 @@
+<policy version="1.0">
+    <grant code-base="myCodeBase">
+        <permission class="java.io.FilePermission"
+            target="${/}tmp${/}*"
+            signed-by="Bob"
+            key-store="nonExistingKeystore"
+            action="read,write"/>
+    </grant>
+</policy>

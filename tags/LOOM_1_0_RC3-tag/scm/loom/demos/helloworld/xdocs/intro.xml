@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+  <body>
+    <section name="Introduction">
+      <p>
+        Congratulations! You have successfully build project
+        documentation with Maven.
+      </p>
+      <p>
+        HelloWorld's documentation can be found on
+        <a href="http://loom.codehaus.org">Loom's homepage</a>.
+      </p>
+    </section>
+    <section name="About this documentation">
+      <p>
+        This is just a very, very basic setup for starting a
+        project's documentation.
+
+      </p>
+      <p>
+        HelloWorld extends the master maven project file in Loom's base
+        directory. Some <a href="project-info.html">Project Info</a>s
+        are generated from that file.
+      </p>
+      <p>
+        Note the links above and in the menu. They are defined
+        in <b><code>xdocs/navigation.xml</code></b>. This file is
+        <b><code>xdocs/intro.xml</code></b> and the examples are
+        <b><code>xdocs/examples.xml</code></b>.
+      </p>
+      <p>
+         When you built this documentation you probably used
+         the <code>maven docs</code> target. This custom
+         target is defined in <b><code>maven.xml</code></b> and
+         triggers javadoc, xdoc and pdf generation.
+      </p>
+      <p>
+        Some special properties, here for Javadoc and PDF generation,
+        are defined in <b><code>project.properties</code></b>.
+      </p>
+      <p>
+        The layout of the PDF document is here controlled by
+        <b><code>xdocs/navigation-pdf.xml</code></b>.
+      </p>
+      <p>
+        The <a href="maven-reports.html">Project Reports</a> section is
+        controlled from the <code>reports</code> part of
+        <b><code>project.xml</code></b>.
+      </p>
+    </section>
+  </body>
+</document>

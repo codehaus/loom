@@ -1,0 +1,172 @@
+<?xml version="1.0"?>
+<project>
+    <pomVersion>3</pomVersion>
+    <inceptionYear>1999</inceptionYear>
+
+    <organization>
+        <name>Codehaus</name>
+        <url>http://codehaus.org/</url>
+        <logo>http://codehaus.org/codehaus-small.gif</logo>
+    </organization>
+
+    <groupId>loom</groupId>    
+    <!-- ensure the plugins/project.xml currentVersion is changed accordingly -->
+    <currentVersion>1.0-rc3</currentVersion>
+    <package>org.codehaus.loom</package>
+    <url>http://loom.codehaus.org</url>
+    <logo>/images/loom-logo.png</logo>
+    <distributionDirectory>/dist/</distributionDirectory>
+    <distributionSite>dist.codehaus.org</distributionSite>
+    <siteDirectory>/home/projects/loom/public_html/releases/${pom.currentVersion}</siteDirectory>
+    <siteAddress>loom.codehaus.org</siteAddress>
+    <issueTrackingUrl>http://jira.codehaus.org/secure/BrowseProject.jspa?id=10210</issueTrackingUrl>
+
+    <repository>
+        <connection>scm:cvs:pserver:anonymous@cvs.loom.codehaus.org:/home/projects/loom/scm:loom</connection>
+        <url>http://cvs.loom.codehaus.org</url>
+    </repository>
+
+    <versions>
+        <version>
+            <id>1.0-rc3</id>
+            <name>1.0-rc3</name>
+            <tag>LOOM_1_0_RC3-tag</tag>
+        </version>
+        <version>
+            <id>1.0-rc2</id>
+            <name>1.0-rc2</name>
+            <tag>LOOM_1_0_RC2-tag</tag>
+        </version>
+        <version>
+            <id>1.0-rc1</id>
+            <name>1.0-rc1</name>
+            <tag>LOOM_1_0_RC1-tag</tag>
+        </version>
+    </versions>
+
+    <licenses>
+        <license>
+            <name>The Loom Software License, Version 1.1</name>
+            <url>http://cvs.loom.codehaus.org/loom/LICENSE.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <mailingLists>
+        <mailingList>
+            <name>Loom User</name>
+            <subscribe>user-subscribe@loom.codehaus.org</subscribe>
+            <unsubscribe>user-unsubscribe@loom.codehaus.org</unsubscribe>
+            <archive>http://archive.loom.codehaus.org/user</archive>
+        </mailingList>
+        <mailingList>
+            <name>Loom Dev</name>
+            <subscribe>dev-subscribe@loom.codehaus.org</subscribe>
+            <unsubscribe>dev-unsubscribe@loom.codehaus.org</unsubscribe>
+            <archive>http://archive.loom.codehaus.org/dev</archive>
+        </mailingList>
+        <mailingList>
+            <name>Loom SCM</name>
+            <subscribe>scm-subscribe@loom.codehaus.org</subscribe>
+            <unsubscribe>scm-unsubscribe@loom.codehaus.org</unsubscribe>
+            <archive>http://archive.loom.codehaus.org/scm</archive>
+        </mailingList>
+    </mailingLists>
+
+    <developers>
+        <developer>
+            <name>Peter Donald</name>
+            <id>pdonald</id>
+            <roles>
+                <role>Founder</role>
+                <role>Developer</role>
+            </roles>
+            <timezone>+10</timezone>
+        </developer>
+        <developer>
+            <name>Paul Hammant</name>
+            <id>paul</id>
+            <roles>
+                <role>Founder</role>
+            </roles>
+            <timezone>0</timezone>
+        </developer>
+        <developer>
+            <name>Peter Royal</name>
+            <id>proyal</id>
+            <email>peter.royal@pobox.com</email>
+            <url>http://fotap.org/~osi</url>
+            <roles>
+                <role>Founder</role>
+                <role>Developer</role>
+            </roles>
+            <timezone>-5</timezone>
+        </developer>
+        <developer>
+            <name>Mauro Talevi</name>
+            <id>mauro</id>
+            <roles>
+                <role>Founder</role>
+                <role>Developer</role>
+            </roles>
+            <timezone>0</timezone>
+        </developer>
+        <developer>
+            <name>Johan Sjoberg</name>
+            <id>sjoberg</id>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone>+2</timezone>
+        </developer>
+    </developers>
+
+    <contributors>
+        <contributor>
+            <name>Ryan Hoegg</name>
+            <email>rhoegg@isisnetworks.net</email>
+        </contributor>
+    </contributors>
+
+    <build>
+        <sourceDirectory>src/java</sourceDirectory>
+        <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
+
+        <unitTest>
+            <includes>
+                <include>**/*TestCase.java</include>
+            </includes>
+            <excludes>
+                <exclude>**/Abstract*.java</exclude>
+            </excludes>
+            <resources>
+                <resource>
+                    <directory>${basedir}/src/test</directory>
+                    <includes>
+                        <include>**/*.xml</include>
+                        <include>**/*.binary</include>
+                    </includes>
+                </resource>
+            </resources>
+        </unitTest>
+
+        <resources>
+            <resource>
+                <directory>${basedir}/src/java</directory>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </resource>
+        </resources>
+    </build>
+
+    <reports>
+        <!--report>maven-checkstyle-plugin</report-->
+        <report>maven-jdepend-plugin</report>
+        <report>maven-javadoc-plugin</report>
+        <report>maven-jxr-plugin</report>
+        <report>maven-junit-report-plugin</report>
+        <!--<report>maven-clover-plugin</report>-->
+        <report>maven-license-plugin</report>
+    </reports>
+</project>

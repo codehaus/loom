@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project>
+    <extend>${basedir}/../project.xml</extend>
+    <name>Loom Plugins</name>
+    <groupId>loom</groupId>
+    <currentVersion>1.0-rc3</currentVersion>
+
+    <versions>
+        <version>
+            <id>1.0-rc3</id>
+            <name>1.0-rc3</name>
+            <tag>LOOM_PLUGINS_1_0_RC3-tag</tag>
+        </version>
+        <version>
+            <id>1.0-rc2</id>
+            <name>1.0-rc2</name>
+            <tag>LOOM_PLUGINS_1_0_RC2-tag</tag>
+        </version>
+    </versions>
+
+
+    <distributionDirectory>/home/projects/loom/dist</distributionDirectory>
+    <distributionSite>dist.codehaus.org</distributionSite>
+    <siteDirectory>/home/projects/loom/public_html/releases/${pom.currentVersion}/plugins</siteDirectory>
+    <siteAddress>loom.codehaus.org</siteAddress>
+
+    <build>
+        <sourceDirectory>${basedir}/src/java</sourceDirectory>
+        <unitTestSourceDirectory>${basedir}/src/test</unitTestSourceDirectory>
+
+        <unitTest>
+            <includes>
+                <include>**/*TestCase.java</include>
+            </includes>
+        </unitTest>
+
+        <resources>
+            <resource>
+                <directory>${basedir}/src/plugin-resources</directory>
+                <targetPath>plugin-resources</targetPath>
+            </resource>
+            <resource>
+                <directory>${basedir}</directory>
+                <includes>
+                    <include>plugin.jelly</include>
+                    <include>plugin.properties</include>
+                    <include>project.properties</include>
+                    <include>project.xml</include>
+                </includes>
+            </resource>
+        </resources>
+
+    </build>
+
+</project>
+

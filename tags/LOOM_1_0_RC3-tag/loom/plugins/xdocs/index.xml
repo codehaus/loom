@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document>
+    <properties>
+        <title>Loom Plugins</title>
+    </properties>
+    <body>
+        <section name="Documentation">
+          <p>
+              Go to <a href="http://loom.codehaus.org/Plugins">Loom's plugin page</a>
+              for more more information about available plugins.
+          </p>
+        </section>
+    </body>
+</document>

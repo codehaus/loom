@@ -1,0 +1,6 @@
+<classloaders default="*system*" version="1.0">
+    <predefined name="*system*"/>
+
+    <classloader name="cl" parent="missing-parent"/>
+
+</classloaders>

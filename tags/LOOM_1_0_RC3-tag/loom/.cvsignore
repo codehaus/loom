@@ -1,0 +1,9 @@
+maven.log
+velocity.log
+target
+.classpath
+.project
+*.iml
+*.ipr
+*.iws
+cleanbuild.log
