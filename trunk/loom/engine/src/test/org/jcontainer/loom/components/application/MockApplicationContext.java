@@ -18,7 +18,7 @@ import org.jcontainer.loom.interfaces.ApplicationContext;
 
 /**
  * @author Peter Donald
- * @version $Revision: 1.8 $ $Date: 2003-11-29 13:44:29 $
+ * @version $Revision: 1.9 $ $Date: 2003-12-04 07:57:05 $
  */
 class MockApplicationContext
     implements ApplicationContext
@@ -62,18 +62,12 @@ class MockApplicationContext
 
     public InputStream getResourceAsStream( final String name )
     {
-        return getClassLoader().getResourceAsStream( name );
+        return getClass().getClassLoader().getResourceAsStream( name );
     }
 
     public File getHomeDirectory()
     {
         return new File( "." );
-    }
-
-    public ClassLoader getClassLoader( String name )
-        throws Exception
-    {
-        throw new Exception( "I can't do that dave!" );
     }
 
     public Logger getLogger( String name )

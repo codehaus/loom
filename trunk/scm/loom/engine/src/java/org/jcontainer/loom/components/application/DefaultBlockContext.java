@@ -178,10 +178,4 @@ final class DefaultBlockContext
             throw new IllegalStateException( message );
         }
     }
-
-    public ClassLoader getClassLoader( final String name )
-        throws Exception
-    {
-        return m_applicationContext.getClassLoader( name );
-    }
 }

@@ -87,7 +87,6 @@
 package org.jcontainer.loom.interfaces;
 
 import java.io.File;
-import java.util.Map;
 import org.codehaus.spice.loggerstore.LoggerStore;
 import org.jcontainer.loom.components.util.profile.PartitionProfile;
 
@@ -102,8 +101,8 @@ public interface Kernel
     void addApplication( PartitionProfile profile,
                          File homeDirectory, File workDirectory,
                          ClassLoader classLoader,
-                         LoggerStore store,
-                         Map classloaders )
+                         LoggerStore store
+                         )
         throws Exception;
 
     /**

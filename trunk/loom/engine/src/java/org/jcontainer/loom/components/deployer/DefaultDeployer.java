@@ -221,8 +221,8 @@ public class DefaultDeployer
         }
         try
         {
-            final File source = (File)installation.get(
-                ContainerConstants.INSTALL_SOURCE );
+            final File source = (File)installation.
+                get( ContainerConstants.INSTALL_SOURCE );
             redeploy( name, source.toURL() );
         }
         catch( final LoomException e )
@@ -376,6 +376,9 @@ public class DefaultDeployer
                                                            data,
                                                            homeDirectory,
                                                            workDirectory );
+
+            //TODO: Add classLoaderSet to application resources
+
             final ClassLoader classLoader =
                 classLoaderSet.getDefaultClassLoader();
 
@@ -405,8 +408,8 @@ public class DefaultDeployer
                                      homeDirectory,
                                      workDirectory,
                                      classLoader,
-                                     store,
-                                     classLoaderSet.getClassLoaders() );
+                                     store
+            );
 
             m_installations.put( name, installation );
 
