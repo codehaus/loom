@@ -5,7 +5,7 @@
 #
 # Author: Alexis Agahi
 #         Peter Donald
-#
+#                                                                         
 # Environment Variable Prequisites
 #
 #   LOOM_OPTS       (Optional) Java runtime options used when the command is
@@ -43,8 +43,6 @@ ACTION=$1
 shift
 ARGS="$*"
 
-
-
 # OS specific support.  $var _must_ be set to either true or false.
 cygwin=false
 case "`uname`" in
@@ -73,7 +71,6 @@ if [ -z "$LOOM_KILLDELAY" ] ; then
   LOOM_KILLDELAY=5
 fi
 
-
 unset THIS_PROG
 
 if [ -r "$LOOM_HOME"/bin/setenv.sh ]; then
@@ -92,7 +89,7 @@ fi
 
 # For Cygwin, ensure paths are in UNIX format before anything is touched
 if $cygwin; then
-  [ -n "$LOOM_HOME" ] && LOOM_HOME=`cygpath --unix "$LOOM_HOME"`
+  [ -n "$LOOM_TMPDIR" ] && LOOM_TMPDIR=`cygpath --unix "$LOOM_TMPDIR"`
 fi
 
 if [ -z "$LOOM_TMPDIR" ] ; then
@@ -100,18 +97,6 @@ if [ -z "$LOOM_TMPDIR" ] ; then
   LOOM_TMPDIR="$LOOM_HOME"/temp
   mkdir -p "$LOOM_TMPDIR"
 fi
-
-# For Cygwin, switch paths to Windows format before running java
-if $cygwin; then
-  LOOM_HOME=`cygpath --path --windows "$LOOM_HOME"`
-  LOOM_TMPDIR=`cygpath --path --windows "$LOOM_TMPDIR"`
-fi
-
-# ----- Execute The Requested Command -----------------------------------------
-
-echo "Using LOOM_HOME:   $LOOM_HOME"
-echo "Using LOOM_TMPDIR: $LOOM_TMPDIR"
-echo "Using JAVA_HOME:      $JAVA_HOME"
 
 # Uncomment to get enable remote debugging
 # DEBUG="-Xdebug -Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=y"
@@ -123,11 +108,37 @@ echo "Using JAVA_HOME:      $JAVA_HOME"
 # thus breaking Loom
 #
 JVM_EXT_DIRS="$LOOM_HOME/lib:$LOOM_HOME/tools/lib"
-if $cygwin; then
-  JVM_EXT_DIRS=`cygpath --path --windows "$JVM_EXT_DIRS"`
-fi
-JVM_OPTS="-Djava.ext.dirs=$JVM_EXT_DIRS -Djava.endorsed.dirs=$LOOM_HOME/lib/endorsed"
 
+LOOM_ENDORSED="$LOOM_HOME/lib/endorsed"
+LOOM_LAUNCHER="$LOOM_HOME/bin/loom-launcher.jar"
+
+#####################################################
+# Find a PID for the pid file
+#####################################################
+if [  -z "$LOOM_PID" ]
+then
+  LOOM_PID="$LOOM_TMPDIR/loom.pid"
+fi
+
+# For Cygwin, switch paths to Windows format before running java
+if $cygwin; then
+  LOOM_HOME=`cygpath --path --windows "$LOOM_HOME"`
+  LOOM_TMPDIR=`cygpath --path --windows "$LOOM_TMPDIR"`
+  LOOM_ENDORSED=`cygpath --path --windows "$LOOM_ENDORSED"`
+  JVM_EXT_DIRS=`cygpath --path --windows "$JVM_EXT_DIRS"`
+  LOOM_LAUNCHER=`cygpath --path --windows "$LOOM_LAUNCHER"`
+  LOOM_TMPDIR=`cygpath --windows "$LOOM_TMPDIR"`
+fi
+
+# ----- Execute The Requested Command -----------------------------------------
+
+echo "Using LOOM_HOME:      $LOOM_HOME"
+echo "Using LOOM_TMPDIR:    $LOOM_TMPDIR"
+echo "Using LOOM_ENDORSED:  $LOOM_ENDORSED"
+echo "Using JAVA_HOME:      $JAVA_HOME"
+echo "Using JVM_EXT_DIRS:   $JVM_EXT_DIRS"
+
+JVM_OPTS="-Djava.ext.dirs=$JVM_EXT_DIRS -Djava.endorsed.dirs=$LOOM_ENDORSED"
 
 if [ "$LOOM_SECURE" != "false" ] ; then
   # Make loom run with security manager enabled
@@ -138,20 +149,11 @@ fi
 RUN_CMD="$JAVA_HOME/bin/java \
     $JVM_OPTS \
     $DEBUG \
-    -Djava.security.policy=jar:file:$LOOM_HOME/bin/loom-launcher.jar!/META-INF/java.policy \
+    -Djava.security.policy=jar:file:$LOOM_LAUNCHER!/META-INF/java.policy \
     $LOOM_JVM_OPTS \
     -Dloom.home="$LOOM_HOME" \
     -Djava.io.tmpdir="$LOOM_TMPDIR" \
-    -jar "$LOOM_HOME/bin/loom-launcher.jar" $*"
-
-
-#####################################################
-# Find a PID for the pid file
-#####################################################
-if [  -z "$LOOM_PID" ]
-then
-  LOOM_PID="$LOOM_TMPDIR/loom.pid"
-fi
+    -jar "$LOOM_LAUNCHER" $*"
 
 #####################################################
 # Find a location for the loom console
@@ -166,7 +168,6 @@ then
     LOOM_CONSOLE=/dev/tty
   fi
 fi
-
 
 #####################################################
 # Action!
@@ -227,10 +228,13 @@ case "$ACTION" in
 
   check)
         echo "Checking arguments to Loom: "
-		echo "LOOM_HOME:     $LOOM_HOME"
-		echo "LOOM_TMPDIR:   $LOOM_TMPDIR"
-		echo "LOOM_JVM_OPTS: $LOOM_JVM_OPTS"
-		echo "JAVA_HOME:        $JAVA_HOME"
+        echo "LOOM_HOME:     $LOOM_HOME"
+        echo "LOOM_TMPDIR:   $LOOM_TMPDIR"
+        echo "LOOM_ENDORSED: $LOOM_ENDORSED"
+        echo "LOOM_LAUNCHER: $LOOM_LAUNCHER"
+        echo "LOOM_JVM_OPTS: $LOOM_JVM_OPTS"
+        echo "LOOM_PID:      $LOOM_PID"
+        echo "JAVA_HOME:        $JAVA_HOME"
         echo "JVM_OPTS:         $JVM_OPTS"
         echo "CLASSPATH:        $CLASSPATH"
         echo "RUN_CMD:          $RUN_CMD"
@@ -250,6 +254,3 @@ case "$ACTION" in
 esac
 
 exit 0
-
-
-
