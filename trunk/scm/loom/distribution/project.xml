@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <project>
     <pomVersion>3</pomVersion>
-    <name>Loom Engine</name>
+    <name>Loom Distribution</name>
     <id>loom</id>
     <currentVersion>1.0dev</currentVersion>
     <inceptionYear>1999-2003</inceptionYear>
     <package>org.jcontainer.loom</package>
 
-    <shortDescription>Main Engine for hosting components.</shortDescription>
+    <shortDescription>Loom Distribution component.</shortDescription>
 
     <description>
-        The core of the Loom Application Server.
+        The component to create a distribution of the Loom Application Server.
     </description>
 
     <dependencies>
