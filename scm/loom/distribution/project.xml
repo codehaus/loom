@@ -25,9 +25,8 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>avalon</groupId>
-            <artifactId>avalon-framework</artifactId>
-            <version>4.1.4</version>
+            <id>avalon-framework</id>
+            <version>4.1.5</version>
             <properties>
                 <category>shared</category>
             </properties>
@@ -186,7 +185,7 @@
         <dependency>
             <groupId>spice</groupId>
             <artifactId>spice-metaclass</artifactId>
-            <version>1.0-rc1</version>
+            <version>1.0-rc3-dev</version>
             <properties>
                 <category>shared</category>
             </properties>
