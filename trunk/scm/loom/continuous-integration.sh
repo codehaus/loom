@@ -29,25 +29,13 @@ rm -Rf ~/.maven/repository/loom/jars
 
 # Compile and test
 rm target/cleanbuild.log
-maven clean-all | tee target/cleanbuild.log
+maven | tee target/cleanbuild.log
 
 # See if the "compiling" file is there. If it is, compilation
 # failed.
 if grep "BUILD SUCCESSFUL" target/cleanbuild.log ; then
-    echo "Clean passed.."
-
-    maven build | tee target/cleanbuild.log
-    
-    # See if the "compiling" file is there. If it is, compilation
-    # failed.
-    if grep "BUILD SUCCESSFUL" target/cleanbuild.log ; then
-      echo "Build passed, emailing list"
+      echo "Rebuild passed, emailing list"
       tail target/cleanbuild.log | mail -s "[PASS] Clean build passed" $mailto
-    else
-      # Mail Maven's output to the dev list.
-      echo "Build failed, emailing list"
-      cat target/cleanbuild.log | mail -s "[FAIL] Clean build failed" $mailto
-    fi
 else
       echo "Clean failed, emailing list"
       cat target/cleanbuild.log | mail -s "[FAIL] Clean failed" $mailto
