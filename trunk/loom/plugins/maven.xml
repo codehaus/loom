@@ -5,7 +5,7 @@
     <attainGoal name="build"/>
   </goal>
 
-  <goal name="build"
+  <goal name="loom:build"
     description="Build all plugins">
     <maven:reactor
       basedir="${basedir}"
@@ -16,7 +16,7 @@
   </goal>
 
   <goal
-    name="install"
+    name="loom:install"
     description="Installs each plugin into plugins dir">
     <maven:reactor
       basedir="${basedir}"
@@ -26,7 +26,7 @@
       ignoreFailures="true"/>
   </goal>
 
-  <goal name="deploy"
+  <goal name="loom:deploy"
     description="Deploys each plugin">
     <maven:reactor
       basedir="${basedir}"
@@ -36,7 +36,7 @@
       ignoreFailures="true"/>
   </goal>
 
-  <goal name="clean"
+  <goal name="loom:clean"
     description="Cleans each plugin">
     <maven:reactor
       basedir="${basedir}"
@@ -46,7 +46,7 @@
       ignoreFailures="false"/>
   </goal>
 
-  <goal name="docs"
+  <goal name="loom:docs"
     description="Builds each plugin documentation">
     <maven:reactor
       basedir="${basedir}"

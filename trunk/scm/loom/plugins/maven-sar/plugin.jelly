@@ -1,205 +1,207 @@
 <?xml version="1.0"?>
 
 <project xmlns:j="jelly:core"
-         xmlns:ant="jelly:ant"
-         xmlns:artifact="artifact"
-         xmlns:license="license"
-         xmlns:util="jelly:util">
+    xmlns:ant="jelly:ant"
+    xmlns:artifact="artifact"
+    xmlns:license="license"
+    xmlns:util="jelly:util">
 
-  <!--==================================================================-->
-  <!-- Default goal : Builds a sar file                                 -->
-  <!--==================================================================-->
-  <goal name="sar" prereqs="sar:sar" description="Build a sar file"/>
+    <!--==================================================================-->
+    <!-- Default goal : Builds a sar file                                 -->
+    <!--==================================================================-->
+    <goal name="sar" prereqs="sar:sar" description="Build a sar file"/>
 
-  <!--==================================================================-->
-  <!-- Initializations                                                  -->
-  <!--==================================================================-->
-  <goal name="sar:init"
-    description="Initialize the file system and define tasks">
+    <!--==================================================================-->
+    <!-- Initializations                                                  -->
+    <!--==================================================================-->
+    <goal name="sar:init"
+        description="Initialize the file system and define tasks">
 
-    <ant:property name="maven.sar.final.name"
-                 value="${pom.artifactId}.sar"/>
+        <ant:property name="maven.sar.final.name"
+            value="${pom.artifactId}.sar"/>
 
-    <ant:echo message="Defining sar task"/>
-    <ant:taskdef name="sar"
+        <ant:echo message="Defining sar task"/>
+        <ant:taskdef name="sar"
             classname="org.jcontainer.loom.tools.ant.SarTask">
-        <ant:classpath>
-            <ant:path refid="maven.dependency.classpath"/>
-            <ant:pathelement path="${maven.build.dest}"/>
-        </ant:classpath>
-    </ant:taskdef>
+            <ant:classpath>
+                <ant:pathelement path="${plugin.dir}" />
+                <ant:pathelement path="${plugin.getDependencyPath('ant')}"/>
+            </ant:classpath>
+        </ant:taskdef>
 
-	<j:set var="metagenerate" value='${context.getVariable("maven.sar.metagenerate")}'/>
-	<ant:echo message="Set metagenerate property to ${metagenerate}"/>
+        <j:set var="metagenerate" value='${context.getVariable("maven.sar.metagenerate")}'/>
+        <ant:echo message="Set metagenerate property to ${metagenerate}"/>
 
-  </goal>
+    </goal>
 
-  <!--==================================================================-->
-  <!-- Metagenerate xinfo files - only if maven.sar.metagenerate=true   -->
-  <!--==================================================================-->
-  <goal name="sar:metagenerate"  prereqs="sar:init"
-         description="Metagenerate xinfo files">
-    <j:if test="${metagenerate == 'true'}">
-	    <ant:echo message="Defining metagenerate task"/>
-	    <ant:taskdef name="metagenerate"
-	            classname="org.jcontainer.loom.info.GenerateLoomDescriptorsTask">
-	        <ant:classpath>
-	            <ant:path refid="maven.dependency.classpath"/>
-	            <ant:pathelement path="${maven.build.dest}"/>
-	        </ant:classpath>
-	    </ant:taskdef>
-	    <ant:echo message="Generating Component Descriptors"/>
-	    <!-- Ensure maven.build.dest exists -->
-	    <ant:mkdir dir="${maven.build.dest}"/>
-	    <metagenerate destDir="${maven.build.dest}">
-	        <ant:fileset dir="${maven.sar.metagenerate.src}">
-	            <ant:include name="${maven.sar.metagenerate.include}"/>
-	            <ant:exclude name="${maven.sar.metagenerate.exclude}"/>
-	        </ant:fileset>
-	    </metagenerate>
-    </j:if>
-  </goal>
+    <!--==================================================================-->
+    <!-- Metagenerate xinfo files - only if maven.sar.metagenerate=true   -->
+    <!--==================================================================-->
+    <goal name="sar:metagenerate" prereqs="sar:init"
+        description="Metagenerate xinfo files">
+        <j:if test="${metagenerate == 'true'}">
+            <ant:echo message="Defining metagenerate task"/>
+            <ant:taskdef name="metagenerate"
+                classname="org.jcontainer.loom.info.GenerateLoomDescriptorsTask">
+                <ant:classpath>
+                    <ant:path refid="maven.dependency.classpath"/>
+                    <ant:pathelement path="${maven.build.dest}"/>
+                </ant:classpath>
+            </ant:taskdef>
+            <ant:echo message="Generating Component Descriptors"/>
+            <!-- Ensure maven.build.dest exists -->
+            <ant:mkdir dir="${maven.build.dest}"/>
+            <metagenerate destDir="${maven.build.dest}">
+                <ant:fileset dir="${maven.sar.metagenerate.src}">
+                    <ant:include name="${maven.sar.metagenerate.include}"/>
+                    <ant:exclude name="${maven.sar.metagenerate.exclude}"/>
+                </ant:fileset>
+            </metagenerate>
+        </j:if>
+    </goal>
 
-  <postGoal name="sar:metagenerate">
-    <attainGoal name="jar:jar"/>
-  </postGoal>
+    <postGoal name="sar:metagenerate">
+        <attainGoal name="jar:jar"/>
+    </postGoal>
 
-  <!--==================================================================-->
-  <!-- Builds a sar file                                                -->
-  <!--==================================================================-->
-  <goal name="sar:sar" prereqs="sar:metagenerate" description="Build a sar file">
+    <!--==================================================================-->
+    <!-- Builds a sar file                                                -->
+    <!--==================================================================-->
+    <goal name="sar:sar" prereqs="sar:metagenerate" description="Build a sar file">
 
-    <ant:echo message="Building sar ${maven.sar.final.name}"/>
-    <ant:mkdir dir="${maven.sar.build.dir}"/>
-    <sar sarfile="${maven.sar.build.dir}/${maven.sar.final.name}"
-         assembly="${maven.sar.assembly}"
-         config="${maven.sar.config}"
-         environment="${maven.sar.environment}"
-  	 	 logging="${maven.sar.logging}">
-        <!-- Add build artifacts -->
-        <ant:lib dir="${maven.sar.build.dir}">
-            <ant:include name="${maven.sar.lib.include}"/>
-            <ant:exclude name="${maven.sar.lib.exclude}"/>
-        </ant:lib>
-        <!-- Add dependency artifacts -->
-	    <j:forEach var="artifact" items="${pom.artifacts}">
-	    	<j:set var="dependency" value="${artifact.dependency}"/>
-            <j:if test="${dependency.getProperty('sar.bundle')=='true'}">
-  	            <ant:lib dir="${maven.repo.local}/${dependency.artifactDirectory}/jars/">
-                    <ant:include name="${dependency.artifact}"/>
-                </ant:lib>
-            </j:if>
-        </j:forEach>
-        <!-- Add resources with targetPath = 'SAR-INF' -->
-        <j:forEach var="resource" items="${pom.build.resources}">
-            <ant:patternset id="maven.sar.resources.set">
-               <j:forEach var="include" items="${resource.includes}">
-                  <ant:include name="${include}"/>
-               </j:forEach>
-               <j:forEach var="exclude" items="${resource.excludes}">
-                  <ant:exclude name="${exclude}"/>
-               </j:forEach>
-            </ant:patternset>
-			<j:set var="directory" value='${resource.directory}'/>
-            <j:if test="${directory == null}">
-				<j:set var="directory" value='${basedir}'/>
-			</j:if>
- 			<j:set var="targetPath" value='${resource.targetPath}'/>
-            <j:if test="${targetPath == 'SAR-INF'}">
-			    <ant:echo message="Adding resources from directory ${directory} to ${targetPath}..."/>
-	            <ant:zipfileset dir="${directory}" prefix="${targetPath}">
-	                <ant:patternset refid="maven.sar.resources.set"/>
-	            </ant:zipfileset>
-            </j:if>
-        </j:forEach>
+        <ant:echo message="Building sar ${maven.sar.final.name}"/>
+        <ant:mkdir dir="${maven.sar.build.dir}"/>
+        <sar sarfile="${maven.sar.build.dir}/${maven.sar.final.name}"
+            assembly="${maven.sar.assembly}"
+            config="${maven.sar.config}"
+            environment="${maven.sar.environment}"
+            logging="${maven.sar.logging}">
+            <!-- Add build artifacts -->
+            <ant:lib dir="${maven.sar.build.dir}">
+                <ant:include name="${maven.sar.lib.include}"/>
+                <ant:exclude name="${maven.sar.lib.exclude}"/>
+            </ant:lib>
+            <!-- Add dependency artifacts -->
+            <j:forEach var="artifact" items="${pom.artifacts}">
+                <j:set var="dependency" value="${artifact.dependency}"/>
+                <j:if test="${dependency.getProperty('sar.bundle')=='true'}">
+                    <ant:lib dir="${maven.repo.local}/${dependency.artifactDirectory}/jars/">
+                        <ant:include name="${dependency.artifact}"/>
+                    </ant:lib>
+                </j:if>
+            </j:forEach>
+            <!-- Add resources with targetPath = 'SAR-INF' -->
+            <j:forEach var="resource" items="${pom.build.resources}">
+                <ant:patternset id="maven.sar.resources.set">
+                    <j:forEach var="include" items="${resource.includes}">
+                        <ant:include name="${include}"/>
+                    </j:forEach>
+                    <j:forEach var="exclude" items="${resource.excludes}">
+                        <ant:exclude name="${exclude}"/>
+                    </j:forEach>
+                </ant:patternset>
+                <j:set var="directory" value='${resource.directory}'/>
+                <j:if test="${directory == null}">
+                    <j:set var="directory" value='${basedir}'/>
+                </j:if>
+                <j:set var="targetPath" value='${resource.targetPath}'/>
+                <j:if test="${targetPath == 'SAR-INF'}">
+                    <ant:echo message="Adding resources from directory ${directory} to ${targetPath}..."/>
+                    <ant:zipfileset dir="${directory}" prefix="${targetPath}">
+                        <ant:patternset refid="maven.sar.resources.set"/>
+                    </ant:zipfileset>
+                </j:if>
+            </j:forEach>
 
-        <j:set var="licenseFileName"><license:fileName/></j:set>
-        <util:file name="${licenseFileName}" var="licenseFile"/>
-        <ant:metainf dir="${licenseFile.canonicalFile.parent}">
-            <ant:include name="${licenseFile.canonicalFile.name}"/>
-        </ant:metainf>
+            <j:set var="licenseFileName">
+                <license:fileName/>
+            </j:set>
+            <util:file name="${licenseFileName}" var="licenseFile"/>
+            <ant:metainf dir="${licenseFile.canonicalFile.parent}">
+                <ant:include name="${licenseFile.canonicalFile.name}"/>
+            </ant:metainf>
 
-        <ant:manifest>
-            <ant:attribute name="Built-By" value="${user.name}" />
-            <ant:section name="${pom.package}">
-              <ant:attribute name="Specification-Title" value="${pom.artifactId}" />
-              <ant:attribute name="Specification-Version"
-                            value="${pom.currentVersion}"/>
-              <ant:attribute name="Specification-Vendor"
-                            value="${pom.organization.name}"/>
-              <ant:attribute name="Implementation-Title"
-                            value="${pom.package}"/>
-              <ant:attribute name="Implementation-Version"
-                            value="${pom.currentVersion}"/>
-              <ant:attribute name="Implementation-Vendor"
-                            value="${pom.organization.name}"/>
-            </ant:section>
-        </ant:manifest>
-    </sar>
+            <ant:manifest>
+                <ant:attribute name="Built-By" value="${user.name}"/>
+                <ant:section name="${pom.package}">
+                    <ant:attribute name="Specification-Title" value="${pom.artifactId}"/>
+                    <ant:attribute name="Specification-Version"
+                        value="${pom.currentVersion}"/>
+                    <ant:attribute name="Specification-Vendor"
+                        value="${pom.organization.name}"/>
+                    <ant:attribute name="Implementation-Title"
+                        value="${pom.package}"/>
+                    <ant:attribute name="Implementation-Version"
+                        value="${pom.currentVersion}"/>
+                    <ant:attribute name="Implementation-Vendor"
+                        value="${pom.organization.name}"/>
+                </ant:section>
+            </ant:manifest>
+        </sar>
 
-  </goal>
+    </goal>
 
-  <!--==================================================================-->
-  <!-- Install the sar in the local repository                          -->
-  <!--==================================================================-->
-  <goal name="sar:install"
+    <!--==================================================================-->
+    <!-- Install the sar in the local repository                          -->
+    <!--==================================================================-->
+    <goal name="sar:install"
         prereqs="sar:sar"
         description="Install the sar in the local repository">
 
-     <artifact:install
-        artifact="${maven.sar.build.dir}/${maven.sar.final.name}"
-        type="sar"
-        project="${pom}"/>
+        <artifact:install
+            artifact="${maven.sar.build.dir}/${maven.sar.final.name}"
+            type="sar"
+            project="${pom}"/>
 
-  </goal>
+    </goal>
 
-  <!--==================================================================-->
-  <!-- Install snapshot of the sar in the local repository              -->
-  <!--==================================================================-->
-  <goal name="sar:install-snapshot"
+    <!--==================================================================-->
+    <!-- Install snapshot of the sar in the local repository              -->
+    <!--==================================================================-->
+    <goal name="sar:install-snapshot"
         prereqs="sar:sar"
         description="Install snapshot of the sar in the local repository">
 
-     <artifact:install-snapshot
-        artifact="${maven.sar.build.dir}/${maven.sar.final.name}"
-        type="sar"
-        project="${pom}"/>
+        <artifact:install-snapshot
+            artifact="${maven.sar.build.dir}/${maven.sar.final.name}"
+            type="sar"
+            project="${pom}"/>
 
-  </goal>
+    </goal>
 
-  <!--==================================================================-->
-  <!-- Deploy the sar to the remote repository                          -->
-  <!--==================================================================-->
-  <goal name="sar:deploy"
+    <!--==================================================================-->
+    <!-- Deploy the sar to the remote repository                          -->
+    <!--==================================================================-->
+    <goal name="sar:deploy"
         prereqs="sar:sar"
         description="Deploy the sar to the remote repository">
 
-     <artifact:deploy
-        artifact="${maven.sar.build.dir}/${maven.sar.final.name}"
-        type="sar"
-        project="${pom}"/>
+        <artifact:deploy
+            artifact="${maven.sar.build.dir}/${maven.sar.final.name}"
+            type="sar"
+            project="${pom}"/>
 
-  </goal>
+    </goal>
 
-  <!--==================================================================-->
-  <!-- Deploy snapshot of the sar to the remote repository              -->
-  <!--==================================================================-->
-  <goal name="sar:deploy-snapshot"
+    <!--==================================================================-->
+    <!-- Deploy snapshot of the sar to the remote repository              -->
+    <!--==================================================================-->
+    <goal name="sar:deploy-snapshot"
         prereqs="sar:sar"
         description="Deploy snapshot of the sar to the remote repository">
 
-     <artifact:deploy-snapshot
-        artifact="${maven.sar.build.dir}/${maven.sar.final.name}"
-        type="sar"
-        project="${pom}"/>
+        <artifact:deploy-snapshot
+            artifact="${maven.sar.build.dir}/${maven.sar.final.name}"
+            type="sar"
+            project="${pom}"/>
 
-  </goal>
+    </goal>
 
-  <!--==================================================================-->
-  <!-- Special no-op goal which can be used by other plugin which need  -->
-  <!-- to get access to any of this plugin's property. This is          -->
-  <!-- temporary, until we get explicit plugin dependencies.            -->
-  <!--==================================================================-->
-  <goal name="sar:load"/>
+    <!--==================================================================-->
+    <!-- Special no-op goal which can be used by other plugin which need  -->
+    <!-- to get access to any of this plugin's property. This is          -->
+    <!-- temporary, until we get explicit plugin dependencies.            -->
+    <!--==================================================================-->
+    <goal name="sar:load"/>
 
 </project>
