@@ -15,7 +15,7 @@
     <package>org.codehaus.loom</package>
     <url>http://loom.codehaus.org</url>
     <logo>/images/loom-logo.png</logo>
-    <distributionDirectory>/home/projects/loom/dist</distributionDirectory>
+    <distributionDirectory>/dist/</distributionDirectory>
     <distributionSite>dist.codehaus.org</distributionSite>
     <siteDirectory>/home/projects/loom/public_html</siteDirectory>
     <siteAddress>loom.codehaus.org</siteAddress>
