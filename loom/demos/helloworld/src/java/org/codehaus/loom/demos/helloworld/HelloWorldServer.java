@@ -92,7 +92,17 @@ package org.codehaus.loom.demos.helloworld;
  */
 public interface HelloWorldServer
 {
+    /**
+     * Set the greeting message.
+     *
+     * @param greeting The new greeting message
+     */
     void setGreeting( String greeting );
 
+    /**
+     * Fetch the greeting message.
+     *
+     * @return The current greeting message
+     */
     String getGreeting();
 }
