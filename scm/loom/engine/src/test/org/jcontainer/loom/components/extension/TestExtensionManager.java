@@ -94,7 +94,7 @@ import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
  * a class to help test sorting of ExtensionManager.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-08-17 18:27:33 $
+ * @version $Revision: 1.4 $ $Date: 2003-10-14 10:31:19 $
  */
 class TestExtensionManager
     implements ExtensionManager
@@ -106,7 +106,7 @@ class TestExtensionManager
         m_optionalPackages = optionalPackages;
     }
 
-    public OptionalPackage[] getOptionalPackages( final org.realityforge.extension.Extension extension )
+    public OptionalPackage[] getOptionalPackages( final Extension extension )
     {
         return m_optionalPackages;
     }
