@@ -13,11 +13,12 @@ import org.apache.avalon.framework.logger.Logger;
 import org.apache.excalibur.instrument.InstrumentManager;
 import org.jcontainer.loom.interfaces.ApplicationContext;
 import org.jcontainer.loom.tools.profile.PartitionProfile;
+import org.jcontainer.loom.components.instrument.NoopInstrumentManager;
 
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-07-19 02:25:23 $
+ * @version $Revision: 1.2 $ $Date: 2003-07-24 08:42:33 $
  */
 class MockApplicationContext
     implements ApplicationContext
@@ -82,7 +83,7 @@ class MockApplicationContext
 
     public InstrumentManager getInstrumentManager()
     {
-        return new MockInstrumentManager();
+        return new NoopInstrumentManager();
     }
 
     public String getInstrumentableName( String component )
