@@ -20,8 +20,7 @@ import org.realityforge.metaclass.model.Attribute;
  *
  * <p>Also associated with each dependency is a set of arbitrary
  * Attributes that can be used to store extra information
- * about dependency. See {@link ComponentDescriptor} for example
- * of how to declare the container specific Attributes.</p>
+ * about dependency.</p>
  *
  * <p>Possible uses for the Attributes are to declare container
  * specific constraints of component. For example a dependency on
@@ -32,7 +31,7 @@ import org.realityforge.metaclass.model.Attribute;
  * demands.</p>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-10-05 01:06:31 $
+ * @version $Revision: 1.4 $ $Date: 2003-10-06 13:29:04 $
  */
 public final class DependencyDescriptor
     extends FeatureDescriptor

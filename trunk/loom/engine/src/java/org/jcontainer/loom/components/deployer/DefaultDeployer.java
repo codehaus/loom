@@ -560,7 +560,7 @@ public class DefaultDeployer
                 final String message =
                     "Unable to validate configuration of component " +
                     component.getMetaData().getName() + " of type " +
-                    component.getInfo().getDescriptor().getImplementationKey();
+                    component.getInfo().getImplementationKey();
                 throw new LoomException( message );
             }
         }

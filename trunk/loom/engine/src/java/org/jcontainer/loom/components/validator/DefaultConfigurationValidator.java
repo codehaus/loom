@@ -43,7 +43,7 @@ import org.w3c.dom.Element;
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author <a href="mailto:proyal at apache.org">Peter Royal</a>
- * @version $Revision: 1.7 $ $Date: 2003-10-06 12:48:52 $
+ * @version $Revision: 1.8 $ $Date: 2003-10-06 13:29:04 $
  * @dna.component
  */
 public class DefaultConfigurationValidator
@@ -93,7 +93,7 @@ public class DefaultConfigurationValidator
         }
 
         final String classname =
-            component.getInfo().getDescriptor().getImplementationKey();
+            component.getInfo().getImplementationKey();
         if( getLogger().isDebugEnabled() )
         {
             final String message =

@@ -25,11 +25,10 @@ import org.realityforge.metaclass.model.Attribute;
  *
  * <p>Also associated with each entry is a set of arbitrary
  * Attributes that can be used to store extra information
- * about entry. See {@link org.jcontainer.loom.tools.info.ComponentDescriptor} for example
- * of how to declare the container specific Attributes.</p>
+ * about entry.</p>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-10-05 01:06:31 $
+ * @version $Revision: 1.4 $ $Date: 2003-10-06 13:29:04 $
  */
 public final class EntryDescriptor
     extends FeatureDescriptor

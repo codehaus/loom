@@ -11,7 +11,6 @@ import com.thoughtworks.qdox.model.DocletTag;
 import com.thoughtworks.qdox.model.JavaClass;
 import com.thoughtworks.qdox.model.JavaMethod;
 import java.util.ArrayList;
-import org.jcontainer.loom.tools.info.ComponentDescriptor;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ContextDescriptor;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
@@ -26,7 +25,7 @@ import org.realityforge.metaclass.model.Attribute;
  * all of the javadoc tags present in JavaClass object model.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.7 $ $Date: 2003-10-06 12:48:52 $
+ * @version $Revision: 1.8 $ $Date: 2003-10-06 13:29:05 $
  */
 public class DefaultInfoBuilder
     extends AbstractInfoBuilder
@@ -39,28 +38,18 @@ public class DefaultInfoBuilder
      */
     public ComponentInfo buildComponentInfo( final JavaClass javaClass )
     {
-        final ComponentDescriptor component = buildComponent( javaClass );
         final ServiceDescriptor[] services = buildServices( javaClass );
         final ContextDescriptor context = buildContext( javaClass );
         final SchemaDescriptor configurationSchema = buildConfigurationSchema( javaClass );
 
         final DependencyDescriptor[] dependencies = buildDependencies( javaClass );
 
-        return new ComponentInfo( component, services,
-                                  context, dependencies,
+        return new ComponentInfo( javaClass.getFullyQualifiedName(),
+                                  Attribute.EMPTY_SET,
+                                  services,
+                                  context,
+                                  dependencies,
                                   configurationSchema );
-    }
-
-    /**
-     * Build the component descriptor for specified class.
-     *
-     * @param javaClass the class
-     * @return the component descriptor
-     */
-    private ComponentDescriptor buildComponent( final JavaClass javaClass )
-    {
-        final String type = javaClass.getFullyQualifiedName();
-        return new ComponentDescriptor( type, Attribute.EMPTY_SET );
     }
 
     /**

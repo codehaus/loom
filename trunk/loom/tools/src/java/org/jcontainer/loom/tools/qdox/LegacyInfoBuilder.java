@@ -90,7 +90,6 @@ import com.thoughtworks.qdox.model.DocletTag;
 import com.thoughtworks.qdox.model.JavaClass;
 import com.thoughtworks.qdox.model.JavaMethod;
 import java.util.ArrayList;
-import org.jcontainer.loom.tools.info.ComponentDescriptor;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ContextDescriptor;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
@@ -105,7 +104,7 @@ import org.realityforge.metaclass.model.Attribute;
  *
  * @author Paul Hammant
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.9 $ $Date: 2003-10-05 01:18:58 $
+ * @version $Revision: 1.10 $ $Date: 2003-10-06 13:29:05 $
  */
 public class LegacyInfoBuilder
     extends AbstractInfoBuilder
@@ -118,26 +117,17 @@ public class LegacyInfoBuilder
      */
     public ComponentInfo buildComponentInfo( final JavaClass javaClass )
     {
-        final ComponentDescriptor component = buildComponent( javaClass );
         final ServiceDescriptor[] services = buildServices( javaClass );
         final ContextDescriptor context = LegacyUtil.CONTEXT_DESCRIPTOR;
         final SchemaDescriptor schema = buildConfigurationSchema( javaClass );
         final DependencyDescriptor[] dependencies = buildDependencies( javaClass );
 
-        return new ComponentInfo( component, services, context,
-                                  dependencies, schema );
-    }
-
-    /**
-     * Build the component descriptor for specified class.
-     *
-     * @param javaClass the class
-     * @return the component descriptor
-     */
-    private ComponentDescriptor buildComponent( final JavaClass javaClass )
-    {
-        final String type = javaClass.getFullyQualifiedName();
-        return new ComponentDescriptor( type, Attribute.EMPTY_SET );
+        return new ComponentInfo( javaClass.getFullyQualifiedName(),
+                                  Attribute.EMPTY_SET,
+                                  services,
+                                  context,
+                                  dependencies,
+                                  schema );
     }
 
     /**

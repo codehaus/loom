@@ -16,8 +16,7 @@ import org.realityforge.metaclass.model.Attribute;
  *
  * <p>Also associated with each service is a set of arbitrary
  * Attributes that can be used to store extra information
- * about service. See {@link org.jcontainer.loom.tools.info.ComponentDescriptor} for example
- * of how to declare the container specific Attributes.</p>
+ * about service.</p>
  *
  * <p>Possible uses for the Attributes are to declare a service
  * as "stateless", "pass-by-value", "remotable" or even to attach
@@ -26,7 +25,7 @@ import org.realityforge.metaclass.model.Attribute;
  * upon to work in all containers.</p>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-10-05 01:06:31 $
+ * @version $Revision: 1.4 $ $Date: 2003-10-06 13:29:04 $
  */
 public final class ServiceDescriptor
     extends FeatureDescriptor

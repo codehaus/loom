@@ -8,7 +8,6 @@
 package org.jcontainer.loom.tools.infobuilder;
 
 import junit.framework.Assert;
-import org.jcontainer.loom.tools.info.ComponentDescriptor;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ContextDescriptor;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
@@ -21,7 +20,7 @@ import org.realityforge.metaclass.model.Attribute;
  * A set of utilities for asserting  facts about info objects.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.5 $ $Date: 2003-10-05 01:18:58 $
+ * @version $Revision: 1.6 $ $Date: 2003-10-06 13:29:05 $
  */
 public class InfoAssert
 {
@@ -29,11 +28,9 @@ public class InfoAssert
                                              final ComponentInfo expected,
                                              final ComponentInfo actual )
     {
-        final ComponentDescriptor expectedComponent = expected.getDescriptor();
-        final ComponentDescriptor actualComponent = actual.getDescriptor();
         assertEqualAttributes( message + ": Component.attribute",
-                               expectedComponent.getAttributes(),
-                               actualComponent.getAttributes() );
+                               expected.getAttributes(),
+                               actual.getAttributes() );
 
         assertEqualFeatures( message, expected, actual );
     }
@@ -42,11 +39,10 @@ public class InfoAssert
                                          final ComponentInfo expected,
                                          final ComponentInfo actual )
     {
-        final ComponentDescriptor expectedComponent = expected.getDescriptor();
-        final ComponentDescriptor actualComponent = actual.getDescriptor();
-        assertEqualComponents( message, expectedComponent, actualComponent );
-
-        assertEqualFeatures( message, expected, actual );
+        Assert.assertEquals( message + ": Component.type",
+                             expected.getImplementationKey(),
+                             actual.getImplementationKey() );
+        assertEqualStructure( message, expected, actual );
     }
 
     public static void assertEqualFeatures( final String message,
@@ -170,17 +166,6 @@ public class InfoAssert
                                    expected[ i ].getAttributes(),
                                    actual[ i ].getAttributes() );
         }
-    }
-
-    public static void assertEqualComponents( final String message,
-                                              final ComponentDescriptor expected,
-                                              final ComponentDescriptor actual )
-    {
-        Assert.assertEquals( message + ": Component.type", expected.getImplementationKey(),
-                             actual.getImplementationKey() );
-        assertEqualAttributes( message + ": Component.attribute",
-                               expected.getAttributes(),
-                               actual.getAttributes() );
     }
 
     public static void assertEqualParameters( final String message,
