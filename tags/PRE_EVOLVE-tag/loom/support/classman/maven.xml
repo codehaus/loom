@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<project
+    xmlns:j="jelly:core"
+    xmlns:ant="jelly:ant"
+    default="java:jar">
+
+    <preGoal name="xdoc:copy-user-resources">
+        <ant:mkdir dir="${basedir}/xdocs"/>
+        <ant:copy file="${basedir}/src/java/org/realityforge/classman/reader/classloader.dtd"
+            todir="${basedir}/target/docs"/>
+    </preGoal>
+
+    <preGoal name="test:compile">
+        <mkdir dir="target/testdata"/>
+        <javac destdir="target/testdata"
+            deprecation="true" debug="true" optimize="false" excludes="**/package.html">
+            <classpath>
+                <path refid="maven.dependency.classpath"/>
+                <pathelement path="${maven.build.dest}"/>
+            </classpath>
+            <src>
+                <pathelement location="src/testdata"/>
+            </src>
+        </javac>
+        <copy todir="target/testdata">
+            <fileset dir="src/testdata" filtering="no">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+        <mkdir dir="target/test-classes"/>
+        <mkdir dir="target/test-classes/SAR-INF/lib"/>
+        <jar jarfile="target/test-classes/cl1.jar" basedir="target/testdata">
+            <include name="org/realityforge/classman/test/data/cl1/**"/>
+        </jar>
+        <jar jarfile="target/test-classes/cl2.jar" basedir="target/testdata">
+            <include name="org/realityforge/classman/test/data/cl2/**"/>
+        </jar>
+        <jar jarfile="target/test-classes/SAR-INF/lib/cl3.jar" basedir="target/testdata">
+            <include name="org/realityforge/classman/test/data/cl3/**"/>
+        </jar>
+        <jar jarfile="target/test-classes/SAR-INF/lib/cl4.jar" basedir="target/testdata">
+            <include name="org/realityforge/classman/test/data/cl4/**"/>
+        </jar>
+    </preGoal>
+
+</project>
+
+

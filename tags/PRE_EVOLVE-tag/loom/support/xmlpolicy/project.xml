@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<project>
+    <extend>${basedir}/../../tools/maven/project.xml</extend>
+    <name>XMLPolicy</name>
+    <id>spice-xmlpolicy</id>
+    <gumpRepositoryId>components</gumpRepositoryId>
+    <currentVersion>1.0</currentVersion>
+    <inceptionYear>2002</inceptionYear>
+
+    <shortDescription>Toolkit to construct Policy object from an XML descriptor.</shortDescription>
+
+    <description>
+        The XMLPolicy toolkit is a set of utility classes that enable
+        Policy objects to be constructed from xml descriptors.
+    </description>
+
+    <versions>
+        <version>
+            <id>1.0</id>
+            <name>1.0</name>
+            <tag>XMLPOLICY_1_0-tag</tag>
+        </version>
+    </versions>
+
+    <dependencies>
+        <dependency>
+            <id>spice-salt</id>
+            <version>0.8dev</version>
+            <properties>
+                <category>runtime</category>
+            </properties>
+        </dependency>
+    </dependencies>
+
+    <developers>
+        <developer>
+            <name>Peter Donald</name>
+            <id>donaldp</id>
+            <email>peter at realityforge.org</email>
+            <roles>
+                <role>Developer</role>
+            </roles>
+        </developer>
+    </developers>
+</project>
