@@ -12,6 +12,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>spice</groupId>
+            <artifactId>spice-metaclass</artifactId>
+            <version>20031005.002435</version>
+        </dependency>
+        <dependency>
             <id>ant</id>
             <version>1.5</version>
         </dependency>
@@ -75,7 +80,7 @@
             </includes>
             <excludes>
                 <exclude>**/Abstract*.java</exclude>
-            </excludes>            
+            </excludes>
 	        <resources>
                 <resource>
                     <directory>${basedir}/src/test</directory>
