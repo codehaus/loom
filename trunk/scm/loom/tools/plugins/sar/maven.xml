@@ -1,4 +1,6 @@
-<project default="main">
+<project default="main"
+    xmlns:ant="jelly:ant"
+	xmlns:deploy="deploy">
 
 	<goal name="main">
     	<attainGoal name="build"/>
@@ -14,6 +16,13 @@
 
   	<goal name="deploy">   
 		<attainGoal name="plugin:deploy"/>
+		<ant:property name="artifact" value="${maven.final.name}.jar"/>
+	    <deploy:artifact
+    	  artifact="${maven.build.dir}/${artifact}"
+      		  type="plugins"
+          assureDirectoryCommand="mkdir -p"
+      	  siteCommand="cd @deployDirectory@; chmod g+w ${artifact}; chgrp ${maven.remote.group} ${artifact}"
+    	/>
 	</goal>
 
 </project>
