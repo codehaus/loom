@@ -20,7 +20,7 @@
           the underlying technology, Java classes and interfaces, component model, and
           behavior of server Blocks within Loom.</p>
         <p>While this book concentrates on server fundamentals, it should not
-          be construed as a &#8220;dummy's&#8220; book. Server side programming
+          be construed as a "dummy's" book. Server side programming
           is complex because of the performance and security issues you must
           balance.</p>
         <p>You should be well versed in the Java language and have some
