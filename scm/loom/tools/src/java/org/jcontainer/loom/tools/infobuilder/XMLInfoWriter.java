@@ -24,8 +24,8 @@ import org.jcontainer.loom.tools.info.ServiceDescriptor;
 /**
  * Write {@link org.jcontainer.loom.tools.info.ComponentInfo} objects to a stream as xml documents.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-26 09:35:27 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.3 $ $Date: 2003-06-29 01:07:35 $
  */
 public class XMLInfoWriter
     implements InfoWriter

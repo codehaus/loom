@@ -19,8 +19,8 @@ import org.realityforge.salt.i18n.Resources;
  * objects from Configuration objects. The format for Configuration object
  * is specified in the <a href="package-summary.html#external">package summary</a>.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-26 09:35:27 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.3 $ $Date: 2003-06-29 01:07:35 $
  */
 public final class InfoBuilder
     extends AbstractLogEnabled

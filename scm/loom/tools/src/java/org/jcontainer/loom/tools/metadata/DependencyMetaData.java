@@ -20,9 +20,9 @@ import org.jcontainer.loom.tools.info.FeatureDescriptor;
  *
  * <p>Note that it is invalid to have circular dependencies.</p>
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
  * @author <a href="mailto:mcconnell@apache.org">Stephen McConnell</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-29 00:49:10 $
+ * @version $Revision: 1.2 $ $Date: 2003-06-29 01:07:36 $
  */
 public final class DependencyMetaData
     extends FeatureDescriptor

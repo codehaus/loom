@@ -29,8 +29,8 @@ package org.jcontainer.loom.tools.info;
  * it is persistent etc. These are all container specific
  * demands.</p>
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-26 08:37:43 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.2 $ $Date: 2003-06-29 01:07:35 $
  */
 public final class DependencyDescriptor
     extends FeatureDescriptor

@@ -31,8 +31,8 @@ import org.xml.sax.XMLReader;
 /**
  * Utility class used to load Configuration trees from XML files.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-06-26 08:52:31 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.5 $ $Date: 2003-06-29 01:07:35 $
  */
 public class ConfigurationBuilder
 {

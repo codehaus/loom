@@ -31,8 +31,8 @@ import org.realityforge.salt.i18n.Resources;
  * Utility class to help verify that component respects the
  * rules of an Avalon component.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-26 09:42:03 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.3 $ $Date: 2003-06-29 01:07:36 $
  */
 public class ComponentVerifier
     extends AbstractLogEnabled

@@ -23,8 +23,8 @@ import org.jcontainer.loom.tools.info.ServiceDescriptor;
  * This is a set of constants and utility methods
  * to enablesupport of Legacy BlockInfo files.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-26 09:34:20 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.2 $ $Date: 2003-06-29 01:07:35 $
  */
 public class LegacyUtil
 {

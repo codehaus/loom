@@ -13,8 +13,8 @@ import org.apache.tools.ant.types.EnumeratedAttribute;
  * This is an enumeration that gives the option of either
  * outputting as xml or as a serialized format.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-26 08:49:15 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.2 $ $Date: 2003-06-29 01:07:35 $
  */
 public class FormatEnum
     extends EnumeratedAttribute

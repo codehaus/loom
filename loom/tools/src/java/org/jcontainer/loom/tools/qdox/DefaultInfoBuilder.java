@@ -26,8 +26,8 @@ import org.jcontainer.loom.tools.info.ServiceDescriptor;
  * from QDoxs JavaClass object model. This essentially involves interpreting
  * all of the javadoc tags present in JavaClass object model.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-06-26 08:52:32 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.3 $ $Date: 2003-06-29 01:07:36 $
  */
 public class DefaultInfoBuilder
     extends AbstractInfoBuilder

@@ -15,8 +15,8 @@ import org.jcontainer.loom.tools.info.ComponentInfo;
  * objects to a stream. Different implementations will write to
  * different output formats.
  *
- * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-26 09:34:20 $
+ * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
+ * @version $Revision: 1.2 $ $Date: 2003-06-29 01:07:35 $
  */
 public interface InfoWriter
 {
