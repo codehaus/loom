@@ -34,7 +34,7 @@ import org.realityforge.xmlpolicy.metadata.PolicyMetaData;
  * PolicyMetaData.
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-04-16 11:45:58 $
+ * @version $Revision: 1.2 $ $Date: 2003-06-05 08:52:07 $
  */
 public class PolicyBuilder
 {
@@ -49,6 +49,15 @@ public class PolicyBuilder
                                final PolicyResolver resolver )
         throws Exception
     {
+        if( null == policy )
+        {
+            throw new NullPointerException( "policy" );
+        }
+        if( null == resolver )
+        {
+            throw new NullPointerException( "resolver" );
+        }
+
         final Map keyStores =
             createKeyStores( policy.getKeyStores(), resolver );
         final Map grants = new HashMap();
