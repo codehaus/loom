@@ -29,7 +29,7 @@ import org.jcontainer.loom.tools.profile.ComponentProfile;
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-07-07 13:22:19 $
+ * @version $Revision: 1.3 $ $Date: 2003-07-19 01:44:52 $
  */
 public class PhoenixProfileBuilder
     extends AbstractLogEnabled
@@ -74,7 +74,7 @@ public class PhoenixProfileBuilder
                                      ComponentProfile.EMPTY_SET );
     }
 
-    private org.jcontainer.loom.tools.profile.PartitionProfile assembleListenerProfile( final PartitionMetaData metaData )
+    private PartitionProfile assembleListenerProfile( final PartitionMetaData metaData )
     {
         final ArrayList componentSet = new ArrayList();
         final ComponentMetaData[] components = metaData.getComponents();
@@ -83,7 +83,7 @@ public class PhoenixProfileBuilder
             final ComponentMetaData component = components[ i ];
             final ComponentInfo info =
                 LegacyUtil.createListenerInfo( component.getImplementationKey() );
-            final ComponentProfile profile = new org.jcontainer.loom.tools.profile.ComponentProfile( info, component );
+            final ComponentProfile profile = new ComponentProfile( info, component );
             componentSet.add( profile );
         }
 
@@ -92,7 +92,7 @@ public class PhoenixProfileBuilder
         return new PartitionProfile( metaData, PartitionProfile.EMPTY_SET, profiles );
     }
 
-    private org.jcontainer.loom.tools.profile.PartitionProfile assembleProfile( final PartitionMetaData metaData,
+    private PartitionProfile assembleProfile( final PartitionMetaData metaData,
                                                                                 final ComponentFactory factory )
         throws Exception
     {
@@ -101,7 +101,7 @@ public class PhoenixProfileBuilder
         for( int i = 0; i < partitions.length; i++ )
         {
             final PartitionMetaData partition = partitions[ i ];
-            final org.jcontainer.loom.tools.profile.PartitionProfile profile = assembleProfile( partition, factory );
+            final PartitionProfile profile = assembleProfile( partition, factory );
             partitionSet.add( profile );
         }
 
@@ -113,14 +113,14 @@ public class PhoenixProfileBuilder
             final ComponentBundle bundle =
                 factory.createBundle( component.getImplementationKey() );
             final ComponentInfo info = bundle.getComponentInfo();
-            final org.jcontainer.loom.tools.profile.ComponentProfile profile = new org.jcontainer.loom.tools.profile.ComponentProfile( info, component );
+            final ComponentProfile profile = new ComponentProfile( info, component );
             componentSet.add( profile );
         }
 
-        final org.jcontainer.loom.tools.profile.PartitionProfile[] partitionProfiles =
-            (org.jcontainer.loom.tools.profile.PartitionProfile[])partitionSet.toArray( new org.jcontainer.loom.tools.profile.PartitionProfile[ partitionSet.size() ] );
-        final org.jcontainer.loom.tools.profile.ComponentProfile[] componentProfiles =
-            (org.jcontainer.loom.tools.profile.ComponentProfile[])componentSet.toArray( new org.jcontainer.loom.tools.profile.ComponentProfile[ componentSet.size() ] );
-        return new org.jcontainer.loom.tools.profile.PartitionProfile( metaData, partitionProfiles, componentProfiles );
+        final PartitionProfile[] partitionProfiles =
+            (PartitionProfile[])partitionSet.toArray( new PartitionProfile[ partitionSet.size() ] );
+        final ComponentProfile[] componentProfiles =
+            (ComponentProfile[])componentSet.toArray( new ComponentProfile[ componentSet.size() ] );
+        return new PartitionProfile( metaData, partitionProfiles, componentProfiles );
     }
 }
