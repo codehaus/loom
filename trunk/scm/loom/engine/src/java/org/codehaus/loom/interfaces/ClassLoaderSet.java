@@ -34,7 +34,7 @@
  *
  * ====================================================================
  *
- * Loom Loom includes code from the Apache Software Foundation
+ * Loom includes code from the Apache Software Foundation
  *
  * ====================================================================
  * The Apache Software License, Version 1.1
@@ -92,7 +92,7 @@ import java.util.Map;
  * A dodgy class to hold all apps classloaders.
  *
  * @author Peter Donald
- * @version $Revision: 1.2 $ $Date: 2004-05-01 12:48:33 $
+ * @version $Revision: 1.3 $ $Date: 2004-08-17 23:14:33 $
  * @todo Remove me when kernel is reworked!
  */
 public final class ClassLoaderSet

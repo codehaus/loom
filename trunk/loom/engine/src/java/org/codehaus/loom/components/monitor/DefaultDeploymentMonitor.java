@@ -34,7 +34,7 @@
  *
  * ====================================================================
  *
- * Loom Loom includes code from the Apache Software Foundation
+ * Loom includes code from the Apache Software Foundation
  *
  * ====================================================================
  * The Apache Software License, Version 1.1
@@ -116,7 +116,7 @@ import org.codehaus.dna.ResourceLocator;
  *
  * @author Peter Donald
  * @author Johan Sjoberg
- * @version $Revision: 1.4 $ $Date: 2004-07-15 08:52:55 $
+ * @version $Revision: 1.5 $ $Date: 2004-08-17 23:14:32 $
  */
 public class DefaultDeploymentMonitor
     extends AbstractLogEnabled

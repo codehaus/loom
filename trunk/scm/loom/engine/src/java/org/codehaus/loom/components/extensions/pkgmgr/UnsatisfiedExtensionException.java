@@ -34,7 +34,7 @@
  *
  * ====================================================================
  *
- * Loom Loom includes code from the Apache Software Foundation
+ * Loom includes code from the Apache Software Foundation
  *
  * ====================================================================
  * The Apache Software License, Version 1.1
@@ -92,7 +92,7 @@ import org.codehaus.loom.extension.Extension;
  * Exception indicating an extension was not found in Package Repository.
  *
  * @author Peter Donald
- * @version $Revision: 1.2 $ $Date: 2004-05-01 12:48:34 $
+ * @version $Revision: 1.3 $ $Date: 2004-08-17 23:14:32 $
  * @see Extension
  */
 public class UnsatisfiedExtensionException

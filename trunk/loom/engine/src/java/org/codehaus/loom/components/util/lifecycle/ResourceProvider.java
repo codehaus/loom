@@ -34,7 +34,7 @@
  *
  * ====================================================================
  *
- * Loom Loom includes code from the Apache Software Foundation
+ * Loom includes code from the Apache Software Foundation
  *
  * ====================================================================
  * The Apache Software License, Version 1.1
@@ -98,7 +98,7 @@ import org.apache.excalibur.instrument.InstrumentManager;
  * The interface via which resources required for a component are aquired.
  *
  * @author Peter Donald
- * @version $Revision: 1.2 $ $Date: 2004-05-01 12:48:35 $
+ * @version $Revision: 1.3 $ $Date: 2004-08-17 23:14:32 $
  */
 public interface ResourceProvider
 {

@@ -34,7 +34,7 @@
  *
  * ====================================================================
  *
- * Loom Loom includes code from the Apache Software Foundation
+ * Loom includes code from the Apache Software Foundation
  *
  * ====================================================================
  * The Apache Software License, Version 1.1
@@ -102,7 +102,7 @@ import org.codehaus.spice.salt.i18n.Resources;
  *
  * @author Peter Donald
  * @author <a href="mailto:Huw@mmlive.com">Huw Roberts</a>
- * @version $Revision: 1.3 $ $Date: 2004-05-01 12:48:35 $
+ * @version $Revision: 1.4 $ $Date: 2004-08-17 23:14:32 $
  */
 public abstract class AbstractJMXManager
     extends AbstractSystemManager
