@@ -8,20 +8,19 @@
 package org.jcontainer.loom.components.util;
 
 import java.util.ArrayList;
+import org.apache.avalon.framework.Version;
 import org.apache.avalon.phoenix.metainfo.BlockDescriptor;
 import org.apache.avalon.phoenix.metainfo.BlockInfo;
 import org.apache.avalon.phoenix.metainfo.DependencyDescriptor;
 import org.apache.avalon.phoenix.metainfo.ServiceDescriptor;
-import org.apache.avalon.framework.Version;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
-import org.jcontainer.loom.tools.infobuilder.LegacyUtil;
 
 /**
  * Convert a {@link org.jcontainer.loom.tools.info.ComponentInfo} into a {@link BlockInfo}.
  *
  * @author <a href="mailto:peter@apache.org">Peter Donald</a>
- * @version $Revision: 1.6 $ $Date: 2003-10-11 09:03:07 $
+ * @version $Revision: 1.7 $ $Date: 2003-10-15 04:20:42 $
  */
 public class ComponentInfoConverter
 {
@@ -41,7 +40,7 @@ public class ComponentInfoConverter
     {
         final BlockDescriptor descriptor = toBlockDescriptor( component );
         final ServiceDescriptor[] services = toPhoenixServices( component.getServices() );
-        final ServiceDescriptor[] mxServices = getMXServices( component.getServices() );
+        final ServiceDescriptor[] mxServices = new ServiceDescriptor[ 0 ];
         final DependencyDescriptor[] dependencys =
             toPhoenixDependencys( component.getDependencies() );
 
@@ -49,26 +48,6 @@ public class ComponentInfoConverter
                               services,
                               mxServices,
                               dependencys );
-    }
-
-    /**
-     * Return Phoenix Management services from Info Service array.
-     *
-     * @param services the services
-     * @return the management services
-     */
-    private static ServiceDescriptor[] getMXServices(
-        final org.jcontainer.loom.tools.info.ServiceDescriptor[] services )
-    {
-        final ArrayList serviceSet = new ArrayList();
-        for( int i = 0; i < services.length; i++ )
-        {
-            if( LegacyUtil.isMxService( services[ i ] ) )
-            {
-                serviceSet.add( toPhoenixService( services[ i ] ) );
-            }
-        }
-        return (ServiceDescriptor[])serviceSet.toArray( new ServiceDescriptor[ serviceSet.size() ] );
     }
 
     /**
@@ -83,10 +62,7 @@ public class ComponentInfoConverter
         final ArrayList serviceSet = new ArrayList();
         for( int i = 0; i < services.length; i++ )
         {
-            if( !LegacyUtil.isMxService( services[ i ] ) )
-            {
-                serviceSet.add( toPhoenixService( services[ i ] ) );
-            }
+            serviceSet.add( toPhoenixService( services[ i ] ) );
         }
         return (ServiceDescriptor[])serviceSet.toArray( new ServiceDescriptor[ serviceSet.size() ] );
     }

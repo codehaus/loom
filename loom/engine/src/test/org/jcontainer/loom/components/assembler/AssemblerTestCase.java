@@ -31,7 +31,7 @@ import org.xml.sax.InputSource;
  *  An basic test case for the LogManager.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-10-15 02:04:51 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-15 04:20:42 $
  */
 public class AssemblerTestCase
     extends TestCase
@@ -82,7 +82,7 @@ public class AssemblerTestCase
 
     private boolean isProxyDisabled( final ComponentProfile block2 )
     {
-        return block2.getMetaData().getAttribute( ContainerConstants.DISABLE_PROXY_ATTR ) != null;
+        return block2.getMetaData().isDisableProxy();
     }
 
     public void _testComplex()

@@ -86,11 +86,9 @@
  */
 package org.jcontainer.loom.components.application;
 
-import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
 import org.jcontainer.loom.tools.profile.ComponentProfile;
-import org.realityforge.metaclass.model.Attribute;
 
 /**
  * This is the structure describing each block before it is loaded.
@@ -130,7 +128,7 @@ class BlockEntry
     {
         invalidate();
 
-        if( null != object && !isDisableProxy() )
+        if( null != object && !getProfile().getMetaData().isDisableProxy() )
         {
             final ComponentInfo blockInfo = m_componentProfile.getInfo();
             final Class[] interfaces = getServiceClasses( object, blockInfo.getServices() );
@@ -141,7 +139,7 @@ class BlockEntry
 
     public synchronized Object getProxy()
     {
-        if( isDisableProxy() )
+        if( getProfile().getMetaData().isDisableProxy() )
         {
             return m_object;
         }
@@ -156,20 +154,6 @@ class BlockEntry
                 return null;
             }
         }
-    }
-
-    private boolean isDisableProxy()
-    {
-        final Attribute[] attributes = getProfile().getMetaData().getAttributes();
-        for( int i = 0; i < attributes.length; i++ )
-        {
-            final Attribute attribute = attributes[ i ];
-            if( attribute.getName().equals( ContainerConstants.DISABLE_PROXY_ATTR ) )
-            {
-                return true;
-            }
-        }
-        return false;
     }
 
     synchronized void invalidate()

@@ -7,8 +7,6 @@
  */
 package org.jcontainer.loom.tools.info;
 
-import org.realityforge.metaclass.model.Attribute;
-
 /**
  * A descriptor that describes dependency information for
  * a particular Component. This class contains information
@@ -31,10 +29,9 @@ import org.realityforge.metaclass.model.Attribute;
  * demands.</p>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-10-06 13:29:04 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-15 04:20:42 $
  */
 public final class DependencyDescriptor
-    extends FeatureDescriptor
 {
     /**
      * Constant with empty set of dependencys.
@@ -71,11 +68,8 @@ public final class DependencyDescriptor
      */
     public DependencyDescriptor( final String key,
                                  final String type,
-                                 final boolean optional,
-                                 final Attribute[] attributes )
+                                 final boolean optional )
     {
-        super( attributes );
-
         if( null == key )
         {
             throw new NullPointerException( "key" );
@@ -183,7 +177,6 @@ public final class DependencyDescriptor
         {
             sb.append( "(Optional)" );
         }
-        sb.append( attributesToString() );
         return sb.toString();
     }
 }

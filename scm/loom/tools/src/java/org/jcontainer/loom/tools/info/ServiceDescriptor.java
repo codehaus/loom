@@ -7,8 +7,6 @@
  */
 package org.jcontainer.loom.tools.info;
 
-import org.realityforge.metaclass.model.Attribute;
-
 /**
  * This descriptor defines the type of service offerend or required
  * by a component. The type corresponds to the class name of the
@@ -25,10 +23,9 @@ import org.realityforge.metaclass.model.Attribute;
  * upon to work in all containers.</p>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-10-06 13:29:04 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-15 04:20:42 $
  */
 public final class ServiceDescriptor
-    extends FeatureDescriptor
 {
     /**
      * Constant set of 0 service descriptors.
@@ -46,13 +43,9 @@ public final class ServiceDescriptor
      * Construct a service with specified name and Attributes.
      *
      * @param type the type of Service
-     * @param attributes the attributes of service
      */
-    public ServiceDescriptor( final String type,
-                              final Attribute[] attributes )
+    public ServiceDescriptor( final String type )
     {
-        super( attributes );
-
         if( null == type )
         {
             throw new NullPointerException( "type" );
@@ -80,7 +73,6 @@ public final class ServiceDescriptor
     {
         final StringBuffer sb = new StringBuffer();
         sb.append( m_type );
-        sb.append( attributesToString() );
         return sb.toString();
     }
 }

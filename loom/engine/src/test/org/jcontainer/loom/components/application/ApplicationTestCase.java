@@ -26,14 +26,13 @@ import org.jcontainer.loom.tools.metadata.DependencyMetaData;
 import org.jcontainer.loom.tools.metadata.PartitionMetaData;
 import org.jcontainer.loom.tools.profile.ComponentProfile;
 import org.jcontainer.loom.tools.profile.PartitionProfile;
-import org.realityforge.metaclass.model.Attribute;
 import org.xml.sax.InputSource;
 
 /**
  *  An basic test case for the Application.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.10 $ $Date: 2003-10-14 08:42:15 $
+ * @version $Revision: 1.11 $ $Date: 2003-10-15 04:20:42 $
  */
 public class ApplicationTestCase
     extends TestCase
@@ -53,14 +52,13 @@ public class ApplicationTestCase
                            ServiceDescriptor.EMPTY_SET,
                            new DependencyDescriptor[]{new DependencyDescriptor( S1_NAME,
                                                                                 S1_NAME,
-                                                                                false,
-                                                                                Attribute.EMPTY_SET )},
+                                                                                false)},
                            null
         );
 
     private static final ComponentInfo C2 =
         new ComponentInfo( C2_NAME,
-                           new ServiceDescriptor[]{new ServiceDescriptor( S1_NAME, Attribute.EMPTY_SET )},
+                           new ServiceDescriptor[]{new ServiceDescriptor( S1_NAME )},
                            DependencyDescriptor.EMPTY_SET,
                            null
         );
@@ -70,8 +68,7 @@ public class ApplicationTestCase
                            ServiceDescriptor.EMPTY_SET,
                            new DependencyDescriptor[]{new DependencyDescriptor( S1_ARRAY_NAME,
                                                                                 S1_ARRAY_NAME,
-                                                                                false,
-                                                                                Attribute.EMPTY_SET )},
+                                                                                false )},
                            null
         );
 
@@ -80,8 +77,7 @@ public class ApplicationTestCase
                            ServiceDescriptor.EMPTY_SET,
                            new DependencyDescriptor[]{new DependencyDescriptor( S1_MAP_NAME,
                                                                                 S1_MAP_NAME,
-                                                                                false,
-                                                                                Attribute.EMPTY_SET )},
+                                                                                false )},
                            null
         );
 
@@ -96,10 +92,10 @@ public class ApplicationTestCase
         final ComponentMetaData md1 =
             new ComponentMetaData( "c1",
                                    C1_NAME,
-                                   new DependencyMetaData[]{new DependencyMetaData( S1_NAME, "c2", "c2", Attribute.EMPTY_SET )},
+                                   new DependencyMetaData[]{new DependencyMetaData( S1_NAME, "c2", "c2")},
                                    null,
                                    null,
-                                   Attribute.EMPTY_SET );
+                                   false );
         final ComponentProfile cp1 = new ComponentProfile( C1, md1 );
         final ComponentMetaData md2 =
             new ComponentMetaData( "c2",
@@ -107,26 +103,23 @@ public class ApplicationTestCase
                                    DependencyMetaData.EMPTY_SET,
                                    null,
                                    null,
-                                   new Attribute[]{new Attribute( ContainerConstants.DISABLE_PROXY_ATTR )} );
+                                   true );
         final ComponentProfile cp2 = new ComponentProfile( C2, md2 );
         final PartitionMetaData blockPartitionMD =
             new PartitionMetaData( LoomToolConstants.BLOCK_PARTITION,
                                    new String[]{LoomToolConstants.LISTENER_PARTITION},
                                    PartitionMetaData.EMPTY_SET,
-                                   new ComponentMetaData[]{md1, md2},
-                                   Attribute.EMPTY_SET );
+                                   new ComponentMetaData[]{md1, md2} );
         final PartitionMetaData listenerPartitionMD =
             new PartitionMetaData( LoomToolConstants.LISTENER_PARTITION,
                                    new String[ 0 ],
                                    PartitionMetaData.EMPTY_SET,
-                                   ComponentMetaData.EMPTY_SET,
-                                   Attribute.EMPTY_SET );
+                                   ComponentMetaData.EMPTY_SET );
         final PartitionMetaData partitionMD =
             new PartitionMetaData( "test",
                                    new String[ 0 ],
                                    new PartitionMetaData[]{blockPartitionMD, listenerPartitionMD},
-                                   ComponentMetaData.EMPTY_SET,
-                                   Attribute.EMPTY_SET );
+                                   ComponentMetaData.EMPTY_SET );
 
         final PartitionProfile blockPartitionProfile =
             new PartitionProfile( blockPartitionMD,
@@ -149,23 +142,20 @@ public class ApplicationTestCase
         final DependencyMetaData[] c3Deps =
             new DependencyMetaData[]{new DependencyMetaData( S1_ARRAY_NAME,
                                                              "c2a",
-                                                             "c2a",
-                                                             Attribute.EMPTY_SET ),
+                                                             "c2a" ),
                                      new DependencyMetaData( S1_ARRAY_NAME,
                                                              "c2b",
-                                                             "c2b",
-                                                             Attribute.EMPTY_SET ),
+                                                             "c2b" ),
                                      new DependencyMetaData( S1_ARRAY_NAME,
                                                              "c2c",
-                                                             "c2c",
-                                                             Attribute.EMPTY_SET )};
+                                                             "c2c" )};
         final ComponentMetaData md3 =
             new ComponentMetaData( "c3",
                                    C3_NAME,
                                    c3Deps,
                                    null,
                                    null,
-                                   Attribute.EMPTY_SET );
+                                   false );
         final ComponentProfile cp3 = new ComponentProfile( C3, md3 );
         final ComponentMetaData md2a =
             new ComponentMetaData( "c2a",
@@ -173,7 +163,7 @@ public class ApplicationTestCase
                                    DependencyMetaData.EMPTY_SET,
                                    null,
                                    null,
-                                   Attribute.EMPTY_SET );
+                                   false );
         final ComponentProfile cp2a = new ComponentProfile( C2, md2a );
         final ComponentMetaData md2b =
             new ComponentMetaData( "c2b",
@@ -181,7 +171,7 @@ public class ApplicationTestCase
                                    DependencyMetaData.EMPTY_SET,
                                    null,
                                    null,
-                                   Attribute.EMPTY_SET );
+                                   false );
         final ComponentProfile cp2b = new ComponentProfile( C2, md2b );
         final ComponentMetaData md2c =
             new ComponentMetaData( "c2c",
@@ -189,27 +179,24 @@ public class ApplicationTestCase
                                    DependencyMetaData.EMPTY_SET,
                                    null,
                                    null,
-                                   Attribute.EMPTY_SET );
+                                   false );
         final ComponentProfile cp2c = new ComponentProfile( C2, md2c );
 
         final PartitionMetaData blockPartitionMD =
             new PartitionMetaData( LoomToolConstants.BLOCK_PARTITION,
                                    new String[]{LoomToolConstants.LISTENER_PARTITION},
                                    PartitionMetaData.EMPTY_SET,
-                                   new ComponentMetaData[]{md3, md2a, md2b, md2c},
-                                   Attribute.EMPTY_SET );
+                                   new ComponentMetaData[]{md3, md2a, md2b, md2c} );
         final PartitionMetaData listenerPartitionMD =
             new PartitionMetaData( LoomToolConstants.LISTENER_PARTITION,
                                    new String[ 0 ],
                                    PartitionMetaData.EMPTY_SET,
-                                   ComponentMetaData.EMPTY_SET,
-                                   Attribute.EMPTY_SET );
+                                   ComponentMetaData.EMPTY_SET );
         final PartitionMetaData partitionMD =
             new PartitionMetaData( "test",
                                    new String[ 0 ],
                                    new PartitionMetaData[]{blockPartitionMD, listenerPartitionMD},
-                                   ComponentMetaData.EMPTY_SET,
-                                   Attribute.EMPTY_SET );
+                                   ComponentMetaData.EMPTY_SET );
 
         final PartitionProfile blockPartitionProfile =
             new PartitionProfile( blockPartitionMD,
@@ -232,23 +219,20 @@ public class ApplicationTestCase
         final DependencyMetaData[] c4Deps =
             new DependencyMetaData[]{new DependencyMetaData( S1_MAP_NAME,
                                                              "c2a",
-                                                             "c2a",
-                                                             Attribute.EMPTY_SET ),
+                                                             "c2a" ),
                                      new DependencyMetaData( S1_MAP_NAME,
                                                              "c2b",
-                                                             "c2b",
-                                                             Attribute.EMPTY_SET ),
+                                                             "c2b" ),
                                      new DependencyMetaData( S1_MAP_NAME,
                                                              "c2c",
-                                                             "anAlias",
-                                                             Attribute.EMPTY_SET )};
+                                                             "anAlias" )};
         final ComponentMetaData md4 =
             new ComponentMetaData( "c4",
                                    C4_NAME,
                                    c4Deps,
                                    null,
                                    null,
-                                   Attribute.EMPTY_SET );
+                                   false );
         final ComponentProfile cp4 = new ComponentProfile( C4, md4 );
         final ComponentMetaData md2a =
             new ComponentMetaData( "c2a",
@@ -256,7 +240,7 @@ public class ApplicationTestCase
                                    DependencyMetaData.EMPTY_SET,
                                    null,
                                    null,
-                                   Attribute.EMPTY_SET );
+                                   false );
         final ComponentProfile cp2a = new ComponentProfile( C2, md2a );
         final ComponentMetaData md2b =
             new ComponentMetaData( "c2b",
@@ -264,7 +248,7 @@ public class ApplicationTestCase
                                    DependencyMetaData.EMPTY_SET,
                                    null,
                                    null,
-                                   Attribute.EMPTY_SET );
+                                   false );
         final ComponentProfile cp2b = new ComponentProfile( C2, md2b );
         final ComponentMetaData md2c =
             new ComponentMetaData( "c2c",
@@ -272,27 +256,24 @@ public class ApplicationTestCase
                                    DependencyMetaData.EMPTY_SET,
                                    null,
                                    null,
-                                   Attribute.EMPTY_SET );
+                                   false );
         final ComponentProfile cp2c = new ComponentProfile( C2, md2c );
 
         final PartitionMetaData blockPartitionMD =
             new PartitionMetaData( LoomToolConstants.BLOCK_PARTITION,
                                    new String[]{LoomToolConstants.LISTENER_PARTITION},
                                    PartitionMetaData.EMPTY_SET,
-                                   new ComponentMetaData[]{md4, md2a, md2b, md2c},
-                                   Attribute.EMPTY_SET );
+                                   new ComponentMetaData[]{md4, md2a, md2b, md2c} );
         final PartitionMetaData listenerPartitionMD =
             new PartitionMetaData( LoomToolConstants.LISTENER_PARTITION,
                                    new String[ 0 ],
                                    PartitionMetaData.EMPTY_SET,
-                                   ComponentMetaData.EMPTY_SET,
-                                   Attribute.EMPTY_SET );
+                                   ComponentMetaData.EMPTY_SET );
         final PartitionMetaData partitionMD =
             new PartitionMetaData( "test",
                                    new String[ 0 ],
                                    new PartitionMetaData[]{blockPartitionMD, listenerPartitionMD},
-                                   ComponentMetaData.EMPTY_SET,
-                                   Attribute.EMPTY_SET );
+                                   ComponentMetaData.EMPTY_SET );
 
         final PartitionProfile blockPartitionProfile =
             new PartitionProfile( blockPartitionMD,

@@ -17,7 +17,6 @@ import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.DependencyDescriptor;
 import org.jcontainer.loom.tools.info.SchemaDescriptor;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
-import org.realityforge.metaclass.model.Attribute;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
 import org.xml.sax.InputSource;
@@ -29,7 +28,7 @@ import org.xml.sax.InputSource;
  * <a href="package-summary.html#external">package summary</a>.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.7 $ $Date: 2003-10-15 02:04:51 $
+ * @version $Revision: 1.8 $ $Date: 2003-10-15 04:20:42 $
  */
 public final class BlockInfoReader
     extends AbstractLogEnabled
@@ -155,7 +154,7 @@ public final class BlockInfoReader
         else
         {
             final String location = LegacyUtil.getSchemaLocationFor( classname );
-            return new SchemaDescriptor( location, schemaType, Attribute.EMPTY_SET );
+            return new SchemaDescriptor( location, schemaType );
         }
 
     }
@@ -224,8 +223,7 @@ public final class BlockInfoReader
 
         return new DependencyDescriptor( key,
                                          implementationKey,
-                                         false,
-                                         Attribute.EMPTY_SET );
+                                         false );
     }
 
     /**
@@ -244,13 +242,13 @@ public final class BlockInfoReader
         Configuration[] elements = info.getChild( "services" ).getChildren( "service" );
         for( int i = 0; i < elements.length; i++ )
         {
-            final ServiceDescriptor service = buildService( elements[ i ], false );
+            final ServiceDescriptor service = buildService( elements[ i ] );
             services.add( service );
         }
         elements = info.getChild( "management-access-points" ).getChildren( "service" );
         for( int i = 0; i < elements.length; i++ )
         {
-            final ServiceDescriptor service = buildService( elements[ i ], true );
+            final ServiceDescriptor service = buildService( elements[ i ] );
             services.add( service );
         }
 
@@ -265,19 +263,10 @@ public final class BlockInfoReader
      * @return the created ServiceDescriptor
      * @throws ConfigurationException if an error occurs
      */
-    private ServiceDescriptor buildService( final Configuration service,
-                                            final boolean isManagement )
+    private ServiceDescriptor buildService( final Configuration service )
         throws ConfigurationException
     {
         final String implementationKey = service.getAttribute( "name" );
-        final ArrayList attributeSet = new ArrayList();
-        if( isManagement )
-        {
-            attributeSet.add( LegacyUtil.MX_ATTRIBUTE );
-        }
-
-        final Attribute[] attributes = (Attribute[])attributeSet.toArray( new Attribute[ attributeSet.size() ] );
-        return new ServiceDescriptor( implementationKey, attributes );
+        return new ServiceDescriptor( implementationKey );
     }
-
 }

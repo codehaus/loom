@@ -7,8 +7,6 @@
  */
 package org.jcontainer.loom.tools.info;
 
-import org.realityforge.metaclass.model.Attribute;
-
 /**
  * A descriptor describing the schema to validate the components
  * {@link org.apache.avalon.framework.parameters.Parameters} or
@@ -24,10 +22,9 @@ import org.realityforge.metaclass.model.Attribute;
  * about Schema requirements.</p>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.4 $ $Date: 2003-10-05 01:06:31 $
+ * @version $Revision: 1.5 $ $Date: 2003-10-15 04:20:42 $
  */
 public class SchemaDescriptor
-    extends FeatureDescriptor
 {
     /**
      * The location of schema relative to component.
@@ -44,13 +41,10 @@ public class SchemaDescriptor
      *
      * @param location the location of schema relative to component
      * @param type the type of the schema
-     * @param attributes the attributes associated with schema
      */
     public SchemaDescriptor( final String location,
-                             final String type,
-                             final Attribute[] attributes )
+                             final String type )
     {
-        super( attributes );
         if( null == location )
         {
             throw new NullPointerException( "location" );

@@ -89,6 +89,9 @@ package org.jcontainer.loom.components.assembler;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import org.jcontainer.dna.AbstractLogEnabled;
+import org.jcontainer.dna.Configuration;
+import org.jcontainer.dna.ConfigurationException;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.tools.LoomToolConstants;
@@ -96,12 +99,8 @@ import org.jcontainer.loom.tools.metadata.ComponentMetaData;
 import org.jcontainer.loom.tools.metadata.DependencyMetaData;
 import org.jcontainer.loom.tools.metadata.MetaDataBuilder;
 import org.jcontainer.loom.tools.metadata.PartitionMetaData;
-import org.jcontainer.dna.Configuration;
-import org.jcontainer.dna.ConfigurationException;
-import org.jcontainer.dna.AbstractLogEnabled;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
-import org.realityforge.metaclass.model.Attribute;
 
 /**
  * Assemble a {@link PartitionMetaData} object from a Configuration
@@ -109,7 +108,7 @@ import org.realityforge.metaclass.model.Attribute;
  * and is in the format specified for <tt>assembly.xml</tt> files.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.8 $ $Date: 2003-10-05 10:07:03 $
+ * @version $Revision: 1.9 $ $Date: 2003-10-15 04:20:42 $
  */
 public class Assembler
     extends AbstractLogEnabled
@@ -162,8 +161,7 @@ public class Assembler
             new PartitionMetaData( LoomToolConstants.BLOCK_PARTITION,
                                    new String[]{LoomToolConstants.LISTENER_PARTITION},
                                    PartitionMetaData.EMPTY_SET,
-                                   blocks,
-                                   Attribute.EMPTY_SET );
+                                   blocks );
 
         final Configuration[] listenerConfig = assembly.getChildren( "listener" );
         final ComponentMetaData[] listeners = buildBlockListeners( listenerConfig, config );
@@ -171,8 +169,7 @@ public class Assembler
             new PartitionMetaData( LoomToolConstants.LISTENER_PARTITION,
                                    new String[ 0 ],
                                    PartitionMetaData.EMPTY_SET,
-                                   listeners,
-                                   Attribute.EMPTY_SET );
+                                   listeners );
 
         final PartitionMetaData[] partitions =
             new PartitionMetaData[]{blockPartition, listenerPartition};
@@ -180,8 +177,7 @@ public class Assembler
         return new PartitionMetaData( name,
                                       new String[ 0 ],
                                       partitions,
-                                      ComponentMetaData.EMPTY_SET,
-                                      Attribute.EMPTY_SET );
+                                      ComponentMetaData.EMPTY_SET );
     }
 
     /**
@@ -223,26 +219,18 @@ public class Assembler
             final String classname = block.getAttribute( "class" );
             final Configuration proxy = block.getChild( "proxy" );
 
-            final ArrayList attributeSet = new ArrayList();
             final boolean disableProxy =
                 proxy.getAttributeAsBoolean( "disable", false );
-            if( disableProxy )
-            {
-                final Attribute attribute =
-                    new Attribute( ContainerConstants.DISABLE_PROXY_ATTR );
-                attributeSet.add( attribute );
-            }
 
             final Configuration[] provides = block.getChildren( "provide" );
             final DependencyMetaData[] dependencys = buildDependencies( provides );
-            final Attribute[] attributes =
-                (Attribute[])attributeSet.toArray( new Attribute[ attributeSet.size() ] );
 
             final Configuration configuration = config.getChild( name );
 
             return new ComponentMetaData( name, classname,
                                           dependencys, null,
-                                          configuration, attributes );
+                                          configuration,
+                                          disableProxy );
         }
         catch( final ConfigurationException ce )
         {
@@ -295,7 +283,7 @@ public class Assembler
                                           DependencyMetaData.EMPTY_SET,
                                           null,
                                           configuration,
-                                          Attribute.EMPTY_SET );
+                                          false );
         }
         catch( final ConfigurationException ce )
         {
@@ -325,7 +313,7 @@ public class Assembler
             final String alias = provide.getAttribute( "alias", requiredName );
             final String key = provide.getAttribute( "role" );
 
-            dependencies.add( new DependencyMetaData( key, requiredName, alias, Attribute.EMPTY_SET ) );
+            dependencies.add( new DependencyMetaData( key, requiredName, alias ) );
         }
 
         return (DependencyMetaData[])dependencies.toArray( new DependencyMetaData[ dependencies.size() ] );
