@@ -20,7 +20,7 @@ import org.realityforge.classman.test.DataConstants;
  * Unit test for join classloader.
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-04-09 10:19:51 $
+ * @version $Revision: 1.3 $ $Date: 2003-04-10 10:54:30 $
  */
 public class JoinClassLoaderTestCase
     extends AbstractLoaderTestCase
@@ -33,6 +33,13 @@ public class JoinClassLoaderTestCase
     public void testJoinClassLoader()
         throws Exception
     {
+        if( System.getProperty( "gump", "false" ).equals( "true" ) )
+        {
+            //Can't test the rest of this as it requires
+            //explicit classloader setup that gump ignores.
+            return;
+        }
+
         final URLClassLoader cl1 = createClassLoader( "cl1.jar" );
         final URLClassLoader cl2 = createClassLoader( "cl2.jar" );
         final ClassLoader[] cls = new ClassLoader[]{cl1, cl2};
@@ -85,13 +92,6 @@ public class JoinClassLoaderTestCase
                        resources1 );
         assertTrue( "Count of resource from classloader", resources1.hasMoreElements() );
         assertEquals( "Resource found from classloader", url1, resources1.nextElement() );
-
-        if( System.getProperty("gump","false").equals( "true") )
-        {
-            //Can't test the rest of this as it requires
-            //explicit classloader setup that gump ignores.
-            return;
-        }
 
         assertTrue( "Second Count of resource from classloader", !resources1.hasMoreElements() );
 
