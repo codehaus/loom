@@ -18,7 +18,7 @@ import org.jcontainer.loom.tools.info.ComponentInfo;
  * is specified in the <a href="package-summary.html#external">package summary</a>.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.10 $ $Date: 2003-10-06 12:56:10 $
+ * @version $Revision: 1.11 $ $Date: 2003-10-06 13:36:59 $
  */
 public final class InfoBuilder
     extends AbstractLogEnabled
@@ -35,19 +35,6 @@ public final class InfoBuilder
     {
         super.enableLogging( logger );
         setupLogger( m_infoCreator );
-    }
-
-    /**
-     * Create a {@link ComponentInfo} object for specified Class.
-     *
-     * @param clazz The class of Component
-     * @return the created ComponentInfo
-     * @throws Exception if an error occurs
-     */
-    public ComponentInfo buildComponentInfo( final Class clazz )
-        throws Exception
-    {
-        return buildComponentInfo( clazz.getName(), clazz.getClassLoader() );
     }
 
     /**
@@ -69,16 +56,6 @@ public final class InfoBuilder
         {
             return null;
         }
-
-        if( null != m_infoCreator )
-        {
-            return m_infoCreator.createComponentInfo( classname, inputStream );
-        }
-        else
-        {
-            final String message =
-                "Unable to locate BlockInfo descriptor for class " + classname;
-            throw new Exception( message );
-        }
+        return m_infoCreator.createComponentInfo( classname, inputStream );
     }
 }
