@@ -60,7 +60,7 @@ public class DefaultLogManager
 {
     private static final Resources REZ =
         ResourceManager.getPackageResources( DefaultLogManager.class );
-
+	
     private final PropertyExpander m_expander = new PropertyExpander();
 
     private final InitialLoggerStoreFactory m_factory = new InitialLoggerStoreFactory();
@@ -80,32 +80,46 @@ public class DefaultLogManager
         final HashMap data = new HashMap();
         data.putAll( appContext );
         data.put( "loom.home", m_loomHome );
-        normaliseFilePaths( data );
         return data;
     }
 
+
     /**
      * Normalises file paths by replacing File.separatorChar with '/'
+     * and storing the path in the map in place of the File object
+     * which would be converted back to using the File.separatorChar
      * 
-     * @param data the Map containing the context data
+     * @param data the Map containing the File objects
+     * @return the Map with the normalised File paths 
      */
-    private void normaliseFilePaths( final Map data ){
+    private Map normaliseFilePaths( final Map data ){
+    	final Map map = new HashMap();
+    	map.putAll( data );
         for ( Iterator i = data.keySet().iterator(); i.hasNext(); )
         {
             final Object key = i.next();
             final Object value = data.get( key );
             if ( value instanceof File )
             {
-                File file = (File)value;
-                final String path = file.getPath();
-                if ( File.separatorChar != '/' ) 
-                {
-                    final String newPath = path.replace( File.separatorChar, '/' );
-                    data.put( key, new File( newPath ) );
-                }
+                final File file = (File)value;
+				final String newPath = normalisePath( file.getPath() );
+				// replace File object value with its path
+                map.put( key, newPath );
             }
         }
+        return map;
     }
+
+	/**
+	 * Normalises file path by replacing File.separatorChar with '/'
+	 * 
+	 * @param path the file path is to be normalised
+	 * @return the normalised file path
+	 */
+	private String normalisePath( final String path ) {
+		return path.replace( File.separatorChar, '/' );
+	}
+
 
     /**
      * Create a Logger hierarchy for specified application.
@@ -122,6 +136,8 @@ public class DefaultLogManager
         throws Exception
     {
         final Map map = createLoggerManagerContext( context );
+		// normalise file paths for log4j to circumvent backslash replacement
+		final Map normalisedMap = normaliseFilePaths( map );
         if( null == logs )
         {
             LoggerStore store = null;
@@ -129,7 +145,7 @@ public class DefaultLogManager
                                          PropertyLog4JLoggerStoreFactory.class.getName(),
                                          homeDirectory,
                                          workDirectory,
-                                         map );
+                                         normalisedMap );
             if( null != store )
             {
                 return store;
@@ -138,7 +154,7 @@ public class DefaultLogManager
                                          DOMLog4JLoggerStoreFactory.class.getName(),
                                          homeDirectory,
                                          workDirectory,
-                                         map );
+                                         normalisedMap );
             if( null != store )
             {
                 return store;
@@ -204,7 +220,7 @@ public class DefaultLogManager
                 ContainerUtil.enableLogging( loggerManager, getLogger() );
                 final HashMap config = new HashMap();
                 final Element element = buildLog4JConfiguration( logs );
-                m_expander.expandValues( element, map );
+                m_expander.expandValues( element, normalisedMap );
                 config.put( Element.class.getName(), element );
                 return loggerManager.createLoggerStore( config );
             }
