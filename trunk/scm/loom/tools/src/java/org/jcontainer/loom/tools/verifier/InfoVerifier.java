@@ -36,7 +36,7 @@ import org.realityforge.metaclass.Attributes;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.11 $ $Date: 2003-10-16 04:34:16 $
+ * @version $Revision: 1.12 $ $Date: 2003-10-16 04:35:58 $
  */
 public class InfoVerifier
     implements LogEnabled
@@ -62,25 +62,6 @@ public class InfoVerifier
      * advertised interfaces. And confrorm to expectations of {@link ComponentInfo}.
      *
      * @param name the name of component
-     * @param implementationKey the implementationKey of component
-     * @param classLoader the ClassLoader to load component from
-     * @throws VerifyException if an error occurs
-     */
-    public void verifyType( final String name,
-                            final String implementationKey,
-                            final ComponentInfo info,
-                            final ClassLoader classLoader )
-        throws VerifyException
-    {
-        final Class clazz = getClass( classLoader, name, implementationKey );
-        verifyType( name, info, clazz );
-    }
-
-    /**
-     * Verfiy that specified components designate classes that implement the
-     * advertised interfaces. And confrorm to expectations of {@link ComponentInfo}.
-     *
-     * @param name the name of component
      * @param type the component type
      * @throws VerifyException if an error occurs
      */
@@ -93,7 +74,7 @@ public class InfoVerifier
             Attributes.getAttribute( type, "dna.component" );
         if( null == attribute )
         {
-            
+
         }
         final Class[] interfaces =
             getServiceClasses( name,
@@ -139,36 +120,5 @@ public class InfoVerifier
         }
 
         return classes;
-    }
-
-    /**
-     * Load class object for specified component.
-     *
-     * @param classLoader the ClassLoader to use
-     * @param name the name of component
-     * @param implementationKey the implementationKey of component
-     * @return the Class object
-     * @throws VerifyException if unable to aquire class object
-     */
-    private Class getClass( final ClassLoader classLoader,
-                            final String name,
-                            final String implementationKey )
-        throws VerifyException
-    {
-        Class clazz = null;
-        try
-        {
-            clazz = classLoader.loadClass( implementationKey );
-        }
-        catch( final Exception e )
-        {
-            final String message =
-                REZ.format( "assembly.bad-class.error",
-                            name,
-                            implementationKey,
-                            e.toString() );
-            throw new VerifyException( message );
-        }
-        return clazz;
     }
 }
