@@ -10,13 +10,13 @@
  */
 package org.jcontainer.loom.interfaces;
 
-import org.apache.avalon.framework.configuration.ConfigurationException;
+import org.jcontainer.loom.tools.profile.ComponentProfile;
 
 /**
  * Handles parsing of configuration schema and validation against schema
  *
  * @author <a href="mailto:proyal@apache.org">Peter Royal</a>
- * @version CVS $Revision: 1.1 $ $Date: 2003-06-29 04:38:22 $
+ * @version CVS $Revision: 1.2 $ $Date: 2003-08-05 10:26:36 $
  */
 public interface ConfigurationValidator
 {
@@ -28,8 +28,8 @@ public interface ConfigurationValidator
      * @param component the ComponentProfile
      * @param classLoader the ClassLoader (to load schema from if necessary)
      * @return true if configuration is valid
-     * @throws ConfigurationException if expected schema is missing
+     * @throws Exception if expected schema is missing
      */
-    boolean isValid( org.jcontainer.loom.tools.profile.ComponentProfile component, ClassLoader classLoader )
-        throws ConfigurationException;
+    boolean isValid( ComponentProfile component, ClassLoader classLoader )
+        throws Exception;
 }
