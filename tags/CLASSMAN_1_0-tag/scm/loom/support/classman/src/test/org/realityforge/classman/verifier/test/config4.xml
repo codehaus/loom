@@ -1,0 +1,8 @@
+<classloaders default="*system*" version="1.0">
+    <predefined name="*system*"/>
+
+    <join name="jl">
+        <classloader-ref name="non-existent"/>
+    </join>
+
+</classloaders>
