@@ -9,39 +9,41 @@
  * Apache Software Foundation (http://www.apache.org/).
  */
 package org.codehaus.spice.extension;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
+
 /**
  * <p>Utility class that represents either an available "Optional Package"
- * (formerly known as "Standard Extension") as described in the manifest
- * of a JAR file, or the requirement for such an optional package.</p>
+ * (formerly known as "Standard Extension") as described in the manifest of a
+ * JAR file, or the requirement for such an optional package.</p>
  *
  * <p>For more information about optional packages, see the document
  * <em>Optional Package Versioning</em> in the documentation bundle for your
- * Java2 Standard Edition package, in file
- * <code>guide/extensions/versioning.html</code>.</p>
+ * Java2 Standard Edition package, in file <code>guide/extensions/versioning.html</code>.</p>
  *
  * @author <a href="mailto:craigmcc at apache.org">Craig R. McClanahan</a>
- * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-12-02 07:56:59 $
+ * @author Peter Donald
+ * @version $Revision: 1.2 $ $Date: 2003-12-02 08:08:09 $
  */
 public final class Extension
 {
     /**
      * Manifest Attribute Name object for EXTENSION_LIST.
+     *
      * @see Attributes.Name#EXTENSION_LIST
      */
     public static final Attributes.Name EXTENSION_LIST = Attributes.Name.EXTENSION_LIST;
     /**
      * <code>Name</code> object for <code>Optional-Extension-List</code>
-     * manifest attribute used for declaring optional dependencies on
-     * installed extensions. Note that the dependencies declared by this method
-     * are not required for the library to operate but if present will be used.
-     * It is NOT part of the official "Optional Package" specification.
+     * manifest attribute used for declaring optional dependencies on installed
+     * extensions. Note that the dependencies declared by this method are not
+     * required for the library to operate but if present will be used. It is
+     * NOT part of the official "Optional Package" specification.
      *
      * @see <a href="http://java.sun.com/j2se/1.3/docs/guide/extensions/spec.html#dependnecy">
      *      Installed extension dependency</a>
@@ -50,116 +52,119 @@ public final class Extension
         new Attributes.Name( "Optional-Extension-List" );
     /**
      * Manifest Attribute Name object for EXTENSION_NAME.
+     *
      * @see Attributes.Name#EXTENSION_NAME
      */
     public static final Attributes.Name EXTENSION_NAME =
         Attributes.Name.EXTENSION_NAME;
     /**
      * Manifest Attribute Name object for SPECIFICATION_VERSION.
+     *
      * @see Attributes.Name#SPECIFICATION_VERSION
      */
     public static final Attributes.Name SPECIFICATION_VERSION =
         Attributes.Name.SPECIFICATION_VERSION;
     /**
      * Manifest Attribute Name object for SPECIFICATION_VENDOR.
+     *
      * @see Attributes.Name#SPECIFICATION_VENDOR
      */
     public static final Attributes.Name SPECIFICATION_VENDOR =
         Attributes.Name.SPECIFICATION_VENDOR;
     /**
      * Manifest Attribute Name object for IMPLEMENTATION_VERSION.
+     *
      * @see Attributes.Name#IMPLEMENTATION_VERSION
      */
     public static final Attributes.Name IMPLEMENTATION_VERSION =
         Attributes.Name.IMPLEMENTATION_VERSION;
     /**
      * Manifest Attribute Name object for IMPLEMENTATION_VENDOR.
+     *
      * @see Attributes.Name#IMPLEMENTATION_VENDOR
      */
     public static final Attributes.Name IMPLEMENTATION_VENDOR =
         Attributes.Name.IMPLEMENTATION_VENDOR;
     /**
      * Manifest Attribute Name object for IMPLEMENTATION_URL.
+     *
      * @see Attributes.Name#IMPLEMENTATION_URL
      */
     public static final Attributes.Name IMPLEMENTATION_URL =
         Attributes.Name.IMPLEMENTATION_URL;
     /**
      * Manifest Attribute Name object for IMPLEMENTATION_VENDOR_ID.
+     *
      * @see Attributes.Name#IMPLEMENTATION_VENDOR_ID
      */
     public static final Attributes.Name IMPLEMENTATION_VENDOR_ID =
         Attributes.Name.IMPLEMENTATION_VENDOR_ID;
-    /**
-     * Enum indicating that extension is compatible with other extension.
-     */
+    /** Enum indicating that extension is compatible with other extension. */
     public static final Compatability COMPATIBLE =
         new Compatability( "COMPATIBLE" );
     /**
-     * Enum indicating that extension requires an upgrade
-     * of specification to be compatible with other extension.
+     * Enum indicating that extension requires an upgrade of specification to be
+     * compatible with other extension.
      */
     public static final Compatability REQUIRE_SPECIFICATION_UPGRADE =
         new Compatability( "REQUIRE_SPECIFICATION_UPGRADE" );
     /**
-     * Enum indicating that extension requires a vendor
-     * switch to be compatible with other extension.
+     * Enum indicating that extension requires a vendor switch to be compatible
+     * with other extension.
      */
     public static final Compatability REQUIRE_VENDOR_SWITCH =
         new Compatability( "REQUIRE_VENDOR_SWITCH" );
     /**
-     * Enum indicating that extension requires an upgrade
-     * of implementation to be compatible with other extension.
+     * Enum indicating that extension requires an upgrade of implementation to
+     * be compatible with other extension.
      */
     public static final Compatability REQUIRE_IMPLEMENTATION_UPGRADE =
         new Compatability( "REQUIRE_IMPLEMENTATION_UPGRADE" );
     /**
-     * Enum indicating that extension is incompatible with
-     * other extension in ways other than other enums
-     * indicate). ie For example the other extension may have
-     * a different ID.
+     * Enum indicating that extension is incompatible with other extension in
+     * ways other than other enums indicate). ie For example the other extension
+     * may have a different ID.
      */
     public static final Compatability INCOMPATIBLE =
         new Compatability( "INCOMPATIBLE" );
-    /**
-     * The name of the optional package being made available, or required.
-     */
+    /** The name of the optional package being made available, or required. */
     private String m_extensionName;
     /**
-     * The version number (dotted decimal notation) of the specification
-     * to which this optional package conforms.
+     * The version number (dotted decimal notation) of the specification to
+     * which this optional package conforms.
      */
     private DeweyDecimal m_specificationVersion;
     /**
-     * The name of the company or organization that originated the
-     * specification to which this optional package conforms.
+     * The name of the company or organization that originated the specification
+     * to which this optional package conforms.
      */
     private String m_specificationVendor;
     /**
-     * The unique identifier of the company that produced the optional
-     * package contained in this JAR file.
+     * The unique identifier of the company that produced the optional package
+     * contained in this JAR file.
      */
     private String m_implementationVendorID;
     /**
-     * The name of the company or organization that produced this
-     * implementation of this optional package.
+     * The name of the company or organization that produced this implementation
+     * of this optional package.
      */
     private String m_implementationVendor;
     /**
-     * The version number (dotted decimal notation) for this implementation
-     * of the optional package.
+     * The version number (dotted decimal notation) for this implementation of
+     * the optional package.
      */
     private String m_implementationVersion;
     /**
-     * The URL from which the most recent version of this optional package
-     * can be obtained if it is not already installed.
+     * The URL from which the most recent version of this optional package can
+     * be obtained if it is not already installed.
      */
     private String m_implementationURL;
+
     /**
      * Return an array of <code>Extension</code> objects representing optional
-     * packages that are available in the JAR file associated with the
-     * specified <code>Manifest</code>.  If there are no such optional
-     * packages, a zero-length array is returned.
+     * packages that are available in the JAR file associated with the specified
+     * <code>Manifest</code>.  If there are no such optional packages, a
+     * zero-length array is returned.
      *
      * @param manifest Manifest to be parsed
      * @return the "available" extensions in specified manifest
@@ -194,10 +199,11 @@ public final class Extension
         }
         return (Extension[])results.toArray( new Extension[ results.size() ] );
     }
+
     /**
-     * Retrieve the set of <code>Extension</code> objects that are available
-     * by the specified Manifest objects. If there are no such optional
-     * packages, a zero-length list is returned.
+     * Retrieve the set of <code>Extension</code> objects that are available by
+     * the specified Manifest objects. If there are no such optional packages, a
+     * zero-length list is returned.
      *
      * @param manifests the manifests to scan
      * @return the extensions
@@ -215,11 +221,12 @@ public final class Extension
         }
         return (Extension[])set.toArray( new Extension[ set.size() ] );
     }
+
     /**
      * Return the set of <code>Extension</code> objects representing optional
-     * packages that are required by the application contained in the JAR
-     * file associated with the specified <code>Manifest</code>.  If there
-     * are no such optional packages, a zero-length list is returned.
+     * packages that are required by the application contained in the JAR file
+     * associated with the specified <code>Manifest</code>.  If there are no
+     * such optional packages, a zero-length list is returned.
      *
      * @param manifest Manifest to be parsed
      * @return the dependencies that are specified in manifes
@@ -228,10 +235,11 @@ public final class Extension
     {
         return getListed( manifest, EXTENSION_LIST );
     }
+
     /**
-     * Retrieve the set of <code>Extension</code> objects that are required
-     * by the specified Manifest objects. If there are no such optional
-     * packages, a zero-length list is returned.
+     * Retrieve the set of <code>Extension</code> objects that are required by
+     * the specified Manifest objects. If there are no such optional packages, a
+     * zero-length list is returned.
      *
      * @param manifests the manifests to scan
      * @return the extensions
@@ -249,6 +257,7 @@ public final class Extension
         }
         return (Extension[])set.toArray( new Extension[ set.size() ] );
     }
+
     /**
      * Return the set of <code>Extension</code> objects representing "Optional
      * Packages" that the application declares they will use if present. If
@@ -261,6 +270,7 @@ public final class Extension
     {
         return getListed( manifest, OPTIONAL_EXTENSION_LIST );
     }
+
     /**
      * Add Extension to the specified manifest Attributes.
      *
@@ -272,10 +282,11 @@ public final class Extension
     {
         addExtension( extension, "", attributes );
     }
+
     /**
-     * Add Extension to the specified manifest Attributes.
-     * Use the specified prefix so that dependencies can added
-     * with a prefix such as "java3d-" etc.
+     * Add Extension to the specified manifest Attributes. Use the specified
+     * prefix so that dependencies can added with a prefix such as "java3d-"
+     * etc.
      *
      * @param attributes the attributes of manifest to add to
      * @param extension the extension
@@ -324,10 +335,10 @@ public final class Extension
                                  implementationURL );
         }
     }
+
     /**
-     * The constructor to create Extension object.
-     * Note that every component is allowed to be specified
-     * but only the extensionName is mandatory.
+     * The constructor to create Extension object. Note that every component is
+     * allowed to be specified but only the extensionName is mandatory.
      *
      * @param extensionName the name of extension.
      * @param specificationVersion the specification Version of extension.
@@ -355,11 +366,13 @@ public final class Extension
         {
             try
             {
-                m_specificationVersion = new DeweyDecimal( specificationVersion );
+                m_specificationVersion =
+                new DeweyDecimal( specificationVersion );
             }
             catch( final NumberFormatException nfe )
             {
-                final String error = "Bad specification version format '" + specificationVersion +
+                final String error = "Bad specification version format '" +
+                    specificationVersion +
                     "' in '" + extensionName + "'. (Reason: " + nfe + ")";
                 throw new IllegalArgumentException( error );
             }
@@ -369,6 +382,7 @@ public final class Extension
         m_implementationVendorID = implementationVendorId;
         m_implementationVersion = implementationVersion;
     }
+
     /**
      * Get the name of the extension.
      *
@@ -378,6 +392,7 @@ public final class Extension
     {
         return m_extensionName;
     }
+
     /**
      * Get the vendor of the extensions specification.
      *
@@ -387,6 +402,7 @@ public final class Extension
     {
         return m_specificationVendor;
     }
+
     /**
      * Get the version of the extensions specification.
      *
@@ -396,6 +412,7 @@ public final class Extension
     {
         return m_specificationVersion;
     }
+
     /**
      * Get the url of the extensions implementation.
      *
@@ -405,6 +422,7 @@ public final class Extension
     {
         return m_implementationURL;
     }
+
     /**
      * Get the vendor of the extensions implementation.
      *
@@ -414,6 +432,7 @@ public final class Extension
     {
         return m_implementationVendor;
     }
+
     /**
      * Get the vendorID of the extensions implementation.
      *
@@ -423,6 +442,7 @@ public final class Extension
     {
         return m_implementationVendorID;
     }
+
     /**
      * Get the version of the extensions implementation.
      *
@@ -432,13 +452,14 @@ public final class Extension
     {
         return m_implementationVersion;
     }
+
     /**
      * Return a Compatibility enum indicating the relationship of this
      * <code>Extension</code> with the specified <code>Extension</code>.
      *
      * @param required Description of the required optional package
-     * @return the enum indicating the compatability (or lack thereof)
-     *         of specifed extension
+     * @return the enum indicating the compatability (or lack thereof) of
+     *         specifed extension
      */
     public Compatability getCompatibilityWith( final Extension required )
     {
@@ -471,20 +492,22 @@ public final class Extension
         // This available optional package satisfies the requirements
         return COMPATIBLE;
     }
+
     /**
-     * Return <code>true</code> if the specified <code>Extension</code>
-     * (which represents an optional package required by an application)
-     * is satisfied by this <code>Extension</code> (which represents an
-     * optional package that is already installed.  Otherwise, return
-     * <code>false</code>.
+     * Return <code>true</code> if the specified <code>Extension</code> (which
+     * represents an optional package required by an application) is satisfied
+     * by this <code>Extension</code> (which represents an optional package that
+     * is already installed.  Otherwise, return <code>false</code>.
      *
      * @param required Description of the required optional package
-     * @return true if the specified extension is compatible with this extension
+     * @return true if the specified extension is compatible with this
+     *         extension
      */
     public boolean isCompatibleWith( final Extension required )
     {
         return ( COMPATIBLE == getCompatibilityWith( required ) );
     }
+
     /**
      * Return a String representation of this object.
      *
@@ -542,24 +565,27 @@ public final class Extension
         }
         return sb.toString();
     }
+
     /**
-     * Return <code>true</code> if the first version number is greater than
-     * or equal to the second; otherwise return <code>false</code>.
+     * Return <code>true</code> if the first version number is greater than or
+     * equal to the second; otherwise return <code>false</code>.
      *
      * @param first First version number (dotted decimal)
      * @param second Second version number (dotted decimal)
      */
-    private boolean isCompatible( final DeweyDecimal first, final DeweyDecimal second )
+    private boolean isCompatible( final DeweyDecimal first,
+                                  final DeweyDecimal second )
     {
         return first.isGreaterThanOrEqual( second );
     }
+
     /**
-     * Retrieve all the extensions listed under a particular key
-     * (Usually EXTENSION_LIST or OPTIONAL_EXTENSION_LIST).
+     * Retrieve all the extensions listed under a particular key (Usually
+     * EXTENSION_LIST or OPTIONAL_EXTENSION_LIST).
      *
      * @param manifest the manifest to extract extensions from
-     * @param listKey the key used to get list (Usually
-     *        EXTENSION_LIST or OPTIONAL_EXTENSION_LIST)
+     * @param listKey the key used to get list (Usually EXTENSION_LIST or
+     * OPTIONAL_EXTENSION_LIST)
      * @return the list of listed extensions
      */
     private static Extension[] getListed( final Manifest manifest,
@@ -581,13 +607,15 @@ public final class Extension
         }
         return (Extension[])results.toArray( new Extension[ 0 ] );
     }
+
     /**
-     * Add required optional packages defined in the specified attributes entry, if any.
+     * Add required optional packages defined in the specified attributes entry,
+     * if any.
      *
      * @param attributes Attributes to be parsed
      * @param required list to add required optional packages to
-     * @param listKey the key to use to lookup list, usually EXTENSION_LIST
-     *    or OPTIONAL_EXTENSION_LIST
+     * @param listKey the key to use to lookup list, usually EXTENSION_LIST or
+     * OPTIONAL_EXTENSION_LIST
      */
     private static void getExtension( final Attributes attributes,
                                       final ArrayList required,
@@ -609,6 +637,7 @@ public final class Extension
             }
         }
     }
+
     /**
      * Splits the string on every token into an array of strings.
      *
@@ -616,9 +645,11 @@ public final class Extension
      * @param onToken the token
      * @return the resultant array
      */
-    private static final String[] split( final String string, final String onToken )
+    private static final String[] split( final String string,
+                                         final String onToken )
     {
-        final StringTokenizer tokenizer = new StringTokenizer( string, onToken );
+        final StringTokenizer tokenizer = new StringTokenizer( string,
+                                                               onToken );
         final String[] result = new String[ tokenizer.countTokens() ];
         for( int i = 0; i < result.length; i++ )
         {
@@ -626,18 +657,19 @@ public final class Extension
         }
         return result;
     }
+
     /**
-     * Extract an Extension from Attributes.
-     * Prefix indicates the prefix checked for each string.
-     * Usually the prefix is <em>"&lt;extension&gt;-"</em> if looking for a
-     * <b>Required</b> extension. If you are looking for an <b>Available</b> extension
-     * then the prefix is <em>""</em>.
+     * Extract an Extension from Attributes. Prefix indicates the prefix checked
+     * for each string. Usually the prefix is <em>"&lt;extension&gt;-"</em> if
+     * looking for a <b>Required</b> extension. If you are looking for an
+     * <b>Available</b> extension then the prefix is <em>""</em>.
      *
      * @param prefix the prefix for each attribute name
      * @param attributes Attributes to searched
      * @return the new Extension object, or null
      */
-    private static Extension getExtension( final String prefix, final Attributes attributes )
+    private static Extension getExtension( final String prefix,
+                                           final Attributes attributes )
     {
         //WARNING: We trim the values of all the attributes because
         //Some extension declarations are badly defined (ie have spaces
@@ -649,20 +681,27 @@ public final class Extension
             return null;
         }
         final String specVendorKey = prefix + SPECIFICATION_VENDOR;
-        final String specVendor = getTrimmedString( attributes.getValue( specVendorKey ) );
+        final String specVendor = getTrimmedString(
+            attributes.getValue( specVendorKey ) );
         final String specVersionKey = prefix + SPECIFICATION_VERSION;
-        final String specVersion = getTrimmedString( attributes.getValue( specVersionKey ) );
+        final String specVersion = getTrimmedString(
+            attributes.getValue( specVersionKey ) );
         final String impVersionKey = prefix + IMPLEMENTATION_VERSION;
-        final String impVersion = getTrimmedString( attributes.getValue( impVersionKey ) );
+        final String impVersion = getTrimmedString(
+            attributes.getValue( impVersionKey ) );
         final String impVendorKey = prefix + IMPLEMENTATION_VENDOR;
-        final String impVendor = getTrimmedString( attributes.getValue( impVendorKey ) );
+        final String impVendor = getTrimmedString(
+            attributes.getValue( impVendorKey ) );
         final String impVendorIDKey = prefix + IMPLEMENTATION_VENDOR_ID;
-        final String impVendorId = getTrimmedString( attributes.getValue( impVendorIDKey ) );
+        final String impVendorId = getTrimmedString(
+            attributes.getValue( impVendorIDKey ) );
         final String impURLKey = prefix + IMPLEMENTATION_URL;
-        final String impURL = getTrimmedString( attributes.getValue( impURLKey ) );
+        final String impURL = getTrimmedString(
+            attributes.getValue( impURLKey ) );
         return new Extension( name, specVersion, specVendor, impVersion,
                               impVendor, impVendorId, impURL );
     }
+
     /**
      * Trim the supplied string if the string is non-null
      *
