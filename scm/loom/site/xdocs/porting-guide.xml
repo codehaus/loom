@@ -72,8 +72,8 @@ maven sar
     classname="org.codehaus.metaclass.tools.tasks.GenerateClassDescriptorsTask"
 >
     <classpath>
-        <pathelement location="${path.to}/metaclass-runtime-1.0-rc3-dev.jar"/>
-        <pathelement location="${path.to}/metaclass-tools-1.0-rc3-dev.jar"/>
+        <pathelement location="${path.to}/metaclass-runtime-1.1.jar"/>
+        <pathelement location="${path.to}/metaclass-tools-1.1.jar"/>
         <pathelement location="${path.to}/qdox-1.3.jar"/>
         <pathelement location="${path.to}/asm-1.4.jar"/>
     </classpath>

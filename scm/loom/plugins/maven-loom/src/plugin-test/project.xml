@@ -9,7 +9,7 @@
         <dependency>
             <groupId>loom</groupId>
             <artifactId>maven-loom-plugin</artifactId>
-            <version>1.0-beta1-dev</version>
+            <version>1.0</version>
             <type>plugin</type>
         </dependency>
         <dependency>
