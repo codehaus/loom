@@ -1,14 +1,9 @@
-<project
-    xmlns:j="jelly:core"
-    xmlns:maven="jelly:maven"
-    xmlns:ant="jelly:ant"
-    default="main">
+<project xmlns:j="jelly:core" xmlns:maven="jelly:maven" xmlns:ant="jelly:ant" default="build">
 
     <preGoal name="java:compile">
         <ant:mkdir dir="${basedir}/target/src/java/org/codehaus/loom/interfaces"/>
         <ant:tstamp/>
-        <j:file name="${basedir}/target/src/java/org/codehaus/loom/interfaces/Version.java"
-            omitXmlDeclaration="true" escapeText="false">
+        <j:file name="${basedir}/target/src/java/org/codehaus/loom/interfaces/Version.java" omitXmlDeclaration="true" escapeText="false">
             package org.codehaus.loom.interfaces;
             interface Version
             {
@@ -17,22 +12,13 @@
             String DATE = "${TODAY}";
             }
         </j:file>
-        <ant:path id="version.src.set"
-            location="${basedir}/target/src/java"/>
+        <ant:path id="version.src.set" location="${basedir}/target/src/java"/>
         <maven:addPath id="maven.compile.src.set" refid="version.src.set"/>
     </preGoal>
 
-    <goal name="main">
-        <attainGoal name="build"/>
-    </goal>
+    <goal name="build" prereqs="jar:install"/>
 
-    <goal name="build">
-        <attainGoal name="jar:install"/>
-    </goal>
-
-    <goal name="deploy">
-        <attainGoal name="jar:deploy"/>
-    </goal>
+    <goal name="deploy" prereqs="jar:deploy"/>
 
     <postGoal name="test:compile">
         <attainGoal name="generateMetaData"/>
