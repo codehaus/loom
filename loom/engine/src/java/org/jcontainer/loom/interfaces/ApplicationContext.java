@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.InputStream;
 import org.apache.avalon.framework.logger.Logger;
 import org.apache.excalibur.instrument.InstrumentManager;
+import org.jcontainer.loom.tools.profile.PartitionProfile;
 
 /**
  * Manage the "context" in which Applications operate.
@@ -26,7 +27,7 @@ public interface ApplicationContext
 
     File getHomeDirectory();
 
-    org.jcontainer.loom.tools.profile.PartitionProfile getPartitionProfile();
+    PartitionProfile getPartitionProfile();
 
     /**
      * A application can request that it be be shutdown. In most cases
