@@ -8,7 +8,6 @@
 package org.jcontainer.loom.tools.profile;
 
 import org.apache.avalon.phoenix.containerkit.metadata.PartitionMetaData;
-import org.jcontainer.loom.tools.profile.ComponentProfile;
 
 /**
  * The PartitionProfile contains the set of data required
@@ -17,7 +16,7 @@ import org.jcontainer.loom.tools.profile.ComponentProfile;
  * objects.
  *
  * @author <a href="mailto:peter at apache.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-29 00:44:44 $
+ * @version $Revision: 1.2 $ $Date: 2003-06-29 00:45:53 $
  */
 public class PartitionProfile
 {
