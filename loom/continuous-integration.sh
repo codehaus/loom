@@ -33,8 +33,9 @@ maven build &> target/cleanbuild.log
 
 # See if the "compiling" file is there. If it is, compilation
 # failed.
-if [ -e "target/compiling" ] ; then
+if grep "BUILD FAILED" target/cleanbuild.log ; then
   # Mail Maven's output to the dev list.
+  echo "Build failed, emailing list"
   cat target/cleanbuild.log | mutt -s "[BUILD] Clean build failed" $mailto
 else
   # See if the "testfailure" file is there. If it is, tests failed.
