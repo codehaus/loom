@@ -10,7 +10,13 @@ package org.realityforge.xmlpolicy.runtime;
 import java.net.URL;
 import java.security.CodeSource;
 import java.security.Permissions;
+import java.security.AllPermission;
+import java.security.Policy;
+import java.security.PermissionCollection;
+import java.security.Permission;
 import java.security.cert.Certificate;
+import java.util.HashMap;
+import java.util.Enumeration;
 import junit.framework.TestCase;
 
 /**
@@ -76,5 +82,29 @@ public class RuntimeTestCase
         {
             fail( "Expected ctor not to except" );
         }
+    }
+
+    public void testPolicyWithNull()
+        throws Exception
+    {
+        final URL url = new URL( "file:/-" );
+        final CodeSource codeSource = new CodeSource( url, new Certificate[ 0 ] );
+        final AllPermission allPermission = new AllPermission();
+        final HashMap grants = new HashMap();
+        grants.put( codeSource, new Permission[]{allPermission} );
+
+        final Policy policy = new DefaultPolicy( grants );
+        policy.refresh();
+        final PermissionCollection resultPermissions = policy.getPermissions( codeSource );
+        final Enumeration enumeration = resultPermissions.elements();
+        while( enumeration.hasMoreElements() )
+        {
+            final Permission permission = (Permission)enumeration.nextElement();
+            assertEquals( "Permissions for codeSource" + codeSource,
+                          allPermission,
+                          permission );
+            return;
+        }
+        fail( "Expected to find AllPermission in set" );
     }
 }
