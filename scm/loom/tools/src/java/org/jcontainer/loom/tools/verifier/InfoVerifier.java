@@ -13,6 +13,8 @@ import org.jcontainer.loom.tools.info.ComponentInfo;
 import org.jcontainer.loom.tools.info.ServiceDescriptor;
 import org.realityforge.salt.i18n.ResourceManager;
 import org.realityforge.salt.i18n.Resources;
+import org.realityforge.metaclass.model.Attribute;
+import org.realityforge.metaclass.Attributes;
 
 /**
  * This Class verifies that an implementation is valid wrt the
@@ -34,7 +36,7 @@ import org.realityforge.salt.i18n.Resources;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.10 $ $Date: 2003-10-16 00:24:46 $
+ * @version $Revision: 1.11 $ $Date: 2003-10-16 04:34:16 $
  */
 public class InfoVerifier
     implements LogEnabled
@@ -87,6 +89,12 @@ public class InfoVerifier
                             final Class type )
         throws VerifyException
     {
+        final Attribute attribute =
+            Attributes.getAttribute( type, "dna.component" );
+        if( null == attribute )
+        {
+            
+        }
         final Class[] interfaces =
             getServiceClasses( name,
                                info.getServices(),
