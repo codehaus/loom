@@ -24,7 +24,7 @@
         <ant:taskdef name="sar"
             classname="org.jcontainer.loom.tools.ant.SarTask">
             <ant:classpath>
-                <ant:pathelement path="${plugin.dir}" />
+                <ant:pathelement path="${plugin.dir}"/>
                 <ant:pathelement path="${plugin.getDependencyPath('ant')}"/>
             </ant:classpath>
         </ant:taskdef>
