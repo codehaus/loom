@@ -86,7 +86,8 @@
             <version>0.1</version>
         </dependency>
         <dependency>
-            <id>excalibur-extension</id>
+            <groupId>spice</groupId>
+            <artifactId>spice-extension</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>

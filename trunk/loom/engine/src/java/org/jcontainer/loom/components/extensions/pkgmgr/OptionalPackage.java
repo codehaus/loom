@@ -11,7 +11,7 @@
 package org.jcontainer.loom.components.extensions.pkgmgr;
 
 import java.io.File;
-import org.apache.avalon.excalibur.extension.Extension;
+import org.realityforge.extension.Extension;
 
 /**
  * This contains the required meta-data for an "Optional Package"

@@ -12,7 +12,7 @@ package org.jcontainer.loom.components.extensions.pkgmgr;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.avalon.excalibur.extension.Extension;
+import org.realityforge.extension.Extension;
 
 /**
  * Basic Implementation Of PackageManager Interface used to manage
@@ -21,7 +21,7 @@ import org.apache.avalon.excalibur.extension.Extension;
  * directories.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-29 04:41:32 $
+ * @version $Revision: 1.2 $ $Date: 2003-08-02 12:26:32 $
  * @see ExtensionManager
  * @todo Determine an appropriate interface to this service and
  *       an appropriate mechanism via which to do searching and

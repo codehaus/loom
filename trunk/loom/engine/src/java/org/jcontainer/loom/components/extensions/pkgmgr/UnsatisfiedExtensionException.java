@@ -10,13 +10,13 @@
  */
 package org.jcontainer.loom.components.extensions.pkgmgr;
 
-import org.apache.avalon.excalibur.extension.Extension;
+import org.realityforge.extension.Extension;
 
 /**
  * Exception indicating an extension was not found in Package Repository.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.1 $ $Date: 2003-06-29 04:41:32 $
+ * @version $Revision: 1.2 $ $Date: 2003-08-02 12:26:32 $
  * @see Extension
  */
 public class UnsatisfiedExtensionException

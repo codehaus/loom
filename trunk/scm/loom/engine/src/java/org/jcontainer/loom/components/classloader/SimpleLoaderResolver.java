@@ -18,7 +18,7 @@ import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.jar.Manifest;
-import org.apache.avalon.excalibur.extension.Extension;
+import org.realityforge.extension.Extension;
 import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
 import org.jcontainer.loom.components.extensions.pkgmgr.PackageManager;
 import org.realityforge.classman.builder.LoaderResolver;
@@ -42,7 +42,7 @@ import org.realityforge.salt.i18n.Resources;
  * </ul>
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-07-13 00:15:36 $
+ * @version $Revision: 1.3 $ $Date: 2003-08-02 12:26:32 $
  * @deprecated Convert to ClassMan SimpleLoaderResolver when it updates
  *             dependecy to latest Excalibur-Extension
  */
@@ -65,7 +65,7 @@ class SimpleLoaderResolver
     /**
      * Create a resolver that resolves all files according to specied
      * baseDirectory and using specified {@link PackageManager} to aquire
-     * {@link Extension} objects.
+     * {@link org.realityforge.extension.Extension} objects.
      *
      * @param baseDirectory the base directory
      * @param manager the {@link PackageManager}
@@ -84,7 +84,7 @@ class SimpleLoaderResolver
      * @return the URL
      * @throws Exception if unable to locate URL for extension
      */
-    public URL resolveExtension( final Extension extension )
+    public URL resolveExtension( final org.realityforge.extension.Extension extension )
         throws Exception
     {
         if( null == getManager() )
@@ -271,8 +271,8 @@ class SimpleLoaderResolver
         throws Exception
     {
         final Manifest[] manifests = getManifests( classPath );
-        final Extension[] available = Extension.getAvailable( manifests );
-        final Extension[] required = Extension.getRequired( manifests );
+        final org.realityforge.extension.Extension[] available = org.realityforge.extension.Extension.getAvailable( manifests );
+        final org.realityforge.extension.Extension[] required = org.realityforge.extension.Extension.getRequired( manifests );
 
         if( isDebugEnabled() )
         {
@@ -311,7 +311,7 @@ class SimpleLoaderResolver
             final int size = unsatisfied.size();
             for( int i = 0; i < size; i++ )
             {
-                final Extension extension = (Extension)unsatisfied.get( i );
+                final org.realityforge.extension.Extension extension = (org.realityforge.extension.Extension)unsatisfied.get( i );
                 final Object[] params = new Object[]
                 {
                     extension.getExtensionName(),

@@ -143,7 +143,8 @@
             </properties>
         </dependency>
         <dependency>
-            <id>excalibur-extension</id>
+            <groupId>spice</groupId>
+            <artifactId>spice-extension</artifactId>
             <version>1.0</version>
             <properties>
                 <category>container</category>
