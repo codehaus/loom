@@ -5,7 +5,7 @@
     <id>loom-site</id>
     <shortDescription>JContainer Loom web site</shortDescription>
     <description>JContainer Loom web site</description>
-    <package>org.jcontainer.loom</package>
+    <package>org.codehaus.loom</package>
 
     <dependencies>
         <dependency>

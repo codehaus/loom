@@ -174,8 +174,8 @@ public class WebServerBlock
                 Ensure that the MX4J RMI Adaptor is enabled in kernel.xml
                 </p>
                 <source>
-                    &lt;component role="org.jcontainer.loom.interfaces.SystemManager"
-    class="org.jcontainer.loom.components.manager.MX4JSystemManager"
+                    &lt;component role="org.codehaus.loom.interfaces.SystemManager"
+    class="org.codehaus.loom.components.manager.MX4JSystemManager"
     logger="manager" >
                     &lt;enable-rmi-adaptor>true&lt;/enable-rmi-adaptor>
   [other enabled adaptors]

@@ -4,7 +4,7 @@
     <name>Extension</name>
     <id>loom-extension</id>
     <inceptionYear>2000</inceptionYear>
-    <package>org.jcontainer.loom.extension</package>
+    <package>org.codehaus.loom.extension</package>
 
     <shortDescription>Parse and represent "Extension" and Specification information</shortDescription>
 

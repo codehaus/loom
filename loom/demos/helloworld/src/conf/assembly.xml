@@ -24,7 +24,7 @@
     <!--                                        -->
     <!-- Below this section are the demo blocks -->
     <!--                                        -->
-    <block class="org.jcontainer.loom.demos.helloworld.HelloWorldServerImpl"
+    <block class="org.codehaus.loom.demos.helloworld.HelloWorldServerImpl"
         name="helloworldserver">
         <provide name="sockets"
             role="org.codehaus.spice.netserve.sockets.ServerSocketFactory"/>

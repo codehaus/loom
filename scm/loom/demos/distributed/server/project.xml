@@ -3,7 +3,7 @@
     <extend>${basedir}/../../../project.xml</extend>
     <name>Loom Distributed Server</name>
     <id>demo-distributed-server</id>
-    <package>org.jcontainer.loom.demos.distributed</package>
+    <package>org.codehaus.loom.demos.distributed</package>
     <shortDescription>Distributed Server Demo</shortDescription>
     <description>
         Distribuited Server Demo app for deployment in Loom Application Server.

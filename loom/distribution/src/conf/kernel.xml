@@ -1,21 +1,21 @@
 <?xml version="1.0"?>
 <loom>
-    <embeddor role="org.jcontainer.loom.interfaces.Embeddor"
-        class="org.jcontainer.loom.components.embeddor.DefaultEmbeddor">
+    <embeddor role="org.codehaus.loom.interfaces.Embeddor"
+        class="org.codehaus.loom.components.embeddor.DefaultEmbeddor">
 
-        <component role="org.jcontainer.loom.interfaces.Installer"
-            class="org.jcontainer.loom.components.installer.DefaultInstaller"
+        <component role="org.codehaus.loom.interfaces.Installer"
+            class="org.codehaus.loom.components.installer.DefaultInstaller"
             logger="installer">
             <base-work-dir>${loom.home}/work</base-work-dir>
             <base-application-dir>${loom.home}/apps</base-application-dir>
         </component>
 
-        <component role="org.jcontainer.loom.interfaces.Deployer"
-            class="org.jcontainer.loom.components.deployer.DefaultDeployer"
+        <component role="org.codehaus.loom.interfaces.Deployer"
+            class="org.codehaus.loom.components.deployer.DefaultDeployer"
             logger="deployer"/>
 
-        <component role="org.jcontainer.loom.interfaces.LogManager"
-            class="org.jcontainer.loom.components.logger.DefaultLogManager"
+        <component role="org.codehaus.loom.interfaces.LogManager"
+            class="org.codehaus.loom.components.logger.DefaultLogManager"
             logger="logs"/>
 
         <!-- There is one JMX MBeanServer infrastructure currently
@@ -27,17 +27,17 @@
         The MX4J manager using the MX4J adapter devewloped at SourceForge
         See http://mx4j.sourceforge.net/ -
 
-        org.jcontainer.loom.components.manager.MX4JSystemManager
+        org.codehaus.loom.components.manager.MX4JSystemManager
 
         There is an impl of system manager that does nothing and it is....
 
-        org.jcontainer.loom.components.manager.NoopSystemManager
+        org.codehaus.loom.components.manager.NoopSystemManager
 
         Alternatively, you could comment the whole SystemManager section out.
         -->
 
-        <component role="org.jcontainer.loom.interfaces.SystemManager"
-            class="org.jcontainer.loom.components.manager.MX4JSystemManager"
+        <component role="org.codehaus.loom.interfaces.SystemManager"
+            class="org.codehaus.loom.components.manager.MX4JSystemManager"
             logger="manager">
 
             <!--
@@ -91,45 +91,45 @@
 
         </component>
 
-        <component role="org.jcontainer.loom.interfaces.Kernel"
-            class="org.jcontainer.loom.components.kernel.DefaultKernel"
+        <component role="org.codehaus.loom.interfaces.Kernel"
+            class="org.codehaus.loom.components.kernel.DefaultKernel"
             logger="kernel"/>
 
-        <component role="org.jcontainer.loom.interfaces.ConfigurationInterceptor"
-            class="org.jcontainer.loom.components.configuration.NoopConfigurationInterceptor"
+        <component role="org.codehaus.loom.interfaces.ConfigurationInterceptor"
+            class="org.codehaus.loom.components.configuration.NoopConfigurationInterceptor"
             logger="config"/>
 
         <!--
-                <component role="org.jcontainer.loom.interfaces.ConfigurationInterceptor"
-                    class="org.jcontainer.loom.components.configuration.FileSystemPersistentConfigurationInterceptor"
+                <component role="org.codehaus.loom.interfaces.ConfigurationInterceptor"
+                    class="org.codehaus.loom.components.configuration.FileSystemPersistentConfigurationInterceptor"
                     logger="config">
                     <storage-directory>${loom.home}/conf/apps</storage-directory>
                 </component>
         -->
 
-        <component role="org.jcontainer.loom.interfaces.ConfigurationValidator"
-            class="org.jcontainer.loom.components.validator.DefaultConfigurationValidator"
+        <component role="org.codehaus.loom.interfaces.ConfigurationValidator"
+            class="org.codehaus.loom.components.validator.DefaultConfigurationValidator"
             logger="validator">
             <schema-type name="relax-ng" uri="http://relaxng.org/ns/structure/1.0"/>
         </component>
 
-        <component role="org.jcontainer.loom.interfaces.ClassLoaderManager"
-            class="org.jcontainer.loom.components.classloader.DefaultClassLoaderManager"
+        <component role="org.codehaus.loom.interfaces.ClassLoaderManager"
+            class="org.codehaus.loom.components.classloader.DefaultClassLoaderManager"
             logger="classes"/>
 
-        <component role="org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager"
-            class="org.jcontainer.loom.components.extensions.DefaultExtensionManager"
+        <component role="org.codehaus.loom.components.extensions.pkgmgr.ExtensionManager"
+            class="org.codehaus.loom.components.extensions.DefaultExtensionManager"
             logger="packages">
             <extensions-dir>${loom.home}/ext</extensions-dir>
         </component>
         <!--
-        <component role="org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager"
-        class="org.jcontainer.loom.components.extensions.pkgmgr.impl.NoopPackageRepository"
+        <component role="org.codehaus.loom.components.extensions.pkgmgr.ExtensionManager"
+        class="org.codehaus.loom.components.extensions.pkgmgr.impl.NoopPackageRepository"
         logger="packages"/>
         -->
 
         <component role="org.apache.excalibur.instrument.InstrumentManager"
-            class="org.jcontainer.loom.components.instrument.NoopInstrumentManager"
+            class="org.codehaus.loom.components.instrument.NoopInstrumentManager"
             logger="instrument"/>
 
         <!--
@@ -156,7 +156,7 @@
         Can disable the Hot-Deploy monitor by commenting out the next component.
         -->
         <component
-            class="org.jcontainer.loom.components.monitor.DefaultDeploymentMonitor"
+            class="org.codehaus.loom.components.monitor.DefaultDeploymentMonitor"
             logger="monitor">
             <!-- the amount of time in milliseconds between checks
             of deployment dir -->

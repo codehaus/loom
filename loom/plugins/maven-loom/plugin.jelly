@@ -16,7 +16,7 @@
     <goal name="loom:init" prereqs="dna:init" description="Setup Loom Descriptor Processing Tasks">
 
         <ant:mc_interceptorSet id="maven.loom.interceptors">
-            <ant:interceptor name="org.jcontainer.loom.info.PhoenixAttributeInterceptor">
+            <ant:interceptor name="org.codehaus.loom.info.PhoenixAttributeInterceptor">
                 <ant:classpath>
                     <ant:pathelement path="${plugin.dir}"/>
                     <!--

@@ -2,7 +2,7 @@
 
 <assembly>
 
-    <block class="org.jcontainer.loom.demos.distributed.block.DefaultServer"
+    <block class="org.codehaus.loom.demos.distributed.block.DefaultServer"
         name="distributed-server">
     </block>
 

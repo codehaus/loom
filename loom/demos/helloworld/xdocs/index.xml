@@ -25,7 +25,7 @@
 		all contained within the src directory </p>
             <ol>
                 <li>
-                    <code>org.jcontainer.loom.demos.helloworld</code> This
+                    <code>org.codehaus.loom.demos.helloworld</code> This
 		package contains the Java source for 'Hello World' and the xinfo block
 		descriptor.
                 </li>
@@ -68,7 +68,7 @@
                 </p>
                 <source>
 (text snipped)
-                    &lt;block class="org.jcontainer.loom.demos.helloworld.HelloWorldServerImpl"
+                    &lt;block class="org.codehaus.loom.demos.helloworld.HelloWorldServerImpl"
            name="helloworldserver" &gt;
                     &lt;provide name="socketsection"
                    role="org.apache.avalon.cornerstone.services.sockets.SocketManager"/&gt;
