@@ -17,7 +17,7 @@ import org.realityforge.metaclass.tools.tasks.PluginElement;
  * information into MetaClass descriptors.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.2 $ $Date: 2003-10-16 08:43:28 $
+ * @version $Revision: 1.1 $ $Date: 2003-11-01 13:15:31 $
  */
 public class GenerateLoomDescriptorsTask
     extends GenerateClassDescriptorsTask

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.7 $ $Date: 2003-10-17 08:06:35 $
+ * @version $Revision: 1.1 $ $Date: 2003-11-01 13:15:31 $
  */
 public class PhoenixAttributeInterceptorTestCase
     extends TestCase

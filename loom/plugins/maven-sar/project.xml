@@ -10,8 +10,8 @@
 
   <versions>
       <version>
-          <id>1.1-dev</id>
-          <name>1.1-dev</name>
+          <id>${pom.currentVersion}</id>
+          <name>${pom.currentVersion}</name>
           <tag>HEAD</tag>
       </version>
       <version>
@@ -21,20 +21,34 @@
       </version>
   </versions>
 
-  <developers>
-    <developer>
-      <name>Mauro Talevi</name>
-      <id>mauro</id>
-      <email>mauro.talevi at aquilonia.org</email>
-    </developer>
-  </developers>
+	<developers>
+		<developer>
+      		<name>Mauro Talevi</name>
+      		<id>mauro</id>
+      		<email>mauro.talevi at aquilonia.org</email>
+    	</developer>
+	</developers>
 
-  <dependencies>
-    <dependency>
-      <groupId>ant</groupId>
-      <artifactId>ant</artifactId>
-      <version>1.5.3-1</version>
-    </dependency>
-  </dependencies>
+	<dependencies>
+		<dependency>
+      		<groupId>ant</groupId>
+      		<artifactId>ant</artifactId>
+      		<version>1.5.1</version>
+    	</dependency>
+        <dependency>
+            <groupId>dna</groupId>
+            <artifactId>dna-tools</artifactId>
+            <version>20031016.083103</version>
+        </dependency>
+        <dependency>
+            <id>qdox</id>
+            <version>1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>spice</groupId>
+            <artifactId>spice-metaclass</artifactId>
+            <version>20031016.074122</version>
+        </dependency>
+	</dependencies>
 
 </project>

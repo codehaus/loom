@@ -23,7 +23,7 @@ import org.realityforge.metaclass.model.ClassDescriptor;
 /**
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version $Revision: 1.3 $ $Date: 2003-10-25 22:54:36 $
+ * @version $Revision: 1.1 $ $Date: 2003-11-01 13:15:31 $
  */
 public class GenerateLoomDescriptorsTaskTestCase
     extends TestCase
