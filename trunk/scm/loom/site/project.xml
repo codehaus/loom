@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <project>
     <extend>${basedir}/../project.xml</extend>
-    <name>JContainer Loom</name>
+    <name>Loom Site</name>
     <id>loom-site</id>
     <shortDescription>JContainer Loom web site</shortDescription>
     <description>JContainer Loom web site</description>
