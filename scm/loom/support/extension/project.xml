@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<project>
+    <extend>${basedir}/../../tools/maven/project.xml</extend>
+    <name>Extension</name>
+    <id>spice-extension</id>
+    <gumpRepositoryId>components</gumpRepositoryId>
+    <currentVersion>0.9.1</currentVersion>
+    <inceptionYear>2000</inceptionYear>
+
+    <shortDescription>Parse and represent "Extension" and Specification information</shortDescription>
+
+    <description>
+        The Extension Project consists of utilities designed to make it easier
+        to parse Manifests to extract information relating to Specifications
+        and "Optional Packages" aka Extensions.
+    </description>
+
+    <developers>
+        <developer>
+            <name>Peter Donald</name>
+            <id>donaldp</id>
+            <email>peter@apache.org</email>
+            <roles>
+                <role>Developer</role>
+            </roles>
+        </developer>
+    </developers>
+</project>
