@@ -97,8 +97,10 @@
         </ant:copy>
 
         <ant:mkdir dir="${distDir}/apps"/>
-        <ant:copy todir="${distDir}/apps" overwrite="true">
-            <ant:fileset dir="deploy/apps">
+        
+        <ant:mkdir dir="${distDir}/demos"/>
+        <ant:copy todir="${distDir}/demos" overwrite="true">
+            <ant:fileset dir="deploy/demos">
                 <ant:include name="*.sar"/>
             </ant:fileset>
         </ant:copy>

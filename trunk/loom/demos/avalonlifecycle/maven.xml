@@ -2,7 +2,7 @@
     xmlns:ant="jelly:ant">
 
     <goal name="build" prereqs="loom:sar">
-        <ant:copy todir="${basedir}/../../distribution/deploy/apps"
+        <ant:copy todir="${basedir}/../../distribution/deploy/demos"
             overwrite="true">
             <ant:fileset dir="${maven.build.dir}">
                 <ant:include name="*.sar"/>
