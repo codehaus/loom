@@ -28,8 +28,7 @@
         <echo message="Build components"/>
         <maven:reactor
             basedir="${basedir}"
-            includes="*/project.xml"
-            excludes="demos/*/project.xml,distribution/project.xml,integration-test/project.xml,plugins/project.xml,site/project.xml"
+            includes="engine/project.xml,launcher/project.xml"
             goals="clean:clean,build"
             banner="Building"
             ignoreFailures="false"/>
