@@ -260,7 +260,7 @@ public class DefaultEmbeddor
                 if( m_shutdown || ( emptyKernel() && m_temporary ) )
                 {
                     // The server will shut itself down when all applications are disposed.
-                    if( emptyKernel() )
+                    if( emptyKernel() && m_temporary )
                     {
                         final String message =
                             REZ.getString( "embeddor.shutdown.all-apps-disposed" );
