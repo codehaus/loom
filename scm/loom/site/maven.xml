@@ -9,6 +9,14 @@
         <attainGoal name="site:generate"/>    	
     </goal>
 
+	<postGoal name="xdoc:copy-user-resources">
+		<copy todir="${maven.build.dir}/docs/dtds" filtering="no">
+        	<fileset dir="${basedir}/../tools/src/java/org/jcontainer/loom/tools">
+	          	<include name="*.dtd"/>
+        	</fileset>
+      	</copy>
+	</postGoal>
+	
     <goal name="deploy">
         <attainGoal name="site:deploy"/>    	
     </goal>
