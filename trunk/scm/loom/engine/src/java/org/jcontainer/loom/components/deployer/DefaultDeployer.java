@@ -472,7 +472,7 @@ public class DefaultDeployer
             {
                 isValid = m_validator.isValid( component, classLoader );
             }
-            catch( ConfigurationException e )
+            catch( final Exception e )
             {
                 getLogger().warn( e.getMessage(), e );
             }
