@@ -87,11 +87,11 @@
 package org.jcontainer.loom.interfaces;
 
 /**
- * This is the object that is interacted with to create, manage and
- * dispose of the kernel and related resources.
+ * This is the object that is interacted with to create, manage and dispose of
+ * the kernel and related resources.
  *
- * @author <a href="mail@leosimons.com">Leo Simons</a>
- * @author <a href="peter at realityforge.org">Peter Donald</a>
+ * @author Leo Simons
+ * @author Peter Donald
  */
 public interface Embeddor
 {

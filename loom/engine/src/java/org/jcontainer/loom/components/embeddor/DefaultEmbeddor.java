@@ -89,6 +89,8 @@ package org.jcontainer.loom.components.embeddor;
 import java.io.File;
 import java.util.Date;
 import java.util.Observer;
+import org.codehaus.spice.salt.i18n.ResourceManager;
+import org.codehaus.spice.salt.i18n.Resources;
 import org.jcontainer.dna.AbstractLogEnabled;
 import org.jcontainer.dna.Active;
 import org.jcontainer.dna.Composable;
@@ -106,16 +108,14 @@ import org.jcontainer.loom.interfaces.Embeddor;
 import org.jcontainer.loom.interfaces.Kernel;
 import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.interfaces.SystemManager;
-import org.codehaus.spice.salt.i18n.ResourceManager;
-import org.codehaus.spice.salt.i18n.Resources;
 
 /**
- * This is the object that is interacted with to create, manage and
- * dispose of the kernel and related resources.
+ * This is the object that is interacted with to create, manage and dispose of
+ * the kernel and related resources.
  *
- * @author <a href="mail@leosimons.com">Leo Simons</a>
- * @author <a href="peter at realityforge.org">Peter Donald</a>
- * @author <a href="bauer@denic.de">Joerg Bauer</a>
+ * @author Leo Simons
+ * @author Peter Donald
+ * @author Joerg Bauer
  * @dna.component
  * @mx.component
  */
@@ -133,29 +133,24 @@ public class DefaultEmbeddor
     private EmbeddorEntry[] m_entries;
 
     /**
-     * If true, flag indicates that the Embeddor should continue running
-     * even when there are no applications in kernel. Otherwise the
-     * Embeddor will shutdown when it detects there is no longer any
-     * applications running.
+     * If true, flag indicates that the Embeddor should continue running even
+     * when there are no applications in kernel. Otherwise the Embeddor will
+     * shutdown when it detects there is no longer any applications running.
      */
     private boolean m_persistent;
 
     /**
-     * Flag is set to true when the embeddor should  shut itself down.
-     * It is set to true as a result of a call to shutdown() method.
+     * Flag is set to true when the embeddor should  shut itself down. It is set
+     * to true as a result of a call to shutdown() method.
      *
      * @see Embeddor#shutdown()
      */
     private boolean m_shutdown;
 
-    /**
-     * Time at which the embeddor was started.
-     */
+    /** Time at which the embeddor was started. */
     private long m_startTime;
 
-    /**
-     * The default directory in which applications are deployed from.
-     */
+    /** The default directory in which applications are deployed from. */
     private ClassLoader m_commonClassLoader;
     private ClassLoader m_containerClassLoader;
 
@@ -172,7 +167,8 @@ public class DefaultEmbeddor
     {
         if( locator.contains( Observer.class.getName() ) )
         {
-            final Observer observer = (Observer)locator.lookup( Observer.class.getName() );
+            final Observer observer = (Observer)locator.lookup(
+                Observer.class.getName() );
             m_observable.addObserver( observer );
         }
         else
@@ -193,7 +189,8 @@ public class DefaultEmbeddor
     public void configure( final Configuration configuration )
         throws ConfigurationException
     {
-        final Configuration[] children = configuration.getChildren( "component" );
+        final Configuration[] children = configuration.getChildren(
+            "component" );
         m_entries = new EmbeddorEntry[ children.length ];
         for( int i = 0; i < children.length; i++ )
         {
@@ -201,14 +198,14 @@ public class DefaultEmbeddor
             final String classname = children[ i ].getAttribute( "class" );
             final String logger = children[ i ].getAttribute( "logger" );
             m_entries[ i ] =
-                new EmbeddorEntry( role, classname, logger, children[ i ] );
+            new EmbeddorEntry( role, classname, logger, children[ i ] );
         }
     }
 
     /**
-     * Creates the core handlers - logger, deployer, Manager and
-     * Kernel. Note that these are not set up properly until you have
-     * called the {@link #execute()} method.
+     * Creates the core handlers - logger, deployer, Manager and Kernel. Note
+     * that these are not set up properly until you have called the {@link
+     * #execute()} method.
      */
     public void initialize()
         throws Exception
@@ -223,20 +220,21 @@ public class DefaultEmbeddor
         catch( final Exception e )
         {
             // whoops!
-            final String message = REZ.getString( "embeddor.error.start.failed" );
+            final String message = REZ.getString(
+                "embeddor.error.start.failed" );
             getLogger().error( message, e );
             throw e;
         }
     }
 
     /**
-     * This is the main method of the embeddor. It sets up the core
-     * components, and then deploys the <code>Facilities</code>. These
-     * are registered with the Kernel and the Manager. The same
-     * happens for the {@link org.jcontainer.loom.interfaces.Application}s.
-     * Now, the Kernel is taken through its lifecycle. When it is
-     * finished, as well as all the applications running in it, it
-     * is shut down, after which the Embeddor is as well.
+     * This is the main method of the embeddor. It sets up the core components,
+     * and then deploys the <code>Facilities</code>. These are registered with
+     * the Kernel and the Manager. The same happens for the {@link
+     * org.jcontainer.loom.interfaces.Application}s. Now, the Kernel is taken
+     * through its lifecycle. When it is finished, as well as all the
+     * applications running in it, it is shut down, after which the Embeddor is
+     * as well.
      */
     public void execute()
         throws Exception
@@ -247,7 +245,8 @@ public class DefaultEmbeddor
         //  immediately.
         if( emptyKernel() )
         {
-            final String message = REZ.getString( "embeddor.error.start.no-apps" );
+            final String message = REZ.getString(
+                "embeddor.error.start.no-apps" );
             getLogger().error( message );
         }
         else
@@ -263,7 +262,8 @@ public class DefaultEmbeddor
                     if( emptyKernel() )
                     {
                         final String message =
-                            REZ.getString( "embeddor.shutdown.all-apps-disposed" );
+                            REZ.getString(
+                                "embeddor.shutdown.all-apps-disposed" );
                         getLogger().info( message );
                     }
                     break;
@@ -275,7 +275,8 @@ public class DefaultEmbeddor
 
     private boolean emptyKernel()
     {
-        final Kernel kernel = (Kernel)getEmbeddorComponent( Kernel.class.getName() );
+        final Kernel kernel = (Kernel)getEmbeddorComponent(
+            Kernel.class.getName() );
         if( null != kernel )
         {
             final String[] names = kernel.getApplicationNames();
@@ -318,7 +319,8 @@ public class DefaultEmbeddor
         catch( final Exception e )
         {
             // whoops!
-            final String message = REZ.getString( "embeddor.error.shutdown.failed" );
+            final String message = REZ.getString(
+                "embeddor.error.shutdown.failed" );
             getLogger().error( message, e );
         }
         for( int i = 0; i < m_entries.length; i++ )
@@ -341,9 +343,9 @@ public class DefaultEmbeddor
     }
 
     /**
+     * @throws UnsupportedOperationException if restart not a supported
+     * operation
      * @mx.operation description="Request the Embeddor restart."
-     *
-     * @throws UnsupportedOperationException if restart not a supported operation
      */
     public void restart()
         throws UnsupportedOperationException
@@ -360,14 +362,12 @@ public class DefaultEmbeddor
     }
 
     /**
-     * Get name by which the server is known.
-     * Usually this defaults to {@link ContainerConstants#SOFTWARE} but the admin
-     * may assign another name. This is useful when you
-     * are managing a cluster of servers.
-     *
-     * @mx.attribute description="The name by which the server is known."
+     * Get name by which the server is known. Usually this defaults to {@link
+     * ContainerConstants#SOFTWARE} but the admin may assign another name. This
+     * is useful when you are managing a cluster of servers.
      *
      * @return the name of server
+     * @mx.attribute description="The name by which the server is known."
      */
     public String getName()
     {
@@ -377,9 +377,8 @@ public class DefaultEmbeddor
     /**
      * Get location of container installation
      *
-     * @mx.attribute description="The location of container installation."
-     *
      * @return the home directory of container
+     * @mx.attribute description="The location of container installation."
      */
     public String getHomeDirectory()
     {
@@ -389,9 +388,8 @@ public class DefaultEmbeddor
     /**
      * Get the date at which this server started.
      *
-     * @mx.attribute description="the date at which this server started."
-     *
      * @return the date at which this server started
+     * @mx.attribute description="the date at which this server started."
      */
     public Date getStartTime()
     {
@@ -399,12 +397,11 @@ public class DefaultEmbeddor
     }
 
     /**
-     * Retrieve the number of millisecond
-     * the server has been up.
-     *
-     * @mx.attribute description="the number of millisecond the server has been up."
+     * Retrieve the number of millisecond the server has been up.
      *
      * @return the the number of millisecond the server has been up
+     * @mx.attribute description="the number of millisecond the server has been
+     * up."
      */
     public long getUpTimeInMillis()
     {
@@ -412,11 +409,12 @@ public class DefaultEmbeddor
     }
 
     /**
-     * Retrieve a string identifying version of server.
-     * Usually looks like "x.y.z".
+     * Retrieve a string identifying version of server. Usually looks like
+     * "x.y.z".
      *
-     * @mx.attribute description="Retrieve a string identifying version of server."
      * @return version string of server.
+     * @mx.attribute description="Retrieve a string identifying version of
+     * server."
      */
     public String getVersion()
     {
@@ -424,12 +422,11 @@ public class DefaultEmbeddor
     }
 
     /**
-     * Get a string defining the build.
-     * Possibly the date on which it was built, where it was built,
-     * with what features it was built and so forth.
+     * Get a string defining the build. Possibly the date on which it was built,
+     * where it was built, with what features it was built and so forth.
      *
-     * @mx.attribute description="a string defining the build."
      * @return the string describing build
+     * @mx.attribute description="a string defining the build."
      */
     public String getBuild()
     {
@@ -440,9 +437,8 @@ public class DefaultEmbeddor
     /// HELPER METHODS ///
     //////////////////////
     /**
-     * Create the logger, deployer and kernel components.
-     * Note that these components are not ready to be used
-     * until setupComponents() is called.
+     * Create the logger, deployer and kernel components. Note that these
+     * components are not ready to be used until setupComponents() is called.
      */
     private synchronized void createComponents()
         throws Exception
@@ -466,10 +462,12 @@ public class DefaultEmbeddor
         }
     }
 
-    protected final synchronized void deployFile( final String name, final File file )
+    protected final synchronized void deployFile( final String name,
+                                                  final File file )
         throws Exception
     {
-        final Deployer deployer = (Deployer)getEmbeddorComponent( Deployer.class.getName() );
+        final Deployer deployer = (Deployer)getEmbeddorComponent(
+            Deployer.class.getName() );
         deployer.deploy( name, file.toURL() );
     }
 
@@ -486,8 +484,7 @@ public class DefaultEmbeddor
     }
 
     /**
-     * Setup a component and run it through al of it's
-     * setup lifecycle stages.
+     * Setup a component and run it through al of it's setup lifecycle stages.
      *
      * @param object the component
      * @throws Exception if an error occurs
@@ -546,7 +543,9 @@ public class DefaultEmbeddor
         }
         catch( final IllegalAccessException iae )
         {
-            final String message = REZ.format( "bad-ctor.error", service.getName(), classname );
+            final String message = REZ.format( "bad-ctor.error",
+                                               service.getName(),
+                                               classname );
             throw new LoomException( message, iae );
         }
         catch( final InstantiationException ie )
@@ -559,7 +558,9 @@ public class DefaultEmbeddor
         }
         catch( final ClassNotFoundException cnfe )
         {
-            final String message = REZ.format( "no-class.error", service.getName(), classname );
+            final String message = REZ.format( "no-class.error",
+                                               service.getName(),
+                                               classname );
             throw new LoomException( message, cnfe );
         }
     }
@@ -571,7 +572,8 @@ public class DefaultEmbeddor
         throws Exception
     {
         final SystemManager systemManager =
-            (SystemManager)getResourceLocator().lookup( SystemManager.class.getName() );
+            (SystemManager)getResourceLocator().lookup(
+                SystemManager.class.getName() );
 
         final SystemManager mxExporter =
             systemManager.getSubContext( null, "component" );
@@ -586,14 +588,14 @@ public class DefaultEmbeddor
     }
 
     /**
-     * Unregister embeddor and it's components from
-     * {@link SystemManager}.
+     * Unregister embeddor and it's components from {@link SystemManager}.
      */
     private void unregisterComponents()
         throws Exception
     {
         final SystemManager systemManager =
-            (SystemManager)getResourceLocator().lookup( SystemManager.class.getName() );
+            (SystemManager)getResourceLocator().lookup(
+                SystemManager.class.getName() );
 
         final SystemManager mxExporter =
             systemManager.getSubContext( null, "component" );
@@ -627,8 +629,10 @@ public class DefaultEmbeddor
         }
 
         locator.put( File.class.getName() + "/home", m_loomHome );
-        locator.put( ClassLoader.class.getName() + "/common", m_commonClassLoader );
-        locator.put( ClassLoader.class.getName() + "/container", m_containerClassLoader );
+        locator.put( ClassLoader.class.getName() + "/common",
+                     m_commonClassLoader );
+        locator.put( ClassLoader.class.getName() + "/container",
+                     m_containerClassLoader );
 
         return locator;
     }
