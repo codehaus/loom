@@ -27,6 +27,22 @@
         <name>sar:sar</name>
         <description>Build a sar file</description>
       </goal>
+      <goal>
+        <name>sar:install</name>
+        <description>Install the sar in the local repository</description>
+      </goal>
+      <goal>
+        <name>sar:install-snapshot</name>
+        <description>Install snapshot of the sar in the local repository</description>
+      </goal>
+      <goal>
+        <name>sar:deploy</name>
+        <description>Deploy the sar to the remote repository</description>
+      </goal>
+      <goal>
+        <name>sar:deploy-snapshot</name>
+        <description>Deploy snapshot of the sar to the remote repository</description>
+      </goal>
     </goals>
   </body>
 </document>
