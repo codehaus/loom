@@ -106,17 +106,17 @@ import org.jcontainer.dna.ConfigurationException;
 import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.Installer;
 import org.jcontainer.loom.interfaces.LoomException;
-import org.realityforge.salt.i18n.ResourceManager;
-import org.realityforge.salt.i18n.Resources;
-import org.realityforge.salt.io.FileUtil;
-import org.realityforge.salt.io.IOUtil;
+import org.codehaus.spice.salt.i18n.ResourceManager;
+import org.codehaus.spice.salt.i18n.Resources;
+import org.codehaus.spice.salt.io.FileUtil;
+import org.codehaus.spice.salt.io.IOUtil;
 
 /**
  * An Installer is responsible for taking a URL for Sar and installing it as
  * appropriate.
  *
  * @author Peter Donald
- * @version $Revision: 1.13 $ $Date: 2003-11-29 13:44:20 $
+ * @version $Revision: 1.14 $ $Date: 2003-12-03 02:54:42 $
  */
 public class DefaultInstaller
     extends AbstractLogEnabled
@@ -311,6 +311,7 @@ public class DefaultInstaller
         boolean success = false;
         try
         {
+            workDir.mkdirs();
             expandZipFile( zipFile, directory, workDir, url );
 
             //Prepare and create Installation

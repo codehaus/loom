@@ -15,8 +15,8 @@ import org.jcontainer.loom.components.util.info.DependencyDescriptor;
 import org.jcontainer.loom.components.util.info.ServiceDescriptor;
 import org.jcontainer.loom.components.util.metadata.DependencyDirective;
 import org.jcontainer.loom.components.util.profile.ComponentProfile;
-import org.realityforge.salt.i18n.ResourceManager;
-import org.realityforge.salt.i18n.Resources;
+import org.codehaus.spice.salt.i18n.ResourceManager;
+import org.codehaus.spice.salt.i18n.Resources;
 
 /**
  * This Class verifies that Sars are valid. It performs a number of checks to
@@ -34,7 +34,7 @@ import org.realityforge.salt.i18n.Resources;
  * the service interfaces.</li> </ul>
  *
  * @author Peter Donald
- * @version $Revision: 1.5 $ $Date: 2003-11-29 13:44:27 $
+ * @version $Revision: 1.6 $ $Date: 2003-12-03 02:54:43 $
  */
 public class AssemblyVerifier
     extends AbstractLogEnabled

@@ -88,8 +88,8 @@ package org.jcontainer.loom.components.extensions.pkgmgr.impl;
 
 import java.util.Comparator;
 import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
-import org.realityforge.extension.DeweyDecimal;
-import org.realityforge.extension.Extension;
+import org.codehaus.spice.extension.DeweyDecimal;
+import org.codehaus.spice.extension.Extension;
 
 /**
  * A simple class to compare two extensions and sort them on spec version and
@@ -97,7 +97,7 @@ import org.realityforge.extension.Extension;
  * versions.
  *
  * @author Peter Donald
- * @version $Revision: 1.5 $ $Date: 2003-11-29 13:44:19 $
+ * @version $Revision: 1.6 $ $Date: 2003-12-03 02:54:41 $
  */
 class OptionalPackageComparator
     implements Comparator

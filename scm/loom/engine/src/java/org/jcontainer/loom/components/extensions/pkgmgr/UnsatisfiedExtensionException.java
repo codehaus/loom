@@ -86,13 +86,13 @@
  */
 package org.jcontainer.loom.components.extensions.pkgmgr;
 
-import org.realityforge.extension.Extension;
+import org.codehaus.spice.extension.Extension;
 
 /**
  * Exception indicating an extension was not found in Package Repository.
  *
  * @author Peter Donald
- * @version $Revision: 1.4 $ $Date: 2003-11-29 13:44:19 $
+ * @version $Revision: 1.5 $ $Date: 2003-12-03 02:54:41 $
  * @see Extension
  */
 public class UnsatisfiedExtensionException

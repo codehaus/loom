@@ -98,7 +98,7 @@ import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 import org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager;
 import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
-import org.realityforge.extension.Extension;
+import org.codehaus.spice.extension.Extension;
 
 /**
  * <p>Interface used to contain "Optional Packages" (formerly known as "Standard
@@ -107,7 +107,7 @@ import org.realityforge.extension.Extension;
  * Optional Packages.</p>
  *
  * @author Peter Donald
- * @version $Revision: 1.5 $ $Date: 2003-11-29 13:44:19 $
+ * @version $Revision: 1.6 $ $Date: 2003-12-03 02:54:41 $
  * @see OptionalPackage
  * @see ExtensionManager
  */

@@ -107,8 +107,8 @@ import org.jcontainer.loom.interfaces.ContainerConstants;
 import org.jcontainer.loom.interfaces.Kernel;
 import org.jcontainer.loom.interfaces.LoomException;
 import org.jcontainer.loom.interfaces.SystemManager;
-import org.realityforge.salt.i18n.ResourceManager;
-import org.realityforge.salt.i18n.Resources;
+import org.codehaus.spice.salt.i18n.ResourceManager;
+import org.codehaus.spice.salt.i18n.Resources;
 
 /**
  * Manage the "frame" in which Applications operate.

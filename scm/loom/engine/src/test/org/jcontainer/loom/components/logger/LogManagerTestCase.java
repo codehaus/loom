@@ -24,14 +24,14 @@ import org.jcontainer.dna.impl.ConfigurationUtil;
 import org.jcontainer.dna.impl.ConsoleLogger;
 import org.jcontainer.dna.impl.ContainerUtil;
 import org.jcontainer.loom.interfaces.LogManager;
-import org.realityforge.salt.io.FileUtil;
+import org.codehaus.spice.salt.io.FileUtil;
 import org.xml.sax.InputSource;
 
 /**
  * An basic test case for the LogManager.
  *
  * @author Peter Donald
- * @version $Revision: 1.13 $ $Date: 2003-11-29 13:44:30 $
+ * @version $Revision: 1.14 $ $Date: 2003-12-03 02:54:44 $
  */
 public class LogManagerTestCase
     extends TestCase

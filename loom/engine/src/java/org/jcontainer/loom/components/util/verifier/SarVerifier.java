@@ -90,8 +90,8 @@ import org.jcontainer.loom.components.util.metadata.ComponentTemplate;
 import org.jcontainer.loom.components.util.profile.ComponentProfile;
 import org.jcontainer.loom.components.util.profile.PartitionProfile;
 import org.jcontainer.loom.interfaces.ContainerConstants;
-import org.realityforge.salt.i18n.ResourceManager;
-import org.realityforge.salt.i18n.Resources;
+import org.codehaus.spice.salt.i18n.ResourceManager;
+import org.codehaus.spice.salt.i18n.Resources;
 
 /**
  * This Class verifies that Sars are valid. It performs a number of checks to
@@ -111,7 +111,7 @@ import org.realityforge.salt.i18n.Resources;
  * support the BlockListener interface.</li> </ul>
  *
  * @author Peter Donald
- * @version $Revision: 1.4 $ $Date: 2003-11-29 13:44:27 $
+ * @version $Revision: 1.5 $ $Date: 2003-12-03 02:54:43 $
  */
 public class SarVerifier
     extends AssemblyVerifier

@@ -89,7 +89,7 @@ package org.jcontainer.loom.components.extensions.pkgmgr;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-import org.realityforge.extension.Extension;
+import org.codehaus.spice.extension.Extension;
 
 /**
  * Basic Implementation Of PackageManager Interface used to manage "Optional
@@ -97,7 +97,7 @@ import org.realityforge.extension.Extension;
  * are stored on file system in a number of directories.
  *
  * @author Peter Donald
- * @version $Revision: 1.5 $ $Date: 2003-11-29 13:44:19 $
+ * @version $Revision: 1.6 $ $Date: 2003-12-03 02:54:41 $
  * @todo Determine an appropriate interface to this service and an appropriate
  * mechanism via which to do searching and expansion of a package set. At that
  * point separate out implementation and interface for mechanism.

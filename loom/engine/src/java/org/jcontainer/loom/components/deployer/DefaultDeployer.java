@@ -118,8 +118,8 @@ import org.jcontainer.loom.interfaces.Installer;
 import org.jcontainer.loom.interfaces.Kernel;
 import org.jcontainer.loom.interfaces.LogManager;
 import org.jcontainer.loom.interfaces.LoomException;
-import org.realityforge.salt.i18n.ResourceManager;
-import org.realityforge.salt.i18n.Resources;
+import org.codehaus.spice.salt.i18n.ResourceManager;
+import org.codehaus.spice.salt.i18n.Resources;
 import org.xml.sax.InputSource;
 
 /**
@@ -376,10 +376,11 @@ public class DefaultDeployer
                                                            data,
                                                            homeDirectory,
                                                            workDirectory );
-            final ClassLoader classLoader = classLoaderSet.getDefaultClassLoader();
+            final ClassLoader classLoader =
+                classLoaderSet.getDefaultClassLoader();
 
-            final Configuration newConfig = processConfiguration( name,
-                                                                  config );
+            final Configuration newConfig =
+                processConfiguration( name, config );
 
             final Map parameters = new HashMap();
             parameters.put( ContainerConstants.ASSEMBLY_NAME, name );
@@ -389,8 +390,8 @@ public class DefaultDeployer
                             classLoader );
 
             //assemble all the blocks for application
-            final PartitionProfile profile = m_builder.buildProfile(
-                parameters );
+            final PartitionProfile profile =
+                m_builder.buildProfile( parameters );
 
             m_verifier.verifySar( profile, classLoader );
 

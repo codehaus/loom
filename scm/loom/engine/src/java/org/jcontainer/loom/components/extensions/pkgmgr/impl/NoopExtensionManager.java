@@ -88,7 +88,7 @@ package org.jcontainer.loom.components.extensions.pkgmgr.impl;
 
 import org.jcontainer.loom.components.extensions.pkgmgr.ExtensionManager;
 import org.jcontainer.loom.components.extensions.pkgmgr.OptionalPackage;
-import org.realityforge.extension.Extension;
+import org.codehaus.spice.extension.Extension;
 
 /**
  * A Noop ExtensionManager that can't provide any extensions. This is for use in
@@ -96,7 +96,7 @@ import org.realityforge.extension.Extension;
  * self-contained.
  *
  * @author Peter Donald
- * @version $Revision: 1.5 $ $Date: 2003-11-29 13:44:19 $
+ * @version $Revision: 1.6 $ $Date: 2003-12-03 02:54:41 $
  */
 public class NoopExtensionManager
     implements ExtensionManager

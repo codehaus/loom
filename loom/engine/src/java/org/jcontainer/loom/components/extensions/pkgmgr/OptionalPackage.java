@@ -87,7 +87,7 @@
 package org.jcontainer.loom.components.extensions.pkgmgr;
 
 import java.io.File;
-import org.realityforge.extension.Extension;
+import org.codehaus.spice.extension.Extension;
 
 /**
  * This contains the required meta-data for an "Optional Package" (formerly

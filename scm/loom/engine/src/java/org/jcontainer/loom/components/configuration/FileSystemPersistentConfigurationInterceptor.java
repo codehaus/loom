@@ -101,9 +101,9 @@ import org.jcontainer.dna.impl.ConfigurationUtil;
 import org.jcontainer.loom.components.configuration.merger.ConfigurationMerger;
 import org.jcontainer.loom.components.util.ExtensionFileFilter;
 import org.jcontainer.loom.interfaces.ConfigurationInterceptor;
-import org.realityforge.salt.i18n.ResourceManager;
-import org.realityforge.salt.i18n.Resources;
-import org.realityforge.salt.io.FileUtil;
+import org.codehaus.spice.salt.i18n.ResourceManager;
+import org.codehaus.spice.salt.i18n.Resources;
+import org.codehaus.spice.salt.io.FileUtil;
 import org.xml.sax.InputSource;
 
 /**

@@ -88,12 +88,12 @@ package org.jcontainer.loom.frontends;
 
 import java.util.List;
 import java.util.Properties;
+import org.codehaus.spice.salt.i18n.ResourceManager;
+import org.codehaus.spice.salt.i18n.Resources;
 import org.realityforge.cli.CLArgsParser;
 import org.realityforge.cli.CLOption;
 import org.realityforge.cli.CLOptionDescriptor;
 import org.realityforge.cli.CLUtil;
-import org.realityforge.salt.i18n.ResourceManager;
-import org.realityforge.salt.i18n.Resources;
 
 /**
  * The class prepare parameters based on input options.
@@ -180,8 +180,8 @@ class CLISetup
 
         if( null != parser.getErrorString() )
         {
-            final String message = REZ.getString( "cli.error.parser",
-                                                  parser.getErrorString() );
+            final String message = REZ.format( "cli.error.parser",
+                                               parser.getErrorString() );
             System.err.println( message );
             return false;
         }
@@ -198,8 +198,8 @@ class CLISetup
                 case 0:
                     {
                         final String message =
-                            REZ.getString( "cli.error.unknown.arg",
-                                           option.getArgument() );
+                            REZ.format( "cli.error.unknown.arg",
+                                        option.getArgument() );
                         System.err.println( message );
                     }
                     return false;
