@@ -107,8 +107,8 @@ import org.codehaus.spice.netserve.connection.SocketAcceptorManager;
 import org.codehaus.spice.netserve.sockets.ServerSocketFactory;
 
 /**
- * @author Paul Hammant <Paul_Hammant@yahoo.com>
- * @author Federico Barbieri <scoobie@pop.systemy.it>
+ * @author Paul Hammant <Paul_Hammant at yahoo.com>
+ * @author Federico Barbieri <scoobie at pop.systemy.it>
  * @version 1.0
  * @dna.component
  * @dna.service type="HelloWorldServer"
@@ -140,7 +140,6 @@ public final class HelloWorldServerImpl
     public void setGreeting( final String greeting )
     {
         m_greeting = greeting;
-        m_helloWorldHandler.setGreeting( greeting );
     }
 
     /**
@@ -169,7 +168,6 @@ public final class HelloWorldServerImpl
         throws ConfigurationException
     {
         m_port = configuration.getChild( "port" ).getValueAsInteger( 8000 );
-
         try
         {
             final String bindAddress =
@@ -192,8 +190,6 @@ public final class HelloWorldServerImpl
     public void service( final ServiceManager serviceManager )
         throws ServiceException
     {
-        getLogger().info( "HelloWorldServer.compose()" );
-
         m_socketManager =
           (ServerSocketFactory)serviceManager.lookup(
             ServerSocketFactory.class.getName() );
@@ -208,6 +204,7 @@ public final class HelloWorldServerImpl
     public void initialize()
         throws Exception
     {
+        getLogger().debug( "Initializing..." );
         m_serverSocket =  m_socketManager.createServerSocket( m_port,
                                                               5,
                                                               m_bindTo );
@@ -227,6 +224,7 @@ public final class HelloWorldServerImpl
      */
     public void dispose()
     {
+        getLogger().debug( "Shutting down..." );
         try
         {
             m_socketAcceptorManager.disconnect( m_connectionName );
@@ -255,7 +253,7 @@ public final class HelloWorldServerImpl
         throws Exception
     {
         final HelloWorldHandler handler =
-          new HelloWorldHandler( m_greeting, m_context );
+          new HelloWorldHandler( this, m_context );
         setupLogger( handler );
         return handler;
     }

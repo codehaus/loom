@@ -99,8 +99,8 @@ import org.codehaus.spice.netserve.connection.RequestHandler;
  * This handles an individual incoming request.
  * It outputs a greeting as html.
  *
- * @author Paul Hammant <Paul_Hammant@yahoo.com>
- * @author Federico Barbieri <scoobie@systemy.it>
+ * @author Paul Hammant <Paul_Hammant at yahoo.com>
+ * @author Federico Barbieri <scoobie at systemy.it>
  * @version 1.0
  */
 final class HelloWorldHandler
@@ -110,8 +110,8 @@ final class HelloWorldHandler
     /** Request counter */
     private static int c_counter;
 
-    /** Greeting message */
-    private String m_greeting;
+    /** HelloWorld server reference */
+    private HelloWorldServer m_helloWorldServer;
 
     /** The block context */
     private BlockContext m_context;
@@ -120,24 +120,14 @@ final class HelloWorldHandler
     /**
      * Crate a new HelloWorld request handler.
      *
-     * @param greeting The initial greeting message
+     * @param helloWorldServer The helloworld server
      * @param context The block context
      */
-    HelloWorldHandler( final String greeting,
+    HelloWorldHandler( final HelloWorldServer helloWorldServer,
                        final BlockContext context )
     {
-        m_greeting = greeting;
+        m_helloWorldServer = helloWorldServer;
         m_context = context;
-    }
-
-    /**
-     * Set the greeting message
-     *
-     * @param greeting The new greeting message
-     */
-    protected void setGreeting( final String greeting )
-    {
-        m_greeting = greeting;
     }
 
     /**
@@ -157,8 +147,9 @@ final class HelloWorldHandler
             final PrintWriter out =
               new PrintWriter( socket.getOutputStream(), true );
 
-            out.println( "<html><body><b>" +m_greeting + "</b><br>" +
-              "Requests so far = " + ++c_counter + "<br>" );
+            out.println( "<html><body>" );
+            out.println( "<b>" + m_helloWorldServer.getGreeting() + "</b><br>" );
+            out.println( "Requests so far = " + ++c_counter + "<br>" );
             out.println( "You are " + remoteHost + " at " + remoteIP + "<br>" );
             out.println( "<p>The application will shutdown after 10 requests." );
             out.println( "</body></html>" );
