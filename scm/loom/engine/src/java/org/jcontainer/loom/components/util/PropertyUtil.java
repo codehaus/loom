@@ -88,13 +88,12 @@ package org.jcontainer.loom.components.util;
 
 import org.apache.avalon.framework.context.Context;
 import org.apache.avalon.framework.context.ContextException;
-import org.apache.avalon.framework.context.Resolvable;
 
 /**
  * This provides utility methods for properties.
  *
  * @author <a href="mailto:peter at realityforge.org">Peter Donald</a>
- * @version CVS $Revision: 1.2 $ $Date: 2003-08-17 18:27:33 $
+ * @version CVS $Revision: 1.3 $ $Date: 2003-10-05 13:47:12 $
  * @since 4.0
  */
 public final class PropertyUtil
@@ -208,18 +207,6 @@ public final class PropertyUtil
         catch( final ContextException ce )
         {
             //ignore
-        }
-
-        try
-        {
-            while( null != value && value instanceof Resolvable )
-            {
-                value = ( (Resolvable)value ).resolve( context );
-            }
-        }
-        catch( final ContextException ce )
-        {
-            throw new Exception( "Unable to resolve value for key " + key );
         }
 
         if( null == value )
