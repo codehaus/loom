@@ -7,15 +7,13 @@
  */
 package org.codehaus.loom.extension;
 
-import org.codehaus.loom.extension.DeweyDecimal;
-
 import junit.framework.TestCase;
 
 /**
  * TestCases for DeweyDecimal.
  *
  * @author Peter Donald
- * @version $Revision: 1.1 $ $Date: 2004-04-19 21:40:38 $
+ * @version $Revision: 1.2 $ $Date: 2005-12-05 15:18:17 $
  */
 public class DeweyDecimalTestCase
     extends TestCase

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <project>
-    <pomVersion>3</pomVersion>
+    <pomVersion>4</pomVersion>
     <inceptionYear>1999</inceptionYear>
 
     <organization>
@@ -9,7 +9,9 @@
         <logo>http://codehaus.org/codehaus-small.gif</logo>
     </organization>
 
-    <groupId>loom</groupId>    
+    <groupId>loom</groupId>
+    <artifactId>loom-all</artifactId>
+	<name>Loom</name>
     <!-- ensure the plugins/project.xml currentVersion is changed accordingly -->
     <currentVersion>1.0-rc4-dev</currentVersion>
     <package>org.codehaus.loom</package>

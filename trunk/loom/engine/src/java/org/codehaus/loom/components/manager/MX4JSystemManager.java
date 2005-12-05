@@ -86,7 +86,14 @@
  */
 package org.codehaus.loom.components.manager;
 
-import java.io.File;
+import mx4j.log.Log;
+import org.codehaus.dna.Configurable;
+import org.codehaus.dna.Configuration;
+import org.codehaus.dna.ConfigurationException;
+import org.codehaus.loom.interfaces.ContainerConstants;
+import org.codehaus.spice.salt.i18n.ResourceManager;
+import org.codehaus.spice.salt.i18n.Resources;
+
 import javax.management.Attribute;
 import javax.management.AttributeNotFoundException;
 import javax.management.InstanceNotFoundException;
@@ -96,16 +103,12 @@ import javax.management.MBeanServer;
 import javax.management.MBeanServerFactory;
 import javax.management.ObjectName;
 import javax.management.ReflectionException;
-import mx4j.adaptor.rmi.jrmp.JRMPAdaptorMBean;
-import mx4j.log.Log;
-import mx4j.util.StandardMBeanProxy;
-
-import org.codehaus.loom.interfaces.ContainerConstants;
-import org.codehaus.spice.salt.i18n.ResourceManager;
-import org.codehaus.spice.salt.i18n.Resources;
-import org.codehaus.dna.Configurable;
-import org.codehaus.dna.Configuration;
-import org.codehaus.dna.ConfigurationException;
+import javax.management.remote.JMXConnectorServer;
+import javax.management.remote.JMXConnectorServerFactory;
+import javax.management.remote.JMXServiceURL;
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This component is responsible for managing loom instance.
@@ -295,39 +298,36 @@ public class MX4JSystemManager
         stopJMXMBean( server, "Http:name=HttpAdaptor" );
     }
 
-    private void startRMIAdaptor( final MBeanServer server )
+    private void startRMIAdaptor( final MBeanServer namingService )
         throws Exception
     {
         // Create and start the naming service
         final ObjectName naming = new ObjectName( "Naming:type=rmiregistry" );
-        server.createMBean( "mx4j.tools.naming.NamingService",
+        namingService.createMBean( "mx4j.tools.naming.NamingService",
                             naming,
                             null,
                             new Object[]{new Integer( m_rmi_registry_port )},
                             new String[]{"int"}
         );
-        server.invoke( naming, "start", null, null );
+        namingService.invoke( naming, "start", null, null );
 
         // Create the JRMP adaptor
         final ObjectName adaptor = new ObjectName( "Adaptor:protocol=JRMP" );
-        server.createMBean( "mx4j.adaptor.rmi.jrmp.JRMPAdaptor",
+        namingService.createMBean( "mx4j.adaptor.rmi.jrmp.JRMPAdaptor",
                             adaptor,
                             null );
-        final JRMPAdaptorMBean mbean =
-            (JRMPAdaptorMBean)StandardMBeanProxy.create(
-                JRMPAdaptorMBean.class,
-                server,
-                adaptor );
-        // Set the JNDI name with which will be registered
-        mbean.setJNDIName( "jrmp" );
 
-        mbean.putNamingProperty( javax.naming.Context.INITIAL_CONTEXT_FACTORY,
-                                 m_namingFactory );
-        mbean.putNamingProperty( javax.naming.Context.PROVIDER_URL,
-                                 "rmi://localhost:" + m_rmi_registry_port );
+        JMXServiceURL address = new JMXServiceURL( "rmi", "localhost", 0, "/jndi/jrmp/" );
+        Map environment = new HashMap( );
 
-        // Register the JRMP adaptor in JNDI and start it
-        mbean.start();
+        environment.put( javax.naming.Context.INITIAL_CONTEXT_FACTORY, m_namingFactory );
+        environment.put( javax.naming.Context.PROVIDER_URL, "rmi://localhost:" + m_rmi_registry_port );
+
+        JMXConnectorServer server = JMXConnectorServerFactory.newJMXConnectorServer( address,
+                                                                                     environment,
+                                                                                     namingService );
+
+        server.start();
     }
 
     private void stopRMIAdaptor( final MBeanServer server )

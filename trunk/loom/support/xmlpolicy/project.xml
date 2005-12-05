@@ -2,7 +2,7 @@
 <project>
     <extend>${basedir}/../../project.xml</extend>
     <name>XMLPolicy</name>
-    <id>loom-xmlpolicy</id>
+    <artifactId>loom-xmlpolicy</artifactId>
     <inceptionYear>2002</inceptionYear>
     <package>org.codehaus.loom.xmlpolicy</package>
 
