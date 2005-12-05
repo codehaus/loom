@@ -2,7 +2,7 @@
 <project>
     <extend>${basedir}/../../project.xml</extend>
     <name>Extension</name>
-    <id>loom-extension</id>
+    <artifactId>loom-extension</artifactId>
     <inceptionYear>2000</inceptionYear>
     <package>org.codehaus.loom.extension</package>
 

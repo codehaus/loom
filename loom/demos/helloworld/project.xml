@@ -2,7 +2,7 @@
 <project>
     <extend>${basedir}/../../project.xml</extend>
     <name>Loom HelloWorld Demo</name>
-    <id>demo-helloworld</id>
+    <artifactId>demo-helloworld</artifactId>
     <package>org.codehaus.loom.demos.helloworld</package>
     <shortDescription>HelloWorld Demo</shortDescription>
     <description>

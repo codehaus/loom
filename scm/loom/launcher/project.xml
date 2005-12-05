@@ -2,7 +2,7 @@
 <project>
     <extend>${basedir}/../project.xml</extend>
     <name>Loom Launcher</name>
-    <id>loom-launcher</id>
+    <artifactId>loom-launcher</artifactId>
     <package>org.codehaus.loom.launcher</package>
     <shortDescription>Tools to launch Loom.</shortDescription>
     <description>

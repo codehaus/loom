@@ -2,7 +2,7 @@
 <project>
     <extend>${basedir}/../../../project.xml</extend>
     <name>Loom Distributed Client Demo</name>
-    <id>demo-distributed-client</id>
+    <artifactId>demo-distributed-client</artifactId>
     <package>org.codehaus.loom.demos.distributed.client</package>
     <shortDescription>Distributed Client Demo</shortDescription>
     <description>
