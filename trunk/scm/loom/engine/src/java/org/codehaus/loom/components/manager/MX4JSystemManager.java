@@ -122,15 +122,15 @@ public class MX4JSystemManager
     implements Configurable
 {
     private static final Resources REZ =
-        ResourceManager.getPackageResources( MX4JSystemManager.class );
+      ResourceManager.getPackageResources( MX4JSystemManager.class );
 
     private static final String DEFAULT_NAMING_FACTORY =
-        "com.sun.jndi.rmi.profile.RegistryContextFactory";
+      "com.sun.jndi.rmi.profile.RegistryContextFactory";
     private static final String DEFAULT_HTTPADAPTER_HOST = "localhost";
     private static final int DEFAULT_HTTPADAPTER_PORT =
-        Integer.getInteger( "loom.adapter.http", 8082 ).intValue();
+      Integer.getInteger( "loom.adapter.http", 8082 ).intValue();
     private static final int DEFAULT_RMIREGISTRY_PORT =
-        Integer.getInteger( "loom.rmiregistry.port", 1099 ).intValue();
+      Integer.getInteger( "loom.rmiregistry.port", 1099 ).intValue();
 
     private String m_host;
     private int m_port;
@@ -146,34 +146,34 @@ public class MX4JSystemManager
         throws ConfigurationException
     {
         m_host = configuration.getChild( "manager-adaptor-host" ).
-            getValue( DEFAULT_HTTPADAPTER_HOST );
+          getValue( DEFAULT_HTTPADAPTER_HOST );
 
         m_port = configuration.getChild( "manager-adaptor-port" ).
-            getValueAsInteger( DEFAULT_HTTPADAPTER_PORT );
+          getValueAsInteger( DEFAULT_HTTPADAPTER_PORT );
 
         //This is for backwards compatability with old-style
         //RI JMX implementation
         m_port = configuration.getChild( "port" ).
-            getValueAsInteger( m_port );
+          getValueAsInteger( m_port );
 
         getLogger().debug( "MX4J HTTP listener port: " + m_port );
 
         m_rmi =
-        configuration.getChild( "enable-rmi-adaptor" ).getValueAsBoolean(
-            false );
+          configuration.getChild( "enable-rmi-adaptor" ).getValueAsBoolean(
+          false );
         m_rmi_registry_port =
-        configuration.getChild( "rmi-registry-port" ).getValueAsInteger(
-            DEFAULT_RMIREGISTRY_PORT );
+          configuration.getChild( "rmi-registry-port" ).getValueAsInteger(
+          DEFAULT_RMIREGISTRY_PORT );
         m_http =
-        configuration.getChild( "enable-http-adaptor" ).getValueAsBoolean(
-            false );
+          configuration.getChild( "enable-http-adaptor" ).getValueAsBoolean(
+          false );
 
         m_namingFactory =
-        configuration.getChild( "rmi-naming-factory" ).getValue(
-            DEFAULT_NAMING_FACTORY );
+          configuration.getChild( "rmi-naming-factory" ).getValue(
+          DEFAULT_NAMING_FACTORY );
 
         final String stylesheets =
-            configuration.getChild( "stylesheets-dir" ).getValue( null );
+          configuration.getChild( "stylesheets-dir" ).getValue( null );
         if( null != stylesheets )
         {
             m_stylesheetDir = new File( stylesheets ).getAbsolutePath();
@@ -227,7 +227,7 @@ public class MX4JSystemManager
         throws Exception
     {
         final ObjectName adaptorName = new ObjectName( "Http:name=HttpAdaptor" );
-        mBeanServer.createMBean( "mx4j.adaptor.http.HttpAdaptor",
+        mBeanServer.createMBean( "mx4j.tools.adaptor.http.HttpAdaptor",
                                  adaptorName,
                                  null );
         mBeanServer.setAttribute( adaptorName,
@@ -252,8 +252,8 @@ public class MX4JSystemManager
         throws Exception
     {
         final ObjectName processorName = new ObjectName(
-            "Http:name=XSLTProcessor" );
-        mBeanServer.createMBean( "mx4j.adaptor.http.XSLTProcessor",
+          "Http:name=XSLTProcessor" );
+        mBeanServer.createMBean( "mx4j.tools.adaptor.http.XSLTProcessor",
                                  processorName,
                                  null );
         mBeanServer.setAttribute( adaptorName,
@@ -268,7 +268,7 @@ public class MX4JSystemManager
         }
 
         final Attribute useCache =
-            new Attribute( "UseCache", Boolean.FALSE );
+          new Attribute( "UseCache", Boolean.FALSE );
         mBeanServer.setAttribute( processorName, useCache );
     }
 
@@ -304,18 +304,17 @@ public class MX4JSystemManager
         // Create and start the naming service
         final ObjectName naming = new ObjectName( "Naming:type=rmiregistry" );
         namingService.createMBean( "mx4j.tools.naming.NamingService",
-                            naming,
-                            null,
-                            new Object[]{new Integer( m_rmi_registry_port )},
-                            new String[]{"int"}
-        );
+                                   naming,
+                                   null,
+                                   new Object[]{new Integer( m_rmi_registry_port )},
+                                   new String[]{"int"} );
         namingService.invoke( naming, "start", null, null );
 
         // Create the JRMP adaptor
         final ObjectName adaptor = new ObjectName( "Adaptor:protocol=JRMP" );
         namingService.createMBean( "mx4j.adaptor.rmi.jrmp.JRMPAdaptor",
-                            adaptor,
-                            null );
+                                   adaptor,
+                                   null );
 
         JMXServiceURL address = new JMXServiceURL( "rmi", "localhost", 0, "/jndi/jrmp/" );
         Map environment = new HashMap( );
@@ -344,7 +343,7 @@ public class MX4JSystemManager
         MX4JLoggerAdapter.setLogger( getLogger() );
         Log.redirectTo( new MX4JLoggerAdapter() );
         return MBeanServerFactory.createMBeanServer(
-            ContainerConstants.SOFTWARE );
+          ContainerConstants.SOFTWARE );
     }
 
     private void stopJMXMBean( final MBeanServer mBeanServer,
@@ -358,7 +357,7 @@ public class MX4JSystemManager
         catch( final Exception e )
         {
             final String message =
-                REZ.format( "jmxmanager.error.jmxmbean.dispose", name );
+              REZ.format( "jmxmanager.error.jmxmbean.dispose", name );
             getLogger().error( message, e );
         }
     }
